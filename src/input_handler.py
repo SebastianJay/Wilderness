@@ -22,6 +22,10 @@ class InputHandler:
                 keys.clear()
                 return
 
+            if(event.keysym == "BackSpace"):
+                keys.pop()
+                return
+
             # keysym gives the actual key for special characters
             # eg Ctrl_L for Control
             # We're ignoring them right now (see above), but it could be useful
