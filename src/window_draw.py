@@ -1,45 +1,42 @@
 
 # def parse_input(self, list_of_string):
-def draw(list_of_string): 
-    number_of_lines = 0
-    temp = {}
-    for item in list_of_string:
-        count = 0
-        space_index = 0
-        char_since_space = 0
-        temp[number_of_lines] = []
-        for character in item:
-#            if(count > self._width):
-            if(count > 30):
-                number_of_lines += 1
-                temp[number_of_lines] = []
-                count = 0
-                check = temp[number_of_lines-1].pop()
-                if(check != ' ' and character != ' '):
-                    for i in range(1, char_since_space):
-                        move = temp[number_of_lines-1][30-char_since_space + i]
-                        if(move != ' '):
-                            temp[number_of_lines].append(move)
-                            count += 1
-                    if(check != ' ' ):
-                        temp[number_of_lines].append(check)
-                        count +=1
-                    for i in range(1, char_since_space):
-                        temp[number_of_lines-1].pop()
-                    for i in range(1, char_since_space):
-                        temp[number_of_lines-1].append("_")
-            if(character == ' '):
-                space_index = count
-                char_since_space = 0
-            temp[number_of_lines].append(character)
-            count += 1
-            char_since_space += 1
-        number_of_lines += 1
-    return temp
-    
+def draw(input_list):
+    width = 30
+    height = 5
+    output_dict = {}
+    output_list = []
+    output_count = 0
+    output_line_count = 0
 
-temp = parse_input(["Hey, This is a Line! Surprise!!!!!! Is this more than 30 letters yet?","This is another line. hopefully less than 30 letters"])
-for a in temp.keys():
-        for b in temp[a]:
-            print(b, end='')
-        print()
+    inputs = []
+
+    #takes in all input and puts them all in a list of words
+    for a in input_list:
+        for b in a.split(" "):
+            inputs.append(b)
+
+    #put the input into the dictionary with line # as key, and length limited
+    key = 0
+    output_dict[key] = []
+    current_count = 0
+    for b in inputs:
+        if current_count + len(b) > width:
+            current_count = 0
+            key += 1
+            output_dict[key] = []
+        current_count += len(b) + 1
+        output_dict[key].append(b)
+
+    #Check if it fits the screen height
+    start = 0
+    if key > height:
+        for a in range(height):
+            output_list.append(" ".join(output_dict[key-height + a+1]))
+    else:
+        for a in output_dict.keys():
+            output_list.append(" ".join(output_dict[a]))
+
+    for a in output_list:
+        print(a)
+
+draw(["Hello, nice to meet you. I'm just trying to test out thise code", "So, this is supposed to cut the input and organize them so it can fit into the given screen", "Do you think this is gonna work? 'Cause,,, I 'm not really sure myself.", "So.. I wonder how long this is now.."])
