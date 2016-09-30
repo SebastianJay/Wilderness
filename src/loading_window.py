@@ -17,7 +17,7 @@ class loading_window(window):
 
     def border(self):
         """
-        Creates a border of asterisks around the box
+        Creates a border of asterisks around the window
         """
         for i in range(0, self.width):
             self.windowChars[0][i], self.windowChars[self.height - 1][i] = "*", "*"
