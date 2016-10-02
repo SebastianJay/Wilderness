@@ -1,45 +1,75 @@
-
+class windows:
+    width = 30
+    height = 10
 # def parse_input(self, list_of_string):
-def draw(list_of_string): 
-    number_of_lines = 0
-    temp = {}
-    for item in list_of_string:
-        count = 0
-        space_index = 0
-        char_since_space = 0
-        temp[number_of_lines] = []
-        for character in item:
-#            if(count > self._width):
-            if(count > 30):
-                number_of_lines += 1
-                temp[number_of_lines] = []
-                count = 0
-                check = temp[number_of_lines-1].pop()
-                if(check != ' ' and character != ' '):
-                    for i in range(1, char_since_space):
-                        move = temp[number_of_lines-1][30-char_since_space + i]
-                        if(move != ' '):
-                            temp[number_of_lines].append(move)
-                            count += 1
-                    if(check != ' ' ):
-                        temp[number_of_lines].append(check)
-                        count +=1
-                    for i in range(1, char_since_space):
-                        temp[number_of_lines-1].pop()
-                    for i in range(1, char_since_space):
-                        temp[number_of_lines-1].append("_")
-            if(character == ' '):
-                space_index = count
-                char_since_space = 0
-            temp[number_of_lines].append(character)
-            count += 1
-            char_since_space += 1
-        number_of_lines += 1
-    return temp
-    
+<<<<<<< HEAD
+# if Output_by_Char is True, the list is split into chars.
+    def draw(self, input_list, output_by_char):
+        output_list = [[]]
+        output_count = 0
+        output_line_count = 0
+        inputs = []
+        discarded = []
+        #takes in all input and puts them all in a list of words
+        for a in input_list:
+            for b in a.split(" "):
+                inputs.append(b)
+                
+        line_count = 0
+        current_count = 0
+        for b in inputs:
+            if b.strip() != "":
+                if current_count + len(b) > self.width:
+                    current_count = 0
+                    line_count += 1
+                    output_list.append([])
+                current_count += len(b) + 1
+                output_list[line_count].append(b)
 
-temp = parse_input(["Hey, This is a Line! Surprise!!!!!! Is this more than 30 letters yet?","This is another line. hopefully less than 30 letters"])
-for a in temp.keys():
-        for b in temp[a]:
-            print(b, end='')
-        print()
+        if len(output_list) > self.height:
+            while len(output_list) > self.height:
+                discarded.append(output_list.pop(0))
+        for a in output_list:
+            if(output_by_char):
+                a = list(" ".join(a))
+            print(a)
+
+def main():
+    tester = windows()
+    test = True
+    test_input = ["Hello, nice to meet you. I'm just trying to test out thise code", "So, this is supposed to cut the input and organize             them so it can fit into the given screen", "Do you think this is gonna work? 'Cause,,, I 'm not really sure myself.", "So.. I wonder how long this is now.."]
+    tester.draw(test_input, not test)
+if __name__ == "__main__":
+    main()
+=======
+def draw(input_list):
+    width = 30
+    height = 5
+    output_list = [[]]
+    output_count = 0
+    output_line_count = 0
+
+    inputs = []
+
+    #takes in all input and puts them all in a list of words
+    for a in input_list:
+        for b in a.split(" "):
+            inputs.append(b)
+
+    line_count = 0
+    current_count = 0
+    for b in inputs:
+        if b.strip() != "":
+            if current_count + len(b) > width:
+                current_count = 0
+                line_count += 1
+                output_list.append([])
+            current_count += len(b) + 1
+            output_list[line_count].append(b)
+
+    for a in output_list:
+        a = list(" ".join(a))
+        print(a)
+
+draw(["Hello, nice to meet you. I'm just trying to test out thise code", "So, this is supposed to cut the input and organize             them so it can fit into the given screen", "Do you think this is gonna work? 'Cause,,, I 'm not really sure myself.", "So.. I wonder how long this is now.."])
+>>>>>>> origin/dev
