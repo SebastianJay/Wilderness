@@ -7,8 +7,8 @@ class GameState:
     name = ""
     gender = ""
     location = ""
-    id_number = 0;
-
+    id_number = 0
+    
     inventory = [] #should be a dictionary object
     status = []
     playtime = 0 #minutes
@@ -30,14 +30,12 @@ class GameState:
         s = json.dumps(GameState)
         with open("C://User//GameState.txt", "w") as f: #write a different filepath
             f.write(s)
-        pass
 
     def add(state): #may not be the correct syntax; depending on how the file is read, each individual "state"
                     #on someone's computer should have their own 'GameState object' that can be added to
         GameState.update(state)
 
         loads()
-        pass
 
     def loads(): #when any instance is added to GameState, this method is called to create another saveFile
         with open ("C://User//GameState.txt") as json_data: #write  a different filepath
@@ -50,5 +48,3 @@ class GameState:
                 fo.write(item + "           ")
 
             fo.close()
-
-        pass

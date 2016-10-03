@@ -1,5 +1,4 @@
 import window
-import window_draw
 import time
 
 class loading_window(window):
@@ -64,4 +63,3 @@ for i in range(1, 30):
     loadingWindow.update(animStateOne, 500)
     loadingWindow.update(animStateTwo, 500)
     loadingWindow.update(animStateThree, 500)
-	

@@ -5,9 +5,16 @@ on width and height fields
 """
 
 class Window:
-    def __init__(width, height):
-        self._width = width
-        self._height = height
+    def __init__(self, width, height):
+        self.width = width
+        self.height = height
 
         #2D char array approach
-        self.pixels = [[' ' for y in range(self._height)] for x in range(self._width)]
+        self.pixels = [['X' for y in range(self.height)] for x in range(self.width)]
+
+    def update(self, timestep):
+        pass
+
+    def draw(self):
+        
+        return self.pixels

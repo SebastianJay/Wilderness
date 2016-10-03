@@ -3,9 +3,34 @@ Definition for game display, which interacts with WindowManager to render
 results to screen. The view in our MVC framework.
 """
 
+import tkinter as tk
+from global_vars import Globals
+
 class Display:
-    def __init__(self):
-        pass
+    def __init__(self, root, windowManager):
+        self.windowManager = windowManager
+        self.xRes = Globals.XRes
+        self.yRes = Globals.YRes
+        self.numCols = Globals.NumCols
+        self.numRows = Globals.NumRows
+        self.root = root
+
+        self.canvas = tk.Canvas(self.root, width=self.xRes, height=self.yRes, background='black')
+        self.textIds = []
+        for i in range(self.numRows):
+            self.textIds.append([])
+            for j in range(self.numCols):
+                #TODO parameterize size of each char
+                #TODO load custom font? seems difficult
+                textId = self.canvas.create_text(j*16, i*16, fill='white', font=('Courier New', 16))
+                self.textIds[-1].append(textId)
+        self.canvas.pack()
+
+    def draw(self):
+        pixels = self.windowManager.draw()
+        for i in range(self.numRows):
+            for j in range(self.numCols):
+                self.canvas.itemconfig(self.textIds[i][j], text=pixels[i][j])
 
 ### Informal test for if print string / clear screen loop is fast enough on my shell
 ### Empirically it's too slow, so we will need to use something like tkinter instead
