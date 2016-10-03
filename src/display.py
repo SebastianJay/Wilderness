@@ -22,7 +22,9 @@ class Display:
             for j in range(self.numCols):
                 #TODO parameterize size of each char
                 #TODO load custom font? seems difficult
-                textId = self.canvas.create_text(j*16, i*16, fill='white', font=('Courier New', 16))
+                textId = self.canvas.create_text((j+1)*(Globals.FontSize-2) + Globals.XOffset,\
+                    (i+1)*(Globals.FontSize-2) + Globals.YOffset,\
+                    fill='white', font=('Courier New', Globals.FontSize))
                 self.textIds[-1].append(textId)
         self.canvas.pack()
 

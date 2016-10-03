@@ -10,11 +10,11 @@ class Window:
         self.height = height
 
         #2D char array approach
-        self.pixels = [['X' for y in range(self.height)] for x in range(self.width)]
+        self.pixels = [['X' for x in range(self.width)] for y in range(self.height)]
 
     def update(self, timestep):
         pass
 
     def draw(self):
-        
+
         return self.pixels
