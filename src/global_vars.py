@@ -9,5 +9,6 @@ class Globals:
     YOffset = 4
     NumCols = 90
     NumRows = 50
+    Timestep = 0.033
     FontSize = 16
     IsDev = True

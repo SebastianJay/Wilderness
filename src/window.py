@@ -16,5 +16,4 @@ class Window:
         pass
 
     def draw(self):
-
         return self.pixels

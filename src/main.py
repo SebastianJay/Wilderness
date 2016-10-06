@@ -8,6 +8,7 @@ from window import Window
 from display import Display
 import tkinter as tk
 import sys
+import time
 
 class GameDriver:
     def __init__(self):
@@ -18,7 +19,7 @@ class GameDriver:
     def mainloop(self):
         while True:
             try:
-                #sys.sleep(50)
+                time.sleep(Globals.Timestep)
                 self.display.draw()
                 self.root.update()
             except:
