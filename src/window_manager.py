@@ -29,3 +29,17 @@ class WindowManager:
         #possible sorting of windows when adding them
         self._windowList.append(window)
         self._numOfWindows += 1
+
+    """
+	def border(self):
+		"""
+		Creates a border of asterisks around the window
+		"""
+		for i in range(0, self.width):
+			self.pixels[0][i] = "*",
+			self.pixels[self.height - 1][i] = "*"
+
+		for i in range(1, self.height - 1):
+			self.pixels[i][0] = "*"
+			self.pixels[i][self.width - 1] = "*"
+    """
