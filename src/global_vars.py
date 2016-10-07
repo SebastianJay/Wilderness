@@ -12,3 +12,9 @@ class Globals:
     Timestep = 0.033
     FontSize = 16
     IsDev = True
+    SavePaths = [
+        'savefiles/sav0.txt',
+        'savefiles/sav1.txt',
+        'savefiles/sav2.txt',
+        'savefiles/sav3.txt',        
+    ]

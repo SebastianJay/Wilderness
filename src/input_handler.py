@@ -2,56 +2,56 @@
 Definition for input handler, which captures keystrokes.
 """
 
-from tkinter import *
+import tkinter as tk
 from queue import Queue
+from time import sleep
+from global_vars import Globals
 import sys
 
 class InputHandler:
-    def __init__(self):
-        root = Tk()
-
+    def __init__(self, canvas):
+        self.canvas = canvas
         self.queue = Queue()
 
         def onKeyPressed(event):
-            # Ignore non-printable characters
-            # This does not capture Tab, BackSpace, Return, Escape
-            if event.char == "":
+            # Debugging info about key event
+            if Globals.IsDev:
+                print("Key event: " + event.char + ", " + event.keysym)
+
+            # Whitelist of metakeys (control keys) that are used in game
+            metakeys = ['Up', 'Down', 'Left', 'Right',\
+                'BackSpace', 'Escape', 'Prior', 'Next', 'Return']
+
+            # Use char (raw printable character) by default, but prefer metakey name
+            putchar = event.char
+            if event.keysym in metakeys:
+                putchar = event.keysym
+
+            # Ignore any non-printable characters that are not whitelisted
+            if putchar == "":
                 return
 
-            if event.keysym == "Escape":
-                sys.exit()
+            # Otherwise enqueue the char
+            self.queue.put(putchar)
 
-            # TODO: Remove this once a proper consumer is implemented
-            if event.keysym == "Return":
-                for key in self.getKeyPresses():
-                    print(key)
-                return
-
-            if event.keysym == "BackSpace":
-                # TODO: Implement proper backspace support
-                return
-
-            # keysym gives the actual key for special characters
-            # eg Ctrl_L for Control
-            # We're ignoring them right now (see above), but it could be useful
-            # in the future.
-            # Otherwise it should be identical to char.
-            self.queue.put(event.keysym)
-
-        frame = Frame(root, width=100, height=100)
-        frame.bind("<Key>", onKeyPressed)
-        frame.pack()
-        frame.focus_set()
-
-        print("Listening for keys...Enter to list detected keys or Esc to exit")
-
-        root.mainloop()
+        self.canvas.bind("<Key>", onKeyPressed)
+        self.canvas.focus_set()
 
     def getKeyPresses(self):
         keys = list()
-
         while not self.queue.empty():
             keys.append(self.queue.get())
         return keys
 
-test = InputHandler()
+if __name__ == '__main__':
+    root = tk.Tk()
+    canvas = tk.Canvas(root, width=100, height=100)
+    canvas.pack()
+    test = InputHandler(canvas)
+    while True:
+        try:
+            root.update()
+            print(test.getKeyPresses())
+            sleep(0.5)
+        except:
+            sys.exit()

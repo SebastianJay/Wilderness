@@ -12,7 +12,7 @@ class Window:
         #2D char array approach
         self.pixels = [['X' for x in range(self.width)] for y in range(self.height)]
 
-    def update(self, timestep):
+    def update(self, timestep, keypresses):
         pass
 
     def draw(self):

@@ -6,6 +6,7 @@ Contains bootstrapping code - run this script to start the game
 from global_vars import Globals
 from window import Window
 from display import Display
+from input_handler import InputHandler
 import tkinter as tk
 import sys
 import time
@@ -15,11 +16,14 @@ class GameDriver:
         self.root = tk.Tk()
         self.window = Window(Globals.NumCols, Globals.NumRows)
         self.display = Display(self.root, self.window)
+        self.inputHandler = InputHandler(self.display.canvas)
 
     def mainloop(self):
         while True:
             try:
                 time.sleep(Globals.Timestep)
+                keypresses = self.inputHandler.getKeyPresses()
+                self.window.update(Globals.Timestep, keypresses)
                 self.display.draw()
                 self.root.update()
             except:
