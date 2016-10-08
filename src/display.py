@@ -3,24 +3,34 @@ Definition for game display, which interacts with WindowManager to render
 results to screen. The view in our MVC framework.
 """
 
-class Display:
-    def __init__(self):
-        pass
+import tkinter as tk
+from global_vars import Globals
 
-### Informal test for if print string / clear screen loop is fast enough on my shell
-### Empirically it's too slow, so we will need to use something like tkinter instead
-import subprocess as sp
-def test():
-    while True:
-        pixels = [[' ' for x in range(150)] for y in range(50)]
-        for y in range(len(pixels)):
-            for x in range(len(pixels[0])):
-                if x < y:
-                    pixels[y][x] = '*'
-                elif x > y:
-                    pixels[y][x] = '^'
-                else:
-                    pixels[y][x] = '@'
-        strcat = '\n'.join([''.join(row) for row in pixels])
-        print(strcat)
-        sp.call('cls', shell=True)
+class Display:
+    def __init__(self, root, windowManager):
+        self.windowManager = windowManager
+        self.xRes = Globals.NumCols
+        self.yRes = Globals.NumRows
+        self.numCols = Globals.NumCols
+        self.numRows = Globals.NumRows
+        self.root = root
+
+        self.text = tk.Text(self.root, width=self.xRes, height=self.yRes, background='black',
+            foreground='white', state=tk.DISABLED, font=(Globals.FontName, Globals.FontSize),
+            padx=0, pady=0, bd=0, selectbackground='black')
+        self.text.pack()
+
+    def draw(self):
+        pixels = self.windowManager.draw()
+        bufferlst = []
+        for sublst in pixels:
+            substr = ''.join(sublst)
+            bufferlst.append(substr)
+        bufferstr = '\n'.join(bufferlst)
+        self.text.config(state=tk.NORMAL)
+        self.text.delete(1.0, tk.END)
+        self.text.insert(tk.END, bufferstr)
+        self.text.config(state=tk.DISABLED)
+
+    def getWidget(self):
+        return self.text
