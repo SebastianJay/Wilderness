@@ -29,10 +29,23 @@ class WindowManager:
         for x in range(len(self._windowList)):
             pixels = self._windowList[x].draw()
             startr, startc = self._windowPos[x]
-            for r in range(len(pixels)):
-                for c in range(len(pixels[0])):
+            height = len(pixels)
+            width = len(pixels[0])
+            # fill in content
+            for r in range(height):
+                for c in range(width):
                     self._screen[startr + r][startc + c] = pixels[r][c]
-            # TODO border
+            # add border
+            for r in range(height):
+                self._screen[startr + r][startc-1] = '|'
+                self._screen[startr + r][startc + width] = '|'
+            for c in range(width):
+                self._screen[startr-1][startc + c] = '-'
+                self._screen[startr + height][startc + c] = '-'
+            self._screen[startr-1][startc-1] = 'o'
+            self._screen[startr + height][startc-1] = 'o'
+            self._screen[startr + height][startc + width] = 'o'
+            self._screen[startr-1][startc + width] = 'o'
 
     def draw(self):
         self.stitch()
@@ -47,15 +60,3 @@ class WindowManager:
         # TODO more sophisticated update relaying
         for win in self._windowList:
             win.update(timestep, keypresses)
-
-    def border(self):
-        """
-        Creates a border of asterisks around the window
-        """
-        for i in range(0, self.width):
-            self.pixels[0][i] = "*",
-            self.pixels[self.height - 1][i] = "*"
-
-        for i in range(1, self.height - 1):
-            self.pixels[i][0] = "*"
-            self.pixels[i][self.width - 1] = "*"

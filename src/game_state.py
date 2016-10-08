@@ -26,7 +26,7 @@ class GameState:
         def debugAddHistoryLine(self, line):
             if len(self.historyLines) == 0:
                 self.historyLines.append('')
-            self.historyLines[0] += line
+            self.historyLines[0] += line + ' '
 
         def dumps(self):
             """ Json stringifies the GameState """

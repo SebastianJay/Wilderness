@@ -20,9 +20,10 @@ class GameDriver:
     def __init__(self):
         self.root = tk.Tk()
         self.windowManager = WindowManager(Globals.NumCols, Globals.NumRows)
-        self.windowManager.addWindow(LoadingWindow(30, 35), 0, 90)
-        self.windowManager.addWindow(InputWindow(90, 15), 20, 0)
-        self.windowManager.addWindow(HistoryWindow(90, 20), 0, 0)
+        # TODO encapsulate window instantiation in WindowManager
+        self.windowManager.addWindow(HistoryWindow(90-2, 20-2), 0+1, 0+1)
+        self.windowManager.addWindow(InputWindow(90-2, 16-2), 19+1, 0+1)
+        self.windowManager.addWindow(LoadingWindow(30-2, 35-2), 0+1, 89+1)
         self.display = Display(self.root, self.windowManager)
         self.inputHandler = InputHandler(self.display.getWidget())
 
