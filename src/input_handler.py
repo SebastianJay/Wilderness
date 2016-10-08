@@ -2,11 +2,8 @@
 Definition for input handler, which captures keystrokes.
 """
 
-import tkinter as tk
 from queue import Queue
-from time import sleep
 from global_vars import Globals
-import sys
 
 class InputHandler:
     def __init__(self, canvas):
@@ -44,6 +41,9 @@ class InputHandler:
         return keys
 
 if __name__ == '__main__':
+    import tkinter as tk
+    from time import sleep
+    import sys
     root = tk.Tk()
     canvas = tk.Canvas(root, width=100, height=100)
     canvas.pack()

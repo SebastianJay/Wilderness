@@ -22,6 +22,6 @@ class AssetLoader:
                     assets[file_path] = f.read()
         return assets
 
-# To test:
-# loader = AssetLoader()
-# print(loader.loadAssets("assets"))
+if __name__ == '__main__':
+    loader = AssetLoader()
+    print(loader.loadAssets("../assets/scripts"))

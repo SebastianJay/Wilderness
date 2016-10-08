@@ -1,5 +1,4 @@
 from window import Window
-from time import *
 
 class LoadingWindow(Window):
 
@@ -54,8 +53,8 @@ class LoadingWindow(Window):
 			self.animTimer = 0.0
 			self.animIndex = (self.animIndex + 1) % len(self.animStates)
 
-from time import sleep
 if __name__ == '__main__':
+	from time import sleep
 	l = LoadingWindow(20, 10, True)
 	for x in range(10):
 		sleep(0.1)
