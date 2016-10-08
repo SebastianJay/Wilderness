@@ -1,67 +1,63 @@
-import window
-import window_draw
-import time
+from window import Window
 
-class loading_window(window):
-    def __init__(self, w, h):
+class LoadingWindow(Window):
 
-        self.width = w
-        self.height = h
-        self.windowChars = []
+	def __init__(self, w, h):
+		super().__init__(w, h)
+		self.animIndex = 0
+		self.animTimer = 0.0
+		self.animReset = 0.25
+		self.animStates = [
+			[("L", (self.width // 2 - 5, self.height // 2)),
+			 ("o", (self.width // 2 - 4, self.height // 2)),
+			 ("a", (self.width // 2 - 3, self.height // 2)),
+			 ("d", (self.width // 2 - 2, self.height // 2)),
+			 ("i", (self.width // 2 - 1, self.height // 2)),
+			 ("n", (self.width // 2, self.height // 2)),
+			 ("g", (self.width // 2 + 1, self.height // 2)),
+			 (".", (self.width // 2 + 2, self.height // 2)),
+			 (" ", (self.width // 2 + 3, self.height // 2)),
+			 (" ", (self.width // 2 + 4, self.height // 2))],
 
-        for i in range(0, self.height):
-            self.windowChars.append([])
+			[("L", (self.width // 2 - 5, self.height // 2)),
+			 ("o", (self.width // 2 - 4, self.height // 2)),
+			 ("a", (self.width // 2 - 3, self.height // 2)),
+			 ("d", (self.width // 2 - 2, self.height // 2)),
+			 ("i", (self.width // 2 - 1, self.height // 2)),
+			 ("n", (self.width // 2, self.height // 2)),
+			 ("g", (self.width // 2 + 1, self.height // 2)),
+			 (".", (self.width // 2 + 2, self.height // 2)),
+			 (".", (self.width // 2 + 3, self.height // 2)),
+			 (" ", (self.width // 2 + 4, self.height // 2))],
 
-            for j in range(0, self.width):
-                self.windowChars[i].append(" ")
+			[("L", (self.width // 2 - 5, self.height // 2)),
+			 ("o", (self.width // 2 - 4, self.height // 2)),
+			 ("a", (self.width // 2 - 3, self.height // 2)),
+			 ("d", (self.width // 2 - 2, self.height // 2)),
+			 ("i", (self.width // 2 - 1, self.height // 2)),
+			 ("n", (self.width // 2, self.height // 2)),
+			 ("g", (self.width // 2 + 1, self.height // 2)),
+			 (".", (self.width // 2 + 2, self.height // 2)),
+			 (".", (self.width // 2 + 3, self.height // 2)),
+			 (".", (self.width // 2 + 4, self.height // 2))]
+		 ]
 
-    def border(self):
-        """
-        Creates a border of asterisks around the window
-        """
-        for i in range(0, self.width):
-            self.windowChars[0][i], self.windowChars[self.height - 1][i] = "*", "*"
+	def draw(self):
+		for i in self.animStates[self.animIndex]:
+			self.pixels[int(i[1][1])][int(i[1][0])] = i[0]
+		return self.pixels
 
-        for i in range(1, self.height - 1):
-            self.windowChars[i][0], self.windowChars[i][self.width - 1] = "*", "*"
+	def update(self, timestep, keypresses):
+		self.animTimer += timestep
+		if self.animTimer >= self.animReset:
+			self.animTimer = 0.0
+			self.animIndex = (self.animIndex + 1) % len(self.animStates)
 
-    def draw(self):
-        """
-        Displays the windowChars matrix using print()
-        """
-        for i in range(0, self.height):
-            if not i == 0: print()
-            for j in range(0, self.width):
-                print(self.windowChars[i][j], end="")
-        print()
-
-    def update(self, listOfUpdates, delay):
-        """
-        listOfUpdates to be in form [ [charcter, [widthOfChar, heightOfChar]], ...]
-        delay to be in milliseconds
-        """
-        time.sleep(delay/1000)
-        for i in listOfUpdates:
-            self.windowChars[int(i[1][1])][int(i[1][0])] = i[0]
-        self.draw()
-
-"""
-The below code is suggestion/example to demonstrate how to use the methods to
-create a good looking loading box, and shows what it would look like
-"""
-
-width = 51
-height = 11
-
-loadingWindow = loading_window(width,height)
-loadingWindow.border()
-
-animStateOne = [["L", [width//2-5,height//2]], ["o", [width//2-4,height//2]], ["a", [width//2-3,height//2]], ["d", [width//2-2,height//2]], ["i", [width//2-1,height//2]], ["n", [width//2,height//2]], ["g", [width//2+1,height//2]], [".", [width//2+2,height//2]], [" ", [width//2+3,height//2]], [" ", [width//2+4,height//2]], ]
-animStateTwo =[["L", [width//2-5,height//2]], ["o", [width//2-4,height//2]], ["a", [width//2-3,height//2]], ["d", [width//2-2,height//2]], ["i", [width//2-1,height//2]], ["n", [width//2,height//2]], ["g", [width//2+1,height//2]], [".", [width//2+2,height//2]], [".", [width//2+3,height//2]], [" ", [width//2+4,height//2]], ]
-animStateThree = [["L", [width//2-5,height//2]], ["o", [width//2-4,height//2]], ["a", [width//2-3,height//2]], ["d", [width//2-2,height//2]], ["i", [width//2-1,height//2]], ["n", [width//2,height//2]], ["g", [width//2+1,height//2]], [".", [width//2+2,height//2]], [".", [width//2+3,height//2]], [".", [width//2+4,height//2]], ]
-
-for i in range(1, 30):
-    loadingWindow.update(animStateOne, 500)
-    loadingWindow.update(animStateTwo, 500)
-    loadingWindow.update(animStateThree, 500)
-	
+if __name__ == '__main__':
+	from time import sleep
+	l = LoadingWindow(20, 10, True)
+	for x in range(10):
+		sleep(0.1)
+		l.update(0.1, [])
+		l.draw()    #updates the pixel matrix
+		l.debugDraw()
