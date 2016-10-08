@@ -29,7 +29,7 @@ class InputHandler:
 
             if event.keysym == "BackSpace":
                 # TODO: Implement proper backspace support
-                return
+                # return
 
             # keysym gives the actual key for special characters
             # eg Ctrl_L for Control
