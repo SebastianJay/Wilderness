@@ -10,7 +10,7 @@ class Window:
         self.height = height
 
         #initialize 2D char array
-        self.pixels = [['X' for x in range(self.width)] for y in range(self.height)]
+        self.pixels = [[' ' for x in range(self.width)] for y in range(self.height)]
 
     def update(self, timestep, keypresses):
         """
@@ -29,6 +29,7 @@ class Window:
         """
         Displays the pixels matrix to shell using print()
         """
+        self.draw() #refresh the pixels state
         for i in range(0, self.height):
             if not i == 0: print()
             for j in range(0, self.width):

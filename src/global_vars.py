@@ -5,8 +5,6 @@ Contains variables that should be accessible from any scope
 class Globals:
     XRes = 1280
     YRes = 720
-    XOffset = 4
-    YOffset = 4
     NumCols = 120
     NumRows = 35
     Timestep = 0.033

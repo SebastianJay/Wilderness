@@ -35,9 +35,13 @@ class InputHandler:
         self.canvas.focus_set()
 
     def getKeyPresses(self):
-        keys = list()
+        keys = []
         while not self.queue.empty():
-            keys.append(self.queue.get())
+            key = self.queue.get()
+            keys.append(key)
+            # throttle input by stalling keystrokes after Return until next update
+            if key == 'Return':
+                break
         return keys
 
 if __name__ == '__main__':

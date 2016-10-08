@@ -6,6 +6,9 @@ Contains bootstrapping code - run this script to start the game
 from global_vars import Globals
 from window import Window
 from loading_window import LoadingWindow
+from input_window import InputWindow
+from history_window import HistoryWindow
+from window_manager import WindowManager
 from display import Display
 from input_handler import InputHandler
 import tkinter as tk
@@ -16,8 +19,11 @@ import traceback
 class GameDriver:
     def __init__(self):
         self.root = tk.Tk()
-        self.window = LoadingWindow(Globals.NumCols, Globals.NumRows)
-        self.display = Display(self.root, self.window)
+        self.windowManager = WindowManager(Globals.NumCols, Globals.NumRows)
+        self.windowManager.addWindow(LoadingWindow(30, 35), 0, 90)
+        self.windowManager.addWindow(InputWindow(90, 15), 20, 0)
+        self.windowManager.addWindow(HistoryWindow(90, 20), 0, 0)
+        self.display = Display(self.root, self.windowManager)
         self.inputHandler = InputHandler(self.display.getWidget())
 
     def mainloop(self):
@@ -25,12 +31,12 @@ class GameDriver:
             try:
                 time.sleep(Globals.Timestep)
                 keypresses = self.inputHandler.getKeyPresses()
-                self.window.update(Globals.Timestep, keypresses)
+                self.windowManager.update(Globals.Timestep, keypresses)
                 self.display.draw()
                 self.root.update()
-            except tk.TclError: # occurs when window is closed
+            except tk.TclError: # window was closed
                 sys.exit()
-            except:
+            except: # some other exception occurred
                 if Globals.IsDev:
                     traceback.print_exc()
                 sys.exit()

@@ -17,7 +17,16 @@ class GameState:
             self.id_number = 0
             self.inventory = {}
             self.status = []
-            self.playtime = 0 #minutes
+            self.playtime = 0       # minutes
+            self.historyLines = []  # lines for the history (feedback) window
+
+        def addHistoryLine(self, line):
+            self.historyLines.append(line)
+
+        def debugAddHistoryLine(self, line):
+            if len(self.historyLines) == 0:
+                self.historyLines.append('')
+            self.historyLines[0] += line
 
         def dumps(self):
             """ Json stringifies the GameState """
