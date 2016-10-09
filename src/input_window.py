@@ -5,27 +5,27 @@ then modifies GameState.
 """
 from window import Window
 from game_state import GameState
+from global_vars import Globals
 
 class InputWindow(Window):
 
     def __init__(self, width, height):
         super().__init__(width, height)
-        self.cmdBuffer = ''
-        self.cmdBufferLimit = 32
 
     def update(self, timestep, keypresses):
+        gs = GameState()
         for key in keypresses:
             # key is printable -> add it to buffer
-            if len(key) == 1 and len(self.cmdBuffer) < self.cmdBufferLimit:
-                self.cmdBuffer += key
+            if len(key) == 1:
+                gs.appendCmdBuffer(key)
             # key is backspace -> pop one char from buffer
             elif key == 'BackSpace':
-                self.cmdBuffer = self.cmdBuffer[:-1]
+                gs.popCmdBuffer()
             # key is return -> commit command
             elif key == 'Return':
                 # TODO replace with actual functionality
-                GameState().debugAddHistoryLine(self.cmdBuffer)
-                self.cmdBuffer = ''
+                gs.debugAddHistoryLine(gs.cmdBuffer)
+                gs.clearCmdBuffer()
 
     def draw(self):
         midY = self.height // 2
@@ -34,7 +34,8 @@ class InputWindow(Window):
         for i in range(3 + 32):
             self.pixels[midY][startX + i] = ' '
         # add current command input
-        fullLine = '>> ' + self.cmdBuffer + ('_' if len(self.cmdBuffer) < self.cmdBufferLimit else '')
+        cmdBuffer = GameState().cmdBuffer
+        fullLine = '>> ' + cmdBuffer + ('_' if len(cmdBuffer) < Globals.CmdMaxLength else '')
         for i, c in enumerate(fullLine):
             self.pixels[midY][startX + i] = c
         return self.pixels

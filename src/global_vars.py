@@ -17,3 +17,4 @@ class Globals:
         'savefiles/sav2.txt',
         'savefiles/sav3.txt',
     ]
+    CmdMaxLength = 32

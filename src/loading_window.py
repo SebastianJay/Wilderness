@@ -59,5 +59,4 @@ if __name__ == '__main__':
 	for x in range(10):
 		sleep(0.1)
 		l.update(0.1, [])
-		l.draw()    #updates the pixel matrix
 		l.debugDraw()

@@ -11,14 +11,33 @@ class GameState:
     # http://python-3-patterns-idioms-test.readthedocs.io/en/latest/Singleton.html
     class __GameState:
         def __init__(self):
-            self.name = ""
-            self.gender = ""
-            self.location = ""
-            self.id_number = 0
-            self.inventory = {}
-            self.status = []
-            self.playtime = 0       # minutes
-            self.historyLines = []  # lines for the history (feedback) window
+            self.init()
+
+        def init(self):
+            """ Wipes out the existing GameState (called on New Game) """
+            self.name = ""              # player name, entered at start of new game
+            self.playtime = 0           # playtime, in seconds
+            self.roomId = ""            # room ID, where player is located
+            self.mapLocation = (0,0)    # coordinates of player location on world map
+            self.inventory = {}         # inventory, represented as {string itemId: int numberOfItem}
+            self.variables = {}         # variables created through script files {string key: string/int value}
+                                        # value is a string by default, but can be converted to int on the fly
+            self.historyLines = []      # lines of strings for the history (feedback) window
+                                        # TODO change to list of LangNodes
+            self.cmdBuffer = ""         # command that player is currently typing
+
+        def appendCmdBuffer(self, ch):
+            """ Add to the command buffer, but do not overflow """
+            if len(self.cmdBuffer) < Globals.CmdMaxLength:
+                self.cmdBuffer += ch
+
+        def popCmdBuffer(self):
+            """ Take one character off command buffer, to implement BackSpace """
+            self.cmdBuffer = self.cmdBuffer[:-1]
+
+        def clearCmdBuffer(self):
+            """ Reset command buffer (e.g. if pressed Return) """
+            self.cmdBuffer = ""
 
         def addHistoryLine(self, line):
             self.historyLines.append(line)
@@ -67,44 +86,6 @@ class GameState:
     def __setattr__(self, name):
         return setattr(self.instance, name)
 
-    """
-    def __init__(self): #more instance variables can be added and subtracted
-        GameState = {
-            {
-                'name': "John",
-                'gender': "Male",
-                'location': "Home",
-                'id_number': 0,
-
-                'playtime': 50,
-                'inventory': ["spoon", "trowel", "flashlight"],
-                'status': "asleep",
-            }
-        }
-
-        s = json.dumps(GameState)
-        with open("C://User//GameState.txt", "w") as f: #write a different filepath
-            f.write(s)
-
-    def add(state): #may not be the correct syntax; depending on how the file is read, each individual "state"
-                    #on someone's computer should have their own 'GameState object' that can be added to
-        GameState.update(state) # TODO resolve update()
-
-        loads()
-
-    def loads(): #when any instance is added to GameState, this method is called to create another saveFile
-        with open ("C://User//GameState.txt") as json_data: #write  a different filepath
-            save_data = json.loads(json_data)
-
-        for individual_state in save_data['GameState']:
-            fo = open(individual_state['id'] + "_" + ['name'] + ".txt", "wb")
-
-            for item in individual_state:
-                fo.write(item + "           ")
-
-            fo.close()
-    """
-
 if __name__ == '__main__':
     g = GameState()
     g.name = 'testing'
@@ -115,6 +96,6 @@ if __name__ == '__main__':
     print(g)
 
     g.writeFile(Globals.SavePaths[0])
-    g.name = 'changed!'
+    g.name = 'should not appear in print(g)!'
     g.readFile(Globals.SavePaths[0])
     print(g)
