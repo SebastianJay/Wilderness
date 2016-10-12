@@ -5,6 +5,7 @@ Definition for window manager, which takes care of multiple Windows.
 from window import Window
 from loading_window import LoadingWindow
 from input_window import InputWindow
+from map_window import MapWindow
 
 # TODO inherit from Window
 class WindowManager:
