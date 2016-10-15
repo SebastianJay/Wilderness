@@ -25,8 +25,12 @@ class AssetLoader:
     def readFormat(self, text):
         #index_of_at will track the last instance of the "@" character in the text
         index_of_at = 0
+        index_close_bracket = -1
+        previous_close_bracket = -1
+        index_open_bracket = -1
+        formatting = {} # dictionary of formation {string : tuple} of formatters and where they apply
+        text_without_formatters = ""
 
-        formatting = {}
         #While there are remaining "@"s in the string, format into a langNode
         while (text.find("@", index_of_at) != -1):
             index_of_at = text.find("@", index_of_at)
@@ -40,10 +44,12 @@ class AssetLoader:
             if (index_close_bracket == -1):
                 print("The formatter is missing an openning bracket: }")
                 return {}
-            int1 = 1
-            int2 = 5
-            formatter = text[index_of_at + 1 :index_open_bracket]
-            formatted_text = text[index_open_bracket+ 1 : index_close_bracket]
+            formatter = text[index_of_at + 1 :index_open_bracket]               # @formatter{formatted_test}
+            formatted_text = text[index_open_bracket + 1 : index_close_bracket]
+            # text_without_formatters will hold the text with the @formatter{formattted_text} replaced with just formatted_text
+
+            text_without_formatters += text[previous_close_bracket + 1 : index_of_at]
+            text_without_formatters += formatted_text
 
             print("index_of_at: " + str(index_of_at))
             print("index_open_bracket: " + str(index_open_bracket))
@@ -55,15 +61,16 @@ class AssetLoader:
             #Seen above is the format we ultimately want to return
             #A LangNode, text as the key, a dictionary linking formatters to a list of tuples of all indexes of that formattter as the avlue
 
+            # Remember where in the text_without_formatters string each formatter applies
             if formatter not in formatting:
-                formatting[formatter] = [(index_open_bracket + 1, index_close_bracket - 1)]
+                formatting[formatter] = [(len(text_without_formatters)-len(formatted_text), len(text_without_formatters) -1)]
             else:
-                formatting[formatter].append((index_open_bracket + 1, index_close_bracket - 1))
+                formatting[formatter].append((len(text_without_formatters)-len(formatted_text), len(text_without_formatters) -1))
 
-            #start searching for the next @ sign
-            index_of_at = index_of_at + 1
+            previous_close_bracket = index_close_bracket # remember where the previous } was
+            index_of_at = index_of_at + 1   # start searching for the next @ after the previous @
 
-        LangNode = (text, formatting)
+        LangNode = (text_without_formatters, formatting)
         return LangNode
 
 
