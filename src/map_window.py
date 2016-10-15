@@ -32,5 +32,5 @@ class MapWindow(Window):
         return self.pixels
 
 if __name__ == '__main__':
-    mapWindow = MapWindow('assets\\maps\\test_map.txt', 1280, 720)
+    mapWindow = MapWindow(1280, 720, 'assets\\maps\\test_map.txt')
     mapWindow.draw()
