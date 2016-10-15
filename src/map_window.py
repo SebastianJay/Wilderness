@@ -6,7 +6,7 @@ from game_state import GameState
 from asset_loader import AssetLoader
 
 class MapWindow(Window):
-    def __init__(self, currentMap, width, height):
+    def __init__(self, width, height, currentMap):
         super().__init__(width, height)
         loader = AssetLoader()
         assets = loader.loadAssets('assets/maps')
