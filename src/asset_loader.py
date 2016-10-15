@@ -9,6 +9,10 @@ class AssetLoader:
         pass
 
     def loadAssets(self, path_to_folder):
+        # Normalize the given path
+        path_to_folder = os.path.normpath(path_to_folder)
+        path_to_folder = os.path.normcase(path_to_folder)
+
         # This dictionary will hold the contents of asset files in the format:
         #   key = the files path, e.g. "assets/readme.txt"
         #   value = the conents of the file
