@@ -1,0 +1,14 @@
+#Beginning_LoreHousePapers
+
+Inspect{
+	The papers were mostly news clippings and brochures from her university. Laying on top of a pile of unopened letters, there was a note from her friends inviting her to meet them at the university. 
+}
+
+Pick up{
+	Lore picked up the letter from her friends and put it in her pocket.
+	#count the number of items picked up by Lore
+		$if_itemsgrabbedLorehouse_eq_0{
+		$set_itemsgrabbedLorehouse_1
+		}$else{$add_itemsgrabbedLorehouse_1
+	}
+}
