@@ -10,11 +10,14 @@ class MapWindow(Window):
         super().__init__(width, height)
         loader = AssetLoader()
         assets = loader.loadAssets('assets/maps')
-        self.map = assets[currentMap].splitlines()
+        self.map = assets[currentMap + '.txt'].splitlines()
+        self.travelMask = assets[currentMap + '_travel_mask.txt'].splitlines()
         self.location = [0, 0] # TODO: Get this from GameState instead
 
     def update(self, timestep, keypresses):
-        previousLocation = self.location
+        previousLocation = [0, 0]
+        previousLocation[0] = self.location[0]
+        previousLocation[1] = self.location[1]
         for key in keypresses:
             if key == "Up" or key == "w":
                 if self.location[0] > 0 and len(self.map[self.location[0] - 1]) - 1 >= self.location[1]:
@@ -31,7 +34,11 @@ class MapWindow(Window):
             elif key == "Return":
                 pass
 
-        if self.location != previousLocation:
+        if self.travelMask[self.location[0]][self.location[1]] == '1':
+            self.location[0] = previousLocation[0]
+            self.location[1] = previousLocation[1]
+
+        if self.location[0] != previousLocation[0] or self.location[1] != previousLocation[1]:
             self.pixels[previousLocation[0]][previousLocation[1]] = self.map[previousLocation[0]][previousLocation[1]]
             self.pixels[self.location[0]][self.location[1]] = '@'
 
@@ -44,5 +51,5 @@ class MapWindow(Window):
         return self.pixels
 
 if __name__ == '__main__':
-    mapWindow = MapWindow(1280, 720, 'assets\\maps\\test_map.txt')
+    mapWindow = MapWindow(1280, 720, 'assets\\maps\\test_map')
     mapWindow.draw()
