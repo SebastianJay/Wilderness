@@ -25,9 +25,9 @@ class FuncNode:
         self.args = args
         """
         type of self.inner depends on self.title:
-            if, elif, else -> BodyNode that gets executed if condition in args is true
-            choice -> (LangNode, BodyNode)[] the BodyNode result for the chosen LangNode option is executed
-            random -> BodyNode[] of which one gets randomly executed
+            if, elif, else -> BodyNode - gets executed if condition in args is true
+            choice -> (LangNode, BodyNode)[] - the BodyNode result for the chosen LangNode option is executed
+            random -> BodyNode[] - one from list gets randomly executed
         for other functions without {}, self.inner is None
         """
         self.inner = inner
@@ -39,8 +39,102 @@ class Interpreter:
         pass
 
     def parseBody(self, bodyStr):
-        """ Converts a string into a BodyNode (can be called recursively) """
-        pass
+        """ Converts a string into a BodyNode """
+
+        def strIndex(string, target, startInd=0):
+            """ utility method for finding index substrings """
+            return string.index(target, startInd) if target in string else -1
+
+        def matchingBraceIndex(string, startInd=0):
+            """ identify index of matching close brace """
+            nextInd = startInd
+            openCount = 1
+            while True:
+                openInd = strIndex(string, '{', nextInd)
+                closeInd = strIndex(string, '}', nextInd)
+                if closeInd == -1:
+                    # error, no matching brace
+                    # throw exception
+                    pass
+                elif openInd == -1:
+                    return closeInd
+                elif openInd < closeInd:
+                    openCount += 1
+                    nextInd = openInd + 1
+                else:
+                    openCount -= 1
+                    if openCount == 0:
+                        return closeInd
+                    nextInd = closeInd + 1
+
+        def parseBodyRec(scriptStr):
+            """ Recursive helper for parseBody """
+            remainingInd = 0
+            nodes = []
+            while remainingInd < len(scriptStr):
+                # locate a function by searching for $
+                funcInd = strIndex(scriptStr, '$', remainingInd)
+                # function not found -> all content can be captured in LangNode
+                if funcInd == -1:
+                    funcInd = len(scriptStr)
+                # if content exists between current index and function, store in LangNode
+                langStr = scriptStr[remainingInd:funcInd].strip()
+                if len(langStr) > 0:
+                    pass
+                # only proceed with function parsing if function exists
+                if funcInd >= len(scriptStr):
+                    break
+                # determine if function has inner (part surrounded by {})
+                braceOpenInd = strIndex(scriptStr, '{', funcInd)
+                innerExists = (braceOpenInd != -1 and len(scriptStr[funcInd:braceOpenInd].split()) == 1)
+                # index where function name ends
+                funcNameEndInd = 0
+                # string containing function inner, if it exists
+                funcInnerStr = None
+                # function has inner -> parse that portion
+                if innerExists:
+                    braceCloseInd = matchingBraceIndex(scriptStr, braceOpenInd + 1)
+                    funcInnerStr = scriptStr[braceOpenInd+1:braceCloseInd]
+                    funcNameEndInd = braceOpenInd
+                    remainingInd = braceCloseInd + 1
+                # function has no inner
+                else:
+                    # function description ends on newline
+                    newlineInd = strIndex(scriptStr, '\n', funcInd)
+                    if newlineInd == -1:
+                        newlineInd = len(scriptStr) - 1
+                    funcNameEndInd = newlineInd
+                    remainingInd = newlineInd + 1
+                # parse function title and args
+                funcAllArgs = scriptStr[funcInd+1:funcNameEndInd].strip().split('_')
+                funcTitle = funcAllArgs[0]
+                funcArgs = funcAllArgs[1:]
+                funcInner = None
+                # parse inner based on title
+                if funcTitle == 'if' or funcTitle == 'elif' or funcTitle == 'else':
+                    funcInner = parseBodyRec(funcInnerStr.strip())
+                elif funcTitle == 'choice':
+                    pass
+                elif funcTitle == 'random':
+                    pass
+                funcNode = FuncNode(funcTitle, funcArgs, funcInner)
+                nodes.append(funcNode)
+            return BodyNode(nodes)
+
+        # split bodyStr into lines
+        lines = bodyStr.split('\n')
+        # remove indenting by stripping leading/trailing spaces from lines
+        lines = [line.strip() for line in lines]
+        # remove single line comments
+        lines = [line for line in lines if len(line) == 0 or line[0] != '#']
+        # remove end of line comments
+        lines = [(line[:line.index('#')] if '#' in line else line) for line in lines]
+        # remove beginning forward slash (syntax for preserving leading spaces)
+        #lines = [(line[1:] if len(line) > 0 and line[0] == '\\' else line) for line in lines]
+        # join back into one string
+        scriptStr = '\n'.join(lines)
+        # recursively parse body
+        return parseBodyRec(scriptStr)
 
     def parseScript(self, scriptStr):
         """ Converts file contents string into a list of (string verb, BodyNode reaction) tuples """
