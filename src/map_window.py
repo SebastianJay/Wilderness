@@ -15,32 +15,26 @@ class MapWindow(Window):
         self.location = [0, 0] # TODO: Get this from GameState instead
 
     def update(self, timestep, keypresses):
-        previousLocation = [0, 0]
-        previousLocation[0] = self.location[0]
-        previousLocation[1] = self.location[1]
         for key in keypresses:
             if key == "Up" or key == "w":
                 if self.location[0] > 0 and len(self.map[self.location[0] - 1]) - 1 >= self.location[1]:
-                    self.location[0] -= 1
+                    if self.travelMask[self.location[0] - 1][self.location[1]] == '0':
+                        self.location[0] -= 1
             elif key == "Left" or key == "a":
                 if self.location[1] > 0:
-                    self.location[1] -= 1
+                    if self.travelMask[self.location[0]][self.location[1] - 1] == '0':
+                        self.location[1] -= 1
             elif key == "Down" or key == "s":
                 if self.location[0] < len(self.map) - 1 and len(self.map[self.location[0] + 1]) - 1 >= self.location[1]:
-                    self.location[0] += 1
+                    if self.travelMask[self.location[0] + 1][self.location[1]] == '0':
+                        self.location[0] += 1
             elif key == "Right" or key == "d":
                 if self.location[1] < len(self.map[self.location[0]]) - 1:
-                    self.location[1] += 1
+                    if self.travelMask[self.location[0]][self.location[1] + 1] == '0':
+                        self.location[1] += 1
             elif key == "Return":
+                # TODO
                 pass
-
-        if self.travelMask[self.location[0]][self.location[1]] == '1':
-            self.location[0] = previousLocation[0]
-            self.location[1] = previousLocation[1]
-
-        if self.location[0] != previousLocation[0] or self.location[1] != previousLocation[1]:
-            self.pixels[previousLocation[0]][previousLocation[1]] = self.map[previousLocation[0]][previousLocation[1]]
-            self.pixels[self.location[0]][self.location[1]] = '@'
 
     def draw(self):
         for row in range(len(self.map)):
