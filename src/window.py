@@ -9,12 +9,29 @@ class Window:
         self.width = width
         self.height = height
 
-        #2D char array approach
-        self.pixels = [['X' for x in range(self.width)] for y in range(self.height)]
+        #initialize 2D char array
+        self.pixels = [[' ' for x in range(self.width)] for y in range(self.height)]
 
-    def update(self, timestep):
+    def update(self, timestep, keypresses):
+        """
+        Given a timestep in seconds and a list of keystrokes during this update,
+        make changes to GameState or the window state itself
+        """
         pass
 
     def draw(self):
-
+        """
+        Pull from GameState (if needed) to update 2D pixel array
+        """
         return self.pixels
+
+    def debugDraw(self):
+        """
+        Displays the pixels matrix to shell using print()
+        """
+        self.draw() #refresh the pixels state
+        for i in range(0, self.height):
+            if not i == 0: print()
+            for j in range(0, self.width):
+                print(self.pixels[i][j], end="")
+        print()
