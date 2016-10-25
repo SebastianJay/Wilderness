@@ -178,7 +178,17 @@ class Interpreter:
         #lines = [(line[1:] if len(line) > 0 and line[0] == '\\' else line) for line in lines]
         # join back into one string
         scriptStr = '\n'.join(lines)
-        
+        remainingInd = 0
+        tuples = []
+        while remainingInd < len(scriptStr):
+            braceloc = strIndex(scriptStr, "{", remainingInd)
+            if braceloc == -1:
+                break
+            verb = scriptStr[remainingInd:braceloc].strip()
+            closeInd = matchingBraceIndex(scriptStr, braceloc + 1)
+            reaction = parseBody(scriptStr[braceloc+1:closeInd].strip())
+            tuples.append((verb, reaction))
+            remainingInd = closeInd + 1
         pass
 
     def executeBody(self, bodyNode):
