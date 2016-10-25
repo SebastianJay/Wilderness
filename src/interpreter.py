@@ -6,6 +6,14 @@ class BodyNode:
         """ contains a sequence of LangNodes and FuncNodes """
         self.nodes = nodes
 
+    def __str__(self):
+        print("BodyNode[")
+        #for a in self.nodes:
+        #    a.printString()
+        for a in self.nodes:
+            print(a)
+        print("]")
+
 class LangNode:
     """ Node that contains natural language to be displayed in game """
 
@@ -14,6 +22,12 @@ class LangNode:
         self.text = text
         """ formatting for text to modify color or style """
         self.formatting = formatting
+
+    def __str__(self):
+        print("LangNode(text: " + self.text.replace("\n"," \\n ") + ", formatting: {", end="")
+        for c in self.formatting.keys():
+            print(c + ": " + self.formatting[c], end = "")
+        print("})")
 
 class FuncNode:
     """ Node that contains a function to be evaluated during runtime """
@@ -31,6 +45,16 @@ class FuncNode:
         for other functions without {}, self.inner is None
         """
         self.inner = inner
+
+    def __str__(self):
+        print("FuncNode(title: " + self.title + ", \nargs: " + (str)(self.args) + ",")
+        print("inner: [")
+        if self.inner is not None:
+            for a in self.inner:
+                print("(", end = "")
+                print(a[0])
+                print(a[1])
+        print("])")
 
 class Interpreter:
     """ Contains parsing and execution routines for the game's custom scripting language. """
@@ -75,14 +99,17 @@ class Interpreter:
                 # locate a function by searching for $
                 funcInd = strIndex(scriptStr, '$', remainingInd)
                 # function not found -> all content can be captured in LangNode
-                if funcInd == -1:
-                    funcInd = len(scriptStr)
+                functionExists = funcInd != -1
                 # if content exists between current index and function, store in LangNode
-                langStr = scriptStr[remainingInd:funcInd].strip()
-                if len(langStr) > 0:
-                    pass
+                if not functionExists:
+                    langStr = scriptStr[remainingInd:].strip()
+                else:
+                    langStr = scriptStr[remainingInd:funcInd].strip()
+                if langStr != "":
+                    langNode = LangNode(langStr)
+                    nodes.append(langNode)
                 # only proceed with function parsing if function exists
-                if funcInd >= len(scriptStr):
+                if not functionExists:
                     break
                 # determine if function has inner (part surrounded by {})
                 braceOpenInd = strIndex(scriptStr, '{', funcInd)
@@ -117,10 +144,11 @@ class Interpreter:
                     pass
                 elif funcTitle == 'random':
                     pass
+                else:
+                    funcInner = None
                 funcNode = FuncNode(funcTitle, funcArgs, funcInner)
                 nodes.append(funcNode)
             return BodyNode(nodes)
-
         # split bodyStr into lines
         lines = bodyStr.split('\n')
         # remove indenting by stripping leading/trailing spaces from lines
