@@ -62,34 +62,34 @@ class Interpreter:
     def __init__(self):
         pass
 
+    def matchingBraceIndex(string, startInd=0):
+        """ identify index of matching close brace """
+        nextInd = startInd
+        openCount = 1
+        while True:
+            openInd = strIndex(string, '{', nextInd)
+            closeInd = strIndex(string, '}', nextInd)
+            if closeInd == -1:
+                # error, no matching brace
+                # throw exception
+                pass
+            elif openInd == -1:
+                return closeInd
+            elif openInd < closeInd:
+                openCount += 1
+                nextInd = openInd + 1
+            else:
+                openCount -= 1
+                if openCount == 0:
+                    return closeInd
+                nextInd = closeInd + 1
+
+    def strIndex(string, target, startInd=0):
+        """ utility method for finding index substrings """
+        return string.index(target, startInd) if target in string else -1
+
     def parseBody(self, bodyStr):
         """ Converts a string into a BodyNode """
-
-        def strIndex(string, target, startInd=0):
-            """ utility method for finding index substrings """
-            return string.index(target, startInd) if target in string else -1
-
-        def matchingBraceIndex(string, startInd=0):
-            """ identify index of matching close brace """
-            nextInd = startInd
-            openCount = 1
-            while True:
-                openInd = strIndex(string, '{', nextInd)
-                closeInd = strIndex(string, '}', nextInd)
-                if closeInd == -1:
-                    # error, no matching brace
-                    # throw exception
-                    pass
-                elif openInd == -1:
-                    return closeInd
-                elif openInd < closeInd:
-                    openCount += 1
-                    nextInd = openInd + 1
-                else:
-                    openCount -= 1
-                    if openCount == 0:
-                        return closeInd
-                    nextInd = closeInd + 1
 
         def parseBodyRec(scriptStr):
             """ Recursive helper for parseBody """
@@ -141,16 +141,33 @@ class Interpreter:
                 if funcTitle == 'if' or funcTitle == 'elif' or funcTitle == 'else':
                     funcInner = parseBodyRec(funcInnerStr.strip())
                 elif funcTitle == 'choice':
-                    pass
+                    choices = funcInnerStr.split("|")
+                    funcInner = []
+                    option = None
+                    result = None
+                    for i in range(len(choices)):
+                        if i % 2 = 0:
+                            option = LangNode(choices[i].strip())
+                        else:
+                            result = parseBodyRec(choices[i].strip())
+                            funcInner.append((option, result))
                 elif funcTitle == 'random':
-                    pass
+                    funcInner = []
+                    choices = funcInnerStr.split("|")
+                    for a in choices:
+                        funcInner.append(parseBodyRec(a.strip()))
                 else:
                     funcInner = None
                 funcNode = FuncNode(funcTitle, funcArgs, funcInner)
                 nodes.append(funcNode)
             return BodyNode(nodes)
+        # recursively parse body
+        return parseBodyRec(scriptStr)
+
+    def parseScript(self, scriptStr):
+        """ Converts file contents string into a list of (string verb, BodyNode reaction) tuples """
         # split bodyStr into lines
-        lines = bodyStr.split('\n')
+        lines = scriptStr.split('\n')
         # remove indenting by stripping leading/trailing spaces from lines
         lines = [line.strip() for line in lines]
         # remove single line comments
@@ -161,11 +178,7 @@ class Interpreter:
         #lines = [(line[1:] if len(line) > 0 and line[0] == '\\' else line) for line in lines]
         # join back into one string
         scriptStr = '\n'.join(lines)
-        # recursively parse body
-        return parseBodyRec(scriptStr)
-
-    def parseScript(self, scriptStr):
-        """ Converts file contents string into a list of (string verb, BodyNode reaction) tuples """
+        
         pass
 
     def executeBody(self, bodyNode):
