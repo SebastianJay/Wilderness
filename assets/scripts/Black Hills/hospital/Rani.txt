@@ -3,11 +3,11 @@ inspect{
 }
 
 talk to{
-	$if_frm_QuestChoice_eq_2{
+	$if_frmQuestChoice_eq_2{
 		The town folks were angered by Kipp's support for Conney and refused to talk to him.
 	}
-	$elif_frm_QuestChoice_eq_1{
-		$if_frm_TalkedRani_eq_0{
+	$elif_frmQuestChoice_eq_1{
+		$if_frmTalkedRani_eq_0{
 			Rani: That was very courageous of you to stand up for us. No one ever went against Conney before.
 			$choice{
 				Shrug it off|
@@ -15,8 +15,8 @@ talk to{
 				|Lighten up the mood|
 				Kipp: Gotta admit that Conney is a frightening man. I almost peed my britches talking to him.
 			}
-			Rani: I need to get back to my work now. You should probably head to the @blue{Town Hall} after checking out the @blue{hospital}.
-			$set_frm_TalkedRani{1}
+			Rani: I need to get back to my work now. You should probably head to the @blue{Town Treasury} after checking out the @blue{hospital}.
+			$set_frmTalkedRani_1
 		}$elif_frm_TalkedRani_eq_1{
 			Rani: I need to get back to my work now. You should probably check out the injured miners then head to the @blue{Town Treasury}.
 		}		

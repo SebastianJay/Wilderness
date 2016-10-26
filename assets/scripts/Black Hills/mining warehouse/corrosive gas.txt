@@ -3,9 +3,9 @@ inspect{
 }
 
 pick up{
-	$if_frm_talkedshotgunpete_eq_1{
+	$if_frmTalkedShotgunPete_eq_1{
 		Kipp picked up the tank of corrosive gas.
-		$set_Inventory_Corrosive_Gas{1}
-	}$elif_frm_talkedshotgunpete_eq_0{
+		$set_inventory_corrosiveGas_1
+	}$elif_frmTalkedShotgunPete_eq_0{
 		Kipp should talk to @green{Shotgun Pete} first.
 }

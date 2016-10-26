@@ -1,5 +1,5 @@
 go to{
-	$if_frm_QuestChoice_eq_2{
+	$if_frmQuestChoice_eq_2{
 		Kipp entered the mining warehouse.
 	}
 }

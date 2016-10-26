@@ -1,12 +1,13 @@
 pick up{
-	$if_frm_TalkedMarshall_eq_0{
+	$if_frmTalkedMarshall_eq_0{
 		Kipp should probably talk to Marshall first.
 	}
-	$elif_frm_TestIntegrity_eq_1{
+	$elif_frmTestIntegrity_eq_1{
 		Kipp failed the Test of Integrity.
-		Game Over.
+		@bold{Game Over}
+		$gameover
 	}
-	$elif_frm_TestIntegrity_eq_0{
+	$elif_frmTestIntegrity_eq_0{
 		The shovel belongs to the town treasury. Kipp shouldn't take it.
 	}
 
@@ -26,8 +27,8 @@ inspect{
 				 |
 			       __|__
 					
-	$if_frm_TestIntegrity_eq_1{
-		$inc_Inspected{1}
+	$if_frmTestIntegrity_eq_1{
+		$inc_inspected_1
 	}
 
 

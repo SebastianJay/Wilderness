@@ -3,22 +3,22 @@ inspect{
 }
 
 talk to{
-	$if_frm_LetterToThomas_eq_1{
+	$if_frmLetterToThomas_eq_1{
 		Kipp: Hi, Thomas. Gritt has a letter to you.
 		
 		Thomas opened the letter and read it.
 
 		Thomas: *grunt* Oh well. You'd better kill the "demon", kid, or I will demolish you.
-		$set_frm_LetterToThomas{2}
-		$set_Inventory_Letter_To_Thomas{0}
-	$elif_frm_TalkedThomas_eq_0{
-            $if_frm_TalkedConney_eq_1{
+		$set_frmLetterToThomas{2}
+		$set_inventory_letterToThomas{0}
+	$elif_frmTalkedThomas_eq_0{
+            $if_frmTalkedConney_eq_1{
                 Thomas: That Conney dude is quite a douche,eh?
                 Kipp: What's with that guy?
                 Thomas: Can't blame him. The man's in charge of all the mining business in @blue{Black Hills}. Been working his butt off dealing with the recent crisis.  
                 Kipp:What's wrong?
                 Thomas: I'd rather keep out of all this nasty business. If you want to know more, you can find @green{Conney} at @blue{Conney and Co.}. 
-                $set_frm_TalkedThomas{1}
+                $set_frmTalkedThomas_1
             }$else{
                 Thomas: Howdy do, sonny?
                 $choice{
@@ -28,9 +28,9 @@ talk to{
                     |Bad|
                     Kipp: Horrible. I've had a long day.
                     Thomas: I'm sorry to hear that. Perhaps some moonshine at the @blue{general store} can cheer you up. 
-                    $set_frm_TalkedThomas{1}
+                    $set_frmTalkedThomas_1
                 }
-    }$elif_frm_TalkedThomas_eq_1{
+    }$elif_frmTalkedThomas_eq_1{
         $random{
             Thomas: I'm heading back to my tank engine.
             |Thomas: I don't drink @italic{and} drive. I always drink @italic{before} I drive.
