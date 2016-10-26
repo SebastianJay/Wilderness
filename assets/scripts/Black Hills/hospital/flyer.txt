@@ -1,20 +1,20 @@
 inspect{
-	Black Friday Sale At
-	 
-	Black Hills Hospital
-	 
-			
-	Promotions: 
-	 
-	 
-	Quintuple Coronary Bypass: $2
-	 
-	Miner's Lung Treatment: $5
-	
-	Special Combo:
-	
-	Organ Transpart Combo: $10
-	Get a heart, lung,and kidney transplant for a low price!
-
-	*All purchases over $10 comes with a free lobotomy.
+\	Black Friday Sale At
+\	 
+\	Black Hills Hospital
+\	 
+\			
+\	Promotions: 
+\	 
+\	 
+\	Quintuple Coronary Bypass: $2
+\	 
+\	Miner's Lung Treatment: $5
+\	
+\	Special Combo:
+\	
+\	Organ Transpart Combo: $10
+\	Get a heart, lung,and kidney transplant for a low price!
+\
+\	*All purchases over $10 comes with a free lobotomy.
 }

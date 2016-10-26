@@ -15,17 +15,17 @@ inspect{
 	The bronze shovel was forged as the symbol of @blue{Black Hills} after coal was found.
 
 
-				___
-			       /   \
-			      /     \
-			     /_______\
-				 |
-				 |
-				 |
-				 |
-				 |
-				 |
-			       __|__
+\				___
+\			       /   \
+\			      /     \
+\			     /_______\
+\				 |
+\				 |
+\				 |
+\				 |
+\				 |
+\				 |
+\			       __|__
 					
 	$if_frmTestIntegrity_eq_1{
 		$inc_inspected_1
