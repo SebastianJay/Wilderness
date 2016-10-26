@@ -1,0 +1,49 @@
+inspect{
+	Marshall served on the Town Council for 20 years before elected sheriff of @blue{Black Hills}. He was a respected man in his 50s.
+}
+
+talk to{
+	$if_frm_TalkedMarshall_eq_0{
+		Marshall: Good job, lad! I've heard about how you stood up against Conney. How can we help you?
+		Kipp: @green{Rosanto} told me that the "demon" can only attack the legs of humans. Can I borrow a pair of boots that can withstand its attacks?
+		Marshall: Ahh, I know just the perfect solution. The Dragonskin Boots we have is known for its resilience. However, you must first pass the Test of Integrity to prove your worthiness.
+		Kipp: Integrity?
+		Marshall: Yes. The Dragonskin Boots are a rare and precious treasure. We must know that you can resist the temptation to steal it.
+		$choice{
+			Perform the test|
+			Kipp: Alright, I'll do it.
+			Marshall: Fantastic! Now go around the room and inspect our treasures. Bask in their glory!
+			$set_frm_TestIntegrity{1}
+			$inc_BrotherPts{1}
+			$inc_LightPts{1} 
+			|Refuse to take it|
+			Kipp: Who are @italic{you} to test @italic{my} integrity? 
+			Marshall: The Test of Integrity is required by the Town Charter...
+			Kipp: Can the italic{charter} kill the "demon" for you? Face it, I'm the only hope you've got. Give me the Dragonskin Boots and be done with it.
+			Marshall: *sigh* Alright.
+			$set_Inventory_Dragonskin_Boots{1}
+			$inc_DarkPts{1}
+			$inc_FugitivePts{1}
+			|Talk him out of it|
+			Kipp: Sir, I am glad to take the test. But time is running short, we need to take down the "demon" @bold{now}.
+			Marshall: But how can I know that you can be trusted?
+			Kipp: Why, I just stood up for the town and turned against Conney. Doesn't that say anything?
+			Marshall: *sigh* I guess extraordinary times call for extraordinary measures. Here are the boots.
+			$set_Inventory_Dragonskin_Boots{1}
+			$inc_DerelictPts{1}	
+	$set_frm_TalkedMarshall{1}
+	}$elif_frm_TalkedMarshall_eq_1{
+		$if_frm_TestIntegrity_eq_1{
+			$if_frm_Inspected_eq_3{
+				Marshall: Congratulations! You have resisted temptation and passed the Test of Integrity! Here are the boots.
+				$set_Inventory_Dragonskin_Boots{1}
+				$set_frm_TestIntegrity{0}
+			}$else{
+				Marshall: Go on and inspect our treasures.
+			}
+		}$elif_frm_TestIntegrity_eq_0{
+			Marshall: Good luck with you endeavors!
+		}			
+	}
+	
+}

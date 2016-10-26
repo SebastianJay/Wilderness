@@ -1,0 +1,18 @@
+inspect{
+	@green{Rosanto} was lying on a bed. There were still bandages on his leg but he looked to be in good shape.
+}
+
+talk to{
+	Kipp: How are you today?
+	Rosanto: Great! My family just came to visit me.
+	Kipp: That's wonderful! I have a favor to ask, though. Can you tell me more about the "demon"?
+	Rosanto: *sigh* I have been getting these questions a lot.
+	Kipp: I'm sorry but I'll need your information to defeat it.
+	Rosanto: Alright. It was dark inside the @blue{mine} so I didn't see much. But I'm pretty sure that the demon is only about 2-feet tall. It can't attack you if you wear protective boots.
+	Kipp: Wow! That is very helpful! Thank you Rosanto!
+	$set_frm_TalkedRosanto{1}
+	inc_MinerClues{1}
+	$if_frm_TalkedRosanto_eq_1{
+		Rosanto went back to sleep. Kipp decided not to disturb him.
+	}
+}

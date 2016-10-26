@@ -1,0 +1,32 @@
+inspect{
+    Conney was very well-dressed. His gait and movements radiated confidence. Kipp figured that he must be an important person in @blue{Black Hills}.
+}
+
+talk to{
+    $if_frmTalkedConney_eq_0{
+        Kipp walked up to Conney trying to strike up a conversation.
+        Kipp: Hi! Are you...
+        Conney: Go away you idiot! I have important business to attend to!
+	$choice{
+		Just leave|
+		Kipp: Cool.
+
+		Kipp decided to talk to other people instead.
+		$inc_DerelictPts{1}
+		|Get angry with Conney|
+		Kipp: If you have a problem with me, why don't we settle it with our fists?
+		Conney: Guards! Dispose of this kid.
+		
+		Conney's guards suddenly appeared from the shadows. They picked up Kipp easily and threw him away.
+		$inc_DarkPts{1}
+		$inc_FugitivePts{1}
+		|Offer help|
+		Kipp: Chillax bro! What's wrong?
+		Conney: Hmmph. As if you can help me.
+		$inc_BrotherPts{1}
+		$inc_LightPts{1}
+        $set_frmTalkedConney{1}
+    }$elif_frmTalkedConney_eq_1{
+        Conney:Leave me alone or I'll call the sheriff!
+    }
+}

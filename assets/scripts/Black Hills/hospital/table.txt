@@ -1,0 +1,14 @@
+inspect{
+	Doctors		Department	In/Out
+	---------------------------------------
+	Huckson		Respiratory	In 
+	
+	Appleton	Respiratory	Out
+
+	Gatesby		Respiratory 	Out
+
+	Kruger		Respiratory	In
+
+	Johnson		Other		Out
+}
+	

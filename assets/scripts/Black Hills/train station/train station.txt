@@ -1,0 +1,8 @@
+go to {
+    Kipp entered the @blue{train station}. Horns whistled as a train rumbled to a stop at the station.
+}
+
+
+look around{
+    Kipp looked around the @green{train station}. The twin brothers @green{Todd and Zodd} were unloading cargo from the train. @green{Thomas} the train captain got off the train to stretch his limbs. Some passengers got off as well, including a fat, middle-aged man @green{Conney}. A @yellow{wanted sign} and a @yellow{train schedule} were hung on the wall. On the south end of the @blue{train station}, there is a road leading to the @blue{general store}.
+}
