@@ -13,10 +13,10 @@ pick up{
 inspect{
 	The silver pitchfork was donated by Theodore Hills and Arthur Black, the founder of @blue{Black Hills}.
 	
-\	|   	|	|	|
-\	|   	|	|	|
-\	|   	|	|	|
-\	|   	|	|	|
+\	|       |       |       |
+\	|       |       |       |
+\	|       |       |       |
+\	|       |       |       |
 \	|_______|_______|_______|
 \                  |
 \                  |
