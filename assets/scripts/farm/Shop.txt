@@ -1,0 +1,4 @@
+Go to $Choice to go:
+	Choice to go = print(House, shop, meadow)
+
+if Choice to go == Shop:
