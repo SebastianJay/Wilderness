@@ -1,0 +1,27 @@
+selectFile:
+    - Arrow keys: Browse options
+    - Return: Confirm option
+credits:
+    - Return: Exit
+inAreaCommand:
+    - Printable keys: Form command
+    - Backspace: Deform command
+    - Return: Execute command
+inAreaChoice:
+    - Arrow keys: Browse choice
+    - Return: Confirm choice
+inAreaInput:
+    - Printable keys: Form input
+    - Backspace: Deform input
+    - Return: Confirm input
+inAreaMap:
+    - Arrow keys: Browse rooms
+    - Return: Exit
+inAreaInventory:
+    - Arrow keys: Browse items
+    - Return: Exit
+worldMap:
+    - Arrow keys: Move
+worldMapOverArea:
+    - Arrow keys: Move
+    - Return: Enter Area
