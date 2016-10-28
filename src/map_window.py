@@ -6,10 +6,11 @@ from game_state import GameState
 from asset_loader import AssetLoader
 
 class MapWindow(Window):
-    def __init__(self, width, height, currentMap):
+    def __init__(self, width, height):
         super().__init__(width, height)
         loader = AssetLoader()
         assets = loader.loadAssets('assets/maps')
+        currentMap = 'assets\\maps\\test_map'   #TODO move this elsewhere
         self.map = assets[currentMap + '.txt'].splitlines()
         self.travelMask = assets[currentMap + '_travel_mask.txt'].splitlines()
         self.location = [0, 0] # TODO: Get this from GameState instead
