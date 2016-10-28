@@ -22,8 +22,8 @@ class WindowManager:
 
         # list of list of indices that represent the windows that are part of one possible screen
         self._windowGroups = []
-        # index into windowGroups representing the active group (what is on screen now)
-        self._activeWindowGroup = 0
+        # stack of indices into windowGroups representing the active groups (what is on screen now)
+        self._activeWindowGroups = []
 
         #this is the full 2D-array of chars that contains all the content from all the windows.
         #this is what will display on the screen
@@ -52,35 +52,40 @@ class WindowManager:
         # add inventory window
 
         # create History/Input/Palette/Help group
-        self._windowGroups.append((0, 1, 2))    #TODO change
-
-        self._activeWindowGroup = 0
+        self._windowGroups = [
+            (0, 1, 2),    #TODO change
+            (3,)
+        ]
+        # initially the first window group is on screen
+        self._activeWindowGroups = [0, 1]
 
     def draw(self):
         """ stitches together multiple Windows from active group into the screen """
-        for winind in self._windowGroups[self._activeWindowGroup]:
-            pixels = self._windowList[winind].draw()
-            startr, startc = self._windowPos[winind]
-            height = len(pixels)
-            width = len(pixels[0])
-            # fill in content
-            for r in range(height):
+        for groupind in self._activeWindowGroups:
+            for winind in self._windowGroups[groupind]:
+                pixels = self._windowList[winind].draw()
+                startr, startc = self._windowPos[winind]
+                height = len(pixels)
+                width = len(pixels[0])
+                # fill in content
+                for r in range(height):
+                    for c in range(width):
+                        self._screen[startr + r][startc + c] = pixels[r][c]
+                # add border
+                for r in range(height):
+                    self._screen[startr + r][startc-1] = '|'
+                    self._screen[startr + r][startc + width] = '|'
                 for c in range(width):
-                    self._screen[startr + r][startc + c] = pixels[r][c]
-            # add border
-            for r in range(height):
-                self._screen[startr + r][startc-1] = '|'
-                self._screen[startr + r][startc + width] = '|'
-            for c in range(width):
-                self._screen[startr-1][startc + c] = '-'
-                self._screen[startr + height][startc + c] = '-'
-            self._screen[startr-1][startc-1] = 'o'
-            self._screen[startr + height][startc-1] = 'o'
-            self._screen[startr + height][startc + width] = 'o'
-            self._screen[startr-1][startc + width] = 'o'
+                    self._screen[startr-1][startc + c] = '-'
+                    self._screen[startr + height][startc + c] = '-'
+                self._screen[startr-1][startc-1] = 'o'
+                self._screen[startr + height][startc-1] = 'o'
+                self._screen[startr + height][startc + width] = 'o'
+                self._screen[startr-1][startc + width] = 'o'
         return self._screen
 
     def update(self, timestep, keypresses):
         """ sends update signal to Windows in the active group """
-        for winind in self._windowGroups[self._activeWindowGroup]:
+        # update is only send to activeWindowGroups[-1], so the foreground windows
+        for winind in self._windowGroups[self._activeWindowGroups[-1]]:
             self._windowList[winind].update(timestep, keypresses)
