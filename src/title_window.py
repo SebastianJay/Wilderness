@@ -16,12 +16,25 @@ Load game - spawn new SelectFile window (#16)
 Credits - spawn new Credits window (#15)
 Exit - use sys.exit() to kill the program
 """
+from asset_loader import AssetLoader
+from window import Window
 
 class TitleWindow(Window):
-    def __init__(self, width, height, art):
-        super.__init__(width, height)
+    def __init__(self, width, height):
+        super().__init__(width, height)
         self.pointingTo = 0
-        self.art = art
+        self.art = AssetLoader().getArt('title_window.txt')
+        rCounter = 0
+        cCounter = 0
+        for i in range (0, len(self.art)):
+            if self.art[i] == "\n":
+                rCounter += 1
+                cCounter = 0
+            else:
+                self.pixels[rCounter][cCounter] = self.art[i]
+                cCounter += 1
+        #for i in range (0, height):
+            #for j in range (0, width):
 
     def update(self, timestep, keypresses):
         for x in range (0, len(keypresses)):
@@ -34,9 +47,16 @@ class TitleWindow(Window):
                     sys.exit()
 
     def draw(self):
-        startRow = 25
-        column = 49
+        startRow = 20
+        column = 51
         for x in range (0,4):
             self.pixels[startRow + x][column] = " "
-        self.pixels[startRow + pointingTo][column] = ">"
+        self.pixels[startRow + self.pointingTo][column] = ">"
         return self.pixels
+
+if __name__ == '__main__':
+    #with open('assets/art/title_window.txt') as f:
+    #    fstr = f.read()
+    #print(fstr)
+    window = TitleWindow(118, 33, fstr)
+    window.debugDraw()
