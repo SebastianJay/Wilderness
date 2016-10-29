@@ -1,6 +1,6 @@
 talk to{
 	$if_frmTalkedShotgunPete_eq_0{
-		Shotgun Pete: Boss aked you to make a weapon to demolish the "demon". You can use anything from this warehouse. 
+		Shotgun Pete: Boss asked you to make a weapon to demolish the "demon". You can use anything from this warehouse.
 		Kipp: So what should I use to demolish the "demon"?
 		Shotgun Pete: The fast way is to just can the corrosive gas directly by pumping it to the mines.
 		Kipp: Won't that harm the future miners into the mines?
@@ -28,7 +28,7 @@ talk to{
 				$set_frmTalkedShotgunPete_2
 			}$elif_frmWeaponChoice_eq_2{
 				Shotgun Pete used the Gutenburg-Heisenberg method to build a corrosive shotgun.
-				
+
 				Shotgun Pete: There you go.
 				$set_inventory_corrosiveshotgun{1}
 				$set_frmtalkedShotgunPete_2
@@ -37,10 +37,11 @@ talk to{
 		}$elif_inventory_corrosiveGas_eq_0{
 			Shotgun Pete: Bring the gas to me and I'll help you.
 		}
-	}$elif_frmTalkedShotgunPete_eq_2:
+	}$elif_frmTalkedShotgunPete_eq_2{
 		Shotgun Pete: You're good to go. Find @green{Widowmaker} for the clues to the yellow{password lock}. It would take you to a train that is directly connected to the @blue{mines}.
+	}
 }
 
 inspect{
-	Shotgun Pete is a tall and buff man.He's the "brawn" of the 2 guards. 
+	Shotgun Pete is a tall and buff man. He's the "brawn" of the 2 guards.
 }

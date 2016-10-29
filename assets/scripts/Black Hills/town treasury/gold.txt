@@ -9,6 +9,7 @@ pick up{
 	$elif_frmTestIntegrity_eq_0{
 		The gold belongs to the town treasury. Kipp shouldn't take it.
 	}
+}
 
 inspect{
 	The gold belongs to the treasury of blue{Black Hills}.

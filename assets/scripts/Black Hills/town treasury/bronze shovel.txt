@@ -10,11 +10,10 @@ pick up{
 	$elif_frmTestIntegrity_eq_0{
 		The shovel belongs to the town treasury. Kipp shouldn't take it.
 	}
+}
 
 inspect{
 	The bronze shovel was forged as the symbol of @blue{Black Hills} after coal was found.
-
-
 \                               ___
 \                              /   \
 \                             /     \
@@ -24,10 +23,8 @@ inspect{
 \                                |
 \                                |
 \                              __|__
-					
+
 	$if_frmTestIntegrity_eq_1{
 		$inc_inspected_1
 	}
-
-
 }

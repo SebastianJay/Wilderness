@@ -1,5 +1,5 @@
 inspect{
-	The corrosive gas may be used to dissolve the "demon".
+	The corrosive gas may be used to dissolve the "demon."
 }
 
 pick up{
@@ -8,4 +8,5 @@ pick up{
 		$set_inventory_corrosiveGas_1
 	}$elif_frmTalkedShotgunPete_eq_0{
 		Kipp should talk to @green{Shotgun Pete} first.
+	}
 }

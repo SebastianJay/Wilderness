@@ -15,9 +15,9 @@ talk to{
 			Marshall: Fantastic! Now go around the room and inspect our treasures. Bask in their glory!
 			$set_frmTestIntegrity_1
 			$inc_brotherPts_1
-			$inc_lightPts_1 
+			$inc_lightPts_1
 			|Refuse to take it|
-			Kipp: Who are @italic{you} to test @italic{my} integrity? 
+			Kipp: Who are @italic{you} to test @italic{my} integrity?
 			Marshall: The Test of Integrity is required by the Town Charter...
 			Kipp: Can the italic{charter} kill the "demon" for you? Face it, I'm the only hope you've got. Give me the Dragonskin Boots and be done with it.
 			Marshall: *sigh* Alright.
@@ -30,7 +30,8 @@ talk to{
 			Kipp: Why, I just stood up for the town and turned against Conney. Doesn't that say anything?
 			Marshall: *sigh* I guess extraordinary times call for extraordinary measures. Here are the boots.
 			$set_inventory_dragonskinBoots_1
-			$inc_derelictPts_1	
+			$inc_derelictPts_1
+		}
 	$set_frmTalkedMarshall_1
 	}$elif_frmTalkedMarshall_eq_1{
 		$if_frmTestIntegrity_eq_1{
@@ -43,7 +44,6 @@ talk to{
 			}
 		}$elif_frmTestIntegrity_eq_0{
 			Marshall: Good luck with you endeavors!
-		}			
+		}
 	}
-	
 }
