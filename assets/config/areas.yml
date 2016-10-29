@@ -1,0 +1,7 @@
+aspire:
+    name: Aspire
+    roomsConfig: rooms/aspire.yml
+    objectsConfig: objects/aspire.yml
+    r: 0
+    c: 0
+    showIf: didFarm #TODO

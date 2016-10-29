@@ -1,0 +1,57 @@
+## Aspire objects
+akechata:
+    name: Akechata
+    script: aspire/akechata.txt  #TODO
+totemPole:
+    name: totem pole
+    script: aspire/totem_pole.txt
+painting:
+    name: painting
+    script: aspire/painting.txt
+fireAle:
+    name: fire ale
+    script: aspire/file_ale.txt
+    showIf: not_inventory_fireAle
+arthur:
+    name: Arthur
+    script: aspire/arthur.txt
+sleepingBag:
+    name: sleeping bag
+    script: aspire/sleeping_bag.txt
+bookshelf:
+    name: bookshelf
+    script: aspire/bookshelf.txt
+flint:
+    name: Flint
+    script: aspire/flint.txt
+lineOfBottles:
+    name: line of bottles
+    script: aspire/line_of_bottles.txt
+bartender:
+    name: bartender
+    script: aspire/bartender.txt
+ticketMachine:
+    name: ticket machine
+    script: aspire/ticket_machine.txt
+exMember:
+    name: ex-Smoking Gun member
+    script: aspire/ex_member.txt
+mohani:
+    name: Mohani
+    script: aspire/mohani.txt
+forge:
+    name: forge
+    script: aspire/forge.txt
+glassOfWater:
+    name: glass of water
+    script: aspire/glass_of_water.txt
+revolver:
+    name: six-chamber revolver
+    script: aspire/revolver.txt
+    showIf: not_inventory_revolver
+rowen:
+    name: Rowen
+    script: aspire/rowen.txt
+townSign:
+    name: town sign
+    script: aspire/town_sign.txt

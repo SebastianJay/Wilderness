@@ -1,0 +1,17 @@
+go to{
+	$if_ntoQuestStart_eq_1{
+		#Text when Kipp returns to the room
+		Kipp: Yup, not a good person in sight. I probably shouldn't @red{look around} for too long. I could @red(go to) the @blue{saloon}, @blue{gunsmith shop}, @blue{bank}, and @blue{library} from here.
+		
+		@bold{It will be in your best interest to save again if you are going to talk to Rowen.}
+	}$else{
+		#Kipp hasn't visited the libary yet to start the quest.
+		Random Gang Member: Hey, you have no business to be here! Get out before we have to use force!
+		
+	}
+}
+
+look around{
+	Kipp: This town looks deserted, except for the random criminals and...@green{Rowen}. Seriously hesitant @red{to talk} to him. Other than that... all I see worth taking a look at is that @yellow{town sign} I saw on my way into town.
+	
+}

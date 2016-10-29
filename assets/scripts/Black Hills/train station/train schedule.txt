@@ -1,0 +1,10 @@
+inspect{
+    Train to @blue{Forest}    : 10.00 PM
+    Train to @blue{Lake}      : 11.00 PM
+    Train to @blue{Town A}    : Cancelled
+    Train to @blue{Wilderness}: Coming up soon!
+}
+
+talk to{
+    Kipp considered talking to the @yellow{train schedule}, but there were too many people around. Maybe next time.
+}

@@ -2,80 +2,87 @@
 Definition of asset loader, which takes care of reading and parsing all files
 within the assets/ directory.
 """
+from interpreter import Interpreter
+from global_vars import Globals
 import os.path
+import yaml
 
 class AssetLoader:
-    def __init__(self):
-        pass
+    # Python singleton implementation adapted from
+    # http://python-3-patterns-idioms-test.readthedocs.io/en/latest/Singleton.html
+    class __AssetLoader:
+        def __init__(self):
+            # maps path to asset
+            self.assets = {}
+            # maps readable item name to item ID
+            self.reverseItem = {}
 
-    def loadAssets(self, path_to_folder):
-        # This dictionary will hold the contents of asset files in the format:
-        #   key = the files path, e.g. "assets/readme.txt"
-        #   value = the conents of the file
-        assets = {}
+        def loadAssets(self, path_to_folder):
+            # This dictionary will hold the contents of asset files in the format:
+            #   key = the files path, e.g. "assets/readme.txt"
+            #   value = the conents of the file
+            assets = {}
 
-        # Go through each file in the specified dir and add contents to the dictionary
-        for root, subdirs, files in os.walk(path_to_folder):
-            for file_name in files:
-                file_path = os.path.join(root,file_name)
-                with open(file_path) as f:
-                    assets[file_path] = f.read()
-        return assets
+            # Go through each file in the specified dir and add contents to the dictionary
+            for root, subdirs, files in os.walk(path_to_folder):
+                for file_name in files:
+                    file_path = os.path.join(root,file_name)
+                    # Normalize the given path
+                    norm_path = os.path.normcase(os.path.normpath(file_path))
+                    with open(norm_path) as f:
+                        assets[norm_path] = f.read()
 
-    def readFormat(self, text):
-        #index_of_at will track the last instance of the "@" character in the text
-        index_of_at = 0
-        index_close_bracket = -1
-        previous_close_bracket = -1
-        index_open_bracket = -1
-        formatting = {} # dictionary of formation {string : tuple} of formatters and where they apply
-        text_without_formatters = ""
+            # Do parsing of any custom scripts and yaml
+            parser = Interpreter()  # instantiate interpreter on the fly to do parsing
+            for path in assets:
+                if path[-len('.ignore'):] == '.ignore':
+                    continue
+                if os.path.normcase(os.path.normpath('assets/scripts')) in path:
+                    # replace string with parsed (string, BodyNode)[]
+                    assets[path] = parser.parseScript(assets[path])
+                elif os.path.normcase(os.path.normpath('assets/config')) in path:
+                    # replace string with parsed Python dict
+                    assets[path] = yaml.load(assets[path])
 
-        #While there are remaining "@"s in the string, format into a langNode
-        while (text.find("@", index_of_at) != -1):
-            index_of_at = text.find("@", index_of_at)
-            index_open_bracket = text.find("{", index_of_at)
-            index_close_bracket = text.find("}", index_of_at)
+            self.assets = assets
 
-            #if no close or open bracket exists, exit the method and return error message
-            if (index_open_bracket == -1):
-                print("The formatter is missing an openning bracket: {")
-                return {}
-            if (index_close_bracket == -1):
-                print("The formatter is missing an openning bracket: }")
-                return {}
-            formatter = text[index_of_at + 1 :index_open_bracket]               # @formatter{formatted_test}
-            formatted_text = text[index_open_bracket + 1 : index_close_bracket]
-            # text_without_formatters will hold the text with the @formatter{formattted_text} replaced with just formatted_text
+            # construct the reverse item mapping
+            itemsConfig = self.getConfig(Globals.ItemsConfigPath)
+            for item in itemsConfig:
+                self.reverseItem[itemsConfig[item]['name']] = item
 
-            text_without_formatters += text[previous_close_bracket + 1 : index_of_at]
-            text_without_formatters += formatted_text
+        def getAsset(self, dirname, name):
+            norm_name = os.path.normcase(os.path.normpath(name))
+            norm_dir = os.path.normcase(os.path.normpath(dirname))
+            return self.assets[os.path.join(norm_dir, norm_name)]
 
-            print("index_of_at: " + str(index_of_at))
-            print("index_open_bracket: " + str(index_open_bracket))
-            print("index_close_bracket: " + str(index_close_bracket))
-            print("formatter: " + formatter)
-            print("formatted_text: " + formatted_text + "\n")
+        def getMap(self, name):
+            return self.getAsset('assets/maps', name)
 
-            #LangNode(text, {formatter1 : [(index1,index2), (index3, index4)], formatter2 : ...})
-            #Seen above is the format we ultimately want to return
-            #A LangNode, text as the key, a dictionary linking formatters to a list of tuples of all indexes of that formattter as the avlue
+        def getArt(self, name):
+            return self.getAsset('assets/art', name)
 
-            # Remember where in the text_without_formatters string each formatter applies
-            if formatter not in formatting:
-                formatting[formatter] = [(len(text_without_formatters)-len(formatted_text), len(text_without_formatters) -1)]
-            else:
-                formatting[formatter].append((len(text_without_formatters)-len(formatted_text), len(text_without_formatters) -1))
+        def getScript(self, name):
+            return self.getAsset('assets/scripts', name)
 
-            previous_close_bracket = index_close_bracket # remember where the previous } was
-            index_of_at = index_of_at + 1   # start searching for the next @ after the previous @
+        def getConfig(self, name):
+            return self.getAsset('assets/config', name)
 
-        LangNode = (text_without_formatters, formatting)
-        return LangNode
+        def reverseItemLookup(self, name):
+            if name in self.reverseItem:
+                return self.reverseItem[name]
+            return ''
 
+    instance = None
+    def __new__(cls):
+        if not AssetLoader.instance:
+            AssetLoader.instance = AssetLoader.__AssetLoader()
+        return AssetLoader.instance
+    def __getattr__(self, name):
+        return getattr(self.instance, name)
+    def __setattr__(self, name):
+        return setattr(self.instance, name)
 
 if __name__ == '__main__':
     loader = AssetLoader()
-    print(loader.loadAssets("assets/scripts"))
-    print(loader.readFormat("Hello @red{there}, friend. How are @bold{you} doing?"))
-    print(loader.readFormat("@blue{This} is blue. But @italics{this} is italicized. And @blue{this one} is also blue."))
+    loader.loadAssets("assets/config")

@@ -14,7 +14,7 @@ class HistoryWindow(Window):
         pass
 
     def draw(self):
-        input_list = GameState().historyLines
+        input_list = GameState().getHistoryLines()
 
         inputs = []
         #takes in all input and puts them all in a list of words
@@ -80,5 +80,5 @@ if __name__ == '__main__':
     h = HistoryWindow(30, 10)
     test_input = ["Hello, nice to meet you. I'm just trying to test out thise code", "So, this is supposed to cut the input and organize             them so it can fit into the given screen", "Do you think this is gonna work? 'Cause,,, I 'm not really sure myself.", "So.. I wonder how long this is now.."]
     # NOTE do not set historyLines directly in non-test code
-    GameState().historyLines = test_input
+    GameState().subStates[0].historyLines = test_input
     h.debugDraw()

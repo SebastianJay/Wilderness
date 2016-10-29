@@ -1,0 +1,30 @@
+pick up{
+	$if_frmTalkedMarshall_eq_0{
+		Kipp should probably talk to Marshall first.
+	}
+	$elif_frmTestIntegrity_eq_1{
+		Kipp failed the Test of Integrity.
+		@bold{Game Over}
+		$gameover
+	}
+	$elif_frmTestIntegrity_eq_0{
+		The shovel belongs to the town treasury. Kipp shouldn't take it.
+	}
+}
+
+inspect{
+	The bronze shovel was forged as the symbol of @blue{Black Hills} after coal was found.
+\                               ___
+\                              /   \
+\                             /     \
+\                            /_______\
+\                                |
+\                                |
+\                                |
+\                                |
+\                              __|__
+
+	$if_frmTestIntegrity_eq_1{
+		$inc_inspected_1
+	}
+}
