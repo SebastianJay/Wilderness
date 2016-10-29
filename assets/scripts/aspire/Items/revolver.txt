@@ -2,25 +2,25 @@ pick up{
 	#CAN ONLY OCCUR IN THE GUNSMITH SHOP
 	$if_inventory_revolver_eq_0{
 		Kipp walked up to the table to inspect the revolver on the table. Kipp then noticed a box of revlovers just sitting under the table. Kipp looked back to notice that the Rune Raiders don't even handle guns.
-			
+
 		Kipp: I wonder if...
-			
+
 		Kipp looked around suspiciously to make sure no one would notice, and then he slowly moved his hand...
-			
+
 		Mohani: @italic{(over Kipp's shoulder)} Just take the stupid gun.
-			
+
 		Kipp screamed and turned around. Mohani shook her head.
-			
+
 		Mohani: Enchanters have no use for guns since we can create barriers around our bodies to slow down and bend bullets. Like I said, stop being an idiot and just take the stupid gun.
-			
+
 		Kipp smiled, swiped the gun, and walked away. @bold{Smooth... *Revolver Added to Inventory*}
-			
+
 		$set_inventory_revolver_1
 	}$elif_ntoSmokingGun_eq_1{
 		I already have a revolver. I've never practiced akimbo so twice the guns won't make me anymore powerful.
 	}
-	$else
-		I thought I already picket it up.
+	$else{
+		I thought I already picked it up.
 	}
 }
 
