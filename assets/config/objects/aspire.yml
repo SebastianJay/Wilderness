@@ -1,57 +1,57 @@
 ## Aspire objects
 akechata:
     name: Akechata
-    script: aspire/akechata.txt  #TODO
+    script: aspire/Items/Akechata.txt
 totemPole:
     name: totem pole
-    script: aspire/totem_pole.txt
+    script: aspire/Items/totem pole.txt
 painting:
     name: painting
-    script: aspire/painting.txt
+    script: aspire/Items/painting.txt
 fireAle:
     name: fire ale
-    script: aspire/file_ale.txt
+    script: aspire/Items/fire ale.txt
     showIf: not_inventory_fireAle
 arthur:
     name: Arthur
-    script: aspire/arthur.txt
+    script: aspire/Items/Arthur.txt
 sleepingBag:
     name: sleeping bag
-    script: aspire/sleeping_bag.txt
+    script: aspire/Items/sleeping bag.txt
 bookshelf:
     name: bookshelf
-    script: aspire/bookshelf.txt
+    script: aspire/Items/bookshelf.txt
 flint:
     name: Flint
-    script: aspire/flint.txt
+    script: aspire/Items/Flint.txt
 lineOfBottles:
     name: line of bottles
-    script: aspire/line_of_bottles.txt
+    script: aspire/Items/line of bottles.txt
 bartender:
     name: bartender
-    script: aspire/bartender.txt
+    script: aspire/Items/bartender.txt
 ticketMachine:
     name: ticket machine
-    script: aspire/ticket_machine.txt
+    script: aspire/Items/vending machine.txt
 exMember:
     name: ex-Smoking Gun member
-    script: aspire/ex_member.txt
+    script: aspire/Items/former Smoking Gunner.txt
 mohani:
     name: Mohani
-    script: aspire/mohani.txt
+    script: aspire/Items/Mohani.txt
 forge:
     name: forge
-    script: aspire/forge.txt
+    script: aspire/Items/forge.txt
 glassOfWater:
     name: glass of water
-    script: aspire/glass_of_water.txt
+    script: aspire/Items/glass of water.txt
 revolver:
     name: six-chamber revolver
-    script: aspire/revolver.txt
+    script: aspire/Items/revolver.txt
     showIf: not_inventory_revolver
 rowen:
     name: Rowen
-    script: aspire/rowen.txt
+    script: aspire/Items/Rowen.txt
 townSign:
     name: town sign
-    script: aspire/town_sign.txt
+    script: aspire/Items/town sign.txt

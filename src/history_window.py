@@ -14,7 +14,7 @@ class HistoryWindow(Window):
         pass
 
     def draw(self):
-        input_list = GameState().getHistoryLines()
+        input_list = GameState().historyLines
 
         inputs = []
         #takes in all input and puts them all in a list of words

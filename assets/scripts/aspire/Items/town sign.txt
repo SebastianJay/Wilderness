@@ -1,15 +1,16 @@
-#The player will have to Inspect the sign twice to receive the tomahawk 
+#The player will have to Inspect the sign twice to receive the tomahawk
 
 inspect{
 	$if_ntoSignCount_eq_0{
 		Kipp: Bullets, horseshoe marks, and @yellow{every blade you can think of} all dug into one sign.
-		
+
 		$inc_ntoSignCount_1
 	}$elif_ntoSignCount_eq_1{
 		Kipp: Huh, I guess they were using the letter A as target practice before it fell over. I don't think anyone will be needing this anymore." @bold{*Tomahawk Added to Inventory*}
-		
+
 		$set_inventory_tomahawk_1
 		$inc_ntoSignCount_1
-	}$else
+	}$else{
 		Kipp: Nope, still a sign.
+	}
 }

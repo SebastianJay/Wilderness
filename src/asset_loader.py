@@ -17,7 +17,7 @@ class AssetLoader:
             # maps readable item name to item ID
             self.reverseItem = {}
 
-        def loadAssets(self, path_to_folder):
+        def loadAssets(self, path_to_folder=Globals.AssetsRootPath):
             # This dictionary will hold the contents of asset files in the format:
             #   key = the files path, e.g. "assets/readme.txt"
             #   value = the conents of the file
@@ -85,4 +85,4 @@ class AssetLoader:
 
 if __name__ == '__main__':
     loader = AssetLoader()
-    loader.loadAssets("assets/config")
+    loader.loadAssets()

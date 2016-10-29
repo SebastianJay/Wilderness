@@ -1,3 +1,7 @@
+## Mappings for the keybindings in different situations in the game
+## These will be displayed in the Help window
+## Note that these are not actually bound to InputHandler, and are only for display
+
 selectFile:
     - Arrow keys: Browse options
     - Return: Confirm option

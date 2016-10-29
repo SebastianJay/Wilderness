@@ -4,48 +4,65 @@ Window containing the world map.
 from window import Window
 from game_state import GameState
 from asset_loader import AssetLoader
+from global_vars import Globals
 
 class MapWindow(Window):
     def __init__(self, width, height):
         super().__init__(width, height)
+        mapslst = Globals.MapsPaths
         loader = AssetLoader()
-        loader.loadAssets('assets/maps')
-        assets = loader.assets
-        currentMap = 'assets\\maps\\test_map'   #TODO move this elsewhere
-        self.map = assets[currentMap + '.txt'].splitlines()
-        self.travelMask = assets[currentMap + '_travel_mask.txt'].splitlines()
-        self.location = [0, 0] # TODO: Get this from GameState instead
+        self.maps = []
+        self.colorMasks = []
+        self.travelMasks = []
+        # TODO move to a load method
+        for threetup in mapslst:
+            self.maps.append(loader.getMap(threetup[0]).splitlines())
+            self.colorMasks.append(loader.getMap(threetup[1]).splitlines())
+            self.travelMasks.append(loader.getMap(threetup[2]).splitlines())
 
     def update(self, timestep, keypresses):
+        # identify the current map we are looking at
+        g = GameState()
+        currentMap = self.maps[g.activeProtagonistInd]
+        currentTravel = self.travelMasks[g.activeProtagonistInd]
+
+        # process keystrokes to move player position
         for key in keypresses:
             if key == "Up" or key == "w":
-                if self.location[0] > 0 and len(self.map[self.location[0] - 1]) - 1 >= self.location[1]:
-                    if self.travelMask[self.location[0] - 1][self.location[1]] == '0':
-                        self.location[0] -= 1
+                if g.mapLocation[0] > 0 and len(currentMap[g.mapLocation[0] - 1]) - 1 >= g.mapLocation[1]:
+                    if currentTravel[g.mapLocation[0] - 1][g.mapLocation[1]] == '0':
+                        g.mapLocation[0] -= 1
             elif key == "Left" or key == "a":
-                if self.location[1] > 0:
-                    if self.travelMask[self.location[0]][self.location[1] - 1] == '0':
-                        self.location[1] -= 1
+                if g.mapLocation[1] > 0:
+                    if currentTravel[g.mapLocation[0]][g.mapLocation[1] - 1] == '0':
+                        g.mapLocation[1] -= 1
             elif key == "Down" or key == "s":
-                if self.location[0] < len(self.map) - 1 and len(self.map[self.location[0] + 1]) - 1 >= self.location[1]:
-                    if self.travelMask[self.location[0] + 1][self.location[1]] == '0':
-                        self.location[0] += 1
+                if g.mapLocation[0] < len(currentMap) - 1 and len(currentMap[g.mapLocation[0] + 1]) - 1 >= g.mapLocation[1]:
+                    if currentTravel[g.mapLocation[0] + 1][g.mapLocation[1]] == '0':
+                        g.mapLocation[0] += 1
             elif key == "Right" or key == "d":
-                if self.location[1] < len(self.map[self.location[0]]) - 1:
-                    if self.travelMask[self.location[0]][self.location[1] + 1] == '0':
-                        self.location[1] += 1
+                if g.mapLocation[1] < len(currentMap[g.mapLocation[0]]) - 1:
+                    if currentTravel[g.mapLocation[0]][g.mapLocation[1] + 1] == '0':
+                        g.mapLocation[1] += 1
             elif key == "Return":
                 # TODO
                 pass
 
     def draw(self):
-        for row in range(len(self.map)):
-            for column in range(len(self.map[row])):
-                self.pixels[row][column] = self.map[row][column]
-        # TODO: Differentiate between Lore and Kipp maybe?
-        self.pixels[self.location[0]][self.location[1]] = '@'
+        # identify the current map we are looking at
+        g = GameState()
+        currentMap = self.maps[g.activeProtagonistInd]
+
+        # draw out the map
+        for row in range(len(currentMap)):
+            for column in range(len(currentMap[row])):
+                self.pixels[row][column] = currentMap[row][column]
+
+        # overlay the character's position
+        self.pixels[g.mapLocation[0]][g.mapLocation[1]] = '@'
         return self.pixels
 
 if __name__ == '__main__':
-    mapWindow = MapWindow(1280, 720, 'assets\\maps\\test_map')
+    AssetLoader().loadAssets()
+    mapWindow = MapWindow(1280, 720)
     mapWindow.draw()

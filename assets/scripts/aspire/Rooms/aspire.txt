@@ -27,7 +27,7 @@ Arthur directs his attention towards Kipp.
 
 Arthur: @italic{(Whispering)} "Hi, I'm Arthur! We should probably find a safer place to talk."
 Kipp: Wait. Why are you helping me?
-Arthur: @italic{(Whispering)} "I'll explain later. We have to @red{go to} the @blue{library), right now!"
+Arthur: @italic{(Whispering)} "I'll explain later. We have to @red{go to} the @blue{library}, right now!"
 
 #END OF DIALOGUE
 
