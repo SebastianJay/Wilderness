@@ -1,11 +1,12 @@
 inspect{
 	$if_subCanCutTree_eq_0{
 	The @yellow{tree} looked like it could easily be cut down by the @yellow{zweihander}.
-	$set_subCanRingDoorbell_1
 	}
 }
 cut{
 	The tree fell down with a loud crash that echoed through the street. Lore could hear noises inside the house and she knew that @green{Glover} was coming out.@green{Glover} stormed out of his house and Lore ducked behind some bushes. A strong wind came down with such a fury that it blew off Glover's afro and conveniently landed in Lore's hands.
 	@italic{Added Glover's afro to inventory.}
 	$set_subCanCutTree_1
+	$set_subCanRingDoorbell_1
+	$set_inventory_afro_1
 }

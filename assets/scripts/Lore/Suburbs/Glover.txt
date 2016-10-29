@@ -21,9 +21,11 @@ talk to{
 					$inc_loreMorality_1
 				}	
 			}
+				Glover: Here you go, muh brutha. I always help a brutha out, man.
+				
+				@italic{Added afro to inventory.}
+				$set_inventory_afro_1
 	}
 	$set_subTalktoGlover_1
-	}$elif_subCutTree_eq_1{
-	
 	}
 }
