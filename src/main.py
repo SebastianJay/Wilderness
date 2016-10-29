@@ -4,10 +4,10 @@ Contains bootstrapping code - run this script to start the game
 """
 
 from global_vars import Globals
-from window import Window
 from window_manager import WindowManager
 from display import Display
 from input_handler import InputHandler
+from asset_loader import AssetLoader
 import tkinter as tk
 import sys
 import time
@@ -23,7 +23,7 @@ class GameDriver:
     def mainloop(self):
         while True:
             try:
-                time.sleep(Globals.Timestep)
+                time.sleep(Globals.Timestep)    # TODO only sleep Timestep - computation time
                 keypresses = self.inputHandler.getKeyPresses()
                 self.windowManager.update(Globals.Timestep, keypresses)
                 self.display.draw()
@@ -37,7 +37,7 @@ class GameDriver:
 
 def bootstrap():
     """Perform all processes needed to start up the game"""
-    # TODO load assets
+    AssetLoader().loadAssets()  # TODO do in separate thread
     GameDriver().mainloop()
 
 if __name__ == '__main__':

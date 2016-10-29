@@ -26,15 +26,17 @@ class GameState:
     # http://python-3-patterns-idioms-test.readthedocs.io/en/latest/Singleton.html
     class __GameState:
 
-        class GameSubState(json.JSONEncoder):
+        class GameSubState:
             """ state variables that each protagonist will maintain separately """
             def __init__(self):
                 self.areaId = ""            # area ID, where the player is located
                 self.roomId = ""            # room ID, where player is located
-                self.mapLocation = (0,0)    # coordinates of player location on world map
+                self.mapLocation = [0,0]    # coordinates of player location on world map
                 self.inventory = {}         # inventory, represented as {string itemId: int numberOfItem}
                 self.historyLines = []      # lines of strings for the history (feedback) window
                                             # TODO change to list of LangNodes
+            def __str__(self):
+                return self.dumps()
             def dumps():
                 return json.dumps(self.__dict__)
             def loads(self, jsonstr):
@@ -45,21 +47,28 @@ class GameState:
         def __init__(self):
             self.init()
 
+        def __str__(self):
+            return self.dumps()
+
         def init(self):
             """ Wipes out the existing GameState (called on New Game) """
+            # game specific savable info
             self.name = ""              # player name, entered at start of new game
             self.playtime = 0           # playtime, in seconds
             self.variables = {}         # variables created through script files {string key: string/int value}
                                         # value is a string by default, but can be converted to int on the fly
-            self.cmdBuffer = ""         # command that player is currently typing
-            self.cmdMap = {}            # "trie" of commands player can type
-            self.gameMode = GameMode.titleScreen    # the "mode" of game player is in
 
+            # character specific savable info
             self.subStates = [
                 GameState.__GameState.GameSubState(),
                 GameState.__GameState.GameSubState(),
             ]
             self.activeProtagonistInd = 0   # which protagonist is active (0=Lore, 1=Kipp)
+
+            # non-savable info (refreshes on reset)
+            self.cmdBuffer = ""         # command that player is currently typing
+            self.cmdMap = {}            # "trie" of commands player can type
+            self.gameMode = GameMode.titleScreen    # the "mode" of game player is in
 
         def appendCmdBuffer(self, ch):
             """ Add to the command buffer, but do not overflow """
@@ -75,18 +84,41 @@ class GameState:
             self.cmdBuffer = ""
 
         def addHistoryLine(self, line):
-            self.subStates[self.activeProtagonistInd].historyLines.append(line)
+            self.historyLines.append(line)
 
         def debugAddHistoryLine(self, line):
-            if len(self.subStates[self.activeProtagonistInd].historyLines) == 0:
-                self.subStates[self.activeProtagonistInd].historyLines.append('')
-            self.subStates[self.activeProtagonistInd].historyLines[0] += line + ' '
+            if len(self.historyLines) == 0:
+                self.historyLines.append('')
+            self.historyLines[0] += line + ' '
 
-        def getHistoryLines(self):
+        @property
+        def historyLines(self):
             return self.subStates[self.activeProtagonistInd].historyLines
 
-        def getInventory(self):
+        @property
+        def inventory(self):
             return self.subStates[self.activeProtagonistInd].inventory
+
+        @property
+        def roomId(self):
+            return self.subStates[self.activeProtagonistInd].roomId
+        @roomId.setter
+        def roomId(self, val):
+            self.subStates[self.activeProtagonistInd].roomId = val
+
+        @property
+        def areaId(self):
+            return self.subStates[self.activeProtagonistInd].areaId
+        @areaId.setter
+        def areaId(self, val):
+            self.subStates[self.activeProtagonistInd].areaId = val
+
+        @property
+        def mapLocation(self):
+            return self.subStates[self.activeProtagonistInd].mapLocation
+        @mapLocation.setter
+        def mapLocation(self, val):
+            self.subStates[self.activeProtagonistInd].mapLocation = val
 
         def refreshCommandList(self):
             """ Updates cmdMap to contain all commands player can type """
@@ -122,7 +154,7 @@ class GameState:
                 cmdMap[action[0]] = action[1]
             # prefill 'use <item>'
             cmdMap['use'] = {}
-            inventory = self.getInventory()
+            inventory = self.inventory
             for item in inventory:
                 if inventory[item] == 0:
                     continue
@@ -155,27 +187,29 @@ class GameState:
         def dumps(self):
             """ Json stringifies the GameState """
             obj = copy.deepcopy(self.__dict__)
-            # GameSubState and GameMode need special treatment
-            obj['gameMode'] = obj['gameMode'].value
+            # GameSubState and GameMode need special treatment as Python classes
             for i in range(len(obj['subStates'])):
                 obj['subStates'][i] = obj['subStates'][i].__dict__
+            # do not save non-persistent fields
+            del obj['cmdMap']
+            del obj['cmdBuffer']
+            del obj['gameMode']
             return json.dumps(obj)
 
         def loads(self, jsonstr):
             """ Initialize the GameState from a Json string """
+            # start all fields from scratch
+            self.init()
             # "join" dct manually so omitted members of dct do not carry over
             dct = json.loads(jsonstr)
             for key in dct:
-                if key == 'gameMode':
-                    self.gameMode = GameMode(dct[key])
-                elif key == 'subStates':
+                if key == 'subStates':
                     self.subStates = []
                     for i in range(len(dct[key])):
                         substate = GameState.__GameState.GameSubState()
                         substate.__dict__ = dct[key][i]
                         self.subStates.append(substate)
                 else:
-                    # NOTE no copies made - dct should persist in memory
                     setattr(self, key, dct[key])
 
         def writeFile(self, fpath):
@@ -191,9 +225,6 @@ class GameState:
             """ Load GameState from file """
             with open(fpath, 'r') as f:
                 self.loads(f.read())
-
-        def __str__(self):
-            return self.dumps()
 
     instance = None
     def __new__(cls):
@@ -214,9 +245,10 @@ if __name__ == '__main__':
     g.readFile(Globals.SavePaths[0])
     print(g)
 
-    loader = AssetLoader()
-    loader.loadAssets('assets')
+    AssetLoader().loadAssets()
     g.areaId = "aspire"
     g.roomId = "library"
+    g.mapLocation = [1, 0]
     g.refreshCommandList()
     print(g.cmdMap)
+    print(g)
