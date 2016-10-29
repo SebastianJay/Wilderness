@@ -18,3 +18,6 @@ class Globals:
         'savefiles/sav3.txt',
     ]
     CmdMaxLength = 32
+    AreasConfigPath = 'areas.yml'
+    ItemsConfigPath = 'items.yml'
+    KeybindingsConfigPath = 'keybindings.yml'

@@ -44,7 +44,7 @@ class FuncNode:
 
     def __init__(self, title='', args=[], inner=None):
         """ a string of the function name """
-        self.title = title
+        self.title = title.lower()
         """ a list of strings of function parameters (other tokens separated by underscores) """
         self.args = args
         """
@@ -271,7 +271,7 @@ class Interpreter:
             braceLoc = scriptStr.find("{", remainingInd)
             if braceLoc == -1:
                 break
-            verb = scriptStr[remainingInd:braceLoc].strip()
+            verb = scriptStr[remainingInd:braceLoc].strip().lower()
             closeInd = self.matchingBraceIndex(scriptStr, braceLoc + 1)
             reaction = self.parseBody(scriptStr[braceLoc+1:closeInd].strip())
             tuples.append((verb, reaction))
