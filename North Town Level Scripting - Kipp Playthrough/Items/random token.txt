@@ -1,0 +1,16 @@
+$if_inventory_fireAle_eq_1{
+
+	inspect{
+		It's a little dirty from the dried mud stains, but you can make out a picture of a @yellow{bottle}
+		and a description: "Good for 1 drink".
+	}
+	
+	use{
+		Kipp: Use it on what? I understand it would be tedious if the player would have to type "pick up fork"
+		and "use fork on eggs" and "eat eggs" just to keep myself from starving every morning, let alone do
+		everything to get through this level, but there are enough hints in the dialogue to figure this out.
+	}
+	
+}$else{
+	Kipp: What Random Token?
+}
