@@ -9,9 +9,20 @@ class HistoryWindow(Window):
 
     def __init__(self, width, height):
         super().__init__(width, height)
+        self.threshold = 0.05 # Delay in seconds before each character appears on-screen
+        self.timestep = 0.0 # Tracks the time since the last character was displayed
+        self.charLimit = 0 # The current number of characters that can be displayed
+        self.allWritten = True # True if everything has been displayed, false otherwise
 
     def update(self, timestep, keypresses):
-        pass
+        # Only increment charLimit when there's unrendered text still to be displayed
+        # Otherwise, there will be no delay when the next batch of text is sent
+        # since charLimit has been incrementing the whole time
+        if self.allWritten == False:
+            self.timestep += timestep
+            if self.timestep > self.threshold:
+                self.timestep -= self.threshold
+                self.charLimit += 1
 
     def draw(self):
         input_list = GameState().historyLines
@@ -56,6 +67,7 @@ class HistoryWindow(Window):
 
         # map output_list to self.pixels
         r = 0
+        charsWritten = 0
         for line_list in output_list:
             c = 0
             # fill in pixels with word content
@@ -63,17 +75,29 @@ class HistoryWindow(Window):
                 for ch in word:
                     self.pixels[r][c] = ch
                     c += 1
+
+                    if charsWritten + c >= self.charLimit:
+                        self.allWritten = False
+                        return self.pixels
+
                 if wi < len(line_list) - 1:
                     self.pixels[r][c] = " "
                     c += 1
+
+                if charsWritten + c >= self.charLimit:
+                    self.allWritten = False
+                    return self.pixels
+
             # fill in what remains with spaces
             for cc in range(c, self.width):
                 self.pixels[r][cc] = " "
             r += 1
+            charsWritten += c
         # fill in blank lines
         for rr in range(r, self.height):
             for c in range(self.width):
                 self.pixels[rr][c] = " "
+        self.allWritten = True
         return self.pixels
 
 if __name__ == '__main__':
