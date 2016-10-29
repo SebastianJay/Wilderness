@@ -1,0 +1,35 @@
+inspect{
+	Kipp walked up to the machine. An automated voice began speaking.
+	Machine: Welcome to the saloon! We have a wide variety of alcohol for you to choose from. 
+	For more information, press the "selection" button.
+			 
+	Kipp pressed the "selection" button.
+	
+	Machine: Today's wide selection is inspired by our sponsor, El Caliente:
+			 Drink 1: Steam Rush
+			 Drink 2: Smooth Wildfire
+			 Drink 3: Daring Diablo
+			 Drink 4: Bracing Inferno
+			 Drink 5: Phoenix Bolt 
+			 Drink 6: Smog in a Bottle
+			 Please remember to drink resp...you're an adult don't be stupid.
+}
+
+
+use Random Token on{
+	$if_inventory_randomToken_eq_1{
+		Which number button will you press?
+		$input_ntoDrink
+		$if_ntoDrink_eq_5{
+			Kipp: I guess I press a button and...yup it's that easy.
+			Machine: Thank you for your service. Please come again!
+			
+			A ticket dispensed from the bottom. Kipp took it. @bold{*Ticket Added to Inventory*}
+			$set_inventory_ticket_1
+			$set_inventory_randomToken_0
+		}$else
+		Kipp:I don't think that was the right order, or maybe I am just guessing. I'll try again later.
+	}$else
+		Kipp:I don't think I have another token for this machine.
+		
+}
