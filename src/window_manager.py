@@ -7,6 +7,7 @@ from loading_window import LoadingWindow
 from input_window import InputWindow
 from map_window import MapWindow
 from history_window import HistoryWindow
+from title_window import TitleWindow
 
 # TODO inherit from Window
 class WindowManager:
@@ -40,7 +41,6 @@ class WindowManager:
     def initWindows(self, screenrows, screencols):
         """ Instantiates all Windows needed in game at the start """
         # add help window
-        # add title window
         # add credits window
         # add select file window
         self.addWindow(HistoryWindow, 0, 0, 25, 95)
@@ -50,14 +50,16 @@ class WindowManager:
         self.addWindow(MapWindow, 0, 0, 35, 120)
         # add in-area map window
         # add inventory window
+        self.addWindow(TitleWindow, 0, 0, 35, 120)
 
         # create History/Input/Palette/Help group
         self._windowGroups = [
             (0, 1, 2),    #TODO change
-            (3,)
+            (3,),
+            (4,)
         ]
         # initially the first window group is on screen
-        self._activeWindowGroups = [0, 1]
+        self._activeWindowGroups = [0]
 
     def draw(self):
         """ stitches together multiple Windows from active group into the screen """

@@ -29,6 +29,8 @@ class AssetLoader:
                     file_path = os.path.join(root,file_name)
                     # Normalize the given path
                     norm_path = os.path.normcase(os.path.normpath(file_path))
+                    if '.DS_Store' in norm_path:
+                        continue    # ignore .DS_Store
                     with open(norm_path) as f:
                         assets[norm_path] = f.read()
 

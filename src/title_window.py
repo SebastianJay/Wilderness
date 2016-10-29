@@ -18,6 +18,7 @@ Exit - use sys.exit() to kill the program
 """
 from asset_loader import AssetLoader
 from window import Window
+import sys
 
 class TitleWindow(Window):
     def __init__(self, width, height):
@@ -41,7 +42,7 @@ class TitleWindow(Window):
             if keypresses[x] == "Up":
                 self.pointingTo = (self.pointingTo - 1) % 4
             elif keypresses[x] == "Down":
-                self.pointingTo = (self.pointingTo - 1) % 4
+                self.pointingTo = (self.pointingTo + 1) % 4
             elif keypresses[x] == "Return":
                 if self.pointingTo == 3:
                     sys.exit()
