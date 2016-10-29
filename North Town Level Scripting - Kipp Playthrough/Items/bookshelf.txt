@@ -1,7 +1,0 @@
-inspect{
-	Kipp: So. Many. Books. What should I @red{read} up on?
-		@underline{Encyclopedia on Native American Culture}
-		@underline{Scientific Journal about the Parasites Within}
-		@underline{Base Numbers for them Not Smart Folk}
-		
-}
