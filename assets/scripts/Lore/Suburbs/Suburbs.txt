@@ -1,0 +1,6 @@
+go to{
+	The @blue{suburbs} that Lore lived in were very quaint. Everything was peaceful and the neighbors greeted each other and life itself was just fine and dandy.
+}
+look around{
+	There were a couple of houses on Lore's street and a @blue{bus stop} at the end of the street. One of the major houses on the street was the scary @blue{Glover House}. There was a long wall dividing the @blue{suburbs} from the @blue{outskirts} that Mayor Trump erected in order to keep out the bad hombres from the @blue{outskirts}. Lore noticed a @blue{Hole in the Wall} which intrigued her because she never saw the other side before.
+}

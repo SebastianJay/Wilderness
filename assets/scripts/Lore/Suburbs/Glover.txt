@@ -1,0 +1,29 @@
+# talk to should only be possible if doorbell rang
+talk to{
+	$if_subRangDoorbell_eq_1{
+	Lore approached the nasty man.
+	$choice{
+	Kill|
+		Lore's strength and dexterity did not have enough points. Lore could not kill @green{Glover}.
+		$if_subTalktoGlover_eq_0{
+			$inc_loreMorality_-1
+		}
+	|Greet|
+		Lore: Howdy do!
+		Glover: Yo dawg, what you doin on muh property, m8.
+		$choice{
+			Need Afro|
+				Lore: Hey, do you mind if I borrow your afro?
+				Glover: Yo man, you can't take away muh property. Git off muh lawn!
+			|Speak his language|
+				Lore: Yo yo yo, I'm yo boi, u know wut I'm sayin, dawg? I need yo hairpiece.
+				$if_subTalktoGlover_eq_0{
+					$inc_loreMorality_1
+				}	
+			}
+	}
+	$set_subTalktoGlover_1
+	}$elif_subCutTree_eq_1{
+	
+	}
+}

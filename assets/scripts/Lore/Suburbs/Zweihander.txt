@@ -1,0 +1,4 @@
+inspect{
+	The ancient @yellow{zweihander} throbbed with power. Lore felt pretty darn cool lifting the sword and carrying it around. Lore put the @yellow{zweihander} on her back.
+	$set_subCanPickUpZweihander_1
+}
