@@ -15,6 +15,9 @@ class HistoryWindow(Window):
         self.allWritten = True # True if everything has been displayed, false otherwise
 
     def update(self, timestep, keypresses):
+        # Only increment charLimit when there's unrendered text still to be displayed
+        # Otherwise, there will be no delay when the next batch of text is sent
+        # since charLimit has been incrementing the whole time
         if self.allWritten == False:
             self.timestep += timestep
             if self.timestep > self.threshold:
