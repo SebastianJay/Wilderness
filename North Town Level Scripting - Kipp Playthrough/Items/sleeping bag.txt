@@ -1,0 +1,16 @@
+inspect{
+	Kipp: Well, I was right. It doesn't look as comfortable as a bale of hay from back home, but
+	at least I won't have to worry about picking bugs out of my clothes after a long nap.
+}
+
+use{
+	Kipp: Maybe I should take a break from all of this
+	
+	The scene gets darker as Kipp closes his eyes.
+	Hours later, the character woke up...but it doesn't look like this is Kipp's body anymore.
+	The sounds and sights of an urban universe swarm the character.
+	@bold{*Lore's playthrough continued*}
+	$switchcharacter
+	#The player switches from this quest to wherever Lore is in her quest.
+	
+}
