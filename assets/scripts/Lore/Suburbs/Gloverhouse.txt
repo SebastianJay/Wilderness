@@ -3,3 +3,4 @@ go to{
 }
 Look around{
 	The @blue{Glover House} was too horrendous to look at. When Lore took a glance, she did notice a @yellow{doorbell} and a decaying, dying, drooping @yellow{tree}.
+}
