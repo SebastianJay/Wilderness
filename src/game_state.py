@@ -3,6 +3,7 @@ Definition of game state, which is the model in our MVC framework.
 """
 
 from global_vars import Globals
+from asset_loader import AssetLoader
 from enum import Enum
 import json
 import copy
@@ -84,6 +85,9 @@ class GameState:
         def getHistoryLines(self):
             return self.subStates[self.activeProtagonistInd].historyLines
 
+        def getInventory(self):
+            return self.subStates[self.activeProtagonistInd].inventory
+
         def refreshCommandList(self):
             """ Updates cmdMap to contain all commands player can type """
             # locate the rooms and objects configs
@@ -94,24 +98,22 @@ class GameState:
             objects = loader.getConfig(area['objectsConfig'])
             # locate the relevant scripts
             cmdMap = {}
-            roomScript = loader.getConfig(rooms[self.roomId]['script'])
+            roomScript = loader.getScript(rooms[self.roomId]['script'])
             objectNames = []
             objectScripts = []
             for obj in rooms[self.roomId]['objects']:
-                objectNames.append(loader.getConfig(objects[obj]['name']))
-                objectScripts.append(loader.getConfig(objects[obj]['script']))
+                objectNames.append(objects[obj]['name'])
+                objectScripts.append(loader.getScript(objects[obj]['script']))
             # fill out the mapping, starting with 'go to'
             cmdMap['go to'] = {}
             for neighbor in rooms[self.roomId]['neighbors']:
-                # neighbor is a one mapping dict
-                for key in neighbor:
-                    neighborName = rooms[key]['name']
-                    neighborScript = loader.getConfig(rooms[key]['script'])
-                    neighborReaction = None
-                    for action in neighborScript:
-                        if action[0] == 'go to':
-                            neighborReaction = action[1]
-                    cmdMap['go to'][neighborName] = neighborReaction
+                neighborName = rooms[neighbor]['name']
+                neighborScript = loader.getScript(rooms[neighbor]['script'])
+                neighborReaction = None
+                for action in neighborScript:
+                    if action[0] == 'go to':
+                        neighborReaction = action[1]
+                cmdMap['go to'][neighborName] = neighborReaction
             # go through actions to take on room
             for action in roomScript:
                 # ignore 'go to' current room (not possible)
@@ -120,10 +122,11 @@ class GameState:
                 cmdMap[action[0]] = action[1]
             # prefill 'use <item>'
             cmdMap['use'] = {}
-            for item in self.inventory:
-                if self.inventory[item] == 0:
+            inventory = self.getInventory()
+            for item in inventory:
+                if inventory[item] == 0:
                     continue
-                itemName = loader.getConfig(items[item]['name'])
+                itemName = items[item]['name']
                 cmdMap['use'][itemName] = None
             # go through actions to take on objects
             for i in range(len(objectScripts)):
@@ -138,7 +141,7 @@ class GameState:
                         targetPhrase = 'on ' + objName
                         if itemKey == '':
                             raise Exception('script item name', itemWord ,'not found in items configuration file')
-                        if itemKey in self.inventory and self.inventory[itemKey] > 0:
+                        if itemKey in inventory and inventory[itemKey] > 0:
                             if cmdMap['use'][itemWord] is None:
                                 cmdMap['use'][itemWord] = {}
                             cmdMap['use'][itemWord][targetPhrase] = action[1]
@@ -210,3 +213,10 @@ if __name__ == '__main__':
     g.name = 'should not appear in print(g)!'
     g.readFile(Globals.SavePaths[0])
     print(g)
+
+    loader = AssetLoader()
+    loader.loadAssets('assets')
+    g.areaId = "aspire"
+    g.roomId = "library"
+    g.refreshCommandList()
+    print(g.cmdMap)

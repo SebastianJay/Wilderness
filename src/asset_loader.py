@@ -85,4 +85,4 @@ class AssetLoader:
 
 if __name__ == '__main__':
     loader = AssetLoader()
-    loader.loadAssets("assets/config")
+    loader.loadAssets("assets")
