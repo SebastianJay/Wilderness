@@ -1,0 +1,124 @@
+use tomahawk on{
+	$if_ntoSmokingGun_eq_1{
+		#Prevents the challenge from happening again after it is completed.
+		Kipp: Breaking bottles just for fun isn't really my cup of tea.
+	
+	}$else{
+		$if_inventory_revolver_eq_0{
+			Kipp: What revolver?
+		}$else{
+			Kipp: Alrigth Kipp, just focus on your aim. You don't have that many chances to miss, so you've got to give it all you've got. Man I sure hope I can count to 33. But what does @yellow{33 in base 4} mean anyway. Man I hope I got this.
+			
+			Kipp tightened his grip. Looked straight down the sight. Ready to pull the trigger.
+			
+			@orange{How many bottles will Kipp break?}
+			$input_ntobrokenBottles
+			
+			#EVAULATION
+			$if_ntobrokenBottles_eq_15{
+				#SUCCESS
+				
+				The first shot Kipp fired spooked him. Kipp jumped back a little bit. The Smoking Gunners silent, ready to see what Kipp would do next. Kipp cracked his knuckles and went back to shooting down the line. One by one, the bottles bursted, spilling water all over the shelf. The drinks were dripping down on the bartender, who didn't seem to mind since he was still wiping the counter as the alcohol splashed onto him. Kipp's adrenaline kept him from feeling the pain from the recoil after every shot. When he was finished shooting the 15th bottle off the shelf, he dropped the gun. He immediately felt the blisters on his hand. While trying to massage his hand, everyone crowded around Kipp in celebration.
+				
+				Random Smoking Gunner: I couldn't believe you did it!
+				Second Random Smoking Gunner: Yeah, you got guts kid.
+				Flint: I do have to agree that was impressive. Now let's talk about you joining the Smoking Gun.
+				
+				Kipp picked up the revolver and started staring at it, what will he do?
+				
+				$choice{
+				Put it back in his bag|
+					Kipp carefully put the revolver back in his bag as he tried to explain himself.
+					
+					Kipp: Look I'm not here to actually join your group. All I want is for you guys to join an alliance and...
+					
+					Kipp wasn't paying attention as he was putting away his gun and it landed on the floor. The gun misfired and grazed the head of Flint. The loud sound somehow paralyzed Flint as a green glowing light began filling his eyes. A tiny little creature began squirming out of Flint's head, and everyone was horrified.
+					
+					Random Smoking Gunner: Everyone stand back! He may be infected.
+					Second Random Smoking Gunner: No wait! That thing was the alien that was trying to infect out leader! Remember down at the corral!
+					Third Random Smoking Gunner: Yer darn right, by the time we're done with that little bugger, he's gonna be swiss cheese!
+					
+					Everyone started rioting as the little parasite tried escaping from Flint's head and towards the door. Kipp could hear multiple gunshots outside the saloon as he is left with Flint. Flint felt weak as he leaned onto Kipp for support.
+					
+					Flint: @italic{faintly} I understand your proposition. We'll be ready on your signal. Just make sure you exterminate those horror film nightmares from existence.
+					Kipp: Will do.
+					Flint: Great.
+					Kipp: Oh and that guy at the table that you kicked out said nothing about your group. He should probably be invited back.
+					Flint: Sure, Whatever.
+					
+					Flint passed out on top of Kipp and they both fell over onto the floor.
+					Kipp: @italic{(gasping for air)} A little help.........
+					Narrator: Don't expect me to be able to help.
+					Bartender: Me neither.
+					
+					$inc_lightPts_1
+					$inc_brotherPts_1
+					$inc_dereclictPts_1
+				|Use it|
+					Kipp: No, I'd rather talk about who's going to run this crew.
+					
+					Kipp aimed his gun at Flint. 
+					
+					Kipp: See, you are too weak that you could never pull a trigger for this gang. You relied on this complicated puzzle to show your dominance and here I am still standing after solving your elementary of a code. You have no traits in being a leader of this crew. So why don't you give your position up.
+					
+					The other members were talking amongst each other, and then all agreed with Kipp. They were all demanding for Flint to step down. Flint was frightened by how quickly his gang turned on him. His head was spinning, his eyes were glowing green, a tiny scream was growing louder as a little parasite evacuated his head. Everyone was kind of shocked and went silent.
+					
+					Random Smoking Gunner: Oh right, that was the little parasite I saw down at the corral before we came here.
+					
+					Everyone directed their attention towards him.
+					
+					Random Smoking Gunner: What?
+					
+					Kipp stood on the of the table. 
+					
+					Kipp: Alright as your new leader I have only two declarations before I step down from my position.
+					
+					Everyone murmured amongst themselves, wondering what the demands were.
+					
+					Kipp: First, I am adding that guy, who Flint kicked out, back into the group and will never be kicked out ever again.
+					
+					Hiram looked up at Kipp. Kipp nodded at Hiram to join the group again.
+					
+					Kipp: And second, once I signal your former leader, who will return as your new leader if you all choose to do so, all of you will gather at town center to riot against Rowen. He too is infected with the parasite.
+					
+					Everyone returns to an uproar.
+					
+					Kipp: That is all.
+					
+					Kipp jumped off the table.
+					$inc_darkPts_1
+					$inc_fugitivePts_2
+				}
+				
+				Kipp: @italic{(to himself)} With this group taken care of, the plan of getting rid of Rowen is being further completed. Let's finish this.
+				
+				@orange{Smoking Gun has joined the cause.} @bold_orange{SALOON ROUTE COMPLETE!}
+				$set_ntoSmokingGun_1
+				#Kipp get's to keep the revolver.
+				
+			}$else
+				#FAIL
+				Kipp just closed his eyes and started shooting. He thought that eventually he'd hit a bottle. Every time the gun ran out of bullets, he tried his best to quickly reload the gun without shooting himself in the foot like his pal Tucker did a few years ago. This process repeated until Kipp thought he had shot enough bottles to finish the challenge. Kipp opened his eyes.
+				
+				Kipp: So did I do it?
+				
+				Flint: What a waste of alcohol...sic 'em!
+				
+				The group unholstered their guns and all pointed them at Kipp. They pulled back their hammers and Kipp shielded his body, as if that was actually going to do anything to high velocity lead. The last scene drew out with a flash of bright lights and the sound of multiple gunshots.
+				
+				@bold{GAME OVER}
+				$gameover
+		}
+	}
+}
+
+inspect{
+	$if_ntoSmokingGun_eq_1{
+		Kipp: That's a lot of wasted alcohol. Well it's for the town's sake.
+	}$elif_inventory_revolver_eq_1{
+		Kipp: Wow there are so many exotic brands on that shelf. It must be so expensive. I'm not going to feel good about this.
+	}$else{
+		Kipp: These bottles have been manufactured from all over the world. I wonder if I could get a try of one of these after all of this has blown over.
+	}
+
+}
