@@ -1,0 +1,115 @@
+use tomahawk on{
+	$if_ntoChikasiClan_eq_1{
+		#Prevents the challenge from happening again after it is completed.
+		Kipp: I freaked out and broke the blade on the last marking. Remember, dummy.
+	
+	}$else{
+		$if_inventory_tomahawk_eq_0{
+			Kipp: What tomahawk?
+		}$else{
+			Kipp took a step forward, nervously holding the tomahawk in his hand.
+		
+			Kipp: Alright, shoot how many did he say? Right, 31. I hope he ain't pulling anything on
+			me and he meant 31 like the age old Lassie was before she kicked the bucket, and I mean the
+			first time she kicked the bucket while I was trying to milk her, or was that 10? Like I remember
+			how old our cow was. I swore never to visit that pen again after... right, 31 markings. Here we
+			go.
+			
+			@orange{How many markings will Kipp carve into the totem pole?}
+			$input_ntoMarkings
+			
+			#EVAULATION
+			$if_ntoMarkings_eq_25{
+				#SUCCESS
+				Kipp worked anxiously as if a Kala and Ma-Zoo were breathing down his neck. Actually, they were.
+				They laughed at Kipp every time he messed up the marking. Kipp would try to fix it the best he can.
+				
+				Kipp: Almost done. Maybe one more?
+				
+				Kipp was debating whether to add a 26th marking once he finished this one. He pressed too hard into
+				the totem pole and the blade snapped off the handle. It dug into the pole and all Kipp had in his hand
+				was the handle.
+				
+				Kipp: Oh no. No, no, no, no, no... This can't be happening.
+				
+				Kipp stepped back to try look away from what he done.
+				
+				Akecheta: I can't...believe it.
+				Kipp: I know. I know. I can get another tomahawk and...
+				Akecheta: ...and what? This is perfect.
+				Kipp: I understand, but...wait what?
+				Akecheta: You have passed the test. I shall listen with an open mind from now on, brother.
+				Kipp: Well thank you. 
+				
+				Kipp took a heavy sigh of relief.
+				
+				Kipp: What I was trying to say... is that don't your morals matter more than someone elses'?
+				I understand that Rowen has added notoriety to your clan, and now you are in a temporary position of power,
+				but is stealing from the innocent people's livelihood worth any power.
+				Kala: We are criminals! This is our job! Akecheta give me the word and I'll squash this little piece of...
+				Akecheta: No, he is right.
+				Kala: You know what, Akecheta? Ever since we put you as leader, all you've done is ruin the reputation of the Chikasi Clan.
+				Akecheta: @bold{My father did not raise a bunch of savages.} Do you want to return home and be remembered as the group of people who stooped
+				so low that they decided to pilage for entertainment? Who disrespected the entire ancestory in one generation! 
+				
+				The room went silent.Akecheta resumed.
+				
+				Akecheta: I can tolerate if we fight for the name of our people, but I will not put up with blindly giving into sending this world into the
+				afterlife for what we have done.
+				
+				Suddenly Akecheta fell forward, groaning in pain. The green glow from his eyes intensified until, a tiny little being escaped from his left ear.
+				The Chikasi Clan went in an uproar, declaring that the parasite was poisoning their lead this whole time. An array of bullets were aimed at the
+				being as it jumped straight out the door. The clan pursued, leaving Akecheta and Kipp behind.
+				
+				Kipp: Akecheta?
+				Akecheta: Thank you. Our clan's values are now safe for the next generation of our kind. I am in your debt.
+				Kipp: Great. Well, you know Rowen and what's been going on, right?
+				Akecheta: Say no more, the Chikasi Clan will assemble, but we can't do this on our own.
+				You need to @yellow{convince the other two clans so that we can fight as one}. Rowen may be alone, but he still has that
+				parasite in his brain, and we don't know what he can do with that intelligence.
+				Kipp: Already ahead of ya. One more thing, how did that thing get into your head in the first place?
+				Akecheta: I don't know but it was briefly after that thing they called "the wilderness" opened up. We were heading towards
+				the West when I woke up one day with the most ingrained pain in my head. I couldn't think. I could only act, and if I disobeyed
+				whatever replaced my thoughts, then I would start to feel something eating away at my brain. Whatever it is, be careful Kipp.
+				Kipp: Will do.
+				
+				@orange{Chikasi Clan has joined the cause.} @bold_orange{BANK ROUTE COMPLETE!}
+				$set_ntoChikasiClan_1
+				$set_inventory_tomahawk_0
+				
+			}$else
+				#FAIL
+				Kipp took his time, widdling all day since he had nothing better to do than
+				to focus on the one thing that could prematurely end his life.
+				
+				On his last mark, Kipp put the last craving in has if he was just finishing off
+				a masterpiece. Kipp stood back to get a better look.
+				
+				Kipp: Vew-wa-la! it is complete.
+				
+				Everyone murmured between each other, trying to hide their expressions from Kipp.
+				
+				Akecheta: I can't believe this.
+				Kipp: Believe what?
+				Akecheta: KALA! MA-ZOO! DISPOSE OF THIS TRAITOR!
+				Kipp: Wait! Wha...
+				
+				@bold{GAME OVER}
+				$gameover
+		}
+	}
+}
+
+inspect{
+	$if_ntoChikasiClan_eq_1{
+		Kipp: Hey, looking back at my markings I did a pretty good job...now that
+		my life isn't in danger and all that.
+	}$elif_inventory_tomahawk_eq_1{
+		Kipp: I might as well make this my grave since I'm carving it. Heh, gallows humor.
+	}$else{
+		Kipp: Weird that a gang would mark it's territory with, this. I do have to say,
+		I am fond of their craftsmanship. This thing looks like it had a lot of work put
+		into it.
+	}
+
+}
