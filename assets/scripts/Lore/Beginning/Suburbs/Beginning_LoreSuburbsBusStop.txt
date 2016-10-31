@@ -1,16 +1,17 @@
 #Beginning_LoreSuburbsBusStop
 
 goto{
-	Lore walked to the bus stop and took a seat on the bench. 
+	Lore walked to the bus stop and took a seat on the bench.
 }
 
 inspect{
-	Lore glanced at the routes and timetables. From this stop, she could go to the @blue{university} or the @blue{downtown}. 
+	Lore glanced at the routes and timetables. From this stop, she could go to the @blue{university} or the @blue{downtown}.
 }
 
 think{
 	Lore: It feels weird going back to the university. Ever since I left, I feel so distant from it. Like it's in a different world. I don't know if it makes me nervous or excited. I don't really know much of how I feel anymore. Every day is just like the last.
 	$set_thoughtBusStopBeg_1
-	$if_thoughtBusStopBeg_1
-	Lore: I should see when the bus is coming.
+	$if_thoughtBusStopBeg_1{
+		Lore: I should see when the bus is coming.
+	}
 }
