@@ -1,0 +1,5 @@
+#Beginning_LoreUniversityEDep
+
+go to{
+	Lore walked over to the engineering department. The sound of machines and radios echoed from the buildings. A pathway went through the facilities and headed up to the @blue{Aquatic and Fitness Center}. She'd have to go through there to get to the dining hall. She was tempted to explore the @blue{engineering facilities}. She wondered if she would run into her old professor, @green{Mark Sherriff}.
+}

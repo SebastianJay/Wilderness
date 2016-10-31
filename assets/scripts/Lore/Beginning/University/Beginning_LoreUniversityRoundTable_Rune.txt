@@ -1,0 +1,24 @@
+#Beginning_LoreUniversityRoundTable_Rune
+
+inspect{
+	Rune was a frail, soft-spoken girl. She was majoring in chemistry, but her expertise extended to many other areas. She was basically a walking encyclopedia. She hadn't been Lore's friend for as long as the others, mostly because she commuted to school from the city. 
+}
+
+talk to{
+	Lore: How have you been?
+	Rune: I've been well. It's so good to see you again.
+	Quen: Wow, it's been a while, hasn't it? You missed me, didn't you?
+	Essa: *laughs* Well, well, long time no see! How are you, you little punk?
+	Lore: It's great to see you guys.
+	
+	$Choice{
+		What have you been up to?|
+			Rune: I don't really have time outside of studying. My parents have had me working at the shop in my free time.
+			Quen: Other than studies, I'm interning with a company that specializes in history and anthropology. It's the same company that organizes the museums and tours downtown. They've put me in charge of managing the company's outreach. It's not like it's a big deal or anything, though.
+			Essa: You know I'm worthless and do nothing. Why are you even asking?
+		|What's been going on around grounds?|
+			Rune: Nothing too unusual. There have been a lot of students going to the Fun Zone and getting high on these drugs made by some student organization. I took some to the lab and analyzed them, the amount of contaminants in the drugs was unbelievable. I wouldn't be surprised if someone dies from them.
+			Quen: 
+			
+	}
+}

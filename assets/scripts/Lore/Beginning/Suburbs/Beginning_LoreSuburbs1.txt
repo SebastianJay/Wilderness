@@ -1,0 +1,5 @@
+#Beginning_LoreSuburbs1
+
+inspect{
+	The outside air was crisp and fresh. Down the street to the left was the @blue{bus stop}, identifiable by its faded blue sign. In the distance, a tall, @blue{imposing house} stood out over the neighborhood as if it were watching. As her eyes scanned the houses in front of her, she noticed a large @blue{hole in the fence}, which appeared to be guarded. She heard a voice call out to her, and turned to notice her neighbor, @green{Hal}, was trying to get her attention.
+}

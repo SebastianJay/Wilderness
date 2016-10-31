@@ -1,0 +1,53 @@
+#Beginning_LoreSuburbsHal
+
+talk to{
+	Hal: How's it going, Lore?
+	$choice{
+		Be friendly|
+		Lore: I'm well, and you?
+		$inc_loreMorality_1
+		Hal: Good as I can be, with everything that has happened. You have heard about the kidnapping, right?
+		
+		Lore shook her head.
+		
+		Hal: It happened in the middle of the night. Someone broke into a home and stole the child right out of bed. The police won't release the name of the child or the family, but I've heard a few rumors. It's been days since the kid went missing. You know what that usually means. Still, I hope they find them soon.
+		Lore: I hope so, too. I wish there was something I could do about it.
+		Hal: I have a friend in the city whose in good standing with the government. He just returned from a research trip to the Wilderness. Maybe I can convince him to pull a few strings and get that kid home. You know how it is in the suburbs here. I'd be surprised if the police have even started looking.
+		
+		A timer begins to go off from Hal's house.
+		
+		Hal: Well, that's my oven. Let me know if you need anything, okay Lore? Anything!
+		
+		Hal runs back into his house.
+		
+		|Keep your distance|
+		Lore: Okay.
+		$inc_loreMorality_0
+		Hal: I see. I suppose everyone is like that right now, considering the kidnapping. 
+		Lore: The kidnapping?
+		Hal:  It happened in the middle of the night. Someone broke into a home and stole the child right out of bed. The police won't release the name of the child or the family, but I've heard a few rumors. It's been days since the kid went missing. You know what that usually means. Still, I hope they find them soon.
+		Lore: Yeah.
+		Hal: Well...I have a friend in the city whose in good standing with the government. He just returned from a research trip to the Wilderness. Maybe I can convince him to pull a few strings and get that kid home. You know how it is in the suburbs here. I'd be surprised if the police have even started looking.
+		
+		A timer begins to go off from Hal's house.
+		
+		Hal: Ah, my oven. I'll see you around.
+		
+		|Be rude|
+		Lore: Why does it matter?
+		$inc_loreMorality_-1
+		Hal: Oh, uh, you're right. We should be more concerned about the kidnapping.
+		Lore: What kidnapping?
+		Hal: It happened in the middle of the night. Someone broke into a home and stole the child right out of bed. The police won't release the name of the child or the family, but I've heard a few rumors. It's been days since the kid went missing. You know what that usually means. Still, I hope they find them soon.
+		
+		Lore remains silent.
+		
+		Hal: I, uh, have a friend in the city whose in good standing with the government. He just returned from a research trip to the Wilderness. Maybe I can convince him to pull a few strings and get that kid home. You know how it is in the suburbs here. I'd be surprised if the police have even started looking.
+		
+		A timer begins to go off from Hal's house. He gives Lore a curt nod and leaves.
+	}
+}
+	
+think{
+	Lore remembered the letter in her pocket from her friends asking her to meet them at the university. She turned away from Hal's house. Down the street to the left was the @blue{bus stop}, identifiable by its faded blue sign. It would take her to the university. In the distance, a tall, @blue{imposing house} stood out over the neighborhood as if it were watching. As her eyes scanned the houses in front of her, she noticed a large @blue{hole in the fence}, which appeared to be guarded. 
+}
