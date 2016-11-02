@@ -1,0 +1,7 @@
+#This is the place that connects the suburbs to the university and downtown. This is the only way to reach the suburbs from those places as well.
+go to{
+	Lore reached the simple @blue{bus stop}.
+}
+look around{
+	A simple bus stop with a bench and a faded blue sign. The bus went to the @blue{University} or @blue{downtown}. The bus stop was pretty empty.
+}
