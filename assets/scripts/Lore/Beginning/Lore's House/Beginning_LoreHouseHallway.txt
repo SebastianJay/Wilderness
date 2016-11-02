@@ -1,0 +1,13 @@
+#Beginning_LoreHouseHallway
+
+go to{
+	Lore opened the door and stepped into the hallway. @green{Marthi} bounded towards the 
+	@blue{kitchen}. The @blue{closet} door was to her right.
+}
+
+look around{
+	Lore felt a bit claustrophobic in the narrow hall. It was windowless and dark. A @yellow{picture} of 
+	Lore and her mother was hanging on the wall.
+}
+
+

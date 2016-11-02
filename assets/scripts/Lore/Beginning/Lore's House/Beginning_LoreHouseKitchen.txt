@@ -1,0 +1,9 @@
+#Beginning_LoreHouseKitchen
+
+go to{
+	Lore followed @green{Marthi} to the kitchen. 
+}
+
+look around{	
+	The counter was messy. @yellow{Papers} and dishes were strewn about lazily. A few @yellow{pill bottles} sat next to the sink. Marthi's @yellow{cat food} was leaning against the foot of the counter. Opposite the kitchen was the @blue{living room}, although it was such a small space it could hardly be considered a room.
+}

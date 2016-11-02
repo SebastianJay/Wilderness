@@ -1,0 +1,5 @@
+#Beginning_LoreUniversityAFC
+
+go to{
+	Lore headed up to the Aquatic and Fitness Center, otherwise known as the AFC. The @blue{Dining hall} was just ahead. The entrance to the @blue{AFC} was to the left of her.
+}
