@@ -1,20 +1,21 @@
-#Beginning_LoreUniversityRoundTable_Rune
+#Beginning_LoreUniversityRoundTable_Essa
 
 inspect{
-	Rune was a frail, soft-spoken girl. She was majoring in chemistry, but her expertise extended to many other areas. She was basically a walking encyclopedia. She hadn't been Lore's friend for as long as the others, mostly because she commuted to school from the city. 
+	Essa was a blunt and overly passionate girl. She had been Lore's first friend at the university. She was studying physics. She lived in the suburbs near Lore.
 }
 
 talk to{
 	Lore: How have you been?
-	Rune: I've been well. It's so good to see you again.
-	Quen: Wow, it's been a while, hasn't it? You missed me, didn't you?
 	Essa: *laughs* Well, well, long time no see! How are you, you little punk?
+	Quen: Wow, it's been a while, hasn't it? You missed me, didn't you?
+	Rune: I've been well. It's so good to see you again.
+	
 	Lore: It's great to see you guys.
 	
 	$Choice{
 		What have you been up to?|
-			Rune: I don't really have time outside of studying. My parents have had me working at the shop in my free time.
 			Quen: Other than studies, I'm interning with a company that specializes in history and anthropology. It's the same company that organizes the museums and tours downtown. They've put me in charge of managing the company's outreach. It's not like it's a big deal or anything, though.
+			Rune: I don't really have time outside of studying. My parents have had me working at the shop in my free time.
 			Essa: You two are always so busy. You know I'm worthless and do nothing.
 		|What's been going on around grounds?|
 			Rune: Nothing too unusual. There have been a lot of students going to the Fun Zone and getting high on these drugs made by some student organization. I took some to the lab and analyzed them, and the amount of contaminants in the drugs was unbelievable. I wouldn't be surprised if someone dies from them.
@@ -38,11 +39,11 @@ talk to{
 			
 			Essa: If you ask me, this is the end. I'm not smart by any measure, but the government's nervous. I heard they moved the president into the emergency shelter underground in the capitol building. I hope the sinkhole opens right under him.
 		|What did you want to talk about?|
-			Rune placed her hand gently on Lore's arm.
+			Essa gave Lore's shoulder a playful punch.
 			
-			Rune: Listen, Lore. Ever since you dropped out the university, you haven't found a job or continued studying on your own. We're not upset with you, we're just worried about you.
-			Essa: What Rune means to say is that, drum roll please...We found you a job!
+			Essa: Drum roll please...We found you a job!
 			Quen: Well, not a job yet, but we know someone who's hiring!
+			Rune: Listen, Lore. Ever since you dropped out the university, you haven't found a job or continued studying on your own. We're not upset with you, we're just worried about you.
 			Essa: He's an entrepeneur who researches biology and the environment in the Wildnerness. He's based right here in the city. Plus, he's young and single, and you're young and single...
 			Quen: Essa! You're going to scare her away from the job! Since you studied biology here, we figured it was perfect for you. I'm not sure exactly what you'd be doing, but it seemed up your alley.
 			Rune: Most likely, you'd be analyzing data. His name is Rodnin, and his office is downtown in the Business District. I really think you should go and interview.

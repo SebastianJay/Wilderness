@@ -3,9 +3,8 @@
 go to{
 	Lore stepped into the bathroom. Some water was dripping from the leaky sink. The @blue{bedroom}
 	was behind her.
-}
-
-$Choice{
+	
+	$Choice{
 	Look in the mirror| Lore gazed at her reflection. She looked the same as she always did at first, 
 	but on closer inspection the circles under her eyes were darker, and the bones of her face 
 	were a little more distinct. She adjusted her hair and rubbed the crust from her eyes.
@@ -17,4 +16,5 @@ $Choice{
 			$set_frmUsedToilet_eq_1
 		}$if_frmUsedToilet_eq_1{She already did that.
 		}
+}
 }
