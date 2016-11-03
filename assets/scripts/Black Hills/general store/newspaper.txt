@@ -1,0 +1,17 @@
+inspect{
+    The Demon: Myth or Fact?
+
+    An exclusive report brought to you by the Black Hills Times.
+
+    On June 14, 6 of our beloved townfolks went down the mines to work just like usual. Unbeknownst to them, they would soon by attacked by the "Demon", a creature the size of an orangutan. 5 of them suffered cuts to the lower bodies and remain hospitalized in the @blue{hospital}, while one person @green{Dru} miraculously stayed unscathed and saved his friends' lives. . 
+    Let's hear it from Dru, our hero: 
+    Dru: I just threw my water bottle at the Demon. The bottle crashed and the Demon let out a sizzling sound and stopped moving. I managed to run out for help and got my fellows out before the Demon attacked again.
+    Meanwhile, Conney the owner of the local mining company is denying the existences of the Demon completely:
+    Conney: Some rocks fell from above and hit the miners. It happens all the time in other mines. Demons? Come on people!
+    
+    ......
+ }
+
+talk to{
+    It was very noisy in the @blue{general store}. Perhaps another time. 
+}

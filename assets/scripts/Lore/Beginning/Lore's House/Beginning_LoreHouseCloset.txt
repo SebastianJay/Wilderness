@@ -1,0 +1,11 @@
+#Beginning_LoreHouseCloset
+
+go to{
+	Lore opened the closet. It smelled like dust and peppermint.
+}
+
+inspect{
+	The closet was filled with summer clothes and cleaning supplies. The weather had begun to 
+	cool down, and the crisp air crept into Lore's bones and made her ache. On a key ring to the side, 
+	her @yellow{keys} shimmered in the light from the hall.
+}

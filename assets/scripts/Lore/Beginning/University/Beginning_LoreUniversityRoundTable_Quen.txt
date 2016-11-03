@@ -1,0 +1,66 @@
+#Beginning_LoreUniversityRoundTable_Quen
+
+inspect{
+	Quen was a down-to-business, organized, and intellectual type. It was amazing that his over-inflated ego could be contained in his body. He studied history and anthropology.
+}
+
+talk to{
+	Lore: How have you been?
+	Quen: Wow, it's been a while, hasn't it? You missed me, didn't you?
+	Rune: I've been well. It's so good to see you again.
+	Essa: *laughs* Well, well, long time no see! How are you, you little punk?
+	Lore: It's great to see you guys.
+	
+	$Choice{
+		What have you been up to?|
+			Quen: Other than studies, I'm interning with a company that specializes in history and anthropology. It's the same company that organizes the museums and tours downtown. They've put me in charge of managing the company's outreach. It's not like it's a big deal or anything, though.
+			Rune: I don't really have time outside of studying. My parents have had me working at the shop in my free time.
+			Essa: You two are always so busy. You know I'm worthless and do nothing.
+		|What's been going on around grounds?|
+			Rune: Nothing too unusual. There have been a lot of students going to the Fun Zone and getting high on these drugs made by some student organization. I took some to the lab and analyzed them, and the amount of contaminants in the drugs was unbelievable. I wouldn't be surprised if someone dies from them.
+			Quen: Wow, Rune, way to ruin the mood. The AFC has installed a new VR system. It's possibly the second best thing ever.
+			Rune: What's the first?
+			Quen: Me, of course.
+			Essa: Shut up, Quen. I've heard rumors that the Library of the Department of Others is haunted. People keep seeing this old crazy lady in there at night. She's obviously a ghost! Doesn't that sound scary, Lore?
+			Lore: Very.
+		|What do you guys think about the sinkhole?|
+			Rune: Hmm. I'm not sure what to think about it. It's certainly possible. I've heard there have been a series of small tremors in the Wildnerness. Tremors like that typically result from movements of tectonic plates, uh, the giant sheets of land that make up the world's outer layer. Usually small tremors lead up to a much larger earthquake. It could be catastrophic, if it's true.
+			Quen: ...Well, you know I don't care much for science. But I'm not too worried.
+			
+			Rune seemed shocked.
+			
+			Rune: Why not?
+			Quen: I study history, and part of that is studying how the lands have changed over time. We know that this region is prone to earthquakes. I think this is just a natural thing that happens all the time. Besides, Rune said that the tremors have been localized to the Wildnerness. We don't live there, so we're not in any danger.
+			Rune: But the tremors could lead to a big earthquake-
+			Essa: Rune, I've never seen you so upset! *laughs*
+			
+			Rune blushed and fell silent.
+			
+			Essa: If you ask me, this is the end. I'm not smart by any measure, but the government's nervous. I heard they moved the president into the emergency shelter underground in the capitol building. I hope the sinkhole opens right under him.
+		|What did you want to talk about?|
+			Rune placed her hand gently on Lore's arm.
+			
+			Rune: Listen, Lore. Ever since you dropped out the university, you haven't found a job or continued studying on your own. We're not upset with you, we're just worried about you.
+			Essa: What Rune means to say is that, drum roll please...We found you a job!
+			Quen: Well, not a job yet, but we know someone who's hiring!
+			Essa: He's an entrepeneur who researches biology and the environment in the Wildnerness. He's based right here in the city. Plus, he's young and single, and you're young and single...
+			Quen: Essa! You're going to scare her away from the job! Since you studied biology here, we figured it was perfect for you. I'm not sure exactly what you'd be doing, but it seemed up your alley.
+			Rune: Most likely, you'd be analyzing data. His name is Rodnin, and his office is downtown in the Business District. I really think you should go and interview.
+			
+			$Choice{
+			Thanks, I appreciate it. I'll go and see him.|
+				Essa: Yes! That's my girl! And let me know if he's cute!
+				Quen: Good luck. I'm always here if you want any practice interviewing.
+				Rune: That's so great. I hope your interview goes well.
+			|I'll think about it.|
+				Quen: We understand. If you decide to go, good luck.
+				Essa: I'm here for you no matter what you choose.
+				Rune: I strongly recommend that you at least interview. But, it's up to you I guess.
+			|No.|
+				Rune and Essa sigh and exchange glances.
+				
+				Quen: I think you'll change your mind. You know where it is and what to do.
+			}
+	}
+	Lore's friends got up and promised to get together again soon before filtering out of the dining hall. Lore sat alone in the @blue{Dining Hall}.
+}

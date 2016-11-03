@@ -1,0 +1,143 @@
+go to{
+	$if_ntoQuestStart_eq_1{
+		$if_ntoGunsmithIntro_eq_0{
+			$set_ntoGunsmithShop_1 #Intro won't repeat
+			#Intro to Rune Raiders when Kipp visits for the first time.
+			Kipp: It's high noon, and Rowen is bringing a gun and his superhuman intellect to the fight.
+			
+<<<<<<< HEAD:North Town Level Scripting - Kipp Playthrough/Rooms/gunsmith shop.txt
+			Kipp walked into the shop hoping for the best. His eyes widened and tried to find a place to hide.
+			He darted for a conveniently placed barrel of gunpowder right next to the entrance.
+=======
+			Kipp walked into the shop hoping for the best. His eyes widened and tried to find a place to hide. He darted for a conveniently placed barrel of gunpowder right next to the entrance.
+>>>>>>> origin/dev:assets/scripts/aspire/Rooms/gunsmith shop.txt
+			
+			Kipp: @italic{(Whispering)} Rowen! This day just keeps getting better and better. 
+			
+			Rowen: I don't see what the problem is here!
+<<<<<<< HEAD:North Town Level Scripting - Kipp Playthrough/Rooms/gunsmith shop.txt
+			Random Gang Member: Why don't you start keeping your cliques in line?! 
+			I'm the leader of this group, but I'm not responsible for those other little kids running around town 
+			doing whatever they feel like!
+			
+			Kipp: @italic{(Whisphering)} I'm guessing she's the leader of this group. 
+			Wait, is this group's leader a girl. Huh, never seen that on the farm. 
+=======
+			Random Gang Member: Why don't you start keeping your cliques in line?! I'm the leader of this group, but I'm not responsible for those other little kids running around town doing whatever they feel like!
+			
+			Kipp: @italic{(Whisphering)} I'm guessing she's the leader of this group. Wait, is this group's leader a girl. Huh, never seen that on the farm. 
+>>>>>>> origin/dev:assets/scripts/aspire/Rooms/gunsmith shop.txt
+			
+			The Leader continued.
+			
+			Rowen: I don't know how I can keep them in line if you can't tell me what the problem is.
+<<<<<<< HEAD:North Town Level Scripting - Kipp Playthrough/Rooms/gunsmith shop.txt
+			Leader: You said that each crew will each control one of the store. We all agreed on a coin toss to
+			see who got first pick. Since we won, we chose the gunshop and now members from the Smoking Gun are walking in all
+			butthurt about losing. 
+=======
+			Leader: You said that each crew will each control one of the store. We all agreed on a coin toss to see who got first pick. Since we won, we chose the gunshop and now members from the Smoking Gun are walking in all butthurt about losing. 
+>>>>>>> origin/dev:assets/scripts/aspire/Rooms/gunsmith shop.txt
+			Rowen: Well what do you expect when you take the gunsmith store from the Smoking @bold{Gun}.
+			Leader: That's not the point. We agreed to work together like adults and now we're all whining like children.
+			Rowen: Well then that doesn't sound like a problem my leadership can fix. Maybe you should check yourself first.
+			Leader: Fine! If you're not going to help...
+			
+<<<<<<< HEAD:North Town Level Scripting - Kipp Playthrough/Rooms/gunsmith shop.txt
+			The leader then summoned a burst of fire from her hand. Kipp, leaning around the barrel, was in disbelief.
+			This was the first instance of magic for him. The leader then threw the flame at the door near the front
+			of the room. The door didn't catch of fire, rather a flash of light filled the room and the door disappeared,
+			leaving behind burn marks all over the door jambs.
+			
+			Leader: ...then you can show yourself out. I'll will have this handled myself. Don't be surprised when you find some of
+			your henchmen turned into ashes.
+			
+			Rowen stood back for a second. Then he left in silence, walking through the leftover smoke from the burned entrance.
+			Kipp regained consciousness from his frozen state and clumsily fell over.
+			Everyone in the room turned to see Kipp laying on the floor, still in minor shock.
+=======
+			The leader then summoned a burst of fire from her hand. Kipp, leaning around the barrel, was in disbelief. This was the first instance of magic for him. The leader then threw the flame at the door near the front of the room. The door didn't catch of fire, rather a flash of light filled the room and the door disappeared, leaving behind burn marks all over the door jambs.
+			
+			Leader: ...then you can show yourself out. I'll will have this handled myself. Don't be surprised when you find some of your henchmen turned into ashes.
+			
+			Rowen stood back for a second. Then he left in silence, walking through the leftover smoke from the burned entrance. Kipp regained consciousness from his frozen state and clumsily fell over. Everyone in the room turned to see Kipp laying on the floor, still in minor shock.
+>>>>>>> origin/dev:assets/scripts/aspire/Rooms/gunsmith shop.txt
+			
+			Leader: What is he doing here?
+			Random Gang Member: I heard he was the kid that ran into Rowen this morning.
+			Leader: And he's still alive?
+			Random Gang Member: Well he didn't come out of the conversation gracefully. More like run away with an even smaller kid.
+			Leader: So not much of the threat.
+			
+<<<<<<< HEAD:North Town Level Scripting - Kipp Playthrough/Rooms/gunsmith shop.txt
+			The leader of the group slowly step towards the bulmbling idiot on the floor.
+			Kipp raised his eyes to see a woman get closer. With every step, her hand would start summoning a flame that gets brighter and
+			brighter. It started out a cool light blue, but it changes to a darker, and more intense, red with every second.
+			Kipp tried his best to get back on his feet. The leader stopped, and then began smiling.
+=======
+			The leader of the group slowly step towards the bulmbling idiot on the floor. Kipp raised his eyes to see a woman get closer. With every step, her hand would start summoning a flame that gets brighter and brighter. It started out a cool light blue, but it changes to a darker, and more intense, red with every second. Kipp tried his best to get back on his feet. The leader stopped, and then began smiling.
+>>>>>>> origin/dev:assets/scripts/aspire/Rooms/gunsmith shop.txt
+			
+			Mohani: Hello there, my name is Mohani. We don't like people snooping around this place. So you're gonna have to die.
+			Kipp: Wait, wait, wait! My name is Kipp! I don't come from here!
+			Mohani: Huh, so nobody knows you. Pretty suspicious. More of a reason to incinerate you.
+			Kipp: But...
+<<<<<<< HEAD:North Town Level Scripting - Kipp Playthrough/Rooms/gunsmith shop.txt
+			Mohani: Look, honey. Us enchanters have trust issues with mortals. And here you were listening on such a confidential conversation.
+			If things started out a lot smoother...well we still wouldn't have spared you, but now we don't feel guilty about it now. Farewell.
+			
+			Mohani grabbed Kipp by the shirt and lifted him in the air before bringing her hand closer to Kipp.
+			Kipp was thinking of anything he could say to keep him alive for at least a few more seconds.
+=======
+			Mohani: Look, honey. Us enchanters have trust issues with mortals. And here you were listening on such a confidential conversation. If things started out a lot smoother...well we still wouldn't have spared you, but now we don't feel guilty about it now. Farewell.
+			
+			Mohani grabbed Kipp by the shirt and lifted him in the air before bringing her hand closer to Kipp. Kipp was thinking of anything he could say to keep him alive for at least a few more seconds.
+>>>>>>> origin/dev:assets/scripts/aspire/Rooms/gunsmith shop.txt
+			
+			Kipp: @bold{But I have supernatural powers, too!}
+			Mohani: @italic{Confused} Go on...
+			Kipp: I don't know what you call it...but I was able to cough up something wicked before out of nowhere. 
+			Mohani: Something that brought fear to others?
+			Kipp: I guess you can say that. Everyone in the room wasn't sure what it was, but they weren't going to stay to find out.
+			Mohani: Well then. This changes some things.
+			Kipp: Thanks. Um, do you mind putting me d...
+			
+			Mohani let go of Kipp and he fell back on the floor. Kipp groaned as he found himself back on the ground.
+			
+			Mohani: But that's not enough. @yellow{You are going to have to prove to us that mana flows within your body. I propose a challenge.}
+			
+			Mohani lit a red flame from here hand and chucks it into the forge.
+
+<<<<<<< HEAD:North Town Level Scripting - Kipp Playthrough/Rooms/gunsmith shop.txt
+			Mohani: I'll explain what the fire is for later. @red{Talk to} @green{me} again when you want to start this thing. And I hope you've studied
+			up on enchanter's @yellow{bases}.
+			
+			Kipp was too preoccupied to try to comprehend what she meant about that last part and walked out to try to get his head together.
+			
+			Kipp: @italic{(exhale)} Kipp, you idiot. A strong belch at last year's festival cause I can't stomach hot sauce is not magic powers! It was loud enough to shock
+			the whole county, but what am I gonna do to go up against Mohani?! Well I'm gonna have to get out of this one step at a time. Let's do this!
+=======
+			Mohani: I'll explain what the fire is for later. @red{Talk to} @green{me} again when you want to start this thing. And I hope you've studied up on enchanter's @yellow{bases}.
+			
+			Kipp was too preoccupied to try to comprehend what she meant about that last part and walked out to try to get his head together.
+			
+			Kipp: @italic{(exhale)} Kipp, you idiot. A strong belch at last year's festival cause I can't stomach hot sauce is not magic powers! It was loud enough to shock the whole county, but what am I gonna do to go up against Mohani?! Well I'm gonna have to get out of this one step at a time. Let's do this!
+>>>>>>> origin/dev:assets/scripts/aspire/Rooms/gunsmith shop.txt
+			
+			Kipp walked back into the shop.     @bold_orange{GUNSMITH SHOP ROUTE STARTED!}
+			
+		}$else{
+			#Text when Kipp returns to this room
+			Kipp: So this is where all of the horseshoes, guns, and other metal products are crafted. Hopefully I could find my way around this place. Time to @red{look around}. I could also @red{go to} the @blue{saloon} or @blue{town center} from here.
+		}
+	}$else{
+		#Kipp hasn't visited the libary yet to start the quest.
+		Random Gang Member: Hey, you have no business to be here! Get out before we have to use force!
+		
+	}
+}
+
+look around{
+	Kipp: Well, it doesn't look like the people around here want to talk. I think have have no choice but to @red{talk to} @green{Mohani} for more information. I could @red{inspect} the @yellow{forge} or @yellow{glass of water}. On the worshop table, there seems to be a revolver just laying there. I wonder if I could just @red{pick up} the @yellow{revolver}. Wait, Mohani has a purse just sitting there on the counter, too. Maybe if I could find a way to get a closer look at her purse without her noticing. I probably could @yellow{cause a distraction}, or it honestly wouldn't hurt to @yellow{be direct} (unless she decides today is a great day to punch someone in the face).
+
+}

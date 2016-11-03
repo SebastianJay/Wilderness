@@ -1,0 +1,15 @@
+inspect{
+\    Wanted: Dead or alive.
+\      //////////\
+\     ///////////\\
+\    |  O     O | \\
+\    |     <    | ||
+\    |    _____ | ||
+\     \_________/ \/
+\      
+\       Jinx
+}
+
+talk to{
+    Kipp considered talking to the @yellow{wanted sign}, but there were too many people around. Maybe next time.
+}

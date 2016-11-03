@@ -1,0 +1,69 @@
+talk to{
+	Kipp: Hey, buddy.
+	Arthur: Hey, what's up?
+<<<<<<< HEAD:North Town Level Scripting - Kipp Playthrough/Items/Arthur.txt
+	
+=======
+
+>>>>>>> origin/dev:assets/scripts/aspire/Items/Arthur.txt
+	Ask about:
+	$choice{
+	His Mood|
+		Kipp: You feeling alright?
+		Arthur: Yeah, just a little bored. The other kids and I ran out of things to do.
+		$if_ntoFatigue_eq_0{
+<<<<<<< HEAD:North Town Level Scripting - Kipp Playthrough/Items/Arthur.txt
+			Maybe his mood will brighten if Kipp @red(pick up) @green(Arthur).
+		}
+		
+	|Numbers|
+		Kipp: Do you know anything about special numbers?
+		Arthur: No...all i know is how to count to...this many.
+		
+		Arthur then proceeded to holding up both his hands, without actually counting them.
+		
+		Arthur: Theres a book on the numbers on the @yellow{bookshelf}.
+		Kipp: Thanks little guy.
+		
+=======
+			Maybe his mood will brighten if Kipp @red{pick up} @green{Arthur}.
+		}
+
+	|Numbers|
+		Kipp: Do you know anything about special numbers?
+		Arthur: No...all i know is how to count to...this many.
+
+		Arthur then proceeded to holding up both his hands, without actually counting them.
+
+		Arthur: There's a book on the numbers on the @yellow{bookshelf}.
+		Kipp: Thanks little guy.
+
+>>>>>>> origin/dev:assets/scripts/aspire/Items/Arthur.txt
+		Arthur then stood up straight and salutded with a serious face. Kipp playfully saluted back to Arthur.
+	}
+}
+
+pick up{
+	$if_fatigue_eq_0{
+<<<<<<< HEAD:North Town Level Scripting - Kipp Playthrough/Items/Arthur.txt
+		Kipp comforted Arthur by picking him up and swinging him around. Arthur began laughing again. 
+		Now all of the kids are running to their parents asking to be picked up and swung around.
+		The general mood of the room lightened up.
+		
+		$inc_lightPts_1
+		$inc_ntoFatigue_1
+		
+	}$else
+		You are too fatigued to pick Arthur up again. Go to the gym, bruh.
+}
+=======
+		Kipp comforted Arthur by picking him up and swinging him around. Arthur began laughing again. Now all of the kids are running to their parents asking to be picked up and swung around. The general mood of the room lightened up.
+
+		$inc_lightPts_1
+		$inc_ntoFatigue_1
+
+	}$else{
+		You are too fatigued to pick Arthur up again. Go to the gym, bruh.
+	}
+}
+>>>>>>> origin/dev:assets/scripts/aspire/Items/Arthur.txt

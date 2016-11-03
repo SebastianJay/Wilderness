@@ -1,0 +1,5 @@
+#Beginning_LoreSuburbsUniversity1
+
+go to{
+	Lore stepped off the bus and took a look around. She was currently standing in front of the @blue{President's Office} and @blue{Central Grounds}. To the north was the @blue{Engineering Department}. To the east was the @blue{Science Department}. To the south was the @blue{Math Department}. To the west was the @blue{Other Department}. She was supposed to meet her friends at the dining hall. To get there, she'd need to go north through the engineering department.
+}

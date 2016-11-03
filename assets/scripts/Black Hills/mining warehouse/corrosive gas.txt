@@ -1,0 +1,12 @@
+inspect{
+	The corrosive gas may be used to dissolve the "demon."
+}
+
+pick up{
+	$if_frmTalkedShotgunPete_eq_1{
+		Kipp picked up the tank of corrosive gas.
+		$set_inventory_corrosiveGas_1
+	}$elif_frmTalkedShotgunPete_eq_0{
+		Kipp should talk to @green{Shotgun Pete} first.
+	}
+}

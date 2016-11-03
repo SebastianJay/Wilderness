@@ -1,0 +1,6 @@
+inspect{
+	The ancient @yellow{zweihander} throbbed with power. Lore felt pretty darn cool lifting the sword and carrying it around. Lore put the @yellow{zweihander} on her back.
+	@italic{Added zweihander to inventory.}
+	$set_subCanPickUpZweihander_1
+	$set_inventory_zweihander_1
+}

@@ -1,0 +1,74 @@
+## Aspire rooms
+
+bank:
+    name: Bank
+    description: Withholding the town's source of funding; currently being held off by the Chikasi Clan.
+    script: aspire/Rooms/bank.txt
+    r: 0    #TODO
+    c: 0    #TODO
+    neighbors:
+        library: S
+        townCenter: SE
+        saloon: E
+    objects:
+        - akechata
+        - totemPole
+        - painting
+        - fireAle
+library:
+    name: Library
+    description: All of the town's knowledge can be found here; being used as a makeshift hideaway from Rowen and his cliques.
+    script: aspire/Rooms/library.txt
+    r: 0
+    c: 0
+    neighbors:
+        bank: N
+        townCenter: E
+    objects:
+        - arthur
+        - sleepingBag
+        - bookshelf
+saloon:
+    name: Saloon
+    description: Bringing the town alcohol from lands far and wide; currently being held off by the Smoking Gun.
+    script: aspire/Rooms/saloon.txt
+    r: 0
+    c: 0
+    neighbors:
+        bank: W
+        townCenter: SW
+        gunshop: S
+    objects:
+        - flint
+        - lineOfBottles
+        - bartender
+        - ticketMachine
+        - exMember
+gunshop:
+    name: Gunsmith Shop
+    description: Crafting gear and guns since '71; currently being held off by the Rune Raiders.
+    script: aspire/Rooms/gunsmith shop.txt
+    r: 0
+    c: 0
+    neighbors:
+        saloon: N
+        townCenter: W
+    objects:
+        - mohani
+        - forge
+        - glassOfWater
+        - revolver
+townCenter:
+    name: Town Center
+    description: Accessible to and from all shops and establishments; not the nicest place to be in a shootout.
+    script: aspire/Rooms/town center.txt
+    r: 0
+    c: 0
+    neighbors:
+        bank: NW
+        library: W
+        saloon: NE
+        gunshop: E
+    objects:
+        - rowen
+        - townSign

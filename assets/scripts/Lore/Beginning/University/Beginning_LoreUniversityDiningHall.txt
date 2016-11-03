@@ -1,0 +1,5 @@
+#Beginning_LoreUniversityDiningHall
+
+go to{
+	Lore stepped inside the dining hall. The smell of freshly made food wafted towards her, bringing a mixture of hunger and nostalgia. She saw her friends in the corner waiting for her at a @blue{round table}. The cook, @green{Ms. Susan}, was busily chopping vegetables. 
+}

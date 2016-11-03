@@ -1,0 +1,10 @@
+inspect{
+	The @yellow{doorbell} was crusty and looked like it did not feel the warmth of human hands for several decades.
+}
+use{
+	$if_subCanRingDoorbell_eq_0{
+	Lore does not know why she dared to even lay a finger on the slimy @yellow{doorbell}. A deep, single tone echoed inside. A tall, imposing figure opened the door.
+	$set_subCanRingDoorbell_1
+	$set_subCanCutTree_1
+	}
+}
