@@ -1,6 +1,6 @@
 inspect{
     @green{Kaven} was about 8-years-old.
-}
+ }
 
 talk to{
     $if_frmTalkedKaven_eq_0{

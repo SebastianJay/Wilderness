@@ -1,4 +1,4 @@
-# Dru is a person.
+
 inspect{
     @green{Dru} is a buff young man. There were blisters on his hands, showing signs of physical labor, possibly mining. He looked weary and somber.
 }

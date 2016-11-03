@@ -2,10 +2,10 @@ inspect{
     $if_frmInspectedGritt_eq_0{
         @green{Gritt} was a middle-aged man.
 	$set_InspectedGritt_1
-     }
+	}
      $elif_frmInspectedritt_eq_1{
         Kipp has made Gritt uneasy. Kipp should probably stop.
-     }
+    }
 }
 
 talk to{
