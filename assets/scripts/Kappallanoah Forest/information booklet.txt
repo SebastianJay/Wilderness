@@ -1,0 +1,5 @@
+inspect{
+	Welcome to Kappallanoah Forest!
+	
+	Kappallanoah Forest means the "beautiful forest with delicious squirrels" in the natives' language. The forest area hosts hundreds of visitors all year round. Feel free to explore the @blue{hunting range} and reside in our cozy wood cabins. 
+}}
