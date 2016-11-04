@@ -68,41 +68,41 @@ class HistoryWindow(Window):
         # map output_list to self.pixels
         r = 0
         charsWritten = 0
+        stopWriting = False     # flag that indicates if we hit charLimit
         for line_list in output_list:
             c = 0
             # fill in pixels with word content
-            for wi, word in enumerate(line_list):
-                for ch in word:
-                    self.pixels[r][c] = ch
-                    c += 1
-
-                    if charsWritten + c >= self.charLimit:
-                        self.allWritten = False
-                        return self.pixels
-
-                if wi < len(line_list) - 1:
-                    self.pixels[r][c] = " "
-                    c += 1
+            line = " ".join(line_list)
+            for ch in line:
+                self.pixels[r][c] = ch
+                c += 1
 
                 if charsWritten + c >= self.charLimit:
-                    self.allWritten = False
-                    return self.pixels
+                    stopWriting = True
+                    break
 
             # fill in what remains with spaces
             for cc in range(c, self.width):
                 self.pixels[r][cc] = " "
             r += 1
             charsWritten += c
+            if stopWriting:
+                break
+
         # fill in blank lines
         for rr in range(r, self.height):
             for c in range(self.width):
                 self.pixels[rr][c] = " "
-        self.allWritten = True
+
+        self.allWritten = not stopWriting
         return self.pixels
 
 if __name__ == '__main__':
     h = HistoryWindow(30, 10)
-    test_input = ["Hello, nice to meet you. I'm just trying to test out thise code", "So, this is supposed to cut the input and organize             them so it can fit into the given screen", "Do you think this is gonna work? 'Cause,,, I 'm not really sure myself.", "So.. I wonder how long this is now.."]
+    test_input = ["Hello, nice to meet you. I'm just trying to test out thise code",
+    "So, this is supposed to cut the input and organize             them so it can fit into the given screen",
+    "Do you think this is gonna work? 'Cause,,, I 'm not really sure myself.",
+    "So.. I wonder how long this is now.."]
     # NOTE do not set historyLines directly in non-test code
     GameState().subStates[0].historyLines = test_input
     h.debugDraw()
