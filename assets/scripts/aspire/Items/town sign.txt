@@ -1,24 +1,8 @@
-<<<<<<< HEAD:North Town Level Scripting - Kipp Playthrough/Items/town sign.txt
-#The player will have to Inspect the sign twice to receive the tomahawk 
-=======
 #The player will have to Inspect the sign twice to receive the tomahawk
->>>>>>> origin/dev:assets/scripts/aspire/Items/town sign.txt
 
 inspect{
 	$if_ntoSignCount_eq_0{
 		Kipp: Bullets, horseshoe marks, and @yellow{every blade you can think of} all dug into one sign.
-<<<<<<< HEAD:North Town Level Scripting - Kipp Playthrough/Items/town sign.txt
-		$inc_ntoSignCount_1
-	}$elif_ntoSignCount_eq_1{
-		Kipp: Huh, I guess they were using the letter A as target practice
-		before it fell over. I don't think anyone will be needing this anymore." @bold{*Tomahawk Added to Inventory*}
-		
-		$set_inventory_tomahawk_1
-		$inc_ntoSignCount_1
-	}$else
-		Kipp: Nope, still a sign.
-}
-=======
 
 		$inc_ntoSignCount_1
 	}$elif_ntoSignCount_eq_1{
@@ -30,4 +14,3 @@ inspect{
 		Kipp: Nope, still a sign.
 	}
 }
->>>>>>> origin/dev:assets/scripts/aspire/Items/town sign.txt

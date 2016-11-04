@@ -3,12 +3,7 @@ $if_inventory_fireAle_eq_1{
 	inspect{
 		The description says: "Gives you the spirit of a @yellow{fire breathing} dragon."
 		
-<<<<<<< HEAD:North Town Level Scripting - Kipp Playthrough/Items/fire ale.txt
-		Kipp: I wonder how the bank didn't defend themselves with this stuff laying around. Well I'm
-		not going to use this on people.
-=======
 		Kipp: I wonder how the bank didn't defend themselves with this stuff laying around. Well I'm not going to use this on people.
->>>>>>> origin/dev:assets/scripts/aspire/Items/fire ale.txt
 	}
 	
 	use{

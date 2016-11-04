@@ -1,18 +1,6 @@
 $if_inventory_ticket_eq_1{
 
 	inspect{
-<<<<<<< HEAD:North Town Level Scripting - Kipp Playthrough/Items/ticket.txt
-		Kipp inspected the ticket. It read, "ONE PHOENIX BOLT. Only acceptable at Aspire Saloon. This establishment is not
-		responsible if fed to an actual phoenix"
-		
-		Kipp: I wonder how they got that disclaimer on there. Must've been a good story. Maybe the bartender will finally
-		give me a bottle.
-	}
-	
-	use{
-		Kipp: Use it how? You want me to eat it or something? I'm not braindead, but c'mon. 1's and 0's take this stuff
-		literally.
-=======
 		Kipp inspected the ticket. It read, "ONE PHOENIX BOLT. Only acceptable at Aspire Saloon. This establishment is not responsible if fed to an actual phoenix"
 		
 		Kipp: I wonder how they got that disclaimer on there. Must've been a good story. Maybe the bartender will finally give me a bottle.
@@ -20,7 +8,6 @@ $if_inventory_ticket_eq_1{
 	
 	use{
 		Kipp: Use it how? You want me to eat it or something? I'm not braindead, but c'mon. 1's and 0's take this stuff literally.
->>>>>>> origin/dev:assets/scripts/aspire/Items/ticket.txt
 	}
 	
 }$else{

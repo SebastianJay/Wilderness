@@ -1,12 +1,7 @@
 $if_inventory_phoenixBolt_eq_1{
 
 	inspect{
-<<<<<<< HEAD:North Town Level Scripting - Kipp Playthrough/Items/Phoenix Bolt.txt
-		Kipp: It says that it's brewed with barley and the seeds of the world's hottest pepper, and may or may not include radioactive material.
-		Because the world's hottest pepper seeds can definitely make this drink glow red. How could anyone stomach this?
-=======
 		Kipp: It says that it's brewed with barley and the seeds of the world's hottest pepper, and may or may not include radioactive material. Because the world's hottest pepper seeds can definitely make this drink glow red. How could anyone stomach this?
->>>>>>> origin/dev:assets/scripts/aspire/Items/Phoenix Bolt.txt
 	}
 	
 	use{

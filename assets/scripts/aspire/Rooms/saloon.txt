@@ -3,14 +3,7 @@ go to{
 		$if_ntoSaloonIntro_eq_0{
 			$set_ntoSaloonIntro_1 #Intro won't repeat
 			#Intro to Smoking Gun when Kipp visits for the first time.
-<<<<<<< HEAD:North Town Level Scripting - Kipp Playthrough/Rooms/saloon.txt
-			Kipp pushed on the doors of the saloon and took a good look of everyone in the room.
-			A second later, Kipp heard a gunshot and immediately ducked onto the floor.
-			The bullet hit the doors behind Kipp and would have went through Kipp's head if he wasn't lucky.
-			Kipp stood back up to see a group of gang members laughing in the corner.
-=======
 			Kipp pushed on the doors of the saloon and took a good look of everyone in the room. A second later, Kipp heard a gunshot and immediately ducked onto the floor. The bullet hit the doors behind Kipp and would have went through Kipp's head if he wasn't lucky. Kipp stood back up to see a group of gang members laughing in the corner.
->>>>>>> origin/dev:assets/scripts/aspire/Rooms/saloon.txt
 			
 			Kipp: I guess I'm looking for them.
 			
@@ -18,12 +11,7 @@ go to{
 			
 			Leader: What do you want half-pint?
 			Kipp: I'm Kipp. New to Aspire. Mind helping me out with the details?
-<<<<<<< HEAD:North Town Level Scripting - Kipp Playthrough/Rooms/saloon.txt
-			Leader: Right. While I'm at it, why don't I also give you the keys to this place and pour you
-			a nice cold one. Take a hike, kid.
-=======
 			Leader: Right. While I'm at it, why don't I also give you the keys to this place and pour you a nice cold one. Take a hike, kid.
->>>>>>> origin/dev:assets/scripts/aspire/Rooms/saloon.txt
 			Kipp: I just want to know who's running this place.
 			Flint: That would be me, Flint, leader of the Smoking Gun.
 			Kipp: Okay, Flint, now I've got one more simple question: How do I join your crew?
@@ -43,18 +31,9 @@ go to{
 			
 			Flint holstered his gun and stood up.
 			
-<<<<<<< HEAD:North Town Level Scripting - Kipp Playthrough/Rooms/saloon.txt
-			Flint: Alright kid, we'll give you a shot, but you're going to have to keep up with the gang's @yellow{base} standards.
-			You've gotta be just as rebellious and commited to the group as every member here in order to join.
-			I guess we should have an initiation.
-			
-			Flint gave the group a signal and everyone held their guns up. Kipp shielded his face. The group then turned to shoot off a line of bottles
-			off the wall. The bartender didn't even flinch. This must be a usual thing by now.
-=======
 			Flint: Alright kid, we'll give you a shot, but you're going to have to keep up with the gang's @yellow{base} standards. You've gotta be just as rebellious and commited to the group as every member here in order to join. I guess we should have an initiation.
 			
 			Flint gave the group a signal and everyone held their guns up. Kipp shielded his face. The group then turned to shoot off a line of bottles off the wall. The bartender didn't even flinch. This must be a usual thing by now.
->>>>>>> origin/dev:assets/scripts/aspire/Rooms/saloon.txt
 			
 			Flint: @red{Talk to} @green{me} again when you're ready to start your hazing. Make sure you have a @yellow{gun} with you.
 			Kipp: Sure, where would I be able to get one?
@@ -73,11 +52,5 @@ go to{
 }
 
 look around{
-<<<<<<< HEAD:North Town Level Scripting - Kipp Playthrough/Rooms/saloon.txt
-	Kipp: I honestly don't believe that there is anyone nice enough to have a word with. I guess @green{Flint} is my only op... wait who is that slumped in the corner.
-	Looks like a @green{former Smoking Gunner}. Oh right, and then there's that @green{bartender}. Well, more people to @red{talk to}. There also a @yellow{line of bottles} that I guess I'll @red{use} my, I'm guessing, @yellow{revolver} @red(on). Finally, I think there's a @yellow{vending machine} in the corner. I don't know what it's for,
-	but it looks like there is a slot just wide enought to fit the @yellow{random token} Arthur game me. Maybe taking a closer look at it first is a better idea.
-=======
 	Kipp: I honestly don't believe that there is anyone nice enough to have a word with. I guess @green{Flint} is my only op... wait who is that slumped in the corner. Looks like a @green{former Smoking Gunner}. Oh right, and then there's that @green{bartender}. Well, more people to @red{talk to}. There also a @yellow{line of bottles} that I guess I'll @red{use} my, I'm guessing, @yellow{revolver} @red(on). Finally, I think there's a @yellow{vending machine} in the corner. I don't know what it's for, but it looks like there is a slot just wide enought to fit the @yellow{random token} Arthur game me. Maybe taking a closer look at it first is a better idea.
->>>>>>> origin/dev:assets/scripts/aspire/Rooms/saloon.txt
 }

@@ -11,12 +11,7 @@ talk to{
 		#Kipp now has the ticket.
 		Bartender: Hey, you're not braindead.
 		
-<<<<<<< HEAD:North Town Level Scripting - Kipp Playthrough/Items/bartender.txt
-		The bartender looked closely at the ticket, and threw it behind him. He then left to go to the stock room in the back.
-		The bartender came back wearing a raditation mask and holding a red glowing drink.
-=======
 		The bartender looked closely at the ticket, and threw it behind him. He then left to go to the stock room in the back. The bartender came back wearing a raditation mask and holding a red glowing drink.
->>>>>>> origin/dev:assets/scripts/aspire/Items/bartender.txt
 		
 		Bartender: @italic{(with no enthusiams)} Thank you for your service. Please come again, or don't. I don't care.
 		

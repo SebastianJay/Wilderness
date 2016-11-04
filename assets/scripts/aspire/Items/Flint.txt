@@ -3,21 +3,10 @@ talk to{
 		#Kipp's first task
 		Flint: Hey, you still don't have a @yellow{gun}. Come back when you could actually start the initation.
 	}$elif_ntoSmokingGun_eq_1{
-<<<<<<< HEAD:North Town Level Scripting - Kipp Playthrough/Items/Flint.txt
-		Flint: Hey, we get it. We ain't going to cause no more trouble for you.
-		Just make sure you have those other two gangs in check.
-	}$else{
-		Kipp: Alright, I got my revolver.
-		Flint: Well looky here. Someone brought a really fancy shooter to the party. Now let's see what you've got.
-		See the @yellow{line of bottles} on the wall. All I want you to do is shoot of 33 bottles off that wall, and
-		I'll know whether or not you've got the street knowledge of the Smoking Gun. Get it right and you're in "Ding! Ding!". Get it wrong,
-		and I'll have these fellas over here test out their pistols to "make sure they're working".
-=======
 		Flint: Hey, we get it. We ain't going to cause no more trouble for you. Just make sure you have those other two gangs in check.
 	}$else{
 		Kipp: Alright, I got my revolver.
 		Flint: Well looky here. Someone brought a really fancy shooter to the party. Now let's see what you've got. See the @yellow{line of bottles} on the wall. All I want you to do is shoot of 33 bottles off that wall, and I'll know whether or not you've got the street knowledge of the Smoking Gun. Get it right and you're in "Ding! Ding!". Get it wrong, and I'll have these fellas over here test out their pistols to "make sure they're working".
->>>>>>> origin/dev:assets/scripts/aspire/Items/Flint.txt
 		#33 in base 4 is 15 in base 10
 		
 		The group began smiling at Kipp.

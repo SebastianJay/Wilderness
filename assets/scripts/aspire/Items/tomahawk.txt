@@ -1,12 +1,7 @@
 $if_inventory_tomahawk_eq_1{ 
 
 	inspect{
-<<<<<<< HEAD:North Town Level Scripting - Kipp Playthrough/Items/tomahawk.txt
-		Kipp: Looks sharp enough to make a dent in a tree like our machete back home.
-		Hopefully I won't have to test if it works with bodies, too.
-=======
 		Kipp: Looks sharp enough to make a dent in a tree like our machete back home. Hopefully I won't have to test if it works with bodies, too.
->>>>>>> origin/dev:assets/scripts/aspire/Items/tomahawk.txt
 	}
 	
 	use{

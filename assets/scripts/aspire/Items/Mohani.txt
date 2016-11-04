@@ -5,17 +5,10 @@ talk to{
 		#Persist in asking her until she gets annoyed and throw the bullets at you. Base number will be found. (Light/Brother Decision)
 		$if_ntoMohaniAnnoyed_eq_3{
 			Mohani: FINE! NOW STOP ACTING LIKE AN IDIOT AND LEAVE ME ALONE!
-<<<<<<< HEAD:North Town Level Scripting - Kipp Playthrough/Items/Mohani.txt
-			
-			Mohani then took something out of her purse and threw it in a rage. The object hit Kipp directly in the face.  @bold{*Mohani's Bullets Added to Inventory*}
-			Kipp walked outside to read the side: @yellow{"Mohani Bullet"}
-		
-=======
 
 			Mohani then took something out of her purse and threw it in a rage. The object hit Kipp directly in the face.  @bold{*Mohani's Bullets Added to Inventory*}
             Kipp walked outside to read the side: @yellow{"Mohani Bullet"}
 
->>>>>>> origin/dev:assets/scripts/aspire/Items/Mohani.txt
 			$set_inventory_MohaniBullet_1
 			$inc_lightPts_1
 			$inc_brotherPts_1
@@ -25,16 +18,6 @@ talk to{
 		}
 		$else{
 			Kipp thought, "Well I could always be an annoying brother".
-<<<<<<< HEAD:North Town Level Scripting - Kipp Playthrough/Items/Mohani.txt
-			
-			Kipp: Hey are there bullets in your purse that I can borrow?
-			Mohani: There are a ton of bullets in this shop. Get lost.
-			
-			Maybe Kipp should try again later.
-			$inc_ntoMohaniAnnoyed_1
-		}
-	
-=======
 
 			Kipp: Hey are there bullets in your purse that I can borrow?
 			Mohani: There are a ton of bullets in this shop. Get lost.
@@ -43,51 +26,18 @@ talk to{
 			$inc_ntoMohaniAnnoyed_1
 		}
 
->>>>>>> origin/dev:assets/scripts/aspire/Items/Mohani.txt
 	|Challenge|
 		$if_inventory_fireAle_eq_0{
 			$if_ntoRuneRaiders_eq_0{
 				#Kipp's first task
 				Mohani: First you must somehow rehone your powers. I suggest something with a burning element.
 				Kipp: I don't think what I summoned before had to do with fire.
-<<<<<<< HEAD:North Town Level Scripting - Kipp Playthrough/Items/Mohani.txt
-				Mohani: Well then it better have something to do with fire fire or you're going nowhere. Talk to me again when you are 
-				prepared to receive the second part of your challenge.
-			}$else
-=======
 				Mohani: Well then it better have something to do with fire fire or you're going nowhere. Talk to me again when you are prepared to receive the second part of your challenge.
 			}$else{
->>>>>>> origin/dev:assets/scripts/aspire/Items/Mohani.txt
 				#Kipp would have lost the fire ale and completed the route.
 				Mohani: Hey, you're cool with us now. Go and do your hero thing.
 				Kipp: Aren't you afraid that this will go bad for you in the end.
 				Mohani: Ah whatever. I just want Rowen out of the picture.
-<<<<<<< HEAD:North Town Level Scripting - Kipp Playthrough/Items/Mohani.txt
-		}$else{
-			Mohani: Hey you're back! Did you get your powers...are you okay?
-			
-			Kipp had a tiny smokestream coming from his mouth. Kipp wiped his mouth.
-			
-			Kipp: @italic{(Confident)} C'mon, I'm ready. @italic{(coughs)}
-			Mohani: Okayyyyyy. So here's what you gotta do. That fire I just casted can wistand against the same level of magic for a certain
-			amount of time. Call it my mystic threshold. Your job is to cast the same level of magic for a certain amount of time to put out the flame. 
-			Don't cast it long enough and the fire will take shape and retaliate, engulfing you into flames. Cast it for too long and the magic will fuse together, 
-			become unstable and...well you can picture what happens next. @yellow{Let me make this easy for you. All you gotta do is hold your spell for} 
-			@bold_yellow{53 seconds.}
-			# 53 seconds in base 6 is 33 in base 10
-			
-			Mohani: If you can pass this test, then you won't die...today. If you fail, well at least you won't parish by my hands. We'll be standing behind this
-			desk just in case you blow yourself up.
-				
-			Just then, the fire grew and took the form of a lion. Kipp looked at the lion and it immediately shifted its head to roar straight into his face.
-			
-			Kipp: @italic{(to himself)} Kipp, we ain't on the farm no more. I hope I can @red{use} this @yellow{fire ale} @red{on} the @yellow{forge}.
-			
-			@bold{It will be in your best interest to save again.}
-		}
-	}
-}
-=======
 			}
 		}$else{
 			Mohani: Hey you're back! Did you get your powers...are you okay?
@@ -109,4 +59,3 @@ talk to{
 		}
 	}
 }
->>>>>>> origin/dev:assets/scripts/aspire/Items/Mohani.txt
