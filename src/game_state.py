@@ -96,19 +96,19 @@ class GameState:
 
         def debugAddHistoryLine(self, line):
             ## DEBUG1 adds a specific langnode
-            #self.areaId = "aspire"
-            #self.roomId = "library"
-            #self.refreshCommandList()
-            #self.addLangNode(self.cmdMap['look around'].nodes[0])
+            self.areaId = "aspire"
+            self.roomId = "library"
+            self.refreshCommandList()
+            self.addLangNode(self.cmdMap['look around'].nodes[0])
             ## end DEBUG1
             ## DEBUG2
-            if len(self.historyLines) == 0:
-                self.historyLines.append('')
-            self.historyLines[0] += line + ' '
+            #if len(self.historyLines) == 0:
+            #    self.historyLines.append('')
+            #self.historyLines[0] += line + ' '
             ## end DEBUG2
 
         def addLangNode(self, node):
-            self.historyBuffer += "\n\n"  # add leading newline to separate new text from old
+            self.historyBuffer += "\n"  # add leading newline to separate new text from old
             prevBufferLen = len(self.historyBuffer) # offset for formatting indices
             self.historyBuffer += node.text # append the LangNode text
             # append the LangNode formatting

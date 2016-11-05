@@ -4,38 +4,88 @@ typing. When a command is entered it is passed to the interpreter which
 then modifies GameState.
 """
 from window import Window
-from game_state import GameState
+from game_state import GameState, GameMode
 from global_vars import Globals
+from lang_parser import BodyNode
+from lang_interpreter import Interpreter
 
 class InputWindow(Window):
 
     def __init__(self, width, height):
         super().__init__(width, height)
+        self.interpreter = Interpreter()
+        self.choiceInd = 0
 
     def update(self, timestep, keypresses):
         gs = GameState()
-        for key in keypresses:
-            # key is printable -> add it to buffer
-            if len(key) == 1:
-                gs.appendCmdBuffer(key)
-            # key is backspace -> pop one char from buffer
-            elif key == 'BackSpace':
-                gs.popCmdBuffer()
-            # key is return -> commit command
-            elif key == 'Return':
-                # TODO replace with actual functionality
-                gs.debugAddHistoryLine(gs.cmdBuffer)
-                gs.clearCmdBuffer()
+        if gs.gameMode == GameMode.inAreaChoice:
+            for key in keypresses:
+                if key == 'Up':
+                    self.choiceInd = (self.choiceInd - 1) % len(gs.choiceList)
+                elif key == 'Down':
+                    self.choiceInd = (self.choiceInd + 1) % len(gs.choiceList)
+                elif key == 'Return':
+                    self.interpreter.resume(self.choiceInd)
+        else:
+            for key in keypresses:
+                # key is printable -> add it to buffer
+                if len(key) == 1:
+                    gs.appendCmdBuffer(key)
+                # key is backspace -> pop one char from buffer
+                elif key == 'BackSpace':
+                    gs.popCmdBuffer()
+                # key is return -> commit command
+                elif key == 'Return':
+                    if gs.gameMode == GameMode.inAreaInput:
+                        self.interpreter.resume(gs.cmdBuffer)
+                    else:   # TODO if inAreaCommand
+                        cmdString = gs.cmdBuffer.strip()
+                        prefixTree = gs.cmdMap
+                        while cmdString:
+                            val = None
+                            for prefix in prefixTree:
+                                if cmdString[:len(prefix)] == prefix:
+                                    val = prefixTree[prefix]
+                                    if isinstance(val, BodyNode):
+                                        self.interpreter.executeAction(val)
+                                        val = None  # make outer loop break out
+                                        break
+                                    else:
+                                        prefixTree = val
+                                        cmdString = cmdString[len(prefix):].strip()
+                                        break
+                            if val is None:
+                                break
+
+                    #gs.debugAddHistoryLine(gs.cmdBuffer)
+                    gs.clearCmdBuffer()
 
     def draw(self):
-        midY = self.height // 2
-        startX = 3
         # clean pixels from last frame
-        for i in range(3 + 32):
-            self.pixels[midY][startX + i] = ' '
-        # add current command input
-        cmdBuffer = GameState().cmdBuffer
-        fullLine = '>> ' + cmdBuffer + ('_' if len(cmdBuffer) < Globals.CmdMaxLength else '')
-        for i, c in enumerate(fullLine):
-            self.pixels[midY][startX + i] = c
+        for i in range(self.height):
+            for j in range(self.width):
+                self.pixels[i][j] = ' '
+
+        gs = GameState()
+        if gs.gameMode == GameMode.inAreaChoice:
+            # display choices
+            rStart = 0
+            cStart = 3
+            cursorOffset = 3
+            r = 0
+            for choice in gs.choiceList:
+                for i, c in enumerate(choice):
+                    self.pixels[rStart + r][cStart + cursorOffset + i] = c
+                r += 1
+            self.pixels[rStart + self.choiceInd][cStart] = '>'
+            self.pixels[rStart + self.choiceInd][cStart+1] = '>'
+        else:
+            midY = self.height // 2
+            cStart = 3
+            # add current command input
+            cmdBuffer = gs.cmdBuffer
+            fullLine = '>> ' + cmdBuffer + ('_' if len(cmdBuffer) < Globals.CmdMaxLength else '')
+            for i, c in enumerate(fullLine):
+                self.pixels[midY][cStart + i] = c
+
         return self.pixels

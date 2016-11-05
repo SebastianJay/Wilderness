@@ -38,6 +38,13 @@ class GameDriver:
 def bootstrap():
     """Perform all processes needed to start up the game"""
     AssetLoader().loadAssets()  # TODO do in separate thread
+
+    # TODO move out of bootstrap
+    from game_state import GameState
+    GameState().areaId = 'aspire'
+    GameState().roomId = 'townCenter'
+    GameState().refreshCommandList()
+
     GameDriver().mainloop()
 
 if __name__ == '__main__':

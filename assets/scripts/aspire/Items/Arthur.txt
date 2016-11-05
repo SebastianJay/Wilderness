@@ -20,12 +20,12 @@ talk to{
 		Arthur: There's a book on the numbers on the @yellow{bookshelf}.
 		Kipp: Thanks little guy.
 
-		Arthur then stood up straight and salutded with a serious face. Kipp playfully saluted back to Arthur.
+		Arthur then stood up straight and saluted with a serious face. Kipp playfully saluted back to Arthur.
 	}
 }
 
 pick up{
-	$if_fatigue_eq_0{
+	$if_ntoFatigue_eq_0{
 		Kipp comforted Arthur by picking him up and swinging him around. Arthur began laughing again. Now all of the kids are running to their parents asking to be picked up and swung around. The general mood of the room lightened up.
 
 		$inc_lightPts_1

@@ -24,11 +24,6 @@ class Display:
     def draw(self):
         pixels = self.windowManager.draw()
         bufferlst = []
-
-        # formatting = self.windowManager._formatting
-        # _formatting: [(string tag, (int start_index, int end_index)), (... )]
-        # bold, italics, underline, and text color
-
         for sublst in pixels:
             substr = ''.join(sublst)
             bufferlst.append(substr)
@@ -39,8 +34,12 @@ class Display:
 
         start_index = 0
         for subformat in self.windowManager._formatting:   # subformat is one tuple: (string tag, (int start_index, int end_index))
-            plain_text = bufferstr[start_index:subformat[1][0]]     # all the text between the last formatter and the start of this formatter
-            formatted_text = bufferstr[subformat[1][0]:(subformat[1][1]+1)]   # all the text contained within this formatter
+            # account for additonal newlines when searching the bufferstr
+            adjusted_format_start = subformat[1][0] + (subformat[1][0] // self.numCols)
+            adjusted_format_end = subformat[1][1] + (subformat[1][1] // self.numCols)
+
+            plain_text = bufferstr[start_index : adjusted_format_start]     # all the text between the last formatter and the start of this formatter
+            formatted_text = bufferstr[adjusted_format_start : adjusted_format_end+1]   # all the text contained within this formatter
 
             formatter = subformat[0]
             is_bold = 0
@@ -49,20 +48,19 @@ class Display:
             formats = formatter.split('_')
             color = "white"
             font_style = (Globals.FontName, Globals.FontSize)
-            for format in formats:
-
-                if format == "bold":
+            for format_tag in formats:
+                if format_tag == "bold":
                     font_style = (Globals.FontName, Globals.FontSize, "bold")
-                elif format == "italic":
+                elif format_tag == "italic":
                     font_style = (Globals.FontName, Globals.FontSize, "italic")
-                elif format == "underline":
+                elif format_tag == "underline":
                     font_style = (Globals.FontName, Globals.FontSize, "underline")
                 else:
-                    color = format
+                    color = format_tag
                 self.text.tag_config(formatter, foreground=color, font=font_style) # bold=is_bold, italic=is_italicized, underline=is_underlined
             self.text.insert(tk.END, plain_text)
             self.text.insert(tk.END, formatted_text, formatter)
-            start_index = subformat[1][1] + 1   # start next search after this formatter
+            start_index = adjusted_format_end + 1   # start next search after this formatter
 
         if start_index < len(bufferstr):
             self.text.insert(tk.END, bufferstr[start_index:])

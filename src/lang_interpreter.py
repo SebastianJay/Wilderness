@@ -4,6 +4,7 @@ Contains routines for executing the game's custom language.
 
 from global_vars import Globals
 from game_state import GameState, GameMode
+from lang_parser import BodyNode, LangNode, FuncNode
 from random import randint
 
 class Interpreter:
@@ -18,7 +19,7 @@ class Interpreter:
             node = bodyNode.nodes[nodeInd]  # grab that node
             if isinstance(node, FuncNode):
                 if node.title in ['if', 'elif']:
-                    cond = evaluateCondition(node.args)
+                    cond = self.evaluateCondition(node.args)
                     if cond:
                         # calculate where body should pick up
                         nodeInd += 1
@@ -28,18 +29,18 @@ class Interpreter:
                             nodeInd += 1
                         # add to call stack and return to manager
                         self.callStack[-1][1] = nodeInd
-                        self.callStack.append((node.inner, 0))
+                        self.callStack.append([node.inner, 0])
                         return True
                 elif node.title == 'else':
                     self.callStack[-1][1] = nodeInd + 1
-                    self.callStack.append((node.inner, 0))
+                    self.callStack.append([node.inner, 0])
                     return True
                 elif node.title == 'choice':
                     if val is not None:
                         gs.gameMode = GameMode.inAreaCommand
                         pick = int(val)
                         self.callStack[-1][1] = nodeInd + 1
-                        self.callStack.append((node.inner[pick], 0))
+                        self.callStack.append([node.inner[pick][1], 0])
                         return True
                     else:
                         gs.gameMode = GameMode.inAreaChoice
@@ -52,7 +53,7 @@ class Interpreter:
                         return False
                 elif node.title == 'random':
                     self.callStack[-1][1] = nodeInd + 1
-                    self.callStack.append((node.inner[pick], 0))
+                    self.callStack.append([node.inner[pick], 0])
                     return True
                 elif node.title == 'set':
                     if len(node.args) < 1 or len(node.args) > 2:
@@ -73,7 +74,7 @@ class Interpreter:
                     if len(node.args) == 1:
                         gs.variables[node.args[0]] = str(int(gs.variables[node.args[0]]) + 1)
                     elif len(node.args) == 2:
-                        gs.variables[node.args[0]] = str(int(gs.variables[node.args[0]]) + int(gs.variables[node.args[1]]))
+                        gs.variables[node.args[0]] = str(int(gs.variables[node.args[0]]) + int(node.args[1]))
                 elif node.title in ['dec', 'sub']:
                     if len(node.args) < 1 or len(node.args) > 2:
                         raise Exception('unexpected number of args in dec')
@@ -81,7 +82,7 @@ class Interpreter:
                     if len(node.args) == 1:
                         gs.variables[node.args[0]] = str(int(gs.variables[node.args[0]]) - 1)
                     elif len(node.args) == 2:
-                        gs.variables[node.args[0]] = str(int(gs.variables[node.args[0]]) - int(gs.variables[node.args[1]]))
+                        gs.variables[node.args[0]] = str(int(gs.variables[node.args[0]]) - int(node.args[1]))
                 elif node.title == 'input':
                     if val is not None:
                         gs.gameMode = GameMode.inAreaCommand

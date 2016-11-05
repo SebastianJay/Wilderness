@@ -220,7 +220,7 @@ class Parser:
                 # function description ends on newline
                 newlineInd = scriptStr.find('\n', funcInd)
                 if newlineInd == -1:
-                    newlineInd = len(scriptStr) - 1
+                    newlineInd = len(scriptStr)
                 funcNameEndInd = newlineInd
                 remainingInd = newlineInd + 1
             # parse function title and args
