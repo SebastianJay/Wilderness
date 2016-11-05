@@ -52,42 +52,36 @@ class HistoryWindow(Window):
         input_list = input_lines.split("\n")
         input_formatting = GameState().historyFormatting
 
-        inputs = []
-        #takes in list of strings and puts them into list of tokens
-        if input_list:
-            for a in input_list:
-                for b in a.split():
-                    #if b != "":
-                    inputs.append(b)
-                    #else:
-                    #    inputs.append("\n")
-                inputs.append("\n")
-            inputs.pop()    # correct for extra "\n" at end
+        if len(input_list) == 0:
+            return self.pixels
 
-        output_list = [[]]  # list of rows, where each row is a list of tokens
+        output_list = []    # list of row text - each row contains a string
         row_indices = []    # list of (start, end) indices of historyBuffer corresponding to row
-        current_count = 0   # number of characters on line so far
         total_count = 0     # number of characters from historyBuffer (include whitespace) written
         start_row_count = 0 # number of characters written by start of current line
 
-        def incLine():
-            nonlocal output_list, current_count, start_row_count, row_indices
-            current_count = 0
-            output_list.append([])
-            row_indices.append((start_row_count, total_count-1))
-            start_row_count = total_count
-
         # go through word list and perform wrapping as necessary
-        for b in inputs:
-            if b == "\n":
-                incLine()
+        # TODO refactor
+        i = 0
+        line_remaining = input_list[i]
+        while i < len(input_list):
+            if len(line_remaining) <= self.width:
+                output_list.append(line_remaining)
+                total_count += len(line_remaining) + 1
+                i += 1
+                if i >= len(input_list):
+                    break
+                line_remaining = input_list[i]
+                row_indices.append((start_row_count, total_count-1))
+                start_row_count = total_count
             else:
-                if current_count + len(b) > self.width:
-                    incLine()
-                current_count += len(b) + 1
-                total_count += len(b) + 1
-                output_list[-1].append(b)
-        row_indices.append((start_row_count, total_count))
+                space_ind = line_remaining.rfind(' ', 0, self.width)
+                output_list.append(line_remaining[:space_ind])
+                total_count += len(line_remaining[:space_ind]) + 1
+                line_remaining = line_remaining[space_ind+1:]
+                row_indices.append((start_row_count, total_count-1))
+                start_row_count = total_count
+        row_indices.append((start_row_count, total_count-1))
 
         # take most recent lines that fit into window
         self.outputLength = len(output_list)
@@ -103,10 +97,9 @@ class HistoryWindow(Window):
         r = 0
         charsWritten = 0
         stopWriting = False     # flag that indicates if we hit charLimit
-        for line_list in output_list:
+        for line in output_list:
             c = 0
             # fill in pixels with word content
-            line = " ".join(line_list)
             for ch in line:
                 self.pixels[r][c] = ch
                 c += 1

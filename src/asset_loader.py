@@ -87,9 +87,6 @@ class AssetLoader:
 
         def reverseRoomLookup(self, name, area):
             # area is an ID, name is the readable room name
-            print(self.reverseRoom)
-            print(name)
-            print(area)
             if area in self.reverseRoom:
                 if name in self.reverseRoom[area]:
                     return self.reverseRoom[area][name]
