@@ -29,12 +29,15 @@ class WindowManager:
         #this is the full 2D-array of chars that contains all the content from all the windows.
         #this is what will display on the screen
         self._screen = [[' ' for x in range(self._screenWidth)] for y in range(self._screenHeight)]
+        # list of (style, (start index, end index)) tuples corresponding to the style
+        self._formatting = []
 
         # create instances of all the Windows
         self.initWindows(self._screenHeight, self._screenWidth)
 
     def addWindow(self, windowcls, startr, startc, numrows, numcols):
         """ Creates a Window of a certain width and height at a certain location """
+        # adjust the row, col, width, and height values for the border
         self._windowList.append(windowcls(numcols - 2, numrows - 2))
         self._windowPos.append((startr + 1, startc + 1))
 
@@ -63,6 +66,7 @@ class WindowManager:
 
     def draw(self):
         """ stitches together multiple Windows from active group into the screen """
+        formatting = []
         for groupind in self._activeWindowGroups:
             for winind in self._windowGroups[groupind]:
                 pixels = self._windowList[winind].draw()
@@ -84,6 +88,30 @@ class WindowManager:
                 self._screen[startr + height][startc-1] = 'o'
                 self._screen[startr + height][startc + width] = 'o'
                 self._screen[startr-1][startc + width] = 'o'
+                # add to formatting
+                for formatter in self._windowList[winind].formatting:
+                    style, (start_index, end_index) = formatter
+                    r1 = start_index // width
+                    c1 = start_index % width
+                    r2 = end_index // width
+                    c2 = end_index % width
+                    print(style, start_index, end_index, r1, c1, r2, c2, startr, startc)
+                    # if the start and end rows are different, add multiple formatter entries
+                    # that way the rows are broken up
+                    c = c1
+                    for r in range(r1, r2):
+                        f1 = (r + startr) * self._screenWidth + (c + startc)
+                        f2 = (r + startr) * self._screenWidth + (width - 1 + startc)
+                        formatting.append((style, (f1, f2)))
+                        c = 0
+                    f1 = (r2 + startr) * self._screenWidth + (c + startc)
+                    f2 = (r2 + startr) * self._screenWidth + (c2 + startc)
+                    formatting.append((style, (f1, f2)))
+        self._formatting = formatting
+        print(self._screen[309//self._screenWidth][309%self._screenWidth:309%self._screenWidth+8])
+        print(self._screen[442//self._screenWidth][442%self._screenWidth:442%self._screenWidth+12])
+        print(self._screen[757//self._screenWidth][757%self._screenWidth:757%self._screenWidth+6])
+        print(self._formatting)
         return self._screen
 
     def update(self, timestep, keypresses):

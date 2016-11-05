@@ -29,12 +29,15 @@ class GameState:
         class GameSubState:
             """ state variables that each protagonist will maintain separately """
             def __init__(self):
-                self.areaId = ""            # area ID, where the player is located
+                self.areaId = ""            # area ID, where player is located
                 self.roomId = ""            # room ID, where player is located
                 self.mapLocation = [0,0]    # coordinates of player location on world map
                 self.inventory = {}         # inventory, represented as {string itemId: int numberOfItem}
                 self.historyLines = []      # lines of strings for the history (feedback) window
                                             # TODO change to list of LangNodes
+                self.historyBuffer = ''     # string containing contents for  history window
+                self.historyFormatting = {} # dict containing formatting info for historyBuffer
+
             def __str__(self):
                 return self.dumps()
             def dumps():
@@ -87,13 +90,48 @@ class GameState:
             self.historyLines.append(line)
 
         def debugAddHistoryLine(self, line):
+            ## DEBUG1 adds a specific langnode
+            #self.areaId = "aspire"
+            #self.roomId = "library"
+            #self.refreshCommandList()
+            #self.addLangNode(self.cmdMap['look around'].nodes[0])
+            ## end DEBUG1
+            ## DEBUG2
             if len(self.historyLines) == 0:
                 self.historyLines.append('')
             self.historyLines[0] += line + ' '
+            ## end DEBUG2
 
+        def addLangNode(self, node):
+            self.historyBuffer += "\n"  # add leading newline to separate new text from old
+            prevBufferLen = len(self.historyBuffer) # offset for formatting indices
+            self.historyBuffer += node.text # append the LangNode text
+            # append the LangNode formatting
+            for key in node.formatting:
+                val = node.formatting[key]
+                if key not in self.historyFormatting:
+                    self.historyFormatting[key] = []
+                for indices in val:
+                    self.historyFormatting[key].append((indices[0]+prevBufferLen, indices[1]+prevBufferLen))
+
+        #TODO remove
         @property
         def historyLines(self):
             return self.subStates[self.activeProtagonistInd].historyLines
+
+        @property
+        def historyBuffer(self):
+            return self.subStates[self.activeProtagonistInd].historyBuffer
+        @historyBuffer.setter
+        def historyBuffer(self, val):
+            self.subStates[self.activeProtagonistInd].historyBuffer = val
+
+        @property
+        def historyFormatting(self):
+            return self.subStates[self.activeProtagonistInd].historyFormatting
+        @historyFormatting.setter
+        def historyFormatting(self, val):
+            self.subStates[self.activeProtagonistInd].historyFormatting = val
 
         @property
         def inventory(self):
@@ -251,4 +289,5 @@ if __name__ == '__main__':
     g.mapLocation = [1, 0]
     g.refreshCommandList()
     print(g.cmdMap)
+    print(g.cmdMap['look around'])
     print(g)
