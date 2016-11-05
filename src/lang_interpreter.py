@@ -56,13 +56,16 @@ class Interpreter:
                     self.callStack.append([node.inner[pick], 0])
                     return True
                 elif node.title == 'set':
-                    if len(node.args) < 1 or len(node.args) > 2:
+                    if len(node.args) < 1 or len(node.args) > 3:
                         raise Exception('unexpected number of args in set')
-                    gs.touchVar(node.args[0])
-                    if len(node.args) == 1:
-                        gs.variables[node.args[0]] = '1'
-                    elif len(node.args) == 2:
-                        gs.variables[node.args[0]] = node.args[1]
+                    if node.args[0] == 'inventory':
+                        gs.inventory[node.args[1]] = node.args[2]   #TODO
+                    else:
+                        gs.touchVar(node.args[0])
+                        if len(node.args) == 1:
+                            gs.variables[node.args[0]] = '1'
+                        elif len(node.args) == 2:
+                            gs.variables[node.args[0]] = node.args[1]
                 elif node.title == 'init':
                     if len(node.args) < 1:
                         raise Exception('unexpected number of args in init')
@@ -141,27 +144,36 @@ class Interpreter:
         if len(args) == 1:
             return gs.variables[varname] != '0'
         else:
+            inventoryFlag = False
+            if args[0] == 'inventory':
+                inventoryFlag = True
+                args = args[1:]
             if len(args) != 3:
                 raise Exception('unexpected num of args')
             comparator = args[1]
             compare = args[2]
+            mapToCheck = gs.variables
+            if inventoryFlag:
+                mapToCheck = gs.inventory
             if comparator in ['eq', '=', '==']:
-                return gs.variables[varname] == compare
+                return mapToCheck[varname] == compare
             elif comparator in ['gt', '>']:
-                return gs.variables[varname] > int(compare)
+                return mapToCheck[varname] > int(compare)
             elif comparator in ['lt', '<']:
-                return gs.variables[varname] < int(compare)
+                return mapToCheck[varname] < int(compare)
             else:
                 raise Exception('unknown comparator ' + str(comparator))
 
     def resume(self, val):
         """ completes a choice or input function with a value """
         self.drainCallStack(val)
+        GameState().refreshCommandList()
 
     def executeAction(self, body):
         """ wrapper around stack manipulation to execute a BodyNode """
         self.callStack.append([body, 0])
         self.drainCallStack()
+        GameState().refreshCommandList()
 
 if __name__ == '__main__':
     i = Interpreter()

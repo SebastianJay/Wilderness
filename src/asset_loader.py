@@ -16,6 +16,8 @@ class AssetLoader:
             self.assets = {}
             # maps readable item name to item ID
             self.reverseItem = {}
+            # maps readable room name to room ID
+            self.reverseRoom = {}
 
         def loadAssets(self, path_to_folder=Globals.AssetsRootPath):
             # This dictionary will hold the contents of asset files in the format:
@@ -48,10 +50,18 @@ class AssetLoader:
 
             self.assets = assets
 
-            # construct the reverse item mapping
+            # construct reverse item mapping
             itemsConfig = self.getConfig(Globals.ItemsConfigPath)
             for item in itemsConfig:
                 self.reverseItem[itemsConfig[item]['name']] = item
+
+            # construct reverse room mapping
+            areasConfig = self.getConfig(Globals.AreasConfigPath)
+            for area in areasConfig:
+                self.reverseRoom[area] = {}
+                roomsConfig = self.getConfig(areasConfig[area]['roomsConfig'])
+                for room in roomsConfig:
+                    self.reverseRoom[area][roomsConfig[room]['name']] = room
 
         def getAsset(self, dirname, name):
             norm_name = os.path.normcase(os.path.normpath(name))
@@ -73,6 +83,16 @@ class AssetLoader:
         def reverseItemLookup(self, name):
             if name in self.reverseItem:
                 return self.reverseItem[name]
+            return ''
+
+        def reverseRoomLookup(self, name, area):
+            # area is an ID, name is the readable room name
+            print(self.reverseRoom)
+            print(name)
+            print(area)
+            if area in self.reverseRoom:
+                if name in self.reverseRoom[area]:
+                    return self.reverseRoom[area][name]
             return ''
 
     instance = None

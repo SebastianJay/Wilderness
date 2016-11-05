@@ -41,7 +41,7 @@ go to{
 
 	}$else{
 		#Text when Kipp returns to this room
-		Kipp: So this is where they hold all the knowledge gathered from far and wide. I wonder where I should start. Maybe if I @red(look around)... I could also @red{go to} the @blue{bank} or @blue{town center} from here.
+		Kipp: So this is where they hold all the knowledge gathered from far and wide. I wonder where I should start. Maybe if I @red{look around}... I could also @red{go to} the @blue{bank} or @blue{town center} from here.
 	}
 
 }

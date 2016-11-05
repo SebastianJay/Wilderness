@@ -4,42 +4,42 @@ go to{
 			$set_ntoSaloonIntro_1 #Intro won't repeat
 			#Intro to Smoking Gun when Kipp visits for the first time.
 			Kipp pushed on the doors of the saloon and took a good look of everyone in the room. A second later, Kipp heard a gunshot and immediately ducked onto the floor. The bullet hit the doors behind Kipp and would have went through Kipp's head if he wasn't lucky. Kipp stood back up to see a group of gang members laughing in the corner.
-			
+
 			Kipp: I guess I'm looking for them.
-			
+
 			Kipp cautiously approached the table just in case they decided to fire another bullet.
-			
+
 			Leader: What do you want half-pint?
 			Kipp: I'm Kipp. New to Aspire. Mind helping me out with the details?
 			Leader: Right. While I'm at it, why don't I also give you the keys to this place and pour you a nice cold one. Take a hike, kid.
 			Kipp: I just want to know who's running this place.
 			Flint: That would be me, Flint, leader of the Smoking Gun.
 			Kipp: Okay, Flint, now I've got one more simple question: How do I join your crew?
-			
+
 			The whole table started laughing at Kipp's request.
-			
+
 			Flint: Kay kid. That was a good one. Now seriously...
-			
+
 			Flint raised his gun in Kipp's face.
-			
+
 			Flint: ...leave before I have to actually clean blood off of this floor.
-			
+
 			Kipp was startled, but clenched his fist and openend his mouth.
-			
+
 			Kipp: Really. You gonna actually fire that thing. Go ahead, I'm not going anywhere.
 			Flint: Wow, he didn't wuss out.
-			
+
 			Flint holstered his gun and stood up.
-			
+
 			Flint: Alright kid, we'll give you a shot, but you're going to have to keep up with the gang's @yellow{base} standards. You've gotta be just as rebellious and commited to the group as every member here in order to join. I guess we should have an initiation.
-			
+
 			Flint gave the group a signal and everyone held their guns up. Kipp shielded his face. The group then turned to shoot off a line of bottles off the wall. The bartender didn't even flinch. This must be a usual thing by now.
-			
+
 			Flint: @red{Talk to} @green{me} again when you're ready to start your hazing. Make sure you have a @yellow{gun} with you.
 			Kipp: Sure, where would I be able to get one?
 			Flint: Not our problem.
 			Kipp: Right.     @bold_orange{SALOON ROUTE STARTED!}
-			
+
 		}$else{
 			#Text when Kipp returns to this room
 			Kipp: This place reeks of alcohol, smoke, and...ugh, don't tell they do @bold{that} in here. I thought they had a separate establishment for that, with cleaner, or more decent rooms. I'm not sure I would really want to @red{look around} here. I'd rather leave and @red{go to} the @blue{gunsmith shop} or @blue{town center} than stay another second here.
@@ -47,10 +47,10 @@ go to{
 	}$else{
 		#Kipp hasn't visited the libary yet to start the quest.
 		Random Gang Member: Hey, you have no business to be here! Get out before we have to use force!
-		
+
 	}
 }
 
 look around{
-	Kipp: I honestly don't believe that there is anyone nice enough to have a word with. I guess @green{Flint} is my only op... wait who is that slumped in the corner. Looks like a @green{former Smoking Gunner}. Oh right, and then there's that @green{bartender}. Well, more people to @red{talk to}. There also a @yellow{line of bottles} that I guess I'll @red{use} my, I'm guessing, @yellow{revolver} @red(on). Finally, I think there's a @yellow{vending machine} in the corner. I don't know what it's for, but it looks like there is a slot just wide enought to fit the @yellow{random token} Arthur game me. Maybe taking a closer look at it first is a better idea.
+	Kipp: I honestly don't believe that there is anyone nice enough to have a word with. I guess @green{Flint} is my only op... wait who is that slumped in the corner. Looks like a @green{former Smoking Gunner}. Oh right, and then there's that @green{bartender}. Well, more people to @red{talk to}. There also a @yellow{line of bottles} that I guess I'll @red{use} my, I'm guessing, @yellow{revolver} @red{on}. Finally, I think there's a @yellow{vending machine} in the corner. I don't know what it's for, but it looks like there is a slot just wide enought to fit the @yellow{random token} Arthur game me. Maybe taking a closer look at it first is a better idea.
 }

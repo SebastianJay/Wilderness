@@ -5,6 +5,7 @@ then modifies GameState.
 """
 from window import Window
 from game_state import GameState, GameMode
+from asset_loader import AssetLoader
 from global_vars import Globals
 from lang_parser import BodyNode
 from lang_interpreter import Interpreter
@@ -47,6 +48,10 @@ class InputWindow(Window):
                                 if cmdString[:len(prefix)] == prefix:
                                     val = prefixTree[prefix]
                                     if isinstance(val, BodyNode):
+                                        # special logic for go to - change room ID
+                                        if gs.cmdBuffer.strip()[0:5] == 'go to':
+                                            roomId = AssetLoader().reverseRoomLookup(gs.cmdBuffer.strip()[5:].strip(), gs.areaId)
+                                            gs.roomId = roomId or gs.roomId
                                         self.interpreter.executeAction(val)
                                         val = None  # make outer loop break out
                                         break
