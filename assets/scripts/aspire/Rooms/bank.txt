@@ -78,8 +78,8 @@ go to{
 
 			Akecheta nodded and Kipp began hearing two sets of heavy footsteps grown near. They stopped behind Kipp's back. Kipp turns around to see two behemoths.
 
-			Chikasi member #1: I'm Kala
-			Chikasi member #2: I'm Ma-Zoo
+			Chikasi member No.1: I'm Kala
+			Chikasi member No.2: I'm Ma-Zoo
 			Kipp: Oh, right. How can I forget.
 
 			Kipp turned back around with a blank face and replied.
@@ -103,5 +103,5 @@ go to{
 }
 
 look around{
-	Kipp: This place is pretty small, or maybe just too crowded with the whole Chikasi Clan in here. I think it's okay to @red{talk to} @green{Akecheta}. There's a nice @yellow{painting} in the corner and...what is that @yellow{totem pole} by the vault for? Maybe if I $red{inspect} them for more detail.
+	Kipp: This place is pretty small, or maybe just too crowded with the whole Chikasi Clan in here. I think it's okay to @red{talk to} @green{Akecheta}. There's a nice @yellow{painting} in the corner and...what is that @yellow{totem pole} by the vault for? Maybe if I @red{inspect} them for more detail.
 }

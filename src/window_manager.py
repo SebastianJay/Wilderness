@@ -8,6 +8,7 @@ from input_window import InputWindow
 from map_window import MapWindow
 from history_window import HistoryWindow
 from title_window import TitleWindow
+from palette_window import PaletteWindow
 
 # TODO inherit from Window
 class WindowManager:
@@ -48,8 +49,8 @@ class WindowManager:
         # add select file window
         self.addWindow(HistoryWindow, 0, 0, 25, 95)
         self.addWindow(InputWindow, 24, 0, 11, 95)
-        # add palette window
-        self.addWindow(LoadingWindow, 0, 94, 35, 25)
+        self.addWindow(PaletteWindow, 0, 94, 35, 25)
+        #self.addWindow(LoadingWindow, 0, 94, 35, 25)
         self.addWindow(MapWindow, 0, 0, 35, 120)
         # add in-area map window
         # add inventory window
