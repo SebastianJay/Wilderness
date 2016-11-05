@@ -11,7 +11,7 @@ bank:
         townCenter: SE
         saloon: E
     objects:
-        - akechata
+        - akecheta
         - totemPole
         - painting
         - fireAle

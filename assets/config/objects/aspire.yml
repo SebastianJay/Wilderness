@@ -1,7 +1,7 @@
 ## Aspire objects
-akechata:
-    name: Akechata
-    script: aspire/Items/Akechata.txt
+akecheta:
+    name: Akecheta
+    script: aspire/Items/Akecheta.txt
 totemPole:
     name: totem pole
     script: aspire/Items/totem pole.txt
