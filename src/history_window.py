@@ -40,10 +40,16 @@ class HistoryWindow(Window):
                 elif key == "Next":
                     if self.startingLine + self.height < self.outputLength:
                         self.startingLine += 1
+        for key in keypresses:
+            if key == " ":
+                self.charLimit = len(GameState().historyBuffer)
+                self.allWritten = True
+                self.timestep = 0.0
 
     def draw(self):
         #input_list = GameState().historyLines
-        input_list = GameState().historyBuffer.split("\n")
+        input_lines = GameState().historyBuffer
+        input_list = input_lines.split("\n")
         input_formatting = GameState().historyFormatting
 
         inputs = []
@@ -66,19 +72,20 @@ class HistoryWindow(Window):
             nonlocal output_list, current_count, start_row_count, row_indices
             current_count = 0
             output_list.append([])
-            row_indices.append((start_row_count, total_count))
+            row_indices.append((start_row_count, total_count-1))
             start_row_count = total_count
 
         # go through word list and perform wrapping as necessary
         for b in inputs:
             if b == "\n":
+                total_count += 1
                 incLine()
             else:
                 if current_count + len(b) > self.width:
                     incLine()
                 current_count += len(b) + 1
+                total_count += len(b) + 1
                 output_list[-1].append(b)
-            total_count += len(b) + 1
         row_indices.append((start_row_count, total_count))
 
         # take most recent lines that fit into window
@@ -152,10 +159,6 @@ class HistoryWindow(Window):
                         break
 
         self.formatting = output_formatting
-        #print(self.formatting)
-        #print(self.pixels[161//self.width][161%self.width:161%self.width+8])
-        #print(self.pixels[267//self.width][267%self.width:267%self.width+12])
-        #print(self.pixels[501//self.width][501%self.width:501%self.width+6])
         self.allWritten = not stopWriting
         return self.pixels
 
