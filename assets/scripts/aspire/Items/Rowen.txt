@@ -125,6 +125,9 @@ talk to{
 		Kipp: Now all three of those guys said something about all of this starting out west of this town. I know that there's miles of @green{forest} out there. Maybe it's time to start heading there.
 		
 		@bold_orange{ASPIRE LEVEL COMPLETE!}
+		
+		#Added variable and set to zero if the player visited this town so that we can bring back memories about it in future levels. Black Hills sets the variable to 1.
+		$set_townChoice_0
 	}
 	
 	
