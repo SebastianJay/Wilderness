@@ -56,9 +56,8 @@ class HistoryWindow(Window):
         #takes in list of strings and puts them into list of tokens
         if input_list:
             for a in input_list:
-                for b in a.split(" "):
-                    if b != "":
-                        inputs.append(b)
+                for b in a.split():
+                    inputs.append(b)
                 inputs.append("\n")
             inputs.pop()    # correct for extra "\n" at end
 
