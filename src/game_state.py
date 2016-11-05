@@ -33,8 +33,6 @@ class GameState:
                 self.roomId = ""            # room ID, where player is located
                 self.mapLocation = [0,0]    # coordinates of player location on world map
                 self.inventory = {}         # inventory, represented as {string itemId: int numberOfItem}
-                self.historyLines = []      # lines of strings for the history (feedback) window
-                                            # TODO change to list of LangNodes
                 self.historyBuffer = ''     # string containing contents for  history window
                 self.historyFormatting = {} # dict containing formatting info for historyBuffer
 
@@ -95,9 +93,6 @@ class GameState:
             if varname not in self.inventory:
                 self.inventory[varname] = '0'
 
-        def addHistoryLine(self, line):
-            self.historyLines.append(line)
-
         def debugAddHistoryLine(self, line):
             ## DEBUG1 adds a specific langnode
             self.areaId = "aspire"
@@ -105,11 +100,6 @@ class GameState:
             self.refreshCommandList()
             self.addLangNode(self.cmdMap['look around'].nodes[0])
             ## end DEBUG1
-            ## DEBUG2
-            #if len(self.historyLines) == 0:
-            #    self.historyLines.append('')
-            #self.historyLines[0] += line + ' '
-            ## end DEBUG2
 
         def addLangNode(self, node):
             prevBufferLen = len(self.historyBuffer) # offset for formatting indices
@@ -122,11 +112,6 @@ class GameState:
                 for indices in val:
                     self.historyFormatting[key].append((indices[0]+prevBufferLen, indices[1]+prevBufferLen))
             self.historyBuffer += "\n"  # add trailing newline to separate new text from old
-
-        #TODO remove
-        @property
-        def historyLines(self):
-            return self.subStates[self.activeProtagonistInd].historyLines
 
         @property
         def historyBuffer(self):

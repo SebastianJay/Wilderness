@@ -17,8 +17,14 @@ class HistoryWindow(Window):
         self.allWritten = True  # True if everything has been displayed, false otherwise
         self.outputLength = 0
         self.startingLine = 0
+        self.historyBufferWatch = 0 # keeps track of length of GameState history buffer
+        self.charMax = 0        # total number of characters rendered to screen discounting animation, height limit
 
     def update(self, timestep, keypresses):
+        # unrendered text exists if history buffer is larger than charLimit
+        if len(GameState().historyBuffer) > self.historyBufferWatch:
+            self.historyBufferWatch = len(GameState().historyBuffer)
+            self.allWritten = False
         # Only increment charLimit when there's unrendered text still to be displayed
         # Otherwise, there will be no delay when the next batch of text is sent
         # since charLimit has been incrementing the whole time
@@ -32,6 +38,14 @@ class HistoryWindow(Window):
                 if self.timestep > self.threshold:
                     self.timestep -= self.threshold
                     self.charLimit += 1
+            # pressing Space fast forwards the animation
+            for key in keypresses:
+                if key == " ":
+                    self.charLimit = self.charMax
+                    self.startingLine = self.outputLength - self.height \
+                        if self.outputLength - self.height >= 0 else 0
+                    self.allWritten = True
+                    self.timestep = 0.0
         else: # Only allow scrolling if we're not writing text to the screen
             for key in keypresses:
                 if key == "Prior":
@@ -40,14 +54,11 @@ class HistoryWindow(Window):
                 elif key == "Next":
                     if self.startingLine + self.height < self.outputLength:
                         self.startingLine += 1
-        for key in keypresses:
-            if key == " ":
-                self.charLimit = len(GameState().historyBuffer)
-                self.allWritten = True
-                self.timestep = 0.0
+        #print(self.allWritten, self.startingLine, self.charLimit, self.charMax)
 
     def draw(self):
-        #input_list = GameState().historyLines
+        # TODO move line wrapping logic into update()
+        #   this will keep the draw method short
         input_lines = GameState().historyBuffer
         input_list = input_lines.split("\n")
         input_formatting = GameState().historyFormatting
@@ -85,35 +96,48 @@ class HistoryWindow(Window):
 
         # take most recent lines that fit into window
         self.outputLength = len(output_list)
+        # reset charMax to be sum of all line lengths
+        self.charMax = 0
+        for line in output_list:
+            self.charMax += len(line)
+        # charsWritten is current count of characters rendered to screen
+        charsWritten = 0
         if self.outputLength > self.height:
+            # if in animating mode, choose the starting line based on which line is animating
             if not self.allWritten:
-                if self.startingLine != self.outputLength - self.height:
-                    self.charLimit -= self.width
-                self.startingLine = self.outputLength - self.height
+                current_line = 0
+                char_counter = 0
+                while current_line < len(output_list) and char_counter < self.charLimit:
+                    char_counter += len(output_list[current_line])
+                    current_line += 1
+                self.startingLine = current_line - self.height if current_line - self.height >= 0 else 0
+            # include lines above window in charsWritten count
+            charsWritten = 0
+            for prevRow in output_list[:self.startingLine]:
+                charsWritten += len(prevRow)
+            # find the right window
             output_list = output_list[self.startingLine:self.startingLine + self.height]
             row_indices = row_indices[self.startingLine:self.startingLine + self.height]
 
         # map output_list to self.pixels
         r = 0
-        charsWritten = 0
         stopWriting = False     # flag that indicates if we hit charLimit
         for line in output_list:
             c = 0
             # fill in pixels with word content
             for ch in line:
-                self.pixels[r][c] = ch
-                c += 1
-
-                if charsWritten + c >= self.charLimit:
+                if charsWritten + 1 >= self.charLimit:
                     self.currentChar = ch
                     stopWriting = True
                     break
+                self.pixels[r][c] = ch
+                c += 1
+                charsWritten += 1
 
             # fill in what remains with spaces
             for cc in range(c, self.width):
                 self.pixels[r][cc] = " "
             r += 1
-            charsWritten += c
             if stopWriting:
                 break
 
@@ -159,12 +183,6 @@ class HistoryWindow(Window):
 if __name__ == '__main__':
     h = HistoryWindow(30, 10)
     # NOTE do not set GameState values directly in non-test code
-    #test_input = ["Hello, nice to meet you. I'm just trying to test out thise code",
-    #"So, this is supposed to cut the input and organize             them so it can fit into the given screen",
-    #"Do you think this is gonna work? 'Cause,,, I 'm not really sure myself.",
-    #"So.. I wonder how long this is now.."]
-    #GameState().subStates[0].historyLines = test_input
-
     test_input = "Kipp stepped back to take a good look at the room. He eyed a fancy bookself with some books that may be worth inspecting. In the far left corner of the room, Kipp also saw a sleeping bag. It may not be the right time to take a nap, but maybe he could use it to de-stress for a while. He looked back at Arthur. It looked like he hasn't gotten any better since we last talked. Maybe Kipp should go talk to Arthur again. \n  \n Kipp: Hmm...what should I do?"
     GameState().subStates[0].historyBuffer = test_input
     formatting = {'yellow': [(67, 74), (174, 185)],
