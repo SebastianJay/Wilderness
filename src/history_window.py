@@ -16,6 +16,9 @@ class HistoryWindow(Window):
         self.charLimit = 1 # The current number of characters that can be displayed
         self.allWritten = True # True if everything has been displayed, false otherwise
 
+        self.outputLength = 0
+        self.startingLine = 0
+
     def update(self, timestep, keypresses):
         # Only increment charLimit when there's unrendered text still to be displayed
         # Otherwise, there will be no delay when the next batch of text is sent
@@ -30,6 +33,14 @@ class HistoryWindow(Window):
                 if self.timestep > self.threshold:
                     self.timestep -= self.threshold
                     self.charLimit += 1
+        else: # Only allow scrolling if we're not writing text to the screen
+            for key in keypresses:
+                if key == "Prior":
+                    if self.startingLine > 0:
+                        self.startingLine -= 1
+                elif key == "Next":
+                    if self.startingLine + self.height < self.outputLength:
+                        self.startingLine += 1
 
     def draw(self):
         input_list = GameState().historyLines
@@ -66,9 +77,13 @@ class HistoryWindow(Window):
                 current_count += len(b) + 1
                 output_list[line_count].append(b)
 
-        # take most recent lines that fit into window
-        while len(output_list) > self.height:
-            discarded.append(output_list.pop(0))
+        self.outputLength = len(output_list)
+        if self.outputLength > self.height:
+            if not self.allWritten:
+                if self.startingLine != self.outputLength - self.height:
+                    self.charLimit -= self.width
+                self.startingLine = self.outputLength - self.height
+            output_list = output_list[self.startingLine:self.startingLine + self.height]
 
         # map output_list to self.pixels
         r = 0
