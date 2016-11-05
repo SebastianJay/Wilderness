@@ -95,7 +95,6 @@ class WindowManager:
                     c1 = start_index % width
                     r2 = end_index // width
                     c2 = end_index % width
-                    #print(style, start_index, end_index, r1, c1, r2, c2, startr, startc)
                     # if the start and end rows are different, add multiple formatter entries
                     # that way the rows are broken up
                     c = c1
@@ -108,10 +107,6 @@ class WindowManager:
                     f2 = (r2 + startr) * self._screenWidth + (c2 + startc)
                     formatting.append((style, (f1, f2)))
         self._formatting = sorted(formatting, key=lambda tup: tup[1][0])
-        #print(self._screen[309//self._screenWidth][309%self._screenWidth:309%self._screenWidth+8])
-        #print(self._screen[442//self._screenWidth][442%self._screenWidth:442%self._screenWidth+12])
-        #print(self._screen[757//self._screenWidth][757%self._screenWidth:757%self._screenWidth+6])
-        #print(self._formatting)
         return self._screen
 
     def update(self, timestep, keypresses):
