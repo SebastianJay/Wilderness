@@ -59,6 +59,8 @@ class HistoryWindow(Window):
                 for b in a.split(" "):
                     if b != "":
                         inputs.append(b)
+                    #else:
+                    #    inputs.append("\n")
                 inputs.append("\n")
             inputs.pop()    # correct for extra "\n" at end
 
@@ -78,7 +80,6 @@ class HistoryWindow(Window):
         # go through word list and perform wrapping as necessary
         for b in inputs:
             if b == "\n":
-                total_count += 1
                 incLine()
             else:
                 if current_count + len(b) > self.width:

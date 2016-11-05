@@ -59,7 +59,11 @@ class Interpreter:
                     if len(node.args) < 1 or len(node.args) > 3:
                         raise Exception('unexpected number of args in set')
                     if node.args[0] == 'inventory':
-                        gs.inventory[node.args[1]] = node.args[2]   #TODO
+                        gs.touchInventory(node.args[1])
+                        if len(node.args) == 2:
+                            gs.inventory[node.args[1]] = '1'   #TODO
+                        else:
+                            gs.inventory[node.args[1]] = node.args[2]   #TODO
                     else:
                         gs.touchVar(node.args[0])
                         if len(node.args) == 1:
@@ -71,21 +75,35 @@ class Interpreter:
                         raise Exception('unexpected number of args in init')
                     gs.variables[node.args[0]] = '0'
                 elif node.title in ['inc', 'add']:
-                    if len(node.args) < 1 or len(node.args) > 2:
+                    if len(node.args) < 1 or len(node.args) > 3:
                         raise Exception('unexpected number of args in inc')
-                    gs.touchVar(node.args[0])
-                    if len(node.args) == 1:
-                        gs.variables[node.args[0]] = str(int(gs.variables[node.args[0]]) + 1)
-                    elif len(node.args) == 2:
-                        gs.variables[node.args[0]] = str(int(gs.variables[node.args[0]]) + int(node.args[1]))
+                    if node.args[0] == 'inventory':
+                        gs.touchInventory(node.args[1])
+                        if len(node.args) == 2:
+                            gs.inventory[node.args[1]] = str(int(gs.inventory[node.args[1]]) + 1)   #TODO
+                        else:
+                            gs.inventory[node.args[1]] = str(int(gs.inventory[node.args[1]]) + int(node.args[2]))   #TODO
+                    else:
+                        gs.touchVar(node.args[0])
+                        if len(node.args) == 1:
+                            gs.variables[node.args[0]] = str(int(gs.variables[node.args[0]]) + 1)
+                        elif len(node.args) == 2:
+                            gs.variables[node.args[0]] = str(int(gs.variables[node.args[0]]) + int(node.args[1]))
                 elif node.title in ['dec', 'sub']:
-                    if len(node.args) < 1 or len(node.args) > 2:
+                    if len(node.args) < 1 or len(node.args) > 3:
                         raise Exception('unexpected number of args in dec')
-                    gs.touchVar(node.args[0])
-                    if len(node.args) == 1:
-                        gs.variables[node.args[0]] = str(int(gs.variables[node.args[0]]) - 1)
-                    elif len(node.args) == 2:
-                        gs.variables[node.args[0]] = str(int(gs.variables[node.args[0]]) - int(node.args[1]))
+                    if node.args[0] == 'inventory':
+                        gs.touchInventory(node.args[1])
+                        if len(node.args) == 2:
+                            gs.inventory[node.args[1]] = str(int(gs.inventory[node.args[1]]) - 1)   #TODO
+                        else:
+                            gs.inventory[node.args[1]] = str(int(gs.inventory[node.args[1]]) - int(node.args[2]))   #TODO
+                    else:
+                        gs.touchVar(node.args[0])
+                        if len(node.args) == 1:
+                            gs.variables[node.args[0]] = str(int(gs.variables[node.args[0]]) - 1)
+                        elif len(node.args) == 2:
+                            gs.variables[node.args[0]] = str(int(gs.variables[node.args[0]]) - int(node.args[1]))
                 elif node.title == 'input':
                     if val is not None:
                         gs.gameMode = GameMode.inAreaCommand
@@ -139,9 +157,9 @@ class Interpreter:
             raise Exception('no args found in evaluateCondition')
 
         gs = GameState()
-        varname = args[0]
-        gs.touchVar(varname)
         if len(args) == 1:
+            varname = args[0]
+            gs.touchVar(varname)
             return gs.variables[varname] != '0'
         else:
             inventoryFlag = False
@@ -150,11 +168,16 @@ class Interpreter:
                 args = args[1:]
             if len(args) != 3:
                 raise Exception('unexpected num of args')
+            varname = args[0]
             comparator = args[1]
             compare = args[2]
-            mapToCheck = gs.variables
+            mapToCheck = None
             if inventoryFlag:
+                gs.touchInventory(varname)
                 mapToCheck = gs.inventory
+            else:
+                gs.touchVar(varname)
+                mapToCheck = gs.variables
             if comparator in ['eq', '=', '==']:
                 return mapToCheck[varname] == compare
             elif comparator in ['gt', '>']:

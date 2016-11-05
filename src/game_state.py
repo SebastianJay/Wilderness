@@ -91,6 +91,10 @@ class GameState:
             if varname not in self.variables:
                 self.variables[varname] = '0'
 
+        def touchInventory(self, varname):
+            if varname not in self.inventory:
+                self.inventory[varname] = '0'
+
         def addHistoryLine(self, line):
             self.historyLines.append(line)
 
@@ -108,7 +112,6 @@ class GameState:
             ## end DEBUG2
 
         def addLangNode(self, node):
-            self.historyBuffer += "\n"  # add leading newline to separate new text from old
             prevBufferLen = len(self.historyBuffer) # offset for formatting indices
             self.historyBuffer += node.text # append the LangNode text
             # append the LangNode formatting
@@ -118,6 +121,7 @@ class GameState:
                     self.historyFormatting[key] = []
                 for indices in val:
                     self.historyFormatting[key].append((indices[0]+prevBufferLen, indices[1]+prevBufferLen))
+            self.historyBuffer += "\n"  # add trailing newline to separate new text from old
 
         #TODO remove
         @property
@@ -216,7 +220,7 @@ class GameState:
                         targetPhrase = 'on ' + objName
                         if itemKey == '':
                             raise Exception('script item name', itemWord ,'not found in items configuration file')
-                        if itemKey in inventory and inventory[itemKey] > 0:
+                        if itemKey in inventory and int(inventory[itemKey]) > 0:
                             if cmdMap['use'][itemWord] is None:
                                 cmdMap['use'][itemWord] = {}
                             cmdMap['use'][itemWord][targetPhrase] = action[1]
