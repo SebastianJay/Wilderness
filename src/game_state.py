@@ -71,6 +71,7 @@ class GameState:
             # non-savable info (refreshes on reset)
             self.cmdBuffer = ""         # command that player is currently typing
             self.cmdMap = {}            # "trie" of commands player can type
+            self.choiceList = []        # list of strings of choices player can make
             self.gameMode = GameMode.titleScreen    # the "mode" of game player is in
 
         def appendCmdBuffer(self, ch):
@@ -85,6 +86,10 @@ class GameState:
         def clearCmdBuffer(self):
             """ Reset command buffer (e.g. if pressed Return) """
             self.cmdBuffer = ""
+
+        def touchVar(self, varname):
+            if varname not in self.variables:
+                self.variables[varname] = '0'
 
         def addHistoryLine(self, line):
             self.historyLines.append(line)
@@ -103,7 +108,7 @@ class GameState:
             ## end DEBUG2
 
         def addLangNode(self, node):
-            self.historyBuffer += "\n"  # add leading newline to separate new text from old
+            self.historyBuffer += "\n\n"  # add leading newline to separate new text from old
             prevBufferLen = len(self.historyBuffer) # offset for formatting indices
             self.historyBuffer += node.text # append the LangNode text
             # append the LangNode formatting
@@ -229,9 +234,9 @@ class GameState:
             for i in range(len(obj['subStates'])):
                 obj['subStates'][i] = obj['subStates'][i].__dict__
             # do not save non-persistent fields
-            del obj['cmdMap']
-            del obj['cmdBuffer']
-            del obj['gameMode']
+            deleteFields = ['cmdMap', 'cmdBuffer', 'gameMode', 'choiceList']
+            for field in deleteFields:
+                del obj[field]
             return json.dumps(obj)
 
         def loads(self, jsonstr):
