@@ -14,7 +14,7 @@ bank:
         - akecheta
         - totemPole
         - painting
-        - fireAle
+        #- fireAle
 library:
     name: Library
     description: All of the town's knowledge can be found here; being used as a makeshift hideaway from Rowen and his cliques.

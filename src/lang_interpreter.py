@@ -181,9 +181,9 @@ class Interpreter:
             if comparator in ['eq', '=', '==']:
                 return mapToCheck[varname] == compare
             elif comparator in ['gt', '>']:
-                return mapToCheck[varname] > int(compare)
+                return int(mapToCheck[varname]) > int(compare)
             elif comparator in ['lt', '<']:
-                return mapToCheck[varname] < int(compare)
+                return int(mapToCheck[varname]) < int(compare)
             else:
                 raise Exception('unknown comparator ' + str(comparator))
 

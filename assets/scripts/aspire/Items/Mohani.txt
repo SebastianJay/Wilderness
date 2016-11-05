@@ -9,11 +9,11 @@ talk to{
 			Mohani then took something out of her purse and threw it in a rage. The object hit Kipp directly in the face.  @bold{*Mohani's Bullets Added to Inventory*}
             Kipp walked outside to read the side: @yellow{"Mohani Bullet"}
 
-			$set_inventory_MohaniBullet_1
+			$set_inventory_mohanisBullets_1
 			$inc_lightPts_1
 			$inc_brotherPts_1
 			$inc_ntoMohaniAnnoyed_1
-		}$elif_gt_3{
+		}$elif_ntoMohaniAnnoyed_gt_3{
 			Mohani: Go ahead ask again. I'll burn you into the next afterlife.
 		}
 		$else{

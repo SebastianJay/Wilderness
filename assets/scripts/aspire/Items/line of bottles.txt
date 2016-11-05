@@ -1,4 +1,4 @@
-use tomahawk on{
+use six-chamber revolver on{
 	$if_ntoSmokingGun_eq_1{
 		#Prevents the challenge from happening again after it is completed.
 		Kipp: Breaking bottles just for fun isn't really my cup of tea.

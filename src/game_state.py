@@ -102,6 +102,7 @@ class GameState:
             ## end DEBUG1
 
         def addLangNode(self, node):
+            self.historyBuffer += "\n"  # leading newline
             prevBufferLen = len(self.historyBuffer) # offset for formatting indices
             self.historyBuffer += node.text # append the LangNode text
             # append the LangNode formatting
@@ -188,7 +189,7 @@ class GameState:
             cmdMap['use'] = {}
             inventory = self.inventory
             for item in inventory:
-                if inventory[item] == 0:
+                if int(inventory[item]) == 0:
                     continue
                 itemName = items[item]['name']
                 cmdMap['use'][itemName] = None
