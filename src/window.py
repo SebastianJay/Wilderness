@@ -9,8 +9,10 @@ class Window:
         self.width = width
         self.height = height
 
-        #initialize 2D char array
+        # initialize 2D char array
         self.pixels = [[' ' for x in range(self.width)] for y in range(self.height)]
+        # initialize color/style formatting info
+        self.formatting = []    #
 
     def update(self, timestep, keypresses):
         """

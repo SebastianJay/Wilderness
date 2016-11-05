@@ -1,0 +1,9 @@
+inspect{
+	Dru was eager to help Kipp.
+}
+
+talk to{
+	Dru: I've heard that you need the Dragonskin boots and moonshine?
+	Kipp: Yeah!
+	Dru: You should find @green{Marshall} for the boots and @green{Gritt} at the @blue{general store} for the moonshine.
+}

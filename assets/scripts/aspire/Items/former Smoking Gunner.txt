@@ -1,0 +1,133 @@
+talk to{
+	$if_inventory_phoenixBolt_eq_0{
+		$if_ntoFormerSGMember_eq_0{
+			#First time speaking to the guy.
+			
+			Kipp walked up to the man with his head against the table and an empty bottle in his hand.
+			
+			Former Smoking Gunner: What *burp* do you want?
+			Kipp: You okay, dude...nevermind. So I was wondering if you belonged to that group over there.
+			Former Smoking Gunner: Yeah, until I was kicked out. Look, if you are here to weasel information about the crew, then you're not getting it from me.
+			
+			The ex member then looked into the bottom of his bottle.
+			
+			Hiram: You know what, I'm willing to sell them out for a price. Name's Hiram. If you could grab me a bottle of Phoenix Bolt, then I'll be glad to fill you in.
+			
+			Hiram: @red{Talk to} @green{me} again when you have a @yellow{Phoenix Bolt}.
+			$set_formerSGMember_1
+		}$else{
+			Hiram: Hey, if you don't have a drink for me. Get lost!
+		}
+	}$else{
+		#Kipp found a Phoenix Bolt.
+		
+		Kipp tossed the bottle to Hiram. Hiram smiled a little.
+		
+		Hiram: Now that's what I'm talking about. So I should talk about...
+		Kipp: The Smoking Gun.
+		Hiram: Right, those deadbeats. They were always stuck up, especially the leader. Flint had an elistist complex. Could never stand how he ordered everyone around. Trust me, he is all just for show. Whenever we would go wagon heisting, it would be us doing the work and him collecting the reward...I'd...I'd uh...
+		Kipp: That's really awful to hear, but did they mention anything about a secret number or two that only you would know?
+		
+		Hiram chuckled a little.
+		
+		Hiram: So that's what you've been after all along...maybe I'll change my mind and just go back to my drink.
+		
+		Kipp was anticipating for this to happen, now it's time to act...
+		
+		
+		$choice{
+		Threaten Hiram|
+			$if_inventory_revolver_eq_1{
+				Kipp had the revolver he found in the gunsmith shop. He really didn't want to do this, but what choice did Kipp have? Kipp pulled out the revolver and held it in front of Hiram's head.
+				
+				Kipp: Look, I'm not here to play any games. Just give me what I need and no one will get hurt.
+				Hiram: You don't have the guts to...
+				
+				Kipp then moved the revolver beside his head and took a shot. The bullet whizzed by Hiram and impacted into the mirror on the other side of the bar. Hiram could hear glass shattering to pieces.
+				
+				Hiram: Okay! Okay! When I was reading over Flint's papers to other gangs, he would always write down @yellow{"Base 4"} in the top right hand corner of the sheet. That's all I know I swear!
+				
+				Kipp: Thank you for your assistance.
+				
+				Hiram: Whatever, just leave me alone!
+				
+				Kipp walked away from the table to leave Hiram to his business. Kipp felt a little good for standing up for himself, but at the same time he felt as if his morality was shut off for a second.
+				
+				$inc_fugitivePts_1
+				$inc_darkPts_1
+			}elif_inventory_tomahawk_eq_1{
+				Kipp still had the tomahawk he found in the town sign. He really didn't want to do this, but what choice did Kipp have?
+				Kipp pulled out the tomahawk and held it to Hiram's throat.
+				
+				Kipp: Look, I'm not here to play any games. Just give me what I need and no one will get hurt.
+				Hiram: You don't have the guts to...
+				
+				Kipp then looked down to see a knife dug into the table and Hiram's hand just laying there. He pulled the knife out and thrusted it back into the table, right in between the spaces of Hiram's fingers. 
+				
+				Hiram: Okay! Okay! When I was reading over Flint's papers to other gangs, he would always write down @yellow{"Base 4"} in the top right hand corner of the sheet. That's all I know I swear!
+				
+				Kipp: Thank you for your assistance.
+				
+				Hiram: Whatever, just take your psycho act elsewhere.
+				
+				Kipp walked away from the table to leave Hiram to his business. Kipp felt a little good for standing up for himself, but at the same time he felt as if his morality was shut off for a second.
+				
+				$inc_fugitivePts_1
+				$inc_darkPts_1
+			}$else{
+				Kipp: Yeah I don't think so...
+				
+				Kipp held up his hand up to find...absolutely nothing. Hiram then noticed that Kipp was going to threaten him and got enraged. Hiram pulled out his pistol and fired a shot through Kipp's heart.
+				
+				Hiram: Unlike Flint, I can take my shots.
+				
+				Kipp fell to the floor and blacked out.
+				
+				@bold{GAME OVER}
+				$gameover
+			}
+			
+		|Other|
+			$choice{
+			Trick Hiram|
+				Kipp chuckled a little.
+				
+				Kipp: You really think you have the upper hand here?
+				Hiram: What are you talking about?
+				Kipp: The Smoking Gun has been staring at us the entire time. Once they find out that you spilled about their secret, then there will be a hefty bounty on your head.
+				Hiram: I didn't say nothing to you.
+				Kipp: What are the odds they'll care about your side of the story. Remember, you were kicked out. You will need my word to get out of this mess.
+				Hiram: Alright, I get it. Here's what I know. When I was reading over Flint's papers to other gangs, he would always write down @yellow{"Base 4"} in the top right hand corner of the sheet. That's all I know.
+				Kipp: Don't worry Hiram, you'll live another day.
+				
+				Kipp walked away from the table to leave Hiram to his business. Kipp felt a little good for standing up for himself, but at the same time he felt as if his morality was shut off for a second.
+				
+				$inc_darkPts_1
+				$inc_derelictPts_1
+			|Lecure Hiram|
+				Narrator: Even I know you're gonna get laughed at, but it's your funeral. Back to the conversation.
+				
+				Kipp: Look here, Hiram. We had a deal. And as adults, it is our responsibility to trust each other and ensure that both parties are satisfied when a deal is made. If our previous generations didn't take the moral high ground and follow these ideals, then our present would be very dark. So I suggest you think again about telling me more about the Smoking Gun.
+				
+				Hiram: Kid, you are too young for this world! I can say or do whatever I feel like and no one will give a hoot.
+				
+				Hiram started laughing so hard in his seat that he was almost going to fall backwards. Hiram leaned on the table to calm himself.
+				
+				Hiram: Well that was a good laugh. You know what, I'll tell you the secret after all. It was worth that good humor you got there.
+				
+				Hiram leaned in closer to whisper to Kipp.
+				
+				Hiram: This is all I know. When I was reading over Flint's papers to other gangs, he would always write down @yellow{"Base 4"} in the top right hand corner of the sheet.
+				
+				Kipp: Thanks
+				Hiram: No, thank you.
+				
+				Kipp walked away from the table to leave Hiram to his business. Well there goes all of Kipp's dignity, but at least he got some info out of it.
+				$inc_lightPts_1
+				$inc_brotherPts_1
+			}
+		}		
+	    All that matters is that Kipp walked away unscathed from the converstion.
+		$set_phoenixBolt_0
+	}
+}

@@ -1,0 +1,15 @@
+## The mappings for each area in the game. Each area corresponds to multiple
+## rooms, which in turn has multiple objects. The rooms and objects are
+## associated through the roomsConfig and objectsConfig fields
+
+aspire:
+    name: Aspire
+    roomsConfig: rooms/aspire.yml
+    objectsConfig: objects/aspire.yml
+    # which world map (0=Lore, 1=Kipp)
+    mapId: 1
+    # location on the world map
+    r: 0
+    c: 0
+    # only be able to enter if a condition is fulfilled
+    showIf: didFarm #TODO

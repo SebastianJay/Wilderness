@@ -1,0 +1,7 @@
+go to{
+    Kipp entered the @blue{general store}. Buzzing with activity, it was the center of @blue{Black Hills}. He could hear the chattering of the crowds from the outside. 
+}
+
+look around{
+    Kipp looked around the @blue{general store}. @green{Gritt} the owner was organizing the cases of moonshine on the shelves. A couple @green{Dru} and Su were shopping for some flour. A kid @green{Kaven}was playing with a magic tricks set. Some @yellow{posters} were hung on the wall. A @yellow{newspaper} was on the rack.
+} 

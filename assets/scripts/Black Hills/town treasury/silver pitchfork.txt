@@ -1,0 +1,38 @@
+pick up{
+	$if_frmTalkedMarshall_eq_0{
+		Kipp should probably talk to Marshall first.
+	}
+	$elif_frmTestIntegrity_eq_1{
+		Kipp failed the Test of Integrity.
+		Game Over.
+	}
+	$elif_frmTestIntegrity_eq_0{
+		The pitchfork belongs to the town treasury. Kipp shouldn't take it.
+	}
+}
+
+inspect{
+	The silver pitchfork was donated by Theodore Hills and Arthur Black, the founder of @blue{Black Hills}.
+
+\	|       |       |       |
+\	|       |       |       |
+\	|       |       |       |
+\	|       |       |       |
+\	|_______|_______|_______|
+\                  |
+\                  |
+\                  |
+\                  |
+\                  |
+\                  |
+\                  |
+\                  |
+\                  |
+\                  |
+\                  |
+\                  |
+\                  |
+	$if_frmTestIntegrity_eq_1{
+		$inc_inspected_1
+	}
+}

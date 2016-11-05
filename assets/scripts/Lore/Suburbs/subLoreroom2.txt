@@ -1,0 +1,7 @@
+#USE THIS WHENEVER LORE ENTERS HER ROOM
+go to{
+	Lore's rectangular room comfortably fitted a bed, a desk, and a wardrobe. The bed was opposite of the doorway, the desk was to the right, and the wardrobe opposite to the bed.
+}
+look around{
+	Lore doesn't decorate her room a lot so it wasn't the best furnished room. Pictures of her and her friends were on her desk and an out of tune guitar, a remainder of her days as a wild college student seeking the next thrill in studying biomedical engineering. There was a crack in the wall that Lore used to believe to be a crack in the space time fabric which caused her parents to not be in her life. A bird chirped outside the window.
+}

@@ -1,0 +1,6 @@
+go to{
+	The @blue{Glover House} was a tall, imposing house in which old man @green{Glover}, an extremely crooked man, lived in. He was despised by his neighbors and the children mocked him for his ridiculous @yellow{afro}.
+}
+Look around{
+	The @blue{Glover House} was too horrendous to look at. When Lore took a glance, she did notice a @yellow{doorbell} and a decaying, dying, drooping @yellow{tree}.
+}

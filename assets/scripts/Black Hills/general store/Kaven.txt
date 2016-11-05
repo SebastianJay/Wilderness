@@ -1,0 +1,43 @@
+inspect{
+    @green{Kaven} was about 8-years-old.
+ }
+
+talk to{
+    $if_frmTalkedKaven_eq_0{
+        $choice{
+            Ask him about magic tricks|
+            Kipp: Can you show me a magic trick?
+            Kaven: Yess!! I'll show you my favorite one.
+           
+	    Kaven made a coin float in the air.
+           
+	    Kipp: Woah! You're good at this.
+            Kaven: Thank you! I hope to be as good as @green{Alodar} one day. He's the greatest magician in the world!!
+            $set_frmTalkedKaven_1
+	    $inc_derelictPts_1
+	    $inc_lightPts_1
+            |Laugh at Kaven|
+            Kipp: Magic isn't real, kid. Grow up.
+            Kaven: Yes it is! the @green{Alodar} does it all the time!
+            $set_frmTalkedKaven_2
+	    $inc_fugitivePts_1
+	    $inc_darkPts_1
+	    |Teach him a new "trick"|
+	    Kipp: Wanna see some interesting magic?
+	    Kaven: Yess!!
+	
+	    Kipp grabbed a glass of water and drank it all down.
+	
+	    Kipp: See? I made the water disappear!
+	    Kaven: ......
+	    $inc_brotherPts_1
+	    $set_frmTalkedKaven_3
+     }
+    }$elif_frmTalkedKaven_eq_1{
+        Kaven: Come again next week and I'll show you a new magic trick!
+    }$leif_frmTalkedKaven_eq_2{
+        Kaven: Go away!
+    }$elif_frmTalkedKaven_eq_3{
+	Kaven: Show me a real trick next time!
+    }
+}

@@ -1,0 +1,9 @@
+go to{
+	$if_frmQuestChoice_eq_2{
+		Kipp entered the mining warehouse.
+	}
+}
+
+look around{
+	Conney had left for an meeting with his business partners. He left his guards @green{Shotgun Pete} and @green{Widowmaker} to help Kipp. The warehouse contains a @yellow{book} and a tank of @yellow{corrosive gas}. There was @yellow{password lock} on the wall.
+}

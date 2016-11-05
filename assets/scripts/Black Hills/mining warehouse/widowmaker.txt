@@ -1,0 +1,55 @@
+inspect{
+	Widowmaker is a short and skinny man. He's the "brain" of the 2 guards.
+}
+
+talk to{
+	$if_frmTalkedWidowmaker_eq_1{
+		Widowmaker: You can unlock the @yellow{password lock} now and head to the mines.	
+	}
+	$elif_frmTalkedShotgunPete_eq_2{
+		Widowmaker: You can use the train to go to the mines directly. The clue to the @yellow{password lock} is (1,3), (3,4), (3,2), (5,1), (6,9). Find me when you have solved it.
+		Kipp: What? This makes no sense.
+		Widowmaker: Not my problem
+		$choice{
+			Threaten Widowmaker|
+			Kipp wrapped his hands around Widowmakers throat. Shotgun Pete saw that and drew out his gun at Kipp.
+	
+			Shotgun Pete: Get your dirty hands off Widowmaker or you'll regret it.
+
+			Kipp pushed Widowmaker into Shotgun Pete, blocking the vision of Pete. He then drew out his corrosive gun and pointed it at Shotgun Pete.
+			
+			Kipp: I regret nothing. Now gimme the password.
+
+			Shotgun Pete was distracted for a second but Kipp has already gotten the upper hand.
+	
+			Shotgun Pete: Fine. Tell him the password.
+			Widowmaker: It's "UCRJA".
+			$set_frmGotPassword_1
+			$inc_fugitivepPts_1
+			$inc_darkPts_1
+			|Trick the Widowmaker into giving the password|
+			Kipp: I've already gotten the password.
+			Widowmaker: What? So fast?
+			Kipp: Of course! This password is so @italic{amateur}.
+			Widowmaker: Don't be ridiculous. The set of numbers each refers to the row and column of letters in the @yellow{book}. This is advanced encryting!
+			Kipp: *grin* I see.
+
+			Kipp checked the @yellow{book} and decrypted the password: "UCRJA"
+			$inc_derelictPts_1
+			|Ask for hints|
+			Kipp: I'm not good at numbers and stuff. Can you help me with it?
+			Widowmaker: Of course you don't. This password is my masterpiece!
+			Kipp: Then I'll never solve it on my own! Can you help me please?
+			Widowmaker: *shrug* Fine. The set of numbers each refers to the row and column of letters in the @yellow{book}.
+
+			Kipp checked the @yellow{book} and decrypted the password: "UCRJA"
+
+			Kipp: Thank you!
+			$inc_brotherPts_1
+			$inc_lightPts_1
+		}
+		Widowmaker: You can unlock the @yellow{password lock} now and head to the mines.
+		$set_frmTalkedWidowmaker_1
+	}
+
+}

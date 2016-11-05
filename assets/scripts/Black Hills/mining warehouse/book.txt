@@ -1,0 +1,20 @@
+inspect{
+	A Dummy's Guide to Making Weapons
+	
+	Double-sided Blade
+	Procedure:
+	Find two swords.
+	Join the handles while facing the two blades at opposite directions.
+	Glue the handles together.
+
+	Corrosive Gun
+	Procedure:
+	Find a shotgun and corrosive gas/liquid.
+	Pour the liquid into the barrel using the Gutenburg-Heisenberg method.
+
+	Self-aiming Arrow
+	Procedure:
+	Find a set of magnets and a set of bow and arrow.
+	Attach one magnet to target and the other magnet to the tip of the arrow.
+	$set_frmReadWeaponBook_1
+}

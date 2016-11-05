@@ -1,0 +1,25 @@
+## Information regarding items that can appear in the inventory
+
+## Begin Aspire items
+randomToken:
+    name: random token
+    description: "It's a little dirty from the dried mud stains, but you can make out a picture of a bottle with the description: \"Good for 1 drink.\""
+fireAle:
+    name: fire ale
+    description: The description says, "Gives you the spirit of a fire breathing dragon." Maybe it's just an ad marketing trick, or maybe...
+ticket:
+    name: ticket
+    description: It says, "ONE PHOENIX BOLT. Only acceptable at Aspire Saloon. This establishment is not responsible if fed to an actual phoenix." Wonder how they got that disclaimer on there.
+phoenixBolt:
+    name: Pheonix Bolt
+    description: Says here that it's brewed with barley and the seeds of world's hottest pepper. How can anyone stomach this?
+mohanisBullets:
+    name: Mohani's bullets
+    description: "I wonder why she would carve the number # on her shells?"
+revolver:
+    name: six-chamber revolver
+    description: Strange how the Rune Raiders just let me have this. Guess magic is stronger than the mortal world. I have enough bullets for two reloads.
+tomahawk:
+    name: tomahawk
+    description: Looks sharp enough to make a dent in a tree like our machete back home. Hopefully I won't have to test if it works with bodies, too.
+## End Aspire items
