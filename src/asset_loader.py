@@ -2,7 +2,7 @@
 Definition of asset loader, which takes care of reading and parsing all files
 within the assets/ directory.
 """
-from interpreter import Interpreter
+from lang_parser import Parser
 from global_vars import Globals
 import os.path
 import yaml
@@ -35,7 +35,7 @@ class AssetLoader:
                         assets[norm_path] = f.read()
 
             # Do parsing of any custom scripts and yaml
-            parser = Interpreter()  # instantiate interpreter on the fly to do parsing
+            parser = Parser()  # instantiate parser on the fly
             for path in assets:
                 if path[-len('.ignore'):] == '.ignore':
                     continue
