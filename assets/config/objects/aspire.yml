@@ -21,6 +21,15 @@ sleepingBag:
 bookshelf:
     name: bookshelf
     script: aspire/Items/bookshelf.txt
+baseNumbersBook:
+    name: Base Numbers
+    script: aspire/Items/Base Numbers for them not Smart Folk.txt
+encyclopediaBook:
+    name: Encyclopedia
+    script: aspire/Items/Encyclopedia on Native American Culture.txt
+scientificBook:
+    name: Scientific Journal
+    script: aspire/Items/Scientific Journal about the Parasites Within.txt
 flint:
     name: Flint
     script: aspire/Items/Flint.txt

@@ -25,4 +25,4 @@ class Globals:
     AreasConfigPath = 'areas.yml'
     ItemsConfigPath = 'items.yml'
     KeybindingsConfigPath = 'keybindings.yml'
-    CmdMaxLength = 32
+    CmdMaxLength = 48

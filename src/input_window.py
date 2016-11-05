@@ -55,7 +55,7 @@ class InputWindow(Window):
                                         self.interpreter.executeAction(val)
                                         val = None  # make outer loop break out
                                         break
-                                    else:
+                                    elif isinstance(val, dict):
                                         prefixTree = val
                                         cmdString = cmdString[len(prefix):].strip()
                                         break

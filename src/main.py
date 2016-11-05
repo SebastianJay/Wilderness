@@ -40,9 +40,10 @@ def bootstrap():
     AssetLoader().loadAssets()  # TODO do in separate thread
 
     # TODO move out of bootstrap
-    from game_state import GameState
+    from game_state import GameState, GameMode
     GameState().areaId = 'aspire'
     GameState().roomId = 'townCenter'
+    GameState().gameMode = GameMode.inAreaCommand
     GameState().refreshCommandList()
 
     GameDriver().mainloop()

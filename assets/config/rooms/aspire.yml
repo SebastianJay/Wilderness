@@ -28,6 +28,9 @@ library:
         - arthur
         - sleepingBag
         - bookshelf
+        - baseNumbersBook
+        - encyclopediaBook
+        - scientificBook
 saloon:
     name: Saloon
     description: Bringing the town alcohol from lands far and wide; currently being held off by the Smoking Gun.

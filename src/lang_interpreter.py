@@ -110,7 +110,7 @@ class Interpreter:
                         if len(node.args) != 1:
                             raise Exception('unexpected number of args in input')
                         gs.touchVar(node.args[0])
-                        gs.variables = str(val)
+                        gs.variables[node.args[0]] = str(val)
                     else:
                         gs.gameMode = GameMode.inAreaInput
                         self.callStack[-1][1] = nodeInd
