@@ -41,9 +41,11 @@ def bootstrap():
 
     # TODO move out of bootstrap
     from game_state import GameState, GameMode
+    from lang_interpreter import Interpreter
     GameState().areaId = 'aspire'
     GameState().roomId = 'townCenter'
     GameState().gameMode = GameMode.inAreaCommand
+    Interpreter().executeAction(AssetLoader().getScript('aspire/Rooms/town center.txt')[0][1])
     GameState().refreshCommandList()
 
     GameDriver().mainloop()
