@@ -47,17 +47,19 @@ class Display:
             is_italicized = 0
             is_underlined = 0
             formats = formatter.split('_')
+            color = "white"
+            font_style = (Globals.FontName, Globals.FontSize)
             for format in formats:
-                color = "white"
+
                 if format == "bold":
-                    is_bold = 1
+                    font_style = (Globals.FontName, Globals.FontSize, "bold")
                 elif format == "italic":
-                    is_italicized = 1
+                    font_style = (Globals.FontName, Globals.FontSize, "italic")
                 elif format == "underline":
-                    is_underlined = 1
+                    font_style = (Globals.FontName, Globals.FontSize, "underline")
                 else:
                     color = format
-                self.text.tag_config(formatter, foreground=color) # bold=is_bold, italic=is_italicized, underline=is_underlined
+                self.text.tag_config(formatter, foreground=color, font=font_style) # bold=is_bold, italic=is_italicized, underline=is_underlined
             self.text.insert(tk.END, plain_text)
             self.text.insert(tk.END, formatted_text, formatter)
             start_index = subformat[1][1] + 1   # start next search after this formatter
