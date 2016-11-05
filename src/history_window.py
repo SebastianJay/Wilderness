@@ -45,8 +45,6 @@ class HistoryWindow(Window):
 
         output_list = [[]]
         discarded = []
-        output_count = 0
-        output_line_count = 0
         line_count = 0
         current_count = 0
         # helper function for dropping to next line
