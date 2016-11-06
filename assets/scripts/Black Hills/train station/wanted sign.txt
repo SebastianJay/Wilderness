@@ -1,13 +1,13 @@
 inspect{
-    Wanted: Dead or alive.
-
-     ///////////
-    |  O     O |
-    |     <    |
-    |    _____ |
-     \_________/
-      
-    The Fugitive
+\    Wanted: Dead or alive.
+\      //////////\
+\     ///////////\\
+\    |  O     O | \\
+\    |     <    | ||
+\    |    _____ | ||
+\     \_________/ \/
+\      
+\       Jinx
 }
 
 talk to{

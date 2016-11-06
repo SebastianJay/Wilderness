@@ -1,5 +1,5 @@
 """
-Contains routines for parsing and executing the game's custom language.
+Contains routines for parsing the game's custom language. Contains the node definitions.
 """
 
 from global_vars import Globals
@@ -12,7 +12,7 @@ class BodyNode:
         self.nodes = nodes
 
     def __str__(self):
-        ret = "BodyNode["
+        ret = "BodyNode[\n"
         for a in self.nodes:
             ret += str(a)
         ret += "]\n"
@@ -44,7 +44,7 @@ class FuncNode:
 
     def __init__(self, title='', args=[], inner=None):
         """ a string of the function name """
-        self.title = title
+        self.title = title.lower()
         """ a list of strings of function parameters (other tokens separated by underscores) """
         self.args = args
         """
@@ -57,26 +57,26 @@ class FuncNode:
         self.inner = inner
 
     def __str__(self):
-        ret = "FuncNode(title: " + self.title + ", \nargs: " + str(self.args) + ","
-        ret += "inner: [\n"
+        ret = "FuncNode(title: " + self.title + ", args: " + str(self.args)
         if self.inner is not None:
-            if funcTitle == 'if' or funcTitle == 'elif' or funcTitle == 'else':
+            ret += ", inner: [\n"
+            if self.title == 'if' or self.title == 'elif' or self.title == 'else':
                 ret += str(self.inner)
-            elif funcTitle == 'choice':
+            elif self.title == 'choice':
                 for a in self.inner:
                     ret += "("
                     ret += "choice: " + str(a[0])
-                    ret += "result: " + str(a[1])
+                    ret += "result: " + str(a[1])[:-1]
                     ret += "),\n"
-            elif funcTitle == 'random':
+            elif self.title == 'random':
                 for a in self.inner:
                     ret += str(a)
-        ret += "])\n"
+            ret += "])\n"
+        else:
+            ret += ")\n"
         return ret
 
-class Interpreter:
-    """ Contains parsing and execution routines for the game's custom scripting language. """
-
+class Parser:
     def __init__(self):
         pass
 
@@ -88,10 +88,8 @@ class Interpreter:
             openInd = string.find('{', nextInd)
             closeInd = string.find('}', nextInd)
             if closeInd == -1:
-                raise Exception('No matching brace in string ' + string)
-            elif openInd == -1:
-                return closeInd
-            elif openInd < closeInd:
+                raise Exception('No matching brace in string:\n' + string)
+            elif openInd != -1 and openInd < closeInd:
                 openCount += 1
                 nextInd = openInd + 1
             else:
@@ -153,9 +151,9 @@ class Interpreter:
 
             #if no close or open bracket exists, exit the method and return error message
             if index_open_bracket == -1:
-                raise Exception("The formatter is missing an opening bracket: {")
+                raise Exception("The formatter is missing an opening bracket: \n" + text)
             if index_close_bracket == -1:
-                raise Exception("The formatter is missing an closing bracket: }")
+                raise Exception("The formatter is missing an closing bracket: \n" + text)
 
             # the formatted text looks like @formatter{formatted_text}
             formatter = text[index_of_at + 1 : index_open_bracket].strip()
@@ -222,7 +220,7 @@ class Interpreter:
                 # function description ends on newline
                 newlineInd = scriptStr.find('\n', funcInd)
                 if newlineInd == -1:
-                    newlineInd = len(scriptStr) - 1
+                    newlineInd = len(scriptStr)
                 funcNameEndInd = newlineInd
                 remainingInd = newlineInd + 1
             # parse function title and args
@@ -232,9 +230,9 @@ class Interpreter:
             funcInner = None
             # parse inner based on title
             if funcTitle == 'if' or funcTitle == 'elif' or funcTitle == 'else':
-                funcInner = parseBodyRec(funcInnerStr.strip())
+                funcInner = self.parseBody(funcInnerStr.strip())
             elif funcTitle == 'choice':
-                choices = self.splitByPipe(funcInnerStr)
+                choices = self.splitByPipe(funcInnerStr.strip())
                 funcInner = []
                 option = None
                 result = None
@@ -242,13 +240,13 @@ class Interpreter:
                     if i % 2 == 0:
                         option = self.parseFormat(choices[i].strip())
                     else:
-                        result = parseBodyRec(choices[i].strip())
+                        result = self.parseBody(choices[i].strip())
                         funcInner.append((option, result))
             elif funcTitle == 'random':
                 funcInner = []
-                choices = self.splitByPipe(funcInnerStr)
+                choices = self.splitByPipe(funcInnerStr.strip())
                 for a in choices:
-                    funcInner.append(parseBodyRec(a.strip()))
+                    funcInner.append(self.parseBody(a.strip()))
             funcNode = FuncNode(funcTitle, funcArgs, funcInner)
             nodes.append(funcNode)
         return BodyNode(nodes)
@@ -271,19 +269,14 @@ class Interpreter:
             braceLoc = scriptStr.find("{", remainingInd)
             if braceLoc == -1:
                 break
-            verb = scriptStr[remainingInd:braceLoc].strip()
+            verb = scriptStr[remainingInd:braceLoc].strip().lower()
             closeInd = self.matchingBraceIndex(scriptStr, braceLoc + 1)
-            reaction = parseBody(scriptStr[braceLoc+1:closeInd].strip())
+            reaction = self.parseBody(scriptStr[braceLoc+1:closeInd].strip())
             tuples.append((verb, reaction))
             remainingInd = closeInd + 1
         return tuples
 
-    def executeBody(self, bodyNode):
-        """ Evaluates a BodyNode """
-        pass
-
-
 if __name__ == '__main__':
-    i = Interpreter()
-    print(i.parseFormat("Hello @red{there}, friend. How are @bold{you} doing?"))
-    print(i.parseFormat("@blue{This} is blue. But @italic{this} is italicized. And @blue{this one} is also blue."))
+    p = Parser()
+    print(p.parseFormat("Hello @red{there}, friend. How are @bold{you} doing?"))
+    print(p.parseFormat("@blue{This} is blue. But @italic{this} is italicized. And @blue{this one} is also blue."))

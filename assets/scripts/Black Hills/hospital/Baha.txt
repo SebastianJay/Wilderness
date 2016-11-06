@@ -13,34 +13,35 @@ talk to{
 		Encourage Baha|
 		Kipp: You're right. But now we have the opportunity to get rid of it once and for all. But I'll need your help to search for its weakness.
 		Baha: I don't know...
-		Kipp: Come on, man. We can do this. 
+		Kipp: Come on, man. We can do this.
 		Baha: Alright, lemme think. The "demon" was stunned when Dru threw a bottle of moonshine at it. You can probably use moonshine to defeat it.
 		Kipp: Moonshine? The newspapers said it was a bottle of water!
 		Baha: *grin* Well, ain't gonna let the boss know that!
 		Kipp: Thank you Baha.
-		$inc_LightPts{1}
-		$inc_DerelictPts{1}
+		$inc_lightPts_1
+		$inc_derelictPts_1
 		|Threaten Baha|
 		Kipp wrapped his arm around Baha's neck.
-		
+
 		Kipp: This isn't about you, italic{whiner}. Hundreds of lives are at stake. Tell me EVERYTHING, NOW!
 		Baha: *sobs* Okay. Lemme think. The "demon" was stunned when Dru threw a bottle at it...
 		Kipp: A bottle of WHAT? Stop wasting my time and get on with it!
 		Baha: A bottle of moonshine... Please don't tell our bosses about this...
 		Kipp: *grin* We'll see.
-		$inc_DarkPts{1}
-		$inc_FugitivePts{1}
+		$inc_darkPts_1
+		$inc_fugitivePts_1
 		|Comfort Baha|
-		Kipp: You're right. I was being inconsiderate, you must have been through a lot. 
+		Kipp: You're right. I was being inconsiderate, you must have been through a lot.
 		Baha: I could have died there, if it wasn't for Dru. I could have italic{died}.
 		Kipp: If you don't want to talk, it's fine. I guess I was being too rash just now. I just wanted to solve the problem so bad.
 		Baha: I'm sorry that I was so emotional just now. You were just trying to help. Now that I think of it, I remember that Dru's moonshine stopped the "demon".
 		Kipp: Wow! That is some valuable information. Thank you!
-		$inc_BrotherPts{1}
-		$inc_LightPts{1}
-		$inc_MinerClues{1}
+		$inc_brotherPts_1
+		$inc_lightPts_1
 	}
-	$set_frm_TalkedBaha{1}
-	$if_frm_TalkedBaha_eq_1:
+	$inc_minerClues_1
+	$set_frmTalkedBaha_1
+	$if_frmTalkedBaha_eq_1{
 		Baha went back to sleep. Kipp decided not to disturb him.
+	}
 }

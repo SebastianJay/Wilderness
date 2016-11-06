@@ -1,0 +1,16 @@
+$if_inventory_mohanisBullets_eq_1{
+
+	inspect{
+		#Base Number clue
+		Kipp further inspected the bullet. On the bottom of the bullet was a tiny engraving that read, "Bse - 6".
+
+		Kipp: I wonder what that's suppose to mean?
+	}
+
+	use{
+		Kipp: What you want me to do, bite into it or something? It's just a bullet.
+	}
+
+}$else{
+	Kipp: What bullet?
+}

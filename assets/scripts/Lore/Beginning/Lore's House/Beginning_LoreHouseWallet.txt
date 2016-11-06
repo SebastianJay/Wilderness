@@ -1,0 +1,10 @@
+#Beginning_LoreHouseWallet
+
+pick up{
+	Lore plucked her wallet off the table and put it in her pocket.
+		#count the number of items picked up by Lore
+		$if_itemsgrabbedLorehouse_eq_0{
+		$set_itemsgrabbedLorehouse_1
+		}$else{$add_itemsgrabbedLorehouse_1
+		}
+}

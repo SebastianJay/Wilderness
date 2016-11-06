@@ -1,34 +1,35 @@
+
 inspect{
     @green{Dru} is a buff young man. There were blisters on his hands, showing signs of physical labor, possibly mining. He looked weary and somber.
 }
 
 talk to{
-    $if_frm_TalkedDru_eq_0{
+    $if_frmTalkedDru_eq_0{
     
         Kipp: How are you?
         Dru: Not good, man. The mines are already closed due to the accidents. I hope they kill the Demon soon or my family would go hungry. 
         Kipp: Accidents? What happened?
-        Dru: A Demon attacked us from the darkness in the mines. I narrowly escaped but my friends were hurt. They are still in the @blue{hosptal} now. 
+        Dru: A Demon attacked us from the darkness in the mines. I narrowly escaped but my friends were hurt. They are still in the @blue{hospital} now. 
         $choice{
 		Comfort Dru|
 		Kipp: Oh... I'm sure everything will get better soon.
 		Dru: I sure hope so.
-		$inc_BrotherPts{1}
-		$inc_DarkPts{1}
+		$inc_brotherPts_1
+		$inc_darkPts_1
 		|Taunt Dru|
 		Kipp: You mean you just ran away? Your muscles are just for showing off, eh?
 		Dru: *shudders* You weren't there. You can't imagine the horror of the "demon".
-		$inc_FugitivePts{1}
-		$inc_DarkPts{1}
+		$inc_fugitivePts_1
+		$inc_darkPts_1
 		|Inquire about the Demon|
 		Kipp: What was the "demon" like?
 		Dru:It was about 2 foot tall and had shiny skin.It was vulnerable to water.
 		Kipp: Maybe we can use that information to our advantage and defeat it
 		Dru: Sounds like a plan.
-		$inc_DerelictPts{1}
+		$inc_DerelictPts_1
 	} 
-        $set_frm_TalkedDru{1}   
-    }$elif_frm_TalkedDru_eq_1{
+        $set_frmTalkedDru_1   
+    }$elif_frmTalkedDru_eq_1{
         Dru: I should check in on my friends in the hospital some time. 
     }
 }

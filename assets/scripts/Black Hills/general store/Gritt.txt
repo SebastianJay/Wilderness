@@ -1,27 +1,27 @@
 inspect{
-    $if_frm_InspectedGritt_eq_0{
+    $if_frmInspectedGritt_eq_0{
         @green{Gritt} was a middle-aged man.
-	$set_InspectedGritt{1}
-     }
-     $elif_frm_Inspectedritt_eq_1{
+	$set_InspectedGritt_1
+	}
+     $elif_frmInspectedritt_eq_1{
         Kipp has made Gritt uneasy. Kipp should probably stop.
-     }
+    }
 }
 
 talk to{
-	$if_frm_QuestChoice_eq_1{
-		$if_frm_LetterToThomas_eq_0{
+	$if_frmQuestChoice_eq_1{
+		$if_frmLetterToThomas_eq_0{
 			Gritt: I heard you're taking on the "demon". How can I help you, kid?
 			Kipp: I'll need some moonshine, it's the "demon's" weakness.
 			Gritt: Hmm. I have only a bucket of moonshine left, but that's reserved for @green{Thomas} the train captain. Tell you what, I'll give the bucket to you. But you'll have to deliver a letter to @green{Thomas} telling him that he's not getting his moonshine today. I'll give you the moonshine after that.
 			Kipp: Consider it done.
-			$set_Inventory_Letter_To_Thomas{1}
-			$set_frm_LetterToThomas{2}
-		}$elif_frm_LetterToThomas_eq_1{
+			$set_inventory_letterToThomas_1
+			$set_frmLetterToThomas_2
+		}$elif_frmLetterToThomas_eq_1{
 			Gritt: You can find Thomas at the @blue{railway station}.
-		}$elif_frm_LetterToThomas_eq_2{
+		}$elif_frmLetterToThomas_eq_2{
 			Gritt: Good job! Here is the moonshine.
-			$set_Inventory_Bucket_Of_Moonshine{1}
+			$set_inventory_bucketOfMoonshine_1
 			Kipp took the bucket of moonshine, put on his Dragonskin boots and set forth to the mines. As he approached the mine entrance, Kipp could hear faint creakings emanating from the depth of the mines. It must be the "demon". Kipp shuddered at the thought of it. Kipp gathered himself together and ventured into the darkness. He followed the creaking noise. The creaking became louder and louder as Kipp got closer to the "demon". 
 			
 			Suddenly, as shiny creature crept up from Kipp's left, its blades slashing into Kipp's left ankle. Fortunately, the Dragonskin Boots proved too much for the "demon", as its blades was stuck in it. Kipp did not let the oportunity go to waste. While the "demon" was trying to remove its blade from his boots, Kipp poured the entire bucket of moonshine onto it. The "demon" was immobilized immediately. It started shaking violently as if struck by lightning. Kipp could smell the odor of burnt metal as the "demon" sizzled. Soon, the creature lay dead on the ground. 
@@ -31,14 +31,14 @@ talk to{
 			Meanwhile, Conney's evil plan to cover-up the incident was revealed to all as the existence of the "demon" is proved. Kipp decided to leave the town as soon as possible, before Conney's men could take revenge on him.
 
 			Kipp went to the @blue{train station} and was ready to leave.
-			$set_frm_questchoice{0}
-			$set_inventory_bucket_of_moonshine{0}
-			$set_inventory_dragonskin_boots{0}
-			### $set_location_train_station
+			$set_frmQuestchoice_0
+			$set_inventory_bucketOfMoonshine_0
+			$set_inventory_dragonskinBoots_0
+			$goto_trainStation
 		}
 		
 	}
-	$elif_frm_TalkedGritt_eq_0{
+	$elif_frmTalkedGritt_eq_0{
         	Gritt: Can I help you? We have the finest flour and moonshine.
         	$choice{
             		No|
@@ -49,9 +49,9 @@ talk to{
             		Kipp: I left it at home. 
             		Gritt: Sorry, I can't sell it to you. 
         	}
-        	$set_frm_TalkedGritt{1}
+        	$set_frmTalkedGritt_1
 	}
-	$elif_frm_TalkedGritt_eq_1{
+	$elif_frmTalkedGritt_eq_1{
         	Gritt: Feel free to look around. 
 	}
 }

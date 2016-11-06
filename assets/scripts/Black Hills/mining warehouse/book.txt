@@ -16,5 +16,5 @@ inspect{
 	Procedure:
 	Find a set of magnets and a set of bow and arrow.
 	Attach one magnet to target and the other magnet to the tip of the arrow.
-	$set_frm_ReadWeaponBook{1}
+	$set_frmReadWeaponBook_1
 }

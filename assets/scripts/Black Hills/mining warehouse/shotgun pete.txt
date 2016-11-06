@@ -1,6 +1,6 @@
 talk to{
-	$if_frm_talkedshotgunpete_eq_0{
-		Shotgun Pete: Boss aked you to make a weapon to demolish the "demon". You can use anything from this warehouse. 
+	$if_frmTalkedShotgunPete_eq_0{
+		Shotgun Pete: Boss asked you to make a weapon to demolish the "demon". You can use anything from this warehouse.
 		Kipp: So what should I use to demolish the "demon"?
 		Shotgun Pete: The fast way is to just can the corrosive gas directly by pumping it to the mines.
 		Kipp: Won't that harm the future miners into the mines?
@@ -9,39 +9,39 @@ talk to{
 				Use gas directly|
 				Kipp: Pumping the gas in sounds good. Quick and easy. Who cares about the miners anyway?
 				Shotgun Pete: Alright. Bring the gas to me just to check if it's the correct one.
-				$set_frm_weaponchoice{1}
-				$inc_darkpts_1
+				$set_frmWeaponChoice_1
+				$inc_darkPts_1
 				|Build corrosive shotgun|
 				Kipp: The corrosive shotgun sounds better.
 				Shotgun Pete: Just pick up the gas and you're good to go.
 				Shotgun Pete: Bring the @yellow{corrosive gas} to me and I'll help you do it.
-				$set_frm_weaponchoice{2}
-				$inc_lightpts_1
+				$set_frmWeaponChoice_2
+				$inc_lightPts_1
 			}
-		$set_frm_talkedshotgunpete{1}
-	}$elif_frm_talkedshotgunpete_eq_1{
-		$if (there is gas in inventory){
+		$set_frmTalkedShotgunPete_1
+	}$elif_frmTalkedShotgunPete_eq_1{
+		$if_inventory_corrosiveGas_eq_1{
 			$if_frm_weaponchoice_eq_1{
 				Pete checked the gas.
 
 				Shotgun Pete: You're good to go.
-				$set_frm_talkedshotgunpete{2}
-				$set_inventory_corrosivegas{0}
-			}$elif_frm)weaponchoice_eq_2{
+				$set_frmTalkedShotgunPete_2
+			}$elif_frmWeaponChoice_eq_2{
 				Shotgun Pete used the Gutenburg-Heisenberg method to build a corrosive shotgun.
-				
+
 				Shotgun Pete: There you go.
 				$set_inventory_corrosiveshotgun{1}
-				$set_frm_talkedshotgunpete{2}
-				$set_inventory_corrosivegas{0}
+				$set_frmtalkedShotgunPete_2
+				$set_inventory_corrosiveGas_0
 			}
-		}$elif(no gas in inventory){
+		}$elif_inventory_corrosiveGas_eq_0{
 			Shotgun Pete: Bring the gas to me and I'll help you.
 		}
-	}$elif_frm_talkedshotgunpete_eq_2:
+	}$elif_frmTalkedShotgunPete_eq_2{
 		Shotgun Pete: You're good to go. Find @green{Widowmaker} for the clues to the yellow{password lock}. It would take you to a train that is directly connected to the @blue{mines}.
+	}
 }
 
 inspect{
-	Shotgun Pete is a tall and buff man.He's the "brawn" of the 2 guards. 
+	Shotgun Pete is a tall and buff man. He's the "brawn" of the 2 guards.
 }

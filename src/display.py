@@ -20,6 +20,7 @@ class Display:
             padx=0, pady=0, bd=0, selectbackground='black')
         self.text.pack()
 
+
     def draw(self):
         pixels = self.windowManager.draw()
         bufferlst = []
@@ -27,9 +28,42 @@ class Display:
             substr = ''.join(sublst)
             bufferlst.append(substr)
         bufferstr = '\n'.join(bufferlst)
+
         self.text.config(state=tk.NORMAL)
         self.text.delete(1.0, tk.END)
-        self.text.insert(tk.END, bufferstr)
+
+        start_index = 0
+        for subformat in self.windowManager._formatting:   # subformat is one tuple: (string tag, (int start_index, int end_index))
+            # account for additonal newlines when searching the bufferstr
+            adjusted_format_start = subformat[1][0] + (subformat[1][0] // self.numCols)
+            adjusted_format_end = subformat[1][1] + (subformat[1][1] // self.numCols)
+
+            plain_text = bufferstr[start_index : adjusted_format_start]     # all the text between the last formatter and the start of this formatter
+            formatted_text = bufferstr[adjusted_format_start : adjusted_format_end+1]   # all the text contained within this formatter
+
+            formatter = subformat[0]
+            is_bold = 0
+            is_italicized = 0
+            is_underlined = 0
+            formats = formatter.split('_')
+            color = "white"
+            font_style = (Globals.FontName, Globals.FontSize)
+            for format_tag in formats:
+                if format_tag == "bold":
+                    font_style = (Globals.FontName, Globals.FontSize, "bold")
+                elif format_tag == "italic":
+                    font_style = (Globals.FontName, Globals.FontSize, "italic")
+                elif format_tag == "underline":
+                    font_style = (Globals.FontName, Globals.FontSize, "underline")
+                else:
+                    color = format_tag
+                self.text.tag_config(formatter, foreground=color, font=font_style) # bold=is_bold, italic=is_italicized, underline=is_underlined
+            self.text.insert(tk.END, plain_text)
+            self.text.insert(tk.END, formatted_text, formatter)
+            start_index = adjusted_format_end + 1   # start next search after this formatter
+
+        if start_index < len(bufferstr):
+            self.text.insert(tk.END, bufferstr[start_index:])
         self.text.config(state=tk.DISABLED)
 
     def getWidget(self):

@@ -1,0 +1,36 @@
+talk to{
+	$if_inventory_ticket_eq_0{
+		Bartender: Look this is how we order drinks here in Aspire:
+		1. Find a @yellow{bottle token}. These are normally distributed as currency from the bank, but since the Chikasi Clan is holding up
+		businesss over there, the chance of getting one now is impossible.
+		2. @red{Use} the token @red{on} the vending machine over there in the corner.
+		3. Press the button of the drink you want and a @yellow{ticket} will dispense.
+		4. @red{Talk to} @green{me} again when you have that ticket and I'll hand you a drink.
+		
+	}$else{
+		#Kipp now has the ticket.
+		Bartender: Hey, you're not braindead.
+		
+		The bartender looked closely at the ticket, and threw it behind him. He then left to go to the stock room in the back. The bartender came back wearing a raditation mask and holding a red glowing drink.
+		
+		Bartender: @italic{(with no enthusiams)} Thank you for your service. Please come again, or don't. I don't care.
+		
+		Kipp hesitantly took the drink.
+		
+		Kipp: Why would anyone want to drink this?
+		
+		The bartender shurgged. @bold{*Phoenix Bolt Added to Inventory*}
+		$set_inventory_ticket_0
+		$set_inventory_phoenixBolt_1
+		
+		@bold{It will be in your best interest to save again.}
+	}
+}
+
+use random token on{
+	Bartender: Hey, I don't accept these things. Why don't you go check out the @yellow{vending maching} before coming here again.
+}
+
+give random token to{
+	Bartender: Hey, I don't accept these things. Why don't you go check out the @yellow{vending maching} before coming here again.
+}

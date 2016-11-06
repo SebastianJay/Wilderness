@@ -4,14 +4,10 @@ Contains bootstrapping code - run this script to start the game
 """
 
 from global_vars import Globals
-from window import Window
-from loading_window import LoadingWindow
-from input_window import InputWindow
-from history_window import HistoryWindow
-from map_window import MapWindow
 from window_manager import WindowManager
 from display import Display
 from input_handler import InputHandler
+from asset_loader import AssetLoader
 import tkinter as tk
 import sys
 import time
@@ -21,18 +17,13 @@ class GameDriver:
     def __init__(self):
         self.root = tk.Tk()
         self.windowManager = WindowManager(Globals.NumCols, Globals.NumRows)
-        # TODO encapsulate window instantiation in WindowManager
-        self.windowManager.addWindow(HistoryWindow(90-2, 20-2), 0+1, 0+1)
-        self.windowManager.addWindow(InputWindow(90-2, 16-2), 19+1, 0+1)
-        self.windowManager.addWindow(LoadingWindow(30-2, 35-2), 0+1, 89+1)
-        # TODO: Add MapWindow here
         self.display = Display(self.root, self.windowManager)
         self.inputHandler = InputHandler(self.display.getWidget())
 
     def mainloop(self):
         while True:
             try:
-                time.sleep(Globals.Timestep)
+                time.sleep(Globals.Timestep)    # TODO only sleep Timestep - computation time
                 keypresses = self.inputHandler.getKeyPresses()
                 self.windowManager.update(Globals.Timestep, keypresses)
                 self.display.draw()
@@ -46,7 +37,17 @@ class GameDriver:
 
 def bootstrap():
     """Perform all processes needed to start up the game"""
-    # TODO load assets
+    AssetLoader().loadAssets()  # TODO do in separate thread
+
+    # TODO move out of bootstrap
+    from game_state import GameState, GameMode
+    from lang_interpreter import Interpreter
+    GameState().areaId = 'aspire'
+    GameState().roomId = 'townCenter'
+    GameState().gameMode = GameMode.inAreaCommand
+    Interpreter().executeAction(AssetLoader().getScript('aspire/Rooms/town center.txt')[0][1])
+    GameState().refreshCommandList()
+
     GameDriver().mainloop()
 
 if __name__ == '__main__':

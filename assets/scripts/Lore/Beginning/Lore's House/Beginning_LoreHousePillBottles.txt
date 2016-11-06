@@ -1,0 +1,5 @@
+#Beginning_LoreHousePillBottles
+
+inspect{
+	The pill bottles contained various types of pain relievers. Lore had recently been getting unbearable migraines. She had sufferred from migraines before, but the auras that preceded them now were different somehow than the ones she used to get. The only thing she could do when the migraines hit was to take medicine and sleep until they went away.
+}
