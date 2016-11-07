@@ -9,7 +9,7 @@ class HistoryWindow(Window):
 
     def __init__(self, width, height):
         super().__init__(width, height)
-        self.threshold = 0.05   # Delay in seconds before each character appears on-screen
+        self.threshold = 0.033  # Delay in seconds before each character appears on-screen
         self.periodThreshold = self.threshold * 3 # Delay for periods
         self.timestep = 0.0     # Tracks the time since the last character was displayed
         self.currentChar = None # The current character
@@ -34,18 +34,15 @@ class HistoryWindow(Window):
                 if self.timestep > self.periodThreshold:
                     self.timestep -= self.periodThreshold
                     self.charLimit += 1
-            else:
-                if self.timestep > self.threshold:
-                    self.timestep -= self.threshold
-                    self.charLimit += 1
-            # pressing Space fast forwards the animation
-            for key in keypresses:
-                if key == " ":
-                    self.charLimit = self.charMax
-                    self.startingLine = self.outputLength - self.height \
-                        if self.outputLength - self.height >= 0 else 0
-                    self.allWritten = True
-                    self.timestep = 0.0
+            elif len(keypresses):
+                for key in keypresses:
+                    # Pressing space will speed up the animation
+                    if key is ' ' and self.timestep > self.threshold / 3:
+                        self.timestep -= self.threshold / 3
+                        self.charLimit += 3
+            elif self.timestep > self.threshold:
+                self.timestep -= self.threshold
+                self.charLimit += 1
         else: # Only allow scrolling if we're not writing text to the screen
             for key in keypresses:
                 if key == "Prior":
