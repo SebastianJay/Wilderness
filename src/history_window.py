@@ -10,7 +10,7 @@ class HistoryWindow(Window):
     def __init__(self, width, height):
         super().__init__(width, height)
         self.threshold = 0.033  # Delay in seconds before each character appears on-screen
-        self.periodThreshold = self.threshold * 3 # Delay for periods
+        self.periodThreshold = self.threshold * 5 # Delay for periods
         self.timestep = 0.0     # Tracks the time since the last character was displayed
         self.currentChar = None # The current character
         self.charLimit = 1      # The current number of characters that can be displayed
@@ -30,16 +30,18 @@ class HistoryWindow(Window):
         # since charLimit has been incrementing the whole time
         if self.allWritten == False:
             self.timestep += timestep
-            if self.currentChar == '.':
-                if self.timestep > self.periodThreshold:
-                    self.timestep -= self.periodThreshold
-                    self.charLimit += 1
-            elif len(keypresses):
+            if len(keypresses):
                 for key in keypresses:
                     # Pressing space will speed up the animation
                     if key is ' ' and self.timestep > self.threshold / 3:
                         self.timestep -= self.threshold / 3
                         self.charLimit += 3
+                        return
+
+            if self.currentChar == '.':
+                if self.timestep > self.periodThreshold:
+                    self.timestep -= self.periodThreshold
+                    self.charLimit += 1
             elif self.timestep > self.threshold:
                 self.timestep -= self.threshold
                 self.charLimit += 1
@@ -123,13 +125,14 @@ class HistoryWindow(Window):
             c = 0
             # fill in pixels with word content
             for ch in line:
-                if charsWritten + 1 >= self.charLimit:
-                    self.currentChar = ch
-                    stopWriting = True
-                    break
                 self.pixels[r][c] = ch
                 c += 1
                 charsWritten += 1
+
+                if charsWritten >= self.charLimit:
+                    self.currentChar = ch
+                    stopWriting = True
+                    break
 
             # fill in what remains with spaces
             for cc in range(c, self.width):
