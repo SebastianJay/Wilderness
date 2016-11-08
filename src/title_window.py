@@ -25,39 +25,61 @@ class TitleWindow(Window):
         super().__init__(width, height)
         self.pointingTo = 0
         self.art = AssetLoader().getArt('title_window.txt')
-        rCounter = 0
-        cCounter = 0
-        for i in range (0, len(self.art)):
-            if self.art[i] == "\n":
-                rCounter += 1
-                cCounter = 0
+        self.options = ('New game', 'Load game', 'Options', 'Credits', 'Exit')
+
+        maxLength = 0
+        row = self.height // 6 # Looks better than starting at 0
+        col = 0
+        # Find the longest line...
+        for i, char in enumerate(self.art):
+            if char == "\n":
+                if col > maxLength:
+                    maxLength = col
+                col = 0
             else:
-                self.pixels[rCounter][cCounter] = self.art[i]
-                cCounter += 1
-        #for i in range (0, height):
-            #for j in range (0, width):
+                col += 1
+
+        # So that we know where to center the ASCII art
+        startCol = (self.width - maxLength) // 2
+        for i, char in enumerate(self.art):
+            if char == "\n":
+                row += 1
+                col = 0
+            else:
+                self.pixels[row][col + startCol] = char
+                col += 1
+
+        # Same as above, but for the options instead.
+        # Note that the options are all left-aligned based on the center
+        # of the first option.
+        self.startRow = row + (self.height - row - len(self.options)) // 2
+        self.startCol = (self.width - len(self.options[0])) // 2
+        row = 0
+        for option in self.options:
+            col = 0
+            for char in list(option):
+                self.pixels[row + self.startRow][col + self.startCol] = char
+                col += 1
+            row += 1
 
     def update(self, timestep, keypresses):
-        for x in range (0, len(keypresses)):
-            if keypresses[x] == "Up":
-                self.pointingTo = (self.pointingTo - 1) % 4
-            elif keypresses[x] == "Down":
-                self.pointingTo = (self.pointingTo + 1) % 4
-            elif keypresses[x] == "Return":
-                if self.pointingTo == 3:
+        for key in keypresses:
+            if key == "Up":
+                self.pointingTo = (self.pointingTo - 1) % len(self.options)
+            elif key == "Down":
+                self.pointingTo = (self.pointingTo + 1) % len(self.options)
+            elif key == "Return":
+                if self.pointingTo == len(self.options) - 1:
                     sys.exit()
 
     def draw(self):
-        startRow = 20
-        column = 51
-        for x in range (0,4):
-            self.pixels[startRow + x][column] = " "
-        self.pixels[startRow + self.pointingTo][column] = ">"
+        # Clear any previous >
+        for row, temp in enumerate(self.options):
+            self.pixels[self.startRow + row][self.startCol - 4] = " "
+        self.pixels[self.startRow + self.pointingTo][self.startCol - 4] = ">"
         return self.pixels
 
 if __name__ == '__main__':
-    #with open('assets/art/title_window.txt') as f:
-    #    fstr = f.read()
-    #print(fstr)
-    window = TitleWindow(118, 33, fstr)
+    AssetLoader().loadAssets()
+    window = TitleWindow(120, 35)
     window.debugDraw()
