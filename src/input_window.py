@@ -86,11 +86,17 @@ class InputWindow(Window):
             self.pixels[rStart + self.choiceInd][cStart+1] = '>'
         else:
             midY = self.height // 2
-            cStart = 3
+            startCol = 3
             # add current command input
             cmdBuffer = gs.cmdBuffer
             fullLine = '>> ' + cmdBuffer + ('_' if len(cmdBuffer) < Globals.CmdMaxLength else '')
-            for i, c in enumerate(fullLine):
-                self.pixels[midY][cStart + i] = c
+            col = 0
+            for i, char in enumerate(fullLine):
+                # Start a new line if necessary
+                if startCol + col >= self.width:
+                    midY += 1
+                    col = startCol
+                self.pixels[midY][startCol + col] = char
+                col += 1
 
         return self.pixels
