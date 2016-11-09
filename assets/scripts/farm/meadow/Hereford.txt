@@ -1,0 +1,9 @@
+Talk to{
+Kipp: Beautiful day, isn¡¯t it, Hereford the leading cow?Do you have a happy Moo-d?
+}
+Milk{ 
+Kipp: Easy Miss, it will be quick. 
+Hereford: (responds with a moo)
+Kipp: I like the milk, purely white, fresh and free of additive
+$set_inventory_milk_1
+}

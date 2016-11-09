@@ -1,0 +1,28 @@
+look around{
+The room is decorated with paintings and handcrafts made by Kipp when he is young. The room is warm and cozy. This is where Kipp and his brother @green{Rice} played @yellow{World of Farmcraft}.@green{Rice} is siting on the sofa. 
+}
+Go outside{
+@blue{house}
+}
+
+go to{
+$if_farmap_eq_1{
+	When Kipp went downstairs, he glanced at the world outside. The night gently caressed the endless meadow and the house was shinning in golden twilight. He was enchanted by this scene until his mother called his name. He found his whole family was waiting for him in the living room. It occurred to him that today is his 18th birthday. After enjoying a turkey with the whole family, he calmly stated his decision: he will go to Wilderness.
+	Kipp's father: Such nonsense. Do you know how much effort I put to make you live this comfortable life?
+	$choice{
+		Yes|: Peace, quiet, and 200 acres to plant my dreams and ideas in. At least that’s what you told me. I am grateful dad, but it's time for me to go outside to explore the world. I don't want to live your life, farm, milk, day in and day out. I want to this the world. 
+		
+		|No|: I am grateful for all you did, but it's time for me to go outside to explore the world. I don't want to live your life, farm, milk, day in and day out. I want to this the world. 
+	}
+	Kipp's father: Fine, if you walk out this door, don't come back. 
+	Kipp's mother: Kipp, please. Apologize to your father, you are not enemies.
+	Kipp's brother: Brother, I support you. You should go outside and see more. But now? How can you defend yourself? You are my small brother and I don't want anything bad happen to you. 
+	$choice{
+		OK,I will stay, we can bring this up later| Kipp returned to his bedroom and started packing. When everyone fell asleep, he left Charli where he was born and raised. 
+		|I have made my mind| Nothing can change my decision. Father, mother, brother, I love you and I will never forget you on my adventure. Packing up all his stuff, he left Charli where he was born and raised with his mother sobbing at door. 
+	}
+}
+$else{
+	Kipp entered the room. This room is connected with @blue{kitchen} and @blue{bedroom}
+}
+}
