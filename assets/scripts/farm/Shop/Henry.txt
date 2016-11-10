@@ -1,19 +1,19 @@
-Talk to {
-	Kipp :Hi Uncle Henry!
-	Owner: Howdy Kipp, isn¡¯t it a nice day to milk some cow?
+talk to {
+	Kipp: Hi Uncle Henry!
+	Henry: Howdy Kipp, isn't it a nice day to milk a cow?
 
-$if_milk_eq_1{
+$if_inventory_milk_eq_1{
 	$choice{
 		Sell milk to Henry|
-			Kipp: What a coincidence Uncle Henry, I happen to have fresh milk. (Show you milk container) Wanna buy some? 
-			Owner: sure, here is 50 cents for you, my little boy. Oh here is a map one bugger gave to me in exchange for 2 bread yesterday. He was bragging about finding treasure through the map. Why don¡¯t him go find it himself. Anyway, thought you might be interested. 
+			Kipp: What a coincidence Uncle Henry, I happen to have fresh milk. *shows milk container* Wanna buy some?
+			Henry: Sure, here is 50 cents for you, my little boy. By the way, here is a map one bugger gave to me in exchange for 2 loaves of bread yesterday. He was bragging about treasure marked on the map. Why doesn't he go find it himself? Anyway, thought you might be interested.
 			$set_inventory_dirtymap_1
+			$set_inventory_milk_0
 		|Do not sell milk|
 			Kipp: Yes, what a day! See you later Henry!
 			}
 			}
 $else{
-	Kipp: Yes, what a day! I will do that right away. 
+	Kipp: Yes, what a day! I will do that right away.
 }
-
 }

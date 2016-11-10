@@ -1,7 +1,7 @@
 go to{
-Sweet sweet home for Kipp. This bedroom stores all his stories in this world: his first sight of the world; his first cry; his first dream.
+Sweet sweet home for Kipp. This bedroom stores all his memories in this world: his first sight of the world; his first cry; his first dream.
 }
 
 look around{
-There was a twin size @yellow{bed} in the middle of the room. On the east side of the wall, there hung a small @yellow{map}.  
+There was a twin size @yellow{bed} in the middle of the room. On the east side of the wall, there hung a small @yellow{map}.
 }

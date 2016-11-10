@@ -1,3 +1,3 @@
-Pat{
-Duke the leading sheep is so comfortable that he turns to lick your hand. 
+pat{
+Kipp patted Duke, the leading sheep, on the neck. Duke was so comfortable that he turned to lick his hand.
 }

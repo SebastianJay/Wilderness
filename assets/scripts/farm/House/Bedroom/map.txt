@@ -1,8 +1,3 @@
 inspect {
-$if_farmLookedAtMap_eq_0{
 This map was a gift from the shop owner @green{Henry}. He was a bold man who had traveled all places shown on the map. This map showed locations of @blue{Aspire} and @blue{Black Hills}.
-$set_farmLookedAtMap_1
-}$else{
-Kipp already looked at the map.
-}
 }
