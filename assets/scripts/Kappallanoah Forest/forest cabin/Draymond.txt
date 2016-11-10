@@ -1,6 +1,8 @@
 inspect{
 	Draymond is 6 years old. He was playing with his toy train.
 }
+
+talk to{
 	$if_companionB_1{
 		$if_frmTalkedDraymond_eq_0{
 			$choice{
@@ -29,9 +31,9 @@ inspect{
 				Kipp: That's a nice train you've got there! Want to make it even more @italic{fun}?
 				Draymond: Of course! Show me show me!
 				Alodar: Abracadabra!
-				
-				After Alodar uttered the spell, the toy train floated in the air and started dashing around like a bird. 
-				
+
+				After Alodar uttered the spell, the toy train floated in the air and started dashing around like a bird.
+
 				Draymond: *gasp* That's magic!
 				Alodar: *wink*
 				$set_frmTalkedDraymond_1
@@ -50,11 +52,11 @@ inspect{
 				Draymond: I don't trust you!
 				|intimidate Draymond|
 				Kipp: What are you gonna do, Draymond? Cry to you @italic{mommy}?
-				
+
 				Draymond started to cry.
 			}
 			$set_frmTalkedDraymond_1
-			
+
 		}$elif_frmTalkedDraymond_eq_1{
 			Draymond: GO AWAY!
 		}
