@@ -1,6 +1,6 @@
 talk to{
-    if $frmTalkedToddandZodd_eq_0:{
-        Kipp went up to the @green{Todd and Zodd}. They were sweating profusely as they labored undered the sweltering sun. @green{Todd and Zodd} struggled to unload a a huge chunk of marble from the train.
+    $if_frmTalkedToddandZodd_eq_0{
+        Kipp went up to @green{Todd and Zodd}. They were sweating profusely as they labored under the sweltering sun. @green{Todd and Zodd} struggled to unload a a huge chunk of marble from the train.
         $choice{
             Extend a helping hand|
             Kipp:Do you guys need a hand?
@@ -12,23 +12,23 @@ talk to{
             Kipp: !!!
             Todd and Zodd: Anyway, have these @yellow{medicine} just in case. We gotta go back to work.
             Kipp: Thank you!
-   	    $inc_brotherPts_1
-	    $inc_lightPts_1
+   	        $inc_brotherPts_1
+	          $inc_lightPts_1
             |Offer some advice|
             Kipp: This would go much easier if you use a ramp. It would save you a lot of work.
-	    Todd and Zodd: Wow! That's some great advice. Thank you buddy!
+	          Todd and Zodd: Wow! That's some great advice. Thank you buddy!
             $inc_derelictPts_1
-	    $inc_lightPts_1
-	    |Laugh at them|
-	    Kipps: My friends, you have a terrible job. It's like 200 degrees out here!
-	    Todd and Zodd: Life's tough these days with all the troubles at the @blue{mines}. A man's gotta eat.
+	          $inc_lightPts_1
+	          |Laugh at them|
+	          Kipp: My friends, you have a terrible job. It's like 200 degrees out here!
+	          Todd and Zodd: Life's tough these days with all the troubles at the @blue{mines}. A man's gotta eat.
             Kipp: Whatever, boys. Have fun.
-	    $inc_fugitivePts_1
-	    $inc_darkPts_1
+	          $inc_fugitivePts_1
+	          $inc_darkPts_1
         }
-	$set_frmTalkedToddandZodd_1 
+	   $set_frmTalkedToddandZodd_1
      }if $frmTalkedToddandZodd_eq_1{
-         Todd and Zodd: We gotta get working or the boss's kick our butts.
+        Todd and Zodd: We gotta get working or the boss's kick our butts.
      }
 }
 

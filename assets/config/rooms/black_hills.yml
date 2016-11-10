@@ -1,0 +1,75 @@
+## Black Hills rooms
+
+railwayStation:
+    name: Railway Station
+    description: n/a
+    script: Black Hills/train station/train station.txt
+    r: 0
+    c: 0
+    neighbors:
+        generalStore: S
+    objects:
+        - conney
+        - thomas
+        - toddAndZodd
+        - trainSchedule
+        - wantedSign
+generalStore:
+    name: General Store
+    description: n/a
+    script: Black Hills/general store/general store.txt
+    r: 0
+    c: 0
+    neighbors:
+        railwayStation: N
+        hospital: S
+    objects:
+        - druGeneral
+        - gritt
+        - kaven
+        - newspaper
+        - poster
+hospital:
+    name: Hospital
+    description: n/a
+    script: Black Hills/hospital/hospital.txt
+    r: 0
+    c: 0
+    neighbors:
+        generalStore: N
+        townTreasury: W
+        miningCompany: E
+    objects:
+        - baha
+        - flyer
+        - rani
+        - rosanto
+        - table
+townTreasury:
+    name: Town Treasury
+    description: n/a
+    script: Black Hills/town treasury/town treasury.txt
+    r: 0
+    c: 0
+    neighbors:
+        hospital: E
+    objects:
+        - bronzeShovel
+        - silverPitchfork
+        - gold
+        - druTreasury
+        - marshall
+miningCompany:
+    name: Mining Company
+    description: n/a
+    script: Black Hills/mining warehouse/mining warehouse.txt
+    r: 0
+    c: 0
+    neighbors:
+        hospital: W
+    objects:
+        - book
+        - corrosiveGas
+        - passwordLock
+        - shotgunPete
+        - widowmaker
