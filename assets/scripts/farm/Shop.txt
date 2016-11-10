@@ -1,0 +1,3 @@
+go to{
+	This shop smelled like old woods, but the vibrating sunshine on the floor made it full of vitality. On the left side placed every tool for farming that you can imagine. The right side was where the shop owner buys stuff from customers. Uncle @green{Henry} was standing in the middle of the room. 
+}

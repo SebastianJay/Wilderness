@@ -1,0 +1,16 @@
+talk to{
+	£Àgreen{Rice}: brother, do you know why our father end up in @blue{Charli}? 
+		$choice{
+		Yes|
+			Kipp: Yes I know that. He told me a million times. Nobody knows when @blue{Charli} was formed. This large farm was constructed by my maternal grand grandfather and when dad married  mom, he inherited the farm and has lived here ever after. @blue{Charli} was at the far side of Wilderness. Here, farm and harvest is the theme of life. Residents here live such peaceful life that man slaughtering monsters and great magicians are considered the wildest lore to fascinate children. 
+			Rice: Ok, you know a lot. Do you know why dad come here? Let me tell you. So after our grandparents got murdered, having nowhere to go, he took the only option his parents gave him and planned his new life on the farm. The rural life was different. At the start, my dad had no clue what he was doing. The neighbor¡¯s kid would sit on the old post and laugh at him. Eventually she would take pity on him and show him how it was done. Days would pass and this became a regular thing. In the end, that girl taught that city boy how to farm. She would still think that he was different, but I guess it was a good different. My dad says that their relationship would only get better from there. He said that too for the rest of the town. He felt for the first time his life was stable, that he had a place to call home.
+		|No|
+			Rice: OK, let me tell you. So after our grandparents got murdered, having nowhere to go, he took the only option his parents gave him and planned his new life on the farm. The rural life was different. At the start, my dad had no clue what he was doing. The neighbor¡¯s kid would sit on the old post and laugh at him. Eventually she would take pity on him and show him how it was done. Days would pass and this became a regular thing. In the end, that girl taught that city boy how to farm. She would still think that he was different, but I guess it was a good different. My dad says that their relationship would only get better from there. He said that too for the rest of the town. He felt for the first time his life was stable, that he had a place to call home.
+	}
+}
+
+play @yellow{World of Farmcraft}{
+	Kipp: Hey Rice, wanna play farmcraft?
+	Rice: I will pass. I feel too tired today. You can keep that board game. By the way, didn't you have to milk the cow on the @blue{meadow}?
+	$set_inventory_farmcraft_1
+}

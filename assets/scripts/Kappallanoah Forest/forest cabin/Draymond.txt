@@ -1,0 +1,62 @@
+inspect{
+	Draymond is 6 years old. He was playing with his toy train.
+}
+	$if_companionB_1{
+		$if_frmTalkedDraymond_eq_0{
+			$choice{
+				compliment his train|
+				Rice: Wow! You have a model train? Can I see it?
+				Draymond: Ok.
+				Rice: The Thom-RTX-96 model! It was my FAVORITE! You have good tastes kiddo!
+				Draymond: I know! It's the best!
+				|give him some tips|
+				Rice: Nice train you've got there! I'm impressed.
+				Draymond: Of course! I'm the @italic{bestest} at making train models.
+				Rice: You can still improve it though. See the wheels over there? They're creaking. But if you just put some butter between the axis, it would go much smoother.
+				Draymond: Wooo! I can do that
+			}
+			$set_frmTalkedDraymond_1
+		}$elif_frmTalkedDraymond_eq_1{
+			Draymond: Choo-choo! Choo-choo!
+		}
+	}$elif_companionD_1{
+		$if_frmTalkedDraymond_eq_0{
+			$choice{
+				compliment Draymond's train|
+				Kipp: That's a nice train you've got there.
+				Draymond: Thank you! It's newest Thom-RTX-96 model.
+				|do something fun with his train|
+				Kipp: That's a nice train you've got there! Want to make it even more @italic{fun}?
+				Draymond: Of course! Show me show me!
+				Alodar: Abracadabra!
+				
+				After Alodar uttered the spell, the toy train floated in the air and started dashing around like a bird. 
+				
+				Draymond: *gasp* That's magic!
+				Alodar: *wink*
+				$set_frmTalkedDraymond_1
+			}
+		}$elif_frmTalkedDraymond_eq_0{
+			Draymond: Show me more tricks pleeeeease!
+			Alodar: *wink* Maybe next time.
+		}
+	}$elif_companionF_1{
+		$if_frmTalkedDraymond_eq_0{
+			Jinx: Oooh. You'll sooo cute with your little choo-choo train. What if I crushed it though, would you cry?
+			Draymond: *gasp* It's mine! Don't touch it you bad woman!
+			$choice{
+				comfort Draymond|
+				Kipp: She's only joking! We're nice people! There's is no need to be afraid!
+				Draymond: I don't trust you!
+				|intimidate Draymond|
+				Kipp: What are you gonna do, Draymond? Cry to you @italic{mommy}?
+				
+				Draymond started to cry.
+			}
+			$set_frmTalkedDraymond_1
+			
+		}$elif_frmTalkedDraymond_eq_1{
+			Draymond: GO AWAY!
+		}
+	}
+}

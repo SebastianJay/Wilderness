@@ -9,6 +9,7 @@ from map_window import MapWindow
 from history_window import HistoryWindow
 from title_window import TitleWindow
 from palette_window import PaletteWindow
+from global_vars import Globals
 
 # TODO inherit from Window
 class WindowManager:
@@ -47,14 +48,14 @@ class WindowManager:
         # add help window
         # add credits window
         # add select file window
-        self.addWindow(HistoryWindow, 0, 0, 25, 95)
-        self.addWindow(InputWindow, 24, 0, 11, 95)
-        self.addWindow(PaletteWindow, 0, 94, 35, 25)
-        #self.addWindow(LoadingWindow, 0, 94, 35, 25)
-        self.addWindow(MapWindow, 0, 0, 35, 120)
+        self.addWindow(HistoryWindow, 0, 0, Globals.NumRows * 5 // 7, Globals.NumCols * 5 // 6)
+        self.addWindow(InputWindow, Globals.NumRows * 5 // 7 - 1, 0, Globals.NumRows * 2 // 7 + 1, Globals.NumCols * 5 // 6)
+        self.addWindow(PaletteWindow, 0, Globals.NumCols * 19 // 24 - 1, Globals.NumRows, Globals.NumCols * 5 // 24)
+        #self.addWindow(LoadingWindow, 0, Globals.NumCols * 19 // 24 - 1, Globals.NumRows, Globals.NumCols * 5 // 24)
+        self.addWindow(MapWindow, 0, 0, Globals.NumRows, Globals.NumCols * 3 // 4)
         # add in-area map window
         # add inventory window
-        self.addWindow(TitleWindow, 0, 0, 35, 120)
+        self.addWindow(TitleWindow, 0, 0, Globals.NumRows, Globals.NumCols)
 
         # create History/Input/Palette/Help group
         self._windowGroups = [

@@ -5,13 +5,17 @@ go to{
 	$if_brotherPts_gt_derelictPts{
 	$if_brotherPts_gt_fugitivePts{
 	$set_companionB_1
+	$set_companionName_Rice
 	}$else{
 	$set_companionF_1
+	$set_companionName_Jinx
 	}
 	}$elif_derelictPts_gt_fugitivePts{
 	$set_companionD_1
+	$set_companionName_Alodar
 	}$else{
 	$set_companionF_1
+	$set_companionName_Jinx
 	}
 	Kipp still couldn't take his mind off what happened in the town. The world was changing. Kipp was glad that he chose to explore the outside world: there were so many new things to see and do.
 		
@@ -61,8 +65,10 @@ go to{
 	Kipp: *gasp* How is this possible? It should been burnt down years ago!
 	
 	Kappallanoah Forest. Such a familiar yet distant place for Kipp. When Kipp was young, his father used to take the entire family there after the crops were harvested. They would hike, hunt and huddle around the campfire at 5 am to catch the glorious sunrise. The good times ended when Kipp was 12. The forest was "burned down to ashes by a forest fire", according to Kipp's father. Kipp never went there again. The booming camp area, however, seemed to suggest a different story.	
+	
+	The @blue{forest cabin} was connected to Kipp's family's @blue{abandoned treehouse}, the @blue{lumber mill} and the @blue{hunting range} to the south.
 }
 
 inspect{
-	A family was residing within the cabin. They were very friendly and welcomed Kipp and his companion inside. The residents are a family of three: @green{Gerald} the father, @green{Bethy} the mother and @{Draymond} the child. There was an @yellow{information booklet} on the table and a @yellow{poster} on the wall.	
+	A family was residing within the cabin. They were very friendly and welcomed Kipp and his companion inside. The residents are a family of three: @green{Gerald} the father, @green{Bethy} the mother and @{Draymond} the child. @green{Draymond} was playing with his toThere was an @yellow{information booklet} on the table and a @yellow{poster} on the wall. 
 }

@@ -1,0 +1,13 @@
+go to{
+Kipp entered the room and heard his mother @green{Doloreas} speak to him.
+ 
+Doloreas: Hello my little boy, how¡¯s your sleep last night? Come to have some bacon!
+}
+
+look around{
+The kitchen smelled like sweet honey. The fragrance of bacon on the pan resonated with the smell from the sandalwood wall. The kitchen had dark brown cabinets with two double doors. These cabinets were filled with dishes, cups and bowls and spices along with a box of assorted celestial seasonings on one side and two boxes of oatmeal on the other. Kipp's mother @green{Doloreas} was standing by the hot oven.
+}
+
+go to have bacon{
+	Kipp: yummy! Thanks mom, I feel energized.
+}

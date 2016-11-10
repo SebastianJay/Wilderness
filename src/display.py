@@ -9,15 +9,13 @@ from global_vars import Globals
 class Display:
     def __init__(self, root, windowManager):
         self.windowManager = windowManager
-        self.xRes = Globals.NumCols
-        self.yRes = Globals.NumRows
         self.numCols = Globals.NumCols
         self.numRows = Globals.NumRows
         self.root = root
 
-        self.text = tk.Text(self.root, width=self.xRes, height=self.yRes, background='black',
+        self.text = tk.Text(self.root, width=Globals.NumCols, height=Globals.NumRows, background='black',
             foreground='white', state=tk.DISABLED, font=(Globals.FontName, Globals.FontSize),
-            padx=0, pady=0, bd=0, selectbackground='black')
+            padx=0, pady=0, borderwidth=0, selectbackground='black')
         self.text.pack()
 
 
