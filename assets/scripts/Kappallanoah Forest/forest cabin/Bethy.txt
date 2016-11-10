@@ -1,0 +1,19 @@
+inspect{
+	Bethy was a stocky women in her late thirties.
+}
+
+talk to{
+	$if_companionD_eq_1{
+		$if_frmTalkedBethy_eq_0{
+			Bethy: Gentlemen, this is our family cabin. We would be grateful if you'll give us some privacy.
+			Alodar: Indeed, my kind lady. We do not wish to bring you trouble. We're just 2 weary travelers seeking help.
+			Bethy: Then how can we help you?
+			$choice{
+				Ask about places to explore|
+				Kipp: We're new to this place. Can you tell us what's around here?
+				Bethy: Of course! 
+				
+			}
+		}
+	}
+}
