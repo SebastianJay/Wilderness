@@ -18,8 +18,9 @@ class GameMode(Enum):
     inAreaInput         =5
     inAreaMap           =6
     inAreaInventory     =7
-    worldMap            =8
-    worldMapOverArea    =9
+    inAreaAnimating     =8
+    worldMap            =9
+    worldMapOverArea    =10
 
 class GameState:
     # Python singleton implementation adapted from
@@ -102,7 +103,6 @@ class GameState:
             ## end DEBUG1
 
         def addLangNode(self, node):
-            self.historyBuffer += "\n"  # leading newline
             prevBufferLen = len(self.historyBuffer) # offset for formatting indices
             self.historyBuffer += node.text # append the LangNode text
             # append the LangNode formatting
