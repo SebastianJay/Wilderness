@@ -21,13 +21,17 @@ class GameDriver:
         self.inputHandler = InputHandler(self.display.getWidget())
 
     def mainloop(self):
+        dt = 0.0
         while True:
             try:
-                time.sleep(Globals.Timestep)    # TODO only sleep Timestep - computation time
+                time.sleep(Globals.Timestep - dt if Globals.Timestep - dt > 0.0 else 0.0)
+                time1 = time.time()
                 keypresses = self.inputHandler.getKeyPresses()
                 self.windowManager.update(Globals.Timestep, keypresses)
                 self.display.draw()
                 self.root.update()
+                time2 = time.time()
+                dt = time2 - time1
             except tk.TclError: # window was closed
                 sys.exit()
             except: # some other exception occurred
