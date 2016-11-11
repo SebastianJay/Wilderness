@@ -49,8 +49,9 @@ def bootstrap():
     GameState().areaId = 'aspire'
     GameState().roomId = 'townCenter'
     GameState().gameMode = GameMode.inAreaCommand
-    Interpreter().executeAction(AssetLoader().getScript('aspire/Rooms/town center.txt')[0][1])
-    GameState().refreshCommandList()
+    i = Interpreter()
+    i.executeAction(AssetLoader().getScript('aspire/Rooms/town center.txt')[0][1])
+    i.refreshCommandList()
 
     GameDriver().mainloop()
 

@@ -5,6 +5,7 @@ Contains routines for executing the game's custom language.
 from global_vars import Globals
 from game_state import GameState, GameMode
 from lang_parser import BodyNode, LangNode, FuncNode
+from asset_loader import AssetLoader
 from random import randint
 
 class Interpreter:
@@ -190,13 +191,77 @@ class Interpreter:
     def resume(self, val):
         """ completes a choice or input function with a value """
         self.drainCallStack(val)
-        GameState().refreshCommandList()
+        self.refreshCommandList()
 
     def executeAction(self, body):
         """ wrapper around stack manipulation to execute a BodyNode """
         self.callStack.append([body, 0])
         self.drainCallStack()
-        GameState().refreshCommandList()
+        self.refreshCommandList()
+
+    def refreshCommandList(self):
+        """ Updates GameState cmdMap to contain all commands player can type """
+        # locate the rooms and objects configs
+        loader = AssetLoader()
+        gs = GameState()
+        area = loader.getConfig(Globals.AreasConfigPath)[gs.areaId]
+        items = loader.getConfig(Globals.ItemsConfigPath)
+        rooms = loader.getConfig(area['roomsConfig'])
+        objects = loader.getConfig(area['objectsConfig'])
+        # locate the relevant scripts
+        cmdMap = {}
+        roomScript = loader.getScript(rooms[gs.roomId]['script'])
+        objectNames = []
+        objectScripts = []
+        for obj in rooms[gs.roomId]['objects']:
+            objectNames.append(objects[obj]['name'])
+            objectScripts.append(loader.getScript(objects[obj]['script']))
+        # fill out the mapping, starting with 'go to'
+        cmdMap['go to'] = {}
+        for neighbor in rooms[gs.roomId]['neighbors']:
+            neighborName = rooms[neighbor]['name']
+            neighborScript = loader.getScript(rooms[neighbor]['script'])
+            neighborReaction = None
+            for action in neighborScript:
+                if action[0] == 'go to':
+                    neighborReaction = action[1]
+            cmdMap['go to'][neighborName] = neighborReaction
+        # go through actions to take on room
+        for action in roomScript:
+            # ignore 'go to' current room (not possible)
+            if action[0] == 'go to':
+                continue
+            cmdMap[action[0]] = action[1]
+        # prefill 'use <item>'
+        cmdMap['use'] = {}
+        for item in gs.inventory:
+            if int(gs.inventory[item]) == 0:
+                continue
+            itemName = items[item]['name']
+            cmdMap['use'][itemName] = None
+        # go through actions to take on objects
+        for i in range(len(objectScripts)):
+            objScript = objectScripts[i]
+            objName = objectNames[i]
+            for action in objScript:
+                # "use .. on" needs special treatment for inventory items
+                verbWords = action[0].split()
+                if verbWords[0] == 'use' and verbWords[-1] == 'on':
+                    itemWord = ' '.join(verbWords[1:-1])
+                    itemKey = loader.reverseItemLookup(itemWord)
+                    targetPhrase = 'on ' + objName
+                    if itemKey == '':
+                        raise Exception('script item name', itemWord ,'not found in items configuration file')
+                    if itemKey in gs.inventory and int(gs.inventory[itemKey]) > 0:
+                        if cmdMap['use'][itemWord] is None:
+                            cmdMap['use'][itemWord] = {}
+                        cmdMap['use'][itemWord][targetPhrase] = action[1]
+                # all other verbs are straightforward
+                else:
+                    if action[0] not in cmdMap:
+                        cmdMap[action[0]] = {}
+                    cmdMap[action[0]][objName] = action[1]
+        gs.cmdMap = cmdMap
 
 if __name__ == '__main__':
     i = Interpreter()
