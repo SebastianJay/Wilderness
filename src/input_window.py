@@ -27,10 +27,12 @@ class InputWindow(Window):
                     self.choiceInd = (self.choiceInd + 1) % len(gs.choiceList)
                 elif key == 'Return':
                     self.interpreter.resume(self.choiceInd)
-        else:
+        elif gs.gameMode == GameMode.inAreaCommand or gs.gameMode == GameMode.inAreaInput:
             for key in keypresses:
                 # key is printable -> add it to buffer
                 if len(key) == 1:
+                    if len(gs.cmdBuffer) == 0 and key == ' ':
+                        continue    # ignore 1st char spaces as that is used to advance text
                     gs.appendCmdBuffer(key)
                 # key is backspace -> pop one char from buffer
                 elif key == 'BackSpace':
@@ -39,7 +41,7 @@ class InputWindow(Window):
                 elif key == 'Return':
                     if gs.gameMode == GameMode.inAreaInput:
                         self.interpreter.resume(gs.cmdBuffer)
-                    else:   # TODO if inAreaCommand
+                    else:   # GameMode.inAreaCommand
                         cmdString = gs.cmdBuffer.strip()
                         prefixTree = gs.cmdMap
                         while cmdString:
@@ -61,8 +63,6 @@ class InputWindow(Window):
                                         break
                             if val is None:
                                 break
-
-                    #gs.debugAddHistoryLine(gs.cmdBuffer)
                     gs.clearCmdBuffer()
 
     def draw(self):
@@ -84,7 +84,7 @@ class InputWindow(Window):
                 r += 1
             self.pixels[rStart + self.choiceInd][cStart] = '>'
             self.pixels[rStart + self.choiceInd][cStart+1] = '>'
-        else:
+        elif gs.gameMode == GameMode.inAreaCommand or gs.gameMode == GameMode.inAreaInput:
             midY = self.height // 2
             startCol = 3
             # add current command input

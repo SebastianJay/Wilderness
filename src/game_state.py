@@ -71,7 +71,9 @@ class GameState:
             self.cmdBuffer = ""         # command that player is currently typing
             self.cmdMap = {}            # "trie" of commands player can type
             self.choiceList = []        # list of strings of choices player can make
-            self.gameMode = GameMode.titleScreen    # the "mode" of game player is in
+            self.gameModeLocked = False # controllers can lock the state until they are ready to proceed
+            self.gameModeLockedRequests = []    # set requests are queued until game state is unlocked
+            self.gameModeActive = GameMode.titleScreen    # the "mode" of game player is in
 
         def appendCmdBuffer(self, ch):
             """ Add to the command buffer, but do not overflow """
@@ -153,6 +155,30 @@ class GameState:
         def mapLocation(self, val):
             self.subStates[self.activeProtagonistInd].mapLocation = val
 
+        # the gameMode property exposed by the GameState has a notion of locking
+        # which is useful for animations like text scrolling and loading windows
+        @property
+        def gameMode(self):
+            return self.gameModeActive
+        @gameMode.setter
+        def gameMode(self, val):
+            if self.gameModeLocked:
+                self.gameModeLockedRequests.append(val)
+            else:
+                self.gameModeActive = val
+        def lockGameMode(self, val):
+            if self.gameModeLocked:
+                return  # ignore if already locked
+            self.gameModeLocked = True
+            self.gameModeLockedRequests.append(self.gameModeActive)
+            self.gameModeActive = val
+        def unlockGameMode(self):
+            if not self.gameModeLocked:
+                return  # ignore if already unlocked
+            self.gameModeLocked = False
+            self.gameModeActive = self.gameModeLockedRequests.pop()
+            self.gameModeLockedRequests = []
+
         def refreshCommandList(self):
             """ Updates cmdMap to contain all commands player can type """
             # locate the rooms and objects configs
@@ -224,7 +250,8 @@ class GameState:
             for i in range(len(obj['subStates'])):
                 obj['subStates'][i] = obj['subStates'][i].__dict__
             # do not save non-persistent fields
-            deleteFields = ['cmdMap', 'cmdBuffer', 'gameMode', 'choiceList']
+            deleteFields = ['cmdMap', 'cmdBuffer', 'gameModeActive', 'choiceList',
+                'gameModeLocked', 'gameModeLockedRequests']
             for field in deleteFields:
                 del obj[field]
             return json.dumps(obj)

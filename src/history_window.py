@@ -21,10 +21,7 @@ class HistoryWindow(Window):
         self.rowIndices = []    # Mappings of char indices in history buffer for particular rows
         self.startingLine = 0   # Index of line to start displaying in window
 
-        self.allWritten = True  # True if everything has been displayed, false otherwise
-
     def update(self, timestep, keypresses):
-        # TODO refactor
         # do word wrapping logic, but only when more has been added to buffer since last update
         historyProcessed = self.historyBufferWatch[GameState().activeProtagonistInd]
         if len(GameState().historyBuffer) > historyProcessed:
@@ -57,12 +54,10 @@ class HistoryWindow(Window):
             self.historyBufferWatch[GameState().activeProtagonistInd] = len(GameState().historyBuffer)
             self.wrappedLines.extend(output_list)
             self.rowIndices.extend(row_indices)
-            self.allWritten = False # start animation
+            GameState().lockGameMode(GameMode.inAreaAnimating)  # switch out game mode until animation finished
 
-        # Only increment charLimit when there's unrendered text still to be displayed
-        # Otherwise, there will be no delay when the next batch of text is sent
-        # since charLimit has been incrementing the whole time
-        if self.allWritten == False:
+        # increment charLimit in certain time increments to advance scrolling animation
+        if GameState().gameMode == GameMode.inAreaAnimating:
             self.timestep += timestep
             unwrappedText = ''.join(self.wrappedLines)
             speedFlag = False
@@ -71,7 +66,7 @@ class HistoryWindow(Window):
             for key in keypresses:
                 if key == ' ':
                     speedFlag = True
-                elif key == 'Return' and Globals.IsDev:
+                elif key == 'Next' and Globals.IsDev:
                     skipFlag = True
                     break
             if not skipFlag:
@@ -89,7 +84,7 @@ class HistoryWindow(Window):
             # check if animation is complete
             if self.charLimit >= len(unwrappedText)+1 or skipFlag:
                 self.charLimit = len(unwrappedText)+1
-                self.allWritten = True
+                GameState().unlockGameMode()
             # update starting line based on where the animation index is at
             lineIndex = 0
             charCounter = 0
@@ -119,11 +114,11 @@ class HistoryWindow(Window):
             c = 0
             # fill in pixels with word
             for ch in line:
-                self.pixels[r][c] = ch
-                charsWritten += 1
                 if charsWritten >= self.charLimit:
                     stopWriting = True
                     break
+                self.pixels[r][c] = ch
+                charsWritten += 1
                 c += 1
             # fill in what remains with spaces
             for cc in range(c, self.width):
@@ -143,8 +138,8 @@ class HistoryWindow(Window):
         for style in input_formatting:
             first_index = row_indices[0][0]
             last_index = row_indices[-1][1]
-            if not self.allWritten and r < len(row_indices):
-                last_index = row_indices[r][0] + c - 1 # bound formatted text to what's displayed
+            if GameState().gameMode == GameMode.inAreaAnimating and r < len(row_indices):
+                last_index = row_indices[r][0] + c # bound formatted text to what's displayed
             for indices in input_formatting[style]:
                 start_index = indices[0]
                 end_index = indices[1]
