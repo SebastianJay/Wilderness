@@ -45,13 +45,17 @@ class WindowManager:
 
     def initWindows(self, screenrows, screencols):
         """ Instantiates all Windows needed in game at the start """
+        #self.addWindow(LoadingWindow, 0, Globals.NumCols * 19 // 24 - 1, Globals.NumRows, Globals.NumCols * 5 // 24)
         # add help window
         # add credits window
         # add select file window
-        self.addWindow(HistoryWindow, 0, 0, Globals.NumRows * 5 // 7, Globals.NumCols * 5 // 6)
-        self.addWindow(InputWindow, Globals.NumRows * 5 // 7 - 1, 0, Globals.NumRows * 2 // 7 + 1, Globals.NumCols * 5 // 6)
-        self.addWindow(PaletteWindow, 0, Globals.NumCols * 19 // 24 - 1, Globals.NumRows, Globals.NumCols * 5 // 24)
-        #self.addWindow(LoadingWindow, 0, Globals.NumCols * 19 // 24 - 1, Globals.NumRows, Globals.NumCols * 5 // 24)
+
+        splitCol = Globals.NumCols * 19 // 24
+        splitRow = Globals.NumRows * 5 // 7
+        self.addWindow(HistoryWindow, 0, 0, splitRow, splitCol)
+        self.addWindow(InputWindow, splitRow - 1, 0, Globals.NumRows - (splitRow - 1), splitCol)
+        self.addWindow(PaletteWindow, 0, splitCol - 1, Globals.NumRows, Globals.NumCols - (splitCol - 1))
+
         self.addWindow(MapWindow, 0, 0, Globals.NumRows, Globals.NumCols * 3 // 4)
         # add in-area map window
         # add inventory window
