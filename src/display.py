@@ -31,7 +31,7 @@ class Display:
         self.text.delete(1.0, tk.END)
 
         start_index = 0
-        for subformat in self.windowManager._formatting:   # subformat is one tuple: (string tag, (int start_index, int end_index))
+        for subformat in self.windowManager.formatting:   # subformat is one tuple: (string tag, (int start_index, int end_index))
             # account for additonal newlines when searching the bufferstr
             adjusted_format_start = subformat[1][0] + (subformat[1][0] // self.numCols)
             adjusted_format_end = subformat[1][1] + (subformat[1][1] // self.numCols)
@@ -40,9 +40,6 @@ class Display:
             formatted_text = bufferstr[adjusted_format_start : adjusted_format_end+1]   # all the text contained within this formatter
 
             formatter = subformat[0]
-            is_bold = 0
-            is_italicized = 0
-            is_underlined = 0
             formats = formatter.split('_')
             color = "white"
             font_style = (Globals.FontName, Globals.FontSize)

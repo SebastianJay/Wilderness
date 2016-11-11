@@ -1,5 +1,6 @@
 """
-Definition for window manager, which takes care of multiple Windows.
+Definition for window manager, which is itself a Window that contains
+multiple sub-Windows and arranges when each is displayed/updated.
 """
 
 from window import Window
@@ -11,37 +12,28 @@ from title_window import TitleWindow
 from palette_window import PaletteWindow
 from global_vars import Globals
 
-# TODO inherit from Window
-class WindowManager:
+class WindowManager(Window):
 
-    def __init__(self, screenWidth, screenHeight):
-        self._screenWidth =  screenWidth #the width of the entire screen
-        self._screenHeight = screenHeight #the height of the entire screen
-
+    def __init__(self, width, height):
+        super().__init__(width, height)
         #list of all the windows that the window manager is going to draw
-        self._windowList = []
+        self.windowList = []
         #list of locations (top-left coordinate) of corresponding windows in windowList
-        self._windowPos = []
+        self.windowPos = []
 
         # list of list of indices that represent the windows that are part of one possible screen
-        self._windowGroups = []
+        self.windowGroups = []
         # stack of indices into windowGroups representing the active groups (what is on screen now)
-        self._activeWindowGroups = []
-
-        #this is the full 2D-array of chars that contains all the content from all the windows.
-        #this is what will display on the screen
-        self._screen = [[' ' for x in range(self._screenWidth)] for y in range(self._screenHeight)]
-        # list of (style, (start index, end index)) tuples corresponding to the style
-        self._formatting = []
+        self.activeWindowGroups = []
 
         # create instances of all the Windows
-        self.initWindows(self._screenHeight, self._screenWidth)
+        self.initWindows(self.height, self.width)
 
     def addWindow(self, windowcls, startr, startc, numrows, numcols):
         """ Creates a Window of a certain width and height at a certain location """
         # adjust the row, col, width, and height values for the border
-        self._windowList.append(windowcls(numcols - 2, numrows - 2))
-        self._windowPos.append((startr + 1, startc + 1))
+        self.windowList.append(windowcls(numcols - 2, numrows - 2))
+        self.windowPos.append((startr + 1, startc + 1))
 
     def initWindows(self, screenrows, screencols):
         """ Instantiates all Windows needed in game at the start """
@@ -62,40 +54,40 @@ class WindowManager:
         self.addWindow(TitleWindow, 0, 0, Globals.NumRows, Globals.NumCols)
 
         # create History/Input/Palette/Help group
-        self._windowGroups = [
-            (0, 1, 2),    #TODO change
+        self.windowGroups = [
+            (1, 0, 2),    #NOTE the ordering here is specific as Input gets updated before History
             (3,),
             (4,)
         ]
         # initially the first window group is on screen
-        self._activeWindowGroups = [0]
+        self.activeWindowGroups = [0]
 
     def draw(self):
         """ stitches together multiple Windows from active group into the screen """
         formatting = []
-        for groupind in self._activeWindowGroups:
-            for winind in self._windowGroups[groupind]:
-                pixels = self._windowList[winind].draw()
-                startr, startc = self._windowPos[winind]
+        for groupind in self.activeWindowGroups:
+            for winind in self.windowGroups[groupind]:
+                pixels = self.windowList[winind].draw()
+                startr, startc = self.windowPos[winind]
                 height = len(pixels)
                 width = len(pixels[0])
                 # fill in content
                 for r in range(height):
                     for c in range(width):
-                        self._screen[startr + r][startc + c] = pixels[r][c]
+                        self.pixels[startr + r][startc + c] = pixels[r][c]
                 # add border
                 for r in range(height):
-                    self._screen[startr + r][startc-1] = '|'
-                    self._screen[startr + r][startc + width] = '|'
+                    self.pixels[startr + r][startc-1] = '|'
+                    self.pixels[startr + r][startc + width] = '|'
                 for c in range(width):
-                    self._screen[startr-1][startc + c] = '-'
-                    self._screen[startr + height][startc + c] = '-'
-                self._screen[startr-1][startc-1] = 'o'
-                self._screen[startr + height][startc-1] = 'o'
-                self._screen[startr + height][startc + width] = 'o'
-                self._screen[startr-1][startc + width] = 'o'
+                    self.pixels[startr-1][startc + c] = '-'
+                    self.pixels[startr + height][startc + c] = '-'
+                self.pixels[startr-1][startc-1] = 'o'
+                self.pixels[startr + height][startc-1] = 'o'
+                self.pixels[startr + height][startc + width] = 'o'
+                self.pixels[startr-1][startc + width] = 'o'
                 # add to formatting
-                for formatter in self._windowList[winind].formatting:
+                for formatter in self.windowList[winind].formatting:
                     style, (start_index, end_index) = formatter
                     r1 = start_index // width
                     c1 = start_index % width
@@ -105,18 +97,18 @@ class WindowManager:
                     # that way the rows are broken up
                     c = c1
                     for r in range(r1, r2):
-                        f1 = (r + startr) * self._screenWidth + (c + startc)
-                        f2 = (r + startr) * self._screenWidth + (width - 1 + startc)
+                        f1 = (r + startr) * self.width + (c + startc)
+                        f2 = (r + startr) * self.width + (width - 1 + startc)
                         formatting.append((style, (f1, f2)))
                         c = 0
-                    f1 = (r2 + startr) * self._screenWidth + (c + startc)
-                    f2 = (r2 + startr) * self._screenWidth + (c2 + startc)
+                    f1 = (r2 + startr) * self.width + (c + startc)
+                    f2 = (r2 + startr) * self.width + (c2 + startc)
                     formatting.append((style, (f1, f2)))
-        self._formatting = sorted(formatting, key=lambda tup: tup[1][0])
-        return self._screen
+        self.formatting = sorted(formatting, key=lambda tup: tup[1][0])
+        return self.pixels
 
     def update(self, timestep, keypresses):
         """ sends update signal to Windows in the active group """
         # update is only send to activeWindowGroups[-1], so the foreground windows
-        for winind in self._windowGroups[self._activeWindowGroups[-1]]:
-            self._windowList[winind].update(timestep, keypresses)
+        for winind in self.windowGroups[self.activeWindowGroups[-1]]:
+            self.windowList[winind].update(timestep, keypresses)
