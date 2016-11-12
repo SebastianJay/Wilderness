@@ -18,29 +18,42 @@ class AssetLoader:
             self.reverseItem = {}
             # maps readable room name to room ID
             self.reverseRoom = {}
+            # indicates if asset loading happened
+            self.isLoaded = False
 
         def loadAssets(self, path_to_folder=Globals.AssetsRootPath):
+            # if assets already in memory do not reload
+            if self.isLoaded:
+                return
+
             # This dictionary will hold the contents of asset files in the format:
             #   key = the files path, e.g. "assets/readme.txt"
             #   value = the conents of the file
             assets = {}
 
+            # recognized filename extensions
+            whitelist_ext = ['.txt', '.wtxt', '.yml']
             # Go through each file in the specified dir and add contents to the dictionary
             for root, subdirs, files in os.walk(path_to_folder):
                 for file_name in files:
                     file_path = os.path.join(root,file_name)
                     # Normalize the given path
                     norm_path = os.path.normcase(os.path.normpath(file_path))
-                    if '.DS_Store' in norm_path:
-                        continue    # ignore .DS_Store
+                    # Check that filename ends with recognized extension
+                    ext_not_valid = True
+                    for ext in whitelist_ext:
+                        if len(norm_path) >= len(ext) and norm_path[-len(ext):] == ext:
+                            ext_not_valid = False
+                            break
+                    if ext_not_valid:
+                        continue
+                    # Store file text into dictionary
                     with open(norm_path) as f:
                         assets[norm_path] = f.read()
 
             # Do parsing of any custom scripts and yaml
             parser = Parser()  # instantiate parser on the fly
             for path in assets:
-                if path[-len('.ignore'):] == '.ignore':
-                    continue
                 if os.path.normcase(os.path.normpath('assets/scripts')) in path:
                     # replace string with parsed (string, BodyNode)[]
                     assets[path] = parser.parseScript(assets[path])
@@ -62,6 +75,8 @@ class AssetLoader:
                 roomsConfig = self.getConfig(areasConfig[area]['roomsConfig'])
                 for room in roomsConfig:
                     self.reverseRoom[area][roomsConfig[room]['name']] = room
+
+            self.isLoaded = True
 
         def getAsset(self, dirname, name):
             norm_name = os.path.normcase(os.path.normpath(name))

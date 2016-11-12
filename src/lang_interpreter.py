@@ -14,6 +14,14 @@ class Interpreter:
     def __init__(self):
         self.callStack = []
 
+    # helper method to extract the 'inventory' arg as a true/false value
+    def extractInventory(self, args):
+        if args[0] == 'inventory':
+            return args[1:], True
+        else:
+            return args, False
+
+    # helper method to execute a BodyNode
     def executeBody(self, bodyNode, nodeInd, val=None):
         gs = GameState()
         while nodeInd < len(bodyNode.nodes):
@@ -56,75 +64,39 @@ class Interpreter:
                     self.callStack[-1][1] = nodeInd + 1
                     self.callStack.append([node.inner[pick], 0])
                     return True
-                elif node.title == 'set':
-                    if len(node.args) < 1 or len(node.args) > 3:
-                        raise Exception('unexpected number of args in set')
-                    if node.args[0] == 'inventory':
-                        gs.touchInventory(node.args[1])
-                        if len(node.args) == 2:
-                            gs.inventory[node.args[1]] = '1'   #TODO
-                        else:
-                            gs.inventory[node.args[1]] = node.args[2]   #TODO
-                    else:
-                        gs.touchVar(node.args[0])
-                        if len(node.args) == 1:
-                            gs.variables[node.args[0]] = '1'
-                        elif len(node.args) == 2:
-                            gs.variables[node.args[0]] = node.args[1]
                 elif node.title == 'init':
-                    if len(node.args) < 1:
-                        raise Exception('unexpected number of args in init')
-                    gs.variables[node.args[0]] = '0'
-                elif node.title in ['inc', 'add']:
-                    if len(node.args) < 1 or len(node.args) > 3:
-                        raise Exception('unexpected number of args in inc')
-                    if node.args[0] == 'inventory':
-                        gs.touchInventory(node.args[1])
-                        if len(node.args) == 2:
-                            gs.inventory[node.args[1]] = str(int(gs.inventory[node.args[1]]) + 1)   #TODO
-                        else:
-                            gs.inventory[node.args[1]] = str(int(gs.inventory[node.args[1]]) + int(node.args[2]))   #TODO
-                    else:
-                        gs.touchVar(node.args[0])
-                        if len(node.args) == 1:
-                            gs.variables[node.args[0]] = str(int(gs.variables[node.args[0]]) + 1)
-                        elif len(node.args) == 2:
-                            gs.variables[node.args[0]] = str(int(gs.variables[node.args[0]]) + int(node.args[1]))
-                elif node.title in ['dec', 'sub']:
-                    if len(node.args) < 1 or len(node.args) > 3:
-                        raise Exception('unexpected number of args in dec')
-                    if node.args[0] == 'inventory':
-                        gs.touchInventory(node.args[1])
-                        if len(node.args) == 2:
-                            gs.inventory[node.args[1]] = str(int(gs.inventory[node.args[1]]) - 1)   #TODO
-                        else:
-                            gs.inventory[node.args[1]] = str(int(gs.inventory[node.args[1]]) - int(node.args[2]))   #TODO
-                    else:
-                        gs.touchVar(node.args[0])
-                        if len(node.args) == 1:
-                            gs.variables[node.args[0]] = str(int(gs.variables[node.args[0]]) - 1)
-                        elif len(node.args) == 2:
-                            gs.variables[node.args[0]] = str(int(gs.variables[node.args[0]]) - int(node.args[1]))
+                    args, inventoryFlag = self.extractInventory(node.args)
+                    gs.touchVar(args[0], inventoryFlag)
+                elif node.title == 'unset':
+                    args, inventoryFlag = self.extractInventory(node.args)
+                    gs.delVar(args[0], inventoryFlag)
+                elif node.title in ['set', 'inc', 'add', 'dec', 'sub']:
+                    args, inventoryFlag = self.extractInventory(node.args)
+                    # if command specifies amount to increment by use that, otherwise use 1
+                    incVal = 1
+                    if len(args) == 2:
+                        incVal = int(args[1])
+                    gs.touchVar(args[0], inventoryFlag)
+                    # whether to add to an existing total
+                    addVal = int(gs.getVar(args[0], inventoryFlag))
+                    if node.title == 'set':
+                        addVal = 0
+                    # which direction to increment in
+                    multiple = 1
+                    if node.title in ['dec', 'sub']:
+                        multiple = -1
+                    gs.setVar(args[0], str(addVal + multiple * incVal), inventoryFlag)
                 elif node.title == 'input':
                     if val is not None:
                         gs.gameMode = GameMode.inAreaCommand
-                        if len(node.args) != 1:
-                            raise Exception('unexpected number of args in input')
                         gs.touchVar(node.args[0])
-                        gs.variables[node.args[0]] = str(val)
+                        gs.setVar(node.args[0], str(val))
                     else:
                         gs.gameMode = GameMode.inAreaInput
                         self.callStack[-1][1] = nodeInd
                         return False
                 elif node.title == 'goto':
-                    if len(node.args) != 1:
-                        raise Exception('unexpected number of args in goto')
                     gs.roomId = node.args[0]
-                elif node.title == 'unset':
-                    if len(node.args) != 1:
-                        raise Exception('unexpected number of args in unset')
-                    if node.args[0] in gs.variables:
-                        del gs.variables[node.args[0]]
                 elif node.title == 'gameover':
                     pass    #TODO
                 elif node.title == 'switchcharacter':
@@ -137,11 +109,13 @@ class Interpreter:
         return True
 
     def drainCallStack(self, val=None):
+        """ Simulates a stack machine executing a tree of function calls """
         while len(self.callStack) > 0:
             body, ind = self.callStack[-1]
             lenStackBefore = len(self.callStack)
             noHalt = self.executeBody(body, ind, val)
             lenStackAfter = len(self.callStack)
+            val = None  # invalidate passed in value as soon as it is used
             if lenStackAfter > lenStackBefore:
                 # body added new stack frame, so execute the newly enqueued one
                 continue
@@ -154,50 +128,29 @@ class Interpreter:
 
     def evaluateCondition(self, args):
         """ returns True if the condition specified by args is true """
-        if len(args) == 0:
-            raise Exception('no args found in evaluateCondition')
-
         gs = GameState()
+        # default to variables, but use inventory if it is first arg
+        args, inventoryFlag = self.extractInventory(args)
+        varname = args[0]
+        gs.touchVar(varname, inventoryFlag)
+        varval = gs.getVar(varname, inventoryFlag)
+        # if no comparator, check if var exists in mapping as nonzero value
         if len(args) == 1:
-            varname = args[0]
-            gs.touchVar(varname)
-            return gs.variables[varname] != '0'
+            return varval != '0'
+        comparator = args[1]
+        compare = args[2]
+        # consult mappings to allow var to var comparisons
+        if gs.getVar(compare, inventoryFlag) is not None:
+            compare = gs.getVar(compare, inventoryFlag)
+        # do the comparison
+        if comparator in ['eq', '=', '==']:
+            return varval == compare
+        elif comparator in ['gt', '>']:
+            return int(varval) > int(compare)
+        elif comparator in ['lt', '<']:
+            return int(varval) < int(compare)
         else:
-            inventoryFlag = False
-            if args[0] == 'inventory':
-                inventoryFlag = True
-                args = args[1:]
-            if len(args) != 3:
-                raise Exception('unexpected num of args')
-            varname = args[0]
-            comparator = args[1]
-            compare = args[2]
-            mapToCheck = None
-            if inventoryFlag:
-                gs.touchInventory(varname)
-                mapToCheck = gs.inventory
-            else:
-                gs.touchVar(varname)
-                mapToCheck = gs.variables
-            if comparator in ['eq', '=', '==']:
-                return mapToCheck[varname] == compare
-            elif comparator in ['gt', '>']:
-                return int(mapToCheck[varname]) > int(compare)
-            elif comparator in ['lt', '<']:
-                return int(mapToCheck[varname]) < int(compare)
-            else:
-                raise Exception('unknown comparator ' + str(comparator))
-
-    def resume(self, val):
-        """ completes a choice or input function with a value """
-        self.drainCallStack(val)
-        self.refreshCommandList()
-
-    def executeAction(self, body):
-        """ wrapper around stack manipulation to execute a BodyNode """
-        self.callStack.append([body, 0])
-        self.drainCallStack()
-        self.refreshCommandList()
+            raise Exception('unknown comparator ' + str(comparator))
 
     def refreshCommandList(self):
         """ Updates GameState cmdMap to contain all commands player can type """
@@ -262,6 +215,17 @@ class Interpreter:
                         cmdMap[action[0]] = {}
                     cmdMap[action[0]][objName] = action[1]
         gs.cmdMap = cmdMap
+
+    def resume(self, val):
+        """ completes a choice or input function with a value """
+        self.drainCallStack(val)
+        self.refreshCommandList()
+
+    def executeAction(self, body):
+        """ wrapper around stack manipulation to execute a BodyNode """
+        self.callStack.append([body, 0])
+        self.drainCallStack()
+        self.refreshCommandList()
 
 if __name__ == '__main__':
     i = Interpreter()

@@ -87,13 +87,37 @@ class GameState:
             """ Reset command buffer (e.g. if pressed Return) """
             self.cmdBuffer = ""
 
-        def touchVar(self, varname):
-            if varname not in self.variables:
-                self.variables[varname] = '0'
+        def touchVar(self, varname, inventoryFlag = False):
+            """ Sets a variable or inventory item to 0 in mapping if it doesn't exist """
+            if inventoryFlag:
+                if varname not in self.inventory:
+                    self.inventory[varname] = '0'
+            else:
+                if varname not in self.variables:
+                    self.variables[varname] = '0'
 
-        def touchInventory(self, varname):
-            if varname not in self.inventory:
-                self.inventory[varname] = '0'
+        def getVar(self, varname, inventoryFlag = False):
+            """ Returns a variable value or item count, or None if it doesn't exist """
+            if inventoryFlag:
+                return self.inventory.get(varname)
+            else:
+                return self.variables.get(varname)
+
+        def setVar(self, varname, value, inventoryFlag = False):
+            """ Sets a variable or item count """
+            if inventoryFlag:
+                self.inventory[varname] = value
+            else:
+                self.variables[varname] = value
+
+        def delVar(self, varname, inventoryFlag = False):
+            """ Removes an existing mapping """
+            if inventoryFlag:
+                if varname in self.inventory:
+                    del self.inventory[varname]
+            else:
+                if varname in self.variables:
+                    del self.variables[varname]
 
         def debugAddHistoryLine(self, line):
             ## DEBUG1 adds a specific langnode
