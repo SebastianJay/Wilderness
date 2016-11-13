@@ -14,6 +14,12 @@ class Window:
         # initialize color/style formatting info
         self.formatting = []    # each element is (tag, (start_index, end_index))
 
+    def load(self):
+        """
+        Any initialization that requires AssetLoader should be deferred to this method
+        """
+        pass
+
     def update(self, timestep, keypresses):
         """
         Given a timestep in seconds and a list of keystrokes during this update,

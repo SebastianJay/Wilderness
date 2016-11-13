@@ -1,21 +1,9 @@
 """
-We will need a title screen, from which a new game, load game, credits, and
-exit options can be selected. Suppose we have 35 rows and 120 columns of
-characters -- some ASCII art of "Wilderness" will be at the top of the screen
-(suppose 25 rows x 120 cols), and the bottom of the screen
-(suppose 10 rows x 120 cols) will have the four options.
-The player will be able to select between options with arrow keys and select one
- with Enter/Return. Some visual indicator (arrows or color) will show which
- option is being hovered over.
-
-Accounting for borders, this window is 33 rows and 118 columns.
-
-New game - on same window, prompt player for name. Then spawn "Game window"
-and do initialization sequence (needs more detail)
-Load game - spawn new SelectFile window (#16)
-Credits - spawn new Credits window (#15)
-Exit - use sys.exit() to kill the program
+Window for Title screen of game - contains some ASCII art and a list of options
+that pull up other windows and/or start up the game.
 """
+from game_state import GameState, GameMode
+from lang_interpreter import Interpreter
 from asset_loader import AssetLoader
 from window import Window
 import sys
@@ -23,10 +11,18 @@ import sys
 class TitleWindow(Window):
     def __init__(self, width, height):
         super().__init__(width, height)
-        self.pointingTo = 0
-        self.art = AssetLoader().getArt('title_window.txt')
+        self.pointingTo = 0 # index of option player is looking at
+        # options to be selected on screen
         self.options = ('New game', 'Load game', 'Options', 'Credits', 'Exit')
+        self.art = None     # set in load()
+        self.startRow = 0   # reset in load()
+        self.startCol = 0   # reset in load()
 
+    def load(self):
+        # grab the title art
+        self.art = AssetLoader().getArt('title_window.txt')
+
+        # do one-time drawing of title and options onto pixels
         maxLength = 0
         row = self.height // 6 # Looks better than starting at 0
         col = 0
@@ -69,13 +65,27 @@ class TitleWindow(Window):
             elif key == "Down":
                 self.pointingTo = (self.pointingTo + 1) % len(self.options)
             elif key == "Return":
-                if self.pointingTo == len(self.options) - 1:
+                cmd = self.options[self.pointingTo]
+                if cmd == 'New game':
+                    # set game startup info
+                    GameState().areaId = 'aspire'
+                    GameState().roomId = 'townCenter'
+                    GameState().gameMode = GameMode.inAreaCommand
+                    i = Interpreter()
+                    i.executeAction(AssetLoader().getScript('aspire/Rooms/town center.txt')[0][1])
+                    i.refreshCommandList()
+                if cmd == 'Exit':
                     sys.exit()
 
     def draw(self):
-        # Clear any previous >
+        # ensure we are loaded
+        if not self.art:
+            return self.pixels
+
+        # Clear previous cursor
         for row, temp in enumerate(self.options):
             self.pixels[self.startRow + row][self.startCol - 4] = " "
+        # Draw current cursor
         self.pixels[self.startRow + self.pointingTo][self.startCol - 4] = ">"
         return self.pixels
 

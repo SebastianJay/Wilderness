@@ -19,6 +19,7 @@ class InputWindow(Window):
 
     def update(self, timestep, keypresses):
         gs = GameState()
+
         if gs.gameMode == GameMode.inAreaChoice:
             for key in keypresses:
                 if key == 'Up':
@@ -27,7 +28,10 @@ class InputWindow(Window):
                     self.choiceInd = (self.choiceInd + 1) % len(gs.choiceList)
                 elif key == 'Return':
                     self.interpreter.resume(self.choiceInd)
-        elif gs.gameMode == GameMode.inAreaCommand or gs.gameMode == GameMode.inAreaInput:
+        else:
+            self.choiceInd = 0  # resets index so future choices start hovering over first option
+
+        if gs.gameMode == GameMode.inAreaCommand or gs.gameMode == GameMode.inAreaInput:
             for key in keypresses:
                 # key is printable -> add it to buffer
                 if len(key) == 1:
@@ -40,7 +44,7 @@ class InputWindow(Window):
                 # key is return -> commit command
                 elif key == 'Return':
                     if gs.gameMode == GameMode.inAreaInput:
-                        self.interpreter.resume(gs.cmdBuffer)
+                        self.interpreter.resume(gs.cmdBuffer.strip())
                     else:   # GameMode.inAreaCommand
                         cmdString = gs.cmdBuffer.strip()
                         prefixTree = gs.cmdMap

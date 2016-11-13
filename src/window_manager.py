@@ -10,6 +10,8 @@ from map_window import MapWindow
 from history_window import HistoryWindow
 from title_window import TitleWindow
 from palette_window import PaletteWindow
+
+from game_state import GameState, GameMode
 from global_vars import Globals
 
 class WindowManager(Window):
@@ -26,8 +28,15 @@ class WindowManager(Window):
         # stack of indices into windowGroups representing the active groups (what is on screen now)
         self.activeWindowGroups = []
 
+        # polls GameState repeatedly to determine when window changes need to be made
+        self.activeGameMode = GameMode.titleScreen
         # create instances of all the Windows
         self.initWindows(self.height, self.width)
+
+    def load(self):
+        # now that AssetLoader is ready, do any other init
+        for win in self.windowList:
+            win.load()
 
     def addWindow(self, windowcls, startr, startc, numrows, numcols):
         """ Creates a Window of a certain width and height at a certain location """
@@ -37,7 +46,16 @@ class WindowManager(Window):
 
     def initWindows(self, screenrows, screencols):
         """ Instantiates all Windows needed in game at the start """
-        #self.addWindow(LoadingWindow, 0, Globals.NumCols * 19 // 24 - 1, Globals.NumRows, Globals.NumCols * 5 // 24)
+        # clear out window list data
+        self.windowList = []
+        self.windowPos = []
+
+        # add all the windows our game needs
+        midCol = Globals.NumCols // 2
+        midRow = Globals.NumRows // 2
+        self.addWindow(LoadingWindow, midRow - 2, midCol - 10, 5, 20)    # default to small size
+
+        self.addWindow(TitleWindow, 0, 0, Globals.NumRows, Globals.NumCols)
         # add help window
         # add credits window
         # add select file window
@@ -51,16 +69,16 @@ class WindowManager(Window):
         self.addWindow(MapWindow, 0, 0, Globals.NumRows, Globals.NumCols * 3 // 4)
         # add in-area map window
         # add inventory window
-        self.addWindow(TitleWindow, 0, 0, Globals.NumRows, Globals.NumCols)
 
-        # create History/Input/Palette/Help group
         self.windowGroups = [
-            (1, 0, 2),    #NOTE the ordering here is specific as Input gets updated before History
-            (3,),
-            (4,)
+            (0,),       # loading window
+            (1,),       # title window
+            (3, 2, 4),  # Input, History, and Palette windows
+                        #NOTE the ordering here is specific as Input gets updated before History
+            (5,),
         ]
-        # initially the first window group is on screen
-        self.activeWindowGroups = [0]
+        # which window group is on screen initially
+        self.activeWindowGroups = [1]
 
     def draw(self):
         """ stitches together multiple Windows from active group into the screen """
@@ -109,6 +127,20 @@ class WindowManager(Window):
 
     def update(self, timestep, keypresses):
         """ sends update signal to Windows in the active group """
+        # update the activeWindowGroups based on changes in the game mode
+        nextMode = GameState().gameMode
+        if self.activeGameMode != GameMode.isLoading and nextMode == GameMode.isLoading:
+            # push the loading window onto the screen
+            self.activeWindowGroups.append(0)
+        elif self.activeGameMode == GameMode.isLoading and nextMode != GameMode.isLoading:
+            # pop the loading window off the screen
+            self.activeWindowGroups.pop()
+        elif self.activeGameMode != nextMode:
+            if self.activeGameMode in [GameMode.titleScreen] and nextMode == GameMode.inAreaCommand:
+                # use the "main game" window group
+                self.activeWindowGroups = [2]
+        self.activeGameMode = nextMode
+
         # update is only send to activeWindowGroups[-1], so the foreground windows
         for winind in self.windowGroups[self.activeWindowGroups[-1]]:
             self.windowList[winind].update(timestep, keypresses)

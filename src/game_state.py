@@ -9,17 +9,18 @@ import copy
 import os
 
 class GameMode(Enum):
-    titleScreen         =0
-    selectFile          =1
-    credits             =2
-    inAreaCommand       =3
-    inAreaChoice        =4
-    inAreaInput         =5
-    inAreaMap           =6
-    inAreaInventory     =7
-    inAreaAnimating     =8
-    worldMap            =9
-    worldMapOverArea    =10
+    isLoading           =0
+    titleScreen         =1
+    selectFile          =2
+    credits             =3
+    inAreaCommand       =4
+    inAreaChoice        =5
+    inAreaInput         =6
+    inAreaMap           =7
+    inAreaInventory     =8
+    inAreaAnimating     =9
+    worldMap            =10
+    worldMapOverArea    =11
 
 class GameState:
     # Python singleton implementation adapted from
