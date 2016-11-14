@@ -74,7 +74,10 @@ class TitleWindow(Window):
                     i = Interpreter()
                     i.executeAction(AssetLoader().getScript('aspire/Rooms/town center.txt')[0][1])
                     i.refreshCommandList()
-                if cmd == 'Exit':
+                elif cmd == 'Options':
+                    # TODO: Figure out how to get this to launch the settings window
+                    continue
+                elif cmd == 'Exit':
                     sys.exit()
 
     def draw(self):

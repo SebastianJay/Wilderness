@@ -8,8 +8,8 @@ class Globals:
     NumCols = 120
     NumRows = 35
     Timestep = 0.033
-    FontName = 'Courier New'
-    FontSize = 14
+    FontName = 'Consolas'
+    FontSize = 11
     IsDev = True
     AssetsRootPath = 'assets'
     SavePaths = [
