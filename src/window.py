@@ -12,7 +12,13 @@ class Window:
         # initialize 2D char array
         self.pixels = [[' ' for x in range(self.width)] for y in range(self.height)]
         # initialize color/style formatting info
-        self.formatting = []    #
+        self.formatting = []    # each element is (tag, (start_index, end_index))
+
+    def load(self):
+        """
+        Any initialization that requires AssetLoader should be deferred to this method
+        """
+        pass
 
     def update(self, timestep, keypresses):
         """

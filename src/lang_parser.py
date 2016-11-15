@@ -47,6 +47,13 @@ class FuncNode:
         self.title = title.lower()
         """ a list of strings of function parameters (other tokens separated by underscores) """
         self.args = args
+        # typecheck the number of arguments
+        if (self.title in ['set', 'inc', 'add', 'dec', 'sub'] and (len(self.args) < 1 or len(self.args) > 3)) \
+            or (self.title in ['if', 'elif'] and (len(self.args) < 1 or len(self.args) > 4)) \
+            or (self.title in ['init', 'unset'] and (len(self.args) < 1 or len(self.args) > 2)) \
+            or (self.title in ['input', 'goto'] and len(self.args) != 1) \
+            or (self.title in ['gameover', 'switchcharacter', 'random', 'choice', 'else'] and len(self.args) > 0):
+            raise Exception('type check fail (number args) for $'+self.title)
         """
         type of self.inner depends on self.title:
             if, elif, else -> BodyNode - gets executed if condition in args is true
@@ -257,6 +264,8 @@ class Parser:
         lines = scriptStr.split('\n')
         # remove indenting by stripping leading/trailing spaces from lines
         lines = [line.strip() for line in lines]
+        # replace tabs with four spaces for readability in window
+        #lines = [line.replace('\t', '    ') for line in lines]
         # remove single line comments
         lines = [line for line in lines if len(line) == 0 or line[0] != '#']
         # remove end of line comments

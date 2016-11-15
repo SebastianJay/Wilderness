@@ -1,0 +1,42 @@
+inspect{
+	Gerald was a timid in his forties. He was on vacation with his wife @green{Bethy} and son @green{Draymond}. He looked a bit uncomfortable with Kipp in the cabin.
+}
+
+talk to{
+	$if_companionF_eq_1{
+		$if_frmTalkedGerald_eq_0{
+			Gerald: Ex-excuse me s-sir, what are you doing in our cabin?
+			Jinx: *grin* We are bandits, here to relieve you of all your earthly possessions!
+			Gerald: W-what?
+			$choice{
+			Agree with Jinx
+			|Kipp: That's right!
+			Gerald: Please don't hurt us! M-my son is only six!
+			Kipp: Alright. Then tell me @bold{everything} you know about this forest, especially what happened recently.
+			Gerald: Yes, sir! I'll tell everything! The camping area consists of 10 cabins, including this one. There is a @blue{hunting range} and a @blue{lumber mill} down south. There's a mysterious cave about 1 hour from here...
+			Kipp: Anything notable happened to the forest in these few years?
+			Gerald: No. It's always like this. I promise!
+			Kipp: Ok. I'll let you off this time.
+			$set_frmTalkedGerald_1
+			|Jinx is joking|
+			Kipp: Relax! She's kidding around with you. We're travelers new to the forest and we just wish to learn more about it.
+			Gerald: Oh, o-okay. Sure, I come here every year. It's a pretty nice place. In my opinion, of course. I'm not sure though, I haven't been to many forests... *rambles on*
+			Kipp: *sigh* I've heard that there was a fire a few years back that destroyed the entire area. Is it true?
+			Gerald: A fire? No, I don't think so. I might be wrong, though. It's not like I'm here all the time... *rambles on*
+			Kipp: Ok. Thank you.
+			$set_frmTalkedGerald_2
+			}
+		}$elif_frmTalkedGerald_eq_1{
+			Gerald: I've t-told you everything I know!
+		}$elif_frmTalkedGerald_eq_2{
+			Gerald: I think nothing much happened around here. I could have been wrong, though.
+		}
+	}$else{
+		Gerald: Ex-excuse me s-sir, what are you doing in our cabin?
+		Kipp: We just want to know more about the forest. We're new here.
+		Gerald: Oh, o-okay. Sure, I come here every year. It's a pretty nice place. In my opinion, of course. I'm not sure though, I haven't been to many forests... *rambles on*
+		Kipp: *sigh* I've heard that there was a fire a few years back that destroyed the entire area. Is it true?
+		Gerald: A fire? No, I don't think so. I might be wrong, though. It's not like I'm here all the time... *rambles on*
+		Kipp: Ok. Thank you.
+	}
+}

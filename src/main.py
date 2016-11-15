@@ -8,10 +8,12 @@ from window_manager import WindowManager
 from display import Display
 from input_handler import InputHandler
 from asset_loader import AssetLoader
+from game_state import GameState, GameMode
 import tkinter as tk
 import sys
 import time
 import traceback
+import threading
 
 class GameDriver:
     def __init__(self):
@@ -20,14 +22,30 @@ class GameDriver:
         self.display = Display(self.root, self.windowManager)
         self.inputHandler = InputHandler(self.display.getWidget())
 
+    def initAssets(self):
+        GameState().lockGameMode(GameMode.isLoading)
+        AssetLoader().loadAssets()
+        self.windowManager.load()
+        GameState().unlockGameMode()
+
     def mainloop(self):
+        # start off separate thread to load assets
+        t = threading.Thread(target = self.initAssets)
+        t.daemon = True
+        t.start()
+
+        # run update-draw loop forever
+        dt = 0.0
         while True:
             try:
-                time.sleep(Globals.Timestep)    # TODO only sleep Timestep - computation time
+                time.sleep(Globals.Timestep - dt if Globals.Timestep - dt > 0.0 else 0.0)
+                time1 = time.time()
                 keypresses = self.inputHandler.getKeyPresses()
                 self.windowManager.update(Globals.Timestep, keypresses)
                 self.display.draw()
                 self.root.update()
+                time2 = time.time()
+                dt = time2 - time1
             except tk.TclError: # window was closed
                 sys.exit()
             except: # some other exception occurred
@@ -37,17 +55,7 @@ class GameDriver:
 
 def bootstrap():
     """Perform all processes needed to start up the game"""
-    AssetLoader().loadAssets()  # TODO do in separate thread
-
-    # TODO move out of bootstrap
-    from game_state import GameState, GameMode
-    from lang_interpreter import Interpreter
-    GameState().areaId = 'aspire'
-    GameState().roomId = 'townCenter'
-    GameState().gameMode = GameMode.inAreaCommand
-    Interpreter().executeAction(AssetLoader().getScript('aspire/Rooms/town center.txt')[0][1])
-    GameState().refreshCommandList()
-
+    GameState() # initialize the singleton before threading to avoid race conditions
     GameDriver().mainloop()
 
 if __name__ == '__main__':

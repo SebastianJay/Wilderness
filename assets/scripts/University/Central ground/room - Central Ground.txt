@@ -1,0 +1,7 @@
+go to{
+	Lore entered the @blue{central ground}. @blue{central ground}is the heart of the university. 
+}
+
+look around{
+	Lore looked around the @blue{central ground}. @green{squirrels} are jumping blithely around the lawn, probably looking for @yellow{acrons}. A nervous-looking @green{supervisor} is writing something down on his notebook. Lore turn her heads aside,there is a splendid @yellow{fountain} with @yellow{coins} inside the pool, and @yellow{hotricultural bushes}shaped into perfect spheres. 
+}

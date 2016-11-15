@@ -1,5 +1,6 @@
 go to {
     Kipp entered the @blue{train station}. Horns whistled as a train rumbled to a stop at the station.
+	$set_townChoice_1
 }
 
 

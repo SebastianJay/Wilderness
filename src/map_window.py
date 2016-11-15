@@ -9,18 +9,26 @@ from global_vars import Globals
 class MapWindow(Window):
     def __init__(self, width, height):
         super().__init__(width, height)
-        mapslst = Globals.MapsPaths
-        loader = AssetLoader()
         self.maps = []
         self.colorMasks = []
         self.travelMasks = []
-        # TODO move to a load method
+
+    def load(self):
+        self.maps = []
+        self.colorMasks = []
+        self.travelMasks = []
+        mapslst = Globals.MapsPaths
+        loader = AssetLoader()
         for threetup in mapslst:
             self.maps.append(loader.getMap(threetup[0]).splitlines())
             self.colorMasks.append(loader.getMap(threetup[1]).splitlines())
             self.travelMasks.append(loader.getMap(threetup[2]).splitlines())
 
     def update(self, timestep, keypresses):
+        # make sure we have loaded
+        if len(self.maps) == 0:
+            return
+
         # identify the current map we are looking at
         g = GameState()
         currentMap = self.maps[g.activeProtagonistInd]
@@ -49,6 +57,10 @@ class MapWindow(Window):
                 pass
 
     def draw(self):
+        # make sure we have loaded
+        if len(self.maps) == 0:
+            return self.pixels
+
         # identify the current map we are looking at
         g = GameState()
         currentMap = self.maps[g.activeProtagonistInd]

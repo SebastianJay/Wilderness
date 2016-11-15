@@ -1,0 +1,8 @@
+pick up{
+	Lore walked along the road, and was stabbed by something. "An acorn! But it's still a few months before autumn."
+	#count the number of items picked up by Lore
+		$if_itemsgrabbedLore_eq_0{
+		$set_itemsgrabbedLore_1
+		}$else{$add_itemsgrabbedLore_1
+		}
+}	
