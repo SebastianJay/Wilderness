@@ -70,12 +70,9 @@ class WindowManager(Window):
         self.addWindow(MapWindow, 0, 0, Globals.NumRows, Globals.NumCols * 3 // 4)
         # add in-area map window
         # add inventory window
-<<<<<<< Updated upstream
         self.addWindow(SettingsWindow, 0, 0, Globals.NumRows, Globals.NumCols)
-=======
         self.addWindow(TitleWindow, 0, 0, 35, 120)
-        self.addWindow(SaveWindow, 0, 0, 35, 120)
->>>>>>> Stashed changes
+        # self.addWindow(SaveWindow, 0, 0, 35, 120)
 
         self.windowGroups = [
             (0,),       # loading window
