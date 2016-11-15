@@ -23,7 +23,7 @@ class savesWindow(Window):
         column = 49
         for x in range (0,4):
             self.pixels[startRow + x][column] = " " + info[x]
-        self.pixels[startRow + pointingTo][column] = ">"
+        self.pixels[startRow + self.pointingTo][column] = ">"
         return self.pixels
 
     def __init__(self, width, height, art):
