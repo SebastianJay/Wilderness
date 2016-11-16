@@ -1,0 +1,39 @@
+#Beginning_LoreDowntownOfficeElevator
+
+go to{
+	Lore stood in front of the elevator door.
+}
+
+Use{
+	$if_elevatorpermission_eq_0{
+		Secretary: May I help you?
+		
+		Lore walked up to the @blue{desk}.
+		
+		Lore: I'm here to interview with Rodnin.
+		Secretary: Oh. Do you have an appointment?
+		Lore: No, but I'd like to make one.
+		Secretary: Of course. May I have your name, please?
+		Lore: Lore.
+			
+		The secretary's eyes widened.
+			
+		Secretary: One moment, please.
+			
+		The secretary picked up the phone at the desk and dialed a number.
+			
+		Secretary: Yes, Mr. Rodnin? Sorry to interrupt. No, nothing's wrong, but...A woman named Lore has come to interview with you. Yes, sir...Yes, I'll send her up.
+			
+		He put the phone down and turned back to Lore.
+			
+		Secretary: Mr. Rodnin will see you now.
+		Lore: Oh, um, thank you.
+		Secretary: Take the @blue{elevator} up to the second floor and his office is straight down the hall to the left.
+		$set_elevatorpermission_eq_1
+		
+		The secretary smiled nonchalantly and returned to his work.
+		}
+	$if_elevatorpermission_eq_1{
+		Lore rang the bell for the elevator. It creaked down slowly down and opened before her. The @green{Lift Attendant} greeted her with a pleasant smile as she stepped inside.
+		}
+	}

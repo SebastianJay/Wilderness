@@ -1,0 +1,31 @@
+#Beginning_LoreDowntownOfficeLiftAttendant
+
+talk to{
+	Lift Attendant: What floor, ma'am?
+	Lore: Second, please.
+	Lift Attendant: Certainly.
+	
+	The Lift Attendant pulled the lever. The elevator began to creak up towards the second floor.
+	
+	Lift Attendant: Meeting with Rodnin?
+	$Choice{
+		That's right|
+			Lift Attendant: Well, don't be nervous. Rodnin's a nice guy, he is, good employer. Why, last time I was sick he gave me the whole week off to recover and even sent me a card. 
+			Lore: Thanks. I'll try not to be nervous.
+			
+			The elevator came to a stop and the door opened.
+			
+			Lift Attendant: Here you are, miss.
+			Lore: Thank you.
+			
+			Lore stepped out of the @blue{elevator}. Down the hall was @blue{Rodnin's office}.
+		|That's none of your business|
+			Lift Attendant: I s'pose you're right, miss. Please forgive me.
+			
+			The two remained silent until the elevator came to a stop and the door opened.
+			
+			Lift Attendant: Here you are, miss.
+			
+			Lore stepped out of the @blue{elevator}. Down the hall was @blue{Rodnin's office}.|
+	}
+}

@@ -1,0 +1,5 @@
+#Downtown_Office_Elevator
+
+go to{
+	Lore stepped into the elevator and was greeted by the @green{Lift Attendant}.
+}
