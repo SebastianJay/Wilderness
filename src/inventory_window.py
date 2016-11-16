@@ -13,6 +13,9 @@ class InventoryWindow(Window):
         self.inventoryList = []
         self.numberOfLines = int((self.height - 3) / 2)
         self.selectedItemPos = 3
+        self.selectedItem = None
+        self.itemsdata = None
+        self.coordsToFormat = []
 
     def load(self):
         print("LOAD Executing")
@@ -58,6 +61,8 @@ class InventoryWindow(Window):
                         self.pixels[i*2+2][6+j] = self.inventoryList[i][1][j]
                 else:
                     for j in range(len(self.inventoryList[i][1]) + 4):
+                        self.formatting.append("bold", i * 2 + 2, 2 + j)
+                        self.formatting.append("yellow", i * 2 + 2, 2 + j)
                         if j < 3:
                             self.pixels[i * 2 + 2][2 + j] = ">"
                         elif j == 3:
