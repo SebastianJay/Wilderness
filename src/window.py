@@ -41,5 +41,5 @@ class Window:
         for i in range(0, self.height):
             if not i == 0: print()
             for j in range(0, self.width):
-                print(self.pixels[i][j], end="")
+                print(self.pixels[i][j], end= "")
         print()
