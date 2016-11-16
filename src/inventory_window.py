@@ -5,8 +5,6 @@ from global_vars import Globals
 class InventoryWindow(Window):
     def __init__(self, w, h):
         print("INIT Executing")
-        Globals.IsDev = False
-
         super().__init__(w, h)
         self.leftSection = (0, int(w / 3))
         self.rightSection = (int(w / 3), w-1)
@@ -18,7 +16,6 @@ class InventoryWindow(Window):
         self.coordsToFormat = []
 
     def load(self):
-        print("LOAD Executing")
         self.itemsdata = AssetLoader().getConfig(Globals.ItemsConfigPath)
         for el in self.itemsdata.keys():
             self.inventoryList.append([el, self.itemsdata[el]["name"], self.itemsdata[el]["description"]])
@@ -44,14 +41,16 @@ class InventoryWindow(Window):
                     self.pixels[j][i] = "o"
 
     def update(self, timestep, keypress):
-        print("UPDATE Executing")
+        if self.selectedItem is None:
+            return
         if "Up" in keypress and self.selectedItem != self.inventoryList[0]:
             self.inventoryList = self.inventoryList[-1:] + self.inventoryList[:-1]
         if "Down" in keypress and self.selectedItem != self.inventoryList[len(self.inventoryList)-1]:
             self.inventoryList = self.inventoryList[1:] + self.inventoryList[0]
 
     def draw(self):
-        print("DRAW Executing")
+        if self.selectedItem is None:
+            return self.pixels
         self.clear()
         self.border()
         for i in range(0, self.numberOfLines):
@@ -61,8 +60,8 @@ class InventoryWindow(Window):
                         self.pixels[i*2+2][6+j] = self.inventoryList[i][1][j]
                 else:
                     for j in range(len(self.inventoryList[i][1]) + 4):
-                        self.formatting.append("bold", i * 2 + 2, 2 + j)
-                        self.formatting.append("yellow", i * 2 + 2, 2 + j)
+                        #self.formatting.append(("bold", (i * 2 + 2, 2 + j)))
+                        #self.formatting.append(("yellow", (i * 2 + 2, 2 + j)))
                         if j < 3:
                             self.pixels[i * 2 + 2][2 + j] = ">"
                         elif j == 3:
@@ -85,7 +84,8 @@ class InventoryWindow(Window):
                 counter += 1
             self.pixels[descriptionHeight][int(self.width / 3) + 3 + counter] = " "
             counter += 1
-        self.debugDraw()
+
+        return self.pixels
 
 if __name__ == '__main__':
     a = InventoryWindow(100, 17)

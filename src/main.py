@@ -9,7 +9,6 @@ from display import Display
 from input_handler import InputHandler
 from asset_loader import AssetLoader
 from game_state import GameState, GameMode
-from inventory_window import InventoryWindow
 import tkinter as tk
 import sys
 import time
@@ -20,7 +19,6 @@ class GameDriver:
     def __init__(self):
         self.root = tk.Tk()
         self.windowManager = WindowManager(Globals.NumCols, Globals.NumRows)
-        #self.windowManager = InventoryWindow(Globals.NumCols, Globals.NumRows)
         self.display = Display(self.root, self.windowManager)
         self.inputHandler = InputHandler(self.display.getWidget())
 

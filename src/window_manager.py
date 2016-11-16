@@ -11,6 +11,7 @@ from history_window import HistoryWindow
 from title_window import TitleWindow
 from settings_window import SettingsWindow
 from palette_window import PaletteWindow
+from inventory_window import InventoryWindow
 
 from game_state import GameState, GameMode
 from global_vars import Globals
@@ -71,9 +72,11 @@ class WindowManager(Window):
         # add in-area map window
         # add inventory window
         self.addWindow(SettingsWindow, 0, 0, Globals.NumRows, Globals.NumCols)
-        self.addWindow(TitleWindow, 0, 0, 35, 120)
+        self.addWindow(InventoryWindow, 0, 0, Globals.NumRows, Globals.NumCols)
         # self.addWindow(SaveWindow, 0, 0, 35, 120)
 
+        # NOTE to debug, add a tuple with the index (in self.windowList) of your window to self.windowGroups
+        #  then change self.activeWindowGroups to be a list containing just the index (in self.windowGroups) of that tuple
         self.windowGroups = [
             (0,),       # loading window
             (1,),       # title window
@@ -81,6 +84,7 @@ class WindowManager(Window):
                         #NOTE the ordering here is specific as Input gets updated before History
             (5,),
             (6,),
+            (7,),
         ]
         # which window group is on screen initially
         self.activeWindowGroups = [1]
