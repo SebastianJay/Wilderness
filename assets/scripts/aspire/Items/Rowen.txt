@@ -1,134 +1,134 @@
 talk to{
 	Rowen: Well look who decided to show his face again. Here with an apology?
-	
+
 	@bold{CAUTION: YOU WILL NEED THE HELP OF ALL THREE GANGS TO TAKE ON ROWEN.}
-	
+
 	$choice{
 	Back Away|
 		Kipp ran away hoping that Rowen wouldn't use him as target practice.
-		
+
 		Rowen: Yeah, that's what I thought!
-		
+
 		Kipp scurried back to a safe place in town center.
-		
+
 	|FINAL SHOWDOWN|
 		Kipp: It's time to end this.
 		Rowen: Took the words right out of my mouth.
-		
+
 		Rowen's eyes turned into a pure white ball of light. He then began levitating off the ground. His hands summoned two balls of light, diffracting lasers of lights all over the place and putting holes in all of the builinds in town. Kipp couldn't back down now. He had to follow through with his plan.
-		
-		if_ntoChikasiClan_eq_1{
+
+		$if_ntoChikasiClan_eq_1{
 			Kipp: Time to meet up with the a friendly fighter.
-			
+
 			Kipp cupped his hands and made a bird noise. Moments later, the Chikasi Clan came running towards the center of town.
-			
+
 			Akecheta: You signaled...woah now that's some serious witchcraft.
-			
+
 			Kipp nodded.
-			
+
 			Akecheta: Alright people, run at that thing with all of your might! We fight together, we die together!
-			
+
 			The entire clan chanted in agreement. As their chanting got louder, a light blue spirit began forming in the center of the group. Out of the cloud of light, claws began climbing out, then a head, then the rest of its body. The great spirit was a wolf that had the same marking as the Chikasi clan on its body. The wolf growled straight at Rowen, ready to pounce.
-			
+
 			Kipp: @italic{(to himself)} Great, who's next?
-			
+
 			One of the lasers struck in front of Kipp's feet and he fell back. Rowen laughed at Kipp's misfortune.
 		}$else{
 			Kipp: Wait, I forgot about the Chikasi Clan!
-		
+
 			Rowen: HA, HA, HA! Where is your plan now!
-		
+
 			Rowen brought both of his hands together. A spark of electricity built up between his fingers. Kipp shielded his eyes, expecting the worst. Rowen then directed the electricity to where Kipp was standing. A bolt of lightning hit the town. Everything when white.
-		
+
 			When the light subsided, all that was left of Aspire dissipated into thin air. Rowen...was gone. Kipp's world was doomed.
-		
+
 			@bold{GAME OVER}
 			$gameover
 		}
-		
-		if_ntoSmokingGun_eq_1{
+
+		$if_ntoSmokingGun_eq_1{
 			Kipp: @italic{(rubbing his head)} Right the trigger happy lunatic.
-			
+
 			Kipp took out his revolver and took six shots into the sky in a pattern.
-			
+
 			At that moment, the gang was barreling out of the saloon like there was no tommorow.
-			
+
 			Hiram: You need some help.
 			Kipp: Hey, wait you're the new leader.
 			Hiram: @italic{(grinning)} With some persuasion. Alright, everyone, on my fire, you will pound some lead into that colossus in front of us!
-			
+
 			All of the Smoking Gunners: FOR EVERY GUNNER OUT THERE!
-			
+
 			Kipp was smiling, but a crash of lightning brought his attention back to the situation. Rowen then summoned a pack of animals made out of the lightning that was striking the ground.
-			
+
 			Kipp:Now...
-			
+
  		}$else{
 			Kipp: Wait, I forgot about the Smoking Gun!
-		
+
 			Rowen: HA, HA, HA! Where is your plan now!
-		
+
 			Rowen brought both of his hands together. A spark of electricity built up between his fingers. Kipp shielded his eyes, expecting the worst. Rowen then directed the electricity to where Kipp was standing. A bolt of lightning hit the town. Everything when white.
-		
+
 			When the light subsided, all that was left of Aspire dissipated into thin air. Rowen...was gone. Kipp's world was doomed.
-		
+
 			@bold{GAME OVER}
 			$gameover
 		}
-		
-		if_ntoRuneRaiders_eq_1{
+
+		$if_ntoRuneRaiders_eq_1{
 			Kipp: ...let's bring in our firepower.
-			
+
 			Kipp took the bag Mohani dropped beside Kipp while he was unconcious. He openend the bag and spread the power inside in an arc. The dust began reacting with the lightning strikes and a wall of fire appeared. Every animal Kipp remembered see in the forge charged out of the wall towards the animals made of lightning. Soon, Mohani and the rest of the Rune Raiders appeared from the wall and the fire fire vanished.
-			
+
 			Kipp: Nice entrance.
 			Mohani: We try.
-			
+
 			Mohani looked up at Rowen.
-			
+
 			Mohani: Hey, Raiders. Remember problem number 43 in Professor Carver's Dark Arts Theory class?
-			
+
 			Random Rune Raider: How to take down a 50 meter giant with the powers of a parasite from an unknown world in the Wild West?
-			
+
 			Mohani: Exactly! Time for a brush up!
-			
+
 		}$else{
 			Kipp: Wait, I forgot about the Rune Raiders!
-		
+
 			Rowen: HA, HA, HA! Where is your plan now!
-		
+
 			Rowen brought both of his hands together. A spark of electricity built up between his fingers. Kipp shielded his eyes, expecting the worst. Rowen then directed the electricity to where Kipp was standing. A bolt of lightning hit the town. Everything when white.
-		
+
 			When the light subsided, all that was left of Aspire dissipated into thin air. Rowen...was gone. Kipp's world was doomed.
-		
+
 			@bold{GAME OVER}
 			$gameover
 		}
-		
+
 		Kipp: Alright on my count, everyone...you know what we don't have time! Just bolt at him NOW!
-		
+
 		All three alliances stampeded into the body of Rowen in unison, throwing everything they had along the way. Once the groups merged at the feet of Rowen. A ball of light flashed and could be seen from miles away. And just like many plotholes that are never explained in video games, Kipp, all three gangs, and the townspeople all found Rowen, lying dead in the middle of the town. The parasite did it's best to crawl out of Rowen's head, but it eventually gave up and dissipated into the ground. Kipp laughed a little, amazed by what just happened. He then turned around to thank the crews.
-		
-		Kipp: Guys, that was way too... 
-		
+
+		Kipp: Guys, that was way too...
+
 		Kipp stopped noticed that all three groups were gone, and only the townspeople were there to congratulate him.
-		
+
 		Narrator: I guess Mohani had one last trick up her sleeve after Kipp was done playing hero.
 		Townspeople: Kipp, you're the man! You've saved us all! We are now free!
-		
+
 		Kipp then looked in the front of the crowd to see Arthur run up to give Kipp a hug. Just then a hand was placed on his shoulder and a voice spoke out.
-		
+
 		Arthur's dad: You did good.
-		
+
 		Arthur stopped, started crying, and turned to sprint towards his dad. Kipp smiled and walked away as the town cheered and went back to rebuilding their empire.
-		
+
 		Kipp: Now all three of those guys said something about all of this starting out west of this town. I know that there's miles of @green{forest} out there. Maybe it's time to start heading there.
-		
+
 		@bold_orange{ASPIRE LEVEL COMPLETE!}
-		
+
 		#Added variable and set to zero if the player visited this town so that we can bring back memories about it in future levels. Black Hills sets the variable to 1.
 		$set_townChoice_0
 	}
-	
-	
+
+
 }
