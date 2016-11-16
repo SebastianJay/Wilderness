@@ -18,6 +18,7 @@ talk to{
 						Lore: Thank you, sir.
 						Rodnin: Of course. If you'd like to take a look around the lab, it's upstairs. Also, if you have any questions about me or your mother, or anything at all, I'll be here.
 						$set_begtalktoRodnin_eq_1
+						$set_acceptedjob_eq_1
 					|No.|
 						Rodnin: I see. I wonder why you came all this way if you were not interested in the position?
 						Lore: I was curious, but I don't think the job is for me.
@@ -33,6 +34,7 @@ talk to{
 						Lore: Thank you, sir.
 						Rodnin: Of course. If you'd like to take a look around the lab, it's upstairs. Also, if you have any questions about me or your mother, or anything at all, I'll be here.
 						$set_begtalktoRodnin_eq_1
+						$set_acceptedjob_eq_1
 					|No.|
 						Rodnin: I see. I wonder why you came all this way then?
 						Lore: I was curious.

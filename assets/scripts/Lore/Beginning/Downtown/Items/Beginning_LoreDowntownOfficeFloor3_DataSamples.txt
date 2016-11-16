@@ -1,0 +1,22 @@
+#Beginning_LoreDowntownOfficeFloor3_DataSamples
+
+Use{
+	Lore began to analyze the data samples. Time seemed to stop as she busily logged the details of the soil into the heavy book. 
+		Think{This is bad. The percentage of soluble rocks is exponentially decreasing with time. If the rock continues to break down at this rate...It will be disastrous. What can I do? This has to be stopped.
+		$Choice{
+		Find out why the rocks are breaking down|
+			I need to know why the rocks are breaking down like this. I need to go to the Wilderness. Going alone will be difficult. I should talk to my friends first and tell them about this data. They might know what to do.
+			$set_analyzedata_eq_1
+		|Tell Rodnin about the data|
+			I should report this to Rodnin. Maybe he has some kind of explanation.
+			$set_analyzedata_eq_1
+		|Ask Hal|
+			Hal worked for Rodnin in the past. He studied this data too, he must have seen the same pattern. Maybe he knows why this is happening.
+			$set_analyzedata_eq_1
+		|I don't know|
+			I don't know what to do. I need help with this. I should ask my friends, or Rodnin, or Hal...Or maybe I should do this alone. They all have lives to get back to. Mine is over. I need to go to the Wilderness.
+			$set_analyzedata_eq_1|
+		}
+			
+	}
+}

@@ -1,0 +1,15 @@
+#Beginning_LoreDowntownOfficeFloor3_EmployeeProfileFolder
+
+Use{
+	Lore thumbed through the table of contents. There was only one named she recognized - Hal.
+	$Choice{
+		Read his profile|
+			Hal
+			Years of Employment: 3
+			Position: Field Manager
+			Description: Worked in the Wilderness collecting data and managing the research outpost. Monitored media reception and PR of scientific data. Managed scientific publications. Skills in data analysis, management, writing, and human resources. Publications of significance include @italic{Role of Tectonic Plate Movements in Wilderness Topography and Geology}.
+		$set_readHalprofile_eq_1
+		|Don't read|
+			Lore placed the binder back on the shelf.|
+	}
+}
