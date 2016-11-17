@@ -31,35 +31,47 @@ class AssetLoader:
             #   value = the conents of the file
             assets = {}
 
+            # Returns whether all files can read and parse successfully
+            success_flag = True
+
             # recognized filename extensions
             whitelist_ext = ['.txt', '.wtxt', '.yml']
             # Go through each file in the specified dir and add contents to the dictionary
             for root, subdirs, files in os.walk(path_to_folder):
                 for file_name in files:
-                    file_path = os.path.join(root,file_name)
-                    # Normalize the given path
-                    norm_path = os.path.normcase(os.path.normpath(file_path))
-                    # Check that filename ends with recognized extension
-                    ext_not_valid = True
-                    for ext in whitelist_ext:
-                        if len(norm_path) >= len(ext) and norm_path[-len(ext):] == ext:
-                            ext_not_valid = False
-                            break
-                    if ext_not_valid:
-                        continue
-                    # Store file text into dictionary
-                    with open(norm_path) as f:
-                        assets[norm_path] = f.read()
+                    try:
+                        file_path = os.path.join(root,file_name)
+                        # Normalize the given path
+                        norm_path = os.path.normcase(os.path.normpath(file_path))
+                        # Check that filename ends with recognized extension
+                        ext_not_valid = True
+                        for ext in whitelist_ext:
+                            if len(norm_path) >= len(ext) and norm_path[-len(ext):] == ext:
+                                ext_not_valid = False
+                                break
+                        if ext_not_valid:
+                            continue
+                        # Store file text into dictionary
+                        with open(norm_path) as f:
+                            assets[norm_path] = f.read()
+                    except:
+                        success_flag = False
 
             # Do parsing of any custom scripts and yaml
             parser = Parser()  # instantiate parser on the fly
             for path in assets:
                 if os.path.normcase(os.path.normpath('assets/scripts')) in path:
-                    # replace string with parsed (string, BodyNode)[]
-                    assets[path] = parser.parseScript(assets[path])
+                    try:
+                        # replace string with parsed (string, BodyNode)[]
+                        assets[path] = parser.parseScript(assets[path])
+                    except:
+                        success_flag = False
                 elif os.path.normcase(os.path.normpath('assets/config')) in path:
-                    # replace string with parsed Python dict
-                    assets[path] = yaml.load(assets[path])
+                    try:
+                        # replace string with parsed Python dict
+                        assets[path] = yaml.load(assets[path])
+                    except:
+                        success_flag = False
 
             self.assets = assets
 
@@ -77,6 +89,7 @@ class AssetLoader:
                     self.reverseRoom[area][roomsConfig[room]['name']] = room
 
             self.isLoaded = True
+            return success_flag
 
         def getAsset(self, dirname, name):
             norm_name = os.path.normcase(os.path.normpath(name))
