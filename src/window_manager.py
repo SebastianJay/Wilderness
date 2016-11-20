@@ -73,6 +73,7 @@ class WindowManager(Window):
         # add inventory window
         self.addWindow(SettingsWindow, 0, 0, Globals.NumRows, Globals.NumCols)
         self.addWindow(InventoryWindow, 0, 0, Globals.NumRows, Globals.NumCols)
+        #self.addWindow(InventoryWindow, Globals.NumRows//4, Globals.NumCols//4, Globals.NumRows//2, Globals.NumCols//2)
         # self.addWindow(SaveWindow, 0, 0, 35, 120)
 
         # NOTE to debug, add a tuple with the index (in self.windowList) of your window to self.windowGroups
@@ -93,16 +94,17 @@ class WindowManager(Window):
         """ stitches together multiple Windows from active group into the screen """
         formatting = []
         for groupind in self.activeWindowGroups:
+            group_formatting = []
             for winind in self.windowGroups[groupind]:
                 pixels = self.windowList[winind].draw()
                 startr, startc = self.windowPos[winind]
                 height = len(pixels)
                 width = len(pixels[0])
-                # fill in content
+                # fill in pixel content
                 for r in range(height):
                     for c in range(width):
                         self.pixels[startr + r][startc + c] = pixels[r][c]
-                # add border
+                # add border around window
                 for r in range(height):
                     self.pixels[startr + r][startc-1] = '|'
                     self.pixels[startr + r][startc + width] = '|'
@@ -113,7 +115,33 @@ class WindowManager(Window):
                 self.pixels[startr + height][startc-1] = 'o'
                 self.pixels[startr + height][startc + width] = 'o'
                 self.pixels[startr-1][startc + width] = 'o'
-                # add to formatting
+
+                # go through previous formatters (those of background windows) and clip their indices
+                #  if the current window groups cover them
+                # TODO refactor for efficiency
+                filtered_formatting = []
+                for i, winformat in enumerate(formatting):
+                    filtered_winformat = []
+                    for formatter in winformat:
+                        style, (start_index, end_index) = formatter
+                        r = start_index // self.width    # start and end row should be same
+                        c1 = start_index % self.width
+                        c2 = end_index % self.width
+                        if r >= startr-1 and r <= startr + height:
+                            if c1 >= startc-1 and c1 <= startc + width:
+                                c1 = startc + width + 1 # push start col to right edge
+                            if c2 >= startc-1 and c2 <= startc + width:
+                                c2 = startc - 2 # push end col to left edge
+                        f1 = r * self.width + c1
+                        f2 = r * self.width + c2
+                        # if bg indices not contained entirely within foreground window
+                        if f1 <= f2:
+                            filtered_winformat.append((style, (f1, f2)))
+                    filtered_formatting.append(filtered_winformat)
+                formatting = filtered_formatting
+
+                # add new elements to formatting
+                winformat = []
                 for formatter in self.windowList[winind].formatting:
                     style, (start_index, end_index) = formatter
                     r1 = start_index // width
@@ -126,12 +154,18 @@ class WindowManager(Window):
                     for r in range(r1, r2):
                         f1 = (r + startr) * self.width + (c + startc)
                         f2 = (r + startr) * self.width + (width - 1 + startc)
-                        formatting.append((style, (f1, f2)))
+                        winformat.append((style, (f1, f2)))
                         c = 0
                     f1 = (r2 + startr) * self.width + (c + startc)
                     f2 = (r2 + startr) * self.width + (c2 + startc)
-                    formatting.append((style, (f1, f2)))
-        self.formatting = sorted(formatting, key=lambda tup: tup[1][0])
+                    winformat.append((style, (f1, f2)))
+                group_formatting.append(winformat)
+            formatting.extend(group_formatting)
+
+        flattened_formatting = []
+        for winformat in formatting:
+            flattened_formatting.extend(winformat)
+        self.formatting = sorted(flattened_formatting, key=lambda tup: tup[1][0])
         return self.pixels
 
     def update(self, timestep, keypresses):
