@@ -13,7 +13,7 @@ class Display:
         self.numRows = Globals.NumRows
         self.root = root
 
-        self.text = tk.Text(self.root, width=Globals.NumCols, height=Globals.NumRows, background='black',
+        self.text = tk.Text(self.root, width=self.numCols, height=self.numRows, background='black',
             foreground='white', state=tk.DISABLED, font=(Globals.FontName, Globals.FontSize),
             padx=0, pady=0, borderwidth=0, selectbackground='black')
         self.text.pack()

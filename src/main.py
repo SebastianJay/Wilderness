@@ -18,7 +18,7 @@ import threading
 class GameDriver:
     def __init__(self):
         self.root = tk.Tk()
-        self.windowManager = WindowManager(Globals.NumCols, Globals.NumRows)
+        self.windowManager = WindowManager()
         self.display = Display(self.root, self.windowManager)
         self.inputHandler = InputHandler(self.display.getWidget())
 

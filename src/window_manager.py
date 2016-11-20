@@ -18,8 +18,8 @@ from global_vars import Globals
 
 class WindowManager(Window):
 
-    def __init__(self, width, height):
-        super().__init__(width, height)
+    def __init__(self):
+        super().__init__(Globals.NumCols, Globals.NumRows)
         #list of all the windows that the window manager is going to draw
         self.windowList = []
         #list of locations (top-left coordinate) of corresponding windows in windowList
@@ -33,7 +33,7 @@ class WindowManager(Window):
         # polls GameState repeatedly to determine when window changes need to be made
         self.activeGameMode = GameMode.titleScreen
         # create instances of all the Windows
-        self.initWindows(self.height, self.width)
+        self.initWindows()
 
     def load(self):
         # now that AssetLoader is ready, do any other init
@@ -46,7 +46,7 @@ class WindowManager(Window):
         self.windowList.append(windowcls(numcols - 2, numrows - 2))
         self.windowPos.append((startr + 1, startc + 1))
 
-    def initWindows(self, screenrows, screencols):
+    def initWindows(self):
         """ Instantiates all Windows needed in game at the start """
         # clear out window list data
         self.windowList = []
