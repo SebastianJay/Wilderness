@@ -24,7 +24,6 @@ class GameDriver:
 
     def initAssets(self):
         GameState().lockGameMode(GameMode.isLoading)
-        print('initAssets')
         AssetLoader().loadAssets()
         self.windowManager.load()
         GameState().unlockGameMode()
@@ -49,6 +48,8 @@ class GameDriver:
                 dt = time2 - time1
             except tk.TclError: # window was closed
                 sys.exit()
+            except SystemExit:
+                break    # thrown on main menu exit
             except: # some other exception occurred
                 if Globals.IsDev:
                     traceback.print_exc()
