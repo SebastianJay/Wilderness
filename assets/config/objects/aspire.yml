@@ -8,10 +8,6 @@ totemPole:
 painting:
     name: painting
     script: aspire/Items/painting.txt
-fireAle:
-    name: fire ale
-    script: aspire/Items/fire ale.txt
-    showIf: not_inventory_fireAle
 arthur:
     name: Arthur
     script: aspire/Items/Arthur.txt
@@ -24,12 +20,15 @@ bookshelf:
 baseNumbersBook:
     name: Base Numbers
     script: aspire/Items/Base Numbers for them not Smart Folk.txt
+    showIf: ntoSawBooks
 encyclopediaBook:
     name: Encyclopedia
     script: aspire/Items/Encyclopedia on Native American Culture.txt
+    showIf: ntoSawBooks
 scientificBook:
     name: Scientific Journal
     script: aspire/Items/Scientific Journal about the Parasites Within.txt
+    showIf: ntoSawBooks
 flint:
     name: Flint
     script: aspire/Items/Flint.txt

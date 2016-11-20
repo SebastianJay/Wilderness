@@ -14,12 +14,18 @@ class Interpreter:
     def __init__(self):
         self.callStack = []
 
-    # helper method to extract the 'inventory' arg as a true/false value
-    def extractInventory(self, args):
-        if args[0] == 'inventory':
+    # helper method to extract an argument's presence as a true/false value
+    def extractFlag(self, args, argname):
+        if args[0] == argname:
             return args[1:], True
         else:
             return args, False
+
+    def extractInventory(self, args):
+        return self.extractFlag(args, 'inventory')
+
+    def extractNot(self, args):
+        return self.extractFlag(args, 'not')
 
     # helper method to execute a BodyNode
     def executeBody(self, bodyNode, nodeInd, val=None):
@@ -106,6 +112,7 @@ class Interpreter:
             else:
                 raise Exception('Unexpected type in BodyNode nodes ' + str(node))
             nodeInd += 1
+            val = None  # invalidate passed in value as soon as it is used
         return True
 
     def drainCallStack(self, val=None):
@@ -129,31 +136,72 @@ class Interpreter:
     def evaluateCondition(self, args):
         """ returns True if the condition specified by args is true """
         gs = GameState()
+        # return inverse of following condition if prefixed with 'not'
+        args, notFlag = self.extractNot(args)
         # default to variables, but use inventory if it is first arg
         args, inventoryFlag = self.extractInventory(args)
         varname = args[0]
         gs.touchVar(varname, inventoryFlag)
         varval = gs.getVar(varname, inventoryFlag)
-        # if no comparator, check if var exists in mapping as nonzero value
+        retval = None
         if len(args) == 1:
-            return varval != '0'
-        comparator = args[1]
-        compare = args[2]
-        # consult mappings to allow var to var comparisons
-        if gs.getVar(compare, inventoryFlag) is not None:
-            compare = gs.getVar(compare, inventoryFlag)
-        # do the comparison
-        if comparator in ['eq', '=', '==']:
-            return varval == compare
-        elif comparator in ['gt', '>']:
-            return int(varval) > int(compare)
-        elif comparator in ['lt', '<']:
-            return int(varval) < int(compare)
+            # no comparator -> check if var exists in mapping as nonzero value
+            retval = varval != '0'
         else:
-            raise Exception('unknown comparator ' + str(comparator))
+            # check variables or inventory with given key
+            comparator = args[1]
+            compare = args[2]
+            # consult mappings to allow var to var comparisons
+            if gs.getVar(compare, inventoryFlag) is not None:
+                compare = gs.getVar(compare, inventoryFlag)
+            # do the comparison
+            if comparator in ['eq', '=', '==']:
+                retval = varval == compare
+            elif comparator in ['gt', '>']:
+                retval = int(varval) > int(compare)
+            elif comparator in ['lt', '<']:
+                retval = int(varval) < int(compare)
+            else:
+                raise Exception('unknown comparator ' + str(comparator))
+        # reverse the retval if notFlag is true
+        return retval if not notFlag else not retval
+
+    def evaluateConditionTree(self, obj):
+        if isinstance(obj, dict):
+            # if dict, then we 'and' or 'or' multiple subtrees together
+            if len(obj) != 1:
+                raise Exception('malformed argument in evaluateConditionTree: ' + str(obj))
+            op = list(obj.keys())[0]
+            children = []
+            for val in obj[op]:
+                children.append(self.evaluateConditionTree(val))
+            if op == 'or':
+                retval = False
+                for child in children:
+                    retval = retval or child
+                return retval
+            elif op == 'and':
+                retval = True
+                for child in children:
+                    retval = retval and child
+                return retval
+            else:
+                raise Exception('malformed argument in evaluateConditionTree: ' + str(obj))
+        elif isinstance(obj, str):
+            return self.evaluateConditionTree(obj.split('_'))  # leaf of tree, convert to list
+        elif isinstance(obj, list):
+            return self.evaluateCondition(obj)  # parse list of tokens normally
+        raise Exception('malformed argument in evaluateConditionTree: ' + str(obj))
 
     def refreshCommandList(self):
         """ Updates GameState cmdMap to contain all commands player can type """
+        # Helper method to see if rooms or objects are visible in game
+        def isVisible(self, mapobj):
+            if 'showIf' in mapobj:
+                conditionVal = mapobj['showIf']
+                return self.evaluateConditionTree(conditionVal)
+            return True # visible by default
+
         # locate the rooms and objects configs
         loader = AssetLoader()
         gs = GameState()
@@ -167,11 +215,15 @@ class Interpreter:
         objectNames = []
         objectScripts = []
         for obj in rooms[gs.roomId]['objects']:
+            if not isVisible(self, objects[obj]):
+                continue    # do not show the object if conditions not met
             objectNames.append(objects[obj]['name'])
             objectScripts.append(loader.getScript(objects[obj]['script']))
         # fill out the mapping, starting with 'go to'
         cmdMap['go to'] = {}
         for neighbor in rooms[gs.roomId]['neighbors']:
+            if not isVisible(self, rooms[neighbor]):
+                continue    # do not show the room if conditions not met
             neighborName = rooms[neighbor]['name']
             neighborScript = loader.getScript(rooms[neighbor]['script'])
             neighborReaction = None
@@ -185,30 +237,29 @@ class Interpreter:
             if action[0] == 'go to':
                 continue
             cmdMap[action[0]] = action[1]
-        # prefill 'use <item>'
-        cmdMap['use'] = {}
-        for item in gs.inventory:
-            if int(gs.inventory[item]) == 0:
-                continue
-            itemName = items[item]['name']
-            cmdMap['use'][itemName] = None
+        # prefill 'use <item>', 'give <item>', 'show <item>'
+        itemActionPhrases = [('use', 'on'), ('give', 'to'), ('show', 'to')]
         # go through actions to take on objects
         for i in range(len(objectScripts)):
             objScript = objectScripts[i]
             objName = objectNames[i]
             for action in objScript:
-                # "use .. on" needs special treatment for inventory items
                 verbWords = action[0].split()
-                if verbWords[0] == 'use' and verbWords[-1] == 'on':
-                    itemWord = ' '.join(verbWords[1:-1])
-                    itemKey = loader.reverseItemLookup(itemWord)
-                    targetPhrase = 'on ' + objName
-                    if itemKey == '':
-                        raise Exception('script item name', itemWord ,'not found in items configuration file')
-                    if itemKey in gs.inventory and int(gs.inventory[itemKey]) > 0:
-                        if cmdMap['use'][itemWord] is None:
-                            cmdMap['use'][itemWord] = {}
-                        cmdMap['use'][itemWord][targetPhrase] = action[1]
+                # "use .. on", "give ... to", "show ... to" needs special treatment for inventory items
+                for prefix, suffix in itemActionPhrases:
+                    if verbWords[0] == prefix and verbWords[-1] == suffix:
+                        itemWord = ' '.join(verbWords[1:-1])
+                        itemKey = loader.reverseItemLookup(itemWord)
+                        targetPhrase = suffix + ' ' + objName
+                        if itemKey == '':
+                            raise Exception('script item name', itemWord ,'not found in items configuration file')
+                        if itemKey in gs.inventory and int(gs.inventory[itemKey]) > 0:
+                            if prefix not in cmdMap:
+                                cmdMap[prefix] = {}
+                            if itemWord not in cmdMap[prefix]:
+                                cmdMap[prefix][itemWord] = {}
+                            cmdMap[prefix][itemWord][targetPhrase] = action[1]
+                        break
                 # all other verbs are straightforward
                 else:
                     if action[0] not in cmdMap:
