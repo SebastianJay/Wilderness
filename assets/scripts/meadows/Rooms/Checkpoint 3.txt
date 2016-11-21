@@ -1,0 +1,512 @@
+go to{
+	$if_medHedgeCheck_eq_3{
+		$if_medCheck3Intro_eq_0{
+			$set_medCheck3Intro_eq_1
+			
+			[companionName]: I am curious, who was that girl you were talking with.
+			Kipp: What girl?
+			
+			$if_companionB_eq_1{
+				Rice: The one with the swift moves on the dance floor while you were flopping like a fish.
+				Kipp: Oh, some girl looking for a good time, and I have you know that I wasn't the worst dancer there tonight.
+				Rice: So did you give it to her.
+				Kipp: Give her what?
+				Rice: A good time?
+				Kipp: No we didn't do it.
+				Rice: Oh...phew.
+			}$elif_companionF_eq_1{
+				Jinx: The one that was all over you.
+				Kipp: You know, I am a respectable person.
+				Jinx: And so?
+				Kipp: No, nothing more happened after that dance.
+				Jinx: But she probably still offered...
+				Kipp: and I set her straight that I have more important matters on hand.
+				Jinx: Huh...
+			}$else{
+				Alodar: The one who persisted to follow you the entire night.
+				Kipp: Oh, she just wanted a man to dance and have a good time with.
+				Alodar: So that's what you meant by look around.
+				Kipp: Don't worry, I sent her on her way and continued finding a way back here.
+				Alodar: I see why the world has favored you...
+				Kipp: Yeah, I guess.
+			}
+			
+			Kipp walks in front of [companionName], taking the lead.
+			
+			Kipp: Now can we get back to... @italic{bang}
+			
+			Kipp wasn't paying attention to the scenery around him and slams his head into a pipe.
+			
+			[companionName]: You do realize we are no longer in the maze, right?
+			Kipp: Well that jump was quick. Where are we?
+			[companionName]: Dark room, red lights all over, whistling pipers...
+			Kipp: So not the exit.
+			Deep Voice: So these are the new toys @italic{they} promised me...@italic{hehehehe}
+			
+			Kipp and [companionName] eye the corner to see a tall shadow making its way towards them. 
+			As the shadow gets closer, a chainsaw began revving up as it's being dragged along metal pipes, sparking everywhere.
+			
+			[companionName]: I think it's best in this situation that we book it.
+			Kipp: Not a bad plan.
+			
+			They started running in the opposite direction. After several turns and poorly made decisions, they find their way to a dead end:
+			a large room with a boiler embedded into the wall.
+			
+			Kipp: You don't think the hedge maze can help us open a new path.
+			[companionName]: Through concrete?
+			Slasher: Finally, I think I've tired out my prey. Now it's time to eat...@italic{revving}
+			
+			[companionName] suddenly started stepping forward, confronting the slasher.
+			
+			$if_companionB_eq_1{
+				Rice: Hey! I know killers like you are just regular people behind those masks. I've seen the movies! You don't scare me.
+				
+				The slasher took of his hockey mask and started smiling.
+				
+				Slasher: I guess I've gotta transform to my A-list role!
+				
+				The slasher began shaking. His body was hunched over and in an instant he was three times the size of his human form. Hair started growing from every inch of his skin. He kept growing until he reached the ceiling. Wings sprouted out from his back, claws began transforming from his hands and feet, and a majestic mane surrounded his head. A twenty foot Manticore stood before Kipp and Rice.
+				
+				Rice: Hey, Kipp. We're gonna need a bigger lasso.
+				
+			}$elif_companionF_eq_1{
+				Jinx: Alright. Why don't you take off the mask and fight an enchantress like a man.
+				
+				The slasher took of his hockey mask and started smiling.
+				
+				Slasher: Let's see who's the better freak show.
+				
+				The slasher began shaking. His body was hunched over and in an instant he was three times the size of his human form. Hair started growing from every inch of his skin. He kept growing until he reached the ceiling. Wings sprouted out from his back, claws began transforming from his hands and feet, and a majestic mane surrounded his head. A twenty foot Manticore stood before Kipp and Jinx.
+				
+				Jinx: Okay, @bold{now} I regret skipping out on that monster hunting class. 
+				
+			}$else{
+				Alodar: All of your blockbuster effects are transparent. You don't stand a chance against a derelict and the chosen one!
+				
+				The slasher took of his hockey mask and started smiling.
+				
+				Slasher: I'm glad you said that. Now the real horror film can start!
+				
+				The slasher began shaking. His body was hunched over and in an instant he was three times the size of his human form. Hair started growing from every inch of his skin. He kept growing until he reached the ceiling. Wings sprouted out from his back, claws began transforming from his hands and feet, and a majestic mane surrounded his head. A twenty foot Manticore stood before Kipp and Alodar.
+				
+				Alodar: Kipp, I don't think looks are deceiving.
+				
+			}
+			
+			The manticore then grabs [companionName] keeps a tight grip on them.
+			
+			[companionName]: Kipp, the demon is crushing every bone in my body! You've got to do something!
+			
+			@bold_orange{It would be in your best interest to save here. Oh wait, the choice is coming up right now...good luck :)}
+			
+			$choice{
+			
+			Save your own skin|
+				Kipp had to play the odds. He knew there's little to chance of saving both of them. Kipp bolted around the monster has he's busy with [companionName], whose struggling through the pain.
+				
+				[companionName]: Wait, what about me?!
+				Manticore: Still got some steam in ya, huh kid?
+				
+				Kipp focused on retracing their path and heading in the other direction to find a way to leave this dimension.
+				
+				Manticore: There's no such thing as an exit here and you ain't going nowhere. 
+				
+				Kipp's options kept narrowing down with every new path he tried. His breath got heavier, his heart kept beating faster and faster. The manticore's voice was muffling and the room kept getting darker, but Kipp was still running. Like a wall, Kipp's body just stopped all of a sudden. The scene blacks out.
+				
+				Kipp wakes up in a sweat, back to safety in the hedge maze.
+				
+				[companionName]: So, did you finally think of a reason why you left me back there?
+				Kipp: I'm sorry. I was thinking about myself for a moment. Are you in any mood of forgiving?
+				[companionName]: Ask me again once we find a way out of here, coward.
+				Kipp: Kay...
+				
+				[companionName] moves on ahead without Kipp, opening the four paths of light at the intersection.
+				
+				$inc_darkPts_1
+			|Help a partner out|
+				Kipp can't just leave them now after all they've been through. He notices the whistling boiler behind him.
+				
+				Kipp: Hey, mammoth. You may be stronger but I bet you'll still miss.
+				
+				The monster takes a look back at Kipp and swings his hand forward, trying to toss him to the wall. Kipp leaps back.
+				
+				Kipp: See, I've seen better swings on my grandma's porch.
+				Manticore: You're really pressing your luck...
+				
+				The manticore took another swing at Kipp rolled to the right to keep his attention.
+
+				Kipp: Make sure you're swinging hard, just in case you actually hit me!
+				
+				The manticore dropped [companioniName], allowing them to run away. The manticore pulled out its claws and viciously swung at Kipp. Kipp inched closer and closer to the boiler with every dodge.
+				
+				Kipp took a few steps behind him until he felt the heat of the boiler.
+				
+				Kipp: No wonder the maze left a killer with no bite in here.
+				Manticore: @bold{ROAAAAAAAAAAAR!}
+				
+				As the manticore took its final swing Kipp ducked and rolled forward. The manticore's claws dug into the metal door of the boiler. The steam blasted the manticore's face. The blasted boiler steamed up the room, blinding Kipp. He started running to catch up with [companionName].
+				
+				Kipp: Hey [companionName], I took care of the manticore. [companionName]?
+				
+				The fog fades as Kipp finds himself back in the maze. He sees [companionName] get up from the ground.
+				
+				[companionName]: Thanks for getting back there. I thought I had no chance after I was grabbed...@italic{ow}.
+				Kipp: Are you alr...
+				[companionName]: Yeah, I'll be okay. Just give me some time to walk it off.
+				
+				Kipp: Okay, I'll get this maze thing settled.
+				
+				$inc_lightPts_1
+			}
+			
+			# MAZE CODE STARTS HERE ---------------------------------------------------------------------------------------------------------------------
+			
+			What path do you take? # INTERSECTION 1
+			# The player needs to take the East path
+			$choice{
+			NORTH|
+				Kipp and [companionName] take a few steps into the light. They walk out to find themselves back at the @blue{Hedge Maze Entrance}.
+				
+				Kipp: Dang it. What should we do no...
+				
+				Kipp looked back at [companionName] to see that they are in no mood for talking.
+				
+				Kipp: Right. What was it again? We either @red{go to } @blue{Checkpoint 3} or give up and just go back to the @blue{Shepherd} 's @blue{House} and tell Sam we need a break...
+				
+				$goto_hedgeMazeEntrance
+				$exit
+				
+			|EAST|
+				Kipp and [companionName] take a few steps into the light. They walk out to find themselves at another intersection.
+				
+				Kipp: Alright, seems like I am somewhat good on my own. Now where to next?
+				
+				Kipp shields his eyes before the light starts coming from all ends of the maze.
+				
+				Kipp: Yup. Use to that, too.
+				
+			|SOUTH|
+				Kipp and [companionName] take a few steps into the light. They walk out to find themselves back at the @blue{Hedge Maze Entrance}.
+				
+				Kipp: Dang it. What should we do no...
+				
+				Kipp looked back at [companionName] to see that they are in no mood for talking.
+				
+				Kipp: Right. What was it again? We either @red{go to } @blue{Checkpoint 3} or give up and just go back to the @blue{Shepherd} 's @blue{House} and tell Sam we need a break...
+				
+				$goto_hedgeMazeEntrance
+				$exit
+				
+			|WEST|
+				Kipp and [companionName] take a few steps into the light. They walk out to find themselves back at the @blue{Hedge Maze Entrance}.
+				
+				Kipp: Dang it. What should we do no...
+				
+				Kipp looked back at [companionName] to see that they are in no mood for talking.
+				
+				Kipp: Right. What was it again? We either @red{go to } @blue{Checkpoint 3} or give up and just go back to the @blue{Shepherd} 's @blue{House} and tell Sam we need a break...
+				
+				$goto_hedgeMazeEntrance
+				$exit
+				
+			}
+			
+			What path do you take? # INTERSECTION 2
+			# The player needs to take the East path
+			$choice{
+			NORTH|
+				Kipp and [companionName] take a few steps into the light. They walk out to find themselves back at the @blue{Hedge Maze Entrance}.
+				
+				Kipp: Dang it. What should we do no...
+				
+				Kipp looked back at [companionName] to see that they are in no mood for talking.
+				
+				Kipp: Right. What was it again? We either @red{go to } @blue{Checkpoint 3} or give up and just go back to the @blue{Shepherd} 's @blue{House} and tell Sam we need a break...
+				
+				$goto_hedgeMazeEntrance
+				$exit
+				
+			|EAST|
+				Kipp and [companionName] take a few steps into the light. They walk out to find themselves at another intersection.
+				
+				Kipp: And another one down on the first try! It's magic...or again, the level designer got lazy.
+				
+				Kipp: Alright last one. Choose wisely Kipp.
+				
+			|SOUTH|
+				Kipp and [companionName] take a few steps into the light. They walk out to find themselves back at the @blue{Hedge Maze Entrance}.
+				
+				Kipp: Dang it. What should we do no...
+				
+				Kipp looked back at [companionName] to see that they are in no mood for talking.
+				
+				Kipp: Right. What was it again? We either @red{go to } @blue{Checkpoint 3} or give up and just go back to the @blue{Shepherd} 's @blue{House} and tell Sam we need a break...
+				
+				$goto_hedgeMazeEntrance
+				$exit
+				
+			|WEST|
+				Kipp and [companionName] take a few steps into the light. They walk out to find themselves back at the @blue{Hedge Maze Entrance}.
+				
+				Kipp: Dang it. What should we do no...
+				
+				Kipp looked back at [companionName] to see that they are in no mood for talking.
+				
+				Kipp: Right. What was it again? We either @red{go to } @blue{Checkpoint 3} or give up and just go back to the @blue{Shepherd} 's @blue{House} and tell Sam we need a break...
+				
+				$goto_hedgeMazeEntrance
+				$exit
+				
+			}
+			
+			What path do you take? # INTERSECTION 3
+			# The player needs to take the East path
+			$choice{
+			NORTH|
+				Kipp and [companionName] take a few steps into the light. They walk out to find themselves back at the @blue{Hedge Maze Entrance}.
+				
+				Kipp: Dang it. What should we do no...
+				
+				Kipp looked back at [companionName] to see that they are in no mood for talking.
+				
+				Kipp: Right. What was it again? We either @red{go to } @blue{Checkpoint 3} or give up and just go back to the @blue{Shepherd} 's @blue{House} and tell Sam we need a break...
+				
+				$goto_hedgeMazeEntrance
+				$exit
+				
+			|EAST|
+				Kipp and [companionName] take a few steps into the light. They walk out to find themselves at, once more, a dead end.
+				
+				Kipp: Look. At. Me. Did it all in one shot. Who's the best? I think it's me.
+				
+				[companionName]: Congratulations you learned how to pick the same direction three times in a row. Someone should give you a cookie...ow.
+				
+				It looks like [companionName] is still slightly bruised from their encounter with the manticore.
+				
+				Kipp: We at least I get this plaque.
+				
+				" Congratulations! You have made it through the third checkpoint. Please proceed to @blue{Checkpoint 4}"
+				
+				Kipp: There's still more maze to @red{go to}?!
+				
+				The plaque started morphing its letting and moving them around: "Do not fret. I will not make you do this path choosing simulator anymore."
+				
+				[companionName]: Even the game is on to the adequate designing of this level.
+				
+				$set_medHedgeCheck_4
+				
+			|SOUTH|
+				Kipp and [companionName] take a few steps into the light. They walk out to find themselves back at the @blue{Hedge Maze Entrance}.
+				
+				Kipp: Dang it. What should we do no...
+				
+				Kipp looked back at [companionName] to see that they are in no mood for talking.
+				
+				Kipp: Right. What was it again? We either @red{go to } @blue{Checkpoint 3} or give up and just go back to the @blue{Shepherd} 's @blue{House} and tell Sam we need a break...
+				
+				$goto_hedgeMazeEntrance
+				$exit
+				
+			|WEST|
+				Kipp and [companionName] take a few steps into the light. They walk out to find themselves back at the @blue{Hedge Maze Entrance}.
+				
+				Kipp: Dang it. What should we do no...
+				
+				Kipp looked back at [companionName] to see that they are in no mood for talking.
+				
+				Kipp: Right. What was it again? We either @red{go to } @blue{Checkpoint 3} or give up and just go back to the @blue{Shepherd} 's @blue{House} and tell Sam we need a break...
+				
+				$goto_hedgeMazeEntrance
+				$exit
+				
+			}
+			
+		}$else{
+			
+			Kipp: Alright Kipp just got to choose the right path this time and maybe [companionName] will finally get back in the mood to talk.
+			
+			Kipp: @yellow{Maybe I should just go in the same direction three times instead of just picking randomly.} I honestly don't believe that strategy actually works, but why not.
+\			¯\_(ツ)_/¯
+			
+			What path do you take? # INTERSECTION 1
+			# The player needs to take the East path
+			$choice{
+			NORTH|
+				Kipp and [companionName] take a few steps into the light. They walk out to find themselves back at the @blue{Hedge Maze Entrance}.
+				
+				Kipp: Dang it. What should we do no...
+				
+				Kipp looked back at [companionName] to see that they are in no mood for talking.
+				
+				Kipp: Right. What was it again? We either @red{go to } @blue{Checkpoint 3} or give up and just go back to the @blue{Shepherd} 's @blue{House} and tell Sam we need a break...
+				
+				$goto_hedgeMazeEntrance
+				$exit
+				
+			|EAST|
+				Kipp and [companionName] take a few steps into the light. They walk out to find themselves at another intersection.
+				
+				Kipp: Alright, seems like I am somewhat good on my own. Now where to next?
+				
+				Kipp shields his eyes before the light starts coming from all ends of the maze.
+				
+				Kipp: Yup. Use to that, too.
+				
+			|SOUTH|
+				Kipp and [companionName] take a few steps into the light. They walk out to find themselves back at the @blue{Hedge Maze Entrance}.
+				
+				Kipp: Dang it. What should we do no...
+				
+				Kipp looked back at [companionName] to see that they are in no mood for talking.
+				
+				Kipp: Right. What was it again? We either @red{go to } @blue{Checkpoint 3} or give up and just go back to the @blue{Shepherd} 's @blue{House} and tell Sam we need a break...
+				
+				$goto_hedgeMazeEntrance
+				$exit
+				
+			|WEST|
+				Kipp and [companionName] take a few steps into the light. They walk out to find themselves back at the @blue{Hedge Maze Entrance}.
+				
+				Kipp: Dang it. What should we do no...
+				
+				Kipp looked back at [companionName] to see that they are in no mood for talking.
+				
+				Kipp: Right. What was it again? We either @red{go to } @blue{Checkpoint 3} or give up and just go back to the @blue{Shepherd} 's @blue{House} and tell Sam we need a break...
+				
+				$goto_hedgeMazeEntrance
+				$exit
+				
+			}
+			
+			What path do you take? # INTERSECTION 2
+			# The player needs to take the East path
+			$choice{
+			NORTH|
+				Kipp and [companionName] take a few steps into the light. They walk out to find themselves back at the @blue{Hedge Maze Entrance}.
+				
+				Kipp: Dang it. What should we do no...
+				
+				Kipp looked back at [companionName] to see that they are in no mood for talking.
+				
+				Kipp: Right. What was it again? We either @red{go to } @blue{Checkpoint 3} or give up and just go back to the @blue{Shepherd} 's @blue{House} and tell Sam we need a break...
+				
+				$goto_hedgeMazeEntrance
+				$exit
+				
+			|EAST|
+				Kipp and [companionName] take a few steps into the light. They walk out to find themselves at another intersection.
+				
+				Kipp: And another one down! It's magic...or again, the level designer got lazy.
+				
+				Kipp: Alright last one. Choose wisely Kipp.
+				
+			|SOUTH|
+				Kipp and [companionName] take a few steps into the light. They walk out to find themselves back at the @blue{Hedge Maze Entrance}.
+				
+				Kipp: Dang it. What should we do no...
+				
+				Kipp looked back at [companionName] to see that they are in no mood for talking.
+				
+				Kipp: Right. What was it again? We either @red{go to } @blue{Checkpoint 3} or give up and just go back to the @blue{Shepherd} 's @blue{House} and tell Sam we need a break...
+				
+				$goto_hedgeMazeEntrance
+				$exit
+				
+			|WEST|
+				Kipp and [companionName] take a few steps into the light. They walk out to find themselves back at the @blue{Hedge Maze Entrance}.
+				
+				Kipp: Dang it. What should we do no...
+				
+				Kipp looked back at [companionName] to see that they are in no mood for talking.
+				
+				Kipp: Right. What was it again? We either @red{go to } @blue{Checkpoint 3} or give up and just go back to the @blue{Shepherd} 's @blue{House} and tell Sam we need a break...
+				
+				$goto_hedgeMazeEntrance
+				$exit
+				
+			}
+			
+			What path do you take? # INTERSECTION 3
+			# The player needs to take the East path
+			$choice{
+			NORTH|
+				Kipp and [companionName] take a few steps into the light. They walk out to find themselves back at the @blue{Hedge Maze Entrance}.
+				
+				Kipp: Dang it. What should we do no...
+				
+				Kipp looked back at [companionName] to see that they are in no mood for talking.
+				
+				Kipp: Right. What was it again? We either @red{go to } @blue{Checkpoint 3} or give up and just go back to the @blue{Shepherd} 's @blue{House} and tell Sam we need a break...
+				
+				$goto_hedgeMazeEntrance
+				$exit
+				
+			|EAST|
+				Kipp and [companionName] take a few steps into the light. They walk out to find themselves at, once more, a dead end.
+				
+				Kipp: Look. At. Me. Did it all by myself. Who's the best? I think it's me.
+				
+				[companionName]: Congratulations you learned how to pick the same direction three times in a row. Someone should give you a cookie...ow.
+				
+				It looks like [companionName] is still slightly bruised from their encounter with the manticore.
+				
+				Kipp: We at least I get this plaque.
+				
+				" Congratulations! You have made it through the third checkpoint. Please proceed to @blue{Checkpoint 4}"
+				
+				Kipp: There's still more maze to @red{go to}?!
+				
+				The plaque started morphing its letting and moving them around: "Do not fret. I will not make you do this path choosing simulator anymore."
+				
+				[companionName]: Even the game is on to the adequate designing of this level.
+				
+				$set_medHedgeCheck_4
+				
+				
+			|SOUTH|
+				Kipp and [companionName] take a few steps into the light. They walk out to find themselves back at the @blue{Hedge Maze Entrance}.
+				
+				Kipp: Dang it. What should we do no...
+				
+				Kipp looked back at [companionName] to see that they are in no mood for talking.
+				
+				Kipp: Right. What was it again? We either @red{go to } @blue{Checkpoint 3} or give up and just go back to the @blue{Shepherd} 's @blue{House} and tell Sam we need a break...
+				
+				$goto_hedgeMazeEntrance
+				$exit
+				
+			|WEST|
+				Kipp and [companionName] take a few steps into the light. They walk out to find themselves back at the @blue{Hedge Maze Entrance}.
+				
+				Kipp: Dang it. What should we do no...
+				
+				Kipp looked back at [companionName] to see that they are in no mood for talking.
+				
+				Kipp: Right. What was it again? We either @red{go to } @blue{Checkpoint 3} or give up and just go back to the @blue{Shepherd} 's @blue{House} and tell Sam we need a break...
+				
+				$goto_hedgeMazeEntrance
+				$exit
+				
+			}
+		}
+	
+	}$else{
+		
+		$if_medHedgeCheck_eq_5{
+			[companionName]: Kipp we are not having the time of our lives back in that maze again. We either @red{go to} the @blue{Shepherd}'s @blue{House} or back to the @blue{Cliffside}.
+		}$else{
+			Kipp and [companionName] keep walking aimlessly for a while. They then find themselves back at the entrance of the maze.
+			
+			[companionName]: Wait...wait...I don't get it.
+			Kipp: I guess that level designer didn't want us there for now.
+			[companionName]: So what now?
+			Kipp: I'll read the plaque, "@red{go to} @blue{Checkpoint }[medHedgeCheck]. Don't make me tear open the room of a thousand demons."
+			[companionName]: So an inanimate maze can be pissed.
+			Kipp: We can @red{go} back @red{to} the @blue{Shepherd}'s @blue{House} if this is too much?
+			[companionName]: You're move.
+			
+			$goto_hedgeMazeEntrance 
+		}
+	}
+
+}

@@ -1,0 +1,519 @@
+go to{
+	$if_medHedgeCheck_eq_2{
+		$if_medCheck2Intro_eq_0{
+			$set_medCheck2ntro_eq_1
+			
+			[companionName]: So what happened back there?
+			Kipp: Back when?
+			[companionName]: At the war zone. You kind of just ran off freaking out.
+			Kipp: Oh, yeah. Not use to having to be violent with animals.
+			[companionName]: You were trying to save its life.
+			Kipp: Yeah...
+			[companionName]: I'll stop bringing that up.
+			Kipp: Thanks.
+			
+			Their conversation is interrupted by the sound of a band.
+			
+			Kipp: You hear that? 
+			[companionName]: Yeah, a saxophone and a line of trombones.
+			Kipp: A saxa- and trum- what?
+			[companionName]: You don't get that much music on the farm, do you?
+			Kipp: Just the fiddle and washboard.
+			[companionName]: Right.
+			
+			Kipp and [companionName] moved the hanging vines out of the way to find a room covered in sparkles on every wall, showy lights at pointed at every angle, fancy suits on every guy and glistening dresses on every girl they saw.
+			
+			$if_companionB_eq_1{
+				Rice: Wow, I've never been invited to a party as grand as this. Where's Gatsby?
+				Kipp: Who?
+				Rice: Nothing.
+				Kipp: Oh Gatsby the Great, he must be a @bold{great} guy.
+				Rice: Close enough.
+			}$elif_companionF_eq_1{
+				Jinx: One big ball. I wonder where the host is at.
+				Kipp: If I took a guess it'd be Gatsby.
+				Jinx: Wait you read?
+				Kipp: I had to do something to put the little chicks to sleep.
+			}$else{
+				Kipp: Wow, I wonder how rich you'd have to be to get an invitation to this.
+				Alodar: Quite a small fortune I'd believe.
+				Kipp: One as big as Gatsby's.
+				Alodar: Probably as enormous as Gat...
+				
+				Alodar turned to Kipp, surprised that he would bring up that reference.
+				
+				Kipp: What? I've read a book before.
+			}
+			
+			Kipp: Never mind, Let's just take a look before leaving.
+			
+			Kipp walked down the staircase, getting a better look at the crowd. Every group he passed by, he can hear laughter and amusement. The food being served was delectable and the drinks were as fancy as the glasses they were served in. 
+
+			Waiter: A drink for you sir?
+			Kipp: No thanks. Gotta keep a working mind here.
+
+			Kipp backed away from the waiter, bumping into a woman.
+
+			Kipp: Oh sorry there, miss.
+			Clarissa: Oh no there, darling. There's no reason for apologizing here. You go on without me ladies. I think I've found someone for the night.
+			Kipp: Excuse me?
+			
+			The group of women laughed as they left Clarissa alone with Kipp. Clarissa started running her hands around Kipp's chest, enticed by Kipp's muscular body.
+
+			Clarissa: So let's start with our names. I am the beautiful Clarissa, and you?
+			Kipp: Uhh...
+			Host: I hope you all are enjoying the evening.
+			
+			Everyone directed their attention towards the top of the steps.
+			
+			Host: Shall we kick off the night with a classic?
+		
+			The crowd responded with a roar of excitement.
+			
+			Host: You heard them, band. Play something that even the stars can swing to!
+			
+			The music began playing and Kipp could see Clarissa's smile show.
+			
+			Clarissa: Oh this is just my favorite hit. You just have to join me.
+			
+			Clarissa drags Kipp to the main floor. She begins dancing, gripping Kipp's hand tightly. Kipp tries his best to mimic CLarissa's moves, but it's obvious that Kipp can't pick up steps that quickly. Clarissa giggled at Kipp's attempt at dancing. She doesn't seem to mind his... inexperience with women. Once the song ends Kipp takes a seat and Clarissa rests on top of him.
+			
+			Clarissa: Man, Kipp. You are some man.
+			Kipp: Clarissa, you are a hoot and a half, but I've got an important task somewhere else.
+			
+			Clarissa leans in closer to whisper in Kipp's ear.
+			
+			Clarissa: Well I hope that task involves something with me...and you...
+			
+			Kipp is having trouble talking his way out of Clarissa's advances. Kipp needs to look for the sheep before they venture off too far, but the party is just getting hot.
+			What should Kipp do next?
+			
+			$choice{
+			Enjoy the party|
+				Kipp thought to himself that this was a once in a lifetime moment to live at the top of society for one night. It's not like he's in his own dimension. What's the consequence?
+				
+				Kipp: Well, Clarissa. Consider yourself busy tonight.
+				Clarissa: Yay!
+				
+				Clarissa takes a drink from the waiter and downs it in one gulp.
+				
+				Clarissa: Let's have once more dance.
+				Kipp: Take the lead.
+				
+				Kipp is dragged again to the floor. The song was slower this time. Kipp hugged tightly to Clarissa as they swung back and forth to the beat. Kipp's vision gets blurrier. Clarissa then whispers something into his ear. It was inaudible; lost in Kipp's head as the music made his eyes drowsier and head heavier. Eventually...he passed out on the floor.
+				The music fades.
+				
+				$inc_darkPts_1
+			|Focus on the mission|
+				Kipp lifted Clarissa off his lap and stands up.
+				
+				Kipp: I'm serious, Clarissa. Any other time would be perfect, but I need to return to my world. I am truly sorry for having to say it like this.
+				Clarissa: But wait...
+				
+				Kipp walked away, trying to find [companionName] or, more importantly, an exit to this dimension. 
+				
+				Kipp: Hey, [companionName]. Time to go.
+				
+				Just then, the band began playing another song, bringing everyone to the dance floor. With Kipp's path blocked, he tried shoving through the crowd till he reached the end of the room where he spotted an emergency exit door. As he kept pushing, the music grew louder and Kipp became dizzy. Kipp's head kept spinning the more he fought back. Eventually his body gave in and he passed out.
+				
+				$inc_lightPts_1
+			}
+			
+			Kipp woke up with a sudden shock. Kipp kept turning his head, until he finds [companionName] sitting on a rock, whittling down a stick with a small knife from Kipp's bag.
+			
+			[companionName]: Man, those dimension warps do a number on you.
+			Kipp: How were you not affected by the music?
+			
+			$if_companionB_eq_1{
+				Rice: I wasn't in the room. A good fellow offered me a chance to push his wheels to the limit. You'll never find cars like those back on the farm. The first thing I'm gonna do when I get back is...
+				Kipp: Rice, focus.
+				Rice: Right, sorry.
+			}$elif_companionF_eq_1{
+				Jinx: I wasn't in the room. I found a car. The keys were in the ignition. I decided to take it for a little joyride.
+			}$else{
+				Alodar: I was outside meditating in the courtyard with the moon to find some answers.
+			}
+			
+			Kipp: So now what do we do?
+			
+			A path of light began shining at the end of each intersection.
+			
+			[companionName]: We play the hedge maze's game I guess.
+			Kipp: Right, here we go.
+			
+			# MAZE CODE STARTS HERE ---------------------------------------------------------------------------------------------------------------------
+			
+			What path do you take? # INTERSECTION 1
+			# The player needs to take the South path
+			$choice{
+			NORTH|
+				Kipp and [companionName] take a few steps into the light. They walk out to find themselves back at the @blue{Hedge Maze Entrance}.
+				
+				Kipp: Well great.
+				[companionName]: %25 percent chance of getting it right! Literally 1 out of 4, Kipp!
+				Kipp: Don't blame me. So now what?
+				[companionName]: We walk back in. Another option is give up and just go back to the @blue{Shepherd} 's @blue{House} and tell Sam we didn't sign up for this, take a nap, do something more interesting.
+				Kipp: Or...we can try that walk back in idea and try again, (@red{go to } @blue{Checkpoint 1}).
+				[companionName]: I'll let you decide @bold{all on your own} so you can't blame me next time.
+				
+				$goto_hedgeMazeEntrance
+				$exit
+				
+			|EAST|
+				Kipp and [companionName] take a few steps into the light. They walk out to find themselves back at the @blue{Hedge Maze Entrance}.
+				
+				Kipp: Well great.
+				[companionName]: %25 percent chance of getting it right! Literally 1 out of 4, Kipp!
+				Kipp: Don't blame me. So now what?
+				[companionName]: We walk back in. Another option is give up and just go back to the @blue{Shepherd} 's @blue{House} and tell Sam we didn't sign up for this, take a nap, do something more interesting.
+				Kipp: Or...we can try that walk back in idea and try again, (@red{go to } @blue{Checkpoint 1}).
+				[companionName]: I'll let you decide @bold{all on your own} so you can't blame me next time.
+				
+				$goto_hedgeMazeEntrance
+				$exit
+				
+			|SOUTH|
+				Kipp and [companionName] take a few steps into the light. They walk out to find themselves at another intersection.
+				
+				Kipp: ...
+				[companionName]: Hey, we're getting good at this guessing thing.
+				Kipp: I guess so. What next?
+				
+				A flash of light shines in all four directions.
+				
+				Kipp: Will never get use to that.
+				[companionName]: Hello, Level Design! We can do without the eye-blazing beams. 
+				Kipp: Which direction this time?
+				
+			|WEST|
+				Kipp and [companionName] take a few steps into the light. They walk out to find themselves back at the @blue{Hedge Maze Entrance}.
+				
+				Kipp: Well great.
+				[companionName]: %25 percent chance of getting it right! Literally 1 out of 4, Kipp!
+				Kipp: Don't blame me. So now what?
+				[companionName]: We walk back in. Another option is give up and just go back to the @blue{Shepherd} 's @blue{House} and tell Sam we didn't sign up for this, take a nap, do something more interesting.
+				Kipp: Or...we can try that walk back in idea and try again, (@red{go to } @blue{Checkpoint 1}).
+				[companionName]: I'll let you decide @bold{all on your own} so you can't blame me next time.
+				
+				$goto_hedgeMazeEntrance
+				$exit
+				
+			}
+			
+			What path do you take? # INTERSECTION 2
+			# The player needs to take the West path
+			$choice{
+			NORTH|
+				Kipp and [companionName] take a few steps into the light. They walk out to find themselves back at the @blue{Hedge Maze Entrance}.
+				
+				Kipp: Well great.
+				[companionName]: %25 percent chance of getting it right! Literally 1 out of 4, Kipp!
+				Kipp: Don't blame me. So now what?
+				[companionName]: We walk back in. Another option is give up and just go back to the @blue{Shepherd} 's @blue{House} and tell Sam we didn't sign up for this, take a nap, do something more interesting.
+				Kipp: Or...we can try that walk back in idea and try again, (@red{go to } @blue{Checkpoint 1}).
+				[companionName]: I'll let you decide @bold{all on your own} so you can't blame me next time.
+				
+				$goto_hedgeMazeEntrance
+				$exit
+				
+			|EAST|
+				Kipp and [companionName] take a few steps into the light. They walk out to find themselves back at the @blue{Hedge Maze Entrance}.
+				
+				Kipp: Well great.
+				[companionName]: %25 percent chance of getting it right! Literally 1 out of 4, Kipp!
+				Kipp: Don't blame me. So now what?
+				[companionName]: We walk back in. Another option is give up and just go back to the @blue{Shepherd} 's @blue{House} and tell Sam we didn't sign up for this, take a nap, do something more interesting.
+				Kipp: Or...we can try that walk back in idea and try again, (@red{go to } @blue{Checkpoint 1}).
+				[companionName]: I'll let you decide @bold{all on your own} so you can't blame me next time.
+				
+				$goto_hedgeMazeEntrance
+				$exit
+				
+			|SOUTH|
+				Kipp and [companionName] take a few steps into the light. They walk out to find themselves back at the @blue{Hedge Maze Entrance}.
+				
+				Kipp: Well great.
+				[companionName]: %25 percent chance of getting it right! Literally 1 out of 4, Kipp!
+				Kipp: Don't blame me. So now what?
+				[companionName]: We walk back in. Another option is give up and just go back to the @blue{Shepherd} 's @blue{House} and tell Sam we didn't sign up for this, take a nap, do something more interesting.
+				Kipp: Or...we can try that walk back in idea and try again, (@red{go to } @blue{Checkpoint 1}).
+				[companionName]: I'll let you decide @bold{all on your own} so you can't blame me next time.
+				
+				$goto_hedgeMazeEntrance
+				$exit
+				
+			|WEST|
+				Kipp and [companionName] take a few steps into the light. They walk out to find themselves at another intersection.
+				
+				Kipp: This is becoming less of a puzzle and more of stupid RNG.
+				[companionName]: And we're not even halfway there.
+				Kipp: One more time?
+				[companionName]: Sure.
+				
+				The paths began glowing once more.
+				
+			}
+			
+			What path do you take? # INTERSECTION 3
+			# The player needs to take the North path
+			$choice{
+			NORTH|
+				Kipp and [companionName] take a few steps into the light. They walk out to find themselves...
+				
+				[companionName]: ANOTHER DEAD END...
+				Kipp: That either means we did it right or the maze seriously wants to kill us now.
+				[companionName]: Just locate the plaque.
+				Kipp: Yup right here.
+				
+				" Congratulations! You have made it through the second checkpoint. Please proceed to @blue{Checkpoint 3}"
+				
+				Kipp: Blah blah...@red{go to}...yup self explanatory.
+				
+				$set_medHedgeCheck_3
+				
+			|EAST|
+				Kipp and [companionName] take a few steps into the light. They walk out to find themselves back at the @blue{Hedge Maze Entrance}.
+				
+				Kipp: Well great.
+				[companionName]: %25 percent chance of getting it right! Literally 1 out of 4, Kipp!
+				Kipp: Don't blame me. So now what?
+				[companionName]: We walk back in. Another option is give up and just go back to the @blue{Shepherd} 's @blue{House} and tell Sam we didn't sign up for this, take a nap, do something more interesting.
+				Kipp: Or...we can try that walk back in idea and try again, (@red{go to } @blue{Checkpoint 1}).
+				[companionName]: I'll let you decide @bold{all on your own} so you can't blame me next time.
+				
+				$goto_hedgeMazeEntrance
+				$exit
+				
+			|SOUTH|
+				Kipp and [companionName] take a few steps into the light. They walk out to find themselves back at the @blue{Hedge Maze Entrance}.
+				
+				Kipp: Well great.
+				[companionName]: %25 percent chance of getting it right! Literally 1 out of 4, Kipp!
+				Kipp: Don't blame me. So now what?
+				[companionName]: We walk back in. Another option is give up and just go back to the @blue{Shepherd} 's @blue{House} and tell Sam we didn't sign up for this, take a nap, do something more interesting.
+				Kipp: Or...we can try that walk back in idea and try again, (@red{go to } @blue{Checkpoint 1}).
+				[companionName]: I'll let you decide @bold{all on your own} so you can't blame me next time.
+				
+				$goto_hedgeMazeEntrance
+				$exit
+				
+			|WEST|
+				Kipp and [companionName] take a few steps into the light. They walk out to find themselves back at the @blue{Hedge Maze Entrance}.
+				
+				Kipp: Well great.
+				[companionName]: %25 percent chance of getting it right! Literally 1 out of 4, Kipp!
+				Kipp: Don't blame me. So now what?
+				[companionName]: We walk back in. Another option is give up and just go back to the @blue{Shepherd} 's @blue{House} and tell Sam we didn't sign up for this, take a nap, do something more interesting.
+				Kipp: Or...we can try that walk back in idea and try again, (@red{go to } @blue{Checkpoint 1}).
+				[companionName]: I'll let you decide @bold{all on your own} so you can't blame me next time.
+				
+				$goto_hedgeMazeEntrance
+				$exit
+			}
+			
+		}$else{
+			
+			$if_companionB_eq_1{
+				Rice: Brother, just take a deep breath and sense the exit.
+				Kipp: That's no better than just closing my eyes and just picking a direction.
+				Rice: I know, just a thought.
+			}$elif_companionF_eq_1{
+				Jinx: I swear if you screw this up again, my foot will meet your mouth!
+				Kipp: Then you should just choose.
+				Jinx: I'm not the main protagonist!
+			}$else{
+				Alodar: The chances of picking the right path grow...I hope.
+				Kipp: Am I the one that's suppose to keep track of the eliminated options?
+				Alodar: ...
+			}
+			
+			What path do you take? # INTERSECTION 1
+			# The player needs to take the South path
+			$choice{
+			NORTH|
+				Kipp and [companionName] take a few steps into the light. They walk out to find themselves back at the @blue{Hedge Maze Entrance}.
+				
+				Kipp: Well great.
+				[companionName]: %25 percent chance of getting it right! Literally 1 out of 4, Kipp!
+				Kipp: @bold{Stop bringing it up!} So now what?
+				[companionName]: We walk back in. Another option is give up and just go back to the @blue{Shepherd} 's @blue{House} and tell Sam we didn't sign up for this, take a nap, do something more interesting.
+				Kipp: Or...we can try that walk back in idea and try again, (@red{go to } @blue{Checkpoint 1}).
+
+				
+				$goto_hedgeMazeEntrance
+				$exit
+				
+			|EAST|
+				Kipp and [companionName] take a few steps into the light. They walk out to find themselves back at the @blue{Hedge Maze Entrance}.
+				
+				Kipp: Well great.
+				[companionName]: %25 percent chance of getting it right! Literally 1 out of 4, Kipp!
+				Kipp: @bold{Stop bringing it up!} So now what?
+				[companionName]: We walk back in. Another option is give up and just go back to the @blue{Shepherd} 's @blue{House} and tell Sam we didn't sign up for this, take a nap, do something more interesting.
+				Kipp: Or...we can try that walk back in idea and try again, (@red{go to } @blue{Checkpoint 1}).
+
+				
+				$goto_hedgeMazeEntrance
+				$exit
+				
+			|SOUTH|
+				Kipp and [companionName] take a few steps into the light. They walk out to find themselves at another intersection.
+				
+				Kipp: ...
+				[companionName]: Hey, we're getting good at this guessing thing.
+				Kipp: I guess so. What next?
+				
+				A flash of light shines in all four directions.
+				
+				Kipp: Will never get use to that.
+				[companionName]: Hello, Level Design! We can do without the eye-blazing beams. 
+				Kipp: Which direction this time?
+				
+			|WEST|
+				Kipp and [companionName] take a few steps into the light. They walk out to find themselves back at the @blue{Hedge Maze Entrance}.
+				
+				Kipp: Well great.
+				[companionName]: %25 percent chance of getting it right! Literally 1 out of 4, Kipp!
+				Kipp: @bold{Stop bringing it up!} So now what?
+				[companionName]: We walk back in. Another option is give up and just go back to the @blue{Shepherd} 's @blue{House} and tell Sam we didn't sign up for this, take a nap, do something more interesting.
+				Kipp: Or...we can try that walk back in idea and try again, (@red{go to } @blue{Checkpoint 1}).
+
+				
+				$goto_hedgeMazeEntrance
+				$exit
+				
+			}
+			
+			What path do you take? # INTERSECTION 2
+			# The player needs to take the West path
+			$choice{
+			NORTH|
+				Kipp and [companionName] take a few steps into the light. They walk out to find themselves back at the @blue{Hedge Maze Entrance}.
+				
+				Kipp: Well great.
+				[companionName]: %25 percent chance of getting it right! Literally 1 out of 4, Kipp!
+				Kipp: @bold{Stop bringing it up!} So now what?
+				[companionName]: We walk back in. Another option is give up and just go back to the @blue{Shepherd} 's @blue{House} and tell Sam we didn't sign up for this, take a nap, do something more interesting.
+				Kipp: Or...we can try that walk back in idea and try again, (@red{go to } @blue{Checkpoint 1}).
+
+				
+				$goto_hedgeMazeEntrance
+				$exit
+				
+			|EAST|
+				Kipp and [companionName] take a few steps into the light. They walk out to find themselves back at the @blue{Hedge Maze Entrance}.
+				
+				Kipp: Well great.
+				[companionName]: %25 percent chance of getting it right! Literally 1 out of 4, Kipp!
+				Kipp: @bold{Stop bringing it up!} So now what?
+				[companionName]: We walk back in. Another option is give up and just go back to the @blue{Shepherd} 's @blue{House} and tell Sam we didn't sign up for this, take a nap, do something more interesting.
+				Kipp: Or...we can try that walk back in idea and try again, (@red{go to } @blue{Checkpoint 1}).
+
+				
+				$goto_hedgeMazeEntrance
+				$exit
+				
+			|SOUTH|
+				Kipp and [companionName] take a few steps into the light. They walk out to find themselves back at the @blue{Hedge Maze Entrance}.
+				
+				Kipp: Well great.
+				[companionName]: %25 percent chance of getting it right! Literally 1 out of 4, Kipp!
+				Kipp: @bold{Stop bringing it up!} So now what?
+				[companionName]: We walk back in. Another option is give up and just go back to the @blue{Shepherd} 's @blue{House} and tell Sam we didn't sign up for this, take a nap, do something more interesting.
+				Kipp: Or...we can try that walk back in idea and try again, (@red{go to } @blue{Checkpoint 1}).
+
+				
+				$goto_hedgeMazeEntrance
+				$exit
+				
+			|WEST|
+				Kipp and [companionName] take a few steps into the light. They walk out to find themselves at another intersection.
+				
+				Kipp: This is becoming less of a puzzle and more stupid RNG.
+				[companionName]: And we're not even halfway there.
+				Kipp: One more time?
+				[companionName]: Sure.
+				
+				The paths began glowing once more.
+				
+			}
+			
+			What path do you take? # INTERSECTION 3
+			# The player needs to take the North path
+			$choice{
+			NORTH|
+				Kipp and [companionName] take a few steps into the light. They walk out to find themselves...
+				
+				[companionName]: ANOTHER DEAD END...
+				Kipp: That either means we did it right or the maze seriously wants to kill us now.
+				[companionName]: Just locate the plaque.
+				Kipp: Yup right here.
+				
+				" Congratulations! You have made it through the second checkpoint. Please proceed to @blue{Checkpoint 3}"
+				
+				Kipp: Blah blah...@red{go to}...yup self explanatory.
+				
+				$set_medHedgeCheck_3
+				
+			|EAST|
+				Kipp and [companionName] take a few steps into the light. They walk out to find themselves back at the @blue{Hedge Maze Entrance}.
+				
+				Kipp: Well great.
+				[companionName]: %25 percent chance of getting it right! Literally 1 out of 4, Kipp!
+				Kipp: @bold{Stop bringing it up!} So now what?
+				[companionName]: We walk back in. Another option is give up and just go back to the @blue{Shepherd} 's @blue{House} and tell Sam we didn't sign up for this, take a nap, do something more interesting.
+				Kipp: Or...we can try that walk back in idea and try again, (@red{go to } @blue{Checkpoint 1}).
+
+				
+				$goto_hedgeMazeEntrance
+				$exit
+				
+			|SOUTH|
+				Kipp and [companionName] take a few steps into the light. They walk out to find themselves back at the @blue{Hedge Maze Entrance}.
+				
+				Kipp: Well great.
+				[companionName]: %25 percent chance of getting it right! Literally 1 out of 4, Kipp!
+				Kipp: @bold{Stop bringing it up!} So now what?
+				[companionName]: We walk back in. Another option is give up and just go back to the @blue{Shepherd} 's @blue{House} and tell Sam we didn't sign up for this, take a nap, do something more interesting.
+				Kipp: Or...we can try that walk back in idea and try again, (@red{go to } @blue{Checkpoint 1}).
+
+				
+				$goto_hedgeMazeEntrance
+				$exit
+				
+			|WEST|
+				Kipp and [companionName] take a few steps into the light. They walk out to find themselves back at the @blue{Hedge Maze Entrance}.
+				
+				Kipp: Well great.
+				[companionName]: %25 percent chance of getting it right! Literally 1 out of 4, Kipp!
+				Kipp: @bold{Stop bringing it up!} So now what?
+				[companionName]: We walk back in. Another option is give up and just go back to the @blue{Shepherd} 's @blue{House} and tell Sam we didn't sign up for this, take a nap, do something more interesting.
+				Kipp: Or...we can try that walk back in idea and try again, (@red{go to } @blue{Checkpoint 1}).
+
+				
+				$goto_hedgeMazeEntrance
+				$exit
+			}
+		}
+	
+	}$else{
+		
+		$if_medHedgeCheck_eq_5{
+			[companionName]: Kipp we are not having the time of our lives back in that maze again. We either @red{go to} the @blue{Shepherd}'s @blue{House} or back to the @blue{Cliffside}.
+		}$else{
+			Kipp and [companionName] keep walking aimlessly for a while. They then find themselves back at the entrance of the maze.
+			
+			[companionName]: Wait...wait...I don't get it.
+			Kipp: I guess that level designer didn't want us there for now.
+			[companionName]: So what now?
+			Kipp: I'll read the plaque, "@red{go to} @blue{Checkpoint }[medHedgeCheck]. Don't make me tear open the room of a thousand demons."
+			[companionName]: So an inanimate maze can be pissed.
+			Kipp: We can @red{go} back @red{to} the @blue{Shepherd}'s @blue{House} if this is too much?
+			[companionName]: You're move.
+			
+			$goto_hedgeMazeEntrance 
+		}
+	
+	}
+
+}
