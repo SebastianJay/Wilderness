@@ -1,0 +1,18 @@
+inspect{
+	Kipp walks into the house and takes a look at the bed.
+	
+	Kipp: Yup, it's a bed. Been a while since I've seen one of those.
+}
+
+sleep on{
+	Kipp walks into the house and takes a look at the bed.
+
+	Kipp: Maybe I should take a break from all of this
+	
+	The scene gets darker as Kipp closes his eyes. Hours later, the character woke up...but it doesn't look like this is Kipp's body anymore. The sounds and sights of an urban universe swarm the character.
+	
+	@bold{*Lore's playthrough continued*}
+	
+	$switchcharacter
+	#The player switches from this quest to wherever Lore is in her quest.
+}
