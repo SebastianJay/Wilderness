@@ -1,0 +1,109 @@
+go to{
+	$if_medHedgeCheck_eq_4{
+		$if_medCheck4Intro_eq_0{
+			$set_medCheck4Intro_eq_1
+			
+			Kipp: You better now...
+			[companionName]: Yeah. We can just leave all of that behind us.
+			Kipp: Alright, we have to be nearing the end of this maze.
+			
+			$if_companionB_eq_1{
+				Kipp: Hey, Rice. When we get back,
+			}$elif_companionF_eq_1{
+				Kipp: Hey, Jinx. Why don't you talk more about that class on monster hunting?
+			}$else{
+				Kipp: Hey, Alodar. What type of horror movies did you watch back when you were a kid?
+			}
+			
+			[companionName] was silent.
+			
+			Kipp: Hey, I thought the whole last checkpoint was all said and done?
+			
+			Kipp took a blow to the head and was knocked out.
+			
+			
+			A wave of heat blasts Kipp's face as he regains consciousness.
+			
+			Kipp: Man, I could go for some lemonade right now. Ahh! Why is the ground so hot?
+			
+			Kipp looked up to see that he was on the edge of a cliff. Below him, a pool of lava sat there bubbling.
+			
+			Voice: Kipp help!
+			Kipp: Crap, [companionName]?!
+			[companionName]: It wasn't me, Kipp.
+			Voice: Over here!
+			
+			Kipp looked over the horizon to see his dad hanging over the edge of a cliff. 
+			
+			Kipp: Oh man. Dad! I'm coming to get you!
+			
+			Kipp got up and ran as fast as he could so he can to reach him.
+			
+			Kipp: Don't worry everything is gonna be fine.
+			Father: How dare you leave the farm.
+			Kipp: What?
+			Father: I don't think I can hold on any longer!
+			[companionName]: Kipp what are you doing? We can't stand around.
+			Kipp: But didn't you just hear that.
+			Father: Why couldn't you just follow your brother.
+			[companionName]: Hear what?
+			Kipp: That!
+			[companionName]: Kipp even if you're losing it right now, you're father still in danger...
+			Kipp: But...whatever!
+			
+			Kipp kept running and the voices didn't stop.
+			
+			Father: I am ashamed of you...you have to grow up someday...you don't deserve to be a part of this family.
+			Father: Kipp, you've got to hurry!
+			Kipp: Argh...what's going on!
+			
+			$choice{
+			
+			Save Father|
+				Kipp: Blood is thicker than water Kipp, and I ain't gonna get another one.
+				
+				Kipp pressed harder against the ground and picked up his pace. A plume of lava began rushing under the father's feet.
+				Kipp took his dad's arm and tugged him up before the pillar of fire consumed him.
+				
+				Father: Thanks, Kipp. You were always a good kid.
+				
+				Kipp tried smiling through all of his exhaustion. Kipp passed out due to his fatigue. The world went dark.
+				$inc_lightPts_1
+				
+			|Leave Him|
+				Kipp stopped and dug his heels into the ground.
+				
+				Kipp: Why am I even doing this? It's my life, it's my decisions. He can take his anger and disappointment to his grave.
+				
+				A sharp noise penetrated Kipp's eardrums. The whole world crumbled around Kipp. Lava rose between the cracks in the earth.
+				A large chuck of rock broke from the ceiling. Before Kipp was crushed by the boulder, the entire scene went dark.
+				
+				$inc_darkPts_1
+			}
+			
+			@italic_orange{Narrator: Player. Go to the Cliffside to reach the final part of this level, or honestly just visit any other room and ruin the story.}
+			
+			$set_medHedgeCheck_5
+		}
+	
+	}$else{
+	
+		$if_medHedgeCheck_eq_5{
+			[companionName]: Kipp we are not having the time of our lives back in that maze again. We either @red{go to} the @blue{Shepherd}'s @blue{House} or back to the @blue{Cliffside}.
+		}$else{
+			Kipp and [companionName] keep walking aimlessly for a while. They then find themselves back at the entrance of the maze.
+			
+			[companionName]: Wait...wait...I don't get it.
+			Kipp: I guess that level designer didn't want us there for now.
+			[companionName]: So what now?
+			Kipp: I'll read the plaque, "@red{go to} @blue{Checkpoint }[medHedgeCheck]. Don't make me tear open the room of a thousand demons."
+			[companionName]: So an inanimate maze can be pissed.
+			Kipp: We can @red{go} back @red{to} the @blue{Shepherd}'s @blue{House} if this is too much?
+			[companionName]: You're move.
+			
+			$goto_hedgeMazeEntrance 
+		}
+		
+	}
+
+}

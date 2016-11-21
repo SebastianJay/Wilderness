@@ -46,7 +46,6 @@ Some tiles on the map might be impassable (that is, the player cannot travel ove
 * `0` - always passable tiles
 * `1` - always impassable tiles
 * `2` and onward - passable under a certain condition; to be defined
-* `a` and onward - entrance to an area, to be defined
 
 For the above map, if we say that we cannot travel on water but can travel everywhere else, the travel mask might look like:
 

@@ -1,0 +1,9 @@
+use {
+$if_inventory_dirtyMap_eq_1{
+	When Kipp was exhausted after the whole day, he laid on the bed holding the map, wondering what could happen. He stared at the map and gradually lost consciousness. In his dream, on the far side, in the world of wilderness, something mysterious was calling him. Their connection was so strong that Kipp could even feel the direction to the place. When Kipp woke up, the map disappeared. The whole thing was like a dream, but the connection in his mind told him it was more real than anything.
+	$set_farmap_eq_1
+}
+$else{
+	Kipp went to his bed. He felt tired now. So he laid on the bed and took a good nap.
+}
+}

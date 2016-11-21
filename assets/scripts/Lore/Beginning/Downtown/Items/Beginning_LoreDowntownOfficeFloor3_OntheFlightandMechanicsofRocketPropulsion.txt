@@ -1,0 +1,13 @@
+#Beginning_LoreDowntownOfficeFloor3_OntheFlightandMechanicsofRocketPropulsion
+
+Take{
+	$Choice{
+		Steal the guide|
+			Lore tucked the book into her bag.
+			$inc_loreMorality_-1
+			$set_stoleplaneguide_eq_1
+		|Put it back|
+			Lore put the book back on the shelf.
+			$inc_loreMorality_1|
+	}
+}

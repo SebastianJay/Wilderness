@@ -1,6 +1,0 @@
-#Beginning_LoreHouseCatFood
-
-use{
-	Lore stooped down and filled Marthi's bowl with food. The cat gave Lore an irritated look as 
-	though she should have been fed earlier. Marthi ungratefully chowed down.
-}

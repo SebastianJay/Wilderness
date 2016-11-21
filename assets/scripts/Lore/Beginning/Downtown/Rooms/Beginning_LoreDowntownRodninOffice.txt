@@ -1,0 +1,9 @@
+#Beginning_LoreDowntownRodninOffice
+
+go to{
+	Lore stepped inside the office. The @blue{desk} was in front of her, seating a pleasant looking secretary. To the right was the @blue{elevator.}
+}
+
+inspect{
+	The office was overwhelmingly normal. The environment was sterile, freshly vacuumed and dusted. A few plants were gathered in the corner. A radio was softly playing music a the desk.
+}

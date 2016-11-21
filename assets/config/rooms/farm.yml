@@ -1,0 +1,58 @@
+bedroom:
+    name: bedroom
+    description: n/a
+    script: farm/House/Bedroom/Bedroom.txt
+    r: 0
+    c: 0
+    neighbors:
+        livingRoom: E
+    objects:
+        - bed
+        - map
+
+livingRoom:
+    name: living room
+    description: n/a
+    script: farm/House/living room/living room.txt
+    r: 0
+    c: 0
+    neighbors:
+        kitchen: E
+        bedroom: W
+        shop: N
+        meadow: S
+    objects:
+        - rice
+
+kitchen:
+    name: kitchen
+    description: n/a
+    script: farm/House/Kitchen.txt
+    r: 0
+    c: 0
+    neighbors:
+        livingRoom: W
+    objects: {}
+
+shop:
+    name: Shop
+    description: n/a
+    script: farm/Shop/Shop.txt
+    r: 0
+    c: 0
+    neighbors:
+        livingRoom: S
+    objects:
+        - henry
+
+meadow:
+    name: Meadow
+    description: n/a
+    script: farm/meadow/meadow.txt
+    r: 0
+    c: 0
+    neighbors:
+        livingRoom: N
+    objects:
+        - duke
+        - hereford

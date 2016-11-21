@@ -3,23 +3,24 @@ Definition of game state, which is the model in our MVC framework.
 """
 
 from global_vars import Globals
-from asset_loader import AssetLoader
 from enum import Enum
 import json
 import copy
 import os
 
 class GameMode(Enum):
-    titleScreen         =0
-    selectFile          =1
-    credits             =2
-    inAreaCommand       =3
-    inAreaChoice        =4
-    inAreaInput         =5
-    inAreaMap           =6
-    inAreaInventory     =7
-    worldMap            =8
-    worldMapOverArea    =9
+    isLoading           =0
+    titleScreen         =1
+    selectFile          =2
+    credits             =3
+    inAreaCommand       =4
+    inAreaChoice        =5
+    inAreaInput         =6
+    inAreaMap           =7
+    inAreaInventory     =8
+    inAreaAnimating     =9
+    worldMap            =10
+    worldMapOverArea    =11
 
 class GameState:
     # Python singleton implementation adapted from
@@ -70,7 +71,9 @@ class GameState:
             self.cmdBuffer = ""         # command that player is currently typing
             self.cmdMap = {}            # "trie" of commands player can type
             self.choiceList = []        # list of strings of choices player can make
-            self.gameMode = GameMode.titleScreen    # the "mode" of game player is in
+            self.gameModeLocked = False # controllers can lock the state until they are ready to proceed
+            self.gameModeLockedRequests = []    # set requests are queued until game state is unlocked
+            self.gameModeActive = GameMode.titleScreen    # the "mode" of game player is in
 
         def appendCmdBuffer(self, ch):
             """ Add to the command buffer, but do not overflow """
@@ -85,13 +88,37 @@ class GameState:
             """ Reset command buffer (e.g. if pressed Return) """
             self.cmdBuffer = ""
 
-        def touchVar(self, varname):
-            if varname not in self.variables:
-                self.variables[varname] = '0'
+        def touchVar(self, varname, inventoryFlag = False):
+            """ Sets a variable or inventory item to 0 in mapping if it doesn't exist """
+            if inventoryFlag:
+                if varname not in self.inventory:
+                    self.inventory[varname] = '0'
+            else:
+                if varname not in self.variables:
+                    self.variables[varname] = '0'
 
-        def touchInventory(self, varname):
-            if varname not in self.inventory:
-                self.inventory[varname] = '0'
+        def getVar(self, varname, inventoryFlag = False):
+            """ Returns a variable value or item count, or None if it doesn't exist """
+            if inventoryFlag:
+                return self.inventory.get(varname)
+            else:
+                return self.variables.get(varname)
+
+        def setVar(self, varname, value, inventoryFlag = False):
+            """ Sets a variable or item count """
+            if inventoryFlag:
+                self.inventory[varname] = value
+            else:
+                self.variables[varname] = value
+
+        def delVar(self, varname, inventoryFlag = False):
+            """ Removes an existing mapping """
+            if inventoryFlag:
+                if varname in self.inventory:
+                    del self.inventory[varname]
+            else:
+                if varname in self.variables:
+                    del self.variables[varname]
 
         def debugAddHistoryLine(self, line):
             ## DEBUG1 adds a specific langnode
@@ -102,7 +129,6 @@ class GameState:
             ## end DEBUG1
 
         def addLangNode(self, node):
-            self.historyBuffer += "\n"  # leading newline
             prevBufferLen = len(self.historyBuffer) # offset for formatting indices
             self.historyBuffer += node.text # append the LangNode text
             # append the LangNode formatting
@@ -153,69 +179,29 @@ class GameState:
         def mapLocation(self, val):
             self.subStates[self.activeProtagonistInd].mapLocation = val
 
-        def refreshCommandList(self):
-            """ Updates cmdMap to contain all commands player can type """
-            # locate the rooms and objects configs
-            loader = AssetLoader()
-            area = loader.getConfig(Globals.AreasConfigPath)[self.areaId]
-            items = loader.getConfig(Globals.ItemsConfigPath)
-            rooms = loader.getConfig(area['roomsConfig'])
-            objects = loader.getConfig(area['objectsConfig'])
-            # locate the relevant scripts
-            cmdMap = {}
-            roomScript = loader.getScript(rooms[self.roomId]['script'])
-            objectNames = []
-            objectScripts = []
-            for obj in rooms[self.roomId]['objects']:
-                objectNames.append(objects[obj]['name'])
-                objectScripts.append(loader.getScript(objects[obj]['script']))
-            # fill out the mapping, starting with 'go to'
-            cmdMap['go to'] = {}
-            for neighbor in rooms[self.roomId]['neighbors']:
-                neighborName = rooms[neighbor]['name']
-                neighborScript = loader.getScript(rooms[neighbor]['script'])
-                neighborReaction = None
-                for action in neighborScript:
-                    if action[0] == 'go to':
-                        neighborReaction = action[1]
-                cmdMap['go to'][neighborName] = neighborReaction
-            # go through actions to take on room
-            for action in roomScript:
-                # ignore 'go to' current room (not possible)
-                if action[0] == 'go to':
-                    continue
-                cmdMap[action[0]] = action[1]
-            # prefill 'use <item>'
-            cmdMap['use'] = {}
-            inventory = self.inventory
-            for item in inventory:
-                if int(inventory[item]) == 0:
-                    continue
-                itemName = items[item]['name']
-                cmdMap['use'][itemName] = None
-            # go through actions to take on objects
-            for i in range(len(objectScripts)):
-                objScript = objectScripts[i]
-                objName = objectNames[i]
-                for action in objScript:
-                    # "use .. on" needs special treatment for inventory items
-                    verbWords = action[0].split()
-                    if verbWords[0] == 'use' and verbWords[-1] == 'on':
-                        itemWord = ' '.join(verbWords[1:-1])
-                        itemKey = loader.reverseItemLookup(itemWord)
-                        targetPhrase = 'on ' + objName
-                        if itemKey == '':
-                            raise Exception('script item name', itemWord ,'not found in items configuration file')
-                        if itemKey in inventory and int(inventory[itemKey]) > 0:
-                            if cmdMap['use'][itemWord] is None:
-                                cmdMap['use'][itemWord] = {}
-                            cmdMap['use'][itemWord][targetPhrase] = action[1]
-                    # all other verbs are straightforward
-                    else:
-                        if action[0] not in cmdMap:
-                            cmdMap[action[0]] = {}
-                        cmdMap[action[0]][objName] = action[1]
-            self.cmdMap = cmdMap
+        # the gameMode property exposed by the GameState has a notion of locking
+        # which is useful for animations like text scrolling and loading windows
+        @property
+        def gameMode(self):
+            return self.gameModeActive
+        @gameMode.setter
+        def gameMode(self, val):
+            if self.gameModeLocked:
+                self.gameModeLockedRequests.append(val)
+            else:
+                self.gameModeActive = val
+        def lockGameMode(self, val):
+            if self.gameModeLocked:
+                return  # ignore if already locked
+            self.gameModeLocked = True
+            self.gameModeLockedRequests.append(self.gameModeActive)
+            self.gameModeActive = val
+        def unlockGameMode(self):
+            if not self.gameModeLocked:
+                return  # ignore if already unlocked
+            self.gameModeLocked = False
+            self.gameModeActive = self.gameModeLockedRequests.pop()
+            self.gameModeLockedRequests = []
 
         def dumps(self):
             """ Json stringifies the GameState """
@@ -224,7 +210,8 @@ class GameState:
             for i in range(len(obj['subStates'])):
                 obj['subStates'][i] = obj['subStates'][i].__dict__
             # do not save non-persistent fields
-            deleteFields = ['cmdMap', 'cmdBuffer', 'gameMode', 'choiceList']
+            deleteFields = ['cmdMap', 'cmdBuffer', 'gameModeActive', 'choiceList',
+                'gameModeLocked', 'gameModeLockedRequests']
             for field in deleteFields:
                 del obj[field]
             return json.dumps(obj)
@@ -278,6 +265,7 @@ if __name__ == '__main__':
     g.readFile(Globals.SavePaths[0])
     print(g)
 
+    from asset_loader import AssetLoader
     AssetLoader().loadAssets()
     g.areaId = "aspire"
     g.roomId = "library"

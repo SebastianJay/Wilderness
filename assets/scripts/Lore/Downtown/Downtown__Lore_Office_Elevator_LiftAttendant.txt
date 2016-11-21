@@ -1,0 +1,31 @@
+#Downtown_Office_Elevator_LiftAttendant
+
+talk to{
+	Lift Attendant: Nice t'see you, miss. What floor?
+	$Choice{
+		1|
+			Lift Attendant: Straight away.
+			
+			The lift attendant pulled the lever and the elevator creaked into position.
+			
+			Lift Attendant: Here you go. 
+			
+			Lore got off the elevator and walked up to the @blue{desk}.
+		|2|
+			Lift Attendant: Straight away.
+			
+			The lift attendant pulled the lever and the elevator creaked into position.
+			
+			Lift Attendant: Here you go. 
+			
+			Lore got off the elevator and entered @blue{Rodnin's office}.
+		|3|
+			Lift Attendant: Straight away.
+			
+			The lift attendant pulled the lever and the elevator creaked into position.
+			
+			Lift Attendant: Here you go. 
+			
+			Lore got off the elevator and headed to the @blue{lab}.
+	}
+}

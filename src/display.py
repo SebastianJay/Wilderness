@@ -9,15 +9,13 @@ from global_vars import Globals
 class Display:
     def __init__(self, root, windowManager):
         self.windowManager = windowManager
-        self.xRes = Globals.NumCols
-        self.yRes = Globals.NumRows
         self.numCols = Globals.NumCols
         self.numRows = Globals.NumRows
         self.root = root
 
-        self.text = tk.Text(self.root, width=self.xRes, height=self.yRes, background='black',
+        self.text = tk.Text(self.root, width=Globals.NumCols, height=Globals.NumRows, background='black',
             foreground='white', state=tk.DISABLED, font=(Globals.FontName, Globals.FontSize),
-            padx=0, pady=0, bd=0, selectbackground='black')
+            padx=0, pady=0, borderwidth=0, selectbackground='black')
         self.text.pack()
 
 
@@ -33,7 +31,7 @@ class Display:
         self.text.delete(1.0, tk.END)
 
         start_index = 0
-        for subformat in self.windowManager._formatting:   # subformat is one tuple: (string tag, (int start_index, int end_index))
+        for subformat in self.windowManager.formatting:   # subformat is one tuple: (string tag, (int start_index, int end_index))
             # account for additonal newlines when searching the bufferstr
             adjusted_format_start = subformat[1][0] + (subformat[1][0] // self.numCols)
             adjusted_format_end = subformat[1][1] + (subformat[1][1] // self.numCols)
@@ -42,9 +40,6 @@ class Display:
             formatted_text = bufferstr[adjusted_format_start : adjusted_format_end+1]   # all the text contained within this formatter
 
             formatter = subformat[0]
-            is_bold = 0
-            is_italicized = 0
-            is_underlined = 0
             formats = formatter.split('_')
             color = "white"
             font_style = (Globals.FontName, Globals.FontSize)

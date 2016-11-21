@@ -1,0 +1,77 @@
+## Black Hills objects
+
+conney:
+    name: Conney
+    script: Black Hills/train station/Conney.txt
+thomas:
+    name: Thomas
+    script: Black Hills/train station/Thomas.txt
+toddAndZodd:
+    name: Todd and Zodd
+    script: Black Hills/train station/ToddandZodd.txt
+trainSchedule:
+    name: train schedule
+    script: Black Hills/train station/train schedule.txt
+wantedSign:
+    name: wanted sign
+    script: Black Hills/train station/wanted sign.txt
+druGeneral:
+    name: Dru
+    script: Black Hills/general store/Dru.txt
+gritt:
+    name: Gritt
+    script: Black Hills/general store/Gritt.txt
+kaven:
+    name: Kaven
+    script: Black Hills/general store/Kaven.txt
+newspaper:
+    name: newspaper
+    script: Black Hills/general store/newspaper.txt
+poster:
+    name: poster
+    script: Black Hills/general store/poster.txt
+baha:
+    name: Baha
+    script: Black Hills/hospital/Baha.txt
+flyer:
+    name: flyer
+    script: Black Hills/hospital/flyer.txt
+rani:
+    name: Rani
+    script: Black Hills/hospital/Rani.txt
+rosanto:
+    name: Rosanto
+    script: Black Hills/hospital/Rosanto.txt
+table:
+    name: table
+    script: Black Hills/hospital/table.txt
+bronzeShovel:
+    name: bronze shovel
+    script: Black Hills/town treasury/bronze shovel.txt
+silverPitchfork:
+    name: silver pitchfork
+    script: Black Hills/town treasury/silver pitchfork.txt
+gold:
+    name: gold
+    script: Black Hills/town treasury/gold.txt
+druTreasury:
+    name: Dru
+    script: Black Hills/town treasury/Dru.txt
+marshall:
+    name: Marshall
+    script: Black Hills/town treasury/Marshall.txt
+book:
+    name: book
+    script: Black Hills/mining warehouse/book.txt
+corrosiveGas:
+    name: corrosive gas
+    script: Black Hills/mining warehouse/corrosive gas.txt
+passwordLock:
+    name: password lock
+    script: Black Hills/mining warehouse/password lock.txt
+shotgunPete:
+    name: Shotgun Pete
+    script: Black Hills/mining warehouse/shotgun pete.txt
+widowmaker:
+    name: Widowmaker
+    script: Black Hills/mining warehouse/widowmaker.txt

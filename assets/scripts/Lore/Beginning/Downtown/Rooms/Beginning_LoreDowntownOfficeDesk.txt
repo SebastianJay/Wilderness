@@ -1,0 +1,5 @@
+#Beginning_LoreDowntownOfficeDesk
+
+go to{
+	Lore walked up to the desk. The @green{secretary} looked up at her expectantly.
+}

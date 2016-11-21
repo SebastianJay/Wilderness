@@ -8,8 +8,34 @@ aspire:
     objectsConfig: objects/aspire.yml
     # which world map (0=Lore, 1=Kipp)
     mapId: 1
-    # location on the world map
-    r: 0
-    c: 0
+    # locations on map where you can enter area
+    entrances:
+        -
+            roomId: townCenter  # id of room that gets loaded
+            r: 9                # r, c indicating tile on world map
+            c: 116
     # only be able to enter if a condition is fulfilled
-    showIf: didFarm #TODO
+    #showIf: didFarm #TODO
+
+farm:
+    name: Charli
+    roomsConfig: rooms/farm.yml
+    objectsConfig: objects/farm.yml
+    mapId: 1
+    entrances:
+        -
+            roomId: meadow
+            r: 22
+            c: 127
+
+blackHills:
+    name: Black Hills
+    roomsConfig: rooms/black_hills.yml
+    objectsConfig: objects/black_hills.yml
+    mapId: 1
+    entrances:
+        -
+            roomId: railwayStation
+            r: 30
+            c: 97
+    #showIf: didFarm

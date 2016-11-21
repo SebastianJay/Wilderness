@@ -1,0 +1,9 @@
+talk to{
+Kipp: Beautiful day, isn't it, Hereford? Do you have a happy Moo-d?
+}
+milk{
+Kipp: Easy Miss, it will be quick.
+Hereford: *mooes*
+Kipp: I like the milk, purely white, fresh and free of additive.
+$set_inventory_milk_1
+}
