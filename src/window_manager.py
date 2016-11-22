@@ -11,7 +11,7 @@ from history_window import HistoryWindow
 from title_window import TitleWindow
 from settings_window import SettingsWindow
 from palette_window import PaletteWindow
-
+from inarea_window import InAreaWindow
 from game_state import GameState, GameMode
 from global_vars import Globals
 
@@ -68,7 +68,7 @@ class WindowManager(Window):
         self.addWindow(PaletteWindow, 0, splitCol - 1, Globals.NumRows, Globals.NumCols - (splitCol - 1))
 
         self.addWindow(MapWindow, 0, 0, Globals.NumRows, Globals.NumCols * 3 // 4)
-        # add in-area map window
+        self.addWindow(InAreaWindow, 0, 0, Globals.NumRows, Globals.NumCols)
         # add inventory window
         self.addWindow(SettingsWindow, 0, 0, Globals.NumRows, Globals.NumCols)
 
@@ -77,11 +77,11 @@ class WindowManager(Window):
             (1,),       # title window
             (3, 2, 4),  # Input, History, and Palette windows
                         #NOTE the ordering here is specific as Input gets updated before History
-            (5,),
-            (6,),
+            (5,),		# Map, InArea Map windows
+            (6,),		# Settings window
         ]
         # which window group is on screen initially
-        self.activeWindowGroups = [1]
+        self.activeWindowGroups = [4]
 
     def draw(self):
         """ stitches together multiple Windows from active group into the screen """

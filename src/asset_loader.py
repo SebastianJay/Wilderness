@@ -6,6 +6,7 @@ from lang_parser import Parser
 from global_vars import Globals
 import os.path
 import yaml
+import codecs
 
 class AssetLoader:
     # Python singleton implementation adapted from
@@ -48,7 +49,7 @@ class AssetLoader:
                     if ext_not_valid:
                         continue
                     # Store file text into dictionary
-                    with open(norm_path) as f:
+                    with codecs.open(norm_path, "r", "utf-8") as f:
                         assets[norm_path] = f.read()
 
             # Do parsing of any custom scripts and yaml
@@ -93,8 +94,8 @@ class AssetLoader:
             return self.getAsset('assets/scripts', name)
 
         def getConfig(self, name):
-            return self.getAsset('assets/config', name)
-
+           return self.getAsset(r'assets/config', name)
+		   
         def reverseItemLookup(self, name):
             if name in self.reverseItem:
                 return self.reverseItem[name]
