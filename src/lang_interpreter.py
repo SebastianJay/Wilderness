@@ -7,9 +7,16 @@ from game_state import GameState, GameMode
 from lang_parser import BodyNode, LangNode, FuncNode
 from asset_loader import AssetLoader
 from random import randint
+from enum import Enum
 
 class Interpreter:
-    """ Contains parsing and execution routines for the game's custom scripting language. """
+
+    # Specifies the exit conditions for executeBody
+    class ExitCode(Enum):
+        empty   = 0     # caller should empty the call stack
+        pop     = 1     # caller should pop topmost stack frame
+        push    = 2     # caller should executed newest stack frame
+        halt    = 3     # caller should pause for user input
 
     def __init__(self):
         self.callStack = []
@@ -45,31 +52,31 @@ class Interpreter:
                         # add to call stack and return to manager
                         self.callStack[-1][1] = nodeInd
                         self.callStack.append([node.inner, 0])
-                        return True
+                        return Interpreter.ExitCode.push
                 elif node.title == 'else':
                     self.callStack[-1][1] = nodeInd + 1
                     self.callStack.append([node.inner, 0])
-                    return True
+                    return Interpreter.ExitCode.push
                 elif node.title == 'choice':
                     if val is not None:
                         gs.gameMode = GameMode.inAreaCommand
                         pick = int(val)
                         self.callStack[-1][1] = nodeInd + 1
                         self.callStack.append([node.inner[pick][1], 0])
-                        return True
+                        return Interpreter.ExitCode.push
                     else:
                         gs.gameMode = GameMode.inAreaChoice
                         # populate choice list in GameState
                         lstChoices = []
                         for choice in node.inner:
                             lstChoices.append(choice[0].text)
-                        gs.choiceList = lstChoices
+                        gs.choices = lstChoices
                         self.callStack[-1][1] = nodeInd
-                        return False
+                        return Interpreter.ExitCode.halt
                 elif node.title == 'random':
                     self.callStack[-1][1] = nodeInd + 1
                     self.callStack.append([node.inner[pick], 0])
-                    return True
+                    return Interpreter.ExitCode.push
                 elif node.title == 'init':
                     args, inventoryFlag = self.extractInventory(node.args)
                     gs.touchVar(args[0], inventoryFlag)
@@ -100,37 +107,49 @@ class Interpreter:
                     else:
                         gs.gameMode = GameMode.inAreaInput
                         self.callStack[-1][1] = nodeInd
-                        return False
+                        return Interpreter.ExitCode.halt
                 elif node.title == 'goto':
                     gs.roomId = node.args[0]
+                elif node.title == 'exit':
+                    return Interpreter.ExitCode.empty
                 elif node.title == 'gameover':
                     pass    #TODO
                 elif node.title == 'switchcharacter':
                     pass    #TODO
+                elif node.title == 'fragment':
+                    self.callStack[-1][1] = nodeInd + 1
+                    path = AssetLoader().getConfig(Globals.FragmentsConfigPath)[node.args[0]]['path']
+                    frag = AssetLoader().getScriptFragment(path)
+                    self.callStack.append([frag, 0])
+                    return Interpreter.ExitCode.push
             elif isinstance(node, LangNode):
                 GameState().addLangNode(node)
             else:
                 raise Exception('Unexpected type in BodyNode nodes ' + str(node))
             nodeInd += 1
             val = None  # invalidate passed in value as soon as it is used
-        return True
+        return Interpreter.ExitCode.pop
 
     def drainCallStack(self, val=None):
         """ Simulates a stack machine executing a tree of function calls """
         while len(self.callStack) > 0:
             body, ind = self.callStack[-1]
-            lenStackBefore = len(self.callStack)
-            noHalt = self.executeBody(body, ind, val)
-            lenStackAfter = len(self.callStack)
+            exitCode = self.executeBody(body, ind, val)
             val = None  # invalidate passed in value as soon as it is used
-            if lenStackAfter > lenStackBefore:
-                # body added new stack frame, so execute the newly enqueued one
+            if exitCode == Interpreter.ExitCode.push:
+                # body added new stack frame, so execute the newly pushed one
                 continue
+            elif exitCode == Interpreter.ExitCode.pop:
+                # topmost stack frame is finished
+                self.callStack.pop()
+            elif exitCode == Interpreter.ExitCode.empty:
+                # remove all existing stack frames
+                self.callStack.clear()
+            elif exitCode == Interpreter.ExitCode.halt:
+                # keep stack as is and go back to get user input
+                return False
             else:
-                if noHalt:
-                    self.callStack.pop()
-                else:
-                    return False
+                raise Exception('Unknown return value from executeBody: ' + str(exitCode))
         return True
 
     def evaluateCondition(self, args):

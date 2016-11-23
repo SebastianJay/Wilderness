@@ -71,9 +71,15 @@ class GameState:
             self.cmdBuffer = ""         # command that player is currently typing
             self.cmdMap = {}            # "trie" of commands player can type
             self.choiceList = []        # list of strings of choices player can make
+            self.choiceUpdateFlag = False   # when choiceList is modified, set to True; meant to be
+                                            #  consumed by InputWindow to reset its choice index
             self.gameModeLocked = False # controllers can lock the state until they are ready to proceed
             self.gameModeLockedRequests = []    # set requests are queued until game state is unlocked
             self.gameModeActive = GameMode.titleScreen    # the "mode" of game player is in
+            self.gameModeChange = None  # when game mode is changed, set to (old state, new state)
+                                        #  meant to be consumed by WindowManager with checkGameModeChange()
+            self.areaEnterFlag = False  # when areaId is modified, set to True; meant to be consumed
+                                        #  by InputWindow (to run startup script) with checkAreaEntered()
 
         def appendCmdBuffer(self, ch):
             """ Add to the command buffer, but do not overflow """
@@ -120,14 +126,6 @@ class GameState:
                 if varname in self.variables:
                     del self.variables[varname]
 
-        def debugAddHistoryLine(self, line):
-            ## DEBUG1 adds a specific langnode
-            self.areaId = "aspire"
-            self.roomId = "library"
-            self.refreshCommandList()
-            self.addLangNode(self.cmdMap['look around'].nodes[0])
-            ## end DEBUG1
-
         def addLangNode(self, node):
             prevBufferLen = len(self.historyBuffer) # offset for formatting indices
             self.historyBuffer += node.text # append the LangNode text
@@ -139,6 +137,18 @@ class GameState:
                 for indices in val:
                     self.historyFormatting[key].append((indices[0]+prevBufferLen, indices[1]+prevBufferLen))
             self.historyBuffer += "\n"  # add trailing newline to separate new text from old
+
+        @property
+        def choices(self):
+            return self.choiceList
+        @choices.setter
+        def choices(self, val):
+            self.choiceUpdateFlag = True
+            self.choiceList = val
+        def checkChoicesUpdated(self):
+            retval = self.choiceUpdateFlag
+            self.choiceUpdateFlag = False   # invalidate once checked
+            return retval
 
         @property
         def historyBuffer(self):
@@ -170,7 +180,12 @@ class GameState:
             return self.subStates[self.activeProtagonistInd].areaId
         @areaId.setter
         def areaId(self, val):
+            self.areaEnterFlag = True
             self.subStates[self.activeProtagonistInd].areaId = val
+        def checkAreaEntered(self):
+            retval = self.areaEnterFlag
+            self.areaEnterFlag = False  # invalidate once checked
+            return retval
 
         @property
         def mapLocation(self):
@@ -189,19 +204,26 @@ class GameState:
             if self.gameModeLocked:
                 self.gameModeLockedRequests.append(val)
             else:
+                if val != self.gameModeActive:
+                    self.gameModeChange = (self.gameModeActive, val)
                 self.gameModeActive = val
         def lockGameMode(self, val):
             if self.gameModeLocked:
                 return  # ignore if already locked
+            oldMode = self.gameMode
+            self.gameMode = val
             self.gameModeLocked = True
-            self.gameModeLockedRequests.append(self.gameModeActive)
-            self.gameModeActive = val
+            self.gameModeLockedRequests.append(oldMode)
         def unlockGameMode(self):
             if not self.gameModeLocked:
                 return  # ignore if already unlocked
             self.gameModeLocked = False
-            self.gameModeActive = self.gameModeLockedRequests.pop()
+            self.gameMode = self.gameModeLockedRequests.pop()
             self.gameModeLockedRequests = []
+        def checkGameModeChange(self):
+            retval = self.gameModeChange
+            self.gameModeChange = None  # invalidate once checked
+            return retval
 
         def dumps(self):
             """ Json stringifies the GameState """
@@ -211,7 +233,8 @@ class GameState:
                 obj['subStates'][i] = obj['subStates'][i].__dict__
             # do not save non-persistent fields
             deleteFields = ['cmdMap', 'cmdBuffer', 'gameModeActive', 'choiceList',
-                'gameModeLocked', 'gameModeLockedRequests']
+                'choiceUpdateFlag', 'gameModeLocked', 'gameModeLockedRequests',
+                'gameModeChange', 'areaEnterFlag']
             for field in deleteFields:
                 del obj[field]
             return json.dumps(obj)

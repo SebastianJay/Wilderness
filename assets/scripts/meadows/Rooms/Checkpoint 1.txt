@@ -2,35 +2,35 @@ go to{
 	$if_medHedgeCheck_eq_1{
 		$if_medCheck1Intro_eq_0{
 			$set_medCheck1Intro_eq_1
-			
+
 			Kipp and [companionName] take a few steps forward. A beam of light flashes behind them. They turn around to see that the entrance behind them has dissipated and been replaced with another hedge wall.
-			
+
 			Kipp: How did we just reach this dead end?
 			[companionName]: You expect me to know.
-			
-			They turn back around to see the only way to progress: a beaten down path that hasn't been trimmed for years. 
-			
+
+			They turn back around to see the only way to progress: a beaten down path that hasn't been trimmed for years.
+
 			Kipp: Any other options?
 			[companionName]: Stay put and starve to death.
 			Kipp: Onwards then.
 			[companionName]: Hey stop pushing.
 			Kipp: Stop shoving me. Trying to move through these thorned branches isn't a walk in the park.
-			
+
 			Kipp and [companionName] continue struggling until they reach the other side. Kipp steps out and trips into a puddle of mud.
 			[companionName] follows, watching their step.
-			
+
 			[companionName]: How? Just, how?
-			
+
 			They both look up to find that they are in a trench that is being bombarded in the middle of a storm. A solider runs up to them and hands them helmets.
-			
+
 			Soldier: Well don't just stand there, the water from the heavens won't damper the rain of bullets coming towards us. Now get moving!
 			Both: Yes, sir!
-			
+
 			They grab the helmets and run off further down the trench.
-			
+
 			[companionName]: Hey, Kipp? How did we find ourselves in a war?
 			Kipp: I don't know. Maybe this is all an allusion!
-			
+
 			$if_companionB_eq_1{
 				Rice: Brother, the only way we're both seeing this is if we both were smoking it, and I ain't talking about cigarettes!
 			}$elif_compaionF_eq_1{
@@ -41,79 +41,79 @@ go to{
 
 			[companionName]: It just doesn't make sense. Wait, is that gang putting a spell on us?
 			Kipp: Just keep running!
-			
+
 			The sound of heavy bullet fire was muffling the conversation. The group was then stopped by two soldiers asking for assistance.
-			
+
 			Soldier 1: Hey, can you help us lift this cart, it won't budge.
 			Kipp and [compaionName]: Yeah, sure.
-			
+
 			The cart was still too heavy with all four people helping. It didn't move an inch. Kipp let's go of the cart to hear the sound of a horse cry out. Kipp walks around to see the horse laying down with one of its legs trapped underneath the cart.
-			
+
 			Kipp: Aw man.
 			Soldier 2: I know he was carrying more ammunition when a mortar blasted the cart forward on top of one of her legs. We've got to find a way to get her out of here.
 			Soldier 1: Wait. Herold bring the hatchet!
-			
+
 			Another soldier hands him a bloody, yet still sharp, hatchet. He then turns towards Kipp
-			
+
 			Soldier 1: What's your name, private?
 			Kipp: Kipp.
-			Soldier 1: Well, Kipp. When we lift the cart, I need you to severe the horse's leg right at the kneecap. 
+			Soldier 1: Well, Kipp. When we lift the cart, I need you to severe the horse's leg right at the kneecap.
 			Kipp: What! You're crazy!
 			Soldier 2: The horse isn't getting out of here if she can't be removed from the field soon. She'll bleed out.
 			Kipp: But...
 			Soldier 2: @bold{You were given an order, private!}
 			Kipp: Will he survive the amputation?
 			Soldier 1: One obstacle at a time, private.
-			
+
 			Kipp stopped to see the horse in dire pain. He isn't sure if the horse will make it out alive. There are a lot of guns laying around. Maybe there's a better solution.
-			
+
 			$choice{
-			
+
 			Follow Orders|
 				Kipp closes is eyes, grips the hatchet tightly...and swung down with everything he had. The blade dug into the horse's bone.
-				
+
 				Soldier 2: It didn't cut clean through!
 				Soldier 1: Private! You've got to do it one more time!
-				
+
 				[companionName] looked away in disturbance. Kipp couldn't just leave the horse there like that. He blocked out the horses cries.
-				
+
 				Kipp: I'm sorry.
-				
+
 				Kipp swung a second time. He felt the blade go through and hit the ground. He let go and started running away from the scene.
-			
+
 			$inc_darkPts_1
-			
+
 			|Shoot Between The Eyes|
 				Kipp closes is eyes, grips the hatchet tightly...and then immediately tosses it on the ground.
-				
+
 				[compaionName]: Kipp what are you doing?
-				
-				Kipp runs for the closest gun laying on the ground. He runs back and aims it towards the horse's head. 
-				
+
+				Kipp runs for the closest gun laying on the ground. He runs back and aims it towards the horse's head.
+
 				[companionName]: Kipp, we're trying not to kill it here!
-				Kipp: [companionName], I know what I'm doing. She's not gonna make it. 
+				Kipp: [companionName], I know what I'm doing. She's not gonna make it.
 				[companionName]: And how are you sure?
 				Kipp: My father tried saving our horse on the farm through the same means. Poor Silver shone no more after he coughed up the rest of his days in agony.
 				Soldier 1: That's not you're order private! Now pick that hatchet back up...
-				
+
 				[companionName] looked away, knowing that they couldn't convince Kipp to stop. Kipp lifted the gun to eye level and fired. The horse stopped struggling and its body laid there cold and resting. Kipp looked blankly at the horse to see what he had done, threw the gun away, and started running.
-				
+
 				$inc_lightPts_1
 			}
-			
+
 			[companionName]: Hey, what's gotten into you?!
-				
-			[companionName] ran after Kipp with the noise of the soldiers yelling at them off in the background. Kipp kept running, dodging every debris in his path. He continued blinking as if was trying to wake up from a nightmare.  Finally a mortar blasted near him, launching him forward. He closes his eyes one more time, and opens them in time to see that he lands in the dirt back in the hedge maze. 
+
+			[companionName] ran after Kipp with the noise of the soldiers yelling at them off in the background. Kipp kept running, dodging every debris in his path. He continued blinking as if was trying to wake up from a nightmare.  Finally a mortar blasted near him, launching him forward. He closes his eyes one more time, and opens them in time to see that he lands in the dirt back in the hedge maze.
 
 			Kipp: Wait...Gasp...what?...
 			[companionName]: I get it now.
-			[companionName]: So this hedge maze is one big teleporter that warps us to a random time in the world's existence against our will. You may not have seen it, but when you fell over, the world around us just opened up like a tear in the scenery back to the maze. 
+			[companionName]: So this hedge maze is one big teleporter that warps us to a random time in the world's existence against our will. You may not have seen it, but when you fell over, the world around us just opened up like a tear in the scenery back to the maze.
 			Kipp: Wait, how do you know that?
-			
+
 			$if_companionB_eq_1{
 				Rice: I read those sci-fi books in the maintenance shed.
 				Kipp: Since when did you read?
-				Rice: Since you took to long to get back for dinner.
+				Rice: Since you took too long to get back for dinner.
 			}$elif_companionF_eq_1{
 				Jinx: Multidimensional-Travel and Transportation class, got a solid A-. The one time in my life I actually wore nice clothes.
 				Kipp: You went a preppy in a magic school?
@@ -123,376 +123,47 @@ go to{
 				Kipp: Like a God?
 				Alodar: Not of human perception.
 			}
-			
+
 			Kipp: So none of that was real?
 			[companionName]: Actually to my knowledge, everything really happened, just not in our timeline......Kipp?
-			
+
 			Kipp glanced down at his hands to to see the blood. He quickly wiped it on the ground, got back up, then wipe the dirt off his clothes.
-			
+
 			Kipp: Well there's no time to complain. Let's keep looking for an exit.
-			
+
 			They walked forward until they reached an intersection. A flash of light blinded Kipp and [companionName]. Once they opened their eyes, they notice the four paths glowing with no end in sight.
-			
+
 			[companionName]: I guess these are the teleporters.
 			Kipp: Teleport us to where?
 			[companionName]: I hope to where we need to go.
 			Kipp: Then what's considered a wrong turn or dead end in this maze?
 			[companionName]: Hopefully somewhere that'll keep us both still alive. Just pick a path and let's start there.
-			
-			# MAZE CODE STARTS HERE ---------------------------------------------------------------------------------------------------------------------
-			
-			What path do you take? # INTERSECTION 1
-			# The player needs to take the North path
-			$choice{
-			NORTH|
-				Kipp and [companionName] take a few steps into the light. They walk out to find themselves at another intersection.
-				
-				Kipp: ...
-				[companionName]: Well, we're still in the maze. I count that as a plus.
-				Kipp: So now what?
-				
-				A flash of light shines in all four directions.
-				
-				Kipp: I think the maze is telling us something.
-				[companionName]: Or trying to blind us for good.
-				Kipp: Doesn't matter, where do you want to head next?
-				
-			|EAST|
-				Kipp and [companionName] take a few steps into the light. They walk out to find themselves back at the @blue{Hedge Maze Entrance}.
-				
-				Kipp: Hold on...
-				[companionName]: Yup, we just went in a dimensional circle.
-				Kipp: So now what?
-				[companionName]: We walk back in. A better option is give up and just go back to the @blue{Shepherd} 's @blue{House} and tell Sam we didn't sign up for this, take a nap, do something more interesting.
-				Kipp: Or...we can try that walk back in idea and try again, (@red{go to } @blue{Checkpoint 1}).
-				[companionName]: Not my decision...
-				
-				$goto_hedgeMazeEntrance
-				$exit
-			|SOUTH|
-				Kipp and [companionName] take a few steps into the light. They walk out to find themselves back at the @blue{Hedge Maze Entrance}.
-				
-				Kipp: Hold on...
-				[companionName]: Yup, we just went in a dimensional circle.
-				Kipp: So now what?
-				[companionName]: We walk back in. A better option is give up and just go back to the @blue{Shepherd} 's @blue{House} and tell Sam we didn't sign up for this, take a nap, do something more interesting.
-				Kipp: Or...we can try that walk back in idea and try again, (@red{go to } @blue{Checkpoint 1}).
-				[companionName]: Not my decision...
-				
-				$goto_hedgeMazeEntrance
-				$exit
-			|WEST|
-				Kipp and [companionName] take a few steps into the light. They walk out to find themselves back at the @blue{Hedge Maze Entrance}.
-				
-				Kipp: Hold on...
-				[companionName]: Yup, we just went in a dimensional circle.
-				Kipp: So now what?
-				[companionName]: We walk back in. A better option is give up and just go back to the @blue{Shepherd} 's @blue{House} and tell Sam we didn't sign up for this, take a nap, do something more interesting.
-				Kipp: Or...we can try that walk back in idea and try again, (@red{go to } @blue{Checkpoint 1}).
-				[companionName]: Not my decision...
-				
-				$goto_hedgeMazeEntrance
-				$exit
-			}
-			
-			What path do you take? # INTERSECTION 2
-			# The player needs to take the East path
-			$choice{
-			NORTH|
-				Kipp and [companionName] take a few steps into the light. They walk out to find themselves back at the @blue{Hedge Maze Entrance}.
-				
-				Kipp: Hold on...
-				[companionName]: Yup, we just went in a dimensional circle.
-				Kipp: So now what?
-				[companionName]: We walk back in. A better option is give up and just go back to the @blue{Shepherd} 's @blue{House} and tell Sam we didn't sign up for this, take a nap, do something more interesting.
-				Kipp: Or...we can try that walk back in idea and try again, (@red{go to} @blue{Checkpoint 1}).
-				[companionName]: Not my decision...
-				
-				$goto_hedgeMazeEntrance
-				$exit
-				
-			|EAST|
-				Kipp and [companionName] take a few steps into the light. They walk out to find themselves at another intersection.
-				
-				Kipp: ...
-				[companionName]: Hey, two for two.
-				Kipp: One more time?
-				[companionName]: These things are normally built in threes, unless the level designer decided to screw us over.
-				
-				A flash of light shines in all four directions.
-				
-				Kipp: Note to self, never build a maze that comes with a seizure warning.
-				
-				
-			|SOUTH|
-				Kipp and [companionName] take a few steps into the light. They walk out to find themselves back at the @blue{Hedge Maze Entrance}.
-				
-				Kipp: Hold on...
-				[companionName]: Yup, we just went in a dimensional circle.
-				Kipp: So now what?
-				[companionName]: We walk back in. A better option is give up and just go back to the @blue{Shepherd} 's @blue{House} and tell Sam we didn't sign up for this, take a nap, do something more interesting.
-				Kipp: Or...we can try that walk back in idea and try again, (@red{go to } @blue{Checkpoint 1}).
-				[companionName]: Not my decision...
-				
-				$goto_hedgeMazeEntrance
-				$exit
-			|WEST|
-				Kipp and [companionName] take a few steps into the light. They walk out to find themselves back at the @blue{Hedge Maze Entrance}.
-				
-				Kipp: Hold on...
-				[companionName]: Yup, we just went in a dimensional circle.
-				Kipp: So now what?
-				[companionName]: We walk back in. A better option is give up and just go back to the @blue{Shepherd} 's @blue{House} and tell Sam we didn't sign up for this, take a nap, do something more interesting.
-				Kipp: Or...we can try that walk back in idea and try again, (@red{go to } @blue{Checkpoint 1}).
-				[companionName]: Not my decision...
-				
-				$goto_hedgeMazeEntrance
-				$exit
-			}
-			
-			What path do you take? # INTERSECTION 3
-			# The player needs to take the West path
-			$choice{
-			NORTH|
-				Kipp and [companionName] take a few steps into the light. They walk out to find themselves back at the @blue{Hedge Maze Entrance}.
-				
-				Kipp: Hold on...
-				[companionName]: Yup, we just went in a dimensional circle.
-				Kipp: So now what?
-				[companionName]: We walk back in. A better option is give up and just go back to the @blue{Shepherd} 's @blue{House} and tell Sam we didn't sign up for this, take a nap, do something more interesting.
-				Kipp: Or...we can try that walk back in idea and try again, (@red{go to} @blue{Checkpoint 1}).
-				[companionName]: Not my decision...
-				
-				$goto_hedgeMazeEntrance
-				$exit
-			|EAST|
-				Kipp and [companionName] take a few steps into the light. They walk out to find themselves back at the @blue{Hedge Maze Entrance}.
-				
-				Kipp: Hold on...
-				[companionName]: Yup, we just went in a dimensional circle.
-				Kipp: So now what?
-				[companionName]: We walk back in. A better option is give up and just go back to the @blue{Shepherd} 's @blue{House} and tell Sam we didn't sign up for this, take a nap, do something more interesting.
-				Kipp: Or...we can try that walk back in idea and try again, (@red{go to } @blue{Checkpoint 1}).
-				[companionName]: Not my decision...
-				
-				$goto_hedgeMazeEntrance
-				$exit
-			|SOUTH|
-				Kipp and [companionName] take a few steps into the light. They walk out to find themselves back at the @blue{Hedge Maze Entrance}.
-				
-				Kipp: Hold on...
-				[companionName]: Yup, we just went in a dimensional circle.
-				Kipp: So now what?
-				[companionName]: We walk back in. A better option is give up and just go back to the @blue{Shepherd} 's @blue{House} and tell Sam we didn't sign up for this, take a nap, do something more interesting.
-				Kipp: Or...we can try that walk back in idea and try again, (@red{go to } @blue{Checkpoint 1}).
-				[companionName]: Not my decision...
-				
-				$goto_hedgeMazeEntrance
-				$exit
-			|WEST|
-				Kipp and [companionName] take a few steps into the light. They walk out to find themselves at a dead end.
-				
-				Kipp: Wait what does a room with no exits mean?
-				[companionName]: That we're going to die in here.
-				Kipp: Well, theres a silver plaque on the wall.
-				
-				The plaque on the wall read, " Congratulations! You have made it through the first checkpoint. Please proceed to @blue{Checkpoint 2}"
-			
-				Kipp: @red{go to} there I guess?
-				[companionName] shrugs
-				
-				A portion of the wall opens up for Kipp and [companionName] to walk through.
-			
-				$set_medHedgeCheck_2
-			}
+
+			$fragment_medCheck1Maze
 
 		}$else{
 			Kipp: Sigh, back here again.
 			[companionName]: Just don't mess up and we won't be seeing much of this maze anymore.
-			Kipp: Right
-			
-			What path do you take? # INTERSECTION 1
-			# The player needs to take the North path
-			$choice{
-			NORTH|
-				Kipp and [companionName] take a few steps into the light. They walk out to find themselves at another intersection.
-				
-				Kipp: ...
-				[companionName]: Well, we're still in the maze. I count that as a plus.
-				Kipp: So now what?
-				
-				A flash of light shines in all four directions.
-				
-				Kipp: I think the maze is telling us something.
-				[companionName]: Or trying to blind us for good.
-				Kipp: Doesn't matter, where do you want to head next?
-				
-			|EAST|
-				Kipp and [companionName] take a few steps into the light. They walk out to find themselves back at the @blue{Hedge Maze Entrance}.
-				
-				Kipp: Hold on...
-				[companionName]: Yup, we just went in a dimensional circle...again.
-				Kipp: So now what?
-				[companionName]: We walk back in. A better option is give up and just go back to the @blue{Shepherd} 's @blue{House} and tell Sam we didn't sign up for this, take a nap, do something more interesting.
-				Kipp: Or...we can try that walk back in idea and try again, (@red{go to } @blue{Checkpoint 1}).
-				[companionName]: Not my decision...
-				
-				$goto_hedgeMazeEntrance
-				$exit
-			|SOUTH|
-				Kipp and [companionName] take a few steps into the light. They walk out to find themselves back at the @blue{Hedge Maze Entrance}.
-				
-				Kipp: Hold on...
-				[companionName]: Yup, we just went in a dimensional circle...again.
-				Kipp: So now what?
-				[companionName]: We walk back in. A better option is give up and just go back to the @blue{Shepherd} 's @blue{House} and tell Sam we didn't sign up for this, take a nap, do something more interesting.
-				Kipp: Or...we can try that walk back in idea and try again, (@red{go to } @blue{Checkpoint 1}).
-				[companionName]: Not my decision...
-				
-				$goto_hedgeMazeEntrance
-				$exit
-			|WEST|
-				Kipp and [companionName] take a few steps into the light. They walk out to find themselves back at the @blue{Hedge Maze Entrance}.
-				
-				Kipp: Hold on...
-				[companionName]: Yup, we just went in a dimensional circle...again.
-				Kipp: So now what?
-				[companionName]: We walk back in. A better option is give up and just go back to the @blue{Shepherd} 's @blue{House} and tell Sam we didn't sign up for this, take a nap, do something more interesting.
-				Kipp: Or...we can try that walk back in idea and try again, (@red{go to } @blue{Checkpoint 1}).
-				[companionName]: Not my decision...
-				
-				$goto_hedgeMazeEntrance
-				$exit
-			}
-			
-			What path do you take? # INTERSECTION 2
-			# The player needs to take the East path
-			$choice{
-			NORTH|
-				Kipp and [companionName] take a few steps into the light. They walk out to find themselves back at the @blue{Hedge Maze Entrance}.
-				
-				Kipp: Hold on...
-				[companionName]: Yup, we just went in a dimensional circle...again.
-				Kipp: So now what?
-				[companionName]: We walk back in. A better option is give up and just go back to the @blue{Shepherd} 's @blue{House} and tell Sam we didn't sign up for this, take a nap, do something more interesting.
-				Kipp: Or...we can try that walk back in idea and try again, (@red{go to} @blue{Checkpoint 1}).
-				[companionName]: Not my decision...
-				
-				$goto_hedgeMazeEntrance
-				$exit
-				
-			|EAST|
-				Kipp and [companionName] take a few steps into the light. They walk out to find themselves at another intersection.
-				
-				Kipp: ...
-				[companionName]: Hey, two for two.
-				Kipp: One more time?
-				[companionName]: These things are normally built in threes, unless the level designer decided to screw us over.
-				
-				A flash of light shines in all four directions.
-				
-				Kipp: Note to self, never build a maze that comes with a seizure warning.
-				
-				
-			|SOUTH|
-				Kipp and [companionName] take a few steps into the light. They walk out to find themselves back at the @blue{Hedge Maze Entrance}.
-				
-				Kipp: Hold on...
-				[companionName]: Yup, we just went in a dimensional circle...again.
-				Kipp: So now what?
-				[companionName]: We walk back in. A better option is give up and just go back to the @blue{Shepherd} 's @blue{House} and tell Sam we didn't sign up for this, take a nap, do something more interesting.
-				Kipp: Or...we can try that walk back in idea and try again, (@red{go to } @blue{Checkpoint 1}).
-				[companionName]: Not my decision...
-				
-				$goto_hedgeMazeEntrance
-				$exit
-			|WEST|
-				Kipp and [companionName] take a few steps into the light. They walk out to find themselves back at the @blue{Hedge Maze Entrance}.
-				
-				Kipp: Hold on...
-				[companionName]: Yup, we just went in a dimensional circle...again.
-				Kipp: So now what?
-				[companionName]: We walk back in. A better option is give up and just go back to the @blue{Shepherd} 's @blue{House} and tell Sam we didn't sign up for this, take a nap, do something more interesting.
-				Kipp: Or...we can try that walk back in idea and try again, (@red{go to } @blue{Checkpoint 1}).
-				[companionName]: Not my decision...
-				
-				$goto_hedgeMazeEntrance
-				$exit
-			}
-			
-			What path do you take? # INTERSECTION 3
-			# The player needs to take the West path
-			$choice{
-			NORTH|
-				Kipp and [companionName] take a few steps into the light. They walk out to find themselves back at the @blue{Hedge Maze Entrance}.
-				
-				Kipp: Hold on...
-				[companionName]: Yup, we just went in a dimensional circle...again.
-				Kipp: So now what?
-				[companionName]: We walk back in. A better option is give up and just go back to the @blue{Shepherd} 's @blue{House} and tell Sam we didn't sign up for this, take a nap, do something more interesting.
-				Kipp: Or...we can try that walk back in idea and try again, (@red{go to} @blue{Checkpoint 1}).
-				[companionName]: Not my decision...
-				
-				$goto_hedgeMazeEntrance
-				$exit
-			|EAST|
-				Kipp and [companionName] take a few steps into the light. They walk out to find themselves back at the @blue{Hedge Maze Entrance}.
-				
-				Kipp: Hold on...
-				[companionName]: Yup, we just went in a dimensional circle...again.
-				Kipp: So now what?
-				[companionName]: We walk back in. A better option is give up and just go back to the @blue{Shepherd} 's @blue{House} and tell Sam we didn't sign up for this, take a nap, do something more interesting.
-				Kipp: Or...we can try that walk back in idea and try again, (@red{go to } @blue{Checkpoint 1}).
-				[companionName]: Not my decision...
-				
-				$goto_hedgeMazeEntrance
-				$exit
-			|SOUTH|
-				Kipp and [companionName] take a few steps into the light. They walk out to find themselves back at the @blue{Hedge Maze Entrance}.
-				
-				Kipp: Hold on...
-				[companionName]: Yup, we just went in a dimensional circle...again.
-				Kipp: So now what?
-				[companionName]: We walk back in. A better option is give up and just go back to the @blue{Shepherd} 's @blue{House} and tell Sam we didn't sign up for this, take a nap, do something more interesting.
-				Kipp: Or...we can try that walk back in idea and try again, (@red{go to } @blue{Checkpoint 1}).
-				[companionName]: Not my decision...
-				
-				$goto_hedgeMazeEntrance
-				$exit
-			|WEST|
-				Kipp and [companionName] take a few steps into the light. They walk out to find themselves at a dead end.
-				
-				Kipp: Wait what does a room with no exits mean?
-				[companionName]: That we're going to die in here.
-				Kipp: Well, theres a silver plaque on the wall.
-				
-				The plaque on the wall read, " Congratulations! You have made it through the first checkpoint. Please proceed to @blue{Checkpoint 2}"
-			
-				Kipp: @red{go to} there I guess?
-				[companionName] shrugs
-				
-				A portion of the wall opens up for Kipp and [companionName] to walk through.
-			
-				$set_medHedgeCheck_2
-			}
-				
+			Kipp: Right.
+
+			$fragment_medCheck1Maze
 		}
-	
+
 	}$else{
 		$if_medHedgeCheck_eq_5{
 			[companionName]: Kipp we are not having the time of our lives back in that maze again. We either @red{go to} the @blue{Shepherd}'s @blue{House} or back to the @blue{Cliffside}.
 		}$else{
 			Kipp and [companionName] keep walking aimlessly for a while. They then find themselves back at the entrance of the maze.
-			
+
 			[companionName]: Wait...wait...I don't get it.
 			Kipp: I guess that level designer didn't want us to go back to that checkpoint once we we're done.
 			[companionName]: So what now?
 			Kipp: I'll read the plaque, "@red{go to} @blue{Checkpoint }[medHedgeCheck]. Don't make me tear open the room of a thousand demons."
 			[companionName]: So an inanimate maze can be pissed.
 			Kipp: We can @red{go} back @red{to} the @blue{Shepherd}'s @blue{House} if this is too much?
-			[companionName]: You're move.
-		
-			$goto_hedgeMazeEntrance 
+			[companionName]: Your move.
+
+			$goto_hedgeMazeEntrance
 		}
 	}
 

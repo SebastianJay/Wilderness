@@ -68,12 +68,10 @@ class TitleWindow(Window):
                 cmd = self.options[self.pointingTo]
                 if cmd == 'New game':
                     # set game startup info
-                    GameState().areaId = 'aspire'
-                    GameState().roomId = 'townCenter'
-                    GameState().gameMode = GameMode.inAreaCommand
-                    i = Interpreter()
-                    i.executeAction(AssetLoader().getScript('aspire/Rooms/town center.txt')[0][1])
-                    i.refreshCommandList()
+                    GameState().init()
+                    GameState().areaId = 'meadows'
+                    GameState().roomId = 'shepherdHouse'
+                    GameState().gameMode = GameMode.inAreaCommand   # WindowManager handles switch
                 elif cmd == 'Options':
                     # TODO: Figure out how to get this to launch the settings window
                     continue

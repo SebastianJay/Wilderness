@@ -199,6 +199,21 @@ class Parser:
         text_without_formatters += text[previous_close_bracket+1:]
         return LangNode(text_without_formatters, formatting)
 
+    def preformatScriptString(self, scriptStr):
+        # split bodyStr into lines
+        lines = scriptStr.split('\n')
+        # remove indenting by stripping leading/trailing spaces from lines
+        lines = [line.strip() for line in lines]
+        # replace tabs with one space for readability in window
+        lines = [line.replace('\t', ' ') for line in lines]
+        # remove single line comments
+        lines = [line for line in lines if len(line) == 0 or line[0] != '#']
+        # remove end of line comments
+        lines = [(line[:line.index('#')] if '#' in line else line) for line in lines]
+        # join back into one string
+        scriptStr = '\n'.join(lines)
+        return scriptStr
+
     def parseBody(self, scriptStr):
         """ Converts a string into a BodyNode """
         remainingInd = 0
@@ -268,20 +283,14 @@ class Parser:
             nodes.append(funcNode)
         return BodyNode(nodes)
 
+    def parseScriptFragment(self, scriptStr):
+        """ Converts a fragment file into a BodyNode """
+        scriptStr = self.preformatScriptString(scriptStr)
+        return self.parseBody(scriptStr)
+
     def parseScript(self, scriptStr):
         """ Converts file contents string into a list of (string verb, BodyNode reaction) tuples """
-        # split bodyStr into lines
-        lines = scriptStr.split('\n')
-        # remove indenting by stripping leading/trailing spaces from lines
-        lines = [line.strip() for line in lines]
-        # replace tabs with one space for readability in window
-        lines = [line.replace('\t', ' ') for line in lines]
-        # remove single line comments
-        lines = [line for line in lines if len(line) == 0 or line[0] != '#']
-        # remove end of line comments
-        lines = [(line[:line.index('#')] if '#' in line else line) for line in lines]
-        # join back into one string
-        scriptStr = '\n'.join(lines)
+        scriptStr = self.preformatScriptString(scriptStr)
         remainingInd = 0
         tuples = []
         while remainingInd < len(scriptStr):

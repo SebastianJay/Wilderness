@@ -1,0 +1,69 @@
+What path do you take? # INTERSECTION 1
+# The player needs to take the East path
+$choice{
+NORTH|
+  $fragment_medCheck3Fail
+|EAST|
+  Kipp and [companionName] take a few steps into the light. They walk out to find themselves at another intersection.
+
+  Kipp: Alright, seems like I am somewhat good on my own. Now where to next?
+
+  Kipp shields his eyes before the light starts coming from all ends of the maze.
+
+  Kipp: Yup. Use to that, too.
+
+|SOUTH|
+  $fragment_medCheck3Fail
+|WEST|
+  $fragment_medCheck3Fail
+}
+
+What path do you take? # INTERSECTION 2
+# The player needs to take the East path
+$choice{
+NORTH|
+  $fragment_medCheck3Fail
+|EAST|
+  Kipp and [companionName] take a few steps into the light. They walk out to find themselves at another intersection.
+
+  Kipp: And another one down on the first try! It's magic...or again, the level designer got lazy.
+
+  Kipp: Alright last one. Choose wisely Kipp.
+
+|SOUTH|
+  $fragment_medCheck3Fail
+|WEST|
+  $fragment_medCheck3Fail
+}
+
+What path do you take? # INTERSECTION 3
+# The player needs to take the East path
+$choice{
+NORTH|
+  $fragment_medCheck3Fail
+|EAST|
+  Kipp and [companionName] take a few steps into the light. They walk out to find themselves at, once more, a dead end.
+
+  Kipp: Look. At. Me. Did it all in one shot. Who's the best? I think it's me.
+
+  [companionName]: Congratulations you learned how to pick the same direction three times in a row. Someone should give you a cookie...ow.
+
+  It looks like [companionName] is still slightly bruised from their encounter with the manticore.
+
+  Kipp: We at least I get this plaque.
+
+  "Congratulations! You have made it through the third checkpoint. Please proceed to @blue{Checkpoint 4}"
+
+  Kipp: There's still more maze to @red{go to}?!
+
+  The plaque started morphing its letting and moving them around: "Do not fret. I will not make you do this path choosing simulator anymore."
+
+  [companionName]: Even the game is on to the adequate designing of this level.
+
+  $set_medHedgeCheck_4
+
+|SOUTH|
+  $fragment_medCheck3Fail
+|WEST|
+  $fragment_medCheck3Fail
+}

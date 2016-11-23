@@ -1,9 +1,9 @@
-# Start of Meadows Level. 
+# Start of Meadows Level.
 go to{
 	$if_medIntroductionCounter_eq_0{
-		
+
 		$set_medIntroductionCounter_1 #Prevents this from repeating the intro
-		As Kipp and his companion walk out of the forest a conversation began.
+		As Kipp and his companion walked out of the forest a conversation began.
 
 		$if_companionB_eq_1{
 			Kipp: Still, out of everyone on this planet, why does it have to be me?
@@ -16,12 +16,12 @@ go to{
 			Rice: Maybe he's just one of those crazy environmentalist.
 			Kipp: That doesn't make me any more comfortable.
 			Rice: Well life is not a relaxing bag of feathers for you to snooze on. Like uncle Lewis said, "You have to take life by the...@bold{ehm}...throat if you want to get anywhere."
-		
+
 		}$elif_companionF_eq_1{
 			Kipp: Still, out of everyone on this planet, why does it have to be me?
-	
-			Jinx immediately closed her ears and let Kipp ramble on. It took a while before Kipp started talking about the adventure again. 
-			
+
+			Jinx immediately closed her ears and let Kipp ramble on. It took a while before Kipp started talking about the adventure again.
+
 			Kipp: All I wanted to do was fulfill my dream travel and explore what the world had to offer outside of my home.
 			Jinx: And how's that fantasy going?
 			Kipp: It's now a nightmare with a side of death trap with every new place we venture into, and it's weird. I remember that town back there being a hustle and bustle center, not shot up and ambushed.
@@ -31,22 +31,22 @@ go to{
 			Kipp: Now a random person in the forest jumps us and tells us the news about a Wilderness.
 			Jinx: Maybe he's just one of those crazy druids that are fond of nature.
 			Kipp: Well that doesn't mean...
-			
+
 			Jinx interrupts Kipp.
-			
-			Jinx: Well maybe I just don't know, Kipp! I was on the run and I bumped into you out of pure chance. This isn't fate, this just stupid luck. You could have just said no to me and walked away back there, it's not like I was in any position to pummel you. Now can we just move on so that we can go our separate ways? 
-	
+
+			Jinx: Well maybe I just don't know, Kipp! I was on the run and I bumped into you out of pure chance. This isn't fate, this just stupid luck. You could have just said no to me and walked away back there, it's not like I was in any position to pummel you. Now can we just move on so that we can go our separate ways?
+
 		}$else{
 			Kipp: Still, out of everyone on this planet, why does it have to be me?
-			Alodar: With every probability in the universe, there is an equal chance of every other alternative to occur. This universe is just one of the outcomes. 
+			Alodar: With every probability in the universe, there is an equal chance of every other alternative to occur. This universe is just one of the outcomes.
 			Kipp: I have no clue what you are talking about. All I wanted to do was leave home and see what's out there.
 			Alodar: And do you have a new perspective of the world?
 			Kipp: Yes, it's hell. I never expected this adventure to entail me staring into death and somehow making it out alive.
 			Alodar: It will take years of thinking before you can comprehend the truths of hell.
 			Kipp: You know, your "wise" advice isn't getting through to me. I may have grown up on the farm, but I can at least put words together and make sense of them.
-			
+
 			Alodar just closed his eyes and continued walking.
-			
+
 			Kipp: Now a random person in the forest jumps us and tells us the news about a Wilderness.
 			Alodar: It will all piece together in do time...
 			Kipp: So not in any time soon...
@@ -71,19 +71,19 @@ go to{
 			Kipp: You mean the Rune Raiders?
 			Rice: I guess so. I've heard that if you hide at night and watch these flatlands, you could see portals pop in from thin air. These glowing guys would start talking and laughing as if they were coming from some party. After a few more seconds...poof, they're all gone.
 			Kipp: Sounds like them.
-			Rice: Yeah, I guess. 
-			
+			Rice: Yeah, I guess.
+
 			They continued walking for another two miles until the reached the first hill in site. They climbed the hill and Kipp covered his eyes from the sunlight.
-			
+
 			Kipp: I think I see...
 			Rice: Food?
 			Kipp: Does your mind ever think of anything else other?
 			Rice: Give me the backpack and maybe I can come up with something else while I grab a snack.
-			
-			Kipp threw the bag to rice.
-			
+
+			Kipp threw the bag to Rice.
+
 			Kipp: No, I see...
-			
+
 		}$elif_companionF_eq_1{
 			Jinx: Yeah, well me and the Rune Raiders never see them 'round these parts.
 			Kipp:You know the raiders?
@@ -93,23 +93,23 @@ go to{
 			Kipp: Which was...
 			Jinx: Not happening.
 			Kipp: Oh. Well, I still will never understand magic.
-			
+
 			They continued walking for another two miles until the reached the first hill in site. They climbed the hill and Kipp covered his eyes from the sunlight.
-			
+
 			Kipp: I think I see...
 			Jinx: The speck you call your brain?
 			Kipp: Very Funny. No, I see...
-			
+
 		}$else{
-			Alodar: Quite peculiar. I would visit this place from time to time. The silence around here is nothing like on the rural grounds. 
+			Alodar: Quite peculiar. I would visit this place from time to time. The silence around here is nothing like on the rural grounds.
 			Kipp: I bet. This place is basically on its own remote island.
 			Alodar: Right, and so when I come to meditate, my mind would drift off, but I would come to my senses when I hear this loud noise of lightning.
 			Kipp: On any given night?
 			Alodar: Yes, even the clear ones. I would open my eyes to see a blur off in the distance magically walk in out of nowhere. Then in another instance, they were gone.
 			Kipp: Magic huh...I guess I'm use to hearing that now.
-			
+
 			They continued walking for another two miles until the reached the first hill in site. They climbed the hill and Kipp covered his eyes from the sunlight.
-			
+
 			Kipp: I think I see...
 			Alodar: Those magic beings?
 			Kipp: No they look normal to me. I see...
@@ -122,18 +122,14 @@ go to{
 		Kipp then bobbed his head further to see a pack of wolves in front of the shepherd.
 
 		Kipp: Oh no. [companionName] we have to save him, or her, or...whatever, we just have to go!
-
 		[companionName]: Right behind you.
-
-		Person: Help! Someone! 
+		Person: Help! Someone!
 
 		As they got closer, they were able to make out the cry for help.
 
 		Person: Please! I would take them out myself, but I left everything inside my home!
-		
 		[companionName]: Kipp, you run into the house. I'll keep the wolves distracted.
-		
-		Kipp: Gotcha
+		Kipp: Gotcha.
 
 		Kipp ran into the entrance of the stone house and frantically looked around for anything that could help. There was not a lot to work with, but his mind narrowed the room down to two options: something delicious on the table, and something deadly on the wall.
 
@@ -146,105 +142,105 @@ go to{
 			Kipp: What alternate universe?
 			Alodar: Never mind that, just find something!
 		}
-
 		Kipp: Man, what do I pick?
 
 		$choice{
 		Deadly|
 			Kipp eyes a rifle right above the fireplace. Kipp looks at the moose head above the gun rack.
-		
+
 			Kipp: Well I hope this was the gun that took him out. Sorry Bullwinkle, but I'm still alive.
-				
+
 			Kipp runs back out to see [companionName] standing in front of Sam with their hands out wide.
-				
+
 			[companionName]: You're not scaring me. The sweat is only means my guard is up.
 			Kipp: Alright [companionName], move!
-				
+
 			It's almost like an action film. [companionName] jumps out of the way. Kipp eyes down the sight of the hunting rifle. He closes his eyes and pulls the trigger. The surprising sound of the shot frightens Kipp and doesn't hold the rifle down when it recoils. The bullet ends up firing into the air. The gun whips back into Kipp's face and Kipp is knocked out.
-				
+
 			$if_companionB_eq_1{
-					
+
 				Rice: Oh boy.
 
 				Rice picks up the rifle, reloads the chamber, and aims it at one of the wolf's ears, just enough to spook it. The wolf retracts and signals the other wolves to retreat.
-					
+
 				Rice: Thank goodness.
 			}$elif_companionF_eq_1{
 				Jinx looks up.
-					
+
 				Jinx: Why this guy, I mean, why?
-					
+
 				Jinx marches towards the unconscious body, picks up the rifle, and aims it at one of the wolves' legs. The leader starts limping away and the pack follows the leader back into the forest.
-					
+
 				Jinx: Good riddance.
 			}$else{
 				Luckily the shot was loud enough for the wolves to get scared to run away.
-					
-				Alodar: Phew. Still in the right universe. 
+
+				Alodar: Phew. Still in the right universe.
 			}
-				
+
 			$inc_darkPts_1
 		|Delicious|
 			Okay so maybe not delicious for Kipp, but he eyes 3 cuts of shoulder from some large game on the table. What the shepherd does on her spare time Kipp will never know. Kipp stops pondering and grabs the hunks of meat. Kipp runs outside to get the wolves' attention. Because Kipp's arms were full, he couldn't see the steps on the front door and tripped.
-				
+
 			$if_companionB_eq_1{
 				Kipp face-plants onto the ground and eats a face full of dirt.
-					
-				Rice: Oh brother. 
-					
+
+				Rice: Oh brother.
+
 				Rice runs up to Kipp grabs all three slabs, ands runs screaming into the forest. The wolves notice Jinx and follow him. Kipp gets up and checks with the shepherd.
-					
+
 				Kipp: What just happened?
 				Shepherd: Your brother just started running and screaming like a maniac with my dinner into the woods.
 				Kipp: Oh, sorry.
 				Shepherd: It's okay. I'm still breathing and all my blood is still in my body.
 				Kipp: Good, I think.
-					
+
 				Rice walks out of the woods unscathed.
-					
+
 				Rice: What'd I miss?
 				Shepherd: Nothing.
 			}$elif_companionF_eq_1{
-				Kipp face-plants onto the ground and eats a face full of dirt. 
-					
+				Kipp face-plants onto the ground and eats a face full of dirt.
+
 				Jinx: Perfect.
-					
+
 				Jinx runs up to Kipp grabs all three slabs, ands runs screaming into the forest. The wolves notice Jinx and follow her. Kipp gets up and checks with the shepherd.
-					
+
 				Kipp: What just happened?
 				Shepherd: Your girlfriend just started running and screaming like a maniac with my dinner into the woods.
 				Kipp: Oh, sorry. Wait...
 				Shepherd: Just joking with you, and it's okay. I'm still breathing and all my blood is still in my body.
 				Kipp: Good, I think.
-					
+
 				Jinx walks out of the woods unscathed.
-					
+
 				Jinx: What'd I miss?
 				Shepherd: Nothing.
-					
-			}$else
+
+			}$else{
 				Luckily Alodar was there to catch Kipp.
-					
+
 				Kipp: Thanks.
 				Alodar: Anytime.
-					
+
 				Kipp and Alodar were able to catch the wolves' attention and ran with the meat into the forest. After a quarter mile, they ditched the slabs of meat and sprinted it back around to the shepherd's house.
 
 				Kipp: I think they're gone now.
-				
+
+			}
 			$inc_lightPts_1
 		}
-		
+
 		The shepherd gets up with the assistance of [companionName].
-		
-		Sam: Thanks you guys for taking care of that. I'm Sam. Pleasure to meet you both.
+
+		Shepherd: Thanks you guys for taking care of that. I'm Sam. Pleasure to meet you both.
 		Kipp: Kipp and [companionName].
-		
+
 		[companionName]: How did you end up in this situation.
 		Sam: Ever since the Wilderness opened, the creatures have been acting unusual.
-		
+
 		Kipp elbows [companionName].
-		
+
 		Sam: Please, I need to ask you both another favor.
 		Kipp: Anything, it doesn't seem to be your day.
 		Sam: My sheep have wandered off from my home after they were sacred off by the wolves. Can you please find them.
@@ -256,37 +252,37 @@ go to{
 		Sam: Well if you head in that direction, you can @red{go to} the great @blue{Hedge Maze Entrance}. I've never entered the maze, but I've heard it's quite strange.
 		Kipp: Sounds like an understatement in my book.
 		Sam: I'll trust you on that.
-		
+
 		@bold_orange{LEVEL START!}
-		
+
 	}$else{
 		Kipp and [companionName] walk back to the Shepherd's house.
-		
+
 		Sam: Hey, guys. You want dinner?
 		[companionName]: No thanks. We're just dropping by.
 		Sam: Alright. If any of you are tired, feel free to @red{sleep on} my @yellow{Queen Bed}.
 		Kipp: Thank you for the offer. Whelp player, do that or @red{go to} the @blue{Hedge Maze Entrance}.
-		
+
 		$if_companionB_eq_1{
 			Rice: Or try @red{let Rice sleep on the bed. I need the sleep too!}
 			Kipp: You can't even follow the text formatting correctly.
 			Rice: Well then maybe I need the sleep more than you do.
-			
+
 		}$elif_companionF_eq_1{
 			Jinx: Or @red{leave} @green{Jinx alone for good}.
 			Kipp: You can't even follow the text formatting correctly.
 			Jinx: Well then maybe you should stop breaking the fourth wall.
-			
-		}$else
+
+		}$else{
 			Alodar: Ah, yes. The last wall has been shattered from the viewers.
 			Kipp: Can you please stop speaking in Chinese cookies?
-			
+
 		}
 	}
-	
+
 }
 
 
 # Previous Variables
-# Companion Variables: companionB, companionF, companionD 
+# Companion Variables: companionB, companionF, companionD
 # Companion name (String variable): companionName

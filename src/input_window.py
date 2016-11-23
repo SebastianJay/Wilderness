@@ -20,18 +20,28 @@ class InputWindow(Window):
     def update(self, timestep, keypresses):
         gs = GameState()
 
-        if gs.gameMode == GameMode.inAreaChoice:
+        # if we enter an area on this update, run its startup script
+        areaEntered = gs.checkAreaEntered()
+        if areaEntered:
+            areasConfig = AssetLoader().getConfig(Globals.AreasConfigPath)
+            roomsConfig = AssetLoader().getConfig(areasConfig[gs.areaId]['roomsConfig'])
+            roomScript = AssetLoader().getScript(roomsConfig[gs.roomId]['script'])
+            for verb, action in roomScript:
+                if verb == 'go to': # TODO make special verb
+                    self.interpreter.executeAction(action)
+                    break
+        elif gs.gameMode == GameMode.inAreaChoice:
+            choicesUpdated = gs.checkChoicesUpdated()
+            if choicesUpdated:
+                self.choiceInd = 0  # always start from top option
             for key in keypresses:
                 if key == 'Up':
-                    self.choiceInd = (self.choiceInd - 1) % len(gs.choiceList)
+                    self.choiceInd = (self.choiceInd - 1) % len(gs.choices)
                 elif key == 'Down':
-                    self.choiceInd = (self.choiceInd + 1) % len(gs.choiceList)
+                    self.choiceInd = (self.choiceInd + 1) % len(gs.choices)
                 elif key == 'Return':
                     self.interpreter.resume(self.choiceInd)
-        else:
-            self.choiceInd = 0  # resets index so future choices start hovering over first option
-
-        if gs.gameMode == GameMode.inAreaCommand or gs.gameMode == GameMode.inAreaInput:
+        elif gs.gameMode == GameMode.inAreaCommand or gs.gameMode == GameMode.inAreaInput:
             for key in keypresses:
                 # key is printable -> add it to buffer
                 if len(key) == 1:
@@ -82,7 +92,7 @@ class InputWindow(Window):
             cStart = 3
             cursorOffset = 3
             r = 0
-            for choice in gs.choiceList:
+            for choice in gs.choices:
                 for i, c in enumerate(choice):
                     self.pixels[rStart + r][cStart + cursorOffset + i] = c
                 r += 1

@@ -1,0 +1,69 @@
+What path do you take? # INTERSECTION 1
+# The player needs to take the South path
+$choice{
+NORTH|
+  $fragment_medCheck2Fail
+|EAST|
+  $fragment_medCheck2Fail
+|SOUTH|
+  Kipp and [companionName] take a few steps into the light. They walk out to find themselves at another intersection.
+
+  Kipp: ...
+  [companionName]: Hey, we're getting good at this guessing thing.
+  Kipp: I guess so. What next?
+
+  A flash of light shines in all four directions.
+
+  Kipp: Will never get use to that.
+  [companionName]: Hello, Level Design! We can do without the eye-blazing beams.
+  Kipp: Which direction this time?
+
+|WEST|
+  $fragment_medCheck2Fail
+}
+
+What path do you take? # INTERSECTION 2
+# The player needs to take the West path
+$choice{
+NORTH|
+  $fragment_medCheck2Fail
+|EAST|
+  $fragment_medCheck2Fail
+|SOUTH|
+  $fragment_medCheck2Fail
+|WEST|
+  Kipp and [companionName] take a few steps into the light. They walk out to find themselves at another intersection.
+
+  Kipp: This is becoming less of a puzzle and more of stupid RNG.
+  [companionName]: And we're not even halfway there.
+  Kipp: One more time?
+  [companionName]: Sure.
+
+  The paths began glowing once more.
+
+}
+
+What path do you take? # INTERSECTION 3
+# The player needs to take the North path
+$choice{
+NORTH|
+  Kipp and [companionName] take a few steps into the light. They walk out to find themselves...
+
+  [companionName]: ANOTHER DEAD END...
+  Kipp: That either means we did it right or the maze seriously wants to kill us now.
+  [companionName]: Just locate the plaque.
+  Kipp: Yup right here.
+
+  " Congratulations! You have made it through the second checkpoint. Please proceed to @blue{Checkpoint 3}"
+
+  Kipp: Blah blah...@red{go to}...yup self explanatory.
+
+  $set_medHedgeCheck_3
+
+|EAST|
+  $fragment_medCheck2Fail
+|SOUTH|
+  $fragment_medCheck2Fail
+|WEST|
+  $fragment_medCheck2Fail
+}

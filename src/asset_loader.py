@@ -6,6 +6,7 @@ from lang_parser import Parser
 from global_vars import Globals
 import os.path
 import yaml
+import traceback
 
 class AssetLoader:
     # Python singleton implementation adapted from
@@ -64,18 +65,22 @@ class AssetLoader:
             # Do parsing of any custom scripts and yaml
             parser = Parser()  # instantiate parser on the fly
             for path in assets:
-                if self.joinAndNorm(self.root_path, 'scripts') in path:
-                    try:
-                        # replace string with parsed (string, BodyNode)[]
-                        assets[path] = parser.parseScript(assets[path])
-                    except:
-                        success_flag = False
-                elif self.joinAndNorm(self.root_path, 'config') in path:
-                    try:
+                try:
+                    if self.joinAndNorm(self.root_path, 'scripts') in path:
+                        if 'fragments' in path:
+                            # replace string with parsed BodyNode
+                            assets[path] = parser.parseScriptFragment(assets[path])
+                        else:
+                            # replace string with parsed (string, BodyNode)[]
+                            assets[path] = parser.parseScript(assets[path])
+                    elif self.joinAndNorm(self.root_path, 'config') in path:
                         # replace string with parsed Python dict
                         assets[path] = yaml.load(assets[path])
-                    except:
-                        success_flag = False
+                except:
+                    success_flag = False
+                    if Globals.IsDev:
+                        print(path)
+                        traceback.print_exc()
 
             self.assets = assets
 
@@ -103,6 +108,9 @@ class AssetLoader:
 
         def getScript(self, name):
             return self.assets[self.joinAndNorm(self.root_path, 'scripts', name)]
+
+        def getScriptFragment(self, name):
+            return self.assets[self.joinAndNorm(self.root_path, 'scripts', 'fragments', name)]
 
         def getConfig(self, name):
             return self.assets[self.joinAndNorm(self.root_path, 'config', name)]

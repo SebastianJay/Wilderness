@@ -39,3 +39,18 @@ blackHills:
             r: 30
             c: 97
     #showIf: didFarm
+
+meadows:
+    name: Uncanny Prairie
+    roomsConfig: rooms/meadows.yml
+    objectsConfig: objects/meadows.yml
+    mapId: 1
+    entrances:
+        -
+            roomId: shepherdHouse
+            r: 0
+            c: 0
+        -
+            roomId: cliffside
+            r: 0
+            c: 1

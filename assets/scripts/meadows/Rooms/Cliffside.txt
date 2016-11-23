@@ -1,61 +1,61 @@
 go to{
 	$if_medHedgeCheck_eq_5{
-	
+
 		[companionName]: Kipp! Kipp, wake up!
 		Kipp: Ugh...what happened?
 		[companionName]: That seems to be a nice go to. We're not in the maze, anymore. The hedge wall is still here, but this place doesn't seem familiar.
 		Kipp: Great.
 		[companionName]: Not to be so blunt with your personal life, but what went on back there?
 		Kipp: Just a family disagreement. Nothing more, nothing less.
-		
+
 		$if_companionB_eq_1{
-			Rice: Don't worry, Kipp. Pops won't chew you out once we get back. He doesn't understand that the world is a little more important thank keeping his son safe.
+			Rice: Don't worry, Kipp. Pops won't chew you out once we get back. He doesn't understand that the world is a little more important than keeping his son safe.
 			Kipp: Thanks Rice. You've always got my back.
 		}$elif_companionF_eq_1{
 			Jinx: Looks like we do have something in common. Just let it go Kipp. Apparently, this trip means more than just your life being at stake.
-			Kipp: Thanks. That's actually relieving to here.
+			Kipp: Thanks. That's actually relieving to hear.
 		}$else{
-			Alodar: One cannot perceive the importance in the decisions they make. Even if that means controverting the views of those around them. In this case, going on this adventure seems to give our world one more chance at survival. 
+			Alodar: One cannot perceive the importance in the decisions they make. Even if that means controverting the views of those around them. In this case, going on this adventure seems to give our world one more chance at survival.
 			Kipp: That actually makes a little sense. Thanks.
 			Alodar: No problem.
 		}
-		
+
 		Sheep: Baaaaahhh!
 		Kipp: Finally.
-		
+
 		Kipp and [companionName] watch the sheep walk up to the maze. The maze opens a path for them to pass through.
-		
+
 		Kipp: You think Sam will get mad if we won't go after them?
 		[companionName]: I think they know the way back. Anyway, they've done their job. Look over there.
-		
+
 		Kipp gets up and looks over the edge to see a land of canyons lie ahead of them.
-		
+
 		Kipp: What is that?
 		[companionName]: They call them the @blue{badlands}.
 		Kipp: So I guess that's our next @red{go to}?
 		[companionName]: No other choice, but how will we get there?
-		
+
 		Kipp looked around to find a set of rock climbing gear.
-		
+
 		Kipp: Have you ever repelled against a cliff?
 		[companionName]: Have you?
 		Kipp: There's a first for everything...
-		
+
 		@bold_orange{MEADOWS LEVEL COMPLETE!}
-		
+
 	}$else{
 		Maze: HOW DARE ANYONE TRIES TO SKIP THROUGH MY TRIALS TO GET TO THE END OF THE LEVEL!
-		
+
 		The ground begins shaking. A gaping hole opens up in the middle of the earth. Kipp and [companionName] get swallowed in. Hours later Kipp wakes up.
-		
+
 		Kipp: Ugh, what happened.
 		Sam: My best guess: both of you pissed off the all mighty spirit that holds control of that maze near the edge of the meadows. After attempting to cheat, He swallowed you whole and spit you back here, at @blue{my house}, through some portal.
 		[companionName]: Yup, that sounds about right.
 		Sam: If you guys still need a break, you can continue to @red{sleep on} my @yellow{Queen Bed}, or you can @red{go to} the @blue{Hedge Maze Entrance}. I understand if getting my sheep back is a pain. But honestly, this is the only way to progress the game, so...
 		Kipp: We got it.
-		
+
 		Kipp drops his head back on the pillow with grief.
-		
+
 		$goto_shepherdHouse # THIS IS THE ONLY FORCED GOTO THAT'S NOT THE HEDGE MAZE ENTRANCE.
 	}
 }

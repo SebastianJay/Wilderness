@@ -30,8 +30,6 @@ class WindowManager(Window):
         # stack of indices into windowGroups representing the active groups (what is on screen now)
         self.activeWindowGroups = []
 
-        # polls GameState repeatedly to determine when window changes need to be made
-        self.activeGameMode = GameMode.titleScreen
         # create instances of all the Windows
         self.initWindows()
 
@@ -171,19 +169,21 @@ class WindowManager(Window):
     def update(self, timestep, keypresses):
         """ sends update signal to Windows in the active group """
         # update the activeWindowGroups based on changes in the game mode
-        nextMode = GameState().gameMode
-        if self.activeGameMode != GameMode.isLoading and nextMode == GameMode.isLoading:
-            # push the loading window onto the screen
-            self.activeWindowGroups.append(0)
-        elif self.activeGameMode == GameMode.isLoading and nextMode != GameMode.isLoading:
-            # pop the loading window off the screen
-            self.activeWindowGroups.pop()
-        elif self.activeGameMode != nextMode:
-            if self.activeGameMode in [GameMode.titleScreen] and nextMode == GameMode.inAreaCommand:
-                # use the "main game" window group
-                self.activeWindowGroups = [2]
-        self.activeGameMode = nextMode
+        change = GameState().checkGameModeChange()
+        if change:
+            old, new = change
+            if old != GameMode.isLoading and new == GameMode.isLoading:
+                # push the loading window onto the screen
+                self.activeWindowGroups.append(0)
+            elif old == GameMode.isLoading and new != GameMode.isLoading:
+                # pop the loading window off the screen
+                self.activeWindowGroups.pop()
+            else:
+                if old in [GameMode.titleScreen] \
+                    and new in [GameMode.inAreaCommand, GameMode.inAreaChoice, GameMode.inAreaInput, GameMode.inAreaAnimating]:
+                    # use the "main game" window group
+                    self.activeWindowGroups = [2]
 
-        # update is only send to activeWindowGroups[-1], so the foreground windows
+        # update is only sent to activeWindowGroups[-1], so the foreground windows
         for winind in self.windowGroups[self.activeWindowGroups[-1]]:
             self.windowList[winind].update(timestep, keypresses)
