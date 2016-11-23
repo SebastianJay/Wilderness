@@ -87,13 +87,30 @@ class Parser:
     def __init__(self):
         pass
 
+    def strFind(self, string, target, startInd=0):
+        """ extension of str.find that ignores escaped characters """
+        ind = string.find(target, startInd)
+        while ind != -1:
+            # check if character is "escaped" by being in art line
+            prev_nlind = string.rfind('\n', 0, ind)
+            if string[prev_nlind+1] == '\\':
+                next_nlind = string.find('\n', ind)
+                if next_nlind != -1:
+                    ind = string.find(target, next_nlind+1)
+                else:
+                    ind = -1
+                    break
+            else:
+                break
+        return ind
+
     def matchingBraceIndex(self, string, startInd=0):
         """ identify index of matching close brace """
         nextInd = startInd
         openCount = 1
         while True:
-            openInd = string.find('{', nextInd)
-            closeInd = string.find('}', nextInd)
+            openInd = self.strFind(string, '{', nextInd)
+            closeInd = self.strFind(string, '}', nextInd)
             if closeInd == -1:
                 raise Exception('No matching brace in string:\n' + string)
             elif openInd != -1 and openInd < closeInd:
@@ -115,12 +132,12 @@ class Parser:
         results = []
         while remainingInd < len(string):
             # find the pipe
-            pipeInd = string.find('|', seekInd)
+            pipeInd = self.strFind(string, '|', seekInd)
             # no more pipes -> done
             if pipeInd == -1:
                 break
             # find the opening of a function
-            openInd = string.find('{', seekInd)
+            openInd = self.strFind(string, '{', seekInd)
             # if function opens before pipe, the pipe might be part of subfunction inner
             if openInd != -1 and openInd < pipeInd:
                 # skip past the function and retry
@@ -170,13 +187,6 @@ class Parser:
             text_without_formatters += text[previous_close_bracket + 1 : index_of_at]
             text_without_formatters += formatted_text
 
-            if Globals.IsDev:
-                print("index_of_at: " + str(index_of_at))
-                print("index_open_bracket: " + str(index_open_bracket))
-                print("index_close_bracket: " + str(index_close_bracket))
-                print("formatter: " + formatter)
-                print("formatted_text: " + formatted_text + "\n")
-
             # Remember where in the text_without_formatters string each formatter applies
             if formatter not in formatting:
                 formatting[formatter] = []
@@ -195,7 +205,7 @@ class Parser:
         nodes = []
         while remainingInd < len(scriptStr):
             # locate a function by searching for $
-            funcInd = scriptStr.find('$', remainingInd)
+            funcInd = self.strFind(scriptStr, '$', remainingInd)
             # function not found -> all content can be captured in LangNode
             functionExists = funcInd != -1
             # if content exists between current index and function, store in LangNode
@@ -210,7 +220,7 @@ class Parser:
             if not functionExists:
                 break
             # determine if function has inner (part surrounded by {})
-            braceOpenInd = scriptStr.find('{', funcInd)
+            braceOpenInd = self.strFind(scriptStr, '{', funcInd)
             innerExists = (braceOpenInd != -1 and len(scriptStr[funcInd:braceOpenInd].split()) == 1)
             # index where function name ends
             funcNameEndInd = 0
@@ -264,8 +274,8 @@ class Parser:
         lines = scriptStr.split('\n')
         # remove indenting by stripping leading/trailing spaces from lines
         lines = [line.strip() for line in lines]
-        # replace tabs with four spaces for readability in window
-        #lines = [line.replace('\t', '    ') for line in lines]
+        # replace tabs with one space for readability in window
+        lines = [line.replace('\t', ' ') for line in lines]
         # remove single line comments
         lines = [line for line in lines if len(line) == 0 or line[0] != '#']
         # remove end of line comments
