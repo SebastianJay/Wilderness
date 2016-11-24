@@ -27,3 +27,4 @@ class Globals:
     KeybindingsConfigPath = 'keybindings.yml'
     FragmentsConfigPath = 'fragments.yml'
     CmdMaxLength = 48
+    NameMaxLength = 8

@@ -4,6 +4,7 @@ Definition for input handler, which captures keystrokes.
 
 from queue import Queue
 from global_vars import Globals
+from string import printable
 
 class InputHandler:
     def __init__(self, canvas):
@@ -13,10 +14,10 @@ class InputHandler:
         def onKeyPressed(event):
             # Debugging info about key event
             if Globals.IsDev:
-                print("Key event: " + event.char + ", " + event.keysym)
+                print("Key event:", event.char, event.keysym)
 
             # Whitelist of metakeys (control keys) that are used in game
-            metakeys = ['Up', 'Down', 'Left', 'Right',\
+            metakeys = ['Up', 'Down', 'Left', 'Right', 'Tab',\
                 'BackSpace', 'Escape', 'Prior', 'Next', 'Return']
 
             # Use char (raw printable character) by default, but prefer metakey name
@@ -25,7 +26,7 @@ class InputHandler:
                 putchar = event.keysym
 
             # Ignore any non-printable characters that are not whitelisted
-            if putchar == "":
+            if len(putchar) == 0 or (len(putchar) == 1 and putchar not in printable):
                 return
 
             # Otherwise enqueue the char
