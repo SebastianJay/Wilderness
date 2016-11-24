@@ -21,21 +21,34 @@ class BodyNode:
 class LangNode:
     """ Node that contains natural language to be displayed in game """
 
-    def __init__(self, text='', formatting={}):
-        """ text to be displayed in game """
+    def __init__(self, text='', formatting=[], variables=[]):
+        """ string text to be displayed in game """
         self.text = text
-        # remove beginning forward slash (syntax for preserving leading spaces)
-        lines = self.text.split('\n')
-        lines = [(line[1:] if len(line) > 0 and line[0] == '\\' else line) for line in lines]
-        self.text = '\n'.join(lines)
-
-        """ formatting for text to modify color or style """
+        """
+        formatting for text to modify color or style;
+        list of dicts that map tag to inclusive start and end indices where tag applies;
+        each dict represents a portion of text without any interpolated variables, so its
+         length is in [len(self.variables), len(self.variables)+1]
+        [{formatter1: (index1, index2),},]
+        """
         self.formatting = formatting
+        """
+        interpolated variable locations;
+        list of tuples of variable name and index into self.text where variable starts
+        [(varname, varindex),]
+        """
+        self.variables = variables
 
     def __str__(self):
         ret = "LangNode(text: " + self.text.replace("\n"," \\n ") + ", formatting: {"
-        for c in self.formatting.keys():
-            ret += c + ": " + str(self.formatting[c]) + ", "
+        for dct in self.formatting:
+            for c in dct:
+                ret += c + ": " + str(dct[c]) + ", "
+            if len(dct) > 0:
+                ret += "\n"
+        ret += '}, variables: {'
+        for var, index in self.variables:
+            ret += var + ": " + str(index) + ", "
         ret += "})\n"
         return ret
 
@@ -88,7 +101,7 @@ class Parser:
         pass
 
     def strFind(self, string, target, startInd=0):
-        """ extension of str.find that ignores escaped characters """
+        """ (internal) extension of str.find() that ignores escaped characters """
         ind = string.find(target, startInd)
         while ind != -1:
             # check if character is "escaped" by being in art line
@@ -105,7 +118,7 @@ class Parser:
         return ind
 
     def matchingBraceIndex(self, string, startInd=0):
-        """ identify index of matching close brace """
+        """ (internal) identify index of matching close brace """
         nextInd = startInd
         openCount = 1
         while True:
@@ -123,7 +136,7 @@ class Parser:
                 nextInd = closeInd + 1
 
     def splitByPipe(self, string, startInd=0):
-        """ performs a split by vertical pipe, accounting for functions """
+        """ (internal) performs a split by vertical pipe, accounting for functions """
         # remainingInd represents where unprocessed string starts
         remainingInd = startInd
         # seekInd indicates where to start looking for a pipe
@@ -155,10 +168,11 @@ class Parser:
         return results
 
     def parseFormat(self, text):
-        """
-        Reads color/style formatted text and returns
-        LangNode(text, {formatter1 : [(index1,index2), (index3, index4)], formatter2 : ...})
-        """
+        """ (internal) Reads color/style formatted text and returns (text, {formatter1 : [(index1,index2),],})"""
+        # empty text case
+        if len(text) == 0:
+            return text, {}
+
         #index_of_at will track the last instance of the "@" character in the text
         index_of_at = 0
         index_close_bracket = -1
@@ -166,12 +180,18 @@ class Parser:
         index_open_bracket = -1
         formatting = {} # dictionary of formation {string : tuple} of formatters and where they apply
         text_without_formatters = ""
+        escape_char_count = 0 if text[0] != '\\' else 1
 
         #While there are remaining "@"s in the string, format into a LangNode
-        while text.find("@", index_of_at) != -1:
-            index_of_at = text.find("@", index_of_at)
+        while self.strFind(text, "@", index_of_at) != -1:
+            # count escape chars ("\" at beginning of line) between last formatter and this one
+            next_index_of_at = self.strFind(text, "@", index_of_at)
+            escape_char_count += text.count('\n\\', index_of_at, next_index_of_at)
+
+            # find indices
+            index_of_at = next_index_of_at
             index_open_bracket = text.find("{", index_of_at)
-            index_close_bracket = text.find("}", index_of_at)
+            index_close_bracket = text.find("}", index_open_bracket)
 
             #if no close or open bracket exists, exit the method and return error message
             if index_open_bracket == -1:
@@ -188,18 +208,51 @@ class Parser:
             text_without_formatters += formatted_text
 
             # Remember where in the text_without_formatters string each formatter applies
+            # Decrement the indices by escape_char_count since those will be removed afterward
             if formatter not in formatting:
                 formatting[formatter] = []
-            formatting[formatter].append((len(text_without_formatters)-len(formatted_text), len(text_without_formatters) -1))
+            formatting[formatter].append((len(text_without_formatters)-len(formatted_text)-escape_char_count,
+                len(text_without_formatters)-1-escape_char_count))
 
             previous_close_bracket = index_close_bracket # remember where the previous } was
-            index_of_at = index_of_at + 1   # start searching for the next @ after the previous @
-
+            index_of_at = index_close_bracket + 1   # start searching for the next @
         # capture remaining unformatted text
         text_without_formatters += text[previous_close_bracket+1:]
-        return LangNode(text_without_formatters, formatting)
+
+        # Remove escape chars
+        lines = text_without_formatters.split('\n')
+        lines = [(line[1:] if len(line) > 0 and line[0] == '\\' else line) for line in lines]
+        final_text = '\n'.join(lines)
+
+        return final_text, formatting
+
+    def parseFormatAndVars(self, text):
+        """ (internal) parses text into a LangNode with formatter and variable locations """
+        parsed_text = ''        # text without variables and formatters
+        formatting_list = []    # formatter indices between variables
+        variables_list = []     # list of (var_name, index into parsed_text)
+        index_seek = 0
+        # find location of start of variable
+        while self.strFind(text, "[", index_seek) != -1:
+            # isolate name of variable
+            index_start_bracket = self.strFind(text, "[", index_seek)
+            index_end_bracket = self.strFind(text, "]", index_start_bracket)
+            var_name = text[index_start_bracket+1 : index_end_bracket]
+            # parse formatters of all text preceding variable
+            text_stub, formatting = self.parseFormat(text[index_seek:index_start_bracket])
+            parsed_text += text_stub
+            formatting_list.append(formatting)
+            variables_list.append((var_name, len(parsed_text)))
+            index_seek = index_end_bracket + 1
+        # parse formatters for text following last variable
+        text_stub, formatting = self.parseFormat(text[index_seek:])
+        if len(text_stub) > 0:
+            parsed_text += text_stub
+            formatting_list.append(formatting)
+        return LangNode(parsed_text, formatting_list, variables_list)
 
     def preformatScriptString(self, scriptStr):
+        """ (internal) prepares text before it is parsed as a BodyNode or full script file """
         # split bodyStr into lines
         lines = scriptStr.split('\n')
         # remove indenting by stripping leading/trailing spaces from lines
@@ -215,7 +268,7 @@ class Parser:
         return scriptStr
 
     def parseBody(self, scriptStr):
-        """ Converts a string into a BodyNode """
+        """ (internal) Converts a string into a BodyNode """
         remainingInd = 0
         nodes = []
         while remainingInd < len(scriptStr):
@@ -229,7 +282,7 @@ class Parser:
             else:
                 langStr = scriptStr[remainingInd:funcInd].strip()
             if langStr != "":
-                langNode = self.parseFormat(langStr)
+                langNode = self.parseFormatAndVars(langStr)
                 nodes.append(langNode)
             # only proceed with function parsing if function exists
             if not functionExists:
@@ -270,7 +323,7 @@ class Parser:
                 result = None
                 for i in range(len(choices)):
                     if i % 2 == 0:
-                        option = self.parseFormat(choices[i].strip())
+                        option = self.parseFormatAndVars(choices[i].strip())
                     else:
                         result = self.parseBody(choices[i].strip())
                         funcInner.append((option, result))
@@ -284,7 +337,7 @@ class Parser:
         return BodyNode(nodes)
 
     def parseScriptFragment(self, scriptStr):
-        """ Converts a fragment file into a BodyNode """
+        """ Converts fragment file contents into a BodyNode """
         scriptStr = self.preformatScriptString(scriptStr)
         return self.parseBody(scriptStr)
 
@@ -306,5 +359,3 @@ class Parser:
 
 if __name__ == '__main__':
     p = Parser()
-    print(p.parseFormat("Hello @red{there}, friend. How are @bold{you} doing?"))
-    print(p.parseFormat("@blue{This} is blue. But @italic{this} is italicized. And @blue{this one} is also blue."))

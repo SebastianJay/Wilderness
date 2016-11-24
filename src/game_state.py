@@ -127,15 +127,33 @@ class GameState:
                     del self.variables[varname]
 
         def addLangNode(self, node):
-            prevBufferLen = len(self.historyBuffer) # offset for formatting indices
-            self.historyBuffer += node.text # append the LangNode text
-            # append the LangNode formatting
-            for key in node.formatting:
-                val = node.formatting[key]
-                if key not in self.historyFormatting:
-                    self.historyFormatting[key] = []
-                for indices in val:
-                    self.historyFormatting[key].append((indices[0]+prevBufferLen, indices[1]+prevBufferLen))
+            # helper for adding correct indices to historyFormatting
+            def appendToHistoryFormatting(self, formatting):
+                nonlocal fullText
+                for key in formatting:
+                    if key not in self.historyFormatting:
+                        self.historyFormatting[key] = []
+                    for start, end in formatting[key]:
+                        # offset formatting indices by constant previous history buffer length
+                        #  and variable current text + interpolated variables length
+                        self.historyFormatting[key].append((start+len(self.historyBuffer)+len(fullText),
+                            end+len(self.historyBuffer)+len(fullText)))
+
+            fullText = ''   # running buffer of text and variables in node
+            seekInd = 0
+            i = 0
+            # interpolate variables into text
+            for varname, varindex in node.variables:
+                appendToHistoryFormatting(self, node.formatting[i])
+                varval = self.getVar(varname) if self.getVar(varname) is not None else ''
+                fullText += node.text[seekInd:varindex] + varval
+                seekInd = varindex
+                i += 1
+            if i < len(node.formatting):
+                # any remaining formatting after last interpolated variable
+                appendToHistoryFormatting(self, node.formatting[i])
+            fullText += node.text[seekInd:]
+            self.historyBuffer += fullText
             self.historyBuffer += "\n"  # add trailing newline to separate new text from old
 
         @property

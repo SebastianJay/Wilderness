@@ -45,7 +45,7 @@ go to{
 			The sound of heavy bullet fire was muffling the conversation. The group was then stopped by two soldiers asking for assistance.
 
 			Soldier 1: Hey, can you help us lift this cart, it won't budge.
-			Kipp and [compaionName]: Yeah, sure.
+			Kipp and [companionName]: Yeah, sure.
 
 			The cart was still too heavy with all four people helping. It didn't move an inch. Kipp let's go of the cart to hear the sound of a horse cry out. Kipp walks around to see the horse laying down with one of its legs trapped underneath the cart.
 
@@ -86,7 +86,7 @@ go to{
 			|Shoot Between The Eyes|
 				Kipp closes is eyes, grips the hatchet tightly...and then immediately tosses it on the ground.
 
-				[compaionName]: Kipp what are you doing?
+				[companionName]: Kipp what are you doing?
 
 				Kipp runs for the closest gun laying on the ground. He runs back and aims it towards the horse's head.
 

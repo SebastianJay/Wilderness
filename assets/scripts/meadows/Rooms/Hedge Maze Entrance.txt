@@ -1,8 +1,8 @@
 go to{
 	$if_medMazeIntro_eq_0{
-	
+
 		$set_medMazeIntro_1 #Prevents this from repeating the intro
-	
+
 		Kipp: So we go left.
 		[companionName]: No she said the maze was a little more to the right.
 		Kipp: We've been leaning towards the right for half an hour. I say we balance it out and try going left. We've probably passed it by now.
@@ -10,27 +10,27 @@ go to{
 		Kipp: Don't remind me.
 		# FOR ANYONE WHO IS READING THE SOURCE FILES OF THIS GAME. I HAVE REACHED THE POINT WHERE MY LEVELS ARE BASICALLY ME WRITING FULL-BLOWN NOVELS. IF THE REST OF THE LEVEL FROM HERE ON OUT IS WRITTEN STUPIDLY, I CAN ONLY BLAME MYSELF :P
 		Sheep: Baaaahhhh!
-		
-		Kipp and [compaionName] look at each other and dart straight for the noise. They arrive to a large wall made completely out of shrubs.
-		
+
+		Kipp and [companionName] look at each other and dart straight for the noise. They arrive to a large wall made completely out of shrubs.
+
 		Sheep: Baaaahhhh!
 		Kipp: Well they're definitely in that maze, but we can't just breach through this dense shrubbery.
 		[companionName]: Let's walk around and try to find an entrance.
 		Kipp: On the same wavelength for once.
-		
-		They walk around the perimeter of the maze, which only took a short stroll to reach the other side. 
-		
+
+		They walk around the perimeter of the maze, which only took a short stroll to reach the other side.
+
 		Kipp: I swear the noise echoed. This maze has to be bigger.
-		[compaionName]: Perhaps it's one of those "small in appearance, but larger on the inside" types of rooms.
-		
+		[companionName]: Perhaps it's one of those "small in appearance, but larger on the inside" types of rooms.
+
 		The walls are too tall to see what's on the other side. [companionName] eventually finds a sign next to the entrance.
-		
+
 		[companionName]: Hey, Kipp. The sign says, "BEGIN YOUR QUESTION BY TYPING IN @red{GO TO} @blue{CHECKPOINT 1}". Man, by the time this game ends, we'll have to build a new fourth wall.
 		Kipp: I guess we have no choice. Time to walk in.
 		[companionName]: Trusting the creepy glowing sign to guide us to safety. What can go wrong?
-		
+
 		@bold{It will be in your best interest to save again.}
-		
+
 		$set_medHedgeCheck_1
 	}$else{
 		Kipp: Well we're back here, again.
@@ -39,5 +39,5 @@ go to{
 		[companionName]: Just a thought. Hey player, there's a sign here that says that we should @red{go to} @blue{Checkpoint }[medHedgeCheck]. Jumping ahead or going back will get us tossed back to the entrance. We could also @red{go to} the @blue{Shepherd House} if you're bored with this guy's play-through.
 		Kipp: Wait, that's my job... whatever just listen to [companionName].
 	}
-	
+
 }
