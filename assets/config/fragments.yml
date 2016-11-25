@@ -12,3 +12,5 @@ medCheck3Fail:
     path: meadows/checkpoint 3 failure.txt
 medCheck3Maze:
     path: meadows/checkpoint 3 maze.txt
+loreMirror:
+    path: suburbs/lore mirror.txt

@@ -1,0 +1,13 @@
+
+use {
+  $if_subUsedToilet_eq_0{
+    Lore sat down on the toilet and relieved herself. She gazed at the painting of a small flower on the wall opposite her. The flower only grew in the Wilderness. She wondered if she'd ever see it. Lore stood up, flushed, and washed her hands.
+    $set_subUsedToilet_1
+  }$else{
+    Lore already did that.
+  }
+}
+
+inspect {
+  Just a regular toilet.
+}

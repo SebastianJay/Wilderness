@@ -2,6 +2,13 @@
 ## rooms, which in turn has multiple objects. The rooms and objects are
 ## associated through the roomsConfig and objectsConfig fields
 
+suburbs:
+    name: Residential District
+    roomsConfig: rooms/suburbs.yml
+    objectsConfig: objects/suburbs.yml
+    mapId: 0
+    entrances: {}
+
 aspire:
     name: Aspire
     roomsConfig: rooms/aspire.yml

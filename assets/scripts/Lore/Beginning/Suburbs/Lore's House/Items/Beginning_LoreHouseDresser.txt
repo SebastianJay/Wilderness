@@ -1,11 +1,11 @@
 #Beginning_LoreHouseDresser
 
 use{
-	Lore opened the dresser. Her clothes were folded neatly inside. She pulled out an outfit and
-	changed from her pajamas.
-	#count the number of items picked up by Lore
-		$if_itemsgrabbedLorehouse_eq_0{
-		$set_itemsgrabbedLorehouse_1
-		}$else{$add_itemsgrabbedLorehouse_1
-		}
+	$if_subUsedDresser_eq_0{
+		Lore opened the dresser. Her clothes were folded neatly inside. She pulled out an outfit and changed from her pajamas.
+		$set_subUsedDresser_1
+		$inc_itemsgrabbedLorehouse_1
+	}$else{
+		Lore had already changed out of her pajamas, and she wasn't that picky about her clothes.
+	}
 }

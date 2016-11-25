@@ -1,0 +1,66 @@
+bedroom:
+    name: Bedroom
+    description: n/a
+    script: Lore/Beginning/Suburbs/Lore's House/Rooms/Beginning_LoreHouseBedroom.txt
+    r: 0
+    c: 0
+    neighbors:
+        bathroom: N
+        hallway: N
+    objects:
+        - dresser
+        - radio
+        - bed
+
+bathroom:
+    name: Bathroom
+    description: n/a
+    script: Lore/Beginning/Suburbs/Lore's House/Rooms/Beginning_LoreHouseBathroom.txt
+    r: 0
+    c: 0
+    neighbors:
+        bedroom: N
+    objects:
+        - mirror
+        - toilet
+
+hallway:
+    name: Hallway
+    description: n/a
+    script: Lore/Beginning/Suburbs/Lore's House/Rooms/Beginning_LoreHouseHallway.txt
+    r: 0
+    c: 0
+    neighbors:
+        bedroom: N
+        kitchen: N
+    objects:
+        - picture
+        - closet
+        - keys
+
+livingRoom:
+    name: Living Room
+    description: n/a
+    script: Lore/Beginning/Suburbs/Lore's House/Rooms/Beginning_LoreHouseLivingRoom.txt
+    r: 0
+    c: 0
+    neighbors:
+        kitchen: N
+    objects:
+        - wallet
+        - loreDoor
+
+kitchen:
+    name: Kitchen
+    description: n/a
+    script: Lore/Beginning/Suburbs/Lore's House/Rooms/Beginning_LoreHouseKitchen.txt
+    r: 0
+    c: 0
+    neighbors:
+        hallway: N
+        livingRoom: N
+    objects:
+        - catFood
+        - pillBottles
+        - stackPapers
+        - marthi

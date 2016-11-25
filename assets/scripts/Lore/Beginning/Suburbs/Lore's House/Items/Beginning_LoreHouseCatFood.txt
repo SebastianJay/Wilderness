@@ -1,6 +1,10 @@
 #Beginning_LoreHouseCatFood
 
 use{
-	Lore stooped down and filled Marthi's bowl with food. The cat gave Lore an irritated look as 
-	though she should have been fed earlier. Marthi ungratefully chowed down.
+	$if_subFedMarthi_eq_0{
+		Lore stooped down and filled @green{Marthi}'s bowl with food. The cat gave Lore an irritated look as though she should have been fed earlier. @green{Marthi} ungratefully chowed down.
+		$set_subFedMarthi_1
+	}$else{
+		@green{Marthi} should be fine for now.
+	}
 }

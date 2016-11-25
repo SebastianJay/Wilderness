@@ -73,8 +73,8 @@ class TitleWindow(Window):
                     gs = GameState()
                     gs.init()
                     gs.name = self.nameBuffer.strip()
-                    gs.areaId = 'meadows'
-                    gs.roomId = 'shepherdHouse'
+                    gs.areaId = 'suburbs'
+                    gs.roomId = 'bedroom'
                     gs.gameMode = GameMode.inAreaCommand   # WindowManager handles window switch
                     self.isPromptingName = False
                     self.nameBuffer = ''

@@ -1,9 +1,0 @@
-#Beginning_LoreHouseDoor
-
-go to{
-	Lore headed over to the door.
-		$if_itemsgrabbedLorehouse_<_4{
-			She paused, feeling like she was forgetting something. She turned back to the 
-			@blue{kitchen} and @blue{living room}
-		}$else{Lore unlocked the bolts and stepped outside.}
-}

@@ -1,0 +1,24 @@
+#Beginning_LoreHouseCloset
+
+open{
+	Lore opened the closet. It smelled like dust and peppermint.
+	$set_subClosetOpen_1
+}
+
+close{
+	Lore closed the closet. No need for summer clothes with this weather.
+	$set_subClosetOpen_0
+}
+
+inspect{
+	$if_subClosetOpen_eq_0{
+		The closet doors were shut. Lore would need to @red{open} them to look inside.
+	}$else{
+		$if_inventory_loreKeys_eq_0{
+			The closet was filled with summer clothes and cleaning supplies. The weather had begun to cool down, and the crisp air crept into Lore's bones and made her ache. On a key ring to the side, her @yellow{keys} shimmered in the light from the hall.
+			$set_subSawKeys_1
+		}$else{
+			The closet was filled with summer clothes and cleaning supplies. The weather had begun to cool down, and the crisp air crept into Lore's bones and made her ache.
+		}
+	}
+}

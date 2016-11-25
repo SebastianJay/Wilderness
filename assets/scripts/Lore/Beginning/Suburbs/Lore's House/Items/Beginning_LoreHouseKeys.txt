@@ -2,9 +2,6 @@
 
 pick up{
 	Lore grabbed her keys off of the key ring and stuck them in her pocket.
-	#count the number of items picked up by Lore
-		$if_itemsgrabbedLorehouse_eq_0{
-		$set_itemsgrabbedLorehouse_1
-		}$else{$add_itemsgrabbedLorehouse_1
-		}
+	$set_inventory_loreKeys_1
+	$inc_itemsgrabbedLorehouse_1
 }
