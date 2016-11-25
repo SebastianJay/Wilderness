@@ -7,8 +7,8 @@ from global_vars import Globals
 from string import printable
 
 class InputHandler:
-    def __init__(self, canvas):
-        self.canvas = canvas
+    def __init__(self, widget):
+        self.widget = widget
         self.queue = Queue()
 
         def onKeyPressed(event):
@@ -17,7 +17,7 @@ class InputHandler:
                 print("Key event:", event.char, event.keysym)
 
             # Whitelist of metakeys (control keys) that are used in game
-            metakeys = ['Up', 'Down', 'Left', 'Right', 'Tab',\
+            metakeys = ['Up', 'Down', 'Left', 'Right', 'Tab', 'F11', \
                 'BackSpace', 'Escape', 'Prior', 'Next', 'Return']
 
             # Use char (raw printable character) by default, but prefer metakey name
@@ -32,8 +32,8 @@ class InputHandler:
             # Otherwise enqueue the char
             self.queue.put(putchar)
 
-        self.canvas.bind("<Key>", onKeyPressed)
-        self.canvas.focus_set()
+        self.widget.bind("<Key>", onKeyPressed)
+        self.widget.focus_set()
 
     def getKeyPresses(self):
         keys = []

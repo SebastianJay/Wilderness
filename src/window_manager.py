@@ -32,6 +32,8 @@ class WindowManager(Window):
 
         # create instances of all the Windows
         self.initWindows()
+        # whether the screen should be in fullscreen mode
+        self.fullScreen = 0
 
     def load(self):
         # now that AssetLoader is ready, do any other init
@@ -168,6 +170,11 @@ class WindowManager(Window):
 
     def update(self, timestep, keypresses):
         """ sends update signal to Windows in the active group """
+        # scan for the fullscreen key to change the mode
+        for key in keypresses:
+            if key == 'F11':
+                self.fullScreen = 1 - self.fullScreen
+
         # update the activeWindowGroups based on changes in the game mode
         change = GameState().checkGameModeChange()
         if change:
