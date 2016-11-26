@@ -16,21 +16,30 @@ class InputWindow(Window):
         super().__init__(width, height)
         self.interpreter = Interpreter()
         self.choiceInd = 0
+        GameState().onChoiceChange += self.choiceChangeHandler()
+        GameState().onEnterArea += self.enterAreaHandler()
 
-    def update(self, timestep, keypresses):
-        gs = GameState()
+    def choiceChangeHandler(self):
+        def _choiceChangeHandler(*args, **kwargs):
+            self.choiceInd = 0
+        return _choiceChangeHandler
 
-        # if we enter an area on this update, run its startup script
-        areaEntered = gs.checkAreaEntered()
-        if areaEntered:
+    def enterAreaHandler(self):
+        def _enterAreaHandler(*args, **kwargs):
+            # run the startup script for an area
+            ((_, areaId), (_, roomId)) = (args[0], args[1]) # extract new room and area
             areasConfig = AssetLoader().getConfig(Globals.AreasConfigPath)
-            roomsConfig = AssetLoader().getConfig(areasConfig[gs.areaId]['roomsConfig'])
-            roomScript = AssetLoader().getScript(roomsConfig[gs.roomId]['script'])
+            roomsConfig = AssetLoader().getConfig(areasConfig[areaId]['roomsConfig'])
+            roomScript = AssetLoader().getScript(roomsConfig[roomId]['script'])
             for verb, action, _ in roomScript:
                 if verb == 'go to': # TODO make special non-visible verb
                     self.interpreter.executeAction(action)
                     break
-        elif gs.gameMode == GameMode.inAreaChoice:
+        return _enterAreaHandler
+
+    def update(self, timestep, keypresses):
+        gs = GameState()
+        if gs.gameMode == GameMode.inAreaChoice:
             for key in keypresses:
                 if key == 'Up':
                     self.choiceInd = (self.choiceInd - 1) % len(gs.choices)
@@ -75,11 +84,6 @@ class InputWindow(Window):
                             if val is None:
                                 break
                     gs.clearCmdBuffer()
-
-        # reset choice index pointer to top if needed
-        choicesUpdated = gs.checkChoicesUpdated()
-        if choicesUpdated:
-            self.choiceInd = 0  # always start from top option
 
     def draw(self):
         # clean pixels from last frame

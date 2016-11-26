@@ -8,24 +8,34 @@ from global_vars import Globals
 
 class HistoryWindow(Window):
 
+    class SubState:
+        """ History Window vars specific to one protagonist's history buffer """
+        def __init__(self):
+            self.timestep = 0.0     # Tracks the time since the last character was displayed
+            self.charLimit = 0      # The current number of characters (exclude newlines) that can be displayed
+            self.wrappedLines = []  # Strings corresponding to word wrapped lines in window
+            self.rowIndices = []    # Mappings of char indices in history buffer for particular rows
+            self.startingLine = 0   # Index of line to start displaying in window
+
     def __init__(self, width, height):
         super().__init__(width, height)
-        self.threshold = 0.02  # Delay in seconds before each character appears on-screen
+        self.threshold = 0.025  # Delay in seconds before each character appears on-screen
         self.speedButtonFactor = 5.0  # Speedup factor for the text animation when "speed" button pressed
         self.speedPeriodFactor = 0.15 # Factor for additional time special chars like period take
-        self.timestep = 0.0     # Tracks the time since the last character was displayed
-        self.charLimit = 0      # The current number of characters (exclude newlines) that can be displayed
 
-        self.historyBufferWatch = [0, 0] # Number of chars already processed from history buffer (one index per protagonist)
-        self.wrappedLines = []  # Strings corresponding to word wrapped lines in window
-        self.rowIndices = []    # Mappings of char indices in history buffer for particular rows
-        self.startingLine = 0   # Index of line to start displaying in window
+        # State is maintained in window for each protagonist
+        self.subStates = [
+            HistoryWindow.SubState(),
+            HistoryWindow.SubState(),
+        ]
 
-    def update(self, timestep, keypresses):
-        # do word wrapping logic, but only when more has been added to buffer since last update
-        historyProcessed = self.historyBufferWatch[GameState().activeProtagonistInd]
-        if len(GameState().historyBuffer) > historyProcessed:
-            input_list = GameState().historyBuffer[historyProcessed:].split("\n")
+        # register handler for additions to history buffer
+        GameState().onAddLangNode += self.langNodeAddedHandler()
+
+    def langNodeAddedHandler(self):
+        def _langNodeAddedHandler(*args, **kwargs):
+            # do word wrapping logic whenever an update has been made to history buffer
+            input_list = args[0].split("\n")    # args[0] is additional text added to buffer
 
             output_list = []    # list of additional row text - each row contains a string
             row_indices = []    # list of additional (start, end) indices of historyBuffer corresponding to row
@@ -51,11 +61,12 @@ class HistoryWindow(Window):
                     i += 1
                     if i < len(input_list):
                         line_remaining = input_list[i]
-            self.historyBufferWatch[GameState().activeProtagonistInd] = len(GameState().historyBuffer)
             self.wrappedLines.extend(output_list)
             self.rowIndices.extend(row_indices)
             GameState().lockGameMode(GameMode.inAreaAnimating)  # switch out game mode until animation finished
+        return _langNodeAddedHandler
 
+    def update(self, timestep, keypresses):
         # increment charLimit in certain time increments to advance scrolling animation
         if GameState().gameMode == GameMode.inAreaAnimating:
             self.timestep += timestep
@@ -168,6 +179,35 @@ class HistoryWindow(Window):
 
         self.formatting = output_formatting
         return self.pixels
+
+    @property
+    def timestep(self):
+        return self.subStates[GameState().activeProtagonistInd].timestep
+    @timestep.setter
+    def timestep(self, val):
+        self.subStates[GameState().activeProtagonistInd].timestep = val
+
+    @property
+    def charLimit(self):
+        return self.subStates[GameState().activeProtagonistInd].charLimit
+    @charLimit.setter
+    def charLimit(self, val):
+        self.subStates[GameState().activeProtagonistInd].charLimit = val
+
+    @property
+    def wrappedLines(self):
+        return self.subStates[GameState().activeProtagonistInd].wrappedLines
+
+    @property
+    def rowIndices(self):
+        return self.subStates[GameState().activeProtagonistInd].rowIndices
+
+    @property
+    def startingLine(self):
+        return self.subStates[GameState().activeProtagonistInd].startingLine
+    @startingLine.setter
+    def startingLine(self, val):
+        self.subStates[GameState().activeProtagonistInd].startingLine = val
 
 if __name__ == '__main__':
     h = HistoryWindow(30, 10)

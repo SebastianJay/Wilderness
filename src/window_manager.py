@@ -30,10 +30,29 @@ class WindowManager(Window):
         # stack of indices into windowGroups representing the active groups (what is on screen now)
         self.activeWindowGroups = []
 
-        # create instances of all the Windows
-        self.initWindows()
         # whether the screen should be in fullscreen mode
         self.fullScreen = 0
+        # create instances of all the Windows
+        self.initWindows()
+        # register a handler for changing the active window groups based on game mode
+        GameState().onGameModeChange += self.gameModeChangeHandler()
+
+    def gameModeChangeHandler(self):
+        def _gameModeChangeHandler(*args, **kwargs):
+            old, new = args[0]  # first arg is (old state, new state)
+            if new == GameMode.isLoading:
+                # push the loading window onto the screen
+                self.activeWindowGroups.append(0)
+            elif old == GameMode.isLoading:
+                # pop the loading window off the screen
+                self.activeWindowGroups.pop()
+            else:
+                if old in [GameMode.titleScreen] \
+                    and new in [GameMode.inAreaCommand, GameMode.inAreaChoice,
+                    GameMode.inAreaInput, GameMode.inAreaAnimating]:
+                    # use the "main game" window group
+                    self.activeWindowGroups = [2]
+        return _gameModeChangeHandler
 
     def load(self):
         # now that AssetLoader is ready, do any other init
@@ -174,22 +193,6 @@ class WindowManager(Window):
         for key in keypresses:
             if key == 'F11':
                 self.fullScreen = 1 - self.fullScreen
-
-        # update the activeWindowGroups based on changes in the game mode
-        change = GameState().checkGameModeChange()
-        if change:
-            old, new = change
-            if old != GameMode.isLoading and new == GameMode.isLoading:
-                # push the loading window onto the screen
-                self.activeWindowGroups.append(0)
-            elif old == GameMode.isLoading and new != GameMode.isLoading:
-                # pop the loading window off the screen
-                self.activeWindowGroups.pop()
-            else:
-                if old in [GameMode.titleScreen] \
-                    and new in [GameMode.inAreaCommand, GameMode.inAreaChoice, GameMode.inAreaInput, GameMode.inAreaAnimating]:
-                    # use the "main game" window group
-                    self.activeWindowGroups = [2]
 
         # update is only sent to activeWindowGroups[-1], so the foreground windows
         for winind in self.windowGroups[self.activeWindowGroups[-1]]:

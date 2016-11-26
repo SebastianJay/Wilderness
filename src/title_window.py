@@ -71,13 +71,9 @@ class TitleWindow(Window):
                 elif key == "Return" and len(self.nameBuffer.strip()) > 0:
                     # set game startup info
                     gs = GameState()
-                    gs.init()
                     gs.name = self.nameBuffer.strip()
-                    gs.areaId = 'suburbs'
-                    gs.roomId = 'bedroom'
-                    gs.gameMode = GameMode.inAreaCommand   # WindowManager handles window switch
-                    self.isPromptingName = False
-                    self.nameBuffer = ''
+                    gs.gameMode = GameMode.inAreaCommand
+                    gs.enterArea(gs.areaId, gs.roomId)  # send signal to run startup script
         else:
             for key in keypresses:
                 if key == "Up":
