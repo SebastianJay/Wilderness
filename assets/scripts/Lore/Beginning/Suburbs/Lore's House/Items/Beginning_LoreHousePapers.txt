@@ -10,7 +10,7 @@ inspect{
 
 pick up{
 	$if_inventory_letterFromFriends_eq_0{
-		Lore extricated a letter from her friends from the stack of papers and put it in her pocket.
+		Lore extricated a letter from her friends from the stack of papers and put it in her pocket. @italic{Added letter from friends to inventory.}
 		$set_inventory_letterFromFriends_1
 		$inc_itemsgrabbedLorehouse_1
 	}$else{

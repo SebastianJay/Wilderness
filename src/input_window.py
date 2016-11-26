@@ -26,14 +26,11 @@ class InputWindow(Window):
             areasConfig = AssetLoader().getConfig(Globals.AreasConfigPath)
             roomsConfig = AssetLoader().getConfig(areasConfig[gs.areaId]['roomsConfig'])
             roomScript = AssetLoader().getScript(roomsConfig[gs.roomId]['script'])
-            for verb, action in roomScript:
-                if verb == 'go to': # TODO make special verb
+            for verb, action, _ in roomScript:
+                if verb == 'go to': # TODO make special non-visible verb
                     self.interpreter.executeAction(action)
                     break
         elif gs.gameMode == GameMode.inAreaChoice:
-            choicesUpdated = gs.checkChoicesUpdated()
-            if choicesUpdated:
-                self.choiceInd = 0  # always start from top option
             for key in keypresses:
                 if key == 'Up':
                     self.choiceInd = (self.choiceInd - 1) % len(gs.choices)
@@ -79,6 +76,11 @@ class InputWindow(Window):
                                 break
                     gs.clearCmdBuffer()
 
+        # reset choice index pointer to top if needed
+        choicesUpdated = gs.checkChoicesUpdated()
+        if choicesUpdated:
+            self.choiceInd = 0  # always start from top option
+
     def draw(self):
         # clean pixels from last frame
         for i in range(self.height):
@@ -88,7 +90,7 @@ class InputWindow(Window):
         gs = GameState()
         if gs.gameMode == GameMode.inAreaChoice:
             # display choices
-            rStart = 0
+            rStart = (self.height // 2) - (len(gs.choices) // 2)
             cStart = 3
             cursorOffset = 3
             r = 0

@@ -215,10 +215,16 @@ class Interpreter:
     def refreshCommandList(self):
         """ Updates GameState cmdMap to contain all commands player can type """
         # Helper method to see if rooms or objects are visible in game
-        def isVisible(self, mapobj):
-            if 'showIf' in mapobj:
-                conditionVal = mapobj['showIf']
-                return self.evaluateConditionTree(conditionVal)
+        def isVisible(self, obj):
+            # if parameter is part of config possibly containing showIf
+            if isinstance(obj, dict):
+                if 'showIf' in obj:
+                    conditionVal = obj['showIf']
+                    return self.evaluateConditionTree(conditionVal)
+            # if parameter is tuple of (verb, reaction, condition)
+            if isinstance(obj, tuple):
+                if obj[2] is not None:
+                    return self.evaluateCondition(obj[2].split('_'))
             return True # visible by default
 
         # locate the rooms and objects configs
@@ -247,13 +253,15 @@ class Interpreter:
             neighborScript = loader.getScript(rooms[neighbor]['script'])
             neighborReaction = None
             for action in neighborScript:
+                if not isVisible(self, action):
+                    continue
                 if action[0] == 'go to':
                     neighborReaction = action[1]
             cmdMap['go to'][neighborName] = neighborReaction
         # go through actions to take on room
         for action in roomScript:
             # ignore 'go to' current room (not possible)
-            if action[0] == 'go to':
+            if action[0] == 'go to' or not isVisible(self, action):
                 continue
             cmdMap[action[0]] = action[1]
         # prefill 'use <item>', 'give <item>', 'show <item>'
@@ -263,6 +271,8 @@ class Interpreter:
             objScript = objectScripts[i]
             objName = objectNames[i]
             for action in objScript:
+                if not isVisible(self, action):
+                    continue
                 verbWords = action[0].split()
                 # "use .. on", "give ... to", "show ... to" needs special treatment for inventory items
                 for prefix, suffix in itemActionPhrases:

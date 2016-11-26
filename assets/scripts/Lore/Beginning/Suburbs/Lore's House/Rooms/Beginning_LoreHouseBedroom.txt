@@ -10,13 +10,15 @@ go to{
 
 		$choice{
 			Continue listening|
-				Officer Ellion would like to remind everyone that the government has plans in place in case of emergency. The government always puts the safety and best interest of the people first. He asks citizens to avoid panic and protest, and reminds them that all citizens can do their part by reporting those they witness or suspect of conspiracy... *fades to static*
+				Voice: Officer Ellion would like to remind everyone that the government has plans in place in case of emergency. The government always puts the safety and best interest of the people first. He asks citizens to avoid panic and protest, and reminds them that all citizens can do their part by reporting those they witness or suspect of conspiracy... @italic{(fades to static)}
+
+				Lore dragged herself out of bed, shivering as her feet touched the cold floor.
 				$set_subListen_1
 			|Get up|
 				Lore dragged herself out of bed, shivering as her feet touched the cold floor.
 		}
 	}$else{
-		Lore entered the bedroom. She breathed a sigh of mixed exhaustion and relief. Her twin @yellow{bed} was always a welcome space to take a load off.
+		Lore entered the bedroom. Her twin @yellow{bed} was always a welcome space to take a load off.
 	}
 }
 

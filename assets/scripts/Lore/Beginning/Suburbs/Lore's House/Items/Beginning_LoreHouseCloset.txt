@@ -1,11 +1,11 @@
 #Beginning_LoreHouseCloset
 
-open{
+open|subClosetOpen_eq_0{
 	Lore opened the closet. It smelled like dust and peppermint.
 	$set_subClosetOpen_1
 }
 
-close{
+close|subClosetOpen_eq_1{
 	Lore closed the closet. No need for summer clothes with this weather.
 	$set_subClosetOpen_0
 }

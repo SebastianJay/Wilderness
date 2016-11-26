@@ -27,6 +27,9 @@ keys:
 stackPapers:
     name: stack of papers
     script: Lore/Beginning/Suburbs/Lore's House/Items/Beginning_LoreHousePapers.txt
+junkMail:
+    name: junk mail
+    script: Lore/Beginning/Suburbs/Lore's House/Items/Beginning_LoreHouseJunkMail.txt
 picture:
     name: picture
     script: Lore/Beginning/Suburbs/Lore's House/Items/Beginning_LoreHousePicture.txt

@@ -1,7 +1,7 @@
 #Beginning_LoreHouseKeys
 
 pick up{
-	Lore grabbed her keys off of the key ring and stuck them in her pocket.
+	Lore grabbed her keys off of the key ring and stuck them in her pocket. @italic{Added keys to inventory.}
 	$set_inventory_loreKeys_1
 	$inc_itemsgrabbedLorehouse_1
 }

@@ -165,6 +165,8 @@ class Parser:
         # append element between last pipe and end of string
         if remainingInd < len(string):
             results.append(string[remainingInd:])
+        # remove any empty elements in results
+        results = [result for result in results if len(result) > 0]
         return results
 
     def parseFormat(self, text):
@@ -350,10 +352,15 @@ class Parser:
             braceLoc = scriptStr.find("{", remainingInd)
             if braceLoc == -1:
                 break
-            verb = scriptStr[remainingInd:braceLoc].strip().lower()
+            verbCondLst = scriptStr[remainingInd:braceLoc].split('|')
+            verb = verbCondLst[0].strip().lower()
+            if len(verbCondLst) > 1:
+                condition = verbCondLst[1].strip()
+            else:
+                condition = None
             closeInd = self.matchingBraceIndex(scriptStr, braceLoc + 1)
             reaction = self.parseBody(scriptStr[braceLoc+1:closeInd].strip())
-            tuples.append((verb, reaction))
+            tuples.append((verb, reaction, condition))
             remainingInd = closeInd + 1
         return tuples
 

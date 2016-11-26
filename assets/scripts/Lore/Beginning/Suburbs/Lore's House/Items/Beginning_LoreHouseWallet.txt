@@ -1,7 +1,7 @@
 #Beginning_LoreHouseWallet
 
 pick up{
-	Lore plucked her wallet off the table and put it in her pocket.
+	Lore plucked her wallet off the table and put it in her pocket. @inventory{Added wallet to inventory.}
 	$set_inventory_loreWallet_1
 	$inc_itemsgrabbedLorehouse_1
 }
