@@ -91,7 +91,13 @@ class GameState:
             self.onEnterArea = EventHook() # called when enterArea is called
 
         def switchCharacter(self):
-            self.activeProtagonistInd = 1 - self.activeProtagonistInd
+            def _doSwitch(*args, **kwargs):
+                old, new = args[0]
+                if old == GameMode.inAreaAnimating: # when done with text animation..
+                    self.activeProtagonistInd = 1 - self.activeProtagonistInd # flip index
+                    self.enterArea(self.areaId, self.roomId)    # send signal to run startup script
+                    self.onGameModeChange -= _doSwitch  # deregister this handler after complete
+            self.onGameModeChange += _doSwitch
 
         def appendCmdBuffer(self, ch):
             """ Add to the command buffer, but do not overflow """
@@ -249,8 +255,9 @@ class GameState:
             if not self.gameModeLocked:
                 return  # ignore if already unlocked
             self.gameModeLocked = False
-            self.gameMode = self.gameModeLockedRequests.pop()
+            newMode = self.gameModeLockedRequests.pop()
             self.gameModeLockedRequests = []
+            self.gameMode = newMode
 
         def dumps(self):
             """ Json stringifies the GameState """

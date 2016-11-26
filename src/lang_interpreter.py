@@ -115,7 +115,8 @@ class Interpreter:
                 elif node.title == 'gameover':
                     pass    #TODO
                 elif node.title == 'switchcharacter':
-                    pass    #TODO
+                    gs.switchCharacter()
+                    return Interpreter.ExitCode.empty
                 elif node.title == 'fragment':
                     self.callStack[-1][1] = nodeInd + 1
                     path = AssetLoader().getConfig(Globals.FragmentsConfigPath)[node.args[0]]['path']
@@ -123,7 +124,7 @@ class Interpreter:
                     self.callStack.append([frag, 0])
                     return Interpreter.ExitCode.push
             elif isinstance(node, LangNode):
-                GameState().addLangNode(node)
+                gs.addLangNode(node)
             else:
                 raise Exception('Unexpected type in BodyNode nodes ' + str(node))
             nodeInd += 1
