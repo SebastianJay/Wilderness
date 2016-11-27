@@ -1,3 +1,7 @@
+"""
+PaletteWindow is shown on the right hand side of the screen and displays
+a list of possible completions to commands a player is typing.
+"""
 
 from game_state import GameState, GameMode
 from lang_parser import BodyNode
@@ -15,10 +19,25 @@ class PaletteWindow(Window):
             for j in range(self.width):
                 self.pixels[i][j] = ' '
 
-        rStart = 1
+        # separate normal commands and metacommands
+        normalDisplayList = []
+        metaDisplayList = []
+        for completion in self.displayList:
+            if completion in GameState.cmdListMetaCommands:
+                metaDisplayList.append(completion)
+            else:
+                normalDisplayList.append(completion)
+        # sort normal list by alpha
+        normalDisplayList.sort()
+        if len(normalDisplayList) > 0:
+            normalDisplayList.append('')    # empty element lets window skip a line
+        # join two lists
+        normalDisplayList.extend(metaDisplayList)
+
+        rStart = 0
         cStart = 1
         r = 0
-        for completion in self.displayList:
+        for completion in normalDisplayList:
             for i, c in enumerate(completion):
                 if cStart + i >= self.width:
                     break
@@ -30,29 +49,20 @@ class PaletteWindow(Window):
         gs = GameState()
         displayList = []
         if gs.gameMode == GameMode.inAreaCommand:
-            cmdString = gs.cmdBuffer.strip()
-            prefixTree = gs.cmdMap
-            cmdMatch = False
-            while cmdString:
-                val = None
-                for prefix in prefixTree:
-                    if cmdString[:len(prefix)] == prefix:
-                        val = prefixTree[prefix]
-                        if isinstance(val, BodyNode):
-                            cmdMatch = True
-                            break
-                        elif isinstance(val, dict):
-                            prefixTree = val
-                            cmdString = cmdString[len(prefix):].strip()
-                            break
-                if val is None or cmdMatch:
-                    break
-            if cmdMatch:
+            val = gs.traverseCmdMap()
+            if isinstance(val, BodyNode) or isinstance(val, str):
+                # reached valid command, nothing more to show
                 displayList = ['.']
-            else:
-                cmdList = list(prefixTree.keys())
-                displayList=[]
-                for j in range(0,len(cmdList)):
-                    if len(cmdString) <= len(cmdList[j]) and cmdString == cmdList[j][:len(cmdString)]:
-                        displayList.append(cmdList[j])
+            elif isinstance(val, tuple):
+                # partial path, get all options at that level of tree
+                tree, cmdString = val
+                cmdList = list(tree.keys())
+                # if at root of tree, add metacommands to list
+                if tree == gs.cmdMap:
+                    cmdList += list(GameState.cmdListMetaCommands)
+                # filter possible commands based on what is in cmdBuffer
+                for completion in cmdList:
+                    if len(cmdString) <= len(completion) and completion.startswith(cmdString):
+                        displayList.append(completion)
+            # otherwise no valid command, so display nothing
         self.displayList = displayList

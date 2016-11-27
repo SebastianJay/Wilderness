@@ -27,7 +27,7 @@ class InputWindow(Window):
     def enterAreaHandler(self):
         def _enterAreaHandler(*args, **kwargs):
             # run the startup script for an area
-            ((_, areaId), (_, roomId)) = (args[0], args[1]) # extract new room and area
+            (_, areaId), (_, roomId) = args[0], args[1] # extract new room and area
             areasConfig = AssetLoader().getConfig(Globals.AreasConfigPath)
             roomsConfig = AssetLoader().getConfig(areasConfig[areaId]['roomsConfig'])
             roomScript = AssetLoader().getScript(roomsConfig[roomId]['script'])
@@ -62,27 +62,24 @@ class InputWindow(Window):
                     if gs.gameMode == GameMode.inAreaInput:
                         self.interpreter.resume(gs.cmdBuffer.strip())
                     else:   # GameMode.inAreaCommand
-                        cmdString = gs.cmdBuffer.strip()
-                        prefixTree = gs.cmdMap
-                        while cmdString:
-                            val = None
-                            for prefix in prefixTree:
-                                if cmdString[:len(prefix)] == prefix:
-                                    val = prefixTree[prefix]
-                                    if isinstance(val, BodyNode):
-                                        # special logic for go to - change room ID
-                                        if gs.cmdBuffer.strip()[0:5] == 'go to':
-                                            roomId = AssetLoader().reverseRoomLookup(gs.cmdBuffer.strip()[5:].strip(), gs.areaId)
-                                            gs.roomId = roomId or gs.roomId
-                                        self.interpreter.executeAction(val)
-                                        val = None  # make outer loop break out
-                                        break
-                                    elif isinstance(val, dict):
-                                        prefixTree = val
-                                        cmdString = cmdString[len(prefix):].strip()
-                                        break
-                            if val is None:
-                                break
+                        val = gs.traverseCmdMap()
+                        if isinstance(val, BodyNode):   # valid normal command
+                            # special logic for go to - change room ID TODO refactor
+                            if gs.cmdBuffer.strip('. ')[0:5] == 'go to':
+                                roomId = AssetLoader().reverseRoomLookup(gs.cmdBuffer.strip('. ')[5:].strip(), gs.areaId)
+                                gs.roomId = roomId or gs.roomId
+                            self.interpreter.executeAction(val)
+                        elif isinstance(val, str):      # valid metacommand
+                            if val == 'view inventory':
+                                pass
+                            elif val == 'view map':
+                                pass
+                            elif val == 'save game':
+                                pass
+                            elif val == 'exit game':
+                                pass
+                        else:   # tuple or None - invalid command
+                            pass
                     gs.clearCmdBuffer()
 
     def draw(self):

@@ -4,6 +4,7 @@ Definition of game state, which is the model in our MVC framework.
 
 from global_vars import Globals
 from event_hook import EventHook
+from lang_parser import BodyNode
 from enum import Enum
 import json
 import copy
@@ -91,6 +92,7 @@ class GameState:
             self.onEnterArea = EventHook() # called when enterArea is called
 
         def switchCharacter(self):
+            """ Switch the active protagonist after text finishes animation """
             def _doSwitch(*args, **kwargs):
                 old, new = args[0]
                 if old == GameMode.inAreaAnimating: # when done with text animation..
@@ -111,6 +113,42 @@ class GameState:
         def clearCmdBuffer(self):
             """ Reset command buffer (e.g. if pressed Return) """
             self.cmdBuffer = ""
+
+        def traverseCmdMap(self):
+            """
+            Travels the command tree cmdMap with cmdBuffer and returns what is at end of path
+            If return val is:
+             str -> valid metacommand, contains string from GameState.cmdListMetaCommands
+             BodyNode -> valid normal command, contains behavior to execute
+             (dict, str) tuple -> partial walk along tree, contains (level in tree, remaining cmdBuffer)
+             None -> extraneous command, bad characters after valid or between tree levels
+            """
+            cmdString = self.cmdBuffer.lstrip().rstrip('. ')
+            prefixTree = self.cmdMap
+            if cmdString in GameState.cmdListMetaCommands:
+                return cmdString    # complete metacommand
+            val = prefixTree
+            keepWalking = True
+            while len(cmdString) > 0 and keepWalking:
+                keepWalking = False
+                for prefix in prefixTree:
+                    if cmdString.startswith(prefix):
+                        val = prefixTree[prefix]
+                        if isinstance(val, BodyNode):
+                            if len(cmdString) > len(prefix):
+                                return None # too many chars at end
+                            return val  # correct command
+                        elif isinstance(val, dict):
+                            prefixTree = val
+                            cmdString = cmdString[len(prefix):]
+                            if len(cmdString) == 0 or cmdString[0] == ' ':
+                                cmdString = cmdString.lstrip()
+                                keepWalking = True
+                                break   # continue walking tree
+                            else:
+                                return None # invalid chars in between
+            # (dict of current layer in tree, string of cmd buffer remaining after walk)
+            return (val, cmdString)
 
         def touchVar(self, varname, inventoryFlag = False):
             """ Sets a variable or inventory item to 0 in mapping if it doesn't exist """
@@ -303,7 +341,17 @@ class GameState:
             with open(fpath, 'r') as f:
                 self.loads(f.read())
 
+    # singleton instance - created once per program run
     instance = None
+
+    # When GameMode is inAreaCommand, some generally available game commands
+    cmdListMetaCommands = (
+        'view inventory',
+        'view map',
+        'save game',
+        'exit game',
+    )
+
     def __new__(cls):
         if not GameState.instance:
             GameState.instance = GameState.__GameState()
