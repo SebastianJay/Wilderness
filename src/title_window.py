@@ -12,12 +12,14 @@ import sys
 class TitleWindow(Window):
     def __init__(self, width, height):
         super().__init__(width, height)
+
+    def reset(self):
         self.pointingTo = 0 # index of option player is looking at
         # options to be selected on screen
         self.options = ('New game', 'Load game', 'Options', 'Credits', 'Exit')
         self.art = None     # set in load()
-        self.startRow = 0   # reset in load()
-        self.startCol = 0   # reset in load()
+        self.startRow = 0   # set in load()
+        self.startCol = 0   # set in load()
         self.isPromptingName = False    # on new game, whether window is asking for player name
         self.nameBuffer = ''            # holds name that player is typing
 
@@ -71,6 +73,7 @@ class TitleWindow(Window):
                 elif key == "Return" and len(self.nameBuffer.strip()) > 0:
                     # set game startup info
                     gs = GameState()
+                    gs.init()   # clear out any old data
                     gs.name = self.nameBuffer.strip()
                     gs.gameMode = GameMode.inAreaCommand
                     gs.enterArea(gs.areaId, gs.roomId)  # send signal to run startup script

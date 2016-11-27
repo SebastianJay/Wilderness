@@ -14,10 +14,12 @@ class InputWindow(Window):
 
     def __init__(self, width, height):
         super().__init__(width, height)
-        self.interpreter = Interpreter()
-        self.choiceInd = 0
         GameState().onChoiceChange += self.choiceChangeHandler()
         GameState().onEnterArea += self.enterAreaHandler()
+
+    def reset(self):
+        self.interpreter = Interpreter()
+        self.choiceInd = 0
 
     def choiceChangeHandler(self):
         def _choiceChangeHandler(*args, **kwargs):
@@ -77,16 +79,14 @@ class InputWindow(Window):
                             elif val == 'save game':
                                 pass
                             elif val == 'exit game':
-                                pass
+                                gs.gameMode = GameMode.titleScreen
                         else:   # tuple or None - invalid command
                             pass
                     gs.clearCmdBuffer()
 
     def draw(self):
         # clean pixels from last frame
-        for i in range(self.height):
-            for j in range(self.width):
-                self.pixels[i][j] = ' '
+        self.clear()
 
         gs = GameState()
         if gs.gameMode == GameMode.inAreaChoice:

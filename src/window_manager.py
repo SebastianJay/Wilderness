@@ -20,9 +20,10 @@ class WindowManager(Window):
 
     def __init__(self):
         super().__init__(Globals.NumCols, Globals.NumRows)
-        #list of all the windows that the window manager is going to draw
+
+        # list of all the windows that the window manager is going to draw
         self.windowList = []
-        #list of locations (top-left coordinate) of corresponding windows in windowList
+        # list of locations (top-left coordinate) of corresponding windows in windowList
         self.windowPos = []
 
         # list of list of indices that represent the windows that are part of one possible screen
@@ -34,6 +35,7 @@ class WindowManager(Window):
         self.fullScreen = 0
         # create instances of all the Windows
         self.initWindows()
+
         # register a handler for changing the active window groups based on game mode
         GameState().onGameModeChange += self.gameModeChangeHandler()
 
@@ -46,13 +48,31 @@ class WindowManager(Window):
             elif old == GameMode.isLoading:
                 # pop the loading window off the screen
                 self.activeWindowGroups.pop()
-            else:
-                if old in [GameMode.titleScreen] \
-                    and new in [GameMode.inAreaCommand, GameMode.inAreaChoice,
-                    GameMode.inAreaInput, GameMode.inAreaAnimating]:
-                    # use the "main game" window group
-                    self.activeWindowGroups = [2]
+            elif old in [GameMode.titleScreen] \
+                and new in [GameMode.inAreaCommand, GameMode.inAreaChoice,
+                GameMode.inAreaInput, GameMode.inAreaAnimating]:
+                # use the "main game" window group
+                self.activeWindowGroups = [2]
+            elif new in [GameMode.titleScreen]:
+                # clear, reset, and reload all windows
+                self.clear()
+                self.reset()
+                self.load()
+                # use the "title" window group
+                self.activeWindowGroups = [1]
         return _gameModeChangeHandler
+
+    def clear(self):
+        super().clear()
+        # relay clear to all windows
+        for win in self.windowList:
+            win.clear()
+
+    def reset(self):
+        # relay reset to all windows
+        if hasattr(self, 'windowList'):
+            for win in self.windowList:
+                win.reset()
 
     def load(self):
         # now that AssetLoader is ready, do any other init

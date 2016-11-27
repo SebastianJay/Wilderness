@@ -57,10 +57,13 @@ class GameState:
                     setattr(self, key, dct[key])
 
         def __init__(self):
+            # event broadcasters - registered listeners persist after game reset
+            #  so they are initialized in __init__ rather than init
+            self.onChoiceChange = EventHook()   # called when choiceList changes
+            self.onGameModeChange = EventHook() # called when gameMode changes
+            self.onAddLangNode = EventHook()    # called when addLangNode is called
+            self.onEnterArea = EventHook() # called when enterArea is called
             self.init()
-
-        def __str__(self):
-            return self.dumps()
 
         def init(self):
             """ Wipes out the existing GameState (called on New Game) """
@@ -81,15 +84,8 @@ class GameState:
             self.cmdBuffer = ""         # command that player is currently typing
             self.cmdMap = {}            # "trie" of commands player can type
             self.choiceList = []        # list of strings of choices player can make
-            self.gameModeLocked = False # controllers can lock the state until they are ready to proceed
-            self.gameModeLockedRequests = []    # set requests are queued until game state is unlocked
+            self.gameModeLockedRequests = []    # set requests are queued if game state is locked
             self.gameModeActive = GameMode.titleScreen    # the "mode" of game player is in
-
-            # event broadcasters
-            self.onChoiceChange = EventHook()   # called when choiceList changes
-            self.onGameModeChange = EventHook() # called when gameMode changes
-            self.onAddLangNode = EventHook()    # called when addLangNode is called
-            self.onEnterArea = EventHook() # called when enterArea is called
 
         def switchCharacter(self):
             """ Switch the active protagonist after text finishes animation """
@@ -275,7 +271,7 @@ class GameState:
             return self.gameModeActive
         @gameMode.setter
         def gameMode(self, val):
-            if self.gameModeLocked:
+            if len(self.gameModeLockedRequests) > 0:
                 self.gameModeLockedRequests.append(val)
             else:
                 oldval = self.gameModeActive
@@ -283,16 +279,14 @@ class GameState:
                 if oldval != val:
                     self.onGameModeChange((oldval, val))
         def lockGameMode(self, val):
-            if self.gameModeLocked:
+            if len(self.gameModeLockedRequests) > 0:
                 return  # ignore if already locked
             oldMode = self.gameMode
             self.gameMode = val
-            self.gameModeLocked = True
-            self.gameModeLockedRequests.append(oldMode)
+            self.gameModeLockedRequests = [oldMode]
         def unlockGameMode(self):
-            if not self.gameModeLocked:
+            if len(self.gameModeLockedRequests) == 0:
                 return  # ignore if already unlocked
-            self.gameModeLocked = False
             newMode = self.gameModeLockedRequests.pop()
             self.gameModeLockedRequests = []
             self.gameMode = newMode
@@ -305,11 +299,14 @@ class GameState:
                 obj['subStates'][i] = obj['subStates'][i].__dict__
             # do not save non-persistent fields
             deleteFields = ['cmdMap', 'cmdBuffer', 'gameModeActive', 'choiceList',
-                'gameModeLocked', 'gameModeLockedRequests', 'onChoiceChange',
+                'gameModeLockedRequests', 'onChoiceChange',
                 'onGameModeChange', 'onAddLangNode', 'onEnterArea']
             for field in deleteFields:
                 del obj[field]
             return json.dumps(obj)
+
+        def __str__(self):
+            return self.dumps()
 
         def loads(self, jsonstr):
             """ Initialize the GameState from a Json string """

@@ -15,9 +15,7 @@ class PaletteWindow(Window):
 
     def draw(self):
         # clean pixels from last frame
-        for i in range(self.height):
-            for j in range(self.width):
-                self.pixels[i][j] = ' '
+        self.clear()
 
         # separate normal commands and metacommands
         normalDisplayList = []

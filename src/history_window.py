@@ -19,6 +19,10 @@ class HistoryWindow(Window):
 
     def __init__(self, width, height):
         super().__init__(width, height)
+        # register handler for additions to history buffer
+        GameState().onAddLangNode += self.langNodeAddedHandler()
+
+    def reset(self):
         self.threshold = 0.025  # Delay in seconds before each character appears on-screen
         self.speedButtonFactor = 5.0  # Speedup factor for the text animation when "speed" button pressed
         self.speedPeriodFactor = 0.15 # Factor for additional time special chars like period take
@@ -28,9 +32,6 @@ class HistoryWindow(Window):
             HistoryWindow.SubState(),
             HistoryWindow.SubState(),
         ]
-
-        # register handler for additions to history buffer
-        GameState().onAddLangNode += self.langNodeAddedHandler()
 
     def langNodeAddedHandler(self):
         def _langNodeAddedHandler(*args, **kwargs):
