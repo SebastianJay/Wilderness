@@ -9,14 +9,16 @@ import sys
 class SettingsWindow(Window):
     def __init__(self, width, height):
         super().__init__(width, height)
-        self.pointingTo = 0 # index of option player is looking at
-        self.options = {'Screen resolution': ('Small', 'Medium', 'Large'),
+        self.pointingTo = [0, 0] # index of option player is looking at
+        self.options = {'Font size': ('Small', 'Medium', 'Large'),
                         'Scroll speed': ('Slow', 'Normal', 'Fast'),
                         'Styled text': ('On', 'Off')}
+        self.numOptions = []
+        self.optionPositions = []
         row = 0
         for option in self.options:
-            col = 4 # Start at 4 so we can put an indicator of which option is currently active
-            # Draw the option names (eg Screen resolution)
+            col = 0
+            # Draw the option names (eg Font size)
             for char in option:
                 self.pixels[row][col] = char
                 col += 1
@@ -25,8 +27,13 @@ class SettingsWindow(Window):
             self.pixels[row][col] = ' '
             col += 1
 
+            self.numOptions.append(0)
+            self.optionPositions.append([])
+
             # Draw the individual option values
             for value in self.options[option]:
+                self.numOptions[row] += 1
+                self.optionPositions[row].append((col, col + len(value) - 1))
                 for char in list(value):
                     self.pixels[row][col] = char
                     col += 1
@@ -37,18 +44,24 @@ class SettingsWindow(Window):
     def update(self, timestep, keypresses):
         for key in keypresses:
             if key == "Up":
-                self.pointingTo = (self.pointingTo - 1) % len(self.options)
+                self.pointingTo[0] = (self.pointingTo[0] - 1) % len(self.options)
+                if self.numOptions[self.pointingTo[0]] <= self.pointingTo[1]:
+                    self.pointingTo[1] = self.numOptions[self.pointingTo[0]] - 1
             elif key == "Down":
-                self.pointingTo = (self.pointingTo + 1) % len(self.options)
+                self.pointingTo[0] = (self.pointingTo[0] + 1) % len(self.options)
+                if self.numOptions[self.pointingTo[0]] <= self.pointingTo[1]:
+                    self.pointingTo[1] = self.numOptions[self.pointingTo[0]] - 1
+            elif key == "Left":
+                self.pointingTo[1] = (self.pointingTo[1] - 1) % self.numOptions[self.pointingTo[0]]
+            elif key == "Right":
+                self.pointingTo[1] = (self.pointingTo[1] + 1) % self.numOptions[self.pointingTo[0]]
             elif key == "Return":
                 continue
 
     def draw(self):
-        # Clear previous cursor
-        for row, temp in enumerate(self.options):
-            self.pixels[row][0] = " "
-        # Draw current cursor
-        self.pixels[self.pointingTo][0] = ">"
+        self.formatting = [] # Clear any previous formatting
+        # Beautiful.
+        self.formatting.append(('underline', (self.pointingTo[0] * self.width + self.optionPositions[self.pointingTo[0]][self.pointingTo[1]][0], self.pointingTo[0] * self.width + self.optionPositions[self.pointingTo[0]][self.pointingTo[1]][1])))
         return self.pixels
 
 if __name__ == '__main__':
