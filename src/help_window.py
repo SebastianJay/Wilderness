@@ -34,26 +34,31 @@ class HelpWindow(Window):
 
     def update(self, timestep, keypresses):
         self.mode = GameState().gameMode.name
+        self.haveMessage = GameState().messageExists()
 
 
     def draw(self):
-        if self.mode is None:
+        if(self.haveMessage):
+            GameState().popMessage()
+            #display message for certain amount of time
+        else:
+            if self.mode is None:
+                return self.pixels
+            dictionaryList = self.config[self.mode]
+            i = 0
+            j = 0
+            for index, dictionary in enumerate(dictionaryList):
+                key, value = list(dictionary.items())[0]
+                for char in key:
+                    self.pixels[i][j] = char
+                    j += 1
+                self.pixels[i][j] = ':'
+                j += 1
+                self.pixels[i][j] = ' '
+                j += 1
+                for char in value:
+                    self.pixels[i][j] = char
+                    j += 1
+                j = self.width//4 + (index * self.width//4)
+                #self.width/4 in order to have 4 stationary columns
             return self.pixels
-        dictionaryList = self.config[self.mode]
-        i = 0
-        j = 0
-        for index, dictionary in enumerate(dictionaryList):
-            key, value = list(dictionary.items())[0]
-            for char in key:
-                self.pixels[i][j] = char
-                j += 1
-            self.pixels[i][j] = ':'
-            j += 1
-            self.pixels[i][j] = ' '
-            j += 1
-            for char in value:
-                self.pixels[i][j] = char
-                j += 1
-            j = self.width//4 + (index * self.width//4)
-            #self.width/4 in order to have 4 stationary columns
-        return self.pixels
