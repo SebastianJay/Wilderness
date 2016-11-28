@@ -63,6 +63,7 @@ class GameState:
             self.onGameModeChange = EventHook() # called when gameMode changes
             self.onAddLangNode = EventHook()    # called when addLangNode is called
             self.onEnterArea = EventHook() # called when enterArea is called
+            self.onSettingChange = EventHook()  # called when a setting changes
             self.init()
 
         def init(self):

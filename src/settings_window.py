@@ -9,14 +9,16 @@ import sys
 class SettingsWindow(Window):
     def __init__(self, width, height):
         super().__init__(width, height)
-        self.pointingTo = 0 # index of option player is looking at
-        self.options = {'Screen resolution': ('Small', 'Medium', 'Large'),
+        self.pointingTo = [0, 0] # index of option player is looking at
+        self.options = {'Font size': ('Small', 'Medium', 'Large'),
                         'Scroll speed': ('Slow', 'Normal', 'Fast'),
                         'Styled text': ('On', 'Off')}
+        self.numOptions = []
+        self.optionPositions = []
         row = 0
         for option in self.options:
-            col = 4 # Start at 4 so we can put an indicator of which option is currently active
-            # Draw the option names (eg Screen resolution)
+            col = 0
+            # Draw the option names (eg Font size)
             for char in option:
                 self.pixels[row][col] = char
                 col += 1
