@@ -13,7 +13,7 @@ talk to{
 		$if_frmLetterToThomas_eq_0{
 			Gritt: I heard you're taking on the "demon". How can I help you, kid?
 			Kipp: I'll need some moonshine, it's the "demon's" weakness.
-			Gritt: Hmm. I have only a bucket of moonshine left, but that's reserved for @green{Thomas} the train captain. Tell you what, I'll give the bucket to you. But you'll have to deliver a letter to @green{Thomas} telling him that he's not getting his moonshine today. I'll give you the moonshine after that.
+			Gritt: Hmm. I have only a bucket of moonshine left, but that's reserved for @green{Thomas} the train captain. Tell you what, I'll give the bucket to you, but you'll have to deliver a letter to @green{Thomas} telling him that he's not getting his moonshine today. I'll give you the moonshine after that.
 			Kipp: Consider it done.
 			$set_inventory_letterToThomas_1
 			$set_frmLetterToThomas_2
@@ -24,9 +24,9 @@ talk to{
 			$set_inventory_bucketOfMoonshine_1
 			Kipp took the bucket of moonshine, put on his Dragonskin boots and set forth to the mines. As he approached the mine entrance, Kipp could hear faint creakings emanating from the depth of the mines. It must be the "demon". Kipp shuddered at the thought of it. Kipp gathered himself together and ventured into the darkness. He followed the creaking noise. The creaking became louder and louder as Kipp got closer to the "demon". 
 			
-			Suddenly, as shiny creature crept up from Kipp's left, its blades slashing into Kipp's left ankle. Fortunately, the Dragonskin Boots proved too much for the "demon", as its blades was stuck in it. Kipp did not let the oportunity go to waste. While the "demon" was trying to remove its blade from his boots, Kipp poured the entire bucket of moonshine onto it. The "demon" was immobilized immediately. It started shaking violently as if struck by lightning. Kipp could smell the odor of burnt metal as the "demon" sizzled. Soon, the creature lay dead on the ground. 
+			Suddenly, a shiny creature crept up from Kipp's left, its blades slashing into Kipp's left ankle. Fortunately, the Dragonskin Boots proved too much for the "demon", as its blades stuck in the boots. Kipp did not let the oportunity go to waste. While the "demon" was trying to remove its blades from his boots, Kipp poured the entire bucket of moonshine onto it. The "demon" was immobilized immediately. It started shaking violently as if struck by lightning. Kipp could smell the odor of burnt metal as the "demon" sizzled. Soon, the creature lay dead on the ground. 
 			
-			Kipp checked one last time to see if it is really dead before going closer to examine it. It looked just like a metal box with some blades. A metal box with a soul. Kipp dragged the "demon's" remains out of the mines and gave it to Sheriff @greem{Marshall}. The town elders were intrigued and scared by the body of the "demon". They discussed for days but could not determine what it was. One thing they did agree on, however, was that it was definitely not from this world.
+			Kipp checked one last time to see if it was really dead before going closer to examine it. It looked just like a metal box with some blades. A metal box with a soul. Kipp dragged the "demon's" remains out of the mines and gave it to Sheriff @greem{Marshall}. The town elders were intrigued and scared by the body of the "demon". They discussed for days but could not determine what it was. One thing they did agree on, however, was that it was definitely not from this world.
 
 			Meanwhile, Conney's evil plan to cover-up the incident was revealed to all as the existence of the "demon" is proved. Kipp decided to leave the town as soon as possible, before Conney's men could take revenge on him.
 
