@@ -37,17 +37,23 @@ class HelpWindow(Window):
 
 
     def draw(self):
-        dictionaryList = self.config[gameMode]
+        if self.mode is None:
+            return self.pixels
+        dictionaryList = self.config[self.mode]
         i = 0
         j = 0
         for index, dictionary in enumerate(dictionaryList):
-            key, val = list(dictionary.items())[0]
+            key, value = list(dictionary.items())[0]
             for char in key:
                 self.pixels[i][j] = char
                 j += 1
+            self.pixels[i][j] = ':'
+            j += 1
             self.pixels[i][j] = ' '
+            j += 1
             for char in value:
                 self.pixels[i][j] = char
                 j += 1
-            j = self.width/4 + (index * self.width/4)
+            j = self.width//4 + (index * self.width//4)
             #self.width/4 in order to have 4 stationary columns
+        return self.pixels

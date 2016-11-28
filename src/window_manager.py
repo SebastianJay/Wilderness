@@ -112,6 +112,7 @@ class WindowManager(Window):
         # add inventory window
         self.addWindow(SettingsWindow, 0, 0, Globals.NumRows, Globals.NumCols)
         self.addWindow(InventoryWindow, 0, 0, Globals.NumRows, Globals.NumCols)
+        self.addWindow(HelpWindow, Globals.NumRows - 3, 0, 3, Globals.NumCols)
         #self.addWindow(InventoryWindow, Globals.NumRows//4, Globals.NumCols//4, Globals.NumRows//2, Globals.NumCols//2)
         # self.addWindow(SaveWindow, 0, 0, 35, 120)
 
@@ -120,7 +121,7 @@ class WindowManager(Window):
         self.windowGroups = [
             (0,),       # loading window
             (1,),       # title window
-            (3, 2, 4),  # Input, History, and Palette windows
+            (3, 2, 4, 8),  # Input, History, and Palette windows
                         #NOTE the ordering here is specific as Input gets updated before History
             (5,),
             (6,),
