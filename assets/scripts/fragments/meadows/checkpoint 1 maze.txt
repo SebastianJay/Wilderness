@@ -1,0 +1,71 @@
+What path do you take? # INTERSECTION 1
+# The player needs to take the North path
+$choice{
+NORTH|
+  Kipp and [companionName] take a few steps into the light. They walk out to find themselves at another intersection.
+
+  Kipp: ...
+  [companionName]: Well, we're still in the maze. I count that as a plus.
+  Kipp: So now what?
+
+  A flash of light shines in all four directions.
+
+  Kipp: I think the maze is telling us something.
+  [companionName]: Or trying to blind us for good.
+  Kipp: Doesn't matter, where do you want to head next?
+
+|EAST|
+  $fragment_medCheck1Fail
+|SOUTH|
+  $fragment_medCheck1Fail
+|WEST|
+  $fragment_medCheck1Fail
+}
+
+What path do you take? # INTERSECTION 2
+# The player needs to take the East path
+$choice{
+NORTH|
+  $fragment_medCheck1Fail
+|EAST|
+  Kipp and [companionName] take a few steps into the light. They walk out to find themselves at another intersection.
+
+  Kipp: ...
+  [companionName]: Hey, two for two.
+  Kipp: One more time?
+  [companionName]: These things are normally built in threes, unless the level designer decided to screw us over.
+
+  A flash of light shines in all four directions.
+
+  Kipp: Note to self, never build a maze that comes with a seizure warning.
+|SOUTH|
+  $fragment_medCheck1Fail
+|WEST|
+  $fragment_medCheck1Fail
+}
+
+What path do you take? # INTERSECTION 3
+# The player needs to take the West path
+$choice{
+NORTH|
+  $fragment_medCheck1Fail
+|EAST|
+  $fragment_medCheck1Fail
+|SOUTH|
+  $fragment_medCheck1Fail
+|WEST|
+  Kipp and [companionName] take a few steps into the light. They walk out to find themselves at a dead end.
+
+  Kipp: Wait what does a room with no exits mean?
+  [companionName]: That we're going to die in here.
+  Kipp: Well, theres a silver plaque on the wall.
+
+  The plaque on the wall read, "Congratulations! You have made it through the first checkpoint. Please proceed to @blue{Checkpoint 2}"
+
+  Kipp: @red{go to} there I guess?
+  [companionName] shrugs.
+
+  A portion of the wall opens up for Kipp and [companionName] to walk through.
+
+  $set_medHedgeCheck_2
+}

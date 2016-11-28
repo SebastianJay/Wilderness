@@ -1,0 +1,11 @@
+Kipp and [companionName] take a few steps into the light. They walk out to find themselves back at the @blue{Hedge Maze Entrance}.
+
+Kipp: Hold on...
+[companionName]: Yup, we just went in a dimensional circle.
+Kipp: So now what?
+[companionName]: We walk back in. A better option is give up and just go back to the @blue{Shepherd} 's @blue{House} and tell Sam we didn't sign up for this, take a nap, do something more interesting.
+Kipp: Or...we can try that walk back in idea and try again, (@red{go to } @blue{Checkpoint 1}).
+[companionName]: Not my decision...
+
+$goto_hedgeMazeEntrance
+$exit

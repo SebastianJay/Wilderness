@@ -18,11 +18,12 @@ from global_vars import Globals
 
 class WindowManager(Window):
 
-    def __init__(self, width, height):
-        super().__init__(width, height)
-        #list of all the windows that the window manager is going to draw
+    def __init__(self):
+        super().__init__(Globals.NumCols, Globals.NumRows)
+
+        # list of all the windows that the window manager is going to draw
         self.windowList = []
-        #list of locations (top-left coordinate) of corresponding windows in windowList
+        # list of locations (top-left coordinate) of corresponding windows in windowList
         self.windowPos = []
 
         # list of list of indices that represent the windows that are part of one possible screen
@@ -30,10 +31,48 @@ class WindowManager(Window):
         # stack of indices into windowGroups representing the active groups (what is on screen now)
         self.activeWindowGroups = []
 
-        # polls GameState repeatedly to determine when window changes need to be made
-        self.activeGameMode = GameMode.titleScreen
+        # whether the screen should be in fullscreen mode
+        self.fullScreen = 0
         # create instances of all the Windows
-        self.initWindows(self.height, self.width)
+        self.initWindows()
+
+        # register a handler for changing the active window groups based on game mode
+        GameState().onGameModeChange += self.gameModeChangeHandler()
+
+    def gameModeChangeHandler(self):
+        def _gameModeChangeHandler(*args, **kwargs):
+            old, new = args[0]  # first arg is (old state, new state)
+            if new == GameMode.isLoading:
+                # push the loading window onto the screen
+                self.activeWindowGroups.append(0)
+            elif old == GameMode.isLoading:
+                # pop the loading window off the screen
+                self.activeWindowGroups.pop()
+            elif old in [GameMode.titleScreen] \
+                and new in [GameMode.inAreaCommand, GameMode.inAreaChoice,
+                GameMode.inAreaInput, GameMode.inAreaAnimating]:
+                # use the "main game" window group
+                self.activeWindowGroups = [2]
+            elif new in [GameMode.titleScreen]:
+                # clear, reset, and reload all windows
+                self.clear()
+                self.reset()
+                self.load()
+                # use the "title" window group
+                self.activeWindowGroups = [1]
+        return _gameModeChangeHandler
+
+    def clear(self):
+        super().clear()
+        # relay clear to all windows
+        for win in self.windowList:
+            win.clear()
+
+    def reset(self):
+        # relay reset to all windows
+        if hasattr(self, 'windowList'):
+            for win in self.windowList:
+                win.reset()
 
     def load(self):
         # now that AssetLoader is ready, do any other init
@@ -46,7 +85,7 @@ class WindowManager(Window):
         self.windowList.append(windowcls(numcols - 2, numrows - 2))
         self.windowPos.append((startr + 1, startc + 1))
 
-    def initWindows(self, screenrows, screencols):
+    def initWindows(self):
         """ Instantiates all Windows needed in game at the start """
         # clear out window list data
         self.windowList = []
@@ -73,6 +112,7 @@ class WindowManager(Window):
         # add inventory window
         self.addWindow(SettingsWindow, 0, 0, Globals.NumRows, Globals.NumCols)
         self.addWindow(InventoryWindow, 0, 0, Globals.NumRows, Globals.NumCols)
+        #self.addWindow(InventoryWindow, Globals.NumRows//4, Globals.NumCols//4, Globals.NumRows//2, Globals.NumCols//2)
         # self.addWindow(SaveWindow, 0, 0, 35, 120)
 
         # NOTE to debug, add a tuple with the index (in self.windowList) of your window to self.windowGroups
@@ -93,16 +133,17 @@ class WindowManager(Window):
         """ stitches together multiple Windows from active group into the screen """
         formatting = []
         for groupind in self.activeWindowGroups:
+            group_formatting = []
             for winind in self.windowGroups[groupind]:
                 pixels = self.windowList[winind].draw()
                 startr, startc = self.windowPos[winind]
                 height = len(pixels)
                 width = len(pixels[0])
-                # fill in content
+                # fill in pixel content
                 for r in range(height):
                     for c in range(width):
                         self.pixels[startr + r][startc + c] = pixels[r][c]
-                # add border
+                # add border around window
                 for r in range(height):
                     self.pixels[startr + r][startc-1] = '|'
                     self.pixels[startr + r][startc + width] = '|'
@@ -113,7 +154,33 @@ class WindowManager(Window):
                 self.pixels[startr + height][startc-1] = 'o'
                 self.pixels[startr + height][startc + width] = 'o'
                 self.pixels[startr-1][startc + width] = 'o'
-                # add to formatting
+
+                # go through previous formatters (those of background windows) and clip their indices
+                #  if the current window groups cover them
+                # TODO refactor for efficiency
+                filtered_formatting = []
+                for i, winformat in enumerate(formatting):
+                    filtered_winformat = []
+                    for formatter in winformat:
+                        style, (start_index, end_index) = formatter
+                        r = start_index // self.width    # start and end row should be same
+                        c1 = start_index % self.width
+                        c2 = end_index % self.width
+                        if r >= startr-1 and r <= startr + height:
+                            if c1 >= startc-1 and c1 <= startc + width:
+                                c1 = startc + width + 1 # push start col to right edge
+                            if c2 >= startc-1 and c2 <= startc + width:
+                                c2 = startc - 2 # push end col to left edge
+                        f1 = r * self.width + c1
+                        f2 = r * self.width + c2
+                        # if bg indices not contained entirely within foreground window
+                        if f1 <= f2:
+                            filtered_winformat.append((style, (f1, f2)))
+                    filtered_formatting.append(filtered_winformat)
+                formatting = filtered_formatting
+
+                # add new elements to formatting
+                winformat = []
                 for formatter in self.windowList[winind].formatting:
                     style, (start_index, end_index) = formatter
                     r1 = start_index // width
@@ -126,30 +193,27 @@ class WindowManager(Window):
                     for r in range(r1, r2):
                         f1 = (r + startr) * self.width + (c + startc)
                         f2 = (r + startr) * self.width + (width - 1 + startc)
-                        formatting.append((style, (f1, f2)))
+                        winformat.append((style, (f1, f2)))
                         c = 0
                     f1 = (r2 + startr) * self.width + (c + startc)
                     f2 = (r2 + startr) * self.width + (c2 + startc)
-                    formatting.append((style, (f1, f2)))
-        self.formatting = sorted(formatting, key=lambda tup: tup[1][0])
+                    winformat.append((style, (f1, f2)))
+                group_formatting.append(winformat)
+            formatting.extend(group_formatting)
+
+        flattened_formatting = []
+        for winformat in formatting:
+            flattened_formatting.extend(winformat)
+        self.formatting = sorted(flattened_formatting, key=lambda tup: tup[1][0])
         return self.pixels
 
     def update(self, timestep, keypresses):
         """ sends update signal to Windows in the active group """
-        # update the activeWindowGroups based on changes in the game mode
-        nextMode = GameState().gameMode
-        if self.activeGameMode != GameMode.isLoading and nextMode == GameMode.isLoading:
-            # push the loading window onto the screen
-            self.activeWindowGroups.append(0)
-        elif self.activeGameMode == GameMode.isLoading and nextMode != GameMode.isLoading:
-            # pop the loading window off the screen
-            self.activeWindowGroups.pop()
-        elif self.activeGameMode != nextMode:
-            if self.activeGameMode in [GameMode.titleScreen] and nextMode == GameMode.inAreaCommand:
-                # use the "main game" window group
-                self.activeWindowGroups = [2]
-        self.activeGameMode = nextMode
+        # scan for the fullscreen key to change the mode
+        for key in keypresses:
+            if key == 'F11':
+                self.fullScreen = 1 - self.fullScreen
 
-        # update is only send to activeWindowGroups[-1], so the foreground windows
+        # update is only sent to activeWindowGroups[-1], so the foreground windows
         for winind in self.windowGroups[self.activeWindowGroups[-1]]:
             self.windowList[winind].update(timestep, keypresses)

@@ -4,7 +4,6 @@ from global_vars import Globals
 
 class InventoryWindow(Window):
     def __init__(self, w, h):
-        print("INIT Executing")
         super().__init__(w, h)
         self.leftSection = (0, int(w / 3))
         self.rightSection = (int(w / 3), w-1)
@@ -13,13 +12,18 @@ class InventoryWindow(Window):
         self.selectedItemPos = 3
         self.selectedItem = None
         self.itemsdata = None
-        self.coordsToFormat = []
+        self.listToDraw = None
+        self.formatting.append(("bold_yellow", ((self.selectedItemPos*2+2)*self.width+1, (self.selectedItemPos*2+2)*self.width+int(self.width/3)-1)))
+        self.startIndex = 0
+        self.index = lambda x: (x + self.startIndex) % len(self.inventoryList)
 
     def load(self):
         self.itemsdata = AssetLoader().getConfig(Globals.ItemsConfigPath)
         for el in self.itemsdata.keys():
             self.inventoryList.append([el, self.itemsdata[el]["name"], self.itemsdata[el]["description"]])
         self.inventoryList.sort(key=lambda row: row[1].lower())
+        print(self.inventoryList)
+        self.listToDraw = self.inventoryList
         self.selectedItem = self.inventoryList[self.selectedItemPos]
 
     def clear(self):
@@ -43,33 +47,39 @@ class InventoryWindow(Window):
     def update(self, timestep, keypress):
         if self.selectedItem is None:
             return
-        if "Up" in keypress and self.selectedItem != self.inventoryList[0]:
-            self.inventoryList = self.inventoryList[-1:] + self.inventoryList[:-1]
-        if "Down" in keypress and self.selectedItem != self.inventoryList[len(self.inventoryList)-1]:
-            self.inventoryList = self.inventoryList[1:] + self.inventoryList[0]
+        if "Up" in keypress:
+            self.startIndex -= 1
+            if self.startIndex == -1:
+                self.startIndex = len(self.inventoryList) - 1
+            self.selectedItem = self.inventoryList[self.index(self.selectedItemPos)]
+        if "Down" in keypress:
+            self.startIndex += 1
+            if self.startIndex == len(self.inventoryList):
+                self.startIndex = 0
+            self.selectedItem = self.inventoryList[self.index(self.selectedItemPos)]
 
     def draw(self):
         if self.selectedItem is None:
             return self.pixels
         self.clear()
         self.border()
+
         for i in range(0, self.numberOfLines):
             try:
                 if not i == self.selectedItemPos:
-                    for j in range(len(self.inventoryList[i][1])):
-                        self.pixels[i*2+2][6+j] = self.inventoryList[i][1][j]
+                    for j in range(len(self.inventoryList[self.index(i)][1])):
+                        self.pixels[i * 2 + 2][6 + j] = self.inventoryList[self.index(i)][1][j]
                 else:
-                    for j in range(len(self.inventoryList[i][1]) + 4):
-                        #self.formatting.append(("bold", (i * 2 + 2, 2 + j)))
-                        #self.formatting.append(("yellow", (i * 2 + 2, 2 + j)))
-                        if j < 3:
+                    for j in range(len(self.inventoryList[self.index(i)][1]) + 4):
+                        if j == 0:
                             self.pixels[i * 2 + 2][2 + j] = ">"
-                        elif j == 3:
+                        elif j < 4:
                             self.pixels[i * 2 + 2][2 + j] = " "
                         else:
-                            self.pixels[i*2+2][2 + j] = self.inventoryList[i][1][j-4]
+                            self.pixels[i * 2 + 2][2 + j] = self.inventoryList[self.index(i)][1][j-4]
             except IndexError:
                 continue
+
         counter = 0
         descriptionHeight = 2
         description = self.selectedItem[2]

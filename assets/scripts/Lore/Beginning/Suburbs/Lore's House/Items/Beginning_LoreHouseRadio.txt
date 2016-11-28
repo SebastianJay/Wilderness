@@ -1,0 +1,8 @@
+listen to{
+	$if_subListen_eq_0{
+		Voice: Officer Ellion would like to remind everyone that the government has plans in place in case of emergency. The government always puts the safety and best interest of the people first. He asks citizens to avoid panic and protest, and reminds them that all citizens can do their part by reporting those they witness or suspect of conspiracy... @italic{(fades to static)}
+		$set_subListen_1
+	} $else {
+		Nothing but static.
+	}
+}

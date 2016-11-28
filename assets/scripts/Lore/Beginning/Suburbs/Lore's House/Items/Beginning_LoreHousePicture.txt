@@ -1,5 +1,5 @@
 #Beginning_LoreHousePicture
 
 inspect{
-	Lore looked at the picture on the wall. It had been from her move-in day to university. Her mother's face was glowing with pride and excitement, her arm draped around Lore's shoulder. Even though it had been a year since her mother died, looking at her mother still caused her heart to drop like an egg cracking as it hit the ground. 
+	Lore looked at the picture on the wall. It had been from her move-in day to university. Her mother's face was glowing with pride and excitement, her arm draped around Lore's shoulder. Even though it had been a year since she died, looking at her mother still caused her heart to drop like an egg cracking as it hit the ground. 
 }

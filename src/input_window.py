@@ -14,24 +14,42 @@ class InputWindow(Window):
 
     def __init__(self, width, height):
         super().__init__(width, height)
+        GameState().onChoiceChange += self.choiceChangeHandler()
+        GameState().onEnterArea += self.enterAreaHandler()
+
+    def reset(self):
         self.interpreter = Interpreter()
         self.choiceInd = 0
 
+    def choiceChangeHandler(self):
+        def _choiceChangeHandler(*args, **kwargs):
+            self.choiceInd = 0
+        return _choiceChangeHandler
+
+    def enterAreaHandler(self):
+        def _enterAreaHandler(*args, **kwargs):
+            # run the startup script for an area
+            (_, areaId), (_, roomId) = args[0], args[1] # extract new room and area
+            areasConfig = AssetLoader().getConfig(Globals.AreasConfigPath)
+            roomsConfig = AssetLoader().getConfig(areasConfig[areaId]['roomsConfig'])
+            roomScript = AssetLoader().getScript(roomsConfig[roomId]['script'])
+            for verb, action, _ in roomScript:
+                if verb == 'go to': # TODO make special non-visible verb
+                    self.interpreter.executeAction(action)
+                    break
+        return _enterAreaHandler
+
     def update(self, timestep, keypresses):
         gs = GameState()
-
         if gs.gameMode == GameMode.inAreaChoice:
             for key in keypresses:
                 if key == 'Up':
-                    self.choiceInd = (self.choiceInd - 1) % len(gs.choiceList)
+                    self.choiceInd = (self.choiceInd - 1) % len(gs.choices)
                 elif key == 'Down':
-                    self.choiceInd = (self.choiceInd + 1) % len(gs.choiceList)
+                    self.choiceInd = (self.choiceInd + 1) % len(gs.choices)
                 elif key == 'Return':
                     self.interpreter.resume(self.choiceInd)
-        else:
-            self.choiceInd = 0  # resets index so future choices start hovering over first option
-
-        if gs.gameMode == GameMode.inAreaCommand or gs.gameMode == GameMode.inAreaInput:
+        elif gs.gameMode == GameMode.inAreaCommand or gs.gameMode == GameMode.inAreaInput:
             for key in keypresses:
                 # key is printable -> add it to buffer
                 if len(key) == 1:
@@ -46,43 +64,38 @@ class InputWindow(Window):
                     if gs.gameMode == GameMode.inAreaInput:
                         self.interpreter.resume(gs.cmdBuffer.strip())
                     else:   # GameMode.inAreaCommand
-                        cmdString = gs.cmdBuffer.strip()
-                        prefixTree = gs.cmdMap
-                        while cmdString:
-                            val = None
-                            for prefix in prefixTree:
-                                if cmdString[:len(prefix)] == prefix:
-                                    val = prefixTree[prefix]
-                                    if isinstance(val, BodyNode):
-                                        # special logic for go to - change room ID
-                                        if gs.cmdBuffer.strip()[0:5] == 'go to':
-                                            roomId = AssetLoader().reverseRoomLookup(gs.cmdBuffer.strip()[5:].strip(), gs.areaId)
-                                            gs.roomId = roomId or gs.roomId
-                                        self.interpreter.executeAction(val)
-                                        val = None  # make outer loop break out
-                                        break
-                                    elif isinstance(val, dict):
-                                        prefixTree = val
-                                        cmdString = cmdString[len(prefix):].strip()
-                                        break
-                            if val is None:
-                                break
+                        val = gs.traverseCmdMap()
+                        if isinstance(val, BodyNode):   # valid normal command
+                            # special logic for go to - change room ID TODO refactor
+                            if gs.cmdBuffer.strip('. ')[0:5] == 'go to':
+                                roomId = AssetLoader().reverseRoomLookup(gs.cmdBuffer.strip('. ')[5:].strip(), gs.areaId)
+                                gs.roomId = roomId or gs.roomId
+                            self.interpreter.executeAction(val)
+                        elif isinstance(val, str):      # valid metacommand
+                            if val == 'view inventory':
+                                pass
+                            elif val == 'view map':
+                                pass
+                            elif val == 'save game':
+                                pass
+                            elif val == 'exit game':
+                                gs.gameMode = GameMode.titleScreen
+                        else:   # tuple or None - invalid command
+                            pass
                     gs.clearCmdBuffer()
 
     def draw(self):
         # clean pixels from last frame
-        for i in range(self.height):
-            for j in range(self.width):
-                self.pixels[i][j] = ' '
+        self.clear()
 
         gs = GameState()
         if gs.gameMode == GameMode.inAreaChoice:
             # display choices
-            rStart = 0
+            rStart = (self.height // 2) - (len(gs.choices) // 2)
             cStart = 3
             cursorOffset = 3
             r = 0
-            for choice in gs.choiceList:
+            for choice in gs.choices:
                 for i, c in enumerate(choice):
                     self.pixels[rStart + r][cStart + cursorOffset + i] = c
                 r += 1

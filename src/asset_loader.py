@@ -6,6 +6,7 @@ from lang_parser import Parser
 from global_vars import Globals
 import os.path
 import yaml
+import traceback
 
 class AssetLoader:
     # Python singleton implementation adapted from
@@ -14,6 +15,8 @@ class AssetLoader:
         def __init__(self):
             # maps path to asset
             self.assets = {}
+            # string containing root of assets folder
+            self.root_path = ''
             # maps readable item name to item ID
             self.reverseItem = {}
             # maps readable room name to room ID
@@ -26,40 +29,58 @@ class AssetLoader:
             if self.isLoaded:
                 return
 
+            # set root to assets for later reference
+            self.root_path = path_to_folder
+
             # This dictionary will hold the contents of asset files in the format:
             #   key = the files path, e.g. "assets/readme.txt"
             #   value = the conents of the file
             assets = {}
+
+            # Returns whether all files can read and parse successfully
+            success_flag = True
 
             # recognized filename extensions
             whitelist_ext = ['.txt', '.wtxt', '.yml']
             # Go through each file in the specified dir and add contents to the dictionary
             for root, subdirs, files in os.walk(path_to_folder):
                 for file_name in files:
-                    file_path = os.path.join(root,file_name)
-                    # Normalize the given path
-                    norm_path = os.path.normcase(os.path.normpath(file_path))
-                    # Check that filename ends with recognized extension
-                    ext_not_valid = True
-                    for ext in whitelist_ext:
-                        if len(norm_path) >= len(ext) and norm_path[-len(ext):] == ext:
-                            ext_not_valid = False
-                            break
-                    if ext_not_valid:
-                        continue
-                    # Store file text into dictionary
-                    with open(norm_path) as f:
-                        assets[norm_path] = f.read()
+                    try:
+                        # Normalize the given path
+                        norm_path = self.joinAndNorm(root, file_name)
+                        # Check that filename ends with recognized extension
+                        ext_not_valid = True
+                        for ext in whitelist_ext:
+                            if len(norm_path) >= len(ext) and norm_path[-len(ext):] == ext:
+                                ext_not_valid = False
+                                break
+                        if ext_not_valid:
+                            continue
+                        # Store file text into dictionary
+                        with open(norm_path) as f:
+                            assets[norm_path] = f.read()
+                    except:
+                        success_flag = False
 
             # Do parsing of any custom scripts and yaml
             parser = Parser()  # instantiate parser on the fly
             for path in assets:
-                if os.path.normcase(os.path.normpath('assets/scripts')) in path:
-                    # replace string with parsed (string, BodyNode)[]
-                    assets[path] = parser.parseScript(assets[path])
-                elif os.path.normcase(os.path.normpath('assets/config')) in path:
-                    # replace string with parsed Python dict
-                    assets[path] = yaml.load(assets[path])
+                try:
+                    if self.joinAndNorm(self.root_path, 'scripts') in path:
+                        if 'fragments' in path:
+                            # replace string with parsed BodyNode
+                            assets[path] = parser.parseScriptFragment(assets[path])
+                        else:
+                            # replace string with parsed (string, BodyNode)[]
+                            assets[path] = parser.parseScript(assets[path])
+                    elif self.joinAndNorm(self.root_path, 'config') in path:
+                        # replace string with parsed Python dict
+                        assets[path] = yaml.load(assets[path])
+                except:
+                    success_flag = False
+                    if Globals.IsDev:
+                        print(path)
+                        traceback.print_exc()
 
             self.assets = assets
 
@@ -77,23 +98,25 @@ class AssetLoader:
                     self.reverseRoom[area][roomsConfig[room]['name']] = room
 
             self.isLoaded = True
-
-        def getAsset(self, dirname, name):
-            norm_name = os.path.normcase(os.path.normpath(name))
-            norm_dir = os.path.normcase(os.path.normpath(dirname))
-            return self.assets[os.path.join(norm_dir, norm_name)]
+            return success_flag
 
         def getMap(self, name):
-            return self.getAsset('assets/maps', name)
+            return self.assets[self.joinAndNorm(self.root_path, 'maps', name)]
 
         def getArt(self, name):
-            return self.getAsset('assets/art', name)
+            return self.assets[self.joinAndNorm(self.root_path, 'art', name)]
 
         def getScript(self, name):
-            return self.getAsset('assets/scripts', name)
+            return self.assets[self.joinAndNorm(self.root_path, 'scripts', name)]
+
+        def getScriptFragment(self, name):
+            return self.assets[self.joinAndNorm(self.root_path, 'scripts', 'fragments', name)]
 
         def getConfig(self, name):
-            return self.getAsset('assets/config', name)
+            return self.assets[self.joinAndNorm(self.root_path, 'config', name)]
+
+        def joinAndNorm(self, *args):
+            return os.path.normcase(os.path.normpath(os.path.join(*args)))
 
         def reverseItemLookup(self, name):
             if name in self.reverseItem:

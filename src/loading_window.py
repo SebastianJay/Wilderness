@@ -4,6 +4,8 @@ class LoadingWindow(Window):
 
 	def __init__(self, w, h):
 		super().__init__(w, h)
+
+	def reset(self):
 		self.animIndex = 0
 		self.animTimer = 0.0
 		self.animReset = 0.25

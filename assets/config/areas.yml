@@ -2,6 +2,13 @@
 ## rooms, which in turn has multiple objects. The rooms and objects are
 ## associated through the roomsConfig and objectsConfig fields
 
+suburbs:
+    name: Residential District
+    roomsConfig: rooms/suburbs.yml
+    objectsConfig: objects/suburbs.yml
+    mapId: 0
+    entrances: {}
+
 aspire:
     name: Aspire
     roomsConfig: rooms/aspire.yml
@@ -39,3 +46,18 @@ blackHills:
             r: 30
             c: 97
     #showIf: didFarm
+
+meadows:
+    name: Uncanny Prairie
+    roomsConfig: rooms/meadows.yml
+    objectsConfig: objects/meadows.yml
+    mapId: 1
+    entrances:
+        -
+            roomId: shepherdHouse
+            r: 0
+            c: 0
+        -
+            roomId: cliffside
+            r: 0
+            c: 1

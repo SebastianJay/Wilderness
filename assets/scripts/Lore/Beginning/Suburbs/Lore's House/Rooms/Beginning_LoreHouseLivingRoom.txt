@@ -1,12 +1,13 @@
 #Beginning_LoreHouseLivingRoom
 
 go to{
-	Lore headed over to the living room. 
+	Lore headed over to the living room.
 }
 
-inspect{
-	The space consisted of a single armchair and table resting on top of an ancient rug she had 
-	picked up from a thrift shop. On the table sat a lamp and her @yellow{wallet}. In between the
-	living room and the @blue{kitchen} was the sturdy @blue{door}. It was made of a heavy wood
-	and bolted with several locks.
+look around{
+	$if_inventory_loreWallet_eq_0{
+		The space consisted of a single armchair and table resting on top of an ancient rug she had picked up from a thrift shop. On the table sat a lamp and her @yellow{wallet}. On one side of the room was the @blue{kitchen}; on the other was the sturdy front @yellow{door}. It was made of a heavy wood and bolted with several locks.
+	}$else{
+		The space consisted of a single armchair and table resting on top of an ancient rug she had picked up from a thrift shop. On the table sat a solitary lamp. On one side of the room was the @blue{kitchen}; on the other was the sturdy front @yellow{door}. It was made of a heavy wood and bolted with several locks.
+	}
 }

@@ -4,6 +4,7 @@ results to screen. The view in our MVC framework.
 """
 
 import tkinter as tk
+import os
 from global_vars import Globals
 
 class Display:
@@ -13,13 +14,29 @@ class Display:
         self.numRows = Globals.NumRows
         self.root = root
 
-        self.text = tk.Text(self.root, width=Globals.NumCols, height=Globals.NumRows, background='black',
+        # set title
+        self.root.wm_title('Wilderness')
+        # prevent resizing
+        self.root.resizable(width=False, height=False)
+        # set window icon
+        if 'nt' in os.name:
+            self.root.iconbitmap(Globals.IconFilePathWin)
+        else:
+            self.root.iconbitmap(Globals.IconFilePathUnix)
+        # set window attributes
+        self.root.configure(background='black', cursor='none')
+        # create Text widget
+        self.text = tk.Text(self.root, width=self.numCols, height=self.numRows, background='black',
             foreground='white', state=tk.DISABLED, font=(Globals.FontName, Globals.FontSize),
-            padx=0, pady=0, borderwidth=0, selectbackground='black')
-        self.text.pack()
-
+            padx=0, pady=0, borderwidth=0, selectbackground='black', cursor='none')
+        self.text.pack(expand=True)
 
     def draw(self):
+        # check for fullscreen change
+        if self.windowManager.fullScreen != self.root.wm_attributes('-fullscreen'):
+            self.root.wm_attributes('-fullscreen', self.windowManager.fullScreen)
+
+        # aggregate text from pixels
         pixels = self.windowManager.draw()
         bufferlst = []
         for sublst in pixels:
@@ -61,5 +78,6 @@ class Display:
             self.text.insert(tk.END, bufferstr[start_index:])
         self.text.config(state=tk.DISABLED)
 
-    def getWidget(self):
+    @property
+    def widget(self):
         return self.text

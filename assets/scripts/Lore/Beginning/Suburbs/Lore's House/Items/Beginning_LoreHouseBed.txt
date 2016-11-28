@@ -1,0 +1,12 @@
+inspect{
+  The bed was a good place to crash.
+}
+
+sleep on{
+  $if_subFinishedLoreHouse_eq_0{
+    Lore laid down on the bed, but just for a minute. She couldn't spend the whole day there.
+  }$else{
+    Lore laid down on the bed and shut her eyes. Her head pulsed with an incoming migraine, but it wasn't long before she slipped into a blissful unconsciousness.
+    $switchcharacter
+  }
+}

@@ -6,6 +6,10 @@ on width and height fields
 
 class Window:
     def __init__(self, width, height):
+        """
+        Any onetime setup (e.g. registering event handlers) goes in __init__.
+        Initializing fields which may be reinitialized on restarting game goes in reset()
+        """
         self.width = width
         self.height = height
 
@@ -13,6 +17,14 @@ class Window:
         self.pixels = [[' ' for x in range(self.width)] for y in range(self.height)]
         # initialize color/style formatting info
         self.formatting = []    # each element is (tag, (start_index, end_index))
+        # initialize other fields
+        self.reset()
+
+    def reset(self):
+        """
+        Initialize pointers and other window specific state data which gets reset on game restart
+        """
+        pass
 
     def load(self):
         """
@@ -32,6 +44,15 @@ class Window:
         Pull from GameState (if needed) to update 2D pixel array
         """
         return self.pixels
+
+    def clear(self):
+        """
+        Utility method to clear pixels to blank (' ') strings and empty formatting
+        """
+        self.formatting = []
+        for i in range(self.height):
+            for j in range(self.width):
+                self.pixels[i][j] = ' '
 
     def debugDraw(self):
         """

@@ -1,5 +1,17 @@
 ## Information regarding items that can appear in the inventory
 
+## Begin Suburbs items
+loreKeys:
+    name: keys
+    description: n/a
+loreWallet:
+    name: wallet
+    description: n/a
+letterFromFriends:
+    name: letter from friends
+    description: n/a
+## End Suburbs items
+
 ## Begin Aspire items
 randomToken:
     name: random token

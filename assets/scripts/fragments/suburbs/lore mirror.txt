@@ -1,0 +1,10 @@
+$if_subUsedDresser_eq_0{
+  Lore gazed at her reflection. After quickly combing her hair, she decided to change out of her pajamas. She eyed the @yellow{dresser} back in the @blue{bedroom}.
+}$else{
+  $if_subLookedAtMirror_gt_1{
+    Lore glanced at her reflection. She looked as ready as she would ever be; no need for further adjustments.
+  }$else{
+    Lore gazed at her reflection. She looked the same as she always did at first, but on closer inspection the circles under her eyes were darker, and the bones of her face were a little more distinct. She adjusted her hair and rubbed the crust from her eyes.
+    $inc_subLookedAtMirror_1
+  }
+}
