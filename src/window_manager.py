@@ -2,7 +2,7 @@
 Definition for window manager, which is itself a Window that contains
 multiple sub-Windows and arranges when each is displayed/updated.
 """
-
+from help_window import HelpWindow
 from window import Window
 from loading_window import LoadingWindow
 from input_window import InputWindow
