@@ -1,0 +1,21 @@
+read{
+  Lore scanned a gaming magazine in the junk mail for anything noteworthy.
+  $choice{
+    |Help and Clues|
+      "Check the Help Window at the bottom of the screen for information on pertinent keybindings. Help is visible at nearly any point in the game. Also note the window on the right which shows a list of commands you may execute in a given situation. Lastly, note the colors on screen for context clues regarding @green{people}, @blue{places}, @yellow{things}, and @red{actions}."
+    |Inventory|
+      "As you continue your journey, you will carry various items that may be useful later on. The 'view inventory' command can show you what is currently in your possession."
+    |Saving/Loading|
+      "You may save at any time in the game where you have control within an area by using 'save game.' You can return to that point by loading the saved file through the title screen. Save early and save often!"
+    |Full Screen|
+      "To enable a more immersive experience, press F11 to toggle full screen mode!"
+    |Importance of Sleep|
+      "Did you know your body needs 7-9 hours of @red{sleep} every day? Be sure to take care of your body when you're not at work or play."
+
+      Lore blinked twice. It was strange to see a PSA in some nerdy magazine.
+  }
+}
+
+inspect{
+  The junk mail included a magazine with information about a video game Lore was not very interested in.
+}

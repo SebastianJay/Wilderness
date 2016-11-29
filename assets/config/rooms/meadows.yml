@@ -1,0 +1,74 @@
+shepherdHouse:
+    name: Shepherd House
+    description: n/a
+    script: meadows/Rooms/Shepherd House.txt
+    r: 0
+    c: 0
+    neighbors:
+        hedgeMazeEntrance: W
+    objects:
+        - queenBed
+
+hedgeMazeEntrance:
+    name: Hedge Maze Entrance
+    description: n/a
+    script: meadows/Rooms/Hedge Maze Entrance.txt
+    r: 0
+    c: 0
+    neighbors:
+        checkpoint1: NW
+        checkpoint2: NE
+        checkpoint3: SE
+        checkpoint4: SW
+        cliffside: W
+    objects: {}
+
+checkpoint1:
+    name: Checkpoint 1
+    description: n/a
+    script: meadows/Rooms/Checkpoint 1.txt
+    r: 0
+    c: 0
+    neighbors:
+        hedgeMazeEntrance: SE
+    objects: {}
+
+checkpoint2:
+    name: Checkpoint 2
+    description: n/a
+    script: meadows/Rooms/Checkpoint 2.txt
+    r: 0
+    c: 0
+    neighbors:
+        hedgeMazeEntrance: SW
+    objects: {}
+
+checkpoint3:
+    name: Checkpoint 3
+    description: n/a
+    script: meadows/Rooms/Checkpoint 3.txt
+    r: 0
+    c: 0
+    neighbors:
+        hedgeMazeEntrance: NW
+    objects: {}
+
+checkpoint4:
+    name: Checkpoint 4
+    description: n/a
+    script: meadows/Rooms/Checkpoint 4.txt
+    r: 0
+    c: 0
+    neighbors:
+        hedgeMazeEntrance: NE
+    objects: {}
+
+cliffside:
+    name: Cliffside
+    description: n/a
+    script: meadows/Rooms/Cliffside.txt
+    r: 0
+    c: 0
+    neighbors:
+        hedgeMazeEntrance: E
+    objects: {}

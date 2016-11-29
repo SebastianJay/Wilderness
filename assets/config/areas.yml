@@ -2,6 +2,13 @@
 ## rooms, which in turn has multiple objects. The rooms and objects are
 ## associated through the roomsConfig and objectsConfig fields
 
+suburbs:
+    name: Residential District
+    roomsConfig: rooms/suburbs.yml
+    objectsConfig: objects/suburbs.yml
+    mapId: 0
+    entrances: {}
+
 aspire:
     name: Aspire
     roomsConfig: rooms/aspire.yml
@@ -12,10 +19,21 @@ aspire:
     entrances:
         -
             roomId: townCenter  # id of room that gets loaded
-            r: 1                # r, c indicating tile on world map
-            c: 2
+            r: 9                # r, c indicating tile on world map
+            c: 116
     # only be able to enter if a condition is fulfilled
-    showIf: didFarm #TODO
+    #showIf: didFarm #TODO
+
+farm:
+    name: Charli
+    roomsConfig: rooms/farm.yml
+    objectsConfig: objects/farm.yml
+    mapId: 1
+    entrances:
+        -
+            roomId: meadow
+            r: 22
+            c: 127
 
 blackHills:
     name: Black Hills
@@ -25,6 +43,21 @@ blackHills:
     entrances:
         -
             roomId: railwayStation
+            r: 30
+            c: 97
+    #showIf: didFarm
+
+meadows:
+    name: Uncanny Prairie
+    roomsConfig: rooms/meadows.yml
+    objectsConfig: objects/meadows.yml
+    mapId: 1
+    entrances:
+        -
+            roomId: shepherdHouse
             r: 0
             c: 0
-    showIf: didFarm
+        -
+            roomId: cliffside
+            r: 0
+            c: 1

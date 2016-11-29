@@ -6,6 +6,7 @@ bank:
     script: aspire/Rooms/bank.txt
     r: 0    #TODO
     c: 0    #TODO
+    showIf: ntoQuestStart
     neighbors:
         library: S
         townCenter: SE
@@ -14,7 +15,6 @@ bank:
         - akecheta
         - totemPole
         - painting
-        #- fireAle
 library:
     name: Library
     description: All of the town's knowledge can be found here; being used as a makeshift hideaway from Rowen and his cliques.
@@ -37,6 +37,7 @@ saloon:
     script: aspire/Rooms/saloon.txt
     r: 0
     c: 0
+    showIf: ntoQuestStart
     neighbors:
         bank: W
         townCenter: SW
@@ -53,6 +54,7 @@ gunshop:
     script: aspire/Rooms/gunsmith shop.txt
     r: 0
     c: 0
+    showIf: ntoQuestStart
     neighbors:
         saloon: N
         townCenter: W

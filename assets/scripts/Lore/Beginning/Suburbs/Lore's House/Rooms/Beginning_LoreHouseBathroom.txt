@@ -1,0 +1,9 @@
+#Beginning_LoreHouseBathroom
+
+go to{
+	Lore stepped into the bathroom. Some water was dripping from the leaky sink. The @blue{bedroom} was behind her.
+}
+
+look around{
+	The bathroom was small, but sufficient. Aside from some toiletries near the faucet, the only objects in the room were a @yellow{mirror} and @yellow{toilet}. 
+}

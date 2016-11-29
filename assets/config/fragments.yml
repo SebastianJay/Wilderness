@@ -1,0 +1,16 @@
+# Maps fragment camel case code name to file path
+
+medCheck1Fail:
+    path: meadows/checkpoint 1 failure.txt
+medCheck1Maze:
+    path: meadows/checkpoint 1 maze.txt
+medCheck2Fail:
+    path: meadows/checkpoint 2 failure.txt
+medCheck2Maze:
+    path: meadows/checkpoint 2 maze.txt
+medCheck3Fail:
+    path: meadows/checkpoint 3 failure.txt
+medCheck3Maze:
+    path: meadows/checkpoint 3 maze.txt
+loreMirror:
+    path: suburbs/lore mirror.txt

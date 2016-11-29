@@ -1,0 +1,54 @@
+catFood:
+    name: cat food
+    script: Lore/Beginning/Suburbs/Lore's House/Items/Beginning_LoreHouseCatFood.txt
+closet:
+    name: closet
+    script: Lore/Beginning/Suburbs/Lore's House/Items/Beginning_LoreHouseCloset.txt
+loreDoor:
+    name: front door
+    script: Lore/Beginning/Suburbs/Lore's House/Items/Beginning_LoreHouseDoor.txt
+bed:
+    name: bed
+    script: Lore/Beginning/Suburbs/Lore's House/Items/Beginning_LoreHouseBed.txt
+dresser:
+    name: dresser
+    script: Lore/Beginning/Suburbs/Lore's House/Items/Beginning_LoreHouseDresser.txt
+radio:
+    name: radio
+    script: Lore/Beginning/Suburbs/Lore's House/Items/Beginning_LoreHouseRadio.txt
+keys:
+    name: keys
+    script: Lore/Beginning/Suburbs/Lore's House/Items/Beginning_LoreHouseKeys.txt
+    showIf:
+      and:
+        - subClosetOpen
+        - subSawKeys
+        - not_inventory_loreKeys
+stackPapers:
+    name: stack of papers
+    script: Lore/Beginning/Suburbs/Lore's House/Items/Beginning_LoreHousePapers.txt
+junkMail:
+    name: junk mail
+    script: Lore/Beginning/Suburbs/Lore's House/Items/Beginning_LoreHouseJunkMail.txt
+picture:
+    name: picture
+    script: Lore/Beginning/Suburbs/Lore's House/Items/Beginning_LoreHousePicture.txt
+pillBottles:
+    name: pill bottles
+    script: Lore/Beginning/Suburbs/Lore's House/Items/Beginning_LoreHousePillBottles.txt
+wallet:
+    name: wallet
+    script: Lore/Beginning/Suburbs/Lore's House/Items/Beginning_LoreHouseWallet.txt
+    showIf: not_inventory_loreWallet
+marthi:
+    name: Marthi
+    script: Lore/Beginning/Suburbs/Lore's House/People/Beginning_LoreHouseMarthi.txt
+mirror:
+    name: mirror
+    script: Lore/Beginning/Suburbs/Lore's House/Items/Beginning_LoreHouseMirror.txt
+toilet:
+    name: toilet
+    script: Lore/Beginning/Suburbs/Lore's House/Items/Beginning_LoreHouseToilet.txt
+hal:
+    name: Hal
+    script: Lore/Beginning/Suburbs/People/Beginning_LoreSuburbsHal.txt

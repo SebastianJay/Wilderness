@@ -3,7 +3,10 @@ Definition of game state, which is the model in our MVC framework.
 """
 
 from global_vars import Globals
+from event_hook import EventHook
+from lang_parser import BodyNode
 from enum import Enum
+from collections import deque
 import json
 import copy
 import os
@@ -36,6 +39,14 @@ class GameState:
                 self.inventory = {}         # inventory, represented as {string itemId: int numberOfItem}
                 self.historyBuffer = ''     # string containing contents for  history window
                 self.historyFormatting = {} # dict containing formatting info for historyBuffer
+            def initLore(self):
+                self.areaId = 'suburbs'
+                self.roomId = 'bedroom'
+                return self
+            def initKipp(self):
+                self.areaId = 'farm'
+                self.roomId = 'bedroom'
+                return self
 
             def __str__(self):
                 return self.dumps()
@@ -47,10 +58,14 @@ class GameState:
                     setattr(self, key, dct[key])
 
         def __init__(self):
+            # event broadcasters - registered listeners persist after game reset
+            #  so they are initialized in __init__ rather than init
+            self.onChoiceChange = EventHook()   # called when choiceList changes
+            self.onGameModeChange = EventHook() # called when gameMode changes
+            self.onAddLangNode = EventHook()    # called when addLangNode is called
+            self.onEnterArea = EventHook() # called when enterArea is called
+            self.onSettingChange = EventHook()  # called when a setting changes
             self.init()
-
-        def __str__(self):
-            return self.dumps()
 
         def init(self):
             """ Wipes out the existing GameState (called on New Game) """
@@ -62,8 +77,8 @@ class GameState:
 
             # character specific savable info
             self.subStates = [
-                GameState.__GameState.GameSubState(),
-                GameState.__GameState.GameSubState(),
+                GameState.__GameState.GameSubState().initLore(),
+                GameState.__GameState.GameSubState().initKipp(),
             ]
             self.activeProtagonistInd = 0   # which protagonist is active (0=Lore, 1=Kipp)
 
@@ -71,9 +86,28 @@ class GameState:
             self.cmdBuffer = ""         # command that player is currently typing
             self.cmdMap = {}            # "trie" of commands player can type
             self.choiceList = []        # list of strings of choices player can make
-            self.gameModeLocked = False # controllers can lock the state until they are ready to proceed
-            self.gameModeLockedRequests = []    # set requests are queued until game state is unlocked
+            self.gameModeLockedRequests = []    # set requests are queued if game state is locked
             self.gameModeActive = GameMode.titleScreen    # the "mode" of game player is in
+            self.gameMessages = deque()
+
+        def pushMessage(self, message):
+            self.gameMessages.append(message)
+
+        def popMessage(self):
+            return self.gameMessages.popleft()
+
+        def messageExists(self):
+            return len(self.gameMessages) != 0
+
+        def switchCharacter(self):
+            """ Switch the active protagonist after text finishes animation """
+            def _doSwitch(*args, **kwargs):
+                old, new = args[0]
+                if old == GameMode.inAreaAnimating: # when done with text animation..
+                    self.activeProtagonistInd = 1 - self.activeProtagonistInd # flip index
+                    self.enterArea(self.areaId, self.roomId)    # send signal to run startup script
+                    self.onGameModeChange -= _doSwitch  # deregister this handler after complete
+            self.onGameModeChange += _doSwitch
 
         def appendCmdBuffer(self, ch):
             """ Add to the command buffer, but do not overflow """
@@ -87,6 +121,42 @@ class GameState:
         def clearCmdBuffer(self):
             """ Reset command buffer (e.g. if pressed Return) """
             self.cmdBuffer = ""
+
+        def traverseCmdMap(self):
+            """
+            Travels the command tree cmdMap with cmdBuffer and returns what is at end of path
+            If return val is:
+             str -> valid metacommand, contains string from GameState.cmdListMetaCommands
+             BodyNode -> valid normal command, contains behavior to execute
+             (dict, str) tuple -> partial walk along tree, contains (level in tree, remaining cmdBuffer)
+             None -> extraneous command, bad characters after valid or between tree levels
+            """
+            cmdString = self.cmdBuffer.lstrip().rstrip('. ')
+            prefixTree = self.cmdMap
+            if cmdString in GameState.cmdListMetaCommands:
+                return cmdString    # complete metacommand
+            val = prefixTree
+            keepWalking = True
+            while len(cmdString) > 0 and keepWalking:
+                keepWalking = False
+                for prefix in prefixTree:
+                    if cmdString.startswith(prefix):
+                        val = prefixTree[prefix]
+                        if isinstance(val, BodyNode):
+                            if len(cmdString) > len(prefix):
+                                return None # too many chars at end
+                            return val  # correct command
+                        elif isinstance(val, dict):
+                            prefixTree = val
+                            cmdString = cmdString[len(prefix):]
+                            if len(cmdString) == 0 or cmdString[0] == ' ':
+                                cmdString = cmdString.lstrip()
+                                keepWalking = True
+                                break   # continue walking tree
+                            else:
+                                return None # invalid chars in between
+            # (dict of current layer in tree, string of cmd buffer remaining after walk)
+            return (val, cmdString)
 
         def touchVar(self, varname, inventoryFlag = False):
             """ Sets a variable or inventory item to 0 in mapping if it doesn't exist """
@@ -120,25 +190,45 @@ class GameState:
                 if varname in self.variables:
                     del self.variables[varname]
 
-        def debugAddHistoryLine(self, line):
-            ## DEBUG1 adds a specific langnode
-            self.areaId = "aspire"
-            self.roomId = "library"
-            self.refreshCommandList()
-            self.addLangNode(self.cmdMap['look around'].nodes[0])
-            ## end DEBUG1
-
         def addLangNode(self, node):
-            prevBufferLen = len(self.historyBuffer) # offset for formatting indices
-            self.historyBuffer += node.text # append the LangNode text
-            # append the LangNode formatting
-            for key in node.formatting:
-                val = node.formatting[key]
-                if key not in self.historyFormatting:
-                    self.historyFormatting[key] = []
-                for indices in val:
-                    self.historyFormatting[key].append((indices[0]+prevBufferLen, indices[1]+prevBufferLen))
-            self.historyBuffer += "\n"  # add trailing newline to separate new text from old
+            # helper for adding correct indices to historyFormatting
+            def appendToHistoryFormatting(self, formatting):
+                nonlocal fullText
+                for key in formatting:
+                    if key not in self.historyFormatting:
+                        self.historyFormatting[key] = []
+                    for start, end in formatting[key]:
+                        # offset formatting indices by constant previous history buffer length
+                        #  and variable current text + interpolated variables length
+                        self.historyFormatting[key].append((start+len(self.historyBuffer)+len(fullText),
+                            end+len(self.historyBuffer)+len(fullText)))
+
+            fullText = ''   # running buffer of text and variables in node
+            seekInd = 0
+            i = 0
+            # interpolate variables into text
+            for varname, varindex in node.variables:
+                appendToHistoryFormatting(self, node.formatting[i])
+                varval = self.getVar(varname) if self.getVar(varname) is not None else ''
+                fullText += node.text[seekInd:varindex] + varval
+                seekInd = varindex
+                i += 1
+            if i < len(node.formatting):
+                # any remaining formatting after last interpolated variable
+                appendToHistoryFormatting(self, node.formatting[i])
+            fullText += node.text[seekInd:]
+            fullText += "\n" # add trailing newline to separate new text from old
+            self.historyBuffer += fullText
+            self.onAddLangNode(fullText)
+
+        @property
+        def choices(self):
+            return self.choiceList
+        @choices.setter
+        def choices(self, val):
+            oldval = self.choiceList[:] # shallow copy
+            self.choiceList = val
+            self.onChoiceChange((oldval, val))
 
         @property
         def historyBuffer(self):
@@ -172,6 +262,13 @@ class GameState:
         def areaId(self, val):
             self.subStates[self.activeProtagonistInd].areaId = val
 
+        def enterArea(self, areaId, roomId):
+            oldArea = self.areaId
+            self.areaId = areaId
+            oldRoom = self.roomId
+            self.roomId = roomId
+            self.onEnterArea((oldArea, areaId), (oldRoom, roomId))
+
         @property
         def mapLocation(self):
             return self.subStates[self.activeProtagonistInd].mapLocation
@@ -186,22 +283,25 @@ class GameState:
             return self.gameModeActive
         @gameMode.setter
         def gameMode(self, val):
-            if self.gameModeLocked:
+            if len(self.gameModeLockedRequests) > 0:
                 self.gameModeLockedRequests.append(val)
             else:
+                oldval = self.gameModeActive
                 self.gameModeActive = val
+                if oldval != val:
+                    self.onGameModeChange((oldval, val))
         def lockGameMode(self, val):
-            if self.gameModeLocked:
+            if len(self.gameModeLockedRequests) > 0:
                 return  # ignore if already locked
-            self.gameModeLocked = True
-            self.gameModeLockedRequests.append(self.gameModeActive)
-            self.gameModeActive = val
+            oldMode = self.gameMode
+            self.gameMode = val
+            self.gameModeLockedRequests = [oldMode]
         def unlockGameMode(self):
-            if not self.gameModeLocked:
+            if len(self.gameModeLockedRequests) == 0:
                 return  # ignore if already unlocked
-            self.gameModeLocked = False
-            self.gameModeActive = self.gameModeLockedRequests.pop()
+            newMode = self.gameModeLockedRequests.pop()
             self.gameModeLockedRequests = []
+            self.gameMode = newMode
 
         def dumps(self):
             """ Json stringifies the GameState """
@@ -211,10 +311,14 @@ class GameState:
                 obj['subStates'][i] = obj['subStates'][i].__dict__
             # do not save non-persistent fields
             deleteFields = ['cmdMap', 'cmdBuffer', 'gameModeActive', 'choiceList',
-                'gameModeLocked', 'gameModeLockedRequests']
+                'gameModeLockedRequests', 'onChoiceChange',
+                'onGameModeChange', 'onAddLangNode', 'onEnterArea']
             for field in deleteFields:
                 del obj[field]
             return json.dumps(obj)
+
+        def __str__(self):
+            return self.dumps()
 
         def loads(self, jsonstr):
             """ Initialize the GameState from a Json string """
@@ -246,7 +350,17 @@ class GameState:
             with open(fpath, 'r') as f:
                 self.loads(f.read())
 
+    # singleton instance - created once per program run
     instance = None
+
+    # When GameMode is inAreaCommand, some generally available game commands
+    cmdListMetaCommands = (
+        'view inventory',
+        'view map',
+        'save game',
+        'exit game',
+    )
+
     def __new__(cls):
         if not GameState.instance:
             GameState.instance = GameState.__GameState()

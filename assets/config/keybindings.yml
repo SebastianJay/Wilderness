@@ -2,6 +2,8 @@
 ## These will be displayed in the Help window
 ## Note that these are not actually bound to InputHandler, and are only for display
 
+isLoading: {}
+titleScreen: {}
 selectFile:
     - Arrow keys: Browse options
     - Return: Confirm option
@@ -24,6 +26,7 @@ inAreaMap:
 inAreaInventory:
     - Arrow keys: Browse items
     - Return: Exit
+inAreaAnimating: {}
 worldMap:
     - Arrow keys: Move
 worldMapOverArea:

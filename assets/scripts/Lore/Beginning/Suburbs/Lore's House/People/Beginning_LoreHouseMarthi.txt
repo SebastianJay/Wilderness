@@ -1,0 +1,17 @@
+#Beginning_LoreHouseMarthi
+
+talk to{
+	Lore called out a greeting to @green{Marthi}. Marthi meowed back as if confused.
+}
+
+pet{
+	Lore reached down to pet @green{Marthi}.
+	$choice{
+		Pet on head| She scratched Marthi on her head. The cat purred and rubbed her whiskers on Lore's hand.
+		|Pet on back| Lore rubbed Marthi along her back. The cat arched her back and wriggled out of the way.
+	}
+}
+
+inspect{
+	Marthi had been adopted by Lore after Lore's mother passed away. She helped fill the sullen loneliness of the house.
+}

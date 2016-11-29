@@ -1,0 +1,5 @@
+#Beginning_LoreDowntownOfficeFloor3_Shelf
+
+go to{
+	Lore walked over to the shelf. Two objects caught her eye. There was a large binder labeled @yellow{Employee Profile Folder}. Tucked away under some dusty books was a manual titled @yellow{On the Flight and Mechanics of Rocket Propulsion}.
+}

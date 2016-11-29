@@ -8,7 +8,7 @@ class Globals:
     NumCols = 120
     NumRows = 35
     Timestep = 0.033
-    FontName = 'Courier New'
+    FontName = 'Consolas'
     FontSize = 14
     IsDev = True
     AssetsRootPath = 'assets'
@@ -29,4 +29,8 @@ class Globals:
     AreasConfigPath = 'areas.yml'
     ItemsConfigPath = 'items.yml'
     KeybindingsConfigPath = 'keybindings.yml'
+    FragmentsConfigPath = 'fragments.yml'
+    IconFilePathWin = 'assets/art/icon.ico'
+    IconFilePathUnix = 'assets/art/icon.xbm'
     CmdMaxLength = 48
+    NameMaxLength = 8

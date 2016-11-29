@@ -23,18 +23,3 @@ pick up{
 		I thought I already picked it up.
 	}
 }
-
-inspect{
-	$if_inventory_revolver_eq_1{
-		Six-chamber revolver, intricate engraving on the side of the barrel, and a Rosewood grip. Man, you'll never find this stuff from around here. This must have been custom-made for someone.
-	}$else{
-		Kipp: What revolver?
-	}
-}
-use{
-	$if_inventory_revolver_eq_1{
-		Narrator: There is a time and situation for everything. Now I'm going to stop referencing video games and tell you to try something else.
-	}$else{
-		Kipp: What revolver?
-	}
-}

@@ -9,7 +9,7 @@ talk to{
 	}
 }
 
-play World of Farmcraft{
+play World of Farmcraft with{
 	Kipp: Hey Rice, wanna play farmcraft?
 	Rice: I will pass. I feel too tired today. You can keep that board game. By the way, didn't you have to milk the cow on the @blue{meadow}?
 	$set_inventory_farmcraft_1

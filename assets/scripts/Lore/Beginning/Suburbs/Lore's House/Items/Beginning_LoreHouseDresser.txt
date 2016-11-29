@@ -1,0 +1,11 @@
+#Beginning_LoreHouseDresser
+
+use{
+	$if_subUsedDresser_eq_0{
+		Lore opened the dresser. Her clothes were folded neatly inside. She pulled out an outfit and changed from her pajamas.
+		$set_subUsedDresser_1
+		$inc_itemsgrabbedLorehouse_1
+	}$else{
+		Lore had already changed out of her pajamas, and she wasn't that picky about her clothes.
+	}
+}

@@ -1,0 +1,10 @@
+Kipp and [companionName] take a few steps into the light. They walk out to find themselves back at the @blue{Hedge Maze Entrance}.
+
+Kipp: Dang it. What should we do no...
+
+Kipp looked back at [companionName] to see that they are in no mood for talking.
+
+Kipp: Right. What was it again? We either @red{go to } @blue{Checkpoint 3} or give up and just go back to the @blue{Shepherd} 's @blue{House} and tell Sam we need a break...
+
+$goto_hedgeMazeEntrance
+$exit

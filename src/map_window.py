@@ -9,6 +9,8 @@ from global_vars import Globals
 class MapWindow(Window):
     def __init__(self, width, height):
         super().__init__(width, height)
+
+    def reset(self):
         self.maps = []
         self.colorMasks = []
         self.travelMasks = []

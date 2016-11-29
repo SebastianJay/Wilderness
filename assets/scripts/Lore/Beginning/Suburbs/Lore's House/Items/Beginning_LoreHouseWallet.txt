@@ -1,0 +1,11 @@
+#Beginning_LoreHouseWallet
+
+pick up{
+	Lore plucked her wallet off the table and put it in her pocket. @inventory{Added wallet to inventory.}
+	$set_inventory_loreWallet_1
+	$inc_itemsgrabbedLorehouse_1
+}
+
+inspect{
+	Lore's wallet contained her ID cards, checks, and some cash.
+}

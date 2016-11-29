@@ -30,7 +30,7 @@ talk to{
 				Shotgun Pete used the Gutenburg-Heisenberg method to build a corrosive shotgun.
 
 				Shotgun Pete: There you go.
-				$set_inventory_corrosiveshotgun{1}
+				$set_inventory_corrosiveShotgun_1
 				$set_frmtalkedShotgunPete_2
 				$set_inventory_corrosiveGas_0
 			}

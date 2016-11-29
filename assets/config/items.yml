@@ -1,5 +1,17 @@
 ## Information regarding items that can appear in the inventory
 
+## Begin Suburbs items
+loreKeys:
+    name: keys
+    description: n/a
+loreWallet:
+    name: wallet
+    description: n/a
+letterFromFriends:
+    name: letter from friends
+    description: n/a
+## End Suburbs items
+
 ## Begin Aspire items
 randomToken:
     name: random token
@@ -11,7 +23,7 @@ ticket:
     name: ticket
     description: It says, "ONE PHOENIX BOLT. Only acceptable at Aspire Saloon. This establishment is not responsible if fed to an actual phoenix." Wonder how they got that disclaimer on there.
 phoenixBolt:
-    name: Pheonix Bolt
+    name: Phoenix Bolt
     description: Says here that it's brewed with barley and the seeds of world's hottest pepper. How can anyone stomach this?
 mohanisBullets:
     name: Mohani's bullets
@@ -23,3 +35,34 @@ tomahawk:
     name: tomahawk
     description: Looks sharp enough to make a dent in a tree like our machete back home. Hopefully I won't have to test if it works with bodies, too.
 ## End Aspire items
+
+## Begin farm items
+dirtyMap:
+    name: dirty map
+    description: n/a
+farmcraft:
+    name: Farmcraft
+    description: n/a
+milk:
+    name: milk
+    description: n/a
+
+## End farm items
+
+## Begin Black Hills items
+letterToThomas:
+    name: letter to Thomas
+    description: n/a
+bucketOfMoonshine:
+    name: bucket of moonshine
+    description: n/a
+dragonskinBoots:
+    name: dragonskin boots
+    description: n/a
+corrosiveGas:
+    name: corrosive gas
+    description: n/a
+corrosiveShotgun:
+    name: corrosive shotgun
+    description: n/a
+## End Black Hills items
