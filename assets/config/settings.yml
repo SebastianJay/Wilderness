@@ -1,0 +1,10 @@
+# Settings
+
+# NOTE: While not strictly required by YAML,
+# we quote all the option values anyway.
+# This is because pyyaml "helpfully" converts
+# On/Off to True/False, which will mess with
+# the internal settings options.
+Font size: 'Medium'
+Scroll speed: 'Normal'
+Styled text: 'On'
