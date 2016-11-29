@@ -124,7 +124,7 @@ class WindowManager(Window):
             (3, 2, 4, 8),  # Input, History, and Palette windows
                         #NOTE the ordering here is specific as Input gets updated before History
             (5,),
-            (6,),
+            (6,),       # Settings window
             (7,),
         ]
         # which window group is on screen initially
