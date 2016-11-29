@@ -1,6 +1,7 @@
 #Beginning_LoreDowntownOfficeFloor3
 
 go to{
-	$if_acceptedjob_eq_1
-		Lore stepped into the lab. There were @yellow{data samples} on the table next to the log book. The @blue{shelf} was in behind the work station. 
+	$if_acceptedjob_eq_1{
+		Lore stepped into the lab. There were @yellow{data samples} on the table next to the log book. The @blue{shelf} was in behind the work station.
+	}
 }
