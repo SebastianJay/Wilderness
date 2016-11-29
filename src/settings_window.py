@@ -51,7 +51,6 @@ class SettingsWindow(Window):
         # so act on the list of the keys instead
         for setting in list(self.settings.keys()):
             if setting not in self.options:
-                print(setting + ' is not in options, deleting')
                 del self.settings[setting]
             else:
                 pass # TODO: figure out the default value
