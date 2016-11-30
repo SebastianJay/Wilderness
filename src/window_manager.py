@@ -128,7 +128,7 @@ class WindowManager(Window):
             (7,),
         ]
         # which window group is on screen initially
-        self.activeWindowGroups = [4]
+        self.activeWindowGroups = [3]
 
     def draw(self):
         """ stitches together multiple Windows from active group into the screen """

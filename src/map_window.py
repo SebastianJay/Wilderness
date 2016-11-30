@@ -77,6 +77,11 @@ class MapWindow(Window):
                 self.pixels[row][column] = currentMap[row][column]
                 colorCode = colorMask[row][column]
                 color = "white"
+                # Check to see if the character is at this position
+                # If so, character should be a white "@"
+                if (g.mapLocation[0] == row and g.mapLocation[1] == column):
+                    self.pixels[g.mapLocation[0]][g.mapLocation[1]] = '@'
+                    colorCode = "w"
                 # to reduce the number if tkinter insert calls in display, look for runs of the same color on the same row
                 if(previousColorCode == colorCode and row == previousRow):
                     c = self.formatting[len(self.formatting)-1][0]  # sets c to be color of last formatter
@@ -84,6 +89,7 @@ class MapWindow(Window):
                     end_index = self.formatting[len(self.formatting)-1][1][1] + 1   #increase end_index by one
                     newFormatter = (c,(start_index,end_index))
                     self.formatting[len(self.formatting)-1] = newFormatter
+                # Otherwise, add a new entry to formatting for this new color
                 elif(colorCode == "r"):
                     color = "red"
                 elif(colorCode == "g"):
@@ -99,7 +105,7 @@ class MapWindow(Window):
                 elif(colorCode == "n"):
                     color = "brown"
 
-                # add a new formatter to self.formatting only if this one is different than the previous one
+                # add a new formatter to self.formatting only if this one is different than the previous one, or a new row
                 if (previousColorCode != colorCode or row != previousRow):
                     self.formatting.append((color,(row*self.width+column,row*self.width+column)))
                 previousColorCode = colorCode
@@ -107,7 +113,7 @@ class MapWindow(Window):
 
 
         # overlay the character's position
-        self.pixels[g.mapLocation[0]][g.mapLocation[1]] = '@'
+        # self.pixels[g.mapLocation[0]][g.mapLocation[1]] = '@'
 
 
 
