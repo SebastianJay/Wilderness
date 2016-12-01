@@ -16,6 +16,7 @@ talk to{
 				Lore: Hey, do you mind if I borrow your afro?
 				Glover: Yo man, you can't take away muh property. Git off muh lawn!
 			|Speak his language|
+				Lore: Yo yo yo, I'm yo boi, u know wut I'm sayin, dawg? I need yo dope hairline, famalam.
 				$if_subTalktoGlover_eq_0{
 					$inc_loreMorality_1
 				}	

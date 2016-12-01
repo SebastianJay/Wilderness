@@ -1,6 +1,6 @@
 inspect{
 	$if_subCanCutTree_eq_0{
-	The @yellow{tree} looked like it could easily be cut down by the @yellow{zweihander}.
+	The @yellow{tree} looked like it could easily be @red{cut} down by the @yellow{zweihander}.
 	}
 }
 cut{

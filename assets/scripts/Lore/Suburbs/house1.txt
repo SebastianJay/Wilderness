@@ -1,0 +1,24 @@
+go to{
+	$if_subPaidPeople_eq_0{
+	Lore gingerly and reluctantly approached @blue{house 1}. She cringed really hard.
+	}
+}
+look around{
+	$if_subPaidPeople_eq_0{
+	It was an ugly hut with barred windows. A group of @green{peeved people} sat outside the house. There was one @yellow{window} that was not barred. There was a pile of @yellow{money} piled up against a @yellow{flamethrower}. Lore did not like how the whole setting looked like.
+	}
+}
+burn{
+	$if_subPaidPeople_eq_0{
+	$if_inventory_flamethrower_eq_1{
+		Lore began to raze the house to the ground. A dengerate looking man ran out and attempted to escape to the streets but the @green{peeved people} grabbed him.
+	$set_subBurnedHouse_1
+	}
+	}
+}
+#The following happens after the Nolan story arc is complete
+go to{
+	$if_subPaidPeople_eq_1{
+	There was nothing to see here.
+	}
+}

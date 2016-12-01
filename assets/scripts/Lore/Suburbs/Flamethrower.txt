@@ -1,0 +1,13 @@
+inspect{
+	It was a cool looking @yellow{flamethrower}. Lore could probably use it to @red{burn} down @blue{house 1}.
+}
+pick up{
+	$if_subBrokeWindow_eq_0{
+	$if_subPickUpFlamethrower_eq_0{
+	Lore placed the @yellow{flamethrower} onto her back.
+	@italic{Added flamethrower to inventory.}
+	$set_inventory_flamethrower_1
+	$set_subPickUpFlamethrower_1
+	}
+	}
+}

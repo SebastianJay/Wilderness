@@ -1,0 +1,64 @@
+talk to{
+	$if_FirstTimewithPeople_eq_0{
+		Lore went up to the @green{peeved people}.
+		
+		Lore: Hey!
+		Peeved people: Hey.
+		$choice{
+			Ask about the child|
+			Lore: Do you know anything about a missing @green{child}?
+			Peeved people: Nope, sorry.
+			|Ask why they are loitering|
+			Lore: Why are you guys sitting outside this house?
+			Peeved people: The dude who lives here, @green{No Life Nolan}, owes us a lot of money but he won't pay up. We're waiting for him to come out of his basement!
+			$set_FirstTimewithPeople_1
+		}
+	}
+}
+give money to{
+	$if_inventory_money_eq_1{
+	Lore gave the @yellow{money} to the Peeved People and they were happy that she paid off @green{No Life Nolan's} debt.
+	
+	Peeved People: Thanks! We don't really have anything to give you in return, except this pack of @yellow{morphine}.
+	
+	@italic{Added morphine to inventory.}
+	$set_inventory_morphine_1
+	$set_inventory_money_0
+	$set_subPaidPeople_1
+	}
+}
+#This talk to is if Lore talked Nolan out of his house
+talk to{
+	$if_FirstTimewithPeople_eq_1{
+	$if_subBrokeWindow_eq_1{
+	$if_subPaidPeople_eq_0{
+		Lore and Nolan went up to the @green{peeved people}.
+		
+		Lore: Here's @green{No Life Nolan}.
+		Peeved People: We'll deal with him now. We don't really have anything to give you in return, except this pack of @yellow{morphine}.
+		
+		@italic{Added morphine to inventory.}
+		$set_inventory_morphine_1
+		$set_subPaidPeople_1
+	}
+	}
+	}
+}
+#This talk to is if Lore burned the house
+talk to{
+	$if_FirstTimewithPeople_eq_1{
+	$if_subPaidPeople_eq_0{
+	$if_subBurnedHouse_eq_1{
+		Lore went up to the @green{peeved people}.
+		
+		Lore: I got @green{No Life Nolan} out fore you.
+		Peeved People: Thanks! We'll deal with him now. We don't really have anything to give you in return, except this pack of @yellow{morphine}.
+		
+		@italic{Added morphine to inventory.}
+		$set_inventory_morphine_1
+		$set_subPaidPeople_1
+	}
+	}
+	}
+}
+#That is the end of the story arc involving house1

@@ -1,0 +1,13 @@
+inspect{
+	It was a nice pile of @yellow{money}, crisp and fat. Maybe it could be used to pay No Life Nolan's debt.
+}
+pick up{
+	$if_subBrokeWindow_eq_0{
+	$if_subPickUpMoney_eq_0{
+	Lore stored the @yellow{money} safely in her pocket.
+	@italic{Added money to inventory.}
+	$set_inventory_money_1
+	$set_subPickUpMoney_1
+	}
+	}
+}

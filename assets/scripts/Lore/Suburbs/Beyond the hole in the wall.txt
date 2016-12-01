@@ -1,0 +1,7 @@
+#This is the subplot area. She can go back to the main suburbs through the hole in the fence and vice versa.
+go to{
+	Lore passed beyond the @blue{Hole in the Fence}. It was desolate.
+}
+look around{
+	There were a couple of trashy houses and the streets were void of people. The air itself did not seem to welcome Lore. There were three houses labeled @blue{house 1}, @blue{house 2}, and @blue{house 3}. Lore felt compelled to visit them in order.
+}
