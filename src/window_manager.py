@@ -119,13 +119,13 @@ class WindowManager(Window):
         # NOTE to debug, add a tuple with the index (in self.windowList) of your window to self.windowGroups
         #  then change self.activeWindowGroups to be a list containing just the index (in self.windowGroups) of that tuple
         self.windowGroups = [
-            (0,),       # loading window
-            (1,),       # title window
-            (3, 2, 4, 9),  # Input, History, and Palette windows
+            (0,),       # Loading window
+            (1,),       # Title window
+            (3, 2, 4, 9),  # Input, History, Palette, and Help windows
                         #NOTE the ordering here is specific as Input gets updated before History
             (5,),
             (6,),       # InArea window
-            (7,),
+            (7,),       # Settings window
         ]
         # which window group is on screen initially
         self.activeWindowGroups = [1]
