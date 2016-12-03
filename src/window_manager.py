@@ -2,8 +2,8 @@
 Definition for window manager, which is itself a Window that contains
 multiple sub-Windows and arranges when each is displayed/updated.
 """
-from help_window import HelpWindow
 from window import Window
+from help_window import HelpWindow
 from loading_window import LoadingWindow
 from input_window import InputWindow
 from map_window import MapWindow
@@ -119,14 +119,14 @@ class WindowManager(Window):
         splitCol = Globals.NumCols * 19 // 24
         splitRow = Globals.NumRows * 5 // 7
         self.addWindow(HistoryWindow, 0, 0, splitRow, splitCol)
-        self.addWindow(InputWindow, splitRow - 1, 0, Globals.NumRows - (splitRow - 1), splitCol)
-        self.addWindow(PaletteWindow, 0, splitCol - 1, Globals.NumRows, Globals.NumCols - (splitCol - 1))
+        self.addWindow(InputWindow, splitRow - 1, 0, Globals.NumRows - (splitRow - 1) - 2, splitCol)
+        self.addWindow(PaletteWindow, 0, splitCol - 1, Globals.NumRows - 2, Globals.NumCols - (splitCol - 1))
 
-        self.addWindow(MapWindow, 0, 0, Globals.NumRows, Globals.NumCols * 3 // 4)
-        self.addWindow(InAreaWindow, 0, 0, Globals.NumRows, Globals.NumCols)
+        self.addWindow(MapWindow, 0, 0, Globals.NumRows-2, Globals.NumCols * 3 // 4)
+        self.addWindow(InAreaWindow, 0, 0, Globals.NumRows-2, Globals.NumCols)
         # add inventory window
-        self.addWindow(SettingsWindow, 0, 0, Globals.NumRows, Globals.NumCols)
-        self.addWindow(InventoryWindow, 0, 0, Globals.NumRows, Globals.NumCols)
+        self.addWindow(SettingsWindow, 0, 0, Globals.NumRows-2, Globals.NumCols)
+        self.addWindow(InventoryWindow, 0, 0, Globals.NumRows-2, Globals.NumCols)
         self.addWindow(HelpWindow, Globals.NumRows - 3, 0, 3, Globals.NumCols)
         #self.addWindow(InventoryWindow, Globals.NumRows//4, Globals.NumCols//4, Globals.NumRows//2, Globals.NumCols//2)
         # self.addWindow(SaveWindow, 0, 0, 35, 120)
@@ -138,7 +138,7 @@ class WindowManager(Window):
             (1,),       # Title window
             (3, 2, 4, 9),  # Input, History, Palette, and Help windows
                         #NOTE the ordering here is specific as Input gets updated before History
-            (5,),
+            (5,),       # Map Window
             (6,),       # InArea window
             (7,),       # Settings window
         ]
