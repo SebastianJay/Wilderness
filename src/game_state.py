@@ -63,6 +63,7 @@ class GameState:
             self.onGameModeChange = EventHook() # called when gameMode changes
             self.onAddLangNode = EventHook()    # called when addLangNode is called
             self.onEnterArea = EventHook() # called when enterArea is called
+            self.onCharacterSwitch = EventHook()    # called when activeProtagonistInd changes
             self.init()
 
         def init(self):
@@ -95,6 +96,7 @@ class GameState:
                     self.activeProtagonistInd = 1 - self.activeProtagonistInd # flip index
                     self.enterArea(self.areaId, self.roomId)    # send signal to run startup script
                     self.onGameModeChange -= _doSwitch  # deregister this handler after complete
+                    self.onCharacterSwitch(self.activeProtagonistInd)   # send event
             self.onGameModeChange += _doSwitch
 
         def appendCmdBuffer(self, ch):
@@ -300,7 +302,7 @@ class GameState:
             # do not save non-persistent fields
             deleteFields = ['cmdMap', 'cmdBuffer', 'gameModeActive', 'choiceList',
                 'gameModeLockedRequests', 'onChoiceChange',
-                'onGameModeChange', 'onAddLangNode', 'onEnterArea']
+                'onGameModeChange', 'onAddLangNode', 'onEnterArea', 'onCharacterSwitch']
             for field in deleteFields:
                 del obj[field]
             return json.dumps(obj)

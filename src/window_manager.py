@@ -43,6 +43,8 @@ class WindowManager(Window):
 
         # register a handler for changing the active window groups based on game mode
         GameState().onGameModeChange += self.gameModeChangeHandler()
+        # register a handler for screen transitioning when protagonist changes
+        GameState().onCharacterSwitch += self.characterSwitchHandler()
 
     def gameModeChangeHandler(self):
         def _gameModeChangeHandler(*args, **kwargs):
@@ -58,6 +60,7 @@ class WindowManager(Window):
                 GameMode.inAreaInput, GameMode.inAreaAnimating]:
                 # use the "main game" window group
                 self.activeWindowGroups = [2]
+                self.isTransitioning = True
             elif new in [GameMode.titleScreen]:
                 # clear, reset, and reload all windows
                 self.clear()
@@ -65,10 +68,17 @@ class WindowManager(Window):
                 self.load()
                 # use the "title" window group
                 self.activeWindowGroups = [1]
+                self.isTransitioning = True
         return _gameModeChangeHandler
 
+    def characterSwitchHandler(self):
+        def _characterSwitchHandler(*args, **kwargs):
+            # enqueue screen transition
+            self.isTransitioning = True
+        return _characterSwitchHandler
+
     def clear(self):
-        super().clear()
+        # NOTE window manager's own pixels are not cleared so they are visible for animation
         # relay clear to all windows
         for win in self.windowList:
             win.clear()
