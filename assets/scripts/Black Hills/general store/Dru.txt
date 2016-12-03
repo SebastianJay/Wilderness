@@ -7,7 +7,7 @@ talk to{
     $if_frmTalkedDru_eq_0{
     
         Kipp: How are you?
-        Dru: Not good, man. The mines are already closed due to the accidents. I hope they kill the Demon soon or my family would go hungry. 
+        Dru: Not good, man. The mines are already closed due to the accidents. I hope they kill the Demon soon or my family will go hungry. 
         Kipp: Accidents? What happened?
         Dru: A Demon attacked us from the darkness in the mines. I narrowly escaped but my friends were hurt. They are still in the @blue{hospital} now. 
         $choice{
@@ -23,7 +23,7 @@ talk to{
 		$inc_darkPts_1
 		|Inquire about the Demon|
 		Kipp: What was the "demon" like?
-		Dru:It was about 2 foot tall and had shiny skin.It was vulnerable to water.
+		Dru: It was about 2 foot tall and had shiny skin. It was vulnerable to water.
 		Kipp: Maybe we can use that information to our advantage and defeat it
 		Dru: Sounds like a plan.
 		$inc_DerelictPts_1

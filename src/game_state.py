@@ -6,6 +6,7 @@ from global_vars import Globals
 from event_hook import EventHook
 from lang_parser import BodyNode
 from enum import Enum
+from collections import deque
 import json
 import copy
 import os
@@ -62,8 +63,9 @@ class GameState:
             self.onChoiceChange = EventHook()   # called when choiceList changes
             self.onGameModeChange = EventHook() # called when gameMode changes
             self.onAddLangNode = EventHook()    # called when addLangNode is called
+            self.onCharacterSwitch = EventHook() # called when activeProtagonistInd changes
             self.onEnterArea = EventHook() # called when enterArea is called
-            self.onCharacterSwitch = EventHook()    # called when activeProtagonistInd changes
+            self.onSettingChange = EventHook()  # called when a setting changes
             self.init()
 
         def init(self):
@@ -87,6 +89,16 @@ class GameState:
             self.choiceList = []        # list of strings of choices player can make
             self.gameModeLockedRequests = []    # set requests are queued if game state is locked
             self.gameModeActive = GameMode.titleScreen    # the "mode" of game player is in
+            self.gameMessages = deque()
+
+        def pushMessage(self, message):
+            self.gameMessages.append(message)
+
+        def popMessage(self):
+            return self.gameMessages.popleft()
+
+        def messageExists(self):
+            return len(self.gameMessages) != 0
 
         def switchCharacter(self):
             """ Switch the active protagonist after text finishes animation """
@@ -301,7 +313,7 @@ class GameState:
                 obj['subStates'][i] = obj['subStates'][i].__dict__
             # do not save non-persistent fields
             deleteFields = ['cmdMap', 'cmdBuffer', 'gameModeActive', 'choiceList',
-                'gameModeLockedRequests', 'onChoiceChange',
+                'gameModeLockedRequests', 'onChoiceChange', 'onSettingChange',
                 'onGameModeChange', 'onAddLangNode', 'onEnterArea', 'onCharacterSwitch']
             for field in deleteFields:
                 del obj[field]

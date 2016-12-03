@@ -22,7 +22,6 @@ class InventoryWindow(Window):
         for el in self.itemsdata.keys():
             self.inventoryList.append([el, self.itemsdata[el]["name"], self.itemsdata[el]["description"]])
         self.inventoryList.sort(key=lambda row: row[1].lower())
-        print(self.inventoryList)
         self.listToDraw = self.inventoryList
         self.selectedItem = self.inventoryList[self.selectedItemPos]
 

@@ -2,7 +2,7 @@
 Definition for window manager, which is itself a Window that contains
 multiple sub-Windows and arranges when each is displayed/updated.
 """
-
+from help_window import HelpWindow
 from window import Window
 from loading_window import LoadingWindow
 from input_window import InputWindow
@@ -11,8 +11,8 @@ from history_window import HistoryWindow
 from title_window import TitleWindow
 from settings_window import SettingsWindow
 from palette_window import PaletteWindow
+from inarea_window import InAreaWindow
 from inventory_window import InventoryWindow
-
 from game_state import GameState, GameMode
 from global_vars import Globals
 
@@ -123,23 +123,24 @@ class WindowManager(Window):
         self.addWindow(PaletteWindow, 0, splitCol - 1, Globals.NumRows, Globals.NumCols - (splitCol - 1))
 
         self.addWindow(MapWindow, 0, 0, Globals.NumRows, Globals.NumCols * 3 // 4)
-        # add in-area map window
+        self.addWindow(InAreaWindow, 0, 0, Globals.NumRows, Globals.NumCols)
         # add inventory window
         self.addWindow(SettingsWindow, 0, 0, Globals.NumRows, Globals.NumCols)
         self.addWindow(InventoryWindow, 0, 0, Globals.NumRows, Globals.NumCols)
+        self.addWindow(HelpWindow, Globals.NumRows - 3, 0, 3, Globals.NumCols)
         #self.addWindow(InventoryWindow, Globals.NumRows//4, Globals.NumCols//4, Globals.NumRows//2, Globals.NumCols//2)
         # self.addWindow(SaveWindow, 0, 0, 35, 120)
 
         # NOTE to debug, add a tuple with the index (in self.windowList) of your window to self.windowGroups
         #  then change self.activeWindowGroups to be a list containing just the index (in self.windowGroups) of that tuple
         self.windowGroups = [
-            (0,),       # loading window
-            (1,),       # title window
-            (3, 2, 4),  # Input, History, and Palette windows
+            (0,),       # Loading window
+            (1,),       # Title window
+            (3, 2, 4, 9),  # Input, History, Palette, and Help windows
                         #NOTE the ordering here is specific as Input gets updated before History
             (5,),
-            (6,),
-            (7,),
+            (6,),       # InArea window
+            (7,),       # Settings window
         ]
         # which window group is on screen initially
         self.activeWindowGroups = [1]

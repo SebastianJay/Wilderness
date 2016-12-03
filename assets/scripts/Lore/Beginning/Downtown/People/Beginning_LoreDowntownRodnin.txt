@@ -1,11 +1,11 @@
 #Beginning_LoreDowntownRodnin
 
 talk to{
-	$if_begtalktoRodnin_eq_0
-		Rodnin: Thank you for coming. You must be surprised that I called you up so suddenly. Let me explain. You see, I worked with your mother back in the day. I was actually her lab assistant. I, uh... I'm sorry for your loss, by the way. 
-		
-		Lore nodded in thanks. 
-		
+	$if_begtalktoRodnin_eq_0{
+		Rodnin: Thank you for coming. You must be surprised that I called you up so suddenly. Let me explain. You see, I worked with your mother back in the day. I was actually her lab assistant. I, uh... I'm sorry for your loss, by the way.
+
+		Lore nodded in thanks.
+
 		Rodnin: When your mother, well, when she became ill, she told me about you. She asked me to look out for you. I told her I was going to do research in the Wildnerness, but I promised that I would make sure you were safe. Your mother never introduced us, so I asked Hal, your neighbor, to keep an eye on you.
 		Lore: I see.
 		Rodnin: I know that all of this must seem weird to you. I am glad to finally meet you. But, you must have come to see me for a reason. What can I do for you?
@@ -24,7 +24,7 @@ talk to{
 						Lore: I was curious, but I don't think the job is for me.
 						Rodnin: I understand. Still, your mother was an excellent woman. It would have been good to have you. Even if you don't work here, you're always welcome in the office. If you have any questions about me or your mother, or anything at all, I'll be here. Please let me know if you need anything.
 						$set_begtalktoRodnin_eq_1|
-						
+
 					}
 			|You've done research in the Wildnerness?|
 				Rodnin: That's right. I've mostly studied changes in the environment due to the sinkhole. Rock formation, soil analysis, animal behavior. That kind of thing. You know, I'm looking for someone to help with my research. Would you be interested?
@@ -43,7 +43,8 @@ talk to{
 					}
 
 			}
-	$if_begtalktoRodnin_eq_1
+	}
+	$if_begtalktoRodnin_eq_1{
 		Rodnin: What can I do for you?
 		$Choice{
 		Tell me about yourself.|
@@ -58,9 +59,9 @@ talk to{
 							$inc_begtalktoRodnin_1
 						|Lie.|
 							Lore: No, I haven't.
-							
+
 							Something in Rodnin's eyes made Lore think he seemed disappointed.
-							
+
 							Rodnin: Is that so? I'm glad to hear it.
 							$inc_begtalktoRodnin_1
 					}
@@ -72,42 +73,44 @@ talk to{
 							$inc_begtalktoRodnin_1
 						|Lie.|
 							Lore: No, I haven't gotten any headaches.
-							
+
 							Something in Rodnin's eyes made Lore think he seemed disappointed.
-							
+
 							Rodnin: Is that so? I'm glad to hear it.
 							$inc_begtalktoRodnin_1|
 			}
 		|Tell me about the work you did with my mother.|
 			Rodnin: Oh, it was mostly genetic engineering. Being an environmental scientist, I was a bit lost the whole time.
-			
+
 			Rodnin chuckled a little.
-			
+
 			Rodnin: Not your mother, though, no. She was amazing. Fast worker, always on schedule. She was one of those scientists that never lost their imagination in school. She was always saying she had a dream, or rather a vision of the future. She said it was a secret and she'd tell me when the time came, but...She got sick before she could ever tell me. If you ask me, I think her secret vision was you. Your mother really loved you. She believed in you, that you would do everything she couldn't or didn't have time for. Well, I suppose you already know all this. You lived with her, after all.
 			$inc_begtalktoRodnin_1
 		|Tell me about the Wilderness.|
 			Rodnin leaned in closer, his eyes sparkling.
-			
+
 			Rodnin: It's unbelievable. You get so tired of seeing the same scenery every day in the city. The Wilderness is vast, incredibly vast, and every day is different. You live from day to day, your only objective is to survive and learn. No sign of human impact for kilometers. You get a deep appreciation for both human and animal life. Ah...
-			
+
 			He became lost in thought for a moment.
-			
+
 			Rodnin: I'd love to go back, but I have my duties here. I've been in the field for long enough.
 			Lore: I want to go.
-			
+
 			Rodnin seemed shocked.
-			
+
 			Rodnin: You want to go? *laughs* Well, I'll be damned. I knew you had your mother's spirit.
 			Lore: How did you get there?
-			Rodnin: Oh, by plane. 
+			Rodnin: Oh, by plane.
 			Lore: Plane? But, aircrafts-
 			Rodnin: Yes, yes, rocketry is a recent invention. Only a few people in the world have planes. I happen to be one of those people. *laughs* Don't look so impressed.
 			$set_beglearnedplane_1
 			$inc_begtalktoRodnin_1
 		|Nevermind.|
 		}
-	$if_begtalktoRodnin_eq_4
+	}
+	$if_begtalktoRodnin_eq_4{
 		Rodnin: What can I do for you?
 		Lore: Need any help?
 		Rodnin: No, thank you, though.
-}		
+	}
+}

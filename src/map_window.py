@@ -66,15 +66,54 @@ class MapWindow(Window):
         # identify the current map we are looking at
         g = GameState()
         currentMap = self.maps[g.activeProtagonistInd]
+        colorMask = self.colorMasks[g.activeProtagonistInd]
 
-        # draw out the map
+        # draw out the map and color it
+        self.formatting = []
+        previousColorCode = "null"
+        previousRow = -1
         for row in range(len(currentMap)):
             for column in range(len(currentMap[row])):
                 self.pixels[row][column] = currentMap[row][column]
+                colorCode = colorMask[row][column]
+                color = "white"
+                # to reduce the number if tkinter insert calls in display, look for runs of the same color on the same row
+                if(previousColorCode == colorCode and row == previousRow):
+                    c = self.formatting[len(self.formatting)-1][0]  # sets c to be color of last formatter
+                    start_index = self.formatting[len(self.formatting)-1][1][0]
+                    end_index = self.formatting[len(self.formatting)-1][1][1] + 1   #increase end_index by one
+                    newFormatter = (c,(start_index,end_index))
+                    self.formatting[len(self.formatting)-1] = newFormatter
+                elif(colorCode == "r"):
+                    color = "red"
+                elif(colorCode == "g"):
+                    color = "green"
+                elif(colorCode == "b"):
+                    color = "blue"
+                elif(colorCode == "v"):
+                    color = "purple"
+                elif(colorCode == "y"):
+                    color = "yellow"
+                elif(colorCode == "o"):
+                    color = "orange"
+                elif(colorCode == "n"):
+                    color = "brown"
+
+                # add a new formatter to self.formatting only if this one is different than the previous one
+                if (previousColorCode != colorCode or row != previousRow):
+                    self.formatting.append((color,(row*self.width+column,row*self.width+column)))
+                previousColorCode = colorCode
+                previousRow = row
+
 
         # overlay the character's position
         self.pixels[g.mapLocation[0]][g.mapLocation[1]] = '@'
+
+
+
+
         return self.pixels
+
 
 if __name__ == '__main__':
     AssetLoader().loadAssets()
