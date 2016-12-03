@@ -39,8 +39,8 @@ class GameDriver:
         dt = 0.0
         while True:
             try:
-                time.sleep(Globals.Timestep - dt if Globals.Timestep - dt > 0.0 else 0.0)
-                timeElapsed = Globals.Timestep if dt < Globals.Timestep else dt
+                time.sleep(max(Globals.Timestep - dt, 0.0))
+                timeElapsed = max(Globals.Timestep, dt)
                 time1 = time.time()
                 self.display.draw()
                 keypresses = self.inputHandler.getKeyPresses()
