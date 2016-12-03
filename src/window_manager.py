@@ -36,6 +36,11 @@ class WindowManager(Window):
         # create instances of all the Windows
         self.initWindows()
 
+        # vars for transition animations between window groups
+        self.isTransitioning = False
+        self.transitionTimer = 0.0
+        self.transitionThreshold = 3.0
+
         # register a handler for changing the active window groups based on game mode
         GameState().onGameModeChange += self.gameModeChangeHandler()
 
@@ -131,6 +136,12 @@ class WindowManager(Window):
 
     def draw(self):
         """ stitches together multiple Windows from active group into the screen """
+        # if transitioning, freeze draw calls and use last drawn frame
+        if self.isTransitioning:
+            self.alphaLevel = min(int(self.transitionTimer * Globals.AlphaMax\
+                * 1.1 / self.transitionThreshold) + 1, Globals.AlphaMax)
+            return self.pixels
+
         formatting = []
         for groupind in self.activeWindowGroups:
             group_formatting = []
@@ -213,6 +224,15 @@ class WindowManager(Window):
         for key in keypresses:
             if key == 'F11':
                 self.fullScreen = 1 - self.fullScreen
+
+        # if in transition mode, freeze update calls
+        if self.isTransitioning:
+            self.transitionTimer += timestep
+            if self.transitionTimer >= self.transitionThreshold:
+                self.transitionTimer = 0.0
+                self.alphaLevel = 0
+                self.isTransitioning = False
+            return
 
         # update is only sent to activeWindowGroups[-1], so the foreground windows
         for winind in self.windowGroups[self.activeWindowGroups[-1]]:
