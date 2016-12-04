@@ -1,0 +1,33 @@
+examine{
+		@orange{[companionName]: So, what number will we put in?}
+		$input_badCode
+		
+		$if_badCode_eq_1265640{
+		
+			Kipp messed around with the wheels until the dials were set to @green{1265640}. The walls glowed green between the cracks.
+			The walls split apart and provide an entry to this forbidden @blue{desert}.
+
+			[companionName]: Alright, Kipp! Now lets...
+			Kipp: Hold on a second, [companionName]. We should stop and think about it. Why should we follow through with this?
+			[companionName]: Because if we don't, both of the worlds will eventually be destroyed within a thousand years; whether the inner or outer world is first.
+			Kipp: But we're talking about a world that we've never visited. One that has never helped our world survive the last terraforming.
+			[companionName]: Kipp, get a grip. The prophecy couldn't begin until you and this girl started this journey. They couldn't save our world even if they tried.
+			Kipp: So in order to be the good guys, we have to put all of our friends and family--the people who are closest to us--in danger just to save complete strangers.
+			[companionName]: I think this girl with the "L" on her lab coat is trying to do something to save our world, too.
+			Kipp: But like you said: "Only one world will come out of this alive, that's the cost."
+			[companionName]: Well, we just don't have all the answers right now. All we know is that your part is just as important as the girl's role in this. Doing this is the only chance the world has.
+			Kipp: We'll see when the time comes.
+			
+			Kipp walks in front of [companionName], leaving [companionName] behind.
+			
+			[companionName]: Kipp, wait up. We have to @red{go to} the @blue{desert} together!
+		
+			@bold_orange{MEADOWS LEVEL COMPLETE!}
+		}$else{
+			Kipp messed around with the wheels until the dials were set to @red{[badCode]}. The walls glowed red between the cracks.
+		
+			[companionName]: I guess that wasn't right.
+			Kipp: Well, then. Let's try again or return to the @blue{Campsite} and check the other caves again.
+		}
+		
+}

@@ -1,0 +1,73 @@
+go to{
+	$if_badUpsilonIntro_eq_0{
+		$set_badUpsilonIntro_1
+		
+		Kipp and [companionName] crossed the bridge and entered the cave.
+		
+		Kipp: It's pretty chilly in here. Don't suppose you have any extra layers I can borrow.
+		
+		$if_inventory_lighter_eq_1{
+			[companionName]: Don't you have a lighter?
+			Kipp: A small flame isn't going to keep up warm.
+		}
+		
+		[companionName]: I wonder if we'll have to light another torch...
+		
+		As if it was upon command, all of the torches in the room lit up simultaneously. 
+		
+		Kipp: I think that was the magic word, and here's another painting.
+		[companionName]: They really spend a lot of time on these. 
+		Kipp: This one seems to be about a girl, who grew up in a town with many buildings, flashing lights, and plastics with electricity flowing through them.
+		
+		$if_companionF_eq_1{
+			Kipp turned to Jinx.
+			
+			Jinx: Don't look at me. There isn't a futuristic city for miles where I come from.
+		}
+		
+		Kipp: [companionName]. Do you think there's another world, besides this one I mean. Where all of this advanced technology exists.
+		[companionName]: I mean at first I thought magic was the superior resource that only a select few can hold. Maybe I'm wrong.
+		
+		Kipp: Well I guess it's no use trying to think about it. Anyways, the girl lived with her mother. Her mother was a very smart person. Looks like she ran tests on her daughter and changed all the tiny twisty ladders in her body.
+		[companionName]: I'm pretty sure that's DNA.
+		Kipp: Whatever she did, she made her daughter really smart. The girl grew up and attended a school where they wrote a lot of math. Get this, they mix letters with their numbers.
+		[companionName]: That's algebra. I'm pretty sure they teach that in your school, too.
+		Kipp: Huh. That's something. 
+		[companionName]: What?
+		Kipp: It doesn't look like she finished this higher school of hers. She quit and got a job to buy the stuff her momma needed, but she passed away, no matter how much medicine the doctor put her on.
+		[companionName]: And it looks like she ran away from her school after that. Hey look, an @orange{L} on her lab coat.
+		Kipp: Maybe it's the school or company she works for.
+		[companionName]: The last picture seems to show some sort of powers she posses. She can concentrate and push waves from her brain so that a boy from somewhere else can receive them. I think it's a higher form of communication.
+		
+		Kipp stopped to reflect on all of the times he received those random fragments of conversation in his head.
+		
+		Kipp: You don't think that the boy in the picture relates to the drawings in the first cave?
+		[companioName]: Unless the other cave has a drawing of a third boy, I doubt it. Why? Do you think you have been receiving the signals from this girl?
+		Kipp: I think I did, but I'm wasn't sure whether I was just imagining it or not. 
+		[companionName]: Well what did she say?
+		Kipp: I can't remember. 
+		[companionName]: It'll come to you eventually
+		Kipp: Wait look back at the chalkboard. Why is the number @yellow{40} circled?
+ 		[companionName]: Beats me. I wonder if there's anything else in here.
+		Kipp: I doubt it. Let's just head back to the @blue{Campsite}.
+		
+
+	}$else{
+		Kipp: Back here again, but I honestly don't think there's anything left to explore.
+		[companionName]: You sure?
+		Kipp: This cave is too small to hold anything else.
+		[companionName]: Maybe we should @red{look around}.
+	}
+		
+
+}
+
+look around{
+	[companionName]: Here, let me see the torch.
+	Kipp: Be my guest.
+	[companionName]: Nope, you're right. We have no reason to stay here. we should go back to the @blue{Campsite}.
+	
+	$if_badUpsilonIntro_eq_1{
+		Kipp: Oh wait. There was that @yellow{40} written on the chalkboard.
+	}
+}

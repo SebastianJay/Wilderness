@@ -1,0 +1,79 @@
+
+inspect{
+	$if_badLit_eq_1{
+		Kipp: It's not like a small match would have helped us see. Now to take a better look in the cave.
+	}$else{
+		Kipp: A big stick. Great.
+	}
+	
+}
+
+use lighter on{
+	$if_inventory_lighter_eq_1{
+		Kipp used the lighter on the torch and it glowed brighter, giving Kipp and [companionName] a larger field of vision.
+	
+		[companionName]: Good, you didn't hurt yourself.
+	
+		$set_badLit_1
+		
+		$if_badTauPainting_eq_0{
+			$set_badTauPainting_1
+			
+			Kipp: Hey [companionName], check this out.
+			[companionName]: Wow. I didn't think they'd put so much effort into these drawings. 
+			Kipp: Well, this is thousands of years in development. I wonder what they were going for.
+			[companionName]: I guess it's trying to tell a story.
+			[companionName]: @italic{A boy grows up on the farm. He abandons his family and friends to go on an adventure with the clothes on his back and a backpack.}
+			
+			$if_townChoice_eq_0{
+				#Flashback to Aspire 
+				[companionName]: @italic{He visits his first town to hear about a villain with powers from a world unknown. The boy teams up with three groups to save the town.}
+				
+			}$else
+				#Flashback to Black Hills
+				[companionName]: @italic{He visits his first town to hear about a demon haunting the town. He goes to the mines to explore and find that's it was only a robot.}
+				
+			$if_companionB_eq_1{
+				Kipp: @italic{ This guy then ventures into the forest to find more answers. His brother back on the farm hears about the guy's departure and leaves to join him.}
+			}$elif_companionF_eq_1{
+				Kipp: @italic{ This guy then ventures into the forest to find more answers. A girl who is running from the law crosses his path and asks if she could join the guy and clear her name.}
+			}$else{
+				Kipp: @italic{ This guy then ventures into the forest to find more answers. He bumps into a derelict who offers to join him and explain to the guy why all of this is happening to him.}
+			}
+			
+			[companionName]: @italic{They then run into a wise man telling them that the boy is part of some prophecy.}
+			Kipp: @italic{They travel to the lake to search for something very important. They then head to the meadows to assist a shepherd. Her sheep guide the two travelers through a hedge maze that eventually leads them to the badlands.}
+			[companionName]: @italic{Finally, the two enter a cave to stand in front of a painting that explains to them everything that has happened on their journey.}
+			
+			# FINISH PAINTING # 1
+			
+			Kipp: Deja vu.
+			[companionName]: The man in the forest was right. You are the prophecy the world has been looking for.
+			Kipp: So this whole journey was planned?
+			[companionName]: In some way.
+			Kipp: What's in the other caves, then?
+			[companionName]: More answers to the prophecy I guess.
+			Kipp: But everything we just did was told right here.
+			[companionName]: Well there's still a future. And who says we're the only ones in this prophecy. 
+			Kipp: You're probably right. Let's head back to the @blue{Campsite} and check the next cave, @blue{Upsilon}
+			[companionName]: Oh wait, Kipp. Look at that last drawing. Do you see something?
+			Kipp: Yeah. A number @yellow{6}. Whatever that means.
+		}
+	}$else{
+		Kipp: What lighter?
+	}
+	
+}
+
+use extinguisher on{
+	$if_inventory_extinguisher_eq_1{
+		Kipp set the torch down and used the extinguisher to put out the torch.
+	
+		[companionName]: I'm not sure what you just accomplished there.
+	
+		$set_badLit_0
+	}$else{
+		Kipp: What fire extinguisher?
+	}
+}
+
