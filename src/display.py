@@ -67,6 +67,8 @@ class Display:
                     font_style = (Globals.FontName, Globals.FontSize, "italic")
                 elif format_tag == "underline":
                     font_style = (Globals.FontName, Globals.FontSize, "underline")
+                elif format_tag == "blue":
+                    color = "light blue"
                 else:
                     color = format_tag
                 self.text.tag_config(formatter, foreground=color, font=font_style) # bold=is_bold, italic=is_italicized, underline=is_underlined

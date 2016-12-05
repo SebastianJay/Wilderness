@@ -19,7 +19,7 @@ class Globals:
         'savefiles/sav3.txt',
     ]
     MapsPaths = [
-        ('test_map.txt', 'test_map_color_mask.txt', 'test_map_travel_mask.txt'),
+        ('kipp_map.txt', 'kipp_map_color_mask.txt', 'kipp_map_travel_mask.txt'),
         ('test_map.txt', 'test_map_color_mask.txt', 'test_map_travel_mask.txt'),
     ]
     InAreaPaths = [
