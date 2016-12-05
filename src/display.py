@@ -20,7 +20,7 @@ class Display:
         'orange':   '#ffaa00',
         'pink':     '#ff7feb',
         'purple':   '#ff00ff',
-        'brown':    '#614126',
+        'brown':    '#8B4513'
     }
 
     def __init__(self, root, windowManager):
