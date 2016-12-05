@@ -1,0 +1,42 @@
+#Downtown_Lore_Rodnin
+
+talk to{
+	$if_Halcompanion_eq_1{
+	Rodnin: Hal, Lore. It's good to see you two. What can I do for you?
+	Hal: Lore and I have decided to do more research together in the Wilderness. You and I both know how serious the sinkhole is. Everyone is in danger. We need to save as many people as we can.
+	
+	Rodnin rubbed his forehead. 
+	
+	Rodnin: You're serious about going back? Even after what happened?
+	
+	Lore looked at Hal in confusion, but he paid her no mind.
+	
+	Hal: I'm serious. I can't ignore what's going on anymore. I have to do something about it. And Lore feels the same way about this as I do.
+	Rodnin: In that case, I'm willing to lend you my plane. Send me any data you get, just like old times. I can't say I'm happy to see you two go. Like you said, the sinkhole's serious. And you're flying straight into danger. But, that said, I respect your passion. I do expect my plane returned in one piece. And you two as well. Don't get yourselves killed. 
+	
+	Hal and Lore: Thank you.
+	
+	Rodnin: You can thank me when you get back here safely. 
+	Hal: Right.
+	
+	Rodnin stood up and shook Hal's hand. The two exchanged a heartfelt look. Rodnin turned to Lore and shook her hand as well.
+	
+	Rodnin: Take care. The plane's in the hangar in the @blue{Industrial District}. Do you remember the passcode to override the security? 
+	Hal: I remember. Thanks again. Let's go, Lore.
+	$set_Halcompanion_eq_2
+	}
+	$if_allfriends_eq_1{
+	Rodnin: It's nice to see you, Lore. You've brought company.
+	Lore: Yes, these are my friends Essa, Quen, and Rune. We have a research proposition for you.
+	Rodnin: I'm listening.
+	Lore: We'd like to go to the Wilderness to research more about the sinkhole. Rune is a chemist, Essa a physicist, and Quen an anthropologist. With our own individual strengths, I think we might be able to learn valuable information about what's happening in the Wilderness.
+	Rodnin: I have no doubt of that. I can see the passion in all of your eyes. I'm willing to lend you my plane to fly into the Wilderness. Of course, I expect it back in one piece. In addition, I'll require a full report from you when you return, and rights to any discoveries you make. Do you we have an agreement?
+	
+	Lore looked to her friends. They nodded.
+	
+	Lore: Yes, we have a deal.
+	Rodnin: Wonderful. The plane is held in a hangar in the Industrial District. I'll turn off the security so you can enter safely. Here, take these blueprints for the plane. The plane is programmed to do most things automatically, but this guide will tell you how to do the rest.
+	Lore: Thank you.
+	$set_allfriends_eq_2
+	}
+}
