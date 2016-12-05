@@ -10,7 +10,7 @@ import yaml
 class InAreaWindow(Window):
     def __init__(self, width, height):
         super().__init__(width, height)
-        self.art = [] 
+        self.art = []
         self.maps = []
         self.details = []
         self.names = []
@@ -21,11 +21,11 @@ class InAreaWindow(Window):
         self.maps = []
         self.details = []
         self.names = []
-        self.maps.append(loader.getArt(artslst[0]).splitlines())
+        self.maps.append(loader.getMap(artslst[0]).splitlines())
         self.details.append(loader.getConfig(artslst[1]))
         for item in self.details[0]:
             self.names.append(item)
-            
+
     def update(self, timestep, keypresses):
         # make sure we have loaded
         if len(self.maps) == 0:

@@ -1,0 +1,43 @@
+go to{
+	$if_badCaveIntro_eq_0{
+		$set_badCaveIntro_1
+		$set_badLit_0
+		
+		Kipp: I can't see anything in this room.
+		[companionName]: Don't you have the torch?
+		Kipp: I put it out after we left the last cave. It's too dark to find the lighter in my bag.
+		[companionName]: Didn't you think we might need it again?
+		Kipp: Let's just leave the room and come back.
+		[companionName]: Never mind that, just @red{look around}. I bet there's a switch somewhere.
+	}$else{
+		Kipp: Do we have the right number this time?
+		[companionName]: I don't know. Let's @red{examine} the @yellow{wall puzzle} and try again.
+	}
+		
+}
+
+look around{
+	$if_badCaveIntro_eq_1{
+		$set_badCaveIntro_2
+		
+		Kipp and [companionName] stumbled in the dark for a few minutes.
+		
+		Kipp: @orange{Marko!}
+		[companionName]: This is no time for games!
+		Kipp: ...polo...
+		
+		Let me rephrase that. Kipp and [companionName] wasted an hour in the dark until Kipp hit a button with his shoulder by pure luck. Small sparks began falling from the ceiling and landed in the cups of oil, lighting two rows of torches down the line. The lines ended at the opposite side of the wall. There were several elegant carvings all over the wall and, in the center, there was a puzzle embedded into it.
+		
+		[companionName]: So there are ten wheels with the markings 0 - 9 and an X. 
+		Kipp: What's the X for?
+		[companionName]: Maybe the number can be ten digits or less.
+		Kipp: Yeah, but what number should we enter.
+		[companionName]: There was probably a hint in the other caves. We should @red{examine} the @yellow{wall puzzle} when we're ready to input the answer.
+		Kipp: Sounds like a plan.
+		
+		@bold_orange{It would be in your best interest to save here.}
+		
+	}$else{
+		Kipp: The only thing in this room are the torches, those disturbing statues and the @yellow{wall puzzle}. There's not much we can do except to @red{examine} it. 
+	}
+}

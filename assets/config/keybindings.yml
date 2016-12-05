@@ -5,30 +5,32 @@
 isLoading: {}
 titleScreen: {}
 selectFile:
-    - Arrow keys: Browse options
+    - ArrowKeys: Browse options
     - Return: Confirm option
 credits:
     - Return: Exit
 inAreaCommand:
-    - Printable keys: Form command
-    - Backspace: Deform command
+    - TextKeys: Form command
     - Return: Execute command
+    - PageUp/Down: Scroll history
+    - Tab: Autocomplete
 inAreaChoice:
-    - Arrow keys: Browse choice
+    - ArrowKeys: Browse choices
     - Return: Confirm choice
 inAreaInput:
-    - Printable keys: Form input
-    - Backspace: Deform input
+    - TextKeys: Form input
     - Return: Confirm input
+    - PageUp/Down: Scroll history
 inAreaMap:
-    - Arrow keys: Browse rooms
+    - ArrowKeys: Browse rooms
     - Return: Exit
 inAreaInventory:
-    - Arrow keys: Browse items
+    - ArrowKeys: Browse items
     - Return: Exit
-inAreaAnimating: {}
+inAreaAnimating:
+    - Space(Hold): Fast Scroll
 worldMap:
-    - Arrow keys: Move
+    - ArrowKeys: Move
 worldMapOverArea:
-    - Arrow keys: Move
+    - ArrowKeys: Move
     - Return: Enter Area

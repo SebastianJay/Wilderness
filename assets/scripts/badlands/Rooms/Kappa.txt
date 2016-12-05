@@ -1,0 +1,47 @@
+go to{
+	$if_badKappaIntro_eq_0{
+		$set_badKappaIntro_1
+		
+		Kipp and [companionName] crossed the last bridge and proceeded to the part of the cave that's lighted with two glowing green rocks.
+		
+		[copanionName]: That doesn't look safe.
+		Kipp: Doesn't matter. One more story.
+		[companionName]: And it looks like this explains your final task. The boy journeys to this sacred place with an altar. The boy places the crystal ball on the alter. The other world stabilizes and the terraforming stops, but the inner world crumbles due the prevention of this phenomenon. 
+		Kipp: What? Where's the good end to our world?
+		[companionName]: There's actually one more part to the drawing, but it's been scraped off the wall.
+		Kipp: Oh great. There was probably something else we need to know to save our world, too.
+		
+		[companionName]: I believe I've read about this before: there exists a crystal ball, the one we saw back in Cave Sigma, that holds power to two worlds. It's suppose to save the entire planet the worlds exists on, but at a cost.
+		Kipp: At what cost?
+		[companionName]: By saving one side of the planet the other side will be destroyed to put the planet back in equilibrium. 
+		Kipp: That can't be right.
+		[companionName]: Well it's all a myth so I doubt we can trust anything from what I've seen.
+		Kipp: But all of the drawings beforehand, to my knowledge, actually happened. The drawing right in front of us matches up with the myth, too.
+		[companionName]: I agree.
+		Kipp: So should we look for this orb...?
+		[companionName]: I mean we're part of the prophecy. 
+		
+		Kipp:...sigh. Well the last number is engraved on the altar: @yellow{1}
+		[companionName]: I wonder if there's anything else in here.
+		Kipp: I think we have everything we need. Let's just head back to the @blue{Campsite}.
+		
+	}$else{
+		Kipp: Back here again, but I honestly don't think there's anything left to explore.
+		[companionName]: You sure?
+		Kipp: This cave is too small to hold anything else.
+		[companionName]: Maybe we should @red{look around}.
+		Kipp: If you want to waste time.
+	}
+		
+
+}
+
+look around{
+	[companionName]: Here, let me see the torch.
+	Kipp: Be my guest.
+	[companionName]: Nope, you're right. We have no reason to stay here. we should go back to the @blue{Campsite}.
+	
+	$if_badKappaIntro_eq_1{
+		Kipp: Oh wait. There was that @yellow{1} drawn on the wall.
+	}
+}

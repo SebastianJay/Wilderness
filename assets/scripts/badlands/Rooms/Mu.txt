@@ -1,0 +1,38 @@
+go to{
+	$if_badMuIntro_eq_0{
+		$set_badMuIntro_1
+		
+		Kipp and [companionName] headed for the cave with the Mu sign.
+		Kipp to the lead and walked in first to see a broken lamp with lit oil all over the floor.
+		
+		[companionName]: That's reassuring.
+		Kipp: At least we can see in the cave. Let's just hurry.
+		[companionName]: Looks like more information about this girl:
+		[companionName]: @italic{The girl finds a plane. She comes up with the idea of using the plane to travel to another world.}
+		Kipp: Our's?
+		[companionName]: I don't know. @italic{She's been working on this plane this entire time: researching on a way to bring it back to a working condition. There's also} @italic_orange{another device in the background}@italic{, but it doesn't looked finished yet.}
+		Kipp: Maybe the carrier is an old warehouse that holds extra parts like our barn.
+		[companionName]: So it looks like we're not the only ones on a journey. I wonder how it ends.
+		Kipp: Let's find that last painting. Hey, I see the number @yellow{2} on the side of the plane.
+		[companionName]: I guess it's the only number we see. I wonder if there's anything else in here.
+		Kipp: I doubt it. Let's just head back to the @blue{Campsite}.
+
+	}$else{
+		Kipp: Back here again, but I honestly don't think there's anything left to explore.
+		[companionName]: You sure?
+		Kipp: This cave is too small to hold anything else.
+		[companionName]: Maybe we should @red{look around}.
+	}
+		
+
+}
+
+look around{
+	[companionName]: Here, let me see the torch.
+	Kipp: Be my guest.
+	[companionName]: Nope, you're right. We have no reason to stay here. we should go back to the @blue{Campsite}.
+	
+	$if_badMuIntro_eq_1{
+		Kipp: Oh wait. There was that @yellow{2} drawn on the wall.
+	}
+}

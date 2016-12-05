@@ -1,0 +1,32 @@
+go to{
+	$if_badSigmaIntro_eq_0{
+		$set_badSigmaIntro_1
+		
+		Kipp and [companionName] into the cave.
+		
+		[companionName]: I have a bad feeling about this cave.
+		Kipp: Like a death-filled feeling or magic-trap feeling.
+		[companionName]: Definitely some sort of magic.
+		Kipp: Hey do you see that drawing on the other...
+		
+		Kipp stepped on a pressure plate and a wall of fire sprung from the floor.
+		
+		[companionName]: Great now how are we going to get to the painting?
+		Kipp: Maybe we can find something to @yellow{extinguish} this @yellow{"firewall"}.
+		[companionName]: Whatever you do, don't @bold_red{play with} it.
+
+	}$else{
+		Kipp: Back here again, but I honestly don't think there's anything left to explore.
+		[companionName]: You sure?
+		Kipp: This cave is too small to hold anything else.
+		[companionName]: Maybe we should @red{look around}.
+	}
+}
+
+look around{
+	[companionName]: Other than the @yellow{firewall} trap, there's nothing else in this room.
+	
+	$if_badSigmaPainting_eq_1
+		Kipp: Oh wait. There was that @yellow{65} drawn on the wall.
+	}
+}

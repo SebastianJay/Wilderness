@@ -2,8 +2,8 @@
 Definition for window manager, which is itself a Window that contains
 multiple sub-Windows and arranges when each is displayed/updated.
 """
-from help_window import HelpWindow
 from window import Window
+from help_window import HelpWindow
 from loading_window import LoadingWindow
 from input_window import InputWindow
 from map_window import MapWindow
@@ -36,8 +36,15 @@ class WindowManager(Window):
         # create instances of all the Windows
         self.initWindows()
 
+        # vars for transition animations between window groups
+        self.isTransitioning = False
+        self.transitionTimer = 0.0
+        self.transitionThreshold = 3.0
+
         # register a handler for changing the active window groups based on game mode
         GameState().onGameModeChange += self.gameModeChangeHandler()
+        # register a handler for screen transitioning when protagonist changes
+        GameState().onCharacterSwitch += self.characterSwitchHandler()
 
     def gameModeChangeHandler(self):
         def _gameModeChangeHandler(*args, **kwargs):
@@ -53,6 +60,7 @@ class WindowManager(Window):
                 GameMode.inAreaInput, GameMode.inAreaAnimating]:
                 # use the "main game" window group
                 self.activeWindowGroups = [2]
+                self.isTransitioning = True
             elif new in [GameMode.titleScreen]:
                 # clear, reset, and reload all windows
                 self.clear()
@@ -60,10 +68,17 @@ class WindowManager(Window):
                 self.load()
                 # use the "title" window group
                 self.activeWindowGroups = [1]
+                self.isTransitioning = True
         return _gameModeChangeHandler
 
+    def characterSwitchHandler(self):
+        def _characterSwitchHandler(*args, **kwargs):
+            # enqueue screen transition
+            self.isTransitioning = True
+        return _characterSwitchHandler
+
     def clear(self):
-        super().clear()
+        # NOTE window manager's own pixels are not cleared so they are visible for animation
         # relay clear to all windows
         for win in self.windowList:
             win.clear()
@@ -104,14 +119,14 @@ class WindowManager(Window):
         splitCol = Globals.NumCols * 19 // 24
         splitRow = Globals.NumRows * 5 // 7
         self.addWindow(HistoryWindow, 0, 0, splitRow, splitCol)
-        self.addWindow(InputWindow, splitRow - 1, 0, Globals.NumRows - (splitRow - 1), splitCol)
-        self.addWindow(PaletteWindow, 0, splitCol - 1, Globals.NumRows, Globals.NumCols - (splitCol - 1))
+        self.addWindow(InputWindow, splitRow - 1, 0, Globals.NumRows - (splitRow - 1) - 2, splitCol)
+        self.addWindow(PaletteWindow, 0, splitCol - 1, Globals.NumRows - 2, Globals.NumCols - (splitCol - 1))
 
-        self.addWindow(MapWindow, 0, 0, Globals.NumRows, Globals.NumCols * 3 // 4)
-        self.addWindow(InAreaWindow, 0, 0, Globals.NumRows, Globals.NumCols)
+        self.addWindow(MapWindow, 0, 0, Globals.NumRows-2, Globals.NumCols * 3 // 4)
+        self.addWindow(InAreaWindow, 0, 0, Globals.NumRows-2, Globals.NumCols)
         # add inventory window
-        self.addWindow(SettingsWindow, 0, 0, Globals.NumRows, Globals.NumCols)
-        self.addWindow(InventoryWindow, 0, 0, Globals.NumRows, Globals.NumCols)
+        self.addWindow(SettingsWindow, 0, 0, Globals.NumRows-2, Globals.NumCols)
+        self.addWindow(InventoryWindow, 0, 0, Globals.NumRows-2, Globals.NumCols)
         self.addWindow(HelpWindow, Globals.NumRows - 3, 0, 3, Globals.NumCols)
         #self.addWindow(InventoryWindow, Globals.NumRows//4, Globals.NumCols//4, Globals.NumRows//2, Globals.NumCols//2)
         # self.addWindow(SaveWindow, 0, 0, 35, 120)
@@ -119,19 +134,26 @@ class WindowManager(Window):
         # NOTE to debug, add a tuple with the index (in self.windowList) of your window to self.windowGroups
         #  then change self.activeWindowGroups to be a list containing just the index (in self.windowGroups) of that tuple
         self.windowGroups = [
-            (0,),       # loading window
-            (1,),       # title window
-            (3, 2, 4, 9),  # Input, History, and Palette windows
+            (0,),       # Loading window
+            (1,),       # Title window
+            (3, 2, 4, 9),  # Input, History, Palette, and Help windows
                         #NOTE the ordering here is specific as Input gets updated before History
-            (5,),
+            (5,),       # Map Window
             (6,),       # InArea window
-            (7,),
+            (7,),       # Settings window
         ]
         # which window group is on screen initially
-        self.activeWindowGroups = [3]
+
+        self.activeWindowGroups = [1]
 
     def draw(self):
         """ stitches together multiple Windows from active group into the screen """
+        # if transitioning, freeze draw calls and use last drawn frame
+        if self.isTransitioning:
+            self.alphaLevel = min(int(self.transitionTimer * Globals.AlphaMax\
+                * 1.1 / self.transitionThreshold) + 1, Globals.AlphaMax)
+            return self.pixels
+
         formatting = []
         for groupind in self.activeWindowGroups:
             group_formatting = []
@@ -214,6 +236,15 @@ class WindowManager(Window):
         for key in keypresses:
             if key == 'F11':
                 self.fullScreen = 1 - self.fullScreen
+
+        # if in transition mode, freeze update calls
+        if self.isTransitioning:
+            self.transitionTimer += timestep
+            if self.transitionTimer >= self.transitionThreshold:
+                self.transitionTimer = 0.0
+                self.alphaLevel = 0
+                self.isTransitioning = False
+            return
 
         # update is only sent to activeWindowGroups[-1], so the foreground windows
         for winind in self.windowGroups[self.activeWindowGroups[-1]]:

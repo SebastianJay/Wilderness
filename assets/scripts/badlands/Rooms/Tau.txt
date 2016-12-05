@@ -1,0 +1,53 @@
+go to{
+	$if_badTauIntro_eq_0{
+		$set_badTauIntro_1
+		There were five narrow paths leading to the caves across the canyon. Kipp and [companionName] set forth to the cave closest to them. 
+		
+		Kipp: Watch you step.
+		[companionName]: Don't look down.
+		Kipp: Kind of hard to do both of those at the same time.
+		
+		After a several stressful minutes, they finally reached the other side and entered the cave.
+
+		Kipp: I can't see a thing. It's pitch black in here.
+		
+		[companionName]: Maybe if we @red{look around}, we're bound to find something.
+		Kipp: I could try to @red{use} a @yellow{lighter} if I still have one.
+		
+	}$else{
+		Kipp: Back here again, but I honestly don't think there's anything left to explore.
+		[companionName]: You sure?
+		Kipp: This cave is too small to hold anything else.
+		[companionName]: Maybe we should still @red{look around}.
+	}
+}
+
+use lighter{
+	[companionName]: I think the flame is too small to shine it on anything.
+	
+	Kipp: Well then we have to keep @red{looking around}.
+}
+
+
+look around{
+	$if_badTauIntro_eq_1{
+		$set_badTauIntro_2
+		
+		Kipp dragged his hand against the wall until he hit it on a @yellow{torch} conveniently placed next to a drawing.
+		
+		Kipp: Now if there was only a way to @yellow{light} this thing.
+	}$else{
+		
+		$if_badLit_eq_1{
+			[companionName]: There's that painting on the wall and the @yellow{torch} is still lit. 
+			
+			$set_badTauPainting_1{
+				Kipp: Oh wait. There was that @yellow{6} written on the wall.
+			}
+		}$else{
+			[companionName]: Kipp, we still need to light the @yellow{torch} in the cave before we can @red{look around}.
+		}
+		
+	}
+	
+}

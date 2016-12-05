@@ -1,0 +1,15 @@
+$if_inventory_lighter_eq_1{
+
+	inspect{
+		Kipp: It's a small lighter like the one my dad use to keep beside his box of cigarettes. Operates like one, too.
+	}
+	
+	use{
+		[companionName]: You just put your finger on the sparkwheel and flick...
+		Kipp: I know how to operate a lighter.
+		[companionName]: Well I had to use some filler since you know just @red{using} the item doesn't do much.
+	}
+	
+}$else{
+	Kipp: What lighter?
+}

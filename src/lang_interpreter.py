@@ -85,11 +85,11 @@ class Interpreter:
                     gs.delVar(args[0], inventoryFlag)
                 elif node.title in ['set', 'inc', 'add', 'dec', 'sub']:
                     args, inventoryFlag = self.extractInventory(node.args)
+                    gs.touchVar(args[0], inventoryFlag)
                     # if command specifies amount to increment by use that, otherwise use 1
                     incVal = 1
                     if len(args) == 2:
                         incVal = int(args[1])
-                    gs.touchVar(args[0], inventoryFlag)
                     # whether to add to an existing total
                     addVal = int(gs.getVar(args[0], inventoryFlag))
                     if node.title == 'set':

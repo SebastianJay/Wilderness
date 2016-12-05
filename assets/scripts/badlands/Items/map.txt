@@ -1,0 +1,17 @@
+$if_inventory_map_eq_1{
+
+	inspect{
+		Kipp: Yup. It's right here: @blue{cave 6} is accessible through that tunnel marked on the map.
+		[companionName]: You just drew a blue six over the red sign on the map.
+		Kipp: And that's how we're gonna reference it.
+	}
+	
+	use{
+		Kipp: Yup. It's right here: @blue{cave 6} is accessible through that tunnel marked on the map.
+		[companionName]: You just drew a blue six over the red sign on the map.
+		Kipp: And that's how we're gonna reference it.
+	}
+	
+}$else{
+	Kipp: What map?
+}

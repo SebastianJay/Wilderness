@@ -60,7 +60,7 @@ class AssetLoader:
                             continue
                         # Store file text into dictionary
                         with codecs.open(norm_path, "r", "utf-8") as f:
-                            assets[norm_path] = f.read()
+                            assets[norm_path] = f.read().replace('\r\n', '\n').replace('\r', '\n')
                     except:
                         success_flag = False
 
@@ -119,7 +119,7 @@ class AssetLoader:
 
         def joinAndNorm(self, *args):
             return os.path.normcase(os.path.normpath(os.path.join(*args)))
-            
+
         def reverseItemLookup(self, name):
             if name in self.reverseItem:
                 return self.reverseItem[name]

@@ -34,3 +34,4 @@ class Globals:
     IconFilePathUnix = 'assets/art/icon.xbm'
     CmdMaxLength = 48
     NameMaxLength = 8
+    AlphaMax = 8        # should be power of two
