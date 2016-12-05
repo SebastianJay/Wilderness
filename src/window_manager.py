@@ -122,7 +122,7 @@ class WindowManager(Window):
         self.addWindow(InputWindow, splitRow - 1, 0, Globals.NumRows - (splitRow - 1) - 2, splitCol)
         self.addWindow(PaletteWindow, 0, splitCol - 1, Globals.NumRows - 2, Globals.NumCols - (splitCol - 1))
 
-        self.addWindow(MapWindow, 0, 0, Globals.NumRows-2, Globals.NumCols * 3 // 4)
+        self.addWindow(MapWindow, Globals.NumRows//4, Globals.NumCols//4, (Globals.NumRows//2)-2, (Globals.NumCols//2))
         self.addWindow(InAreaWindow, 0, 0, Globals.NumRows-2, Globals.NumCols)
         # add inventory window
         self.addWindow(SettingsWindow, 0, 0, Globals.NumRows-2, Globals.NumCols)
