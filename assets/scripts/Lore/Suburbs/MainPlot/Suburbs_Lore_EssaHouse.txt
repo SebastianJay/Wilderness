@@ -1,0 +1,82 @@
+#Suburbs_Lore_EssaHouse
+
+go to{
+	$if_analyzedata_eq_6{
+		Lore knocked on the door. It was answered by Essa's little sister, Nillie.
+		
+		Nillie: Uh, hello?
+		Lore: Hi, I'm Essa's friend, Lore.
+		Nillie: Hi, Lore.
+		Lore: Can I talk to you for a second?
+		
+		Nillie's mother appeared behind her. She was wrapped in a house robe, her hair unkempt.
+		
+		Mother: Nillie, who are you talking to?
+		Lore: Hi, I'm Essa's friend, Lore.
+		Mother: Essa's not home.
+		Lore: Oh, I know, I actually came to talk to you and your family. 
+		Mother: Why? Is Essa okay? Oh god...
+		Lore: Essa's fine! She's great, actually! May I speak to Nillie alone?
+		Mother: Absolutely not.
+		Lore: But-
+		Mother: Anything you have to say to my daughter, you can say in front of me.
+		Lore: *sigh* Okay. You see, Essa wants to come with me to the Wilderness to do research.
+		Mother: My lord! What have you put into my daughter's head? What are you trying to do to my family!? You're ruining everything! You can't take my Essa away!
+		
+		She began sobbing. Nillie, confused, also began to cry. Footsteps behind them made them bolt to the sides of the door. Nillie's father swaggered up, eyes bloodshot.
+		
+		Father: What's going on over here? Why all the yapping?
+		
+		Lore swallowed a lump in her throat.
+		
+		$Choice{
+			Essa and I want to do research in the Wilderness|
+				Lore: Essa and I want to do research in the Wilderness. It's important, and it may save-
+				Father: Essa...That little punk. She wants to leave? After everything I've done for her? Turn her back on her family, just like that?
+				Lore: It's not like that, Essa's trying to save you by stopping the sinkhole.
+				Father: The sinkhole, eh? That's a load of you know what.
+				
+				He spat.
+				
+				Father: If she wants to leave us, fine. But you tell her that if she comes back, I'll make her pay for what she did. I'll kill her. Y'hear? 
+				
+				He shoved Nillie out the door. Lore caught her in her arms.
+				
+				Father: You want Nillie, too, huh? Well good riddance. 
+				Mother: No, please-
+				Father: Shut up! If I catch another word of your whining I'll cut your tongue out. 
+				
+				He grabbed his wife by the arm and slammed the door in Lore and Nillie's face. The little girl was still crying.
+				
+				Lore: Hey, Nillie, it's okay, I'll take you somewhere safe.
+				
+				Nillie looked up at Lore, eyes full of tears.
+				
+				Nillie: But you're taking my sister away? I'm never going to see her again.
+				Lore: No, no, we're only going away for a little while. We'll be back, don't worry. Essa will come and live with you and take care of you as soon as we get back.
+				
+				Nillie didn't respond, but she was no longer crying. Lore needed to take her to @blue{Hal's house}.
+				$set_analyzedata_7
+			|I'm taking Nillie to a safe home|
+				Lore: I'm taking Nillie with me to a safe place.
+				
+				Nillie's father leaned close to Lore and stared into her eyes. Lore could feel his stale breath hit her face.
+				
+				Father: That so? There's no safer place than here for her. We're her family. And who are you? Some stranger.
+				Lore: Nillie deserves better than this. I'm taking her. 
+				
+				Nillie's father looked smugly down at his daughter.
+				
+				Father: Nillie, what do you say? Do you want to go with some stranger, or your family that's loved you since you were born?
+				
+				Nillie closed her eyes in fear. After a moment, she stepped outside the door and grabbed Lore's hand.
+				
+				Father: Why you-
+				
+				Nillie's mother screamed. Without thinking, Lore hoisted Nillie into her arms and bolted down the road towards @blue{Hal's house}.
+				$set_analyzedata_7|
+		}
+	}$else{
+		Lore knocked on the door. No one answered.
+	}
+}

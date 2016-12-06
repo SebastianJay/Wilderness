@@ -6,6 +6,18 @@ Take{
 			Lore tucked the book into her bag.
 			$inc_loreMorality_-1
 			$set_stoleplaneguide_eq_1
+			$if_beglearnedplane_1{
+			Lore: If I have the blueprints, I can figure out how to fly the plane. I won't need to rely on anyone else or take them from their busy lives. Maybe if I follow Rodnin after he leaves the office tonight, I'll learn where the plane is. Then, I can take it and finally get to the Wildnerness.
+			$Choice{
+				Wait outside the office until nightfall|
+					Lore exited the building and waited, hidden, in the @blue{Business District}. After a while, @green{Rodnin} came out of the office, followed by the secretary and lift attendant. @green{Rodnin} waved goodbye and headed in the direction of the @blue{Industrial District}.
+					$set_followRodnin_eq_1
+				|There's a better way|
+				Lore: There's no need for me to steal just to get to the Wilderness. I should find another way.|
+			}
+			}$else{
+			Lore: Plane blueprints? I wonder why? I should talk to Rodnin, maybe he's hiding something.
+			}
 		|Put it back|
 			Lore put the book back on the shelf.
 			$inc_loreMorality_1|

@@ -1,0 +1,58 @@
+#Mid_LoreDowntownIndustrialDistrict
+
+go to{
+	$if_followRodnin_eq_1{
+	Lore followed Rodnin into the Industrial District. She rounded the corner and looked for Rodnin. The street was empty. Panic knotted her stomach. Then she heard the creak of a door. She whipped her head to the right and caught a glimpse of Rodnin entering what looked to be a large storage unit. She raced after him, heart pounding in her head. She peeked into the storage unit. Like a dream, the plane was stationed right in the middle of the storage unit, which Lore realized to be a hangar. She had to stop herself from gasping. Never had she seen an aircraft up close. Its metal wings shimmered in the moonlight filtering through the open door. She wondered how something so big and heavy could possibly fly. 
+	
+	Rodnin: Now where did I leave that...
+	
+	Lore leaped back behind the door, startled by Rodnin's voice. She heard him rummaging through something. Taking her chance, Lore raced back to the @blue{Business District}. 
+	
+	As Lore caught her breath, exhaustion came over her.
+	
+	Lore: I should get some sleep. In the morning, I can figure out what to do. All I have to do is get the plane out of the hangar and fly it. That shouldn't be so bad...right? Anyways, I should head home.
+	
+	Lore trudged to the subway and took the train home. She was so tired that she ignored Marthi's greeting at the door. She collapsed into her bed and fell asleep.
+	$set_followRodnin_eq_2
+	
+	}$if_followRodnin_eq_2{
+	Lore entered the Industrial District. The @blue{Hangar} was to her right.
+	@bold{Once you enter the hangar, you will not be able to leave. Make any necessary preparations before entering.}
+	
+	}$if_enteredHangar_eq_1{
+	Lore turned to leave. To her surprise, the door had closed behind her. She tried to open it, but it wouldn't budge. Fear settled to the bottom of her stomach. There was no turning back now.
+	}
+	
+	$if_Halcompanion_eq_2{
+	Lore and Hal walked down the street to the Industrial District.
+	
+	Hal: The @blue{hangar} is just over there.
+	
+	He pointed to a large warehouse-like structure.
+	
+	$Choice{
+		I'm ready to go|
+			Lore: I'm ready.
+			Hal: Great, let's go, then.
+		|Wait|
+			Lore: Wait, I forgot something.
+			Hal: Oh. Alright, well don't be long. I'll be waiting for you in the @blue{Hangar}.
+	}
+	}
+	
+	$if_allfriends_eq_2{
+	Lore led Essa, Rune, and Quen to the Industrial District.
+	
+	Essa: So where's the @blue{hangar}?
+	Quen: More importantly, who gets to fly the plane?
+	Rune: I think it's that big building over there.
+	}
+	
+	}$else{
+	Lore began walking towards the Industrial District, but was stopped by an officer.
+	
+	Officer: Road's closed at the moment, ma'am. The street lights went out all of a sudden, so we're closed until they're fixed. Come back later.
+	
+	Lore turned back. She could head to the @blue{Business District}, @blue{Shopping District}, or the @blue{Park}.
+	}
+}

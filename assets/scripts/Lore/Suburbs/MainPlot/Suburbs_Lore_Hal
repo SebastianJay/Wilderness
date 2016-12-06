@@ -1,0 +1,156 @@
+#Suburbs_Lore_Hal
+
+talk to{
+	Lore: Hello, Hal.
+	Hal: Lore! How are you? I'm doing well myself. It's so nice of you to stop by and visit me.
+	$Choice{
+		$if_Halnumber_1{
+		Tell me about your research|
+			Lore: What can you tell me about the research you did with Rodnin?
+			Hal: Oh, I'm surprised to hear you ask that. Met Rodnin, did you? Great guy. But that's beside the point, isn't it? I studied the movements of the tectonic plates in relation to the sinkhole. The strangest thing was that there was no clear pattern. Usually, the tectonic plates shift in very predictable ways. Uh, if you map the seismic waves over a few years, which we did, you start to see peaks of activity fall on certain dates. Or, uh, you can predict small earthquakes by watching for an increase in activity. But...The way that the plates are behaving now, it's almost random. I just couldn't wrap my head around it. 
+				Lore: Why would that happen?
+				
+				Hal shook his head.
+				
+				Hal: I just don't know. But I can tell you one thing. The readings would sometimes go off the charts. I'm talking catastrophic levels of seismic activity. That sinkhole is opening, and it's not going to pretty when she reaches full size. Everyone is in danger. All my fellow researchers in the Wilderness, too. I told them to get out, but they wouldn't listen to me. I wish there was a way to rescue them.
+				
+					$Choice{
+					Come with me to the Wilderness|
+					Lore: I want to go to the Wilderness. You could come with me, and we could rescue the people in trouble.
+					
+					Hal sat in silence for a moment, staring at the ground. He then raised his eyes to the ceiling, and back to Lore.
+					
+					Hal: You're right. There's no way I can sit here and twindle my thumbs while my friends are in trouble. I'll speak to Rodnin about borrowing his plane if you're serious about this. Come meet me at his office when you're ready to leave. Oh, and Lore...Thanks. 
+					
+					Hal stood up and walked Lore to the door. He smiled and waved goodbye, shutting the door softly behind her.
+					$set_Halcompanion_1
+					$set_Halnumber_3
+					|They chose to risk their lives|
+					Lore: They chose to risk their lives doing research. It's their fault if they die.
+					
+					Hal seemed taken aback.
+					
+					Hal: I guess, but...Well...Nevermind. 
+					
+					He blinked at Lore with tired eyes.
+					
+					Hal: I'm actually in the middle of something right now, so I'll show you out. Thanks for stopping by.
+					
+					Hal stood up and walked Lore to the door. He smiled and waved goodbye, shutting the door softly behind her.|
+					}
+		|Tell me about the missing children|
+			Hal: What a tragedy. I don't know much about it other than the rumors around the neighborhood. If you're looking into it, I would start with that weird man in the pink suit outside. He just stands there all day and night. I haven't the slightest idea what he's doing, but it sure looks like he's guarding something. If you do go investigate, please be careful. It wouldn't hurt to go armed, as well. Just...Make sure you come back in one piece.
+			
+			Hal stood up and walked Lore to the door. He smiled and waved goodbye, shutting the door softly behind her.
+		|Nevermind|
+			Hal: Oh, no problem. Are you tired? Maybe you should get some rest. Take care of yourself, Lore.
+			
+			Hal stood up and walked Lore to the door. He smiled and waved goodbye, shutting the door softly behind her.|
+		}
+		$if_Halnumber_2{
+		About the data|
+			Lore: I started working in Rodnin's lab. I've analyzed the data samples from the Wildnerness. I was hoping you could tell me a little bit more about it.
+			Hal: Oh, that's a surprise! Not that I doubt you, your mother was also a brilliant scientist. Um, yes, the data. Confusing, isn't it? I searched for a pattern in the tectonic plate activity for years, but the outbreaks seemed random.
+			Lore: The percentage of soluble rocks seems to be decreasing rapidly. I thought the government said the sinkhole wasn't serious?
+			
+			Hal looked grave.
+			
+			Hal: Oh, the sinkhole's serious. Listen, Lore, I'm really not supposed to talk about this, but I trust you. When I was in the Wilderness, there was an earthquake almost every week. The wildlife is going crazy. After every earthquake, the amount of destruction in the forestry was devastating. Most of the animals had already fled. I'm sure you've noticed our recent pest infestation in the suburbs? They're not invading, they're running. From the sinkhole. Everyone still in the Wilderness is going to get hurt. I wish there was something I could do to save them.
+			
+			$Choice{
+					Come with me to the Wilderness|
+					Lore: I want to go to the Wildnerness to study this more. You're welcome to come with me, and we can rescue the people still in the Wilderness while we're there. What do you say?
+					
+					Hal sat in silence for a moment, staring at the ground. He then raised his eyes to the ceiling, and back to Lore.
+					
+					Hal: You're right. There's no way I can sit here and twindle my thumbs while people are in trouble. I'll speak to Rodnin about borrowing his plane if you're serious about this. Come meet me at his office when you're ready to leave. Oh, and Lore...Thanks. 
+					
+					Hal stood up and walked Lore to the door. He smiled and waved goodbye, shutting the door softly behind her.
+					$set_Halcompanion_1
+					$set_Halnumber_3
+					|They chose to risk their lives|
+					Lore: They chose to risk their lives doing research. It's their fault if they die.
+					
+					Hal seemed taken aback.
+					
+					Hal: I guess, but...Well...Nevermind. 
+					
+					He blinked at Lore with tired eyes.
+					
+					Hal: I'm actually in the middle of something right now, so I'll show you out. Thanks for stopping by.
+					
+					Hal stood up and walked Lore to the door. He smiled and waved goodbye, shutting the door softly behind her.|
+					}
+		|Tell me about the missing children|
+			Hal: What a tragedy. I don't know much about it other than the rumors around the neighborhood. If you're looking into it, I would start with that weird man in the pink suit outside. He just stands there all day and night. I haven't the slightest idea what he's doing, but it sure looks like he's guarding something. If you do go investigate, please be careful. It wouldn't hurt to go armed, as well. Just...Make sure you come back in one piece.
+			
+			Hal stood up and walked Lore to the door. He smiled and waved goodbye, shutting the door softly behind her.
+		|Nevermind|
+			Hal: Oh, no problem. Are you tired? Maybe you should get some rest. Take care of yourself, Lore.
+			
+			Hal stood up and walked Lore to the door. He smiled and waved goodbye, shutting the door softly behind her.|
+		}
+		$if_Halnumber_3{
+		Hal: Oh, hi. Did you forget something? Listen, when you're ready, meet me at Rodnin's office. I need to get ready for the trip. I'll see you there.
+		
+		Hal closed the door.
+		}$if_analyzedata_eq_5{
+			Lore: I have a huge favor to ask of you.
+			Hal: What is it?
+			
+			Lore told Hal about her employment with Rodnin, the data, and Essa.
+			
+			Lore: Essa comes from a pretty rough background.
+			Hal: I know. I know just about everyone who lives in this neighborhood, including Essa and her family. It's a real shame. Those girls are so sweet, Essa and her sister. They don't deserve to be treated like that.
+			Lore: I know it's a lot to ask, but if you could take care of Essa's sister while we're gone, we'd be forever in your debt.
+			Hal: I'd be happy to take her in, but what would her father say? I'm not inclined to get on that man's bad side. If he found out I was harboring her, he could call the police on me for abduction. I'm not legally her parent. Besides, we're not that far apart in age, you and I. I'm not too sure I'd make a good parent just yet. I'm not even married.
+			Lore: If I get her father's permission, would you accept?
+			Hal: Speaking of, do you even have her permission? Don't decide the poor girl's fate without even asking her. If you get both of them to agree to it, then I'll take her in. But don't put yourself in unnecessary danger. Their father can be violent.
+			Lore: It's a deal.
+			$set_analyzedata_6
+		}$if_analyzedata_eq_7{
+			Lore: I've brought Nillie.
+			Hal: I don't think I want to know how you managed that.
+			
+			Hal kneeled down to look at Nillie eye to eye.
+			
+			Hal: I don't know if you remember me, but I'm-
+			Nillie: Hal. You're the cookie man.
+			
+			Hal laughed.
+			
+			Hal: I'm the cookie man? I guess I did bring cookies when I volunteered at school, didn't I? Would you like some cookies?
+			
+			Nillie nodded.
+			
+			Hal: Okay! Why don't you go sit on the couch and then we can make them together?
+			
+			Nillie scampered over to the couch.
+			
+			Hal: I think she'll be fine here.
+			Lore: I can't thank you enough, Hal.
+			Hal: Ah, don't worry about it.
+			
+			Hal glanced fondly over his shoulder at Nillie.
+			
+			Hal: So you're off to the Wildnerness now?
+			Lore: I guess so.
+			Hal: Well, I hope you have better luck than I did. And if you need anything, smoke signals, carrier pigeons, radio. Anything works.
+			Lore: Thank you.
+			
+			Lore said goodbye to Hal and Nillie and stepped out the door.
+			$set_analyzedata_8
+		}$else{
+		$Choice{
+			Tell me about the missing children|
+				Hal: What a tragedy. I don't know much about it other than the rumors around the neighborhood. If you're looking into it, I would start with that weird man in the pink suit outside. He just stands there all day and night. I haven't the slightest idea what he's doing, but it sure looks like he's guarding something. If you do go investigate, please be careful. It wouldn't hurt to go armed, as well. Just...Make sure you come back in one piece.
+				
+				Hal stood up and walked Lore to the door. He smiled and waved goodbye, shutting the door softly behind her.
+			|Nevermind|
+				Hal: Oh, no problem. Are you tired? Maybe you should get some rest. Take care of yourself, Lore.
+				
+				Hal stood up and walked Lore to the door. He smiled and waved goodbye, shutting the door softly behind her.|
+			}
+		}
+	}
+}

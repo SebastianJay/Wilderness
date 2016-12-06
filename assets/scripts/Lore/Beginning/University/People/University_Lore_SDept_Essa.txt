@@ -1,0 +1,109 @@
+#University_Lore_SDept_Essa
+
+talk to{
+	$if_analyzedata_eq_4{
+		Lore: Hey, Essa.
+		Essa: Lore!
+		
+		Essa thrust her arm around Lore's neck forcefully in greeting.
+		
+		Lore: *wheezing* It's nice to see you too.
+		
+		Essa released her.
+		
+		Essa: Now what do I owe this honor?
+		Lore: Actually, I need your help.
+		Essa: What? Okay, no more details necessary. You tell me who to beat up, and I'll make sure they never come near you again. 
+		Lore: Not that kind of help.
+		
+		Essa softened her tone.
+		
+		Essa: What's wrong?
+		Lore: I took the job for Rodnin.
+		Essa: Okay, and that's bad how?
+		Lore: I'm going to the Wilderness to do research for him. With Rune.
+		Essa: I don't understand.
+			$Choice{
+			The sinkhole is real|
+				Lore: The sinkhole is real, and it's huge. If I don't find a way to stop it, a lot of people are going to get hurt.
+				Essa: Okay, but why do you have to be the one to stop it? Let someone else do it. 
+				Lore: No, there's no one else. I have to do it. And we could use your help.
+				Essa: My help?
+				Lore: You're studying physics, plus you're the strongest person I know. Having you with us would make things a lot easier. 
+				Essa: I can't leave my baby sister. What would happen to her if I'm gone?
+				
+				Essa gingerly touched a burn mark on her arm. It was probably her latest gift from her father.
+				
+				Lore: I could find someone to take care of her.
+				Essa: Lore...I want to help, but...Is the city in danger? Is my sister in danger from the sinkhole?
+				
+				Lore nodded.
+				
+				Essa: Then I guess we have no choice. If you find someone responsible who will look after her, then I'll go with you.
+				Lore: Thank you, Essa.
+				Lore: (Out of all the people I can think of that would be willing to take care of a child, it would be Hal. I should go to his house in the suburbs.)
+				$set_analyzedata_5
+			|Rune found a manmade chemical|
+				Lore: Rune found a manmade chemical in the soil. We think someone's intentionally destroying the Wilderness.
+				Essa: Okay, well we live kilometers from the Wilderness. Why does that affect us?
+				Lore: All of our resources come from the Wilderness. If it's destroyed, our city won't survive.
+				Essa: Why do you have to be the one to stop it? Let someone else do it.
+				Lore: It has to be us. And we could use your help.
+				Essa: What?
+				Lore: You're studying physics, plus you're the strongest person I know. Having you with us would make things a lot easier. 
+				Essa: I can't leave my baby sister. What would happen to her if I'm gone?
+				
+				Essa gingerly touched a burn mark on her arm. It was probably her latest gift from her father.
+				
+				Lore: I could find someone to take care of her.
+				Essa: Lore...I want to help, but...Is my sister in danger from this? Is she going to suffer if we don't stop it?
+				
+				Lore nodded.
+				
+				Essa: Then I guess we have no choice. If you find someone responsible who will look after her, then I'll go with you.
+				Lore: Thank you, Essa.
+				Lore: (Out of all the people I can think of that would be willing to take care of a child, it would be Hal. I should go to his house in the suburbs.)
+				$set_analyzedata_5
+			|It's complicated|
+				Lore: It's complicated and hard to explain. But a lot of people will get hurt if we don't do something.
+				Essa: How many people are we talking? Who's going to hurt them?
+				Lore: Not who. What. Rune and I analyzed the data, and it seems like someone is intentionally destroying the Wilderness.
+				Essa: But how does that affect us? We live kilometers from the Wilderness?
+				Lore: All of our resources come from the Wilderness. If it's destroyed, our city won't survive.
+				Essa: Why do you have to be the one to stop it? Let someone else do it.
+				Lore: It has to be us. And we could use your help.
+				Essa: What?
+				Lore: You're studying physics, plus you're the strongest person I know. Having you with us would make things a lot easier. 
+				Essa: I can't leave my baby sister. What would happen to her if I'm gone?
+				
+				Essa gingerly touched a burn mark on her arm. It was probably her latest gift from her father.
+				
+				Lore: I could find someone to take care of her.
+				Essa: Lore...I want to help, but...Is my sister in danger from this? Is she going to suffer if we don't stop it?
+				
+				Lore nodded.
+				
+				Essa: Then I guess we have no choice. If you find someone responsible who will look after her, then I'll go with you.
+				Lore: Thank you, Essa.
+				Lore: (Out of all the people I can think of that would be willing to take care of a child, it would be Hal. I should go to his house in the suburbs.)
+				$set_analyzedata_5
+			}
+	}$else{
+		Lore: Hey, Essa.
+		Essa: Hey, Lore! What's up, sistah?
+		$Choice{
+			Just checking in|
+				Lore: I just wanted to see how you're doing.
+				Essa: Oh, you know me. I'm always good. How are you?
+				Lore: I'm fine. But I was asking about you.
+				Essa: My baby sister's birthday is coming up, did I tell you? 
+				Lore: That...That's still not about you.
+				
+				Essa launched into a story about her sister's first birthday. Lore ran away as quickly as she could.
+			|Pat her head|
+				Lore questioned why she would pat Essa on the head. She knew Essa would pat her back, but looking at Essa's muscles, she would probably get a concussion. Lore decided not to.
+			|Nevermind|
+				Essa: Cool. See ya around!
+		}
+	}
+}

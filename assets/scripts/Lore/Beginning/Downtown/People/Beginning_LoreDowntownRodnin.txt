@@ -56,28 +56,24 @@ talk to{
 						Be honest.|
 							Lore: Yes, actually. I've been getting them more and more recently.
 							Rodnin: Ah, well. I've heard something's going around...Listen, I know it sounds a bit weird, but please let me know if anything out of the ordinary happens. Saftey and all that, yes?
-							$inc_begtalktoRodnin_1
 						|Lie.|
 							Lore: No, I haven't.
 
 							Something in Rodnin's eyes made Lore think he seemed disappointed.
 
 							Rodnin: Is that so? I'm glad to hear it.
-							$inc_begtalktoRodnin_1
-					}
+							}
 				|Not so good.|
 					Rodnin: Oh, I'm sorry to hear that. Headaches?
 					Be honest.|
 							Lore: Yes, actually. I've been getting them more and more recently.
 							Rodnin: Ah, well. I've heard something's going around...Listen, I know it sounds a bit weird, but please let me know if anything out of the ordinary happens. Saftey and all that, yes?
-							$inc_begtalktoRodnin_1
 						|Lie.|
 							Lore: No, I haven't gotten any headaches.
 
 							Something in Rodnin's eyes made Lore think he seemed disappointed.
 
-							Rodnin: Is that so? I'm glad to hear it.
-							$inc_begtalktoRodnin_1|
+							Rodnin: Is that so? I'm glad to hear it.|
 			}
 		|Tell me about the work you did with my mother.|
 			Rodnin: Oh, it was mostly genetic engineering. Being an environmental scientist, I was a bit lost the whole time.
@@ -85,7 +81,6 @@ talk to{
 			Rodnin chuckled a little.
 
 			Rodnin: Not your mother, though, no. She was amazing. Fast worker, always on schedule. She was one of those scientists that never lost their imagination in school. She was always saying she had a dream, or rather a vision of the future. She said it was a secret and she'd tell me when the time came, but...She got sick before she could ever tell me. If you ask me, I think her secret vision was you. Your mother really loved you. She believed in you, that you would do everything she couldn't or didn't have time for. Well, I suppose you already know all this. You lived with her, after all.
-			$inc_begtalktoRodnin_1
 		|Tell me about the Wilderness.|
 			Rodnin leaned in closer, his eyes sparkling.
 
@@ -104,13 +99,29 @@ talk to{
 			Lore: Plane? But, aircrafts-
 			Rodnin: Yes, yes, rocketry is a recent invention. Only a few people in the world have planes. I happen to be one of those people. *laughs* Don't look so impressed.
 			$set_beglearnedplane_1
-			$inc_begtalktoRodnin_1
+			$if_stoleplaneguide_eq_1{
+			Lore: (So he has a plane, and that's what these blueprints are for. He must have the plane stored somewhere closeby. If I follow him after he leaves the office, maybe I can find the plane and take it myself.
+				$Choice{
+				Wait outside the office until nightfall|
+					Lore exited the building and waited, hidden, in the @blue{Business District}. After a while, @green{Rodnin} came out of the office, followed by the secretary and lift attendant. @green{Rodnin} waved goodbye and headed in the direction of the @blue{Industrial District}.
+					$set_followRodnin_eq_1
+				|There's a better way|
+				Lore: There's no need for me to steal just to get to the Wilderness. I should find another way.|})
+			}
 		|Nevermind.|
+		$if_analyzedata_eq_1{ |I've analyzed the data.
+			Rodnin: That was fast. I knew you were a brilliant scientist from the moment I met you. So, what did you find out?
+			Lore: The rocks are breaking down quickly. It looks like the sinkhole is true.
+			
+			Rodnin didn't seem surprised.
+			
+			Rodnin: Yes, I figured as much. There were tremors almost every day when I was in the field.
+			Lore: I'd like to go to the Wildnerness to study this more.
+			Rodnin: Would you? Oh, I see. You need the plane to get there. Well, Lore, you've analyzed one piece of data for me. Why would I trust you with one of the most valuable pieces of technology in the world?
+			Lore: But my mother-
+			Rodnin: Yes, your mother. I would trust your mother with the plane. But I don't know you. Prove your worth. Once I see your passion for this research, then we can talk about the plane.|
+			}
 		}
 	}
-	$if_begtalktoRodnin_eq_4{
-		Rodnin: What can I do for you?
-		Lore: Need any help?
-		Rodnin: No, thank you, though.
-	}
 }
+
