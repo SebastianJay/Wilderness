@@ -1,7 +1,7 @@
 #Beginning_LoreHouseBedroom
 #Lore wakes up at her house to start her side of the game
 
-go to{
+_awake{
 	$if_loreHouseIntro_eq_0{
 		$set_loreHouseIntro_1
 		A radio was going off in the @blue{house}. Lore's eyes batted open, the haze of sleep still clouding her mind.
@@ -18,8 +18,12 @@ go to{
 				Lore dragged herself out of bed, shivering as her feet touched the cold floor.
 		}
 	}$else{
-		Lore entered the bedroom. Her twin @yellow{bed} was always a welcome space to take a load off.
+		Lore woke up and slowly pulled herself off the bed, clearing out fragments of another person's life from her head.
 	}
+}
+
+go to{
+	Lore entered the bedroom. Her twin @yellow{bed} was always a welcome space to take a load off.
 }
 
 look around{

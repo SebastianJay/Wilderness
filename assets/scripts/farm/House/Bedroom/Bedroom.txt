@@ -1,7 +1,18 @@
+_awake{
+  $if_frmIntro_eq_0{
+    $set_frmIntro_1
+    Kipp stared straight at the ceiling. Another morning, another day on the farm. The past couple weeks he carefully reviewed the right construction of words for his family. But nothing felt right. There was no way to explain why he would give up everything they provided him.
+
+    Kipp sat up and got out of bed. He could think it over as the day passed. But first, chores.
+  }$else{
+    Kipp stretched as he became conscious. He jumped out of bed, ready to start the day.
+  }
+}
+
 go to{
-Sweet sweet home for Kipp. This bedroom stores all his memories in this world: his first sight of the world; his first cry; his first dream.
+  Sweet sweet home for Kipp. This bedroom stores all his memories in this world: his first sight of the world; his first cry; his first dream.
 }
 
 look around{
-There was a twin size @yellow{bed} in the middle of the room. On the east side of the wall, there hung a small @yellow{map}.
+  There was a twin size @yellow{bed} in the middle of the room. On the east side of the wall, there hung a small @yellow{map}.
 }

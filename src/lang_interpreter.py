@@ -224,7 +224,11 @@ class Interpreter:
                     return self.evaluateConditionTree(conditionVal)
             # if parameter is tuple of (verb, reaction, condition)
             if isinstance(obj, tuple):
+                if obj[0].startswith('_'):
+                    # verbs starting with underscore are not publicly visible
+                    return False
                 if obj[2] is not None:
+                    # evaluate the condition
                     return self.evaluateCondition(obj[2].split('_'))
             return True # visible by default
 

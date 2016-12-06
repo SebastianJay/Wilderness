@@ -47,6 +47,9 @@ class WindowManager(Window):
         GameState().onCharacterSwitch += self.characterSwitchHandler()
 
     def gameModeChangeHandler(self):
+        inGameModes = [GameMode.inAreaCommand, GameMode.inAreaChoice,
+            GameMode.inAreaInput, GameMode.inAreaAnimating]
+        worldMapModes = [GameMode.worldMap, GameMode.worldMapOverArea]
         def _gameModeChangeHandler(*args, **kwargs):
             old, new = args[0]  # first arg is (old state, new state)
             if new == GameMode.isLoading:
@@ -55,11 +58,13 @@ class WindowManager(Window):
             elif old == GameMode.isLoading:
                 # pop the loading window off the screen
                 self.activeWindowGroups.pop()
-            elif old in [GameMode.titleScreen] \
-                and new in [GameMode.inAreaCommand, GameMode.inAreaChoice,
-                GameMode.inAreaInput, GameMode.inAreaAnimating]:
+            elif (old in [GameMode.titleScreen] or old in worldMapModes) and new in inGameModes:
                 # use the "main game" window group
                 self.activeWindowGroups = [2]
+                self.isTransitioning = True
+            elif old in inGameModes and new in worldMapModes:
+                # switch to map window group
+                self.activeWindowGroups = [3]
                 self.isTransitioning = True
             elif new in [GameMode.titleScreen]:
                 # clear, reset, and reload all windows

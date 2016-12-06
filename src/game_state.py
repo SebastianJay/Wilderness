@@ -264,12 +264,12 @@ class GameState:
         def areaId(self, val):
             self.subStates[self.activeProtagonistInd].areaId = val
 
-        def enterArea(self, areaId, roomId):
+        def enterArea(self, areaId, roomId, fromWorldMap=False):
             oldArea = self.areaId
             self.areaId = areaId
             oldRoom = self.roomId
             self.roomId = roomId
-            self.onEnterArea((oldArea, areaId), (oldRoom, roomId))
+            self.onEnterArea((oldArea, areaId), (oldRoom, roomId), fromWorldMap)
 
         @property
         def mapLocation(self):
