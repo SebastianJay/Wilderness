@@ -9,8 +9,6 @@ use{
 	 
 	 Lore: Time to tie up some lose ends.
 	
-	@bold{*Lore's playthrough continued*}
-	
 	$switchcharacter
 	#The player switches from this quest to wherever Lore is in her quest.
 }

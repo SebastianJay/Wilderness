@@ -94,7 +94,7 @@ use six-chamber revolver on{
 
 				@orange{Smoking Gun has joined the cause.} @bold_orange{SALOON ROUTE COMPLETE!}
 				$set_ntoSmokingGun_1
-				#Kipp get's to keep the revolver.
+				#Kipp gets to keep the revolver.
 
 			}$else{
 				#FAIL
@@ -104,7 +104,7 @@ use six-chamber revolver on{
 
 				Flint: What a waste of alcohol...sic 'em!
 
-				The group unholstered their guns and all pointed them at Kipp. They pulled back their hammers and Kipp shielded his body, as if that was actually going to do anything to high velocity lead. The last scene drew out with a flash of bright lights and the sound of multiple gunshots.
+				The group takes their guns out from their holsters and all pointed them at Kipp. They pulled back their hammers and Kipp shielded his body, as if that was actually going to do anything to high velocity lead. The last scene drew out with a flash of bright lights and the sound of multiple gunshots.
 
 				@bold{GAME OVER}
 				$gameover

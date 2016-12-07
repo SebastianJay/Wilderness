@@ -32,7 +32,7 @@ go to{
 
 		Kipp: What is that?
 		[companionName]: They call them the @blue{badlands}.
-		Kipp: So I guess that's our next @red{go to}?
+		Kipp: So I guess that's where we'll head next?
 		[companionName]: No other choice, but how will we get there?
 
 		Kipp looked around to find a set of rock climbing gear.

@@ -12,12 +12,12 @@ go to{
 			Rowen: I don't see what the problem is here!
 			Random Gang Member: Why don't you start keeping your cliques in line?! I'm the leader of this group, but I'm not responsible for those other little kids running around town doing whatever they feel like!
 
-			Kipp: @italic{(Whisphering)} I'm guessing she's the leader of this group. Wait, is this group's leader a girl. Huh, never seen that on the farm.
+			Kipp: @italic{(Whispering)} I'm guessing she's the leader of this group. Wait, is this group's leader a girl. Huh, never seen that on the farm.
 
 			The Leader continued.
 
 			Rowen: I don't know how I can keep them in line if you can't tell me what the problem is.
-			Leader: You said that each crew will each control one of the store. We all agreed on a coin toss to see who got first pick. Since we won, we chose the gunshop and now members from the Smoking Gun are walking in all butthurt about losing.
+			Leader: You said that each crew will each control one of the store. We all agreed on a coin toss to see who got first pick. Since we won, we chose the gun shop and now members from the Smoking Gun are walking in all butt-hurt about losing.
 			Rowen: Well what do you expect when you take the gunsmith store from the Smoking @bold{Gun}.
 			Leader: That's not the point. We agreed to work together like adults and now we're all whining like children.
 			Rowen: Well then that doesn't sound like a problem my leadership can fix. Maybe you should check yourself first.
@@ -35,7 +35,7 @@ go to{
 			Random Gang Member: Well he didn't come out of the conversation gracefully. More like run away with an even smaller kid.
 			Leader: So not much of the threat.
 
-			The leader of the group slowly step towards the bulmbling idiot on the floor. Kipp raised his eyes to see a woman get closer. With every step, her hand would start summoning a flame that gets brighter and brighter. It started out a cool light blue, but it changes to a darker, and more intense, red with every second. Kipp tried his best to get back on his feet. The leader stopped, and then began smiling.
+			The leader of the group slowly step towards the bumbling idiot on the floor. Kipp raised his eyes to see a woman get closer. With every step, her hand would start summoning a flame that gets brighter and brighter. It started out a cool light blue, but it changes to a darker, and more intense, red with every second. Kipp tried his best to get back on his feet. The leader stopped, and then began smiling.
 
 			Mohani: Hello there, my name is Mohani. We don't like people snooping around this place. So you're gonna have to die.
 			Kipp: Wait, wait, wait! My name is Kipp! I don't come from here!
@@ -73,13 +73,13 @@ go to{
 			Kipp: So this is where all of the horseshoes, guns, and other metal products are crafted. Hopefully I could find my way around this place. Time to @red{look around}. I could also @red{go to} the @blue{saloon} or @blue{town center} from here.
 		}
 	}$else{
-		#Kipp hasn't visited the libary yet to start the quest.
+		#Kipp hasn't visited the library yet to start the quest.
 		Random Gang Member: Hey, you have no business to be here! Get out before we have to use force!
 
 	}
 }
 
 look around{
-	Kipp: Well, it doesn't look like the people around here want to talk. I think have have no choice but to @red{talk to} @green{Mohani} for more information. I could @red{inspect} the @yellow{forge} or @yellow{glass of water}. On the worshop table, there seems to be a revolver just laying there. I wonder if I could just @red{pick up} the @yellow{revolver}. Wait, Mohani has a purse just sitting there on the counter, too. Maybe if I could find a way to get a closer look at her purse without her noticing. I probably could @yellow{cause a distraction}, or it honestly wouldn't hurt to @yellow{be direct} (unless she decides today is a great day to punch someone in the face).
+	Kipp: Well, it doesn't look like the people around here want to talk. I think have have no choice but to @red{talk to} @green{Mohani} for more information. I could @red{inspect} the @yellow{forge} or @yellow{glass of water}. On the workshop table, there seems to be a revolver just laying there. I wonder if I could just @red{pick up} the @yellow{revolver}. Wait, Mohani has a purse just sitting there on the counter, too. Maybe if I could find a way to get a closer look at her purse without her noticing. I probably could @yellow{cause a distraction}, or it honestly wouldn't hurt to @yellow{be direct} (unless she decides today is a great day to punch someone in the face).
 
 }

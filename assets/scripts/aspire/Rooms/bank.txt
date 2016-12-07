@@ -4,7 +4,7 @@ go to{
 			$set_ntoBankIntro_1 #Intro won't repeat
 			#Intro to Chikasi Clan when Kipp visits for the first time.
 
-			Kipp made his way over to the bank, turning his head frequently to make sure Rowen wasn't around to start another commotion. Expecting the worst, Kipp slowy pushed against the door, hoping that no one will notice him walk in.
+			Kipp made his way over to the bank, turning his head frequently to make sure Rowen wasn't around to start another commotion. Expecting the worst, Kipp slowly pushed against the door, hoping that no one will notice him walk in.
 
 			Random Gang Member: You know the drill. Put the money earned today in the bag and no one will get hurt.
 			Kipp: @italic{(to himself)} I guess they're all too busy with something else.
@@ -50,20 +50,20 @@ go to{
 
 			Akecheta stopped for a second and took in a deep breathe as if he was going sigh. He opened his eyes to continue.
 
-			Akecheta: Yes, I understand the hipocrisy in my words. You see, we try to live with peace among others and spite only those who won't return the same respect we give, but the person who currently pulls all of the strings around this town tells us that we are weak and will dissolve within the competition between the other two clans if we hold back.
+			Akecheta: Yes, I understand the hypocrisy in my words. You see, we try to live with peace among others and spite only those who won't return the same respect we give, but the person who currently pulls all of the strings around this town tells us that we are weak and will dissolve within the competition between the other two clans if we hold back.
 
 			Kipp: You don't look like the type that would lead such a dangerous group of criminals.
 
 			Kipp noticed his last statement and began shielding his body.
 
-			Kipp: @bold{I'm sorry, I didn't mean it like that! You are definetly the type of person capable of bashing my face in, but please don't demonstrate!}
+			Kipp: @bold{I'm sorry, I didn't mean it like that! You are definitely the type of person capable of bashing my face in, but please don't demonstrate!}
 			Akecheta: @italic{(with no change in expression)} This group was originally led by my father. It was passed down to me and now everyone here respects my order. They will listen to me before they lay a hand on others.
 			Kipp: So you're still assisting in this orchestra of violence. Akecheta, do understand that you don't have to follow Rowen's code.
 			Akecheta: But look at how much Rowen has bestowed upon us for following him.
 
 			The leader's eyes began glowing brighter.
 
-			Akecheta: He has shown more respect to us than anyone ever has. Those who defy him are ingorant of his actions.
+			Akecheta: He has shown more respect to us than anyone ever has. Those who defy him are ignorant of his actions.
 			Kipp: I'm not sure you understand the whole...
 			Akecheta: Silence! Outsiders only spread lies and disband us. Leave where you are not welcome!
 
@@ -96,7 +96,7 @@ go to{
 
 		}
 	}$else{
-		#Kipp hasn't visited the libary yet to start the quest.
+		#Kipp hasn't visited the library yet to start the quest.
 		Random Gang Member: Hey, you have no business to be here! Get out before we have to use force!
 
 	}

@@ -7,7 +7,7 @@ use fire ale on{
 		$if_inventory_fireAle_eq_0{
 			Kipp: What fire ale?
 		}$else{
-			Kipp: If this all doesn't go well, at least my parents won't have to pay to cremate my body. Actually I think mom wanted my body burried behind the house. I guess it's too late to start thinking about my parents' wishes.
+			Kipp: If this all doesn't go well, at least my parents won't have to pay to cremate my body. Actually I think mom wanted my body buried behind the house. I guess it's too late to start thinking about my parents' wishes.
 			
 			Kipp stared down at the fire ale in his hand. He closed his eyes and began chugging half the bottle. He expected such a dose would either give him enough power or kill him on the spot. He waited a second. Welp, the latter didn't happen so Kipp rushed up to the forge to release the intense pressure building up in his body.
 			
@@ -15,7 +15,7 @@ use fire ale on{
 			
 			Kipp: Right, Mohani said the powers I had could overcome hers if I just hold this stream of fire for @yellow{53} seconds. I know she's playing games. 53 won't be the answer. I just have to think a little harder.
 			
-			@orange{How long will kipp breathe fire into the forge?}
+			@orange{How long will Kipp breathe fire into the forge?}
 			$input_ntoSeconds
 			
 			#EVAULATION
@@ -58,9 +58,9 @@ use fire ale on{
 				
 				Mohani: Hey, Kipp. I owe you one. That little low life raided our group as we were trying to raid this ruin a few miles west. Next thing I knew my body was forcing me to abandon the mission and walk towards the middle of nowhere until we met up with our boss, Rowen, and the two other gangs. He would have dragged me around till the bitter end. 
 				
-				Mohani: I understand this whole coup you're trying to set up here. So I guess I'll join it as long as that little parasite in Rowen's head get's smashed into pieces. I honestly don't care if it's still in Rowen's head when that happens. That would actually be a plus. @yellow{I'll wait for your signal and we'll be there to kick his butt.} @italic{(with a smile)} See ya later Abhay. #name in Sanskrit for fearless.
+				Mohani: I understand this whole coup you're trying to set up here. So I guess I'll join it as long as that little parasite in Rowen's head will be smashed into pieces. I honestly don't care if it's still in Rowen's head when that happens. That would actually be a plus. @yellow{I'll wait for your signal and we'll be there to kick his butt.} @italic{(with a smile)} See ya later Abhay. #name in Sanskrit for fearless.
 				
-				Kipp was still unconcious, but I guess the narrator will catch him up with the situation later. Where to next?
+				Kipp was still unconscious, but I guess the narrator will catch him up with the situation later. Where to next?
 				
 				@orange{Rune Raiders has joined the cause.} @bold_orange{GUNSMITH SHOP ROUTE COMPLETE!}
 				$set_ntoRuneRaiders_1
@@ -80,7 +80,7 @@ inspect{
 	}$else{
 		Kipp: Nope, I am not going near the fire until I have a way of fighting back.
 		
-		The fire responded by forming tiny little balls of flames in the form of imps. They all started laughing at Kipp's cowardness. Kipp was not amused.
+		The fire responded by forming tiny little balls of flames in the form of imps. They all started laughing at Kipp's cowardliness. Kipp was not amused.
 	}
 
 }

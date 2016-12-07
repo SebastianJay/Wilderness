@@ -30,7 +30,7 @@ talk to{
 		$if_inventory_fireAle_eq_0{
 			$if_ntoRuneRaiders_eq_0{
 				#Kipp's first task
-				Mohani: First you must somehow rehone your powers. I suggest something with a burning element.
+				Mohani: First you must somehow hone your powers again. I suggest something with a burning element.
 				Kipp: I don't think what I summoned before had to do with fire.
 				Mohani: Well then it better have something to do with fire fire or you're going nowhere. Talk to me again when you are prepared to receive the second part of your challenge.
 			}$else{
@@ -42,10 +42,10 @@ talk to{
 		}$else{
 			Mohani: Hey you're back! Did you get your powers...are you okay?
 
-			Kipp had a tiny smokestream coming from his mouth. Kipp wiped his mouth.
+			Kipp had a tiny smoke stream coming from his mouth. Kipp wiped his mouth.
 
 			Kipp: @italic{(Confident)} C'mon, I'm ready. @italic{(coughs)}
-			Mohani: Okayyyyyy. So here's what you gotta do. That fire I just casted can wistand against the same level of magic for a certain amount of time. Call it my mystic threshold. Your job is to cast the same level of magic for a certain amount of time to put out the flame. Don't cast it long enough and the fire will take shape and retaliate, engulfing you into flames. Cast it for too long and the magic will fuse together, become unstable and...well you can picture what happens next. @yellow{Let me make this easy for you. All you gotta do is hold your spell for}
+			Mohani: Okayyyyyy. So here's what you gotta do. That fire I just casted can withstand against the same level of magic for a certain amount of time. Call it my mystic threshold. Your job is to cast the same level of magic for a certain amount of time to put out the flame. Don't cast it long enough and the fire will take shape and retaliate, engulfing you into flames. Cast it for too long and the magic will fuse together, become unstable and...well you can picture what happens next. @yellow{Let me make this easy for you. All you gotta do is hold your spell for}
 			@bold_yellow{53 seconds.}
 			# 53 seconds in base 6 is 33 in base 10
 

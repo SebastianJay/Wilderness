@@ -40,9 +40,9 @@ use tomahawk on{
 				Kala: We are criminals! This is our job! Akecheta give me the word and I'll squash this little piece of...
 				Akecheta: No, he is right.
 				Kala: You know what, Akecheta? Ever since we put you as leader, all you've done is ruin the reputation of the Chikasi Clan.
-				Akecheta: @bold{My father did not raise a bunch of savages.} Do you want to return home and be remembered as the group of people who stooped so low that they decided to pilage for entertainment? Who disrespected the entire ancestory in one generation!
+				Akecheta: @bold{My father did not raise a bunch of savages.} Do you want to return home and be remembered as the group of people who stooped so low that they decided to pillage for entertainment? Who disrespected the entire ancestry in one generation!
 
-				The room went silent.Akecheta resumed.
+				The room went silent. Akecheta resumed.
 
 				Akecheta: I can tolerate if we fight for the name of our people, but I will not put up with blindly giving into sending this world into the afterlife for what we have done.
 
@@ -62,7 +62,7 @@ use tomahawk on{
 
 			}$else{
 				#FAIL
-				Kipp took his time, widdling all day since he had nothing better to do than to focus on the one thing that could prematurely end his life.
+				Kipp took his time, whittling all day since he had nothing better to do than to focus on the one thing that could prematurely end his life.
 
 				On his last mark, Kipp put the last craving in has if he was just finishing off a masterpiece. Kipp stood back to get a better look.
 

@@ -9,7 +9,7 @@ talk to{
 		
 	}$else{
 		#Kipp now has the ticket.
-		Bartender: Hey, you're not braindead.
+		Bartender: Hey, you're not brain-dead.
 		
 		The bartender looked closely at the ticket, and threw it behind him. He then left to go to the stock room in the back. The bartender came back wearing a radiation mask and holding a red glowing drink.
 		
