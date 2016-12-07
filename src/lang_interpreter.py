@@ -291,7 +291,6 @@ class Interpreter:
             objScript = objectScripts[i]
             objName = objectNames[i]
             for action in objScript:
-                print(action, objName)
                 if not isVisible(self, action):
                     continue
                 verbWords = action[0].split()

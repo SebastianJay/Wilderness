@@ -56,7 +56,7 @@ class GameDriver:
             except: # some other exception occurred
                 if Globals.IsDev:
                     traceback.print_exc()
-                    #sys.exit()
+                sys.exit()
 
 if __name__ == '__main__':
     GameDriver().mainloop()
