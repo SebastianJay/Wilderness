@@ -97,3 +97,10 @@ bandages:
     name: bandages
     script: Lore/Suburbs/bandages.txt
     showIf: inventory_money_eq_0
+solaire:
+    name: Solaire
+    script: Lore/Suburbs/solaire.txt
+samjam:
+    name: Samjam
+    script: Lore/Suburbs/samjam.txt
+    showIf: subLove_eq_0

@@ -1,0 +1,6 @@
+go to{
+    Lore entered into the magnificent house.
+}
+look around{
+    Beautiful objects and beautiful things graced Lore's eyes. Master @green{Samjam} stood in front of her and she felt loved and welcomed.
+}

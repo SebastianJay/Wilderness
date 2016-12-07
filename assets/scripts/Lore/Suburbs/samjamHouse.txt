@@ -1,0 +1,6 @@
+go to{
+    Lore approached this beautiful mansion adorned with the sun.
+}
+look around{
+    It was a marvelous mansion that shined upon the poor houses of the neighborhood. The sun truly blessed this house.
+}

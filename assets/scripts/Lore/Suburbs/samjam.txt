@@ -1,0 +1,24 @@
+talk to{
+    Master @green{Samjam} embraced her in fatherly love.
+    $if_subFirstTimeSam_eq_0{
+        Samjam: You have come a long way, child. You will face future challenges but now is the time to rest. Then you shall train with me to defeat my ancient arch-nemesis, the nefarious @green{Kyung}. He has stolen the little boy and it is up to you, as the chosen one, to defeat him.
+        Here child, here is a gift for you.
+        
+        $if_inventory_blueCrystal_1{
+            Master @green{Samjam} gave her a @yellow{lightsaber}.
+            @italic{Added blue lightsaber to inventory.}
+        }$elif_inventory_greenCrystal_1{
+            Master @green{Samjam} gave her a @yellow{lightsaber}.
+            @italic{Added green lightsaber to inventory.}
+        }else{
+            Master @green{Samjam} gave her a @yellow{lightsaber}.
+            @italic{Added blue lightsaber to inventory.}
+        }
+    
+    Now head over to @green{Kyung} and defeat him hastily!
+    $set_subFirstTimeSam_1
+    }else{
+        You are a great person. I believe in you, friend.
+    }
+    $set_subLove_1
+}

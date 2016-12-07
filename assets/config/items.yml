@@ -37,6 +37,9 @@ redCrystal:
 greenCrystal:
     name: green crystal
     description: This crystal reflects wisdom and good intentions.
+lightsaber:
+    name: lightsaber
+    description: Made using the crystal, the lightsaber is the ultimate sword. May the force be with you.
 ## End Suburbs items
 
 ## Begin Aspire items

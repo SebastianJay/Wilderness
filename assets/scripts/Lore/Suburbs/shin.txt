@@ -28,8 +28,8 @@ use zweihander on{
 }
 use bandages on{
     $if_inventory_bandages_eq_1{
-        $if_subAmputated_eq_1{
         $if_subFixedShin_eq_0{
+        $if_subAmputated_eq_1{
             Lore bandaged @green{Shin's} amputated leg to stop the bleeding. Lore sighed a breath of relief because they escaped the danger zone. Now she started to look through @green{Shin's} inventory to take anything of value.
             Lore spotted three different colored crystals. She decided to only take one.
             $choice{
@@ -47,6 +47,9 @@ use bandages on{
                     $set_inventory_redCrystal_1
             }
         }
+        $set_subFixedShin_1
+        }$else{
+            Lore was not going to waste any more bandages on @green{Shin}.
         }
     }
 }
