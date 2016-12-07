@@ -1,0 +1,5 @@
+talk to{
+    Lore was amazed by the man that she couldn't speak.
+    
+    Solaire: I am @green{Solaire} of Astora, an adherent of the Lord of Sunlight! This is the @blue{House of Samjam}. Please come inside and make yourself welcome.
+}

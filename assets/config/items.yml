@@ -28,6 +28,18 @@ zweihander:
 bandages:
     name: bandages
     description: Some good ol bandages to fix any injury.
+blueCrystal:
+    name: blue crystal
+    description: The blue crystal releases feelings of justice and friendliness.
+redCrystal:
+    name: red crystal
+    description: Hatred and wrath oozes from this crystal.
+greenCrystal:
+    name: green crystal
+    description: This crystal reflects wisdom and good intentions.
+lightsaber:
+    name: lightsaber
+    description: Made using the crystal, the lightsaber is the ultimate sword. May the force be with you.
 ## End Suburbs items
 
 ## Begin Aspire items

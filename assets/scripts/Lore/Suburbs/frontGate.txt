@@ -1,0 +1,7 @@
+go to{
+    Lore approached the massive @blue{front gate}.
+    $set_subFirstTimeGate_1
+}
+knock on{
+    Lore knocked and the @blue{front gate} opened. A man in amazing armor stood in front of Lore.
+}

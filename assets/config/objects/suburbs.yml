@@ -92,8 +92,16 @@ zweihander:
     script: Lore/Suburbs/Zweihander.txt
     showIf: inventory_zweihander_eq_0
 shin:
-    name: Shin
+    name: shin
     script: Lore/Suburbs/shin.txt
 bandages:
     name: bandages
-    script:
+    script: Lore/Suburbs/bandages.txt
+    showIf: inventory_money_eq_0
+solaire:
+    name: Solaire
+    script: Lore/Suburbs/solaire.txt
+samjam:
+    name: Samjam
+    script: Lore/Suburbs/samjam.txt
+    showIf: subLove_eq_0

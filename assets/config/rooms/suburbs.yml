@@ -128,6 +128,7 @@ outskirts:
         nolanHouse: N
         holeInWall: N
         shinHouse: N
+        samjamHouse: N
     showIf: canVisitOutskirts
     objects: {}
 
@@ -139,6 +140,7 @@ nolanHouse:
     c: 0
     neighbors:
         outskirts: N
+        shinHouse: N
     objects:
         - peevedPeople
         - pileOfMoney
@@ -165,16 +167,67 @@ shinHouse:
     neighbors:
         outskirts: N
         insideShinHouse: N
+        nolanHouse: N
+        samjamHouse: N
     objects: {}
 
 insideShinHouse:
-    name: Inside Shin's House
+    name: Inside Shin House
     description: n/a
     script: Lore/Suburbs/InsideShinHouse.txt
     r: 0
     c: 0
     neighbors:
         shinHouse: N
+    showIf: inventory_morphine_eq_1
     objects:
         - shin
         - bandages
+
+samjamHouse:
+    name: House of Samjam
+    description: n/a
+    script: Lore/Suburbs/samjamHouse.txt
+    r: 0
+    c: 0
+    neighbors:
+        outskirts: N
+        shinHouse: N
+        frontDoor: N
+    showIf: subFixedShin_1
+    objects: {}
+    
+frontGate:
+    name: front gate
+    description: n/a
+    script: Lore/Suburbs/frontGate.txt
+    r: 0
+    c: 0
+    neighbors:
+        samjamHouse: N
+    objects:
+        - solaire
+
+insideSamjam:
+    name: Inside House Samjam
+    description: n/a
+    script: Lore/Suburbs/InsideSamjam.txt
+    r: 0
+    c: 0
+    neighbors:
+        frontGate: N
+        dungeon: N
+    objects:
+        - samjam
+dungeon:
+    name: Dungeon
+    description: n/a
+    script:
+    r: 0
+    c: 0
+    neighbors:
+        insideSamjam: N
+        holeInWall: N
+    objects:
+        - kyung
+        - child

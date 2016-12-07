@@ -13,6 +13,6 @@ inspect{
 		Rice: OMG! That's us!!
 		Kipp: You were so tiny then haha.
 	}$else{
-		[companionName]]: Aww. You guys were so cute.
+		[companionName]: Aww. You guys were so cute.
 	}
 }

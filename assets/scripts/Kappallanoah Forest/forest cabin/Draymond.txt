@@ -3,7 +3,7 @@ inspect{
 }
 
 talk to{
-	$if_companionB_1{
+	$if_companionB_eq_1{
 		$if_frmTalkedDraymond_eq_0{
 			$choice{
 				compliment his train|
@@ -21,7 +21,7 @@ talk to{
 		}$elif_frmTalkedDraymond_eq_1{
 			Draymond: Choo-choo! Choo-choo!
 		}
-	}$elif_companionD_1{
+	}$elif_companionD_eq_1{
 		$if_frmTalkedDraymond_eq_0{
 			$choice{
 				compliment Draymond's train|
@@ -42,7 +42,7 @@ talk to{
 			Draymond: Show me more tricks pleeeeease!
 			Alodar: *wink* Maybe next time.
 		}
-	}$elif_companionF_1{
+	}$elif_companionF_eq_1{
 		$if_frmTalkedDraymond_eq_0{
 			Jinx: Oooh. You'll sooo cute with your little choo-choo train. What if I crushed it though, would you cry?
 			Draymond: *gasp* It's mine! Don't touch it you bad woman!
