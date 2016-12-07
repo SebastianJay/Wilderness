@@ -26,7 +26,9 @@ abandonedTreehouse:
         lumberMill: N
         huntingRange: N
     objects:
-        -
+        - diary
+        - familyPhoto
+        - recipe
         
 lumberMill:
     name: Lumber Mill
@@ -39,7 +41,8 @@ lumberMill:
         abandondedTreehouse: N
         huntingRange: N
     objects:
-        -
+        - jack
+        - olWilly
 
 huntingRange:
     name: Hunting Range

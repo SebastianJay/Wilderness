@@ -16,16 +16,20 @@ poster:
     name: poster
     script: Kappallanoah Forest/forest cabin/poster.txt
     ## Lumber Mill
-    
-    
+jack:
+    name: Jack
+    script: Kappallanoah Forest/lumber mill/Jack.txt
+olWilly:
+    name: Ol' Willy
+    script: Kappallanoah Forest/lumber mill/Ol' Willy.txt
     ## Abandoned Forest
 diary:
     name: diary
     script: Kappallanoah Forest/abandoned forest/diary.txt
 familyPhoto:
     name: family photo
-    script: Kappallanoah Forest/family photo
+    script: Kappallanoah Forest/family photo.txt
 recipe:
     name: recipe
-    script: Kappallanoah Forest/recipe
+    script: Kappallanoah Forest/recipe.txt
     ## Hunting Range

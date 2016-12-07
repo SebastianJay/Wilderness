@@ -1,11 +1,11 @@
-inpect{
+inspect{
 	Ol' Willy was rumored to have lived for 500 years. He had been working at the @blue{lumber mill} for as long as people remember.
 }
 
 talk to{
 	$if_frmTalkedOlWilly_eq_0{
 		Ol' Willy: Hmm. You look awfully familiar, son. Have I met you before?
-		Kipp: I don't think so. You might've met my dad though. He used to drink with the lumberjacks a lot.
+		Kipp: I don't think so. You might have met my dad though. He used to drink with the lumberjacks a lot.
 		Ol' Willy: Oh! You're Johnson's boy? By god you have grown so much! So how can I help you?
 		[companionName]: We're investigating something in the cave. We've heard that you know the @blue{cave} very well.
 		Ol' Willy: I know it better than the wrinkles on my face. Can I know why you're going there?
