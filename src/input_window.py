@@ -29,12 +29,13 @@ class InputWindow(Window):
     def enterAreaHandler(self):
         def _enterAreaHandler(*args, **kwargs):
             # run the startup script for an area
-            (_, areaId), (_, roomId) = args[0], args[1] # extract new room and area
+            (_, areaId), (_, roomId), fromWorldMap = args[0], args[1], args[2]
+            startupverb = '_enter' if fromWorldMap else '_awake'
             areasConfig = AssetLoader().getConfig(Globals.AreasConfigPath)
             roomsConfig = AssetLoader().getConfig(areasConfig[areaId]['roomsConfig'])
             roomScript = AssetLoader().getScript(roomsConfig[roomId]['script'])
             for verb, action, _ in roomScript:
-                if verb == 'go to': # TODO make special non-visible verb
+                if verb == startupverb:
                     self.interpreter.executeAction(action)
                     break
         return _enterAreaHandler

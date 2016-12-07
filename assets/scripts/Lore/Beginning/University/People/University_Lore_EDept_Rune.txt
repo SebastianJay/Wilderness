@@ -1,0 +1,155 @@
+#University_Lore_EDept_Rune
+
+talk to{
+	Lore: Hey, Rune!
+	Rune: Hi, Lore! What's up?
+	$if_analyzedata_eq_1{
+	$Choice{
+		I need your help|
+			Lore: I took the job that you guys recommended.
+			Rune: Really? That's so great! We're all so proud of you.
+			Lore: Thanks. But I'm having trouble understanding this data I'm analyzing. They're soil samples from the Wilderness. From what I can tell, the soluble rock composition is far less than it should be, and the rocks are porous and cracked in an unusual weathering pattern. I can't figure out what could have caused the erosion.
+			$if_loreMorality_gt_-3{
+				Rune: Hm. I don't think I can help you unless I can analyze the soil myself. Do you have it with you?
+				Lore: No, it's still in the lab.
+				Rune: I guess you'll have to get it, then. I'll be here when you get back.
+				Lore: You're going to make me go all the way back to the lab just so you can analyze the soil?
+				Rune: Hey, you're the one who asked for my help.
+				Lore: Fine, I'll be back.
+				$set_analyzedata_eq_2
+			}
+			$if_loreMorality_lt_-2{
+				Rune: I'd like to help, Lore, but I can't. 
+				Lore: What? Why not?
+				Rune: You're in a bad place right now. Don't lie, I know. And that's okay. But what's important for you is to get back on your feet. You can't keep bullying other people. I'm not doing your work for you. I know you can figure it out yourself.
+				Lore: Fine, I didn't want your help anyway.
+				Rune: Lore-
+				Lore: Don't.
+				$set_friendpath_0
+			}
+		|Just checking in|
+			Lore: I'm just checking in to see how you're doing.
+			Rune: Aw, that's sweet of you. To tell the truth, I could be better. My parents won't let up about me joining the goverment as a chemist. They're relying on me to have a high income so that I can support them, since the shop's not doing too well. But I don't really want to work for the government. I want to teach, here, at the university. Oh my, I shouldn't rant so much to you. It's not like there's anything you can do about it.
+			$Choice{
+			It's okay|
+				Lore: I'm happy to listen to you rant. We're friends, remember?
+				Rune: Right, thanks. You're the best!
+				$inc_Loremorality_1
+			|Shut up|
+				Lore: Yeah, there's nothing I can do. I don't know why you're even bothering to tell me. You don't know what it's like to be unhappy. Not like I do.
+				Rune: I'm sorry, I didn't mean to-
+				Lore: Shut up.
+				
+				Rune fell silent, her eyes watering. 
+				$inc_Loremorality_-1
+			}
+		|Pat her on the head|
+			Lore pat Rune on the head.
+			Rune blinked in confusion at her, then laughed at the awkward silence.
+			Rune patted Lore on the head in return and went back to her work.
+		|Nevermind|
+			Rune: See you around!|
+		}
+	}
+	$if_analyzedata_eq_3{
+		Lore: I've brought the samples.
+		Rune: Yay, thanks!
+		
+		Lore handed the data samples over to Rune. Rune carried them over to a microscope and powered it up.
+		
+		Rune: Mind if I take a bit for the slide?
+		
+		She didn't wait for an answer and made a wet slide of the soil. She slid it under the microscope and adjused the knobs with well-trained precision.
+		
+		Rune: Mmhm...Huh. That's weird.
+		Lore: What is it?
+		Rune: Hold on, hold on. 
+		
+		She stood up from the microscope and took another pinch of the soil and placed it in a beaker.
+		
+		Lore: Are you going to take all of my soil?
+		
+		Rune ignored her. She grabbed some kind of chemical from under the hood on the other side of the room. Taking a pipette, she placed a few drops in the soil. The mixture bubbled up immediately.
+		
+		Rune: Ooh.
+		Lore: What is it?
+		Rune: Hm. 
+		
+		Rune filtered out the solid from the liquid left in the beaker and grabbed more chemicals. Lore tapped her foot impatiently.
+		
+		Lore: Are you going to ignore me this whole time?
+		Rune: Huh? Did you say something?
+		Lore: Very funny.
+		
+		Rune mixed a few more chemicals and then thrust the beaker in front of Lore.
+		
+		Rune: Look! A precipitate!
+		Lore: Cool. Did you have fun?
+		Rune: I said look. It's salt. You see, the soil underwent a reaction that-
+		Lore: Just tell me the important things.
+		Rune: You know, chemistry is important. It wouldn't hurt you to learn every now and then. Anyways, there's a manmade chemical in the soil.
+		Lore: Manmade? Could it have been from the researchers?
+		Rune: Not unless they were trying to destroy the sample.
+		Lore: What do you mean?
+		Rune: There was a highly potent acid present. Didn't you think it was weird that there was no vegetation on the soil?
+		Lore: It occurred to me.
+		Rune: Someone intentionally killed this land. That's why the holes and cracks in the rocks looked weird to you. They aren't from water, they're from acid.
+		Lore: Why would someone do that?
+		Rune: I don't know. Did all the samples show the same erosion?
+		
+		Lore nodded. Rune cast her eyes down in concern.
+		
+		Lore: Listen, Rune. I want to go to the Wilderness to study this more.
+		Rune: What?
+		Lore: I know it sounds crazy, but I feel like this is something I'm meant to do.
+		Rune: Well you're not going alone. 
+		Lore: Excuse me?
+		Rune: I'm going with you. I'm done with classes for the season anyway, and now you've made me curious.
+		Lore: No, no, I don't want you to get involved.
+		Rune: Then why did you ask for my help?
+		
+		Lore had no answer.
+		
+		Rune: Got you there, didn't I?
+		
+		She laughed.
+		
+		Rune: I know Quen and Essa will want to help too. When you've talked to everyone, where should I meet you?
+		Lore: At Rodnin's office, in the Business District.
+		Rune: Will do. Oh, this is so exciting! 
+		
+		Rune jumped up and embraced Lore.
+		
+		Rune: Okay, I'm going to swing home and let my parents know what I'm doing. Talk to Quen and Essa, and then we'll meet at the office. Bye!
+		
+		Rune pranced out of the engineering department.
+		$set_analyzedata_4
+	}$if_friendpath_eq_0{
+		Lore refused to talk to Rune.
+	}$else{
+	$Choice{
+		Just checking in|
+			Lore: I'm just checking in to see how you're doing.
+			Rune: Aw, that's sweet of you. To tell the truth, I could be better. My parents won't let up about me joining the goverment as a chemist. They're relying on me to have a high income so that I can support them, since the shop's not doing too well. But I don't really want to work for the government. I want to teach, here, at the university. Oh my, I shouldn't rant so much to you. It's not like there's anything you can do about it.
+			$Choice{
+			It's okay|
+				Lore: I'm happy to listen to you rant. We're friends, remember?
+				Rune: Right, thanks. You're the best!
+				$inc_Loremorality_1
+			|Shut up|
+				Lore: Yeah, there's nothing I can do. I don't know why you're even bothering to tell me. You don't know what it's like to be unhappy. Not like I do.
+				Rune: I'm sorry, I didn't mean to-
+				Lore: Shut up.
+				
+				Rune fell silent, her eyes watering. 
+				$inc_Loremorality_-1
+			}
+		|Pat her on the head|
+			Lore pat Rune on the head.
+			Rune blinked in confusion at her, then laughed at the awkward silence.
+			Rune patted Lore on the head in return and went back to her work.
+		|Nevermind|
+			Rune: See you around!|
+		}
+	}
+}

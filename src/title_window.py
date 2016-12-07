@@ -32,7 +32,7 @@ class TitleWindow(Window):
         row = self.height // 6 # Looks better than starting at 0
         col = 0
         # Find the longest line...
-        for i, char in enumerate(self.art):
+        for char in self.art:
             if char == "\n":
                 if col > maxLength:
                     maxLength = col
@@ -42,7 +42,7 @@ class TitleWindow(Window):
 
         # So that we know where to center the ASCII art
         startCol = (self.width - maxLength) // 2
-        for i, char in enumerate(self.art):
+        for char in self.art:
             if char == "\n":
                 row += 1
                 col = 0

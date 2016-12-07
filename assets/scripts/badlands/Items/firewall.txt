@@ -1,0 +1,43 @@
+use extinguisher on{
+	$if_inventory_extingusiher_eq_1{
+		$if_badSigmaPainting_eq_0{
+			$set_badSigmaPainting_1
+			Kipp pulled out the fire extinguisher. He aimed at the base of the wall and doused the flames. The wall vanished in a matter of seconds.
+			
+			Kipp: Didn't you say that barrier was created from magic.
+			[companionName]: I don't think enchanters are impenetrable to everything.
+			
+			$if_townChoice_eq_0{
+				Kipp: So guns are useless to magic users but fire-retardant foam puts them down?
+				[companionName]: @italic{*shrugs*}
+			}
+			
+			Kipp: I don't understand their logic.
+			[companionName]: Weird. No story this time just one big picture.
+			Kipp: Of an orb in a desert?
+			[companionName]: Maybe we'll need to head there and retrieve it. 
+			Kipp: Isn't that like trying to find a needle in the haystack? How big can that desert be?
+			[companionName]: We were able to find sheep in an multi-dimensional hedge maze. I'm pretty sure we'll find a way.
+			Kipp: I'll trust you on that. Oh, over on that sand dune. Someone in a cloak is drawing a @yellow{65}.
+			[companionName]: Good to know.
+		
+		}$else{
+			Kipp: The wall is already down and we have what we need. Locate the crystal ball in the middle of the desert.
+			[companionName]: Who are talking to...oh the player tried to extinguish the wall again.
+			Kipp: Yup.
+		}
+	}$else{
+		Kipp: What fire extinguisher?
+	}
+}
+
+play with{
+	$if_inventory_extingusher_eq_1{
+		The player was actually that curious to see what happens when Kipp played with it. Kipp crouched near the base of the flames, grabbed a marshmallow from his backpack and a stick on the ground, and started roasting it. A fire spirit in the shape of a hand came from the wall, picked Kipp up, and slammed him on the ground. [companionName] got up and grabbed the fire extinguisher from Kipp's backpack. He pulled the pin and put out the small flames on Kipp's clothes.
+		
+		Kipp: Thanks.
+		[companionName]: Can't say I told ya so.
+	}$else{
+		[companionName]: I wasn't joking. Don't actually touch that. I don't have anything to save you with.
+	}
+}

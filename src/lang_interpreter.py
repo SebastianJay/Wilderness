@@ -85,11 +85,11 @@ class Interpreter:
                     gs.delVar(args[0], inventoryFlag)
                 elif node.title in ['set', 'inc', 'add', 'dec', 'sub']:
                     args, inventoryFlag = self.extractInventory(node.args)
+                    gs.touchVar(args[0], inventoryFlag)
                     # if command specifies amount to increment by use that, otherwise use 1
                     incVal = 1
                     if len(args) == 2:
                         incVal = int(args[1])
-                    gs.touchVar(args[0], inventoryFlag)
                     # whether to add to an existing total
                     addVal = int(gs.getVar(args[0], inventoryFlag))
                     if node.title == 'set':
@@ -224,7 +224,11 @@ class Interpreter:
                     return self.evaluateConditionTree(conditionVal)
             # if parameter is tuple of (verb, reaction, condition)
             if isinstance(obj, tuple):
+                if obj[0].startswith('_'):
+                    # verbs starting with underscore are not publicly visible
+                    return False
                 if obj[2] is not None:
+                    # evaluate the condition
                     return self.evaluateCondition(obj[2].split('_'))
             return True # visible by default
 

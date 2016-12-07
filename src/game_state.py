@@ -63,6 +63,7 @@ class GameState:
             self.onChoiceChange = EventHook()   # called when choiceList changes
             self.onGameModeChange = EventHook() # called when gameMode changes
             self.onAddLangNode = EventHook()    # called when addLangNode is called
+            self.onCharacterSwitch = EventHook() # called when activeProtagonistInd changes
             self.onEnterArea = EventHook() # called when enterArea is called
             self.onSettingChange = EventHook()  # called when a setting changes
             self.init()
@@ -107,6 +108,7 @@ class GameState:
                     self.activeProtagonistInd = 1 - self.activeProtagonistInd # flip index
                     self.enterArea(self.areaId, self.roomId)    # send signal to run startup script
                     self.onGameModeChange -= _doSwitch  # deregister this handler after complete
+                    self.onCharacterSwitch(self.activeProtagonistInd)   # send event
             self.onGameModeChange += _doSwitch
 
         def appendCmdBuffer(self, ch):
@@ -262,12 +264,12 @@ class GameState:
         def areaId(self, val):
             self.subStates[self.activeProtagonistInd].areaId = val
 
-        def enterArea(self, areaId, roomId):
+        def enterArea(self, areaId, roomId, fromWorldMap=False):
             oldArea = self.areaId
             self.areaId = areaId
             oldRoom = self.roomId
             self.roomId = roomId
-            self.onEnterArea((oldArea, areaId), (oldRoom, roomId))
+            self.onEnterArea((oldArea, areaId), (oldRoom, roomId), fromWorldMap)
 
         @property
         def mapLocation(self):
@@ -311,8 +313,8 @@ class GameState:
                 obj['subStates'][i] = obj['subStates'][i].__dict__
             # do not save non-persistent fields
             deleteFields = ['cmdMap', 'cmdBuffer', 'gameModeActive', 'choiceList',
-                'gameModeLockedRequests', 'onChoiceChange',
-                'onGameModeChange', 'onAddLangNode', 'onEnterArea']
+                'gameModeLockedRequests', 'onChoiceChange', 'onSettingChange',
+                'onGameModeChange', 'onAddLangNode', 'onEnterArea', 'onCharacterSwitch']
             for field in deleteFields:
                 del obj[field]
             return json.dumps(obj)

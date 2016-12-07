@@ -17,6 +17,7 @@ import threading
 
 class GameDriver:
     def __init__(self):
+        GameState() # initialize the singleton before threading to avoid race conditions
         self.root = tk.Tk()
         self.windowManager = WindowManager()
         self.display = Display(self.root, self.windowManager)
@@ -38,12 +39,12 @@ class GameDriver:
         dt = 0.0
         while True:
             try:
-                time.sleep(Globals.Timestep - dt if Globals.Timestep - dt > 0.0 else 0.0)
-                timeElapsed = Globals.Timestep if dt < Globals.Timestep else dt
+                time.sleep(max(Globals.Timestep - dt, 0.0))
+                timeElapsed = max(Globals.Timestep, dt)
                 time1 = time.time()
+                self.display.draw()
                 keypresses = self.inputHandler.getKeyPresses()
                 self.windowManager.update(timeElapsed, keypresses)
-                self.display.draw()
                 self.root.update()
                 time2 = time.time()
                 dt = time2 - time1
@@ -56,10 +57,5 @@ class GameDriver:
                     traceback.print_exc()
                 sys.exit()
 
-def bootstrap():
-    """Perform all processes needed to start up the game"""
-    GameState() # initialize the singleton before threading to avoid race conditions
-    GameDriver().mainloop()
-
 if __name__ == '__main__':
-    bootstrap()
+    GameDriver().mainloop()

@@ -1,6 +1,14 @@
+_enter{
+    $if_enteredBlackHills_eq_0{
+      As Kipp wandered further south, he encountered a bustling mining settlement. Signs closeby indicated that the town's name was @blue{Black Hills}.
+    }$else{
+      Kipp walked back into Black Hills.
+    }
+}
+
 go to {
     Kipp entered the @blue{train station}. Horns whistled as a train rumbled to a stop at the station.
-	$set_townChoice_1
+    $set_townChoice_1
 }
 
 

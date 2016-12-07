@@ -17,6 +17,9 @@ class Window:
         self.pixels = [[' ' for x in range(self.width)] for y in range(self.height)]
         # initialize color/style formatting info
         self.formatting = []    # each element is (tag, (start_index, end_index))
+        # degree of transparency (0 = opaque, Globals.AlphaMax = transparent)
+        # NOTE as of now, only used in WindowManager
+        self.alphaLevel = 0
         # initialize other fields
         self.reset()
 

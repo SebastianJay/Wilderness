@@ -1,4 +1,4 @@
-go to{
+_enter{
 	$if_ntoIntroduction_eq_0{
 		## Runs the very first time Kipp enters Aspire
 		It has been days since Kipp has seen a town. He has mentally trained himself to embrace the emptiness of isolation on his journey, but nothing could have prepared him for a sense of loneliness like this. The sunlight has grown oddly intense. The world beneath Kipp's feet has dried up. With every step, Kipp's bones start to grind harder and pain in your joints soon follow. The craving for water drenches Kipp's mind, but all signs of water have withered away.
@@ -72,16 +72,22 @@ go to{
 
 		$set_ntoIntroduction_1
 	}
-	$else{
-		$if_ntoQuestStart_eq_1{
-			#Text when Kipp returns to the room
-			Kipp: Yup, not a good person in sight. I probably shouldn't @red{look around} for too long. I could @red{go to} the @blue{saloon}, @blue{gunsmith shop}, @blue{bank}, and @blue{library} from here.
+	$elif_aspireComplete_eq_1{
+		Kipp walked into Aspire, hearing some friendly greetings from the townspeople milling around outside.
+	}$else{
+		Kipp walked back into Aspire, ready to clear up some remaining business.
+	}
+}
 
-			@bold{It will be in your best interest to save again if you are going to talk to Rowen.}
-		}$else{
-			#Kipp hasn't visited the libary yet to start the quest.
-			Random Gang Member: Hey, you have no business to be here! Get out before we have to use force!
-		}
+go to{
+	$if_ntoQuestStart_eq_1{
+		#Text when Kipp returns to the room
+		Kipp: Yup, not a good person in sight. I probably shouldn't @red{look around} for too long. I could @red{go to} the @blue{saloon}, @blue{gunsmith shop}, @blue{bank}, and @blue{library} from here.
+
+		@bold{It will be in your best interest to save again if you are going to talk to Rowen.}
+	}$else{
+		#Kipp hasn't visited the libary yet to start the quest.
+		Random Gang Member: Hey, you have no business to be here! Get out before we have to use force!
 	}
 }
 

@@ -1,70 +1,80 @@
+_enter{
+	$if_forIntro_eq_0{
+		$set_forIntro_1
+		$set_companionB_0
+		$set_companionF_0
+		$set_companionD_0
+		$if_brotherPts_gt_derelictPts{
+			$if_brotherPts_gt_fugitivePts{
+				$set_companionB_1
+				$set_companionName_Rice
+			}$else{
+				$set_companionF_1
+				$set_companionName_Jinx
+			}
+		}$elif_derelictPts_gt_fugitivePts{
+				$set_companionD_1
+				$set_companionName_Alodar
+		}$else{
+				$set_companionF_1
+				$set_companionName_Jinx
+		}
+		Kipp still couldn't take his mind off what happened in the town. The world was changing. Kipp was glad that he chose to explore the outside world: there were so many new things to see and do.
+
+		$if_companionF_1{
+			Kipp was musing to himself when he felt a pair of slender yet callused hands covering his mouth from behind. "Be quiet." the stranger whispered softly into Kipp's ear. The smell of cheap perfume emanated from the stranger's body. The stranger kept on talking, indifferent to Kipp's uneasiness: "The sheriff's chasing me down with dogs. Take me to a place where I can hide. And don't you dare make a sound when I let go of you. Or I'll slit your throat." Kipp nodded furiously in agreement as he felt a cool blade sliding on his neck and shoulders. The stranger let go of Kipp. Kipp led the way and rushed into a river nearby. They got some hollow weeds as breathing tubes and hid under the water. Kipp could hear the barking of the dogs coming nearer. A man's voice was shouting in rage. Gradually, the noise died down. Kipp got out of the water with the stranger.
+
+			Kipp finally had to time to examine the stranger closer. She was in her early 20s, with a scar on her cheek and a head of flaming red hair. She wore a faded black and white prison uniform.
+
+			The stranger: You're a natural! Team up with me and we can be new Bonny and Clyde!
+			Kipp: Hmm.
+			The stranger: Well, it's too late to turn back anyway. You're already guilty of harboring a fugitive! *wink* I'm Jinx, by the way.
+			Kipp: *sigh* Alright. I'm Kipp. We'd better get you some new clothes, then.
+
+			Jinx stole some shirts from a hanging clothesline and changed into it. Kipp continued his journey to the forest with Jinx.
+		}
+		$elif_companionD_1{
+			Kipp was musing to himself when he heard a faint sound coming from the side of the road. "Help m.. Hel.." Kipp followed the sound and found an old man in ragged clothes lying on the ground. He suffered wounds on his shoulder. Kipp quickly applied some medicine on the wounds and bandaged it.
+
+			Old man: Thank you my friend. I feeling much better.
+			Kipp: What happened.
+			Old man: A group of bandits attacked me and robbed me of all my stuff. Ah! If people knew the mighty Magician Alodar was defeated by some thieves!
+			Kipp: Magician? I didn't know they still exist.
+			Alodar: We are a dying breed, my friend. How can I thank you for your kindness?
+			Kipp: I'm traveling to the wilderness now. Can a wise magician like you give me some advice to deal with the dangers along the way?
+			Alodar: No way! The wilderness? I'm heading there myself. I found a disturbance in the current world order and I wanted to investigate it.
+			Kipp: Wow! Why don't you come along with me? We can watch out for each other.
+			Alodar: Sure!
+
+			Kipp and Alodar continued their journey together.
+		}
+		$elif_companionB_1{
+			A familiar voice disturbed Kipp's musings -- "Kipp! I found you! Finally!"
+
+			Kipp turned around to find his brother, Rice coming to him. Rice looked exhausted. His clothes and face were covered by dust.
+
+			Kipp: Rice! Why are you here? What happened?
+			Rice: Pa and Ma were crying all day since the you left after quarrel. They didn't want your last memory of them to be filled with anger. So I volunteered to come with you so that we can watch out for each other,
+			Kipp: That's wonderful! We'll have too get you cleaned up though, you look horrible.
+
+			After Kipp and Rice showered and rested in a inn, they set off once again.
+		}
+
+		"Welcome to Kapallanoah Forest!" The sign greeted Kipp as he reached @blue{wood cabin 1}. Much to Kipp's surprise, the camping area presented a prosperous sight.
+
+		Kipp: *gasp* How is this possible? It should been burnt down years ago!
+
+		Kappallanoah Forest. Such a familiar yet distant place for Kipp. When Kipp was young, his father used to take the entire family there after the crops were harvested. They would hike, hunt and huddle around the campfire at 5 am to catch the glorious sunrise. The good times ended when Kipp was 12. The forest was "burned down to ashes by a forest fire", according to Kipp's father. Kipp never went there again. The booming camp area, however, seemed to suggest a different story.
+
+		The @blue{forest cabin} was connected to Kipp's family's @blue{abandoned treehouse}, the @blue{lumber mill} and the @blue{hunting range} to the south.
+	}
+	$else{
+		Kipp and [companionName] entered Kapallanoah Forest. It was green and placid as always. They approached the forest cabin.
+	}
+}
+
 go to{
-	$set_companionB_0
-	$set_companionF_0
-	$set_companionD_0
-	$if_brotherPts_gt_derelictPts{
-	$if_brotherPts_gt_fugitivePts{
-	$set_companionB_1
-	$set_companionName_Rice
-	}$else{
-	$set_companionF_1
-	$set_companionName_Jinx
-	}
-	}$elif_derelictPts_gt_fugitivePts{
-	$set_companionD_1
-	$set_companionName_Alodar
-	}$else{
-	$set_companionF_1
-	$set_companionName_Jinx
-	}
-	Kipp still couldn't take his mind off what happened in the town. The world was changing. Kipp was glad that he chose to explore the outside world: there were so many new things to see and do.
-
-	$if_companionF_1{
-		Kipp was musing to himself when he felt a pair of slender yet callused hands covering his mouth from behind. "Be quiet." the stranger whispered softly into Kipp's ear. The smell of cheap perfume emanated from the stranger's body. The stranger kept on talking, indifferent to Kipp's uneasiness: "The sheriff's chasing me down with dogs. Take me to a place where I can hide. And don't you dare make a sound when I let go of you. Or I'll slit your throat." Kipp nodded furiously in agreement as he felt a cool blade sliding on his neck and shoulders. The stranger let go of Kipp. Kipp led the way and rushed into a river nearby. They got some hollow weeds as breathing tubes and hid under the water. Kipp could hear the barking of the dogs coming nearer. A man's voice was shouting in rage. Gradually, the noise died down. Kipp got out of the water with the stranger.
-
-		Kipp finally had to time to examine the stranger closer. She was in her early 20s, with a scar on her cheek and a head of flaming red hair. She wore a faded black and white prison uniform.
-
-		The stranger: You're a natural! Team up with me and we can be new Bonny and Clyde!
-		Kipp: Hmm.
-		The stranger: Well, it's too late to turn back anyway. You're already guilty of harboring a fugitive! *wink* I'm Jinx, by the way.
-		Kipp: *sigh* Alright. I'm Kipp. We'd better get you some new clothes, then.
-
-		Jinx stole some shirts from a hanging clothesline and changed into it. Kipp continued his journey to the forest with Jinx.
-	}
-	$elif_companionD_1{
-		Kipp was musing to himself when he heard a faint sound coming from the side of the road. "Help m.. Hel.." Kipp followed the sound and found an old man in ragged clothes lying on the ground. He suffered wounds on his shoulder. Kipp quickly applied some medicine on the wounds and bandaged it.
-
-		Old man: Thank you my friend. I feeling much better.
-		Kipp: What happened.
-		Old man: A group of bandits attacked me and robbed me of all my stuff. Ah! If people knew the mighty Magician Alodar was defeated by some thieves!
-		Kipp: Magician? I didn't know they still exist.
-		Alodar: We are a dying breed, my friend. How can I thank you for your kindness?
-		Kipp: I'm traveling to the wilderness now. Can a wise magician like you give me some advice to deal with the dangers along the way?
-		Alodar: No way! The wilderness? I'm heading there myself. I found a disturbance in the current world order and I wanted to investigate it.
-		Kipp: Wow! Why don't you come along with me? We can watch out for each other.
-		Alodar: Sure!
-
-		Kipp and Alodar continued their journey together.
-	}
-	$elif_companionB_1{
-		A familiar voice disturbed Kipp's musings -- "Kipp! I found you! Finally!"
-
-		Kipp turned around to find his brother, Rice coming to him. Rice looked exhausted. His clothes and face were covered by dust.
-
-		Kipp: Rice! Why are you here? What happened?
-		Rice: Pa and Ma were crying all day since the you left after quarrel. They didn't want your last memory of them to be filled with anger. So I volunteered to come with you so that we can watch out for each other,
-		Kipp: That's wonderful! We'll have too get you cleaned up though, you look horrible.
-
-		After Kipp and Rice showered and rested in a inn, they set off once again.
-	}
-
-	"Welcome to Kapallanoah Forest!" The sign greeted Kipp as he reached @blue{wood cabin 1}. Much to Kipp's surprise, the camping area presented a prosperous sight.
-
-	Kipp: *gasp* How is this possible? It should been burnt down years ago!
-
-	Kappallanoah Forest. Such a familiar yet distant place for Kipp. When Kipp was young, his father used to take the entire family there after the crops were harvested. They would hike, hunt and huddle around the campfire at 5 am to catch the glorious sunrise. The good times ended when Kipp was 12. The forest was "burned down to ashes by a forest fire", according to Kipp's father. Kipp never went there again. The booming camp area, however, seemed to suggest a different story.
-
-	The @blue{forest cabin} was connected to Kipp's family's @blue{abandoned treehouse}, the @blue{lumber mill} and the @blue{hunting range} to the south.
+	Kipp and [companionName] walked back to the forest cabin.
 }
 
 inspect{

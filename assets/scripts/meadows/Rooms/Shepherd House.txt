@@ -1,5 +1,5 @@
+_enter{
 # Start of Meadows Level.
-go to{
 	$if_medIntroductionCounter_eq_0{
 
 		$set_medIntroductionCounter_1 #Prevents this from repeating the intro
@@ -256,30 +256,35 @@ go to{
 		@bold_orange{LEVEL START!}
 
 	}$else{
-		Kipp and [companionName] walk back to the Shepherd's house.
+		Kipp and [companionName] entered the meadows and approached the Shepherd's house.
 
-		Sam: Hey, guys. You want dinner?
-		[companionName]: No thanks. We're just dropping by.
-		Sam: Alright. If any of you are tired, feel free to @red{sleep on} my @yellow{Queen Bed}.
-		Kipp: Thank you for the offer. Whelp player, do that or @red{go to} the @blue{Hedge Maze Entrance}.
-
-		$if_companionB_eq_1{
-			Rice: Or try @red{let Rice sleep on the bed. I need the sleep too!}
-			Kipp: You can't even follow the text formatting correctly.
-			Rice: Well then maybe I need the sleep more than you do.
-
-		}$elif_companionF_eq_1{
-			Jinx: Or @red{leave} @green{Jinx alone for good}.
-			Kipp: You can't even follow the text formatting correctly.
-			Jinx: Well then maybe you should stop breaking the fourth wall.
-
-		}$else{
-			Alodar: Ah, yes. The last wall has been shattered from the viewers.
-			Kipp: Can you please stop speaking in Chinese cookies?
-
-		}
+		Sam: Hi, guys. How's it going?
 	}
+}
 
+go to{
+	Kipp and [companionName] walk back to the Shepherd's house.
+
+	Sam: Hey, guys. You want dinner?
+	[companionName]: No thanks. We're just dropping by.
+	Sam: Alright. If any of you are tired, feel free to @red{sleep on} my @yellow{Queen Bed}.
+	Kipp: Thank you for the offer. Whelp player, do that or @red{go to} the @blue{Hedge Maze Entrance}.
+
+	$if_companionB_eq_1{
+		Rice: Or try @red{let Rice sleep on the bed. I need the sleep too!}
+		Kipp: You can't even follow the text formatting correctly.
+		Rice: Well then maybe I need the sleep more than you do.
+
+	}$elif_companionF_eq_1{
+		Jinx: Or @red{leave} @green{Jinx alone for good}.
+		Kipp: You can't even follow the text formatting correctly.
+		Jinx: Well then maybe you should stop breaking the fourth wall.
+
+	}$else{
+		Alodar: Ah, yes. The last wall has been shattered from the viewers.
+		Kipp: Can you please stop speaking in Chinese cookies?
+
+	}
 }
 
 

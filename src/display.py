@@ -8,6 +8,21 @@ import os
 from global_vars import Globals
 
 class Display:
+
+    colorStringToHex = {
+        'white':    '#ffffff',
+        'black':    '#000000',
+        'blue':     '#3030ff',
+        'red':      '#ff3030',
+        'green':    '#00ff00',
+        'cyan':     '#00ffff',
+        'yellow':   '#ffff00',
+        'orange':   '#ffaa00',
+        'pink':     '#ff7feb',
+        'purple':   '#ff00ff',
+        'brown':    '#8B4513'
+    }
+
     def __init__(self, root, windowManager):
         self.windowManager = windowManager
         self.numCols = Globals.NumCols
@@ -44,9 +59,14 @@ class Display:
             bufferlst.append(substr)
         bufferstr = '\n'.join(bufferlst)
 
+        # set the plain text color to white with the right transparency
+        alpha_level = self.windowManager.alphaLevel
+        plain_color = '#{0:02X}{0:02X}{0:02X}'.format(max(255 - alpha_level * (256 // Globals.AlphaMax), 0))
+        plain = 'plain'     # tags are identified by strings
+        self.text.tag_config(plain, foreground=plain_color)
+
         self.text.config(state=tk.NORMAL)
         self.text.delete(1.0, tk.END)
-
         start_index = 0
         for subformat in self.windowManager.formatting:   # subformat is one tuple: (string tag, (int start_index, int end_index))
             # account for additonal newlines when searching the bufferstr
@@ -69,13 +89,19 @@ class Display:
                     font_style = (Globals.FontName, Globals.FontSize, "underline")
                 else:
                     color = format_tag
-                self.text.tag_config(formatter, foreground=color, font=font_style) # bold=is_bold, italic=is_italicized, underline=is_underlined
-            self.text.insert(tk.END, plain_text)
+            # map readable string to hex color code
+            hex_color = Display.colorStringToHex[color]
+            # create transparency by pulling color to black
+            color_ints = int(hex_color[1:3], 16), int(hex_color[3:5], 16), int(hex_color[5:7], 16)
+            color_ints = [max(ci - alpha_level * 256 // Globals.AlphaMax, 0) for ci in color_ints]
+            hex_color = '#{:02X}{:02X}{:02X}'.format(*color_ints)
+            self.text.tag_config(formatter, foreground=hex_color, font=font_style) # bold=is_bold, italic=is_italicized, underline=is_underlined
+            self.text.insert(tk.END, plain_text, plain)
             self.text.insert(tk.END, formatted_text, formatter)
             start_index = adjusted_format_end + 1   # start next search after this formatter
 
         if start_index < len(bufferstr):
-            self.text.insert(tk.END, bufferstr[start_index:])
+            self.text.insert(tk.END, bufferstr[start_index:], plain)
         self.text.config(state=tk.DISABLED)
 
     @property

@@ -1,0 +1,59 @@
+#University_Lore_MDept_Quen
+
+talk to{
+	Lore: Hey, Quen.
+	Quen: Just couldn't stay away from me, huh, Lore?
+	$if_analyzedata_gt_3{
+		Lore: Actually, I need your help.
+		Quen: Of course you do. At your service, madam.
+		Lore: I'm going to the Wilderness with Rune to do research.
+		Quen: I beg your pardon?
+		Lore: Rune and I are going to the Wilderness to do research on the sinkhole and the environment.
+		Quen: ...One more time.
+		Lore: Quen, you heard me.
+		
+		Quen scratched the back of his head.
+		
+		Quen: Yeah, I heard you. Why are you suddenly interested in the Wilderness?
+		
+		Lore told Quen the story of her employment and about the data she and Rune analyzed.
+		
+		Quen: I see. You know, what's happening now may have happened before.
+		Lore: What do you mean?
+		Quen: Well, I happen to be an expert on anthropology, and part of that, brace yourself, part of that is scientific. I know, science is my mortal enemy, but I make certain exceptions. Anyway, the soil patterns that we're seeing now in have been seen before. Areas with high weathering expose old bedrock underneath. At the museum, we've been studying that bedrock, and the erosion lines are almost the same as what we're seeing now all over the city. And there's one more thing.
+		Lore: What?
+		Quen: There's a large amount of carbon-based organic material in the bedrock. So, basically, there are fossils. Remains.
+		Lore: So?
+		
+		Quen grimaced.
+		
+		Quen: Human remains. 
+		Lore: So what you're saying...
+		Quen: So what I'm saying is that whatever's happening now destroyed the previous life that existed here. You and I both know that in order for fossils to be preserved, they must be quickly buried. Usually that indicates some kind of rapid natural disaster, such as a flood or a volcanic eruption. In this case, we think it's an earthquake, resulting in landslides and tsunamis. The worst part is we can see in the rock that this has happened not just once before, but many times before, all around the same time interval. It's cyclic.
+		Lore: Have you reported this to the government?
+		Quen: My boss has tried, and they took our reports, but so far there's been no response. If you're going to the Wilderness to study that, I'll come too. I know you wouldn't last a day without me, and you could use my expertise.
+		Lore: Are you sure?
+		Quen: Sure, I'm sure. What's the rendezvous?
+		Lore: We're meeting at Rodnin's office in the Business District.
+		Quen: Okay, I'll see you there, then.
+		$inc_analyzedata_1
+	}$else{
+		Just checking in|
+			Lore: Just checking in to see how you're doing.
+			Quen: I appreciate that, but you know I'm great. Anyone with a face like mine has to be feeling pretty happy. Oh, and with my intelligence, and my big heart...
+			
+			Lore rolled her eyes.
+			
+			Quen: Oh, by the way, I keep meaning to check out the Library of the Department of Others. I keep hearing all kinds of spooky rumors about that place. Sounds like the perfect spot for Quen the Great.
+			
+			Quen laughed at his own joke - was it even a joke? - and went back to his work.
+		|Pat his head|
+			Lore patted Quen's head. 
+			
+			Quen: Hey, hey, watch the hair! 
+			
+			He fixed his hair and went back to his work.
+		|Nevermind|
+			Quen: You know, my time is valuable, Lore, and you just wasted it.
+	}
+}

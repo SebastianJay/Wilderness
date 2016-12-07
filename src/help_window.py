@@ -28,6 +28,7 @@ class HelpWindow(Window):
         super().__init__(width, height)
         self.config = None
         self.mode = None
+        self.haveMessage = False
 
     def load(self):
         self.config = AssetLoader().getConfig(Globals.KeybindingsConfigPath)
@@ -36,12 +37,12 @@ class HelpWindow(Window):
         self.mode = GameState().gameMode.name
         self.haveMessage = GameState().messageExists()
 
-
     def draw(self):
-        if(self.haveMessage):
-            GameState().popMessage()
-            #display message for certain amount of time
+        if self.haveMessage:
+            pass
+            # TODO display message for certain amount of time
         else:
+            self.clear()
             if self.mode is None:
                 return self.pixels
             dictionaryList = self.config[self.mode]

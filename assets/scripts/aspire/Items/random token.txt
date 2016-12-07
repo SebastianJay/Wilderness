@@ -5,7 +5,7 @@ $if_inventory_fireAle_eq_1{
 	}
 	
 	use{
-		Kipp: Use it on what? I understand it would be tedious if the player would have to type "pick up fork" and "use fork on eggs" and "eat eggs" just to keep myself from starving every morning, let alone do everything to get through this level, but there are enough hints in the dialogue to figure this out.
+		Kipp: Use it on what? I understand it would be tedious if the player would have to type "pick up fork" and "use fork on eggs" and "eat eggs" just to keep myself from starving every morning, let alone do everything to get through this level, but there are enough hints in the dialog to figure this out.
 	}
 	
 }$else{

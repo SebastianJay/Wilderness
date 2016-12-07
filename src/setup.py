@@ -1,5 +1,7 @@
 from setuptools import setup
 
+# NOTE to setup a development environment, ensure you have setuptools installed and then run:
+#  python src/setup.py develop
 setup(
     name='Wilderness',
     version='0.1',

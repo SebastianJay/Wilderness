@@ -1,0 +1,17 @@
+use{
+	Kipp: Maybe I should take a break from all of this
+	
+	The scene gets darker as Kipp closes his eyes. 
+	
+	[companionName]: Night dude. Hope you wake up.
+	
+	 Hours later, the character did wake up...but it doesn't look like this is Kipp's body anymore. The world around them is filled with the lights and sounds of the future. 
+	 
+	 Lore: Time to tie up some lose ends.
+	
+	@bold{*Lore's playthrough continued*}
+	
+	$switchcharacter
+	#The player switches from this quest to wherever Lore is in her quest.
+}
+	

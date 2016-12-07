@@ -103,7 +103,7 @@ class HistoryWindow(Window):
             while lineIndex < len(self.wrappedLines) and charCounter < self.charLimit:
                 charCounter += len(self.wrappedLines[lineIndex])
                 lineIndex += 1
-            self.startingLine = lineIndex - self.height if lineIndex - self.height >= 0 else 0
+            self.startingLine = max(lineIndex - self.height, 0)
         else: # Only allow scrolling if we're not writing text to the screen
             for key in keypresses:
                 if key == "Prior":

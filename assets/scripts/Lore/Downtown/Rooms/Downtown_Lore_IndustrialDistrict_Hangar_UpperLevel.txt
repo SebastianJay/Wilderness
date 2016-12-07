@@ -1,0 +1,31 @@
+#Downtown_Lore_IndustrialDistrict_Hangar_UpperLevel
+
+go to{
+	$if_planeUL_eq_1{
+	Lore climbed to the upper level. The wind blew forcefully around her hair. The level sloped down before a giant runway. The @yellow{plane} sat in the center facing the runway.
+	
+	Voice: Stop!!!
+	
+	Lore felt her heart jump into her mouth. In front of the hangar, Rodnin was screaming at her as armed guards rushed inside. She ran back to lock the door to the upper level. She could barely hear the guards banging on the door over the sound of blood pounding in her ears. She had to get in the plane.
+	}
+	$if_planeUL_eq_0{
+	The upper level appeared to lead to a runway. The central slate seemed as though it moved.
+	}
+	$if_Halcompanion_eq_3{
+	Hal and Lore climbed to the upper level. The roof opened up to a huge runway. The plane sat in the center, glimmering in the sunlight. Hal turned to Lore, eyes twinkling.
+	
+	Hal: Well, shall we?
+	
+	Lore nodded in excitement.
+	
+	Hal: I'll let you get in the @yellow{plane} first.
+	}
+	$if_planeULfriends_eq_0{
+	The upper level appeared to lead to a runway. The central slate seemed as though it moved.
+	}$if_planeULfriends_eq_1{
+	Lore climbed the stairs to the upper level. Essa, Quen, and Rune were close behind. The wind blew forcefully around them. The @yellow{plane} sat in the center facing the runway.
+	}
+	$else{
+	Lore couldn't go there yet.
+	}
+}

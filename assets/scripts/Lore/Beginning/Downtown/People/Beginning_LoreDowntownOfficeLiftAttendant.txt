@@ -1,6 +1,7 @@
 #Beginning_LoreDowntownOfficeLiftAttendant
 
 talk to{
+	$if_begtalktoRodnin_eq_0{
 	Lift Attendant: What floor, ma'am?
 	Lore: Second, please.
 	Lift Attendant: Certainly.
@@ -27,5 +28,6 @@ talk to{
 			Lift Attendant: Here you are, miss.
 			
 			Lore stepped out of the @blue{elevator}. Down the hall was @blue{Rodnin's office}.|
+		}
 	}
 }

@@ -1,0 +1,33 @@
+#Downtown_Lore_IndustrialDistrict_Hangar
+
+go to{
+	$if_followRodnin_eq_2{
+		Lore stepped inside the hangar. The plane glimmered in front of her as if it was made of diamond. First, she had to figure out how to get the plane outside.
+		$set_enteredHangar_1
+		$Choice{
+		Search the hangar|
+			Lore looked around the hangar. There was a @yellow{control panel} on the wall.
+		|Search the plane|
+			Lore peeked into the cockpit. There were a million buttons and levers. Lore thought it was best not to touch them yet.
+		|Push it|
+			Lore flexed her bicep. Nothing happened. Did she even have a muscle? Somehow, Lore thought that might not work.|
+		}
+	}$if_Halcompanion_eq_2{
+		Hal led Lore into the Hangar. He walked over to a control panel and began pressing buttons. Lore stood captivated by the plane. She had never seen one before in her life. It was larger than she expected, and glistened with well-cared for metal. 
+		
+		Hal: Pretty impressive, isn't it? Just wait til' we get flying. 
+		
+		He pressed a button and the central platform began to shake. It lifted the plane up and onto the roof. Lore's jaw dropped. Hal laughed at her face.
+		
+		Hal: Come on, the stairs to the @blue{Upper Level} are over here.
+		$set_Halcompanion_3
+	}$if_allfriends_eq_2{
+		Lore and her friends entered the hangar. They simultaneously gasped. The plane was sitting in the middle of the hangar, aglow. It was bigger than Lore had imagined.
+		
+		Essa: Look at those wings! I've studied rocketry in school, but I never thought...
+		
+		She ran towards the plane and began to study it. Quen and Rune followed her. Lore looked around and spotted an @yellow{control panel}.
+	}$else{
+	Lore couldn't get inside.
+	}
+}
