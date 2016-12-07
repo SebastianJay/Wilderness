@@ -52,10 +52,11 @@ class GameState:
                 return self.dumps()
             def dumps():
                 return json.dumps(self.__dict__)
-            def loads(self, jsonstr):
-                dct = json.loads(jsonstr)
+            def load(self, dct):
                 for key in dct:
                     setattr(self, key, dct[key])
+            def loads(self, jsonstr):
+                self.load(json.loads(jsonstr))
 
         def __init__(self):
             # event broadcasters - registered listeners persist after game reset
@@ -362,12 +363,13 @@ class GameState:
                     self.subStates = []
                     for i in range(len(dct[key])):
                         substate = GameState.__GameState.GameSubState()
-                        substate.__dict__ = dct[key][i]
+                        substate.load(dct[key][i])
                         self.subStates.append(substate)
                 else:
                     setattr(self, key, dct[key])
-            # signal that buffer has updated
+            # send signals so other windows load correctly
             self.onAddLangNode(self.historyBuffer, True)
+            self.onInventoryChange()
 
         def loads(self, jsonstr):
             """ Initialize the GameState from a Json string """

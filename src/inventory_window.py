@@ -21,7 +21,7 @@ class InventoryWindow(Window):
             currentInventoryList = []
             for itemdata in self.inventoryList:
                 # TODO refactor for efficiency
-                if itemdata[0] in GameState().inventory:
+                if itemdata[0] in GameState().inventory and int(GameState().inventory[itemdata[0]]) > 0:
                     currentInventoryList.append(itemdata)
             self.currentInventoryList = currentInventoryList
         return _inventoryChangeHandler
