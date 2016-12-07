@@ -50,6 +50,7 @@ livingRoom:
     objects:
         - wallet
         - loreDoor
+        - zweihander
 
 kitchen:
     name: Kitchen
@@ -76,6 +77,8 @@ mainStreet:
     neighbors:
         livingRoom: N
         gloverHouse: N
+        busStop: N
+        holeInWall: N
     objects: {}
 
 gloverHouse:
@@ -95,6 +98,7 @@ gloverHouse:
 busStop:
     name: Bus Stop
     description: n/a
+    script: Lore/Suburbs/bus stop.txt
     r: 0
     c: 0
     neighbors:
