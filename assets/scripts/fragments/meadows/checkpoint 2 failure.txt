@@ -4,7 +4,7 @@ Kipp: Well great.
 [companionName]: %25 percent chance of getting it right! Literally 1 out of 4, Kipp!
 Kipp: Don't blame me. So now what?
 [companionName]: We walk back in. Another option is give up and just go back to the @blue{Shepherd} 's @blue{House} and tell Sam we didn't sign up for this, take a nap, do something more interesting.
-Kipp: Or...we can try that walk back in idea and try again, (@red{go to } @blue{Checkpoint 1}).
+Kipp: Or...we can try that walk back in idea and try again, (@red{go to } @blue{Checkpoint 2}).
 [companionName]: I'll let you decide @bold{all on your own} so you can't blame me next time.
 
 $goto_hedgeMazeEntrance
