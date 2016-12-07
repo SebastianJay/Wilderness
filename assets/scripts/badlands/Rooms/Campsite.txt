@@ -1,5 +1,5 @@
 # Start of Badlands Level
-go to{
+_enter{
 	$if_badBadlandsIntro_eq_0{
 		$set_badBadlandsIntro_1
 		
@@ -49,6 +49,22 @@ go to{
 		Kipp: There's also a @yellow{sleeping bag} to @red{use} in case we get tired.
 		
 	}
+}
+
+go to{
+    Kipp: Alright, back here and still no one in sight.
+    
+    $if_companionF_eq_1{
+        Jinx: Don't count on anyone coming back. You saw what was inside those caves.
+    }$elif_companionD_eq_1{
+        Alodar: A lot of defensive measures were place for outsiders. I doubt there will be a return.
+    }$else{
+        Rice: Trust me brother. Anyone who doesn't belong here are either lost for good or being eaten by the buzzards in the valley.  
+    }
+    
+    Kipp: Let's move on and @red{go to } on of the other caves...uh.
+    [companionName]: @blue{Tau, Upsilon, Mu, Sigma, and Kappa} or we can @{look around} just in case we missed something.
+    Kipp: There's also a @yellow{sleeping bag} to @red{use} in case we get tired.
 }
 
 look around{

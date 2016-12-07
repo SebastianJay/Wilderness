@@ -1,13 +1,12 @@
 $if_inventory_extinguisher_eq_1{
 
 	inspect{
-		Kipp: It's a small lighter like the one my dad use to keep beside his box of cigarettes. Operates like one, too.
+		A fire extinguisher...to put out fires. Not much else to it. 
 	}
 	
 	use{
-		[companionName]: You just put your finger on the sparkwheel and flick...
-		Kipp: I know how to operate a lighter.
-		[companionName]: Well I had to use some filler since you know just @red{using} the item doesn't do much in this instance.
+		[companionName]: Kipp, now is not the time to start playing fireman. Keep the pin in until the time comes.
+        Kipp: Fine.
 	}
 	
 	use torch on{
