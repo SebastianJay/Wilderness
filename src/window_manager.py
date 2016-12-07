@@ -13,6 +13,7 @@ from settings_window import SettingsWindow
 from palette_window import PaletteWindow
 from inarea_window import InAreaWindow
 from inventory_window import InventoryWindow
+from saves_window import SavesWindow
 from game_state import GameState, GameMode
 from global_vars import Globals
 
@@ -76,6 +77,8 @@ class WindowManager(Window):
             elif old in [GameMode.inAreaInventory, GameMode.inAreaMap] and new in inGameModes:
                 # pop off overlay
                 self.activeWindowGroups.pop()
+            elif old == GameMode.titleScreen and new == GameMode.selectFile:
+                self.activeWindowGroups.append()
             elif new in [GameMode.titleScreen]:
                 # use the "title" window group
                 self.activeWindowGroups = [1]
@@ -138,7 +141,7 @@ class WindowManager(Window):
         self.addWindow(SettingsWindow, 0, 0, Globals.NumRows-2, Globals.NumCols)
         self.addWindow(InventoryWindow, Globals.NumRows//5, Globals.NumCols//6, (Globals.NumRows*3//5)-2, (Globals.NumCols*2//3))
         self.addWindow(HelpWindow, Globals.NumRows - 3, 0, 3, Globals.NumCols)
-        # self.addWindow(SaveWindow, 0, 0, 35, 120)
+        self.addWindow(SavesWindow, 0, 0, Globals.NumRows, Globals.NumCols)
 
         # NOTE to debug, add a tuple with the index (in self.windowList) of your window to self.windowGroups
         #  then change self.activeWindowGroups to be a list containing just the index (in self.windowGroups) of that tuple
@@ -151,6 +154,7 @@ class WindowManager(Window):
             (6,9),      # InArea window
             (7,),       # Settings window
             (8,9),      # Inventory window
+            (10,)       # Save Window
         ]
         # which window group is on screen initially
         self.activeWindowGroups = [1]

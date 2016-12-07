@@ -16,10 +16,11 @@ class TitleWindow(Window):
     def reset(self):
         self.pointingTo = 0 # index of option player is looking at
         # options to be selected on screen
-        self.options = ('New game', 'Load game', 'Options', 'Credits', 'Exit')
+        self.options = ['New game', 'Load game', 'Options', 'Credits', 'Exit']
         self.art = None     # set in load()
         self.startRow = 0   # set in load()
         self.startCol = 0   # set in load()
+        self.freeFileInd = 0    # set in load()
         self.isPromptingName = False    # on new game, whether window is asking for player name
         self.nameBuffer = ''            # holds name that player is typing
 
@@ -50,6 +51,13 @@ class TitleWindow(Window):
                 self.pixels[row][col + startCol] = char
                 col += 1
 
+        # Check if New Game or Load Game options are visible
+        self.freeFileInd = AssetLoader().freeSaveFileInd()
+        if self.freeFileInd < 0:
+            self.options[0] = None  # remove new game option
+        if AssetLoader().lenSaveFiles() == 0:
+            self.options[1] = None  # remove load game option
+
         # Same as above, but for the options instead.
         # Note that the options are all left-aligned based on the center
         # of the first option.
@@ -57,10 +65,11 @@ class TitleWindow(Window):
         self.startCol = (self.width - len(self.options[0])) // 2
         row = 0
         for option in self.options:
-            col = 0
-            for char in list(option):
-                self.pixels[row + self.startRow][col + self.startCol] = char
-                col += 1
+            if option is not None:
+                col = 0
+                for char in list(option):
+                    self.pixels[row + self.startRow][col + self.startCol] = char
+                    col += 1
             row += 1
 
     def update(self, timestep, keypresses):
@@ -77,17 +86,29 @@ class TitleWindow(Window):
                     gs.name = self.nameBuffer.strip()
                     gs.gameMode = GameMode.inAreaCommand
                     gs.enterArea(gs.areaId, gs.roomId)  # send signal to run startup script
+                    """
+                    gs.activeProtagonistInd = 1
+                    gs.enterArea('farm', 'meadow', True)
+                    """
         else:
             for key in keypresses:
                 if key == "Up":
-                    self.pointingTo = (self.pointingTo - 1) % len(self.options)
+                    while True:
+                        self.pointingTo = (self.pointingTo - 1) % len(self.options)
+                        if self.options[self.pointingTo] is not None:
+                            break
                 elif key == "Down":
-                    self.pointingTo = (self.pointingTo + 1) % len(self.options)
+                    while True:
+                        self.pointingTo = (self.pointingTo + 1) % len(self.options)
+                        if self.options[self.pointingTo] is not None:
+                            break
                 elif key == "Return":
                     cmd = self.options[self.pointingTo]
                     if cmd == 'New game':
                         # switch to name prompt mode before starting game
                         self.isPromptingName = True
+                    elif cmd == 'Load game':
+                        GameState().gameMode = GameMode.selectFile
                     elif cmd == 'Options':
                         # TODO: Figure out how to get this to launch the settings window
                         continue

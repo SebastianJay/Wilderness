@@ -74,7 +74,7 @@ class GameState:
             """ Wipes out the existing GameState (called on New Game) """
             # game specific savable info
             self.name = ""              # player name, entered at start of new game
-            self.playtime = 0           # playtime, in seconds
+            self.playtime = 0.0         # playtime, in seconds
             self.variables = {}         # variables created through script files {string key: string/int value}
                                         # value is a string by default, but can be converted to int on the fly
 
@@ -86,6 +86,7 @@ class GameState:
             self.activeProtagonistInd = 0   # which protagonist is active (0=Lore, 1=Kipp)
 
             # non-savable info (refreshes on reset)
+            self.saveId = 0             # which save path this state would be written on
             self.cmdBuffer = ""         # command that player is currently typing
             self.cmdMap = {}            # "trie" of commands player can type
             self.choiceList = []        # list of strings of choices player can make
@@ -340,7 +341,7 @@ class GameState:
             deleteFields = ['cmdMap', 'cmdBuffer', 'gameModeActive', 'choiceList',
                 'gameModeLockedRequests', 'onChoiceChange', 'onSettingChange', 'onClearBuffer',
                 'onGameModeChange', 'onAddLangNode', 'onEnterArea', 'onCharacterSwitch',
-                'onInventoryChange', 'gameMessages']
+                'onInventoryChange', 'gameMessages', 'saveId']
             for field in deleteFields:
                 del obj[field]
             return json.dumps(obj)
