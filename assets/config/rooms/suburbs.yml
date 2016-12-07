@@ -90,7 +90,6 @@ gloverHouse:
         - doorbell
         - tree
         - glover
-        - afro
 
 busStop:
     name: Bus Stop

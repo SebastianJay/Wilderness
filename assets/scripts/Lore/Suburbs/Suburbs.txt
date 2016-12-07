@@ -1,3 +1,6 @@
+_enter{
+this is temporary, you are in main street
+}
 go to{
 	The @blue{suburbs} that Lore lived in were very quaint. Everything was peaceful and the neighbors greeted each other and life itself was just fine and dandy.
 }
