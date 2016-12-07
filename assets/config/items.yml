@@ -21,10 +21,13 @@ money:
     description: A nice fat stash of cash. The safest way to double your money is to fold it over and put it in your pocket.
 flamethrower:
     name: flamethrower
-    description: A brand new flamethrower, fit for duty! Good for roasting fools.
+    description: A brand new flamethrower, fit for duty! Good for roasting fools.2
 zweihander:
     name: zweihander
     description: As the name suggests, the Zweihander is held with two hands, buts its wielder must still be inhumanly strong. It is this great weight that sends foes flying when hit solidly.
+bandages:
+    name: bandages
+    description: Some good ol bandages to fix any injury.
 ## End Suburbs items
 
 ## Begin Aspire items
@@ -93,3 +96,9 @@ corrosiveShotgun:
     name: corrosive shotgun
     description: n/a
 ## End Black Hills items
+
+##Begin Kappallanoah Forest items
+rifle:
+    name: Rifle
+    description: It was Kipp's father's old automatic rifle. The rifle wasn't in great condition but it might be useful for Kipp.
+## End Kappallanoah Forest items

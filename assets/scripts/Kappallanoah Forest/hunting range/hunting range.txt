@@ -1,0 +1,3 @@
+go to{
+    Kipp and [companionName] walked to the hunting range.
+}

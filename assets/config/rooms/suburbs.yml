@@ -125,6 +125,7 @@ outskirts:
     neighbors:
         nolanHouse: N
         holeInWall: N
+        shinHouse: N
     showIf: canVisitOutskirts
     objects: {}
 
@@ -152,3 +153,26 @@ nolanBasement:
         nolanHouse: N
     objects:
         - nolan
+
+shinHouse:
+    name: Shin House
+    description: n/a
+    script: Lore/Suburbs/ShinHouse.txt
+    r: 0
+    c: 0
+    neighbors:
+        outskirts: N
+        insideShinHouse: N
+    objects: {}
+
+insideShinHouse:
+    name: Inside Shin's House
+    description: n/a
+    script: Lore/Suburbs/InsideShinHouse.txt
+    r: 0
+    c: 0
+    neighbors:
+        shinHouse: N
+    objects:
+        - shin
+        - bandages

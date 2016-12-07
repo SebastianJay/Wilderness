@@ -1,0 +1,7 @@
+go to{
+    Lore opened the door and stepped inside. @green{Shin} laid on the floor crying out for help. @green{Shin's} shin was split to shit.
+}
+look around{
+    Inside the house was calm compared to the calamity crippling Shin. There was a neat little bed, a cute little kitchen, and a nice little trash bin.
+    There were @yellow{bandages} that could be useful.
+}

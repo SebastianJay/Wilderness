@@ -68,7 +68,7 @@ go to{
 }
 
 look around{
-	$if_badSavenge_eq_0{
+	$if_badScavenge_eq_0{
 		Kipp: Found a @yellow{lighter} in one of the bags.
 		@bold{*Lighter Added to Inventory*}
 		$set_inventory_lighter_1

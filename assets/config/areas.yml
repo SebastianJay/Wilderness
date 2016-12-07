@@ -23,7 +23,7 @@ aspire:
             c: 116
     # only be able to enter if a condition is fulfilled
     #showIf: didFarm #TODO
-
+    
 farm:
     name: Charli
     roomsConfig: rooms/farm.yml
@@ -77,3 +77,15 @@ badlands:
             roomId: cave6
             r: 0
             c: 0
+            
+forest:
+    name: Kappallanoah Forest
+    roomsConfig: rooms/forest.yml
+    objectsConfig: objects/forest.yml
+    mapId: 1
+    entrances:
+        -
+            roomId: forest cabin
+            r: 0
+            c: 0
+            

@@ -1,0 +1,13 @@
+inspect{
+    Shin seemed to be hurting a lot. Perhaps the @yellow{zweihander} would prove useful in ending his suffering.
+}
+talk to{
+    Lore went up to @green{Shin}.
+    
+    Lore: Hi! Are you doing alright?
+    Shin: AHOEUCOIUSRHSORU
+    Lore: Sorry, I can't understand you.
+}
+use morphine on{
+        
+}

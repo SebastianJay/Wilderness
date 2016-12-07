@@ -90,3 +90,9 @@ zweihander:
     name: zweihander
     script: Lore/Suburbs/Zweihander.txt
     showIf: inventory_zweihander_eq_0
+shin:
+    name: Shin
+    script: Lore/Suburbs/shin.txt
+bandages:
+    name: bandages
+    script:
