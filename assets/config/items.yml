@@ -22,6 +22,9 @@ money:
 flamethrower:
     name: flamethrower
     description: n/a
+zweihander:
+    name: zweihander
+    description: n/a
 ## End Suburbs items
 
 ## Begin Aspire items

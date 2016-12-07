@@ -75,12 +75,18 @@ peevedPeople:
 pileOfMoney:
     name: pile of money
     script: Lore/Suburbs/pile of money.txt
+    showIf: inventory_money_eq_0
 flamethrower:
     name: flamethrower
     script: Lore/Suburbs/Flamethrower.txt
+    showIf: inventory_flamethrower_eq_0
 window:
     name: window
     script: Lore/Suburbs/window.txt
 nolan:
     name: Nolan
     script: Lore/Suburbs/Nolan.txt
+zweihander:
+    name: zweihander
+    script: Lore/Suburbs/Zweihander.txt
+    showIf: inventory_zweihander_eq_0
