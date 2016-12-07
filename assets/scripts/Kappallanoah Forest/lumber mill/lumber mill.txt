@@ -1,0 +1,7 @@
+go to{
+	Kipp went to the lumber mill. The mill lay 20 minutes away from the forest cabins. Business were declining here as most locals switched to the services industry.
+}
+
+look around{
+	@green{Ol' Willy} was sitting by a pile of logs, smoking a pipe. @green{Jack} the apprentice was busy working on a log. A @yellow{poster} was on the wall. @green{Johnson} the manager was working in a small office. 
+}

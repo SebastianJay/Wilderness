@@ -46,6 +46,7 @@ livingRoom:
     c: 0
     neighbors:
         kitchen: N
+        mainStreet: N
     objects:
         - wallet
         - loreDoor
@@ -65,3 +66,84 @@ kitchen:
         - stackPapers
         - junkMail
         - marthi
+
+mainStreet:
+    name: Main Street
+    description: n/a
+    script: Lore/Suburbs/Suburbs.txt
+    r: 0
+    c: 0
+    neighbors:
+        livingRoom: N
+        gloverHouse: N
+    objects: {}
+
+gloverHouse:
+    name: Glover House
+    description: n/a
+    script: Lore/Suburbs/Gloverhouse.txt
+    r: 0
+    c: 0
+    neighbors:
+        mainStreet: N
+    objects:
+        - doorbell
+        - tree
+        - glover
+        - afro
+
+busStop:
+    name: Bus Stop
+    description: n/a
+    r: 0
+    c: 0
+    neighbors:
+        mainStreet: N
+    objects: {}
+
+holeInWall:
+    name: Hole in the Wall
+    description: n/a
+    script: Lore/Suburbs/Hole in the Wall.txt
+    r: 0
+    c: 0
+    neighbors:
+        mainStreet: N
+        outskirts: N
+    objects:
+        - pinkGuy
+
+outskirts:
+    name: Outskirts
+    description: n/a
+    script: Lore/Suburbs/Beyond the hole in the wall.txt
+    r: 0
+    c: 0
+    neighbors:
+        nolanHouse: N
+    objects: {}
+
+nolanHouse:
+    name: Nolan House
+    description: n/a
+    script: Lore/Suburbs/house1.txt
+    r: 0
+    c: 0
+    neighbors:
+        outskirts: N
+    objects:
+        - peevedPeople
+        - pileOfMoney
+        - flamethrower
+        - window
+
+nolanHouseInterior:
+    name: Nolan Basement
+    description: n/a
+    script: Lore/Suburbs/NolanBasement.txt
+    r: 0
+    c: 0
+    neighbors:
+        nolanHouse: N
+    objects:
+        - nolan

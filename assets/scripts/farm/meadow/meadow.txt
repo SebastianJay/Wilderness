@@ -1,3 +1,8 @@
 go to {
-The endless grassland fills Kipp's eye with green. The roaming herd of cow and sheep starts to get excited once they see Kipp.
+  The endless grassland fills Kipp's eye with green. The roaming herd of cow and sheep starts to get excited once they see Kipp.
+}
+
+leave area{
+  Kipp stepped out into the vast, unfamiliar fields beyond his hometown of @blue{Charli}. Onward to the Wilderness.
+  $worldmap_22_125
 }

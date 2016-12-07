@@ -1,0 +1,8 @@
+inspect{
+	The recipe belonged to Kipp's mother. She made the best squirrel pie before the squirrels became endangered.
+	
+	Squirrel Pie
+	
+	Ingredients: Flour, salt, rosemary, basil, Kappallanoah squirrels.
+	Procedure: Stuff the squirrels and spices in flour. Bake for 1 hour.
+}

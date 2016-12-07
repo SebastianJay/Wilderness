@@ -1,0 +1,57 @@
+inpect{
+	Ol' Willy was rumored to have lived for 500 years. He had been working at the @blue{lumber mill} for as long as people remember.
+}
+
+talk to{
+	$if_frmTalkedOlWilly_eq_0{
+		Ol' Willy: Hmm. You look awfully familiar, son. Have I met you before?
+		Kipp: I don't think so. You might've met my dad though. He used to drink with the lumberjacks a lot.
+		Ol' Willy: Oh! You're Johnson's boy? By god you have grown so much! So how can I help you?
+		[companionName]: We're investigating something in the cave. We've heard that you know the @blue{cave} very well.
+		Ol' Willy: I know it better than the wrinkles on my face. Can I know why you're going there?
+		$choice{
+			tell Ol' Willy|
+			Kipp: My father told a lie to me about the forest. I want to find out why...
+			
+			Ol' Willy interrupted Kipp.
+			
+			Ol' Willy: Ok, ok. I don't want no part in your family matters. But sure, I can teach you how to navigate in the @blue{cave}. Whenever you encounter a junction, flip a coin. If it's heads, go left. If tails, go right.
+			|keep it a secret|
+			Kipp: I'm sorry Willy, I would rather not tell you for now.
+			Ol' Willy: Fine. Sure, I can teach you how to navigate in the @blue{cave}. Whenever you encounter a junction, flip a coin. If it's heads, go left. If tails, go right.
+		}
+		Kipp: That sounds awfully arbitrary.
+		Ol' Willy: *chuckles* It's magic, son. The Emperor put a incredibly strong spell on it so that any metal coin can act as a guide. A flipped coin would only land on a particular side before junctions.
+		$if_companionD_eq_1{
+			[companionName]: Destiny magic! I've only read about it in ancient scrolls. The Emperor must have been immensely powerful to perform a spell like that.
+			Kipp: Destiny magic? That's a rather fancy-schmancy name for @italic{coin-flipping magic}.
+			Alodar: Ohh, this is not just @italic{coin-flipping magic}. It allows you to control fate and destiny.
+		}
+		 $elif_companionF_eq_1{
+			[companionName]: Destiny magic! I've learned that during SC 9999: Multivarible Spell-Casting! That's one of the most advanced form of magic! 
+			Kipp: Destiny magic? That's a rather fancy-schmancy name for @italic{coin-flipping magic}.
+			Jinx: Says someone who had never gone to magic school.
+		}$elif_companionB_eq_1{
+			[companionName]: Destiny magic? I've read about it in our town library. I thought it was just make-believe!
+			Kipp: Destiny magic? That's a rather fancy-schmancy name for @italic{coin-flipping magic}.
+			Rice: It actually had a very complex mechanism behind it. The caster would first have to warp time-space and...
+			Kipp: Yeah, Yeah. Whatever.
+		}
+		Ol' Willy: Just trust the coin.
+		Kipp: Thank you, Willy!
+		$set_frmTalkedOlWilly_1
+	}$elif_frmTalkedOlWilly_eq_1{
+		Ol' Willy: How can I help you now?
+		$choice{
+			ask about Willy's age|
+			Kipp: Just out of curiosity, how old are you?
+			Ol' Willy: To be honest, I've long lost count. I remember serving as the squire for the Emperor once. But at my age, you can no longer tell if the memories are real or just dreams.
+			|ask about Willy's favorite food|
+			Kipp: Just out of curiosity, what's your favorite food?
+			Ol' Willy: Roasted squirrels. I love them. Used to have them every night before the authorities told me the squirrels are @italic{endangered}.
+			|nothing|
+			Kipp: Nah, I'm good.
+			}
+		}
+	}
+}
