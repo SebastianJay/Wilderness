@@ -1,3 +1,3 @@
 look around{
-	The room was dank and clammy. @green{Nolan} sat in a chair staring at the wall. He looked like a degenerate, rejected man with no hope for the future.
+	The room was dank and clammy. @green{Nolan} sat in a chair staring at the wall. He looked like a degenerate, rejected man with no hope for the future. His back was hunched and peaked so that it resembled Mount Fuji. He reeked of sweat and old socks from days past before time memorable. Being in the room just drained the life out of poor Lore. She felt like she would prefer death than to spend more time in this room.
 }

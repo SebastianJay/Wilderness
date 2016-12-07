@@ -14,18 +14,19 @@ talk to{
 							@italic{Removed afro from inventory.}
 							$dec_inventory_afro_1
 							$set_subGaveAfro_1
-						}
+						Pink Guy: Ore wa chin chin ga daiski da yo. (You may proceed.)
+					$set_canVisitOutskirts_1
+                    }
 					}
 
-					Pink Guy: Ore wa chin chin ga daiski da yo. (You may proceed.)
-					$set_canVisitOutskirts_1
+					
 				|No|
 					Lore: Not right now.
 					Pink Guy: Ore wa chin chin ga daisuki da yo. (I do hope that you come back soon and save this child.)
 			}
 		}$else{
 			Lore: Hi!
-			Pink Guy: Ore wa chin chin ga daisuki da yo. (There is a war coming, young one. Be wary of all and trust no one.)
+			Pink Guy: Ore wa chin chin ga daisuki da yo. (There is a war coming, young one. The real Frank has disappeared and the Dark Lord will come soon for the ultimate fight. Buy the Wilderness DLC exclusive for Xbox One and talk to @purple{Jerminator79} to bring light to all creation.)
 			Lore: ...
 		}
 }

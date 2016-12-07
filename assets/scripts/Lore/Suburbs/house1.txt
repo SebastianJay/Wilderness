@@ -1,7 +1,11 @@
 go to{
 	$if_subPaidPeople_eq_0{
-	Lore gingerly and reluctantly approached @blue{house 1}. She cringed really hard.
+	Lore gingerly and reluctantly approached @blue{Nolan House}. She cringed really hard.
+	}$else{
+    $if_subPaidPeople_eq_1{
+	There was nothing to see here.
 	}
+    }
 }
 look around{
 	$if_subPaidPeople_eq_0{
@@ -9,16 +13,34 @@ look around{
 	}
 }
 burn{
+    $if_FirstTimewithPeople_eq_1{
+    $if_subBrokeWindow_eq_0{
 	$if_subPaidPeople_eq_0{
+    $if_subCanBurnHouse_eq_0{
+    $if_subBurnedHouse_eq_0{
 	$if_inventory_flamethrower_eq_1{
 		Lore began to raze the house to the ground. A dengerate looking man ran out and attempted to escape to the streets but the @green{peeved people} grabbed him.
-	$set_subBurnedHouse_1
+    $set_subBurnedHouse_1
+    
+	$if_subPaidPeople_eq_0{
+	$if_subBurnedHouse_eq_1{
+		Lore went up to the @green{peeved people}.
+		
+		Lore: I got @green{No Life Nolan} out fore you.
+		Peeved People: Thanks! We'll deal with him now. We don't really have anything to give you in return, except this pack of @yellow{morphine}.
+		
+		@italic{Added morphine to inventory.}
+		$set_inventory_morphine_1
+		$set_subPaidPeople_1
 	}
 	}
+	}
+    }$else{
+        Lore wished she could burn the house again and perhaps burn @green{Nolan} with the house, but alas, the house was no more.
+	}
+    }
+    }
+	}
+    }
 }
-#The following happens after the Nolan story arc is complete
-go to{
-	$if_subPaidPeople_eq_1{
-	There was nothing to see here.
-	}
-}
+	
