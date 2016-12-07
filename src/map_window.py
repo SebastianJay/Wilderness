@@ -114,6 +114,8 @@ class MapWindow(Window):
 
         if self.overEntrance(g.mapLocation[0], g.mapLocation[1]):
             g.gameMode = GameMode.worldMapOverArea
+        else:
+            g.gameMode = GameMode.worldMap
 
         # process keystrokes to move player position
         for key in keypresses:

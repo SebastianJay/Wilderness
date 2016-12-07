@@ -2,7 +2,7 @@
 Window containing the world map.
 """
 from window import Window
-from game_state import GameState
+from game_state import GameState, GameMode
 from asset_loader import AssetLoader
 from global_vars import Globals
 import yaml
@@ -64,8 +64,7 @@ class InAreaWindow(Window):
                     if (g.mapLocation[0] == self.details[0][x]['r']) and (g.mapLocation[1] == self.details[0][x]['c']):
                         print(x)
             elif key == "Return":
-                # TODO
-                pass
+                g.gameMode = GameMode.inAreaCommand
 
     def draw(self):
         # make sure we have loaded

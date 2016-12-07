@@ -45,7 +45,7 @@ phoenixBolt:
     description: Says here that it's brewed with barley and the seeds of world's hottest pepper. How can anyone stomach this?
 mohanisBullets:
     name: Mohani's bullets
-    description: "I wonder why she would carve the number # on her shells?"
+    description: "I wonder why she would carve the number 6 on her shells?"
 revolver:
     name: six-chamber revolver
     description: Strange how the Rune Raiders just let me have this. Guess magic is stronger than the mortal world. I have enough bullets for two reloads.
@@ -60,7 +60,7 @@ lighter:
     description: It's a small lighter like the one my dad use to keep beside his box of cigarettes. Operates like one, too.
 extinguisher:
     name: extinguisher
-    description: A fire extinguisher...to put out fires. Not much else to it. 
+    description: A fire extinguisher...to put out fires. Not much else to it.
 map:
     name: map
     description: "Yup. It's right here: cave 6 is accessible through that tunnel marked on the map. And that's how I'm  gonna reference it."
@@ -69,13 +69,13 @@ map:
 ## Begin farm items
 dirtyMap:
     name: dirty map
-    description: n/a
+    description: An old, dusty map detailing a vast expanse of wilderness. Contains dragons and other such mythical beasts at the corners.
 farmcraft:
     name: Farmcraft
-    description: n/a
+    description: A game that you can sink infinite amounts of time into and yet still be n00bish.
 milk:
     name: milk
-    description: n/a
+    description: Whole milk! None of that 2% nonsense.
 
 ## End farm items
 

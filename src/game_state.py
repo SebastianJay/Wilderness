@@ -63,10 +63,11 @@ class GameState:
             self.onChoiceChange = EventHook()   # called when choiceList changes
             self.onGameModeChange = EventHook() # called when gameMode changes
             self.onAddLangNode = EventHook()    # called when addLangNode is called
-            self.onCharacterSwitch = EventHook()# called when activeProtagonistInd changes
+            self.onCharacterSwitch = EventHook()    # called when activeProtagonistInd changes
             self.onEnterArea = EventHook()      # called when enterArea is called
             self.onClearBuffer = EventHook()    # called when clearBuffer is called
             self.onSettingChange = EventHook()  # called when a setting changes
+            self.onInventoryChange = EventHook()    # called when inventory changes
             self.init()
 
         def init(self):
@@ -181,6 +182,7 @@ class GameState:
             """ Sets a variable or item count """
             if inventoryFlag:
                 self.inventory[varname] = value
+                self.onInventoryChange(varname, value)
             else:
                 self.variables[varname] = value
 
@@ -332,7 +334,8 @@ class GameState:
             # do not save non-persistent fields
             deleteFields = ['cmdMap', 'cmdBuffer', 'gameModeActive', 'choiceList',
                 'gameModeLockedRequests', 'onChoiceChange', 'onSettingChange', 'onClearBuffer',
-                'onGameModeChange', 'onAddLangNode', 'onEnterArea', 'onCharacterSwitch']
+                'onGameModeChange', 'onAddLangNode', 'onEnterArea', 'onCharacterSwitch',
+                'onInventoryChange']
             for field in deleteFields:
                 del obj[field]
             return json.dumps(obj)
