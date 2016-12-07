@@ -76,7 +76,7 @@ class InputWindow(Window):
                             if val == 'view inventory':
                                 pass
                             elif val == 'view map':
-                                pass
+                                gs.gameMode = GameMode.inAreaMap
                             elif val == 'save game':
                                 pass
                             elif val == 'exit game':
