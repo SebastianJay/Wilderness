@@ -24,6 +24,7 @@ class Globals:
     ]
     InAreaPaths = [
         ('inarea_aspire_map.txt', 'aspire.yml'),
+        ('inarea_aspire_map.txt', 'aspire.yml'),
     ]
     AreasConfigPath = 'areas.yml'
     ItemsConfigPath = 'items.yml'

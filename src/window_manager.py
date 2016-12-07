@@ -67,10 +67,15 @@ class WindowManager(Window):
                 # switch to map window group
                 self.activeWindowGroups = [3]
                 self.isTransitioning = True
-            elif new in [GameMode.inAreaMap]:
-                # switch to map window group
-                self.activeWindowGroups = [4]
-                self.isTransitioning = True
+            elif old in inGameModes and new == GameMode.inAreaInventory:
+                # add inventory window
+                self.activeWindowGroups.append(6)
+            elif old in inGameModes and new == GameMode.inAreaMap:
+                # switch to in area map window group
+                self.activeWindowGroups.append(4)
+            elif old in [GameMode.inAreaInventory, GameMode.inAreaMap] and new in inGameModes:
+                # pop off overlay
+                self.activeWindowGroups.pop()
             elif new in [GameMode.titleScreen]:
                 # use the "title" window group
                 self.activeWindowGroups = [1]
@@ -119,7 +124,6 @@ class WindowManager(Window):
         self.addWindow(LoadingWindow, midRow - 2, midCol - 10, 5, 20)    # default to small size
 
         self.addWindow(TitleWindow, 0, 0, Globals.NumRows, Globals.NumCols)
-        # add help window
         # add credits window
         # add select file window
 
@@ -130,12 +134,10 @@ class WindowManager(Window):
         self.addWindow(PaletteWindow, 0, splitCol - 1, Globals.NumRows - 2, Globals.NumCols - (splitCol - 1))
 
         self.addWindow(MapWindow, Globals.NumRows//4, Globals.NumCols//4, (Globals.NumRows//2)-2, (Globals.NumCols//2))
-        self.addWindow(InAreaWindow, 0, 0, Globals.NumRows-2, Globals.NumCols)
-        # add inventory window
+        self.addWindow(InAreaWindow, Globals.NumRows//5, Globals.NumCols//6, (Globals.NumRows*3//5)-2, (Globals.NumCols*2//3))
         self.addWindow(SettingsWindow, 0, 0, Globals.NumRows-2, Globals.NumCols)
-        self.addWindow(InventoryWindow, 0, 0, Globals.NumRows-2, Globals.NumCols)
+        self.addWindow(InventoryWindow, Globals.NumRows//5, Globals.NumCols//6, (Globals.NumRows*3//5)-2, (Globals.NumCols*2//3))
         self.addWindow(HelpWindow, Globals.NumRows - 3, 0, 3, Globals.NumCols)
-        #self.addWindow(InventoryWindow, Globals.NumRows//4, Globals.NumCols//4, Globals.NumRows//2, Globals.NumCols//2)
         # self.addWindow(SaveWindow, 0, 0, 35, 120)
 
         # NOTE to debug, add a tuple with the index (in self.windowList) of your window to self.windowGroups
@@ -148,6 +150,7 @@ class WindowManager(Window):
             (5,9),      # Map Window
             (6,9),      # InArea window
             (7,),       # Settings window
+            (8,9),      # Inventory window
         ]
         # which window group is on screen initially
         self.activeWindowGroups = [1]
