@@ -9,7 +9,7 @@ talk to{
 		Ask about the child|
 		Lore: Do you know anything about a missing @green{child}?
 		
-		He did move his gaping mouth. He looked too weak to kidnap a child, anyway.
+		He did not move his gaping mouth. He looked too weak to kidnap a child, anyway.
 		
 		|Ask about the people outside|
 		Lore: What do you know about the people outside the house?
@@ -17,6 +17,6 @@ talk to{
 		Lore: You owe them money. C'mon, let's go discuss things with them!
 		
 		Lore reached out her hand to Nolan. He shrank back a little and appeared to be flustered. He never touched a female before. Lore grabbed Nolan's hand and they went out through the front door.
-		$goto_house1
+		$goto_nolanHouse
 		}
 }

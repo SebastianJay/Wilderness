@@ -1,15 +1,15 @@
 inspect{
 	$if_subBrokeWindow_eq_0{
-	$if_subPickUpMoney_eq_0{
-	$if_subPickUpFlamethrower_eq_0{
 	Lore went up to the @yellow{window} that was not barred. Lore probably could @red{break} it with the @yellow{zweihander}.
-	}
-	}
 	}
 }
 break{
+    $if_subBrokeWindow_eq_0{
+    $if_subCanBurnHouse_eq_0{
 	Lore shouted @bold{Deus Vult} and rekt the window before it could retaliate. Lore could see inside the @blue{basement}.
 	Lore fell into the @blue{basement}.
 	$set_subBrokeWindow_1
 	$goto_nolanBasement
+    }
+    }
 }	
