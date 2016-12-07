@@ -4,4 +4,5 @@ go to{
 }
 knock on{
     Lore knocked and the @blue{front gate} opened. A man in amazing armor stood in front of Lore.
+    $set_subKnocked
 }

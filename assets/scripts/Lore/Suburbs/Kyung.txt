@@ -1,0 +1,22 @@
+talk to{
+    Lore: Is anyone there?
+    Kyung: Prepare to die.
+    
+    @italic{You can try hitting Kyung 10 times. All attacks cost 1 time. Light hits have a higher chances of dealing damage but do less damage. Heavy attacks do more damage but there is a more chance of missing. Kyung has 15 life points.}
+}
+horizontal sweep on{
+    $random{
+    Lore did 0 damage|
+    |Lore did 1 damage|
+    }
+}
+uppercut on{
+    $random{
+    Lore did 0 damage|
+    |Lore did 0 damage|
+    |Lore did 1 damage|
+    |Lore did 2 damage|
+    }
+}
+piercing thrust on{
+overhead chop on{

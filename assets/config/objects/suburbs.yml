@@ -100,6 +100,7 @@ bandages:
 solaire:
     name: Solaire
     script: Lore/Suburbs/solaire.txt
+    showIf: subKnocked
 samjam:
     name: Samjam
     script: Lore/Suburbs/samjam.txt

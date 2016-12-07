@@ -191,8 +191,7 @@ samjamHouse:
     neighbors:
         outskirts: N
         shinHouse: N
-        frontDoor: N
-    showIf: subFixedShin_1
+        frontGate: N
     objects: {}
     
 frontGate:
@@ -203,6 +202,7 @@ frontGate:
     c: 0
     neighbors:
         samjamHouse: N
+        insideSamjam: N
     objects:
         - solaire
 
@@ -214,18 +214,16 @@ insideSamjam:
     c: 0
     neighbors:
         frontGate: N
-        dungeon: N
+        
+    showIf: subSolaired_eq_1
     objects:
         - samjam
 dungeon:
     name: Dungeon
     description: n/a
-    script:
+    script: Lore/Suburbs/dungeon.txt
     r: 0
     c: 0
     neighbors:
-        insideSamjam: N
-        holeInWall: N
-    objects:
-        - kyung
-        - child
+       holeInWall: N
+    objects: {}
