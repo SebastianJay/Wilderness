@@ -53,7 +53,8 @@ class PaletteWindow(Window):
                 displayList = ['.']
             elif isinstance(val, tuple):
                 # partial path, get all options at that level of tree
-                tree, cmdString = val
+                tree, pathFollowed = val
+                cmdString = pathFollowed[-1]
                 cmdList = list(tree.keys())
                 # if at root of tree, add metacommands to list
                 if tree == gs.cmdMap:
@@ -62,5 +63,20 @@ class PaletteWindow(Window):
                 for completion in cmdList:
                     if len(cmdString) <= len(completion) and completion.startswith(cmdString):
                         displayList.append(completion)
-            # otherwise no valid command, so display nothing
+            for key in keypresses:
+                if key == 'Tab' and isinstance(val, tuple) and len(displayList) == 1:
+                    # do autocomplete
+                    _, pathFollowed = val
+                    remainderLen = len(gs.cmdBuffer) - len(' '.join(pathFollowed[:-1]))
+                    gs.popCmdBuffer(remainderLen)   # remove partial
+                    if len(gs.cmdBuffer) > 0:
+                        gs.appendCmdBuffer(' ')     # append delimiter space
+                    gs.appendCmdBuffer(displayList[0]) # add completion
+                    # add trailing space if more commands to be read
+                    nextval = gs.traverseCmdMap()
+                    if isinstance(nextval, tuple):
+                        gs.appendCmdBuffer(' ')
+                        displayList = list(tree.keys())
+                    elif isinstance(nextval, str) or isinstance(nextval, BodyNode):
+                        displayList = ['.']
         self.displayList = displayList

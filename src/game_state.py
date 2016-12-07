@@ -115,12 +115,14 @@ class GameState:
 
         def appendCmdBuffer(self, ch):
             """ Add to the command buffer, but do not overflow """
-            if len(self.cmdBuffer) < Globals.CmdMaxLength:
+            if len(self.cmdBuffer) + len(ch) <= Globals.CmdMaxLength:
                 self.cmdBuffer += ch
 
-        def popCmdBuffer(self):
-            """ Take one character off command buffer, to implement BackSpace """
-            self.cmdBuffer = self.cmdBuffer[:-1]
+        def popCmdBuffer(self, numchars=1):
+            """ Take numchar characters off command buffer """
+            if numchars <= 0:
+                return
+            self.cmdBuffer = self.cmdBuffer[:-numchars]
 
         def clearCmdBuffer(self):
             """ Reset command buffer (e.g. if pressed Return) """
@@ -132,7 +134,7 @@ class GameState:
             If return val is:
              str -> valid metacommand, contains string from GameState.cmdListMetaCommands
              BodyNode -> valid normal command, contains behavior to execute
-             (dict, str) tuple -> partial walk along tree, contains (level in tree, remaining cmdBuffer)
+             (dict, str[]) tuple -> partial walk along tree, contains (level in tree, path taken including remainder)
              None -> extraneous command, bad characters after valid or between tree levels
             """
             cmdString = self.cmdBuffer.lstrip().rstrip('. ')
@@ -141,10 +143,12 @@ class GameState:
                 return cmdString    # complete metacommand
             val = prefixTree
             keepWalking = True
+            pathFollowed = []
             while len(cmdString) > 0 and keepWalking:
                 keepWalking = False
                 for prefix in prefixTree:
                     if cmdString.startswith(prefix):
+                        pathFollowed.append(prefix)
                         val = prefixTree[prefix]
                         if isinstance(val, BodyNode):
                             if len(cmdString) > len(prefix):
@@ -159,8 +163,9 @@ class GameState:
                                 break   # continue walking tree
                             else:
                                 return None # invalid chars in between
-            # (dict of current layer in tree, string of cmd buffer remaining after walk)
-            return (val, cmdString)
+            pathFollowed.append(cmdString)
+            # (dict of current layer in tree, string[] of tokenized pieces of walk)
+            return (val, pathFollowed)
 
         def touchVar(self, varname, inventoryFlag = False):
             """ Sets a variable or inventory item to 0 in mapping if it doesn't exist """
@@ -335,7 +340,7 @@ class GameState:
             deleteFields = ['cmdMap', 'cmdBuffer', 'gameModeActive', 'choiceList',
                 'gameModeLockedRequests', 'onChoiceChange', 'onSettingChange', 'onClearBuffer',
                 'onGameModeChange', 'onAddLangNode', 'onEnterArea', 'onCharacterSwitch',
-                'onInventoryChange']
+                'onInventoryChange', 'gameMessages']
             for field in deleteFields:
                 del obj[field]
             return json.dumps(obj)
