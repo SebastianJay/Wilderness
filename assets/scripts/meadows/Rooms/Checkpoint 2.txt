@@ -1,7 +1,7 @@
 go to{
 	$if_medHedgeCheck_eq_2{
 		$if_medCheck2Intro_eq_0{
-			$set_medCheck2ntro_eq_1
+			$set_medCheck2Intro_eq_1
 
 			[companionName]: So what happened back there?
 			Kipp: Back when?

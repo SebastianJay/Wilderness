@@ -31,6 +31,7 @@ checkpoint1:
     c: 0
     neighbors:
         hedgeMazeEntrance: SE
+        checkpoint2: NE
     objects: {}
 
 checkpoint2:
@@ -41,6 +42,7 @@ checkpoint2:
     c: 0
     neighbors:
         hedgeMazeEntrance: SW
+        checkpoint3: SE
     objects: {}
 
 checkpoint3:
@@ -51,6 +53,7 @@ checkpoint3:
     c: 0
     neighbors:
         hedgeMazeEntrance: NW
+        checkpoint4: SW
     objects: {}
 
 checkpoint4:
@@ -61,6 +64,7 @@ checkpoint4:
     c: 0
     neighbors:
         hedgeMazeEntrance: NE
+        cliffside: W
     objects: {}
 
 cliffside:
