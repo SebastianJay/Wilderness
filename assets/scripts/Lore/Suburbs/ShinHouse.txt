@@ -1,0 +1,14 @@
+go to{
+    $if_subPaidPeople_eq_1{
+        Lore was reluctant to enter a new area after the terrible experience of Nolan's house. She gingerly stepped up to the second house.
+    }$else{
+        Lore felt wrong going to this house before finishing up business at @blue{No Life Nolan's House}.
+    }
+}
+look around{
+    $if_subPaidPeople_eq_1{
+        A rundown two story house with overgrown bushes at the front. The front door seems to be ajar and there are shouts for help coming within.
+    }$else{
+        Lore could hear cries of help coming within the house, but she wanted to finish up business at @blue{No Life Nolan's House} first.
+    }
+}

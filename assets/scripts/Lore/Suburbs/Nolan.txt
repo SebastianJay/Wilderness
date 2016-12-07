@@ -16,7 +16,9 @@ talk to{
 		Nolan: Uhhhhhh. Tell them to go away.
 		Lore: You owe them money. C'mon, let's go discuss things with them!
 		
-		Lore reached out her hand to Nolan. He shrank back a little and appeared to be flustered. He never touched a female before. Lore grabbed Nolan's hand and they went out through the front door.
+		Lore reached out her hand to Nolan. He shrank back a little and appeared to be flustered. He never touched a female before much like the writer of this narration. Lore grabbed Nolan's hand and they went out through the front door.
+        
+        @italic{Added Nolan to inventory.}
 		$goto_nolanHouse
 		}
 }

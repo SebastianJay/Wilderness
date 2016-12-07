@@ -1,0 +1,15 @@
+University AFC:
+    name: University AFC
+    description: n/a
+    script: Lore/Beginning/University/Rooms/Beginning_LoreUniversityAFC.txt
+    r: 0
+    c: 0
+    neighbors:
+        Observatory Hill: N
+        Engineering Department: N
+        Dining Hall: N
+        Library of Department of Others: N
+    objects:
+        - VR
+        - Supervisor
+        - Simulator

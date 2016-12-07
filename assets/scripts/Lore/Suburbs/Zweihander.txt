@@ -1,5 +1,5 @@
 inspect{
-	The ancient @yellow{zweihander} hung from a fancy display case. Lore got it from an antique store, but she could not remember when.
+	The ancient @yellow{zweihander} hung from a fancy display case coated in dust and fond memories. It was big as it was in her memories of wielding it.
 }
 
 pick up{
