@@ -5,7 +5,7 @@ forestCabin:
     r: 0
     c: 0
     neighbors:
-        abandondedTreehouse: N
+        abandonedTreehouse: N
         lumberMill: S
         huntingRange: W 
     objects:
@@ -33,7 +33,7 @@ abandonedTreehouse:
 lumberMill:
     name: Lumber Mill
     description: n/a
-    script: Kappalanoah Forest/lumber mill/lumber mill.txt
+    script: Kappallanoah Forest/lumber mill/lumber mill.txt
     r: 0
     c: 0
     neighbors:
