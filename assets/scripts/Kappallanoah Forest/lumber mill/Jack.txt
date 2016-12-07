@@ -1,0 +1,50 @@
+inspect{
+	Jack was a young man about Kipp's age. Months of hard labor had gave him ripped muscles. He was busy moving a pile of logs
+}
+
+talk to{
+	Jack: *pants* gotta move the logs before noon *pant* or boss ain't gonna be happy *pant*
+	$choice{
+		help Jack|
+		$if_companionD_eq_1{
+			Kipp: You look terrible. Need some help?
+			[companionName]: A simple levitation spell would do nicely. Levitus!
+			
+			The pile of logs rose in the air. Alodar waved his hands to the left and the logs landed perfectly to the intended place.
+			
+			Jack: That's impossible! Who are you?
+			Alodar: Only the greatest magician alive *wink*
+		}$elif_companionF_eq_1{
+			Kipp: You look terrible. Need some help?
+			
+			Kipp went up to help Jack carry the logs but was stopped by Jinx.
+			
+			Jinx: Awww. You muggles are so @italic{adorable}. I can move it easily with a simple levitation spell. Levitus! Levitus!
+			
+			The pile of logs remained in its place. 
+			
+			Kipp: *imitating Jinx* @italic{I can move it easily with a simple levitation spell.}
+			Jinx: *groans* Guess I should have paid more attention during class. Now we'll have to do it the old-fashioned way.
+			
+			Kipp and Jinx went up to Jack pushed to pile slowly to its intended place.
+			
+			Jack: *pant* Thank you friends.
+			Kipp: *pant* No *pant* problem.
+		}$elif_companionB_eq_1{
+			Kipp: You look terrible. Need some help?
+			Jack: Oh yes. 
+			Rice: Hmm. I remembered a levitation spell I came across in the library. Might be helpful in this situation. Levitus!
+			
+			Rice waved his hand at the pile of logs. The logs shaked a bit and steadily rose up a foot above ground. Rice tried to concentrate and move the logs to his left but they just shaked in the air. Rice finally gave up and the logs dropped back to the ground.
+			
+			Kipp: Well, at least you tried.
+			
+			Kipp and Rice went up to Jack and pushed the logs slowly to their intended place.
+			
+			Jack: *pant* Thank you, friends.
+		}
+		|wish him luck|
+		Kipp: Man, you sure look tired. Good luck trying to push that huge pile.
+		Jack: *pants* Just shut up if you're not helping. 
+	}
+}

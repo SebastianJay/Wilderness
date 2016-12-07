@@ -1,0 +1,18 @@
+inspect{
+\	Kipp saw an old picture of him and Rice.   
+\   ///////
+\  |      |
+\  | 0  0 | 
+\  |   >  |   ___
+\   \ _3_/   /0 0\
+\      |     \_3_/ 
+\   ---|--- ---|---
+\     /\       /\
+\    /  \
+	$if_companionB_eq_1{
+		Rice: OMG! That's us!!
+		Kipp: You were so tiny then haha.
+	}$else{
+		[companionName]]: Aww. You guys were so cute.
+	}
+}
