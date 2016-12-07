@@ -29,9 +29,10 @@ use lighter on{
 				#Flashback to Aspire 
 				[companionName]: @italic{He visits his first town to hear about a villain with powers from a world unknown. The boy teams up with three groups to save the town.}
 				
-			}$else
+			}$else{
 				#Flashback to Black Hills
 				[companionName]: @italic{He visits his first town to hear about a demon haunting the town. He goes to the mines to explore and find that's it was only a robot.}
+            }
 				
 			$if_companionB_eq_1{
 				Kipp: @italic{ This guy then ventures into the forest to find more answers. His brother back on the farm hears about the guy's departure and leaves to join him.}
@@ -44,8 +45,6 @@ use lighter on{
 			[companionName]: @italic{They then run into a wise man telling them that the boy is part of some prophecy.}
 			Kipp: @italic{They travel to the lake to search for something very important. They then head to the meadows to assist a shepherd. Her sheep guide the two travelers through a hedge maze that eventually leads them to the badlands.}
 			[companionName]: @italic{Finally, the two enter a cave to stand in front of a painting that explains to them everything that has happened on their journey.}
-			
-			# FINISH PAINTING # 1
 			
 			Kipp: Deja vu.
 			[companionName]: The man in the forest was right. You are the prophecy the world has been looking for.
