@@ -12,19 +12,19 @@ letterFromFriends:
     description: n/a
 afro:
     name: afro
-    description: n/a
+    description: A nice, thick afro. Inscribed inside is "Wow queen, you're so beautiful".
 morphine:
     name: morphine
-    description: n/a
+    description: A lil something to ease the pain of living.
 money:
     name: money
-    description: n/a
+    description: A nice fat stash of cash. The safest way to double your money is to fold it over and put it in your pocket.
 flamethrower:
     name: flamethrower
-    description: n/a
+    description: A brand new flamethrower, fit for duty! Good for roasting fools.
 zweihander:
     name: zweihander
-    description: n/a
+    description: As the name suggests, the Zweihander is held with two hands, buts its wielder must still be inhumanly strong. It is this great weight that sends foes flying when hit solidly.
 ## End Suburbs items
 
 ## Begin Aspire items

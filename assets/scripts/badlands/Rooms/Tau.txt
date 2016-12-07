@@ -7,7 +7,7 @@ go to{
 		[companionName]: Don't look down.
 		Kipp: Kind of hard to do both of those at the same time.
 		
-		After a several stressful minutes, they finally reached the other side and entered the cave.
+		After several stressful minutes, they finally reached the other side and entered the cave.
 
 		Kipp: I can't see a thing. It's pitch black in here.
 		
@@ -22,11 +22,11 @@ go to{
 	}
 }
 
-use lighter{
-	[companionName]: I think the flame is too small to shine it on anything.
+#use lighter{
+#	[companionName]: I think the flame is too small to shine it on anything.
 	
-	Kipp: Well then we have to keep @red{looking around}.
-}
+#	Kipp: Well then we have to keep @red{looking around}.
+#}
 
 
 look around{
@@ -41,9 +41,10 @@ look around{
 		$if_badLit_eq_1{
 			[companionName]: There's that painting on the wall and the @yellow{torch} is still lit. 
 			
-			$set_badTauPainting_1{
-				Kipp: Oh wait. There was that @yellow{6} written on the wall.
-			}
+			$if_badTauPainting_eq_1{
+                Kipp: Oh wait. There was that @yellow{6} written on the wall.
+            }
+            
 		}$else{
 			[companionName]: Kipp, we still need to light the @yellow{torch} in the cave before we can @red{look around}.
 		}

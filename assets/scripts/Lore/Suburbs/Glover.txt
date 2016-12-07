@@ -10,6 +10,7 @@ talk to{
 		}
 	|Greet|
 		Lore: Howdy do!
+        $if_inventory_afro_eq_0{
 		Glover: Yo dawg, what you doin on muh property, m8.
 		$choice{
 			Need Afro|
@@ -17,14 +18,17 @@ talk to{
 				Glover: Yo man, you can't take away muh property. Git off muh lawn!
 			|Speak his language|
 				Lore: Yo yo yo, I'm yo boi, u know wut I'm sayin, dawg? I need yo dope hairline, famalam.
-				$if_subTalktoGlover_eq_0{
+				
 					$inc_loreMorality_1
-				}	
-			}
+					
 				Glover: Here you go, muh brutha. I always help a brutha out, man.
 				
 				@italic{Added afro to inventory.}
 				$set_inventory_afro_1
+        }
+        }
+        $else{
+            Glover: Fak off m8.}
 	}
 	$set_subTalktoGlover_1
 	}
