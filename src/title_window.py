@@ -54,22 +54,22 @@ class TitleWindow(Window):
         # Check if New Game or Load Game options are visible
         self.freeFileInd = AssetLoader().freeSaveFileInd()
         if self.freeFileInd < 0:
-            self.options[0] = None  # remove new game option
+            self.options[0] = ''  # remove new game option
+            self.pointingTo = 1   # move cursor
         if AssetLoader().lenSaveFiles() == 0:
-            self.options[1] = None  # remove load game option
+            self.options[1] = ''  # remove load game option
 
         # Same as above, but for the options instead.
         # Note that the options are all left-aligned based on the center
         # of the first option.
         self.startRow = row + (self.height - row - len(self.options)) // 2
-        self.startCol = (self.width - len(self.options[0])) // 2
+        self.startCol = (self.width // 2 - len(self.options[self.pointingTo]) // 2)
         row = 0
         for option in self.options:
-            if option is not None:
-                col = 0
-                for char in list(option):
-                    self.pixels[row + self.startRow][col + self.startCol] = char
-                    col += 1
+            col = 0
+            for char in list(option):
+                self.pixels[row + self.startRow][col + self.startCol] = char
+                col += 1
             row += 1
 
     def update(self, timestep, keypresses):
@@ -84,6 +84,7 @@ class TitleWindow(Window):
                     gs = GameState()
                     gs.init()   # clear out any old data
                     gs.name = self.nameBuffer.strip()
+                    gs.saveId = self.freeFileInd
                     gs.gameMode = GameMode.inAreaCommand
                     gs.enterArea(gs.areaId, gs.roomId)  # send signal to run startup script
                     """
@@ -95,12 +96,12 @@ class TitleWindow(Window):
                 if key == "Up":
                     while True:
                         self.pointingTo = (self.pointingTo - 1) % len(self.options)
-                        if self.options[self.pointingTo] is not None:
+                        if self.options[self.pointingTo]:
                             break
                 elif key == "Down":
                     while True:
                         self.pointingTo = (self.pointingTo + 1) % len(self.options)
-                        if self.options[self.pointingTo] is not None:
+                        if self.options[self.pointingTo]:
                             break
                 elif key == "Return":
                     cmd = self.options[self.pointingTo]

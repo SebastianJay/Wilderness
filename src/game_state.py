@@ -94,6 +94,9 @@ class GameState:
             self.gameModeActive = GameMode.titleScreen    # the "mode" of game player is in
             self.gameMessages = deque()
 
+        def incPlaytime(self, dt):
+            self.playtime += dt
+
         def pushMessage(self, message):
             self.gameMessages.append(message)
 
@@ -349,12 +352,11 @@ class GameState:
         def __str__(self):
             return self.dumps()
 
-        def loads(self, jsonstr):
-            """ Initialize the GameState from a Json string """
+        def load(self, dct):
+            """ Initialize the GameState from a dictionary """
             # start all fields from scratch
             self.init()
             # "join" dct manually so omitted members of dct do not carry over
-            dct = json.loads(jsonstr)
             for key in dct:
                 if key == 'subStates':
                     self.subStates = []
@@ -364,6 +366,12 @@ class GameState:
                         self.subStates.append(substate)
                 else:
                     setattr(self, key, dct[key])
+            # signal that buffer has updated
+            self.onAddLangNode(self.historyBuffer, True)
+
+        def loads(self, jsonstr):
+            """ Initialize the GameState from a Json string """
+            self.load(json.loads(jsonstr))
 
         def writeFile(self, fpath):
             """ Write GameState to file """

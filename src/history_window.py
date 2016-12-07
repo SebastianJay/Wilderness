@@ -21,6 +21,7 @@ class HistoryWindow(Window):
         super().__init__(width, height)
         # register handler for additions to history buffer
         GameState().onAddLangNode += self.langNodeAddedHandler()
+        # register handler for clearing out buffer vars when area resets
         GameState().onClearBuffer += self.clearBufferHandler()
 
     def reset(self):
@@ -65,7 +66,14 @@ class HistoryWindow(Window):
                         line_remaining = input_list[i]
             self.wrappedLines.extend(output_list)
             self.rowIndices.extend(row_indices)
-            GameState().lockGameMode(GameMode.inAreaAnimating)  # switch out game mode until animation finished
+
+            if len(args) == 1 or not args[1]:   # second arg indicates whether to animate
+                # switch out game mode until animation finished
+                GameState().lockGameMode(GameMode.inAreaAnimating)
+            else:
+                # advance pointers as if animation complete
+                self.charLimit = len(''.join(self.wrappedLines)) + 1
+                self.startingLine = max(len(self.wrappedLines) - self.height, 0)
         return _langNodeAddedHandler
 
     def clearBufferHandler(self):

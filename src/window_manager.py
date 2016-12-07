@@ -14,6 +14,7 @@ from palette_window import PaletteWindow
 from inarea_window import InAreaWindow
 from inventory_window import InventoryWindow
 from saves_window import SavesWindow
+from asset_loader import AssetLoader
 from game_state import GameState, GameMode
 from global_vars import Globals
 
@@ -60,7 +61,7 @@ class WindowManager(Window):
             elif old == GameMode.isLoading:
                 # pop the loading window off the screen
                 self.activeWindowGroups.pop()
-            elif (old in [GameMode.titleScreen] or old in worldMapModes) and new in inGameModes:
+            elif (old in [GameMode.titleScreen, GameMode.selectFile] or old in worldMapModes) and new in inGameModes:
                 # use the "main game" window group
                 self.activeWindowGroups = [2]
                 self.isTransitioning = True
@@ -78,7 +79,12 @@ class WindowManager(Window):
                 # pop off overlay
                 self.activeWindowGroups.pop()
             elif old == GameMode.titleScreen and new == GameMode.selectFile:
-                self.activeWindowGroups.append()
+                self.activeWindowGroups.append(7)
+            elif old == GameMode.titleScreen and new == GameMode.credits:
+                pass
+            elif old in [GameMode.selectFile, GameMode.credits] and new == GameMode.titleScreen:
+                # pop off overlay
+                self.activeWindowGroups.pop()
             elif new in [GameMode.titleScreen]:
                 # use the "title" window group
                 self.activeWindowGroups = [1]
@@ -128,7 +134,6 @@ class WindowManager(Window):
 
         self.addWindow(TitleWindow, 0, 0, Globals.NumRows, Globals.NumCols)
         # add credits window
-        # add select file window
 
         splitCol = Globals.NumCols * 19 // 24
         splitRow = Globals.NumRows * 5 // 7
@@ -141,7 +146,7 @@ class WindowManager(Window):
         self.addWindow(SettingsWindow, 0, 0, Globals.NumRows-2, Globals.NumCols)
         self.addWindow(InventoryWindow, Globals.NumRows//5, Globals.NumCols//6, (Globals.NumRows*3//5)-2, (Globals.NumCols*2//3))
         self.addWindow(HelpWindow, Globals.NumRows - 3, 0, 3, Globals.NumCols)
-        self.addWindow(SavesWindow, 0, 0, Globals.NumRows, Globals.NumCols)
+        self.addWindow(SavesWindow, Globals.NumRows * 3 // 7, 0, Globals.NumRows * 4 // 7, Globals.NumCols)
 
         # NOTE to debug, add a tuple with the index (in self.windowList) of your window to self.windowGroups
         #  then change self.activeWindowGroups to be a list containing just the index (in self.windowGroups) of that tuple
@@ -259,11 +264,16 @@ class WindowManager(Window):
                 self.isTransitioning = False
                 self.clear()
                 if self.resetOnTransitionComplete:
+                    # reload save files
+                    AssetLoader().loadSaves()
                     # clear, reset, and reload all windows
                     self.reset()
                     self.load()
                     self.resetOnTransitionComplete = False
             return
+
+        # update the playtime clock
+        GameState().incPlaytime(timestep)
 
         # update is only sent to activeWindowGroups[-1], so the foreground windows
         for winind in self.windowGroups[self.activeWindowGroups[-1]]:

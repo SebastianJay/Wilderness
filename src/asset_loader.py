@@ -118,7 +118,7 @@ class AssetLoader:
 
         def freeSaveFileInd(self):
             # collapse all save path names into a big string
-            searchString = ''.join(list(self.savefiles.keys()))
+            searchString = ''.join(self.savefiles.keys())
             # pick out missing indices in that string
             for i in range(len(Globals.SavePaths)):
                 if str(i) not in searchString:
