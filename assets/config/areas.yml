@@ -61,3 +61,19 @@ meadows:
             roomId: cliffside
             r: 0
             c: 1
+
+badlands:
+    name: The Good Badlands
+    roomsConfig: rooms/badlands.yml
+    objectsConfig: objects/badlands.yml
+    mapId: 1
+    entrances:
+        -
+            roomId: campsite
+            r: 0
+            c: 0
+            
+        -
+            roomId: cave6
+            r: 0
+            c: 0

@@ -1,0 +1,13 @@
+## Badlands objects
+firewall:
+    name: firewall
+    script: badlands/Items/firewall.txt
+sleepingBag:
+    name: sleeping bag
+    script: badlands/Items/sleeping bag.txt
+wallPuzzle:
+    name: wall puzzle
+    script: badlands/Items/wall puzzle.txt
+torch:
+    name: torch
+    script: badlands/Items/torch.txt

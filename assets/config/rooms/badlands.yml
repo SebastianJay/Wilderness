@@ -1,0 +1,78 @@
+campsite:
+    name: Campsite
+    description: n/a
+    script: badlands/Rooms/Campsite.txt
+    r: 0
+    c: 0
+    neighbors:
+        tau: N
+        upsilon: N
+        sigma: N
+        mu: N
+        kappa: N
+        cave6: N # HAS TO BE HIDDEN UNTIL THE MAP IS ADDED TO INVENTORY
+    objects:
+        - sleepingBag
+        
+tau:
+    name: Tau
+    description: n/a
+    script: badlands/Rooms/Tau.txt
+    r: 0
+    c: 0
+    neighbors:
+        campsite: N
+    objects:
+        - torch
+        
+upsilon:
+    name: Upsilon
+    description: n/a
+    script: badlands/Rooms/Upsilon.txt
+    r: 0
+    c: 0
+    neighbors:
+        campsite: N
+    objects: {}
+
+sigma:
+    name: Sigma
+    description: n/a
+    script: badlands/Rooms/Sigma.txt
+    r: 0
+    c: 0
+    neighbors:
+        campsite: N
+    objects: 
+        -firewall
+
+mu:
+    name: Mu
+    description: n/a
+    script: badlands/Rooms/Mu.txt
+    r: 0
+    c: 0
+    neighbors:
+        campsite: N
+    objects: {}
+
+kappa:
+    name: Kappa
+    description: n/a
+    script: badlands/Rooms/Kappa.txt
+    r: 0
+    c: 0
+    neighbors:
+        campsite: N
+    objects: {}
+
+cave6:
+    name: Cave 6
+    description: n/a
+    script: badlands/Rooms/Cave 6.txt
+    r: 0
+    c: 0
+    neighbors:
+        campsite: N
+    objects:
+        -wallPuzzle

@@ -51,6 +51,18 @@ tomahawk:
     description: Looks sharp enough to make a dent in a tree like our machete back home. Hopefully I won't have to test if it works with bodies, too.
 ## End Aspire items
 
+## Begin badlands items
+lighter:
+    name: lighter
+    description: It's a small lighter like the one my dad use to keep beside his box of cigarettes. Operates like one, too.
+extinguisher:
+    name: extinguisher
+    description: A fire extinguisher...to put out fires. Not much else to it. 
+map:
+    name: map
+    description: "Yup. It's right here: cave 6 is accessible through that tunnel marked on the map. And that's how I'm  gonna reference it."
+## End badlands items
+
 ## Begin farm items
 dirtyMap:
     name: dirty map

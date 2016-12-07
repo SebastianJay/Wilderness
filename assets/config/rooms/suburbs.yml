@@ -124,6 +124,8 @@ outskirts:
     c: 0
     neighbors:
         nolanHouse: N
+        mainStreet: N
+    showIf: canVisitOutskirts
     objects: {}
 
 nolanHouse:
@@ -140,7 +142,7 @@ nolanHouse:
         - flamethrower
         - window
 
-nolanHouseInterior:
+nolanBasement:
     name: Nolan Basement
     description: n/a
     script: Lore/Suburbs/NolanBasement.txt
