@@ -182,10 +182,12 @@ class Interpreter:
         else:
             # check variables or inventory with given key
             comparator = args[1]
-            compare = args[2]
-            # consult mappings to allow var to var comparisons
-            if gs.getVar(compare, inventoryFlag) is not None:
-                compare = gs.getVar(compare, inventoryFlag)
+            try:
+                # see if second val is a constant or a variable
+                compare = str(int(args[2]))
+            except ValueError:
+                gs.touchVar(args[2])
+                compare = gs.getVar(args[2])
             # do the comparison
             if comparator in ['eq', '=', '==']:
                 retval = varval == compare
@@ -274,7 +276,8 @@ class Interpreter:
                     continue
                 if action[0] == 'go to':
                     neighborReaction = action[1]
-            cmdMap['go to'][neighborName] = neighborReaction
+            if neighborReaction:
+                cmdMap['go to'][neighborName] = neighborReaction
         # go through actions to take on room
         for action in roomScript:
             # ignore 'go to' current room (not possible)
@@ -288,6 +291,7 @@ class Interpreter:
             objScript = objectScripts[i]
             objName = objectNames[i]
             for action in objScript:
+                print(action, objName)
                 if not isVisible(self, action):
                     continue
                 verbWords = action[0].split()

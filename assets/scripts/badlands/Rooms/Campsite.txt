@@ -2,7 +2,7 @@
 _enter{
 	$if_badBadlandsIntro_eq_0{
 		$set_badBadlandsIntro_1
-		
+
 		[companionName]: Kipp, that was not safe.
 		Kipp: But we made it down the cliff, didn't we?
 		[companionName]: I guess, so we arrived at camp I see?
@@ -10,11 +10,11 @@ _enter{
 		[companionName]: You think they're gonna come back
 		Kipp: Leaving all of their backpacks here, I doubt it.
 		[companionName]: So what do you think they were studying?
-		
-		Kipp walked towards the edge of the cliff. He crouched and studied the caves in the cliff on the opposite side of the canyon. 
-		
+
+		Kipp walked towards the edge of the cliff. He crouched and studied the caves in the cliff on the opposite side of the canyon.
+
 		Kipp: Hey, come over here. What's painted above them?
-		
+
 		[companionName]: They're greek letters: @blue{Tau, Upsilon, Mu, Sigma, and Kappa}
 		Kipp: Couldn't Cave 1, 2, 3, 4, and 5 do?
 		[companionName]: They probably mean something more important.
@@ -23,45 +23,50 @@ _enter{
 		Kipp: So like hundreds of years ago?
 		[companionName]: Try thousands.
 		Kipp: But, the Wilderness?
-		[companionName]: It says here this the one place that isn't affected by the "terrraforming" of the inner and outer worlds. So they have to hold something important. 
+		[companionName]: It says here this the one place that isn't affected by the "terrraforming" of the inner and outer worlds. So they have to hold something important.
 		Kipp: Something that is calling us.
 		[companionName]: It also says here that @yellow{the caves should be visited in the order they were written in this journal for the story to make sense. Everything we'll need to explore in order can be found at this campsite.}
 		Kipp: Let's @yellow{search around camp first before we head out to investigate.}
-		
+
 		@bold_orange{BADLANDS LEVEL START!}
-		
+
 		[companionName]: Will @red{look}ing @red{around} really help?
 		Kipp: Who knows what we'll need to handle what lies in those caves?
-		
+
 	}$else{
 		Kipp: Alright, back here and still no one in sight.
-		
+
 		$if_companionF_eq_1{
 			Jinx: Don't count on anyone coming back. You saw what was inside those caves.
 		}$elif_companionD_eq_1{
 			Alodar: A lot of defensive measures were place for outsiders. I doubt there will be a return.
 		}$else{
-			Rice: Trust me brother. Anyone who doesn't belong here are either lost for good or being eaten by the buzzards in the valley.  
+			Rice: Trust me brother. Anyone who doesn't belong here are either lost for good or being eaten by the buzzards in the valley.
 		}
-		
+
 		Kipp: Let's move on and @red{go to } on of the other caves...uh.
 		[companionName]: @blue{Tau, Upsilon, Mu, Sigma, and Kappa} or we can @{look around} just in case we missed something.
 		Kipp: There's also a @yellow{sleeping bag} to @red{use} in case we get tired.
-		
+
 	}
+}
+
+leave area{
+	Kipp and [companionName] decided to take a breather from the hills and valleys and headed south.
+	$worldmap_23_36
 }
 
 go to{
     Kipp: Alright, back here and still no one in sight.
-    
+
     $if_companionF_eq_1{
         Jinx: Don't count on anyone coming back. You saw what was inside those caves.
     }$elif_companionD_eq_1{
         Alodar: A lot of defensive measures were place for outsiders. I doubt there will be a return.
     }$else{
-        Rice: Trust me brother. Anyone who doesn't belong here are either lost for good or being eaten by the buzzards in the valley.  
+        Rice: Trust me brother. Anyone who doesn't belong here are either lost for good or being eaten by the buzzards in the valley.
     }
-    
+
     Kipp: Let's move on and @red{go to } on of the other caves...uh.
     [companionName]: @blue{Tau, Upsilon, Mu, Sigma, and Kappa} or we can @{look around} just in case we missed something.
     Kipp: There's also a @yellow{sleeping bag} to @red{use} in case we get tired.
@@ -90,15 +95,15 @@ look around{
 		$inc_badScavenge_1
 	}$elif_badScavenge_eq_5{
 		Kipp looked at the tent again, shook his head, and turned around. A gust of wind pulled the spikes out of the ground and the tent started tumbling away. [companionName] looked closer to see something taped under the bottom.
-		
+
 		[companionName]: Don't let the tent get away!
-		
+
 		Kipp takes a full sprint to grab the tent before it fell over the edge. After Peeling the tape off, they turned the paper over to see small map of the badlands.
-		
-		Kipp: What's that red sign? 
-		
+
+		Kipp: What's that red sign?
+
 		Kipp walks over the edge to see a cave that's not marked with one of the greek letters.
-		
+
 		[companionName]: Looks like that cave is marked with a lambd...
 		Kipp: 6. @blue{Cave 6}.
 		[companionName]: But the sign on the map here...
@@ -114,7 +119,7 @@ look around{
 
 _awake{
     Kipp woke up.
-    
+
     [companionName]: You feel better?
     Kipp: Yeah. Everything is alright.
     [companionName]: Good. While you were asleep, you got up and started walking.

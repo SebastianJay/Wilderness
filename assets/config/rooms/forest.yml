@@ -7,7 +7,7 @@ forestCabin:
     neighbors:
         abandonedTreehouse: N
         lumberMill: S
-        huntingRange: W 
+        huntingRange: W
     objects:
         - bethy
         - draymond
@@ -29,7 +29,7 @@ abandonedTreehouse:
         - diary
         - familyPhoto
         - recipe
-        
+
 lumberMill:
     name: Lumber Mill
     description: n/a
@@ -38,7 +38,7 @@ lumberMill:
     c: 0
     neighbors:
         forestCabin: E
-        abandondedTreehouse: N
+        abandonedTreehouse: N
         huntingRange: W
     objects:
         - jack
@@ -52,7 +52,6 @@ huntingRange:
     c: 0
     neighbors:
         forestCabin: E
-        abandondedTreehouse: N
+        abandonedTreehouse: N
         lumberMill: S
     objects: {}
-        

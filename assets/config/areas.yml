@@ -81,12 +81,12 @@ meadows:
     entrances:
         -
             roomId: shepherdHouse
-            r: 0
-            c: 0
+            r: 20
+            c: 62
         -
             roomId: cliffside
-            r: 0
-            c: 1
+            r: 15
+            c: 55
 
 badlands:
     name: The Good Badlands
@@ -96,13 +96,13 @@ badlands:
     entrances:
         -
             roomId: campsite
-            r: 0
-            c: 0
+            r: 22
+            c: 36
 
         -
             roomId: cave6
-            r: 0
-            c: 0
+            r: 8
+            c: 34
 
 forest:
     name: Kappallanoah Forest
@@ -112,5 +112,9 @@ forest:
     entrances:
         -
             roomId: forestCabin
-            r: 0
-            c: 0
+            r: 19
+            c: 89
+        -
+            roomId: huntingRange
+            r: 21
+            c: 77

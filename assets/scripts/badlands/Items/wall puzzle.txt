@@ -1,9 +1,9 @@
 examine{
 		[companionName]@orange{: So, what number will we put in?}
 		$input_badCode
-		
+
 		$if_badCode_eq_1265640{
-		
+
 			Kipp messed around with the wheels until the dials were set to @green{1265640}. The walls glowed green between the cracks.
 			The walls split apart and provide an entry to this forbidden @blue{desert}.
 
@@ -17,17 +17,19 @@ examine{
 			Kipp: But like you said: "Only one world will come out of this alive, that's the cost."
 			[companionName]: Well, we just don't have all the answers right now. All we know is that your part is just as important as the girl's role in this. Doing this is the only chance the world has.
 			Kipp: We'll see when the time comes.
-			
+
 			Kipp walks in front of [companionName], leaving [companionName] behind.
-			
+
 			[companionName]: Kipp, wait up. We have to trek the @blue{desert} together!
-		
-			@bold_orange{MEADOWS LEVEL COMPLETE!}
+
+			@bold_orange{BADLANDS LEVEL COMPLETE!}
+			$set_badlandsComplete_1
+			$worldmap_8_33
 		}$else{
 			Kipp messed around with the wheels until the dials were set to [badCode]. The walls glowed red between the cracks.
-		
+
 			[companionName]: I guess that wasn't right.
 			Kipp: Well, then. Let's try again or return to the @blue{Campsite} and check the other caves again.
 		}
-		
+
 }
