@@ -106,7 +106,7 @@ class GameState:
                 old, new = args[0]
                 if old == GameMode.inAreaAnimating: # when done with text animation..
                     self.activeProtagonistInd = 1 - self.activeProtagonistInd # flip index
-                    self.enterArea(self.areaId, self.roomId)    # send signal to run startup script
+                    self.enterArea(self.areaId, self.roomId)    # send signal to run _awake startup script
                     self.onGameModeChange -= _doSwitch  # deregister this handler after complete
                     self.onCharacterSwitch(self.activeProtagonistInd)   # send event
             self.onGameModeChange += _doSwitch
@@ -265,6 +265,7 @@ class GameState:
             self.subStates[self.activeProtagonistInd].areaId = val
 
         def enterArea(self, areaId, roomId, fromWorldMap=False):
+            """ changes active character's area and room and fires event """
             oldArea = self.areaId
             self.areaId = areaId
             oldRoom = self.roomId
@@ -277,6 +278,16 @@ class GameState:
         @mapLocation.setter
         def mapLocation(self, val):
             self.subStates[self.activeProtagonistInd].mapLocation = val
+
+        def gotoWorldMap(self, r, c):
+            """ transitions to world map and sets character position to (r, c) """
+            def _gotoWorldMap(*args, **kwargs):
+                old, new = args[0]
+                if old == GameMode.inAreaAnimating: # when done with text animation..
+                    self.mapLocation = [int(r), int(c)]     # change player coordinates
+                    self.gameMode = GameMode.worldMap       # window manager changes active windows
+                    self.onGameModeChange -= _gotoWorldMap  # deregister handler
+            self.onGameModeChange += _gotoWorldMap
 
         # the gameMode property exposed by the GameState has a notion of locking
         # which is useful for animations like text scrolling and loading windows

@@ -20,7 +20,7 @@ class Display:
         'orange':   '#ffaa00',
         'pink':     '#ff7feb',
         'purple':   '#ff00ff',
-        'brown':    '#8B4513'
+        'brown':    '#8B4513',
     }
 
     def __init__(self, root, windowManager):
@@ -90,7 +90,9 @@ class Display:
                 else:
                     color = format_tag
             # map readable string to hex color code
-            hex_color = Display.colorStringToHex[color]
+            hex_color = Display.colorStringToHex.get(color)
+            if hex_color is None:
+                hex_color = Display.colorStringToHex['white']
             # create transparency by pulling color to black
             color_ints = int(hex_color[1:3], 16), int(hex_color[3:5], 16), int(hex_color[5:7], 16)
             color_ints = [max(ci - alpha_level * 256 // Globals.AlphaMax, 0) for ci in color_ints]

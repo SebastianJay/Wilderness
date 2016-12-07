@@ -60,10 +60,12 @@ class WindowManager(Window):
                 self.activeWindowGroups.pop()
             elif (old in [GameMode.titleScreen] or old in worldMapModes) and new in inGameModes:
                 # use the "main game" window group
+                self.clear(True)
                 self.activeWindowGroups = [2]
                 self.isTransitioning = True
             elif old in inGameModes and new in worldMapModes:
                 # switch to map window group
+                self.clear(True)
                 self.activeWindowGroups = [3]
                 self.isTransitioning = True
             elif new in [GameMode.titleScreen]:
@@ -82,8 +84,10 @@ class WindowManager(Window):
             self.isTransitioning = True
         return _characterSwitchHandler
 
-    def clear(self):
-        # NOTE window manager's own pixels are not cleared so they are visible for animation
+    def clear(self, clearSelf=False):
+        if clearSelf:
+            # NOTE we may want window manager's own pixels to be preserved for animation
+            super().clear()
         # relay clear to all windows
         for win in self.windowList:
             win.clear()
