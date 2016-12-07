@@ -23,8 +23,7 @@ class Globals:
         ('test_map.txt', 'test_map_color_mask.txt', 'test_map_travel_mask.txt'),
     ]
     InAreaPaths = [
-        'inarea_test_map.txt',
-        'inarea_test.yml'
+        ('inarea_aspire_map.txt', 'aspire.yml'),
     ]
     AreasConfigPath = 'areas.yml'
     ItemsConfigPath = 'items.yml'
