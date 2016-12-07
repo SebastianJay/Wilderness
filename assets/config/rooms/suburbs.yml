@@ -125,7 +125,7 @@ outskirts:
     c: 0
     neighbors:
         nolanHouse: N
-        mainStreet: N
+        holeInWall: N
     showIf: canVisitOutskirts
     objects: {}
 

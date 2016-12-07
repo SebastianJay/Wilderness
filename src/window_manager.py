@@ -40,6 +40,7 @@ class WindowManager(Window):
         self.isTransitioning = False
         self.transitionTimer = 0.0
         self.transitionThreshold = 3.0
+        self.resetOnTransitionComplete = False
 
         # register a handler for changing the active window groups based on game mode
         GameState().onGameModeChange += self.gameModeChangeHandler()
@@ -60,12 +61,10 @@ class WindowManager(Window):
                 self.activeWindowGroups.pop()
             elif (old in [GameMode.titleScreen] or old in worldMapModes) and new in inGameModes:
                 # use the "main game" window group
-                self.clear(True)
                 self.activeWindowGroups = [2]
                 self.isTransitioning = True
             elif old in inGameModes and new in worldMapModes:
                 # switch to map window group
-                self.clear(True)
                 self.activeWindowGroups = [3]
                 self.isTransitioning = True
             elif new in [GameMode.inAreaMap]:
@@ -73,13 +72,10 @@ class WindowManager(Window):
                 self.activeWindowGroups = [4]
                 self.isTransitioning = True
             elif new in [GameMode.titleScreen]:
-                # clear, reset, and reload all windows
-                self.clear()
-                self.reset()
-                self.load()
                 # use the "title" window group
                 self.activeWindowGroups = [1]
                 self.isTransitioning = True
+                self.resetOnTransitionComplete = True
         return _gameModeChangeHandler
 
     def characterSwitchHandler(self):
@@ -88,10 +84,8 @@ class WindowManager(Window):
             self.isTransitioning = True
         return _characterSwitchHandler
 
-    def clear(self, clearSelf=False):
-        if clearSelf:
-            # NOTE we may want window manager's own pixels to be preserved for animation
-            super().clear()
+    def clear(self):
+        super().clear()
         # relay clear to all windows
         for win in self.windowList:
             win.clear()
@@ -151,8 +145,8 @@ class WindowManager(Window):
             (1,),       # Title window
             (3, 2, 4, 9),  # Input, History, Palette, and Help windows
                         #NOTE the ordering here is specific as Input gets updated before History
-            (5,),       # Map Window
-            (6,9),       # InArea window
+            (5,9),      # Map Window
+            (6,9),      # InArea window
             (7,),       # Settings window
         ]
         # which window group is on screen initially
@@ -256,6 +250,12 @@ class WindowManager(Window):
                 self.transitionTimer = 0.0
                 self.alphaLevel = 0
                 self.isTransitioning = False
+                self.clear()
+                if self.resetOnTransitionComplete:
+                    # clear, reset, and reload all windows
+                    self.reset()
+                    self.load()
+                    self.resetOnTransitionComplete = False
             return
 
         # update is only sent to activeWindowGroups[-1], so the foreground windows
