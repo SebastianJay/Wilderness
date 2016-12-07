@@ -16,9 +16,10 @@ _enter{
 				$set_companionF_1
 				$set_companionName_Jinx
 		}
+        
 		Kipp still couldn't take his mind off what happened in the town. The world was changing. Kipp was glad that he chose to explore the outside world: there were so many new things to see and do.
 
-		$if_companionF_1{
+		$if_companionF_eq_1{
 			Kipp was musing to himself when he felt a pair of slender yet callused hands covering his mouth from behind. "Be quiet." the stranger whispered softly into Kipp's ear. The smell of cheap perfume emanated from the stranger's body. The stranger kept on talking, indifferent to Kipp's uneasiness: "The sheriff's chasing me down with dogs. Take me to a place where I can hide. And don't you dare make a sound when I let go of you. Or I'll slit your throat." Kipp nodded furiously in agreement as he felt a cool blade sliding on his neck and shoulders. The stranger let go of Kipp. Kipp led the way and rushed into a river nearby. They got some hollow weeds as breathing tubes and hid under the water. Kipp could hear the barking of the dogs coming nearer. A man's voice was shouting in rage. Gradually, the noise died down. Kipp got out of the water with the stranger.
 
 			Kipp finally had to time to examine the stranger closer. She was in her early 20s, with a scar on her cheek and a head of flaming red hair. She wore a faded black and white prison uniform.
@@ -30,7 +31,7 @@ _enter{
 
 			Jinx stole some shirts from a hanging clothesline and changed into it. Kipp continued his journey to the forest with Jinx.
 		}
-		$elif_companionD_1{
+		$elif_companionD_eq_1{
 			Kipp was musing to himself when he heard a faint sound coming from the side of the road. "Help m.. Hel.." Kipp followed the sound and found an old man in ragged clothes lying on the ground. He suffered wounds on his shoulder. Kipp quickly applied some medicine on the wounds and bandaged it.
 
 			Old man: Thank you my friend. I feeling much better.
@@ -45,7 +46,7 @@ _enter{
 
 			Kipp and Alodar continued their journey together.
 		}
-		$elif_companionB_1{
+		$elif_companionB_eq_1{
 			A familiar voice disturbed Kipp's musings -- "Kipp! I found you! Finally!"
 
 			Kipp turned around to find his brother, Rice coming to him. Rice looked exhausted. His clothes and face were covered by dust.
@@ -75,5 +76,5 @@ go to{
 }
 
 inspect{
-	A family was residing within the cabin. They were very friendly and welcomed Kipp and his companion inside. The residents are a family of three: @green{Gerald} the father, @green{Bethy} the mother and @{Draymond} the child. @green{Draymond} was playing with his toThere was an @yellow{information booklet} on the table and a @yellow{poster} on the wall.
+	A family was residing within the cabin. They were very friendly and welcomed Kipp and his companion inside. The residents are a family of three: @green{Gerald} the father, @green{Bethy} the mother and @green{Draymond} the child. @green{Draymond} was playing with his, too. There was an @yellow{information booklet} on the table and a @yellow{poster} on the wall.
 }
