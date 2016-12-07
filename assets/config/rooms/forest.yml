@@ -29,6 +29,7 @@ abandonedTreehouse:
         - diary
         - familyPhoto
         - recipe
+        - rifle
 
 lumberMill:
     name: Lumber Mill

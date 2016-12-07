@@ -25,11 +25,14 @@ olWilly:
     ## Abandoned Forest
 diary:
     name: diary
-    script: Kappallanoah Forest/abandoned forest/diary.txt
+    script: Kappallanoah Forest/abandoned treehouse/diary.txt
 familyPhoto:
     name: family photo
-    script: Kappallanoah Forest/abandoned forest/family photo.txt
+    script: Kappallanoah Forest/abandoned treehouse/family photo.txt
 recipe:
     name: recipe
-    script: Kappallanoah Forest/abandoned forest/recipe.txt
+    script: Kappallanoah Forest/abandoned treehouse/recipe.txt
+rifle:
+    name: hunting rifle
+    script: Kappallanoah Forest/abandoned treehouse/rifle.txt
     ## Hunting Range
