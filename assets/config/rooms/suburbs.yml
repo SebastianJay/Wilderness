@@ -137,6 +137,7 @@ nolanHouse:
     c: 0
     neighbors:
         outskirts: N
+        shinHouse: N
     objects:
         - peevedPeople
         - pileOfMoney
@@ -163,16 +164,18 @@ shinHouse:
     neighbors:
         outskirts: N
         insideShinHouse: N
+        nolanHouse: N
     objects: {}
 
 insideShinHouse:
-    name: Inside Shin's House
+    name: Inside Shin House
     description: n/a
     script: Lore/Suburbs/InsideShinHouse.txt
     r: 0
     c: 0
     neighbors:
         shinHouse: N
+    showIf: inventory_morphine_eq_1
     objects:
         - shin
         - bandages

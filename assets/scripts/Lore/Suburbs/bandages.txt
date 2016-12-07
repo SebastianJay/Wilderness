@@ -1,0 +1,8 @@
+inspect{
+    Some @yellow{bandages} that would stop any form of bleeding.
+}
+pick up{
+    Lore stuffed the @yellow{bandages} in her pocket for future use.
+    @italic{Added bandages to inventory.}
+    $set_inventory_bandages_1
+}

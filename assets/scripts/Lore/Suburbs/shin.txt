@@ -9,5 +9,44 @@ talk to{
     Lore: Sorry, I can't understand you.
 }
 use morphine on{
-        
+    $if_subMorphined_eq_0{
+        Lore injected the morphine into Shin and he gave a sigh of relief.
+    $set_subMorphined_1
+    }$else{
+        Lore was not going to waste any more morphine on @green{Shin}.
+    }
+}
+use zweihander on{
+    $if_subAmputated_eq_0{
+        $if_subMorphined_eq_0{
+            Lore attempted to slice @green{Shin's} head off but he parried the attack.
+        }$else{
+            Lore swung the @yellow{zweihander} and successfully amputated @green{Shin's} shin. Blood profusely sprayed all over the house.
+            $set_subAmputated_1
+        }
+    }
+}
+use bandages on{
+    $if_inventory_bandages_eq_1{
+        $if_subAmputated_eq_1{
+        $if_subFixedShin_eq_0{
+            Lore bandaged @green{Shin's} amputated leg to stop the bleeding. Lore sighed a breath of relief because they escaped the danger zone. Now she started to look through @green{Shin's} inventory to take anything of value.
+            Lore spotted three different colored crystals. She decided to only take one.
+            $choice{
+                blue|
+                    Lore chose the @blue{blue crystal} and she felt more friendly.
+                    @italic{Added blue crystal to inventory.}
+                    $set_inventory_blueCrystal_1
+                |green|
+                    Lore chose the @green{green crystal} and she felt more calm and loving.
+                    @italic{Added green crystal to inventory.}
+                    $set_inventory_greenCrystal_1
+                |red|
+                    Lore chose the @red{red crystal} and she felt wrath.
+                    @italic{Added red crystal to inventory.}
+                    $set_inventory_redCrystal_1
+            }
+        }
+        }
+    }
 }
