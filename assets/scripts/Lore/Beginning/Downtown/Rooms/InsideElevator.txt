@@ -1,0 +1,4 @@
+
+look around{
+  The elevator was nice and clean. Some mirrors on the ceiling reflected back the image of Lore and the @green{lift attendant}.
+}

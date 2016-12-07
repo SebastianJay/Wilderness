@@ -9,10 +9,10 @@ talk to{
 		Rodnin: When your mother, well, when she became ill, she told me about you. She asked me to look out for you. I told her I was going to do research in the Wildnerness, but I promised that I would make sure you were safe. Your mother never introduced us, so I asked Hal, your neighbor, to keep an eye on you.
 		Lore: I see.
 		Rodnin: I know that all of this must seem weird to you. I am glad to finally meet you. But, you must have come to see me for a reason. What can I do for you?
-			$Choice{
+			$choice{
 			I heard that you were hiring.|
 				Rodnin: Ah, yes. I'm looking for someone to help around the lab. I have a team of researchers out in the field who send periodic updates, samples, back to the lab here. It's difficult to organize and analyze all the data myself, so I need an assistant. Are you interested in the position?
-					$Choice{
+					$choice{
 					Yes.|
 						Rodnin: Wonderful. You would work a minimum of thirty hours a week in the lab upstairs on the third floor. You would be responsible for organizing the data in our log, and doing the occasional soil analysis. The wage is hourly, starting at ten units per hour. Your mother was an excellent woman, and I assume the same from you. Consider yourself hired.
 						Lore: Thank you, sir.
@@ -28,7 +28,7 @@ talk to{
 					}
 			|You've done research in the Wildnerness?|
 				Rodnin: That's right. I've mostly studied changes in the environment due to the sinkhole. Rock formation, soil analysis, animal behavior. That kind of thing. You know, I'm looking for someone to help with my research. Would you be interested?
-					$Choice{
+					$choice{
 					Yes.|
 						Rodnin: Wonderful. You would work a minimum of thirty hours a week in the lab upstairs on the third floor. You would be responsible for organizing the data in our log, and doing the occasional soil analysis. The wage is hourly, starting at ten units per hour. Your mother was an excellent woman, and I assume the same from you. Consider yourself hired.
 						Lore: Thank you, sir.
@@ -46,13 +46,13 @@ talk to{
 	}
 	$if_begtalktoRodnin_eq_1{
 		Rodnin: What can I do for you?
-		$Choice{
+		$choice{
 		Tell me about yourself.|
 			Rodnin: Well, as you know, I specialize in environmental science. I studied at the university of course, then worked with your mother in the lab down the street. We did mostly genetic engineering. It's amazing how similar microbiology is to the macrobiology I do work in. It's as if each cell is its own ecosystem...Ah, I'm going off on a tangent. By the way, how are you doing?
-			$Choice{
+			$choice{
 				I'm doing well.|
 					Rodnin: I'm glad to hear it. Have you had any headaches recently?
-					$Choice{
+					$choice{
 						Be honest.|
 							Lore: Yes, actually. I've been getting them more and more recently.
 							Rodnin: Ah, well. I've heard something's going around...Listen, I know it sounds a bit weird, but please let me know if anything out of the ordinary happens. Saftey and all that, yes?
@@ -101,7 +101,7 @@ talk to{
 			$set_beglearnedplane_1
 			$if_stoleplaneguide_eq_1{
 			Lore: (So he has a plane, and that's what these blueprints are for. He must have the plane stored somewhere closeby. If I follow him after he leaves the office, maybe I can find the plane and take it myself.
-				$Choice{
+				$choice{
 				Wait outside the office until nightfall|
 					Lore exited the building and waited, hidden, in the @blue{Business District}. After a while, @green{Rodnin} came out of the office, followed by the secretary and lift attendant. @green{Rodnin} waved goodbye and headed in the direction of the @blue{Industrial District}.
 					$set_followRodnin_eq_1
@@ -109,12 +109,13 @@ talk to{
 				Lore: There's no need for me to steal just to get to the Wilderness. I should find another way.|})
 			}
 		|Nevermind.|
-		$if_analyzedata_eq_1{ |I've analyzed the data.
+		$if_analyzedata_eq_1{
+			Lore: I've analyzed the data.
 			Rodnin: That was fast. I knew you were a brilliant scientist from the moment I met you. So, what did you find out?
 			Lore: The rocks are breaking down quickly. It looks like the sinkhole is true.
-			
+
 			Rodnin didn't seem surprised.
-			
+
 			Rodnin: Yes, I figured as much. There were tremors almost every day when I was in the field.
 			Lore: I'd like to go to the Wildnerness to study this more.
 			Rodnin: Would you? Oh, I see. You need the plane to get there. Well, Lore, you've analyzed one piece of data for me. Why would I trust you with one of the most valuable pieces of technology in the world?
@@ -124,4 +125,3 @@ talk to{
 		}
 	}
 }
-

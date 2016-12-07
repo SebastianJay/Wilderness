@@ -13,13 +13,27 @@ suburbs:
             r: 18
             c: 14
 
-#university:
-#  r: 15
-#  c: 26
+university:
+    name: University
+    roomsConfig: rooms/university.yml
+    objectsConfig: objects/university.yml
+    mapId: 0
+    entrances:
+        -
+            roomId: diningHall
+            r: 30
+            c: 39
 
-#downtown:
-#  r: 30
-#  c: 39
+downtown:
+    name: Downtown
+    roomsConfig: rooms/downtown.yml
+    objectsConfig: objects/downtown.yml
+    mapId: 0
+    entrances:
+        -
+            roomId: rodninOffice
+            r: 15
+            c: 26
 
 aspire:
     name: Aspire

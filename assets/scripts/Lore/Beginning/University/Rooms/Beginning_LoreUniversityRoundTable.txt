@@ -1,9 +1,0 @@
-#Beginning_LoreUniversityDiningHallRoundTable
-
-go to{
-	Lore headed over to the round table where her friends were sitting. They greeted her excitedly as she took a seat. 
-}
-
-inspect{
-	It had been a while since she had seen them. @green{Rune}, @green{Quen}, and @green{Essa} stood up to each give her a hug. 
-}

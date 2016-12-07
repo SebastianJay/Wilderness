@@ -1,0 +1,31 @@
+rodninOffice:
+    name: Office
+    description: n/a
+    script: Lore/Beginning/Downtown/Rooms/Beginning_LoreDowntownRodninOffice.txt
+    r: 0
+    c: 0
+    neighbors: {}
+    objects:
+        - secretary
+        - elevator
+
+insideElevator:
+    name: Inside Elevator
+    description: n/a
+    script: Lore/Beginning/Downtown/Rooms/InsideElevator.txt
+    r: 0
+    c: 0
+    neighbors: {}
+    objects:
+        - liftAttendant
+
+rodninOfficeSecondFloor:
+    name: Second Floor
+    description: n/a
+    script: Lore/Beginning/Downtown/Rooms/Beginning_LoreDowntownSecondFloorRodninOffice.txt
+    r: 0
+    c: 0
+    neighbors: {}
+    objects:
+        - rodnin
+        - elevator

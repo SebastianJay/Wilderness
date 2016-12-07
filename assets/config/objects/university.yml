@@ -1,0 +1,26 @@
+roundTable:
+    name: round table
+    script: Lore/Beginning/University/People/Beginning_LoreUniversityRoundTable.txt
+runePrelim:
+    name: Rune
+    script: Lore/Beginning/University/People/Beginning_LoreUniversityRoundTable_Rune.txt
+    showIf:
+        and:
+            - not_uniTalkedToFriends
+            - uniAtTable
+
+quenPrelim:
+    name: Quen
+    script: Lore/Beginning/University/People/Beginning_LoreUniversityRoundTable_Quen.txt
+    showIf:
+        and:
+            - not_uniTalkedToFriends
+            - uniAtTable
+
+essaPrelim:
+    name: Essa
+    script: Lore/Beginning/University/People/Beginning_LoreUniversityRoundTable_Essa.txt
+    showIf:
+        and:
+            - not_uniTalkedToFriends
+            - uniAtTable

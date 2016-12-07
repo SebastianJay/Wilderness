@@ -1,5 +1,14 @@
 #Beginning_LoreUniversityDiningHall
 
+_enter{
+	Lore got off the bus at the dining hall and stepped inside. The smell of freshly made food wafted towards her, bringing a mixture of hunger and nostalgia. She saw her friends in the corner waiting for her at a @blue{round table}. The cook, @green{Ms. Susan}, was busily chopping vegetables.
+}
+
 go to{
-	Lore stepped inside the dining hall. The smell of freshly made food wafted towards her, bringing a mixture of hunger and nostalgia. She saw her friends in the corner waiting for her at a @blue{round table}. The cook, @green{Ms. Susan}, was busily chopping vegetables. 
+	Lore stepped inside the dining hall. The smell of freshly made food wafted towards her, bringing a mixture of hunger and nostalgia. She saw her friends in the corner waiting for her at a @blue{round table}. The cook, @green{Ms. Susan}, was busily chopping vegetables.
+}
+
+leave area{
+	Lore got into one of the idle buses, and within a couple minutes, she was off.
+	$worldmap_29_39
 }

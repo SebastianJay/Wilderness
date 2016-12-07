@@ -1,9 +1,20 @@
 #Beginning_LoreDowntownRodninOffice
 
-go to{
+_enter{
 	Lore stepped inside the office. The @blue{desk} was in front of her, seating a pleasant looking secretary. To the right was the @blue{elevator.}
+	$set_rodOfficeFloor_0
 }
 
-inspect{
+go to{
+	Lore stepped inside the office. The @blue{desk} was in front of her, seating a pleasant looking secretary. To the right was the @blue{elevator.}
+	$set_rodOfficeFloor_0
+}
+
+look around{
 	The office was overwhelmingly normal. The environment was sterile, freshly vacuumed and dusted. A few plants were gathered in the corner. A radio was softly playing music a the desk.
+}
+
+leave area{
+	Lore left the office and found the nearest bus to take her outside the city.
+	$worldmap_16_26
 }

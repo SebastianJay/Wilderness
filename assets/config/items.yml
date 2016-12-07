@@ -3,13 +3,13 @@
 ## Begin Suburbs items
 loreKeys:
     name: keys
-    description: n/a
+    description: Keys to the house. Never leave home without them.
 loreWallet:
     name: wallet
-    description: n/a
+    description: Filled with the essential notes and documentation you need in a civilization.
 letterFromFriends:
     name: letter from friends
-    description: n/a
+    description: "\"Lore, please come meet us at the university, we have some news for you. We can catch up at the dining hall. With love -- Rune, Quen, and Essa\""
 afro:
     name: afro
     description: A nice, thick afro. Inscribed inside is "Wow queen, you're so beautiful".
@@ -94,19 +94,19 @@ milk:
 ## Begin Black Hills items
 letterToThomas:
     name: letter to Thomas
-    description: n/a
+    description: Probably not best to read through others' mail.
 bucketOfMoonshine:
     name: bucket of moonshine
-    description: n/a
+    description: Looks sort of appetizing, but not sure I'd trust this.
 dragonskinBoots:
     name: dragonskin boots
-    description: n/a
+    description: I thought dragons were a myth. This seems like some sort of scam.
 corrosiveGas:
     name: corrosive gas
-    description: n/a
+    description: Deadly, and, um, that's all I know.
 corrosiveShotgun:
     name: corrosive shotgun
-    description: n/a
+    description: I might get convicted of war crimes if I fool around with this.
 ## End Black Hills items
 
 ##Begin Kappallanoah Forest items
