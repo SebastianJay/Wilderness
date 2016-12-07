@@ -1,0 +1,55 @@
+forestCabin:
+    name: Forest Cabin
+    description: n/a
+    script: Kappallanoah Forest/Rooms/forest cabin.txt
+    r: 0
+    c: 0
+    neighbors:
+        abandondedTreehouse: N
+        lumberMill: N
+        huntingRange: N 
+    objects:
+        - bethy
+        - draymond
+        - gerald
+        - informationBooklet
+        - poster
+
+abandonedTreehouse:
+    name: Abandoned Treehouse
+    description: n/a
+    script: Kappallanoah Forest/Rooms/abandoned treehouse.txt
+    r: 0
+    c: 0
+    neighbors:
+        forestCabin: N
+        lumberMill: N
+        huntingRange: N
+    objects:
+        -
+        
+lumberMill:
+    name: Lumber Mill
+    description: n/a
+    script: Kappalanoah Forest/Rooms/lumber mill.txt
+    r: 0
+    c: 0
+    neighbors:
+        forestCabin: N
+        abandondedTreehouse: N
+        huntingRange: N
+    objects:
+        -
+
+huntingRange:
+    name: Hunting Range
+    description: n/a
+    script: Kappallanoah Forest/Rooms/hunting range.txt
+    r: 0
+    c: 0
+    neighbors:
+        forestCabin: N
+        abandondedTreehouse: N
+        lumberMill: N
+    objects: {}
+        

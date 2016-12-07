@@ -1,9 +1,6 @@
 _enter{
 	$if_forIntro_eq_0{
 		$set_forIntro_1
-		$set_companionB_0
-		$set_companionF_0
-		$set_companionD_0
 		$if_brotherPts_gt_derelictPts{
 			$if_brotherPts_gt_fugitivePts{
 				$set_companionB_1

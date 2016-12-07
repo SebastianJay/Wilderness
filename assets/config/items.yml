@@ -93,3 +93,9 @@ corrosiveShotgun:
     name: corrosive shotgun
     description: n/a
 ## End Black Hills items
+
+##Begin Kappallanoah Forest items
+rifle:
+    name: Rifle
+    descprition: It was Kipp's father's old automatic rifle. The rifle wasn't in great condition but it might be useful for Kipp.
+## End Kappallanoah Forest items

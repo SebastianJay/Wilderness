@@ -1,0 +1,31 @@
+## Forest objects
+    ## Forest Cabin
+bethy:
+    name: Bethy
+    script: Kappallanoah Forest/forest cabin/Bethy.txt
+draymond:
+    name: Draymond
+    script: Kappallanoah Forest/forest cabin/Draymond.txt
+gerald:
+    name: Gerald
+    script: Kappallanoah Forest/forest cabin/Gerald.txt
+informationBooklet:
+    name: information booklet
+    script: Kappallanoah Forest/forest cabin/information booklet.txt
+poster:
+    name: poster
+    script: Kappallanoah Forest/forest cabin/poster.txt
+    ## Lumber Mill
+    
+    
+    ## Abandoned Forest
+diary:
+    name: diary
+    script: Kappallanoah Forest/abandoned forest/diary.txt
+familyPhoto:
+    name: family photo
+    script: Kappallanoah Forest/family photo
+recipe:
+    name: recipe
+    script: Kappallanoah Forest/recipe
+    ## Hunting Range
