@@ -6,6 +6,11 @@ _enter{
     }
 }
 
+leave area{
+    Kipp decided to head out of Black Hills.
+    $worldmap_29_97
+}
+
 go to {
     Kipp entered the @blue{train station}. Horns whistled as a train rumbled to a stop at the station.
     $set_townChoice_1

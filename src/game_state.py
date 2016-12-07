@@ -52,10 +52,11 @@ class GameState:
                 return self.dumps()
             def dumps():
                 return json.dumps(self.__dict__)
-            def loads(self, jsonstr):
-                dct = json.loads(jsonstr)
+            def load(self, dct):
                 for key in dct:
                     setattr(self, key, dct[key])
+            def loads(self, jsonstr):
+                self.load(json.loads(jsonstr))
 
         def __init__(self):
             # event broadcasters - registered listeners persist after game reset
@@ -74,7 +75,7 @@ class GameState:
             """ Wipes out the existing GameState (called on New Game) """
             # game specific savable info
             self.name = ""              # player name, entered at start of new game
-            self.playtime = 0           # playtime, in seconds
+            self.playtime = 0.0         # playtime, in seconds
             self.variables = {}         # variables created through script files {string key: string/int value}
                                         # value is a string by default, but can be converted to int on the fly
 
@@ -86,12 +87,16 @@ class GameState:
             self.activeProtagonistInd = 0   # which protagonist is active (0=Lore, 1=Kipp)
 
             # non-savable info (refreshes on reset)
+            self.saveId = 0             # which save path this state would be written on
             self.cmdBuffer = ""         # command that player is currently typing
             self.cmdMap = {}            # "trie" of commands player can type
             self.choiceList = []        # list of strings of choices player can make
             self.gameModeLockedRequests = []    # set requests are queued if game state is locked
             self.gameModeActive = GameMode.titleScreen    # the "mode" of game player is in
             self.gameMessages = deque()
+
+        def incPlaytime(self, dt):
+            self.playtime += dt
 
         def pushMessage(self, message):
             self.gameMessages.append(message)
@@ -115,12 +120,14 @@ class GameState:
 
         def appendCmdBuffer(self, ch):
             """ Add to the command buffer, but do not overflow """
-            if len(self.cmdBuffer) < Globals.CmdMaxLength:
+            if len(self.cmdBuffer) + len(ch) <= Globals.CmdMaxLength:
                 self.cmdBuffer += ch
 
-        def popCmdBuffer(self):
-            """ Take one character off command buffer, to implement BackSpace """
-            self.cmdBuffer = self.cmdBuffer[:-1]
+        def popCmdBuffer(self, numchars=1):
+            """ Take numchar characters off command buffer """
+            if numchars <= 0:
+                return
+            self.cmdBuffer = self.cmdBuffer[:-numchars]
 
         def clearCmdBuffer(self):
             """ Reset command buffer (e.g. if pressed Return) """
@@ -132,7 +139,7 @@ class GameState:
             If return val is:
              str -> valid metacommand, contains string from GameState.cmdListMetaCommands
              BodyNode -> valid normal command, contains behavior to execute
-             (dict, str) tuple -> partial walk along tree, contains (level in tree, remaining cmdBuffer)
+             (dict, str[]) tuple -> partial walk along tree, contains (level in tree, path taken including remainder)
              None -> extraneous command, bad characters after valid or between tree levels
             """
             cmdString = self.cmdBuffer.lstrip().rstrip('. ')
@@ -141,10 +148,12 @@ class GameState:
                 return cmdString    # complete metacommand
             val = prefixTree
             keepWalking = True
+            pathFollowed = []
             while len(cmdString) > 0 and keepWalking:
                 keepWalking = False
                 for prefix in prefixTree:
                     if cmdString.startswith(prefix):
+                        pathFollowed.append(prefix)
                         val = prefixTree[prefix]
                         if isinstance(val, BodyNode):
                             if len(cmdString) > len(prefix):
@@ -159,8 +168,9 @@ class GameState:
                                 break   # continue walking tree
                             else:
                                 return None # invalid chars in between
-            # (dict of current layer in tree, string of cmd buffer remaining after walk)
-            return (val, cmdString)
+            pathFollowed.append(cmdString)
+            # (dict of current layer in tree, string[] of tokenized pieces of walk)
+            return (val, pathFollowed)
 
         def touchVar(self, varname, inventoryFlag = False):
             """ Sets a variable or inventory item to 0 in mapping if it doesn't exist """
@@ -335,7 +345,7 @@ class GameState:
             deleteFields = ['cmdMap', 'cmdBuffer', 'gameModeActive', 'choiceList',
                 'gameModeLockedRequests', 'onChoiceChange', 'onSettingChange', 'onClearBuffer',
                 'onGameModeChange', 'onAddLangNode', 'onEnterArea', 'onCharacterSwitch',
-                'onInventoryChange']
+                'onInventoryChange', 'gameMessages', 'saveId']
             for field in deleteFields:
                 del obj[field]
             return json.dumps(obj)
@@ -343,21 +353,27 @@ class GameState:
         def __str__(self):
             return self.dumps()
 
-        def loads(self, jsonstr):
-            """ Initialize the GameState from a Json string """
+        def load(self, dct):
+            """ Initialize the GameState from a dictionary """
             # start all fields from scratch
             self.init()
             # "join" dct manually so omitted members of dct do not carry over
-            dct = json.loads(jsonstr)
             for key in dct:
                 if key == 'subStates':
                     self.subStates = []
                     for i in range(len(dct[key])):
                         substate = GameState.__GameState.GameSubState()
-                        substate.__dict__ = dct[key][i]
+                        substate.load(dct[key][i])
                         self.subStates.append(substate)
                 else:
                     setattr(self, key, dct[key])
+            # send signals so other windows load correctly
+            self.onAddLangNode(self.historyBuffer, True)
+            self.onInventoryChange()
+
+        def loads(self, jsonstr):
+            """ Initialize the GameState from a Json string """
+            self.load(json.loads(jsonstr))
 
         def writeFile(self, fpath):
             """ Write GameState to file """

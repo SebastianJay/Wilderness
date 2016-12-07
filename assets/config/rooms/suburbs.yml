@@ -79,7 +79,9 @@ mainStreet:
         gloverHouse: N
         busStop: N
         holeInWall: N
-    objects: {}
+    showIf: subFinishedLoreHouse
+    objects:
+        - halBeginning
 
 gloverHouse:
     name: Glover House

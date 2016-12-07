@@ -1,9 +1,9 @@
-_enter{
-this is temporary, you are in main street
-}
 go to{
 	The @blue{suburbs} that Lore lived in were very quaint. Everything was peaceful and the neighbors greeted each other and life itself was just fine and dandy.
 }
 look around{
-	There were a couple of houses on Lore's street and a @blue{bus stop} at the end of the street. One of the major houses on the street was the scary @blue{Glover House}. There was a long wall dividing the @blue{suburbs} from the @blue{outskirts} that Mayor Trump erected in order to keep out the bad hombres from the @blue{outskirts}. Lore noticed a @blue{Hole in the Wall} which intrigued her because she never saw the other side before.
+	There were a couple of houses on Lore's street and a @blue{bus stop} at the end of the street. One of the major houses on the street was the scary @blue{Glover House}. There was a long wall dividing the @blue{suburbs} from the @blue{outskirts} that Mayor Krump erected in order to keep out the ne'er-do-wells from the @blue{outskirts}. Lore noticed a @blue{Hole in the Wall} which intrigued her because she never saw the other side before.
+}
+think{
+	Lore remembered the letter in her pocket from her friends asking her to meet them at the university. She turned away from Hal's house. Down the street to the left was the @blue{bus stop}, identifiable by its faded blue sign. It would take her to the university. In the distance, a tall, @blue{imposing house} stood out over the neighborhood as if it were watching. As her eyes scanned the houses in front of her, she noticed a large @blue{hole in the wall}, which appeared to be guarded.
 }

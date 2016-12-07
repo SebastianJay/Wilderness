@@ -79,6 +79,15 @@ _enter{
 	}
 }
 
+leave area{
+	$if_aspireComplete_eq_1{
+		Kipp headed out of Aspire with hopes of new adventures beyond the horizon.
+	}$else{
+		Kipp headed out of Aspire to weigh his options.
+	}
+	$worldmap_10_116
+}
+
 go to{
 	$if_ntoQuestStart_eq_1{
 		#Text when Kipp returns to the room

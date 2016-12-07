@@ -7,7 +7,33 @@ suburbs:
     roomsConfig: rooms/suburbs.yml
     objectsConfig: objects/suburbs.yml
     mapId: 0
-    entrances: {}
+    entrances:
+        -
+            roomId: busStop
+            r: 18
+            c: 14
+
+university:
+    name: University
+    roomsConfig: rooms/university.yml
+    objectsConfig: objects/university.yml
+    mapId: 0
+    entrances:
+        -
+            roomId: diningHall
+            r: 30
+            c: 39
+
+downtown:
+    name: Downtown
+    roomsConfig: rooms/downtown.yml
+    objectsConfig: objects/downtown.yml
+    mapId: 0
+    entrances:
+        -
+            roomId: rodninOffice
+            r: 15
+            c: 26
 
 aspire:
     name: Aspire
@@ -23,7 +49,7 @@ aspire:
             c: 116
     # only be able to enter if a condition is fulfilled
     #showIf: didFarm #TODO
-    
+
 farm:
     name: Charli
     roomsConfig: rooms/farm.yml
@@ -55,12 +81,12 @@ meadows:
     entrances:
         -
             roomId: shepherdHouse
-            r: 0
-            c: 0
+            r: 20
+            c: 62
         -
             roomId: cliffside
-            r: 0
-            c: 1
+            r: 15
+            c: 55
 
 badlands:
     name: The Good Badlands
@@ -70,14 +96,14 @@ badlands:
     entrances:
         -
             roomId: campsite
-            r: 0
-            c: 0
-            
+            r: 22
+            c: 36
+
         -
             roomId: cave6
-            r: 0
-            c: 0
-            
+            r: 8
+            c: 34
+
 forest:
     name: Kappallanoah Forest
     roomsConfig: rooms/forest.yml
@@ -86,6 +112,9 @@ forest:
     entrances:
         -
             roomId: forestCabin
-            r: 0
-            c: 0
-            
+            r: 19
+            c: 89
+        -
+            roomId: huntingRange
+            r: 21
+            c: 77

@@ -1,3 +1,8 @@
 go to{
     Kipp and [companionName] walked to the hunting range.
 }
+
+leave area{
+  Onwards.
+  $worldmap_21_76
+}

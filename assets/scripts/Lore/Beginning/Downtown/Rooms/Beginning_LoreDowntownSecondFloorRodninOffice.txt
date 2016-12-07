@@ -4,10 +4,7 @@ go to{
 	Lore walked down the hall and stopped at the door of Rodnin's office.
 }
 
-inspect{
-	The door was slightly ajar. Through the crack Lore could see @green{Rodnin} slouched over his desk. The office seemed cluttered, but the stacks of paper and lab equipment made it seem less intimidating.
-}
-
-Use{
-	Lore knocked on the door and was waved in by @green{Rodnin}.
+look around{
+#	The door to the office was slightly ajar. Through the crack Lore could see @green{Rodnin} slouched over his desk. 
+	The office seemed cluttered, but the stacks of paper and lab equipment made it seem less intimidating.
 }

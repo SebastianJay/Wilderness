@@ -24,13 +24,14 @@ class GameDriver:
         self.inputHandler = InputHandler(self.display.widget)
 
     def initAssets(self):
-        GameState().lockGameMode(GameMode.isLoading)
         AssetLoader().loadAssets()
+        AssetLoader().loadSaves()
         self.windowManager.load()
         GameState().unlockGameMode()
 
     def mainloop(self):
         # start off separate thread to load assets
+        GameState().lockGameMode(GameMode.isLoading)
         t = threading.Thread(target=self.initAssets)
         t.daemon = True
         t.start()
@@ -55,7 +56,7 @@ class GameDriver:
             except: # some other exception occurred
                 if Globals.IsDev:
                     traceback.print_exc()
-                    #sys.exit()
+                sys.exit()
 
 if __name__ == '__main__':
     GameDriver().mainloop()

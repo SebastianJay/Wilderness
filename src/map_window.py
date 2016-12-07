@@ -138,8 +138,8 @@ class MapWindow(Window):
             elif key == "Return":
                 val = self.overEntrance(g.mapLocation[0], g.mapLocation[1])
                 if val:
-                    GameState().enterArea(val[0], val[1], True)
                     GameState().gameMode = GameMode.inAreaCommand
+                    GameState().enterArea(val[0], val[1], True)
 
 if __name__ == '__main__':
     AssetLoader().loadAssets()

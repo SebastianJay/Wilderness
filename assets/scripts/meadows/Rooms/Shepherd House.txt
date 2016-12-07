@@ -289,10 +289,14 @@ go to{
 
 _awake{
     Kipp woke up.
-    
+
     [companionName]: You feel better?
     Kipp: Yeah. Everything is alright.
     [companionName]: Already I'm ready to head out when you are.
-    
+
 }
 
+leave area{
+		Kipp and [companionName] took a break from the mystifying meadows.
+		$worldmap_20_62
+}

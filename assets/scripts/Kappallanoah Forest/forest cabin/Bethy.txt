@@ -11,8 +11,8 @@ talk to{
 			$choice{
 				Ask about places to explore|
 				Kipp: We're new to this place. Can you tell us what's around here?
-				Bethy: Of course! 
-				
+				Bethy: Of course!
+
 			}
 		}
 	}

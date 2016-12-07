@@ -5,6 +5,7 @@ within the assets/ directory.
 from lang_parser import Parser
 from global_vars import Globals
 import os.path
+import json
 import yaml
 import codecs
 import traceback
@@ -17,6 +18,8 @@ class AssetLoader:
         def __init__(self):
             # maps path to asset
             self.assets = {}
+            # maps path to save file (as dict, not game state)
+            self.savefiles = {}
             # string containing root of assets folder
             self.root_path = ''
             # maps readable item name to item ID
@@ -105,6 +108,26 @@ class AssetLoader:
             self.isLoaded = True
             return success_flag
 
+        def loadSaves(self, paths_to_saves=Globals.SavePaths):
+            self.savefiles = {}
+            for path in paths_to_saves:
+                normPath = self.joinAndNorm(path)
+                if os.path.exists(normPath):
+                    with open(normPath, 'r') as f:
+                        self.savefiles[normPath] = json.loads(f.read())
+
+        def freeSaveFileInd(self):
+            # collapse all save path names into a big string
+            searchString = ''.join(self.savefiles.keys())
+            # pick out missing indices in that string
+            for i in range(len(Globals.SavePaths)):
+                if str(i) not in searchString:
+                    return i
+            return -1
+
+        def lenSaveFiles(self):
+            return len(self.savefiles)
+
         def getMap(self, name):
             return self.assets[self.joinAndNorm(self.root_path, 'maps', name)]
 
@@ -119,6 +142,11 @@ class AssetLoader:
 
         def getConfig(self, name):
             return self.assets[self.joinAndNorm(self.root_path, 'config', name)]
+
+        def getSave(self, name):
+            if self.joinAndNorm(name) in self.savefiles:
+                return self.savefiles[self.joinAndNorm(name)]
+            return None
 
         def joinAndNorm(self, *args):
             return os.path.normcase(os.path.normpath(os.path.join(*args)))

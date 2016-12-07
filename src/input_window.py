@@ -16,6 +16,7 @@ class InputWindow(Window):
         super().__init__(width, height)
         GameState().onChoiceChange += self.choiceChangeHandler()
         GameState().onEnterArea += self.enterAreaHandler()
+        GameState().onAddLangNode += self.langNodeAddedHandler()
 
     def reset(self):
         self.interpreter = Interpreter()
@@ -39,6 +40,12 @@ class InputWindow(Window):
                     self.interpreter.executeAction(action)
                     break
         return _enterAreaHandler
+
+    def langNodeAddedHandler(self):
+        def _langNodeAddedHandler(*args, **kwargs):
+            if len(args) >= 2 and args[1]:
+                self.interpreter.refreshCommandList()
+        return _langNodeAddedHandler
 
     def update(self, timestep, keypresses):
         gs = GameState()
@@ -78,7 +85,7 @@ class InputWindow(Window):
                             elif val == 'view map':
                                 gs.gameMode = GameMode.inAreaMap
                             elif val == 'save game':
-                                pass
+                                gs.writeFile(Globals.SavePaths[gs.saveId])
                             elif val == 'exit game':
                                 gs.gameMode = GameMode.titleScreen
                         else:   # tuple or None - invalid command

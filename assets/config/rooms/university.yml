@@ -1,15 +1,28 @@
-University AFC:
-    name: University AFC
+#University AFC:
+#    name: University AFC
+#    description: n/a
+#    script: Lore/Beginning/University/Rooms/Beginning_LoreUniversityAFC.txt
+#    r: 0
+#    c: 0
+#    neighbors:
+#        Observatory Hill: N
+#        Engineering Department: N
+#        Dining Hall: N
+#        Library of Department of Others: N
+#    objects:
+#        - VR
+#        - Supervisor
+#        - Simulator
+
+diningHall:
+    name: Dining Hall
     description: n/a
-    script: Lore/Beginning/University/Rooms/Beginning_LoreUniversityAFC.txt
+    script: Lore/Beginning/University/Rooms/Beginning_LoreUniversityDiningHall.txt
     r: 0
     c: 0
-    neighbors:
-        Observatory Hill: N
-        Engineering Department: N
-        Dining Hall: N
-        Library of Department of Others: N
+    neighbors: {}
     objects:
-        - VR
-        - Supervisor
-        - Simulator
+        - roundTable
+        - runePrelim
+        - quenPrelim
+        - essaPrelim

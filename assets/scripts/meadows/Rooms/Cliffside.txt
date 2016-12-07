@@ -1,3 +1,7 @@
+_enter{
+	Kipp and [companionName] entered the cliffside.
+}
+
 go to{
 	$if_medHedgeCheck_eq_5{
 
@@ -58,4 +62,8 @@ go to{
 
 		$goto_shepherdHouse # THIS IS THE ONLY FORCED GOTO THAT'S NOT THE HEDGE MAZE ENTRANCE.
 	}
+}
+
+leave area{
+	$worldmap_15_55
 }

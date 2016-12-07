@@ -49,9 +49,10 @@ mirror:
 toilet:
     name: toilet
     script: Lore/Beginning/Suburbs/Lore's House/Items/Beginning_LoreHouseToilet.txt
-hal:
+halBeginning:
     name: Hal
     script: Lore/Beginning/Suburbs/People/Beginning_LoreSuburbsHal.txt
+    showIf: not_talkedToHal
 
 tree:
     name: tree

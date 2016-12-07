@@ -1,0 +1,12 @@
+secretary:
+    name: secretary
+    script: Lore/Beginning/Downtown/People/Beginning_LoreDowntownOfficeSecretary.txt
+elevator:
+    name: elevator
+    script: Lore/Beginning/Downtown/Items/Beginning_LoreDowntownOfficeElevator.txt
+rodnin:
+    name: Rodnin
+    script: Lore/Beginning/Downtown/People/Beginning_LoreDowntownRodnin.txt
+liftAttendant:
+    name: lift attendant
+    script: Lore/Beginning/Downtown/People/Beginning_LoreDowntownOfficeLiftAttendant.txt

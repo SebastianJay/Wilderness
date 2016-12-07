@@ -1,0 +1,13 @@
+#Beginning_LoreUniversityDiningHallRoundTable
+
+approach|uniAtTable_eq_0{
+	Lore headed over to the round table where her friends were sitting. They greeted her excitedly.
+
+	It had been a while since she had seen them. @green{Rune}, @green{Quen}, and @green{Essa} stood up to each give her a hug. They all took a seat.
+	$set_uniAtTable_1
+}
+
+get out of|uniAtTable_eq_1{
+	Lore got up from the table and prepared to leave.
+	$set_uniAtTable_0
+}
