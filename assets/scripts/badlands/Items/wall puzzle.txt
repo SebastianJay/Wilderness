@@ -1,5 +1,5 @@
 examine{
-		@orange{[companionName]: So, what number will we put in?}
+		[companionName]@orange{: So, what number will we put in?}
 		$input_badCode
 		
 		$if_badCode_eq_1265640{
@@ -24,7 +24,7 @@ examine{
 		
 			@bold_orange{MEADOWS LEVEL COMPLETE!}
 		}$else{
-			Kipp messed around with the wheels until the dials were set to @red{[badCode]}. The walls glowed red between the cracks.
+			Kipp messed around with the wheels until the dials were set to [badCode]. The walls glowed red between the cracks.
 		
 			[companionName]: I guess that wasn't right.
 			Kipp: Well, then. Let's try again or return to the @blue{Campsite} and check the other caves again.

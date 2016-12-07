@@ -26,7 +26,7 @@ go to{
 look around{
 	[companionName]: Other than the @yellow{firewall} trap, there's nothing else in this room.
 	
-	$if_badSigmaPainting_eq_1
+	$if_badSigmaPainting_eq_1{
 		Kipp: Oh wait. There was that @yellow{65} drawn on the wall.
 	}
 }

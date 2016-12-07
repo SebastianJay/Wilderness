@@ -44,7 +44,7 @@ sigma:
     neighbors:
         campsite: N
     objects: 
-        -firewall
+        - firewall
 
 mu:
     name: Mu
@@ -75,4 +75,4 @@ cave6:
     neighbors:
         campsite: N
     objects:
-        -wallPuzzle
+        - wallPuzzle
