@@ -1,87 +1,68 @@
 from window import Window
 from asset_loader import AssetLoader
 from global_vars import Globals
+from game_state import GameState, GameMode
 
 class InventoryWindow(Window):
     def __init__(self, w, h):
         super().__init__(w, h)
-        self.leftSection = (0, int(w / 3))
-        self.rightSection = (int(w / 3), w-1)
+        GameState().onInventoryChange += self.inventoryChangeHandler()
+
+    def reset(self):
         self.inventoryList = []
-        self.numberOfLines = int((self.height - 3) / 2)
-        self.selectedItemPos = 3
-        self.selectedItem = None
-        self.itemsdata = None
-        self.listToDraw = None
-        self.formatting.append(("bold_yellow", ((self.selectedItemPos*2+2)*self.width+1, (self.selectedItemPos*2+2)*self.width+int(self.width/3)-1)))
+        self.currentInventoryList = []
+        #self.formatting.append(("bold_yellow", ((self.selectedItemPos*2+2)*self.width+1, (self.selectedItemPos*2+2)*self.width+int(self.width/3)-1)))
         self.startIndex = 0
-        self.index = lambda x: (x + self.startIndex) % len(self.inventoryList)
+        self.index = lambda x: (x + self.startIndex) % len(self.currentInventoryList)
+
+    def inventoryChangeHandler(self):
+        def _inventoryChangeHandler(*args, **kwargs):
+            # refresh currentInventoryList by scanning for all items in Game State inventory
+            currentInventoryList = []
+            for itemdata in self.inventoryList:
+                # TODO refactor for efficiency
+                if itemdata[0] in GameState().inventory:
+                    currentInventoryList.append(itemdata)
+            self.currentInventoryList = currentInventoryList
+        return _inventoryChangeHandler
 
     def load(self):
-        self.itemsdata = AssetLoader().getConfig(Globals.ItemsConfigPath)
-        for el in self.itemsdata.keys():
-            self.inventoryList.append([el, self.itemsdata[el]["name"], self.itemsdata[el]["description"]])
+        itemsdata = AssetLoader().getConfig(Globals.ItemsConfigPath)
+        for el in itemsdata.keys():
+            self.inventoryList.append([el, itemsdata[el]["name"], itemsdata[el]["description"]])
         self.inventoryList.sort(key=lambda row: row[1].lower())
-        self.listToDraw = self.inventoryList
-        self.selectedItem = self.inventoryList[self.selectedItemPos]
-
-    def clear(self):
-        for i in range(self.width):
-            for j in range(self.height):
-                self.pixels[j][i] = " "
-
-    def border(self):
-        for i in range(self.width):
-            for j in range(self.height):
-
-                if i in self.leftSection or i in self.rightSection:
-                    self.pixels[j][i] = "|"
-
-                if j == 0 or j == self.height-1:
-                    self.pixels[j][i] = "-"
-
-                if (i in self.leftSection or i in self.rightSection) and (j == 0 or j == self.height-1):
-                    self.pixels[j][i] = "o"
 
     def update(self, timestep, keypress):
-        if self.selectedItem is None:
-            return
-        if "Up" in keypress:
-            self.startIndex -= 1
-            if self.startIndex == -1:
-                self.startIndex = len(self.inventoryList) - 1
-            self.selectedItem = self.inventoryList[self.index(self.selectedItemPos)]
-        if "Down" in keypress:
-            self.startIndex += 1
-            if self.startIndex == len(self.inventoryList):
-                self.startIndex = 0
-            self.selectedItem = self.inventoryList[self.index(self.selectedItemPos)]
+        for key in keypress:
+            if len(self.currentInventoryList) > 0:
+                if key == "Up":
+                    self.startIndex = (self.startIndex - 1) % len(self.currentInventoryList)
+                elif key == "Down":
+                    self.startIndex = (self.startIndex + 1) % len(self.currentInventoryList)
+            if key == "Return":
+                GameState().gameMode = GameMode.inAreaCommand
 
     def draw(self):
-        if self.selectedItem is None:
-            return self.pixels
         self.clear()
-        self.border()
+        if len(self.currentInventoryList) == 0:
+            message = "No items in inventory"
+            for j in range(len(message)):
+                self.pixels[self.height//2][self.width//2 - len(message)//2 + j] = message[j]
+            return self.pixels
 
-        for i in range(0, self.numberOfLines):
-            try:
-                if not i == self.selectedItemPos:
-                    for j in range(len(self.inventoryList[self.index(i)][1])):
-                        self.pixels[i * 2 + 2][6 + j] = self.inventoryList[self.index(i)][1][j]
-                else:
-                    for j in range(len(self.inventoryList[self.index(i)][1]) + 4):
-                        if j == 0:
-                            self.pixels[i * 2 + 2][2 + j] = ">"
-                        elif j < 4:
-                            self.pixels[i * 2 + 2][2 + j] = " "
-                        else:
-                            self.pixels[i * 2 + 2][2 + j] = self.inventoryList[self.index(i)][1][j-4]
-            except IndexError:
-                continue
+        selectedItemPos = 0
+        numRows = (self.height - 3) // 2
+        for i in range(numRows):
+            if i >= len(self.currentInventoryList):
+                break
+            if i == selectedItemPos:
+                self.pixels[((i+2) % numRows) * 2 + 2][2] = ">"
+            for j in range(len(self.currentInventoryList[self.index(i)][1])):
+                self.pixels[((i+2) % numRows) * 2 + 2][6+j] = self.currentInventoryList[self.index(i)][1][j]
 
         counter = 0
         descriptionHeight = 2
-        description = self.selectedItem[2]
+        description = self.currentInventoryList[self.index(selectedItemPos)][2]
         descriptionList = description.split(" ")
 
         for el in descriptionList:

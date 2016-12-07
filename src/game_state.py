@@ -63,9 +63,11 @@ class GameState:
             self.onChoiceChange = EventHook()   # called when choiceList changes
             self.onGameModeChange = EventHook() # called when gameMode changes
             self.onAddLangNode = EventHook()    # called when addLangNode is called
-            self.onCharacterSwitch = EventHook() # called when activeProtagonistInd changes
-            self.onEnterArea = EventHook() # called when enterArea is called
+            self.onCharacterSwitch = EventHook()    # called when activeProtagonistInd changes
+            self.onEnterArea = EventHook()      # called when enterArea is called
+            self.onClearBuffer = EventHook()    # called when clearBuffer is called
             self.onSettingChange = EventHook()  # called when a setting changes
+            self.onInventoryChange = EventHook()    # called when inventory changes
             self.init()
 
         def init(self):
@@ -180,6 +182,7 @@ class GameState:
             """ Sets a variable or item count """
             if inventoryFlag:
                 self.inventory[varname] = value
+                self.onInventoryChange(varname, value)
             else:
                 self.variables[varname] = value
 
@@ -246,6 +249,11 @@ class GameState:
         def historyFormatting(self, val):
             self.subStates[self.activeProtagonistInd].historyFormatting = val
 
+        def clearBuffer(self):
+            self.historyBuffer = ''
+            self.historyFormatting = {}
+            self.onClearBuffer()
+
         @property
         def inventory(self):
             return self.subStates[self.activeProtagonistInd].inventory
@@ -270,6 +278,7 @@ class GameState:
             self.areaId = areaId
             oldRoom = self.roomId
             self.roomId = roomId
+            self.clearBuffer()
             self.onEnterArea((oldArea, areaId), (oldRoom, roomId), fromWorldMap)
 
         @property
@@ -283,7 +292,7 @@ class GameState:
             """ transitions to world map and sets character position to (r, c) """
             def _gotoWorldMap(*args, **kwargs):
                 old, new = args[0]
-                if old == GameMode.inAreaAnimating: # when done with text animation..
+                if old == GameMode.inAreaAnimating:         # when done with text animation..
                     self.mapLocation = [int(r), int(c)]     # change player coordinates
                     self.gameMode = GameMode.worldMap       # window manager changes active windows
                     self.onGameModeChange -= _gotoWorldMap  # deregister handler
@@ -324,8 +333,9 @@ class GameState:
                 obj['subStates'][i] = obj['subStates'][i].__dict__
             # do not save non-persistent fields
             deleteFields = ['cmdMap', 'cmdBuffer', 'gameModeActive', 'choiceList',
-                'gameModeLockedRequests', 'onChoiceChange', 'onSettingChange',
-                'onGameModeChange', 'onAddLangNode', 'onEnterArea', 'onCharacterSwitch']
+                'gameModeLockedRequests', 'onChoiceChange', 'onSettingChange', 'onClearBuffer',
+                'onGameModeChange', 'onAddLangNode', 'onEnterArea', 'onCharacterSwitch',
+                'onInventoryChange']
             for field in deleteFields:
                 del obj[field]
             return json.dumps(obj)

@@ -74,7 +74,7 @@ class InputWindow(Window):
                             self.interpreter.executeAction(val)
                         elif isinstance(val, str):      # valid metacommand
                             if val == 'view inventory':
-                                pass
+                                gs.gameMode = GameMode.inAreaInventory
                             elif val == 'view map':
                                 gs.gameMode = GameMode.inAreaMap
                             elif val == 'save game':

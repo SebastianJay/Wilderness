@@ -78,6 +78,9 @@ class AssetLoader:
                     elif self.joinAndNorm(self.root_path, 'config') in path:
                         # replace string with parsed Python dict
                         assets[path] = yaml.load(assets[path])
+                    elif self.joinAndNorm(self.root_path, 'maps') in path:
+                        # replace string with split string
+                        assets[path] = assets[path].split('\n')
                 except:
                     success_flag = False
                     if Globals.IsDev:

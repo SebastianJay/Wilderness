@@ -28,8 +28,8 @@ diary:
     script: Kappallanoah Forest/abandoned forest/diary.txt
 familyPhoto:
     name: family photo
-    script: Kappallanoah Forest/family photo.txt
+    script: Kappallanoah Forest/abandoned forest/family photo.txt
 recipe:
     name: recipe
-    script: Kappallanoah Forest/recipe.txt
+    script: Kappallanoah Forest/abandoned forest/recipe.txt
     ## Hunting Range

@@ -2,7 +2,7 @@
 Window containing the world map.
 """
 from window import Window
-from game_state import GameState
+from game_state import GameState, GameMode
 from asset_loader import AssetLoader
 from global_vars import Globals
 
@@ -22,9 +22,20 @@ class MapWindow(Window):
         mapslst = Globals.MapsPaths
         loader = AssetLoader()
         for threetup in mapslst:
-            self.maps.append(loader.getMap(threetup[0]).splitlines())
-            self.colorMasks.append(loader.getMap(threetup[1]).splitlines())
-            self.travelMasks.append(loader.getMap(threetup[2]).splitlines())
+            self.maps.append(loader.getMap(threetup[0]))
+            self.colorMasks.append(loader.getMap(threetup[1]))
+            self.travelMasks.append(loader.getMap(threetup[2]))
+
+        self.entrances = ([], [])
+        areaConfig = loader.getConfig(Globals.AreasConfigPath)
+        for area in areaConfig:
+            entranceList = areaConfig[area]['entrances']
+            mapId = areaConfig[area]['mapId']
+            for entrance in entranceList:
+                roomId = entrance['roomId']
+                r = entrance['r']
+                c = entrance['c']
+                self.entrances[mapId].append((r, c, area, roomId))
 
     def draw(self):
         # make sure we have loaded
@@ -35,20 +46,24 @@ class MapWindow(Window):
         g = GameState()
         currentMap = self.maps[g.activeProtagonistInd]
         colorMask = self.colorMasks[g.activeProtagonistInd]
+        entrances = self.entrances[g.activeProtagonistInd]
+
+        startRow = min(max(g.mapLocation[0] - self.height // 2, 0), len(currentMap) - self.height - (self.height % 2))
+        startCol = min(max(g.mapLocation[1] - self.width // 2, 0), len(currentMap[g.mapLocation[0]]) - self.width - (self.width % 2))
 
         # draw out the map and color it
         self.formatting = []
         previousColorCode = "null"
         previousRow = -1
-        for row in range(min(len(currentMap),self.height)):
-            for column in range(min(len(currentMap[row]),self.width)):
-                self.pixels[row][column] = currentMap[row][column]
+        for i, row in enumerate(range(startRow, startRow + self.height)):
+            for j, column in enumerate(range(startCol, startCol + self.width)):
+                self.pixels[i][j] = currentMap[row][column]
                 colorCode = colorMask[row][column]
                 color = "white"
                 # Check to see if the character is at this position
                 # If so, character should be a white "@"
                 if (g.mapLocation[0] == row and g.mapLocation[1] == column):
-                    self.pixels[g.mapLocation[0]][g.mapLocation[1]] = '@'
+                    self.pixels[i][j] = '@'
                     colorCode = "w"
                 # To reduce the number if tkinter insert calls in display, look for runs of the same color on the same row
                 if(previousColorCode == colorCode and row == previousRow):
@@ -75,11 +90,17 @@ class MapWindow(Window):
 
                 # add a new formatter to self.formatting only if this one is different than the previous one, or a new row
                 if (previousColorCode != colorCode or row != previousRow):
-                    self.formatting.append((color,(row*self.width+column,row*self.width+column)))
+                    self.formatting.append((color,(i*self.width+j,i*self.width+j)))
                 previousColorCode = colorCode
                 previousRow = row
 
         return self.pixels
+
+    def overEntrance(self, r, c):
+        for er, ec, areaId, roomId in self.entrances[GameState().activeProtagonistInd]:
+            if er == r and ec == c:
+                return (areaId, roomId)
+        return False
 
     def update(self, timestep, keypresses):
         # make sure we have loaded
@@ -90,6 +111,11 @@ class MapWindow(Window):
         g = GameState()
         currentMap = self.maps[g.activeProtagonistInd]
         currentTravel = self.travelMasks[g.activeProtagonistInd]
+
+        if self.overEntrance(g.mapLocation[0], g.mapLocation[1]):
+            g.gameMode = GameMode.worldMapOverArea
+        else:
+            g.gameMode = GameMode.worldMap
 
         # process keystrokes to move player position
         for key in keypresses:
@@ -110,12 +136,10 @@ class MapWindow(Window):
                     if currentTravel[g.mapLocation[0]][g.mapLocation[1] + 1] == '0':
                         g.mapLocation[1] += 1
             elif key == "Return":
-                # TODO
-                pass
-            #    if (g.mapLocation[0] == 2 and g.mapLocation[1] == 2):
-            #        GameState().enterArea('Aspire', 'townCenter')  # in place of the strings use values pulled from config files
-            #        GameState().gameMode = GameMode.inAreaCommand
-
+                val = self.overEntrance(g.mapLocation[0], g.mapLocation[1])
+                if val:
+                    GameState().enterArea(val[0], val[1], True)
+                    GameState().gameMode = GameMode.inAreaCommand
 
 if __name__ == '__main__':
     AssetLoader().loadAssets()

@@ -88,8 +88,14 @@ class Interpreter:
                     gs.touchVar(args[0], inventoryFlag)
                     # if command specifies amount to increment by use that, otherwise use 1
                     incVal = 1
+                    strVal = None
                     if len(args) == 2:
-                        incVal = int(args[1])
+                        try:
+                            # try parsing arg as integer
+                            incVal = int(args[1])
+                        except ValueError:
+                            # if not integer, set as string directly
+                            strVal = args[1]
                     # whether to add to an existing total
                     addVal = int(gs.getVar(args[0], inventoryFlag))
                     if node.title == 'set':
@@ -98,7 +104,10 @@ class Interpreter:
                     multiple = 1
                     if node.title in ['dec', 'sub']:
                         multiple = -1
-                    gs.setVar(args[0], str(addVal + multiple * incVal), inventoryFlag)
+                    if strVal:
+                        gs.setVar(args[0], strVal, inventoryFlag)
+                    else:
+                        gs.setVar(args[0], str(addVal + multiple * incVal), inventoryFlag)
                 elif node.title == 'input':
                     if val is not None:
                         gs.gameMode = GameMode.inAreaCommand

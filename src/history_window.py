@@ -21,6 +21,7 @@ class HistoryWindow(Window):
         super().__init__(width, height)
         # register handler for additions to history buffer
         GameState().onAddLangNode += self.langNodeAddedHandler()
+        GameState().onClearBuffer += self.clearBufferHandler()
 
     def reset(self):
         self.threshold = 0.025  # Delay in seconds before each character appears on-screen
@@ -66,6 +67,11 @@ class HistoryWindow(Window):
             self.rowIndices.extend(row_indices)
             GameState().lockGameMode(GameMode.inAreaAnimating)  # switch out game mode until animation finished
         return _langNodeAddedHandler
+
+    def clearBufferHandler(self):
+        def _clearBufferHandler(*args, **kwargs):
+            self.subStates[GameState().activeProtagonistInd] = HistoryWindow.SubState()
+        return _clearBufferHandler
 
     def update(self, timestep, keypresses):
         # increment charLimit in certain time increments to advance scrolling animation
