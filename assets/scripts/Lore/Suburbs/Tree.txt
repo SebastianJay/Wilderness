@@ -1,12 +1,24 @@
 inspect{
-	$if_subCanCutTree_eq_0{
-	The @yellow{tree} looked like it could easily be @red{cut} down by the @yellow{zweihander}.
+	$if_subDidCutTree_eq_1{
+		The @yellow{tree} was now just a stump.
+	}$elif_subCanCutTree_eq_0{
+		The @yellow{tree} looked like it could easily be @red{cut} down by the @yellow{zweihander}.
+	}$else{
+		The @yellow{tree} looked calm and thankful that Lore did not cut it down.
 	}
 }
-cut{
-	The tree fell down with a loud crash that echoed through the street. Lore could hear noises inside the house and she knew that @green{Glover} was coming out.@green{Glover} stormed out of his house and Lore ducked behind some bushes. A strong wind came down with such a fury that it blew off Glover's afro and conveniently landed in Lore's hands.
-	@italic{Added Glover's afro to inventory.}
-	$set_subCanCutTree_1
-	$set_subCanRingDoorbell_1
-	$set_inventory_afro_1
+
+cut|inventory_zweihander_eq_1{
+	$if_subCanCutTree_eq_0{
+		The tree fell down with a loud crash that echoed through the street. Lore could hear noises inside the house and she knew that @green{Glover} was coming out.@green{Glover} stormed out of his house and Lore ducked behind some bushes. A strong wind came down with such a fury that it blew off Glover's afro and conveniently landed in Lore's hands.
+		@italic{Added Glover's afro to inventory.}
+		$set_subCanCutTree_1
+		$set_subDidCutTree_1
+		$set_subCanRingDoorbell_1
+		$set_inventory_afro_1
+	}$elif_subDidCutTree_eq_1{
+		The stump could not be trimmed down any more.
+	}$else{
+		Lore dared not touch the tree.
+	}
 }

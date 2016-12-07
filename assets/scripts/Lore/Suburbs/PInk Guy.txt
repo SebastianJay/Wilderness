@@ -1,26 +1,31 @@
 talk to{
-		Lore approached @green{Pink Guy}.
-		$if_FirstTimewithPinkGuy_eq_0{
-		
-		Lore: Hey, can you let me pass?
-		Pink Guy: Ore wa chin chin ga daisuki da yo. (Do you wish to proceed on a journey through dimensions to find the missing @green{child?})
-		$set_FirstTimewithPinkGuy_1
-		}$else{
-			
-		$choice{
-			Yes|
-				$if_subGaveAfro_eq_0{
-				Lore: Yeah, I want to see what's on the other side.
-				Pink Guy: Ore wa chin chin ga daiski da yo. (First you must provide me with the beloved object that covered an old man's crown.)
-					$if_inventory_afro_eq_1{
-				
-						Lore gave Pink Guy the afro.
-						@italic{Removed afro from inventory.}
-						$dec_inventory_afro_1
-						$set_subGaveAfro_1
+		Lore approached @pink{Pink Guy}.
+		$if_canVisitOutskirts_eq_0{
+			Lore: Hey, can you let me pass?
+			Pink Guy: Ore wa chin chin ga daisuki da yo. (Do you wish to proceed on a journey through dimensions to find the missing @green{child?})
+			$choice{
+				Yes|
+					$if_subGaveAfro_eq_0{
+					Lore: Yeah, I want to see what's on the other side.
+					Pink Guy: Ore wa chin chin ga daiski da yo. (First you must provide me with the beloved object that covered an old man's crown.)
+						$if_inventory_afro_eq_1{
+
+							Lore gave Pink Guy the afro.
+							@italic{Removed afro from inventory.}
+							$dec_inventory_afro_1
+							$set_subGaveAfro_1
+						}
 					}
-				}
-			|No|
-				Lore: Not right now.
-				Pink Guy: Ore wa chin chin ga daisuki da yo. (I do hope that you come back soon and save this child.)
+
+					Pink Guy: Ore wa chin chin ga daiski da yo. (You may proceed.)
+					$set_canVisitOutskirts_1
+				|No|
+					Lore: Not right now.
+					Pink Guy: Ore wa chin chin ga daisuki da yo. (I do hope that you come back soon and save this child.)
+			}
+		}$else{
+			Lore: Hi!
+			Pink Guy: Ore wa chin chin ga daisuki da yo. (There is a war coming, young one. Be wary of all and trust no one.)
+			Lore: ...
+		}
 }
