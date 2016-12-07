@@ -15,7 +15,7 @@ talk to{
 		Kipp: It's time to end this.
 		Rowen: Took the words right out of my mouth.
 
-		Rowen's eyes turned into a pure white ball of light. He then began levitating off the ground. His hands summoned two balls of light, diffracting lasers of lights all over the place and putting holes in all of the builinds in town. Kipp couldn't back down now. He had to follow through with his plan.
+		Rowen's eyes turned into a pure white ball of light. He then began levitating off the ground. His hands summoned two balls of light, diffracting lasers of lights all over the place and putting holes in all of the buildings in town. Kipp couldn't back down now. He had to follow through with his plan.
 
 		$if_ntoChikasiClan_eq_1{
 			Kipp: Time to meet up with the a friendly fighter.
@@ -79,7 +79,7 @@ talk to{
 		$if_ntoRuneRaiders_eq_1{
 			Kipp: ...let's bring in our firepower.
 
-			Kipp took the bag Mohani dropped beside Kipp while he was unconcious. He openend the bag and spread the power inside in an arc. The dust began reacting with the lightning strikes and a wall of fire appeared. Every animal Kipp remembered see in the forge charged out of the wall towards the animals made of lightning. Soon, Mohani and the rest of the Rune Raiders appeared from the wall and the fire fire vanished.
+			Kipp took the bag Mohani dropped beside Kipp while he was unconscious. He opened the bag and spread the power inside in an arc. The dust began reacting with the lightning strikes and a wall of fire appeared. Every animal Kipp remembered see in the forge charged out of the wall towards the animals made of lightning. Soon, Mohani and the rest of the Rune Raiders appeared from the wall and the fire fire vanished.
 
 			Kipp: Nice entrance.
 			Mohani: We try.
@@ -107,7 +107,7 @@ talk to{
 
 		Kipp: Alright on my count, everyone...you know what we don't have time! Just bolt at him NOW!
 
-		All three alliances stampeded into the body of Rowen in unison, throwing everything they had along the way. Once the groups merged at the feet of Rowen. A ball of light flashed and could be seen from miles away. And just like many plotholes that are never explained in video games, Kipp, all three gangs, and the townspeople all found Rowen, lying dead in the middle of the town. The parasite did it's best to crawl out of Rowen's head, but it eventually gave up and dissipated into the ground. Kipp laughed a little, amazed by what just happened. He then turned around to thank the crews.
+		All three alliances stampeded into the body of Rowen in unison, throwing everything they had along the way. Once the groups merged at the feet of Rowen. A ball of light flashed and could be seen from miles away. And just like many plot holes that are never explained in video games, Kipp, all three gangs, and the townspeople all found Rowen, lying dead in the middle of the town. The parasite did it's best to crawl out of Rowen's head, but it eventually gave up and dissipated into the ground. Kipp laughed a little, amazed by what just happened. He then turned around to thank the crews.
 
 		Kipp: Guys, that was way too...
 

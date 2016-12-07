@@ -16,7 +16,7 @@ _enter{
 		Rowen: 	My name is Rowen, and I am the ringleader of this here circus we call Aspire. We have criminals lurking all over this town, so don't you think you can't get away with anything. To make sure you understand, let me teach you a lesson. There are two kinds of people I don't like: those who question my authority and those who go dirtying my town with their saliva.
 		Kipp: Oh I didn't mean to disgrace your town. Um...your eyes, sir.
 
-		Kipp noticed that Rowen's eyes have started emiting a green glow that keeps getting brigther as Rowen's rage grows.
+		Kipp noticed that Rowen's eyes have started emitting a green glow that keeps getting brighter as Rowen's rage grows.
 		Rowen: Clodhopper, I think you are asking for a shoe in your mouth right about now. @bold{I swear I won't miss again.}
 
 		Just then, a little boy comes running towards Kipp.
@@ -54,7 +54,7 @@ _enter{
 		$set_ntoSmokingGun_0
 		$set_ntoRuneRaiders_0
 
-		#Certain Attributes that prevent the player from repeating a certian action or so that actions can be repeating multiple times
+		#Certain Attributes that prevent the player from repeating a certain action or so that actions can be repeating multiple times
 		$set_ntoSignCount_0
 		$set_ntoPaintingCount_0
 		$set_ntoFatigue_0
@@ -86,7 +86,7 @@ go to{
 
 		@bold{It will be in your best interest to save again if you are going to talk to Rowen.}
 	}$else{
-		#Kipp hasn't visited the libary yet to start the quest.
+		#Kipp hasn't visited the library yet to start the quest.
 		Random Gang Member: Hey, you have no business to be here! Get out before we have to use force!
 	}
 }

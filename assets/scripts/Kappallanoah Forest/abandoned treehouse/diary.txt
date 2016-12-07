@@ -1,0 +1,34 @@
+inspect{
+	Kipp felt a bit guilty peeking into his father's diary. The pages have turned yellow, but Kipp still managed to read it. He flipped to an interesting entry about 10 years ago. 
+	
+	Sept 15  XXX6
+	
+	Dear diary,
+	
+	I heard the most HILARIOUS story today. I was drinking with my buddies around the campfire just now and we decided to "spice things up" a little. So we played a tree-naming game and each listed all the species of trees in the forest. Guess who lost? @green{Ol' Willy}! Turns out that the lumberjack knows nothing about his trade!
+	
+	So as a punishment, we asked him to tell us a secret of his. Poor @green{Ol' Willy} must've been dead drunk and he started bullshitting about the Emperor leaving a prophecy or whatever in a cave around here. The Emperor leaving a @italic{prophecy} in this middle-of-nowhere forest? Man did we laugh at @green{Ol' Willy}.
+	
+	We carried @green{Ol' Willy} back to his home at the @blue{lumber mill} and called it a day.
+	
+	
+	Kipp flipped to the next entry. Some ink was spilled on the paragraph at the end, so some sentences could not be read. 
+	
+	Sept 17 XXX6
+	
+	Dear diary,
+	
+	OMG!! THE PROPHECY IS REAL!! AND ITS BAD!!
+	
+	So I was doing my usual afternoon walk today and found myself wandering near the cave that the @italic{prophecy} is supposedly hidden in. So I thought, hell, why not go inside and check it out? So I went inside and walked about half an hour. As you know, I have an incredible sense of direction so I didn't lose my way. 
+
+	After lots of twists and turns, I found an altar at the end. On it was a scroll of paper that glows in the darkness. I was scared. So I opened it and on it says: "On year XXXX, Kipp, named for The DXXXXXer in the ancient tongue, would dXXXXXX tXe ouXer world and become the neX XXXX."
+	
+	.......
+	
+	
+	
+	Kipp was surprised to find his name on the prophecy. What could it be? Maybe he should go to the @blue{cave} to find out. 
+	
+	$set_forestClueTreehouse_1
+}

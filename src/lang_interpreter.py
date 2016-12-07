@@ -110,10 +110,13 @@ class Interpreter:
                         return Interpreter.ExitCode.halt
                 elif node.title == 'goto':
                     gs.roomId = node.args[0]
+                elif node.title == 'worldmap':
+                    gs.gotoWorldMap(node.args[0], node.args[1])
                 elif node.title == 'exit':
                     return Interpreter.ExitCode.empty
                 elif node.title == 'gameover':
-                    pass    #TODO
+                    gs.gameMode = GameMode.titleScreen
+                    return Interpreter.ExitCode.empty
                 elif node.title == 'switchcharacter':
                     gs.switchCharacter()
                     return Interpreter.ExitCode.empty

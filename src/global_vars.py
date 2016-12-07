@@ -20,7 +20,7 @@ class Globals:
     ]
     MapsPaths = [
         ('kipp_map.txt', 'kipp_map_color_mask.txt', 'kipp_map_travel_mask.txt'),
-        ('test_map.txt', 'test_map_color_mask.txt', 'test_map_travel_mask.txt'),
+        ('kipp_map.txt', 'kipp_map_color_mask.txt', 'kipp_map_travel_mask.txt'),
     ]
     InAreaPaths = [
         ('inarea_aspire_map.txt', 'aspire.yml'),

@@ -1,7 +1,7 @@
 talk to{
 	$if_inventory_revolver_eq_0{
 		#Kipp's first task
-		Flint: Hey, you still don't have a @yellow{gun}. Come back when you could actually start the initation.
+		Flint: Hey, you still don't have a @yellow{gun}. Come back when you could actually start the initiation.
 	}$elif_ntoSmokingGun_eq_1{
 		Flint: Hey, we get it. We ain't going to cause no more trouble for you. Just make sure you have those other two gangs in check.
 	}$else{

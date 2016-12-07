@@ -3,7 +3,7 @@ read{
 
 	Kipp opened to the back of the book.
 
-	"About the Author: Doctor Dwindle Carvin is a world renound microbiologist who now teaches as a professor at the University of Corvone. He's made scientific breakthroughts in the existence and nature of microorganisms in the most extreme environments in the @orange{Outer World}"
+	"About the Author: Doctor Dwindle Carvin is a world renowned microbiologist who now teaches as a professor at the University of Corvone. He's made scientific breakthroughs in the existence and nature of microorganisms in the most extreme environments in the @orange{Outer World}"
 
 	Kipp: Is this a piece of science fiction?
 
@@ -13,7 +13,7 @@ read{
 
 	Kipp: This could never exist in our world.
 
-	"No traces of these parasites have known to exist in the in the region called 'Inner World' for the past 1000 years. The last known location of the facilites that handle the growth of these parasites was in the region past the radioactive wasteland, isolated from human civilization."
+	"No traces of these parasites have known to exist in the in the region called 'Inner World' for the past 1000 years. The last known location of the facilities that handle the growth of these parasites was in the region past the radioactive wasteland, isolated from human civilization."
 
 	Kipp closed the book and put it back on the self.
 }

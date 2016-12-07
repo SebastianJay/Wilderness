@@ -10,6 +10,18 @@ loreWallet:
 letterFromFriends:
     name: letter from friends
     description: n/a
+afro:
+    name: afro
+    description: n/a
+morphine:
+    name: morphine
+    description: n/a
+money:
+    name: money
+    description: n/a
+flamethrower:
+    name: flamethrower
+    description: n/a
 ## End Suburbs items
 
 ## Begin Aspire items

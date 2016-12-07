@@ -18,7 +18,7 @@ talk to{
 		Akecheta: This will have to do. Now, using the @yellow{base} of our ancestors' knowledge, carve @orange{31} markings into the totem pole beside the vault. This is what you will carve.
 		#31 in base 8 is 25 in base 10
 
-		Kipp: @italic{(to himself)} The base of his ancestory? Man, I hope the @blue{library} has something on this.
+		Kipp: @italic{(to himself)} The base of his ancestry? Man, I hope the @blue{library} has something on this.
 
 		Akecheta proceeded to show Kipp what symbol Kipp will draw. Kipp practiced on the wall to make sure he was doing it correctly.
 

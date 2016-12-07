@@ -52,3 +52,35 @@ toilet:
 hal:
     name: Hal
     script: Lore/Beginning/Suburbs/People/Beginning_LoreSuburbsHal.txt
+
+tree:
+    name: tree
+    script: Lore/Suburbs/Tree.txt
+doorbell:
+    name: doorbell
+    script: Lore/Suburbs/doorbell.txt
+glover:
+    name: Glover
+    script: Lore/Suburbs/Glover.txt
+    showIf:
+        or:
+            - subDidCutTree_eq_1
+            - subCanRingDoorbell_eq_1
+pinkGuy:
+    name: Pink Guy
+    script: Lore/Suburbs/Pink Guy.txt
+peevedPeople:
+    name: peeved people
+    script: Lore/Suburbs/Peeved People.txt
+pileOfMoney:
+    name: pile of money
+    script: Lore/Suburbs/pile of money.txt
+flamethrower:
+    name: flamethrower
+    script: Lore/Suburbs/Flamethrower.txt
+window:
+    name: window
+    script: Lore/Suburbs/window.txt
+nolan:
+    name: Nolan
+    script: Lore/Suburbs/Nolan.txt

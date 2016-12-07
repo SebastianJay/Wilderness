@@ -45,7 +45,7 @@ go to{
 			Kipp: This place reeks of alcohol, smoke, and...ugh, don't tell they do @bold{that} in here. I thought they had a separate establishment for that, with cleaner, or more decent rooms. I'm not sure I would really want to @red{look around} here. I'd rather leave and @red{go to} the @blue{gunsmith shop} or @blue{town center} than stay another second here.
 		}
 	}$else{
-		#Kipp hasn't visited the libary yet to start the quest.
+		#Kipp hasn't visited the library yet to start the quest.
 		Random Gang Member: Hey, you have no business to be here! Get out before we have to use force!
 
 	}

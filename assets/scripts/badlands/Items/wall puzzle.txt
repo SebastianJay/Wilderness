@@ -20,7 +20,7 @@ examine{
 			
 			Kipp walks in front of [companionName], leaving [companionName] behind.
 			
-			[companionName]: Kipp, wait up. We have to @red{go to} the @blue{desert} together!
+			[companionName]: Kipp, wait up. We have to trek the @blue{desert} together!
 		
 			@bold_orange{MEADOWS LEVEL COMPLETE!}
 		}$else{

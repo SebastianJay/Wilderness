@@ -209,7 +209,7 @@ _enter{
 				Kipp: What just happened?
 				Shepherd: Your girlfriend just started running and screaming like a maniac with my dinner into the woods.
 				Kipp: Oh, sorry. Wait...
-				Shepherd: Just joking with you, and it's okay. I'm still breathing and all my blood is still in my body.
+				Shepherd: Just joking with you, I know you two aren't dating. And I'm still breathing and all my blood is still in my body.
 				Kipp: Good, I think.
 
 				Jinx walks out of the woods unscathed.
@@ -287,7 +287,12 @@ go to{
 	}
 }
 
+_awake{
+    Kipp woke up.
+    
+    [companionName]: You feel better?
+    Kipp: Yeah. Everything is alright.
+    [companionName]: Already I'm ready to head out when you are.
+    
+}
 
-# Previous Variables
-# Companion Variables: companionB, companionF, companionD
-# Companion name (String variable): companionName

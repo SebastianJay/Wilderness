@@ -7,11 +7,11 @@ go to{
 		Kipp: Excuse me, the what?
 		Arthur: @italic{(Now Confused)} Wait, you don't know?
 
-		Arthur stopped suddendly, ran to grab a seat, and plopped it down in front of Kipp.
+		Arthur stopped suddenly, ran to grab a seat, and plopped it down in front of Kipp.
 
 		Arthur: I reckon you came from the town due east, right?
 		Kipp: @italic{(Nodding)} Yeah, I'm Kipp.
-		Arthur: @italic{(Serious)} Well, when your hometown became too crowded to raise a farm or business for every family, people have been venturing out to lands far north to find new opportunities. The town of Aspire was built to help these so called pioneers. Our economy thrives on providing people with the necessary supplies in order to travel for days on unknown territory. We were considered the center of everything. The three hordes that are keeping us hostage, they came here one day in an organized manner and took out our businesses one by one. We were surprised 'cause them three bruteful crews were sworn enemies since we last knew. Once that smart fellow, Rowen, showed up, I think his smartness spread to those hordes and now every criminal turned into a mastermind with their signature green glowing eyes. Funny, too, 'cause I don't remember Rowen ever being a part of any of those groups. But now, they have been ordering us around and horded the profits for themselves. They weren't hesitant to resort to violence to keep up in line. Sooner or later, our money supply is gonna run dry. Then we'll be saying goodbye to our town. You gotta help us, Kipp. There no time left for waiting.
+		Arthur: @italic{(Serious)} Well, when your hometown became too crowded to raise a farm or business for every family, people have been venturing out to lands far north to find new opportunities. The town of Aspire was built to help these so called pioneers. Our economy thrives on providing people with the necessary supplies in order to travel for days on unknown territory. We were considered the center of everything. The three hordes that are keeping us hostage, they came here one day in an organized manner and took out our businesses one by one. We were surprised 'cause them three bashful brute crews were sworn enemies since we last knew. Once that smart fellow, Rowen, showed up, I think his smartness spread to those hordes and now every criminal turned into a mastermind with their signature green glowing eyes. Funny, too, 'cause I don't remember Rowen ever being a part of any of those groups. But now, they have been ordering us around and horded the profits for themselves. They weren't hesitant to resort to violence to keep up in line. Sooner or later, our money supply is gonna run dry. Then we'll be saying goodbye to our town. You gotta help us, Kipp. There no time left for waiting.
 		Kipp: But I can't stand toe to toe with the three most dangerous gangs in all of existence!
 		Arthur: But you gotta try! Here, if it helps, the hordes may have gotten smarter, but they still have grounded cattle meat between one another.
 		Kipp: You mean beef?
@@ -47,7 +47,17 @@ go to{
 }
 
 look around{
-	Kipp stepped back to take a good look at the room. He eyed a fancy @yellow{bookself} with some books that may be worth @red{inspecting}. In the far left corner of the room, Kipp also saw a @yellow{sleeping bag}. It may not be the right time to take a nap, but maybe he could @red{use} it to de-stress for a while. He looked back at @green{Arthur}. It looked like he hasn't gotten any better since we last talked. Maybe Kipp should go @red{talk to} @green{Arthur} again.
+	Kipp stepped back to take a good look at the room. He eyed a fancy @yellow{bookshelf} with some books that may be worth @red{inspecting}. In the far left corner of the room, Kipp also saw a @yellow{sleeping bag}. It may not be the right time to take a nap, but maybe he could @red{use} it to de-stress for a while. He looked back at @green{Arthur}. It looked like he hasn't gotten any better since we last talked. Maybe Kipp should go @red{talk to} @green{Arthur} again.
 
 	Kipp: Hmm...what should I do?
+}
+
+_awake{
+    Kipp woke up.
+    
+    Arthur: You okay big buddy?
+    Kipp: Don't worry about me, Arthur. I'll be fine.
+    Arthur: Good.
+    Kipp: And I'll make sure your dad will come home.
+    Arthur: Yay!
 }
