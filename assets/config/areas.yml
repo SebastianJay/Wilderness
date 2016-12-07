@@ -85,7 +85,7 @@ forest:
     mapId: 1
     entrances:
         -
-            roomId: forest cabin
+            roomId: forestCabin
             r: 0
             c: 0
             
