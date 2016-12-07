@@ -87,10 +87,6 @@ class TitleWindow(Window):
                     gs.saveId = self.freeFileInd
                     gs.gameMode = GameMode.inAreaCommand
                     gs.enterArea(gs.areaId, gs.roomId)  # send signal to run startup script
-                    """
-                    gs.activeProtagonistInd = 1
-                    gs.enterArea('farm', 'meadow', True)
-                    """
         else:
             for key in keypresses:
                 if key == "Up":

@@ -5,3 +5,20 @@ go to{
 look around{
 	A simple bus stop with a bench and a faded blue sign. The bus went to the @blue{University} or @blue{downtown}. The bus stop was pretty empty.
 }
+
+think{
+	Lore: It feels weird going back to the university. Ever since I left, I feel so distant from it. Like it's in a different world. I don't know if it makes me nervous or excited. I don't really know much of how I feel anymore. Every day is just like the last.
+	$if_thoughtBusStopBeg_eq_1{
+		Lore: I should see when the bus is coming.
+	}
+	$set_thoughtBusStopBeg_1
+}
+
+wait{
+	Lore waited until a bus came to pick her up. She filed into the back and pressed her head against the glass.
+	$worldmap_17_14
+}
+
+_enter{
+	A bus wheezed as it came ambling to a stop. Lore got off and entered the Residential District.
+}

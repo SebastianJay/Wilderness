@@ -7,7 +7,19 @@ suburbs:
     roomsConfig: rooms/suburbs.yml
     objectsConfig: objects/suburbs.yml
     mapId: 0
-    entrances: {}
+    entrances:
+        -
+            roomId: busStop
+            r: 18
+            c: 14
+
+#university:
+#  r: 15
+#  c: 26
+
+#downtown:
+#  r: 30
+#  c: 39
 
 aspire:
     name: Aspire
@@ -23,7 +35,7 @@ aspire:
             c: 116
     # only be able to enter if a condition is fulfilled
     #showIf: didFarm #TODO
-    
+
 farm:
     name: Charli
     roomsConfig: rooms/farm.yml
@@ -72,12 +84,12 @@ badlands:
             roomId: campsite
             r: 0
             c: 0
-            
+
         -
             roomId: cave6
             r: 0
             c: 0
-            
+
 forest:
     name: Kappallanoah Forest
     roomsConfig: rooms/forest.yml
@@ -88,4 +100,3 @@ forest:
             roomId: forestCabin
             r: 0
             c: 0
-            
