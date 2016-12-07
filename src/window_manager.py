@@ -68,6 +68,10 @@ class WindowManager(Window):
                 self.clear(True)
                 self.activeWindowGroups = [3]
                 self.isTransitioning = True
+            elif new in [GameMode.inAreaMap]:
+                # switch to map window group
+                self.activeWindowGroups = [4]
+                self.isTransitioning = True
             elif new in [GameMode.titleScreen]:
                 # clear, reset, and reload all windows
                 self.clear()
@@ -148,11 +152,10 @@ class WindowManager(Window):
             (3, 2, 4, 9),  # Input, History, Palette, and Help windows
                         #NOTE the ordering here is specific as Input gets updated before History
             (5,),       # Map Window
-            (6,),       # InArea window
+            (6,9),       # InArea window
             (7,),       # Settings window
         ]
         # which window group is on screen initially
-
         self.activeWindowGroups = [1]
 
     def draw(self):

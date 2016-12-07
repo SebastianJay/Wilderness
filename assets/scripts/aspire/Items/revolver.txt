@@ -1,7 +1,7 @@
 pick up{
 	#CAN ONLY OCCUR IN THE GUNSMITH SHOP
 	$if_inventory_revolver_eq_0{
-		Kipp walked up to the table to inspect the revolver on the table. Kipp then noticed a box of revlovers just sitting under the table. Kipp looked back to notice that the Rune Raiders don't even handle guns.
+		Kipp walked up to the table to inspect the revolver on the table. Kipp then noticed a box of revolvers just sitting under the table. Kipp looked back to notice that the Rune Raiders don't even handle guns.
 
 		Kipp: I wonder if...
 

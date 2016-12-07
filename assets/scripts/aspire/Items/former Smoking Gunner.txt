@@ -6,7 +6,7 @@ talk to{
 			Kipp walked up to the man with his head against the table and an empty bottle in his hand.
 			
 			Former Smoking Gunner: What *burp* do you want?
-			Kipp: You okay, dude...nevermind. So I was wondering if you belonged to that group over there.
+			Kipp: You okay, dude...never mind. So I was wondering if you belonged to that group over there.
 			Former Smoking Gunner: Yeah, until I was kicked out. Look, if you are here to weasel information about the crew, then you're not getting it from me.
 			
 			The ex member then looked into the bottom of his bottle.
@@ -25,7 +25,7 @@ talk to{
 		
 		Hiram: Now that's what I'm talking about. So I should talk about...
 		Kipp: The Smoking Gun.
-		Hiram: Right, those deadbeats. They were always stuck up, especially the leader. Flint had an elistist complex. Could never stand how he ordered everyone around. Trust me, he is all just for show. Whenever we would go wagon heisting, it would be us doing the work and him collecting the reward...I'd...I'd uh...
+		Hiram: Right, those deadbeats. They were always stuck up, especially the leader. Flint had an elitist complex. Could never stand how he ordered everyone around. Trust me, he is all just for show. Whenever we would go wagon heisting, it would be us doing the work and him collecting the reward...I'd...I'd uh...
 		Kipp: That's really awful to hear, but did they mention anything about a secret number or two that only you would know?
 		
 		Hiram chuckled a little.
@@ -62,7 +62,7 @@ talk to{
 				Kipp: Look, I'm not here to play any games. Just give me what I need and no one will get hurt.
 				Hiram: You don't have the guts to...
 				
-				Kipp then looked down to see a knife dug into the table and Hiram's hand just laying there. He pulled the knife out and thrusted it back into the table, right in between the spaces of Hiram's fingers. 
+				Kipp then looked down to see a knife dug into the table and Hiram's hand just laying there. He pulled the knife out and shoved the blade it back into the table, right in between the spaces of Hiram's fingers. 
 				
 				Hiram: Okay! Okay! When I was reading over Flint's papers to other gangs, he would always write down @yellow{"Base 4"} in the top right hand corner of the sheet. That's all I know I swear!
 				
@@ -127,7 +127,7 @@ talk to{
 				$inc_brotherPts_1
 			}
 		}		
-	    All that matters is that Kipp walked away unscathed from the converstion.
+	    All that matters is that Kipp walked away unscathed from the conversation.
 		$set_phoenixBolt_0
 	}
 }

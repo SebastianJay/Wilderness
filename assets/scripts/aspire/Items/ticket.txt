@@ -7,7 +7,7 @@ $if_inventory_ticket_eq_1{
 	}
 	
 	use{
-		Kipp: Use it how? You want me to eat it or something? I'm not braindead, but c'mon. 1's and 0's take this stuff literally.
+		Kipp: Use it how? You want me to eat it or something? I'm not brain dead, but c'mon. 1's and 0's take this stuff literally.
 	}
 	
 }$else{

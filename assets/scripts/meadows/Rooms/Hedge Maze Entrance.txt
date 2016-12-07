@@ -23,7 +23,7 @@ go to{
 		Kipp: I swear the noise echoed. This maze has to be bigger.
 		[companionName]: Perhaps it's one of those "small in appearance, but larger on the inside" types of rooms.
 
-		The walls are too tall to see what's on the other side. [companionName] eventually finds a sign next to the entrance.
+		The walls were too tall to see what's on the other side. [companionName] eventually found a sign next to the entrance.
 
 		[companionName]: Hey, Kipp. The sign says, "BEGIN YOUR QUESTION BY TYPING IN @red{GO TO} @blue{CHECKPOINT 1}". Man, by the time this game ends, we'll have to build a new fourth wall.
 		Kipp: I guess we have no choice. Time to walk in.

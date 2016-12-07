@@ -95,3 +95,13 @@ look around{
 		[companionName]: Well, I hope this is enough to get us out of here.
 	}
 }
+
+_awake{
+    Kipp woke up.
+    
+    [companionName]: You feel better?
+    Kipp: Yeah. Everything is alright.
+    [companionName]: Good. While you were asleep, you got up and started walking.
+    Kipp: I started sleepwalking?
+    [companionName]: Don't worry. I wasn't going to let you fall off the edge.
+}
