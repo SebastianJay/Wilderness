@@ -70,6 +70,7 @@ cave6:
     name: Cave 6
     description: n/a
     script: badlands/Rooms/Cave 6.txt
+    showIf: inventory_map_eq_1
     r: 0
     c: 0
     neighbors:
