@@ -32,7 +32,7 @@ familyPhoto:
 recipe:
     name: recipe
     script: Kappallanoah Forest/abandoned treehouse/recipe.txt
-rifle:
+automaticRifle:
     name: automatic rifle
     script: Kappallanoah Forest/abandoned treehouse/rifle.txt
     showIf: not_inventory_rifle

@@ -1,15 +1,18 @@
 talk to{
     $choice{
     
-    learn about creatures|
+    Learn about creatures|
         Kipp: Hey, Tucker. Do you know anything about the woodland creatures that live around here?
         Tucker: Well there have been rumors of a @blue{cave} around here holding the secret to the world, but it's guarded by a strange beast. 
         
-        Kipp turned to [companionName]: Well, now we have to @red{go to} this @blue{cave}
-        [compaionName]: Kipp, you understand how dangerous that sounds.
+        Kipp turned to [companionName]: Well, now we have to @red{go to} this @blue{mysterious cave}
+        [companionName]: Kipp, you understand how dangerous that sounds.
         Kipp: And once we get some @yellow{rifle lessons}, we should be prepared.
+        Tucker: Here, @yellow{I'll mark the location on your map so you can explore it once you're ready.}
+        Kipp: Thanks.
+        Tucker: @yellow{I'd suggest talking with someone about the traps in the cave so you know what you're walking into.}
         $set_forTuckerTalk_1
-    |ask for lessons|
+    |Ask for lessons|
         Tucker: Yes, would you like to learn how to operate a rifle?
         Kipp: Yes, sir.
         
@@ -43,7 +46,7 @@ talk to{
                 Tucker: Oh dear.
                 [companionName]: Don't worry. He'll be alright.
                 Tucker: Just make sure he doesn't get into anymore danger.
-                [compaionName]: What should we do next, player? I think we're ready to visit a @blue{cave}
+                [compaionName]: What should we do next, player? I think we're ready to visit a @blue{mysterious cave}
                 
                 $set_forWeaponsTraining_1
             }$else{
