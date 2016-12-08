@@ -4,7 +4,9 @@ pick up{
 	}
 	$elif_frmTestIntegrity_eq_1{
 		Kipp failed the Test of Integrity.
-		Game Over.
+		@bold{Game Over.}
+        
+        $gameover
 	}
 	$elif_frmTestIntegrity_eq_0{
 		The gold belongs to the town treasury. Kipp shouldn't take it.

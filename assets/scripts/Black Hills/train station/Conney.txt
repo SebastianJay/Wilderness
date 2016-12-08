@@ -25,9 +25,9 @@ talk to{
     		Conney: Hmmph. As if you can help me.
     		$inc_brotherPts_1
     		$inc_lightPts_1
-            $set_frmTalkedConney_1
         }
+        $set_frmTalkedConney_1
     }$elif_frmTalkedConney_eq_1{
-        Conney:Leave me alone or I'll call the sheriff!
+        Conney: Leave me alone or I'll call the sheriff!
     }
 }

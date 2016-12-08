@@ -1,56 +1,64 @@
 go to{
-   	Kipp heard the sirens wailing as an ambulance pulled over at the @blue{hospital}. @green{Kru}, a miner and @green{Dru}'s brother, was carried into the @blue{hospital} on a stretcher. A crowd gathered at the hospital, including @green{Conney} and @green{Dru}.
+    $if_hospitalIntro_eq_0{
+        $set_hospitalIntro_eq_1
+        Kipp heard the sirens wailing as an ambulance pulled over at the @blue{hospital}. @green{Kru}, a miner and @green{Dru}'s brother, was carried into the @blue{hospital} on a stretcher. A crowd gathered at the hospital, including @green{Conney} and @green{Dru}.
 
-    	Nurse Rani: Make way! Injured person coming through!
-	Dru: NOO! Not an another attack! Is Kru alright? I want to see him!
-    	Conney: What is going on? Let me in!
+            Nurse Rani: Make way! Injured person coming through!
+        Dru: NOO! Not an another attack! Is Kru alright? I want to see him!
+            Conney: What is going on? Let me in!
 
- 	Both @green{Conney} and @green{Dru} followed the injured @green{Kru} until they were stopped at the emergency room.
+        Both @green{Conney} and @green{Dru} followed the injured @green{Kru} until they were stopped at the emergency room.
 
-	Nurse Rani: I'm sorry gentleman, this room is for medical staff only.
-	Conney: Missy, I don't think you understand the situation. My million dollar business is at stake!
+        Nurse Rani: I'm sorry gentleman, this room is for medical staff only.
+        Conney: Missy, I don't think you understand the situation. My million dollar business is at stake!
 
-	@green{Dru}, who was waiting anxiously by the side, suddenly erupted like volcano.
+        @green{Dru}, who was waiting anxiously by the side, suddenly erupted like volcano.
 
-	Dru: No one gives a darn about your million gazillion business! We are dying down there!
-	Conney: You, for one, should care because my company puts bread on your table!
+        Dru: No one gives a darn about your million gazillion business! We are dying down there!
+        Conney: You, for one, should care because my company puts bread on your table!
 
-	No one else in the room dared to make a sound. Kipp decided to step in.
+        No one else in the room dared to make a sound. Kipp decided to step in.
 
-	$choice{
-		Root for Dru|
-		Kipp: Dru's right, Conney. If you don't deal with the problem, we will take it into our own hands.
-		Conney: How do you solve a problem where there isn't one. I just told you that these are just routine accidents.
-		Kipp: We'll see, Conney. We'll see.
+        $choice{
+            Root for Dru|
+            Kipp: Dru's right, Conney. If you don't deal with the problem, we will take it into our own hands.
+            Conney: How do you solve a problem where there isn't one. I just told you that these are just routine accidents.
+            Kipp: We'll see, Conney. We'll see.
 
-		The crowd roared and jeered at the embarassed @green{Conney}.
+            The crowd roared and jeered at the embarrassed @green{Conney}.
 
-		@green{Conney} left the @blue{hospital} in anger and slammed the door.
+            @green{Conney} left the @blue{hospital} in anger and slammed the door.
 
-		Dru: Good job buddy! Why don't we head to the Town Treasury and make a plan.
-		Kipp: Sounds like a plan.
-		$inc_lightPts_1
-		$set_frmQuestChoice_1
-		|Root for Conney|
-		Kipp: I'm afraid I'll have to side with Mr. Conney, Dru. Your theory of "demons" is so full of loopholes.
-		Dru: What?
-		Conney: Finally, now this is someone with a brain.
+            Dru: Good job buddy! Why don't we head to the Town Treasury and make a plan.
+            Kipp: Sounds like a plan.
+            $inc_lightPts_1
+            $set_frmQuestChoice_1
+            |Root for Conney|
+            Kipp: I'm afraid I'll have to side with Mr. Conney, Dru. Your theory of "demons" is so full of loopholes.
+            Dru: What?
+            Conney: Finally, now this is someone with a brain.
 
-		The crowded started to murmur as they overcame the initial shock.
+            The crowded started to murmur as they overcame the initial shock.
 
-		Town folk A: The kid's mad.
-		Town folk B: Get out of our town you ass-kisser!
-		Dru: You're no longer welcome in the town, Kipp. Better gather your stuff and leave.
+            Town folk A: The kid's mad.
+            Town folk B: Get out of our town you ass-kisser!
+            Dru: You're no longer welcome in the town, Kipp. Better gather your stuff and leave.
 
-		Kipp ignored the crowd.
+            Kipp ignored the crowd.
 
-		Kipp: Mr. Conney, why don't we talk in private?
-		Conney: Sure, find me at the @blue{mining warehouse}. We won't be interrupted there.
-		$set_frmQuestChoice_2
-		$inc_darkPts_1
+            Kipp: Mr. Conney, why don't we talk in private?
+            Conney: Sure, find me at the @blue{mining warehouse}. We won't be interrupted there.
+            $set_frmQuestChoice_2
+            $inc_darkPts_1
 
-	}
-
+        }
+        @bold_blue{From the desk of level designer, James:}
+        @bold_orange{Please save now so that you, the player, won't be butthurt when you randomly encounter a game over. If you do, you will return to the main menu screen and must load a save to continue. And always remember to have an awesome day :P}
+        
+    }$else{
+        Kipp: I wonder if everything has finally settle down. Maybe I should @red{look around}.
+    }
+    
 }
 
 look around{

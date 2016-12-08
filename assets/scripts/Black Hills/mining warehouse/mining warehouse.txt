@@ -1,7 +1,16 @@
 go to{
 	$if_frmQuestChoice_eq_2{
 		Kipp entered the mining warehouse.
-	}
+        
+        Guard: Hello there. Conney informed us about your presence. You have full access to the warehouse.
+	}$else{
+        Guard: Hey beat it kid. Our superior, Conney, said that you're not welcome around these part.
+        
+        Kipp must have really peeved off Conney after choosing the wrong side.
+        
+        Kipp made his way back to the @blue{hospital}.
+        $goto_hospital
+    }
 }
 
 look around{
