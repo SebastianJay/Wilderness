@@ -1,21 +1,21 @@
 #Downtown_Lore_IndustrialDistrict_Hangar_Plane
 
-Use{
+use{
 	$if_planeUL_eq_1{
 	Lore raced into the plane. 
 		$if_stoleplaneguide_eq_1{
-		Lore flipped open the blueprints. She frantically turned the plane on and zoomed out on the runway. She didn't look behind her. She had never been so focused in her life. She watched as the spedometer slowly climbed up. She pulled down on the central wheel. The plane leapt into the air. The noise of the wind was deafening. Lore located a pair of headphones and placed them snugly over her ears. Just like that, the sound was gone. There was only peace. She felt her heart rate slowing. She looked out the window towards the ground. Everything seemed so small. The city that she had spent her whole life in disappeared in the clouds. The world was opening up to her. Despite everything that had happened, a smile spread on her lips. For the first time in her life, she felt alive. She watched the tall trees of the Wilderness appear like tiny grains of sand beneath her. She started to look for a place to land. She decelerated the plane and dropped altitude under the guide's instructions. After a few minutes, she saw a large field. She slowed to the recommended speed and initiated the plane's programmed landing sequence. The plane's automation took over. The wheels slammed into the uneven ground. Lore lurched forward, her head crashing against the wheel. Everything went black. 
+		Lore flipped open the blueprints. She frantically turned the plane on and zoomed out on the runway. She didn't look behind her. She had never been so focused in her life. She watched as the speedometer slowly climbed up. She pulled down on the central wheel. The plane leapt into the air. The noise of the wind was deafening. Lore located a pair of headphones and placed them snugly over her ears. Just like that, the sound was gone. There was only peace. She felt her heart rate slowing. She looked out the window towards the ground. Everything seemed so small. The city that she had spent her whole life in disappeared in the clouds. The world was opening up to her. Despite everything that had happened, a smile spread on her lips. For the first time in her life, she felt alive. She watched the tall trees of the Wilderness appear like tiny grains of sand beneath her. She started to look for a place to land. She decelerated the plane and dropped altitude under the guide's instructions. After a few minutes, she saw a large field. She slowed to the recommended speed and initiated the plane's programmed landing sequence. The plane's automation took over. The wheels slammed into the uneven ground. Lore lurched forward, her head crashing against the wheel. Everything went black. 
 		}$else{
 		Lore frantically began pressing buttons and turning levers. She could see the door across the level giving way. Any minute now the guards would be upon her. 
 		
 		Lore: Come on, come on, come on!
 		
-		She pressed all the buttons at once. The plane made a horrendous sound and sped forward, the lights flashing on and off. Lore grabbed the wheel and tried to steer herself on the runway. The plane lifted up and touched down again to the sound of groaning metal. The spedometer was going up faster and faster as the view outside began to blur. Lore pulled up on the central wheel. Nothing happened. In a panic, she slammed the wheel down. The plane launched into the air, shaking and trembling. The noise of the wind was deafening. Lore grabbed a pair of headphones and shoved them over her ears. The sound was drowned out by her own pulse. Her hands were shaking as she began steering the plane. The trees of the Wilderness flew underneath of her. She looked hurriedly for a place to land. The flashing lights began to make her feel sick. Up ahead, she saw a large field. She raised the wheel and began lowering the plane to the ground. The plane shook unsteadily as she came closer and closer to the field. She realized she was going way too fast. She turned all the buttons off and heard the engine cut out. The plane slowed and slammed into the uneven ground. Lore was ejected from her seat and slammed into the window. Everything went black. 
+		She pressed all the buttons at once. The plane made a horrendous sound and sped forward, the lights flashing on and off. Lore grabbed the wheel and tried to steer herself on the runway. The plane lifted up and touched down again to the sound of groaning metal. The speedometer was going up faster and faster as the view outside began to blur. Lore pulled up on the central wheel. Nothing happened. In a panic, she slammed the wheel down. The plane launched into the air, shaking and trembling. The noise of the wind was deafening. Lore grabbed a pair of headphones and shoved them over her ears. The sound was drowned out by her own pulse. Her hands were shaking as she began steering the plane. The trees of the Wilderness flew underneath of her. She looked hurriedly for a place to land. The flashing lights began to make her feel sick. Up ahead, she saw a large field. She raised the wheel and began lowering the plane to the ground. The plane shook unsteadily as she came closer and closer to the field. She realized she was going way too fast. She turned all the buttons off and heard the engine cut out. The plane slowed and slammed into the uneven ground. Lore was ejected from her seat and slammed into the window. Everything went black. 
 		}
 		
-	}$if_planeUL_eq_0{
+	}$elif_planeUL_eq_0{
 	Lore needed to raise the plane to the upper level first.
-	}$if_Halcompanion_eq_3{
+	}$elif_Halcompanion_eq_3{
 		Lore climbed into the plane and sat behind the pilot's seat. Hal followed her and took his place as pilot. He handed her a pair of headphones to put on.
 		
 		Hal: The plane gets pretty loud. Put those on unless you want to go deaf. We can talk to each other through the radio attached. Alright, buckle your seatbelt. Here we go!
@@ -29,13 +29,13 @@ Use{
 		Hal: We're going to land soon. It might be a little bumpy, so hold on.
 		
 		The plane slowed and dived closer to the ground. The blurry spots below her began to materialize into different types of trees and flora. After a few moments, the plane touched down into a large field. It glided across the grass, decelerating. Then the wheels caught on something. The plane leapt back up into the air. It slammed down on the ground, sending Lore and Hal flying forward in their seats. Lore felt something slam against her head and heard Hal yelling out. Then everything went black.
-	}$if_planeULfriends_eq_1{
+	}$elif_planeULfriends_eq_1{
 		Essa, Rune, and Quen climbed into the back. Lore seated herself in the pilot's seat and opened the blueprints.
 		
 		Quen: Don't kill us, okay, Lore?
-		Lore: Buckle your seatbelts and put on the headphones.
+		Lore: Buckle your seat belts and put on the headphones.
 		
-		Everyone got strapped in. Lore followed the guide. With the push of a button, the plane came to life. It launched down the runway. Lore could hear her friends laughing excitedly as the outsides began to blur. Lore felt her face break into a smile. The spedometer climbed and climbed until it reached liftoff speed. Lore pushed down on the wheel, and the plane leapt into the air. The plane zoomed into the clouds. Everything became so small beneath them. The city she had spent her whole life in disappeared. The world opened up before them. For the first time in her life, Lore felt alive. She watched the tall trees of the Wilderness appear like tiny grains of sand beneath her.
+		Everyone got strapped in. Lore followed the guide. With the push of a button, the plane came to life. It launched down the runway. Lore could hear her friends laughing excitedly as the outsides began to blur. Lore felt her face break into a smile. The speedometer climbed and climbed until it reached liftoff speed. Lore pushed down on the wheel, and the plane leapt into the air. The plane zoomed into the clouds. Everything became so small beneath them. The city she had spent her whole life in disappeared. The world opened up before them. For the first time in her life, Lore felt alive. She watched the tall trees of the Wilderness appear like tiny grains of sand beneath her.
 		
 		Lore: I'm going to try to land in that field up there.
 		Rune: Be careful!

@@ -23,7 +23,7 @@ talk to{
 	
 	Rodnin: Take care. The plane's in the hangar in the @blue{Industrial District}. Do you remember the passcode to override the security? 
 	Hal: I remember. Thanks again. Let's go, Lore.
-	$set_Halcompanion_eq_2
+	$set_Halcompanion_2
 	}
 	$if_allfriends_eq_1{
 	Rodnin: It's nice to see you, Lore. You've brought company.
@@ -37,6 +37,6 @@ talk to{
 	Lore: Yes, we have a deal.
 	Rodnin: Wonderful. The plane is held in a hangar in the Industrial District. I'll turn off the security so you can enter safely. Here, take these blueprints for the plane. The plane is programmed to do most things automatically, but this guide will tell you how to do the rest.
 	Lore: Thank you.
-	$set_allfriends_eq_2
+	$set_allfriends_2
 	}
 }

@@ -2,7 +2,7 @@
 
 talk to{
 	Lift Attendant: Nice t'see you, miss. What floor?
-	$Choice{
+	$choice{
 		1|
 			Lift Attendant: Straight away.
 			

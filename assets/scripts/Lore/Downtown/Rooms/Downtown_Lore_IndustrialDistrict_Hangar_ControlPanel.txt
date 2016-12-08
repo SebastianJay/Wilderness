@@ -1,48 +1,50 @@
 #Downtown_Lore_IndustrialDistrict_Hangar_ControlPanel
 
 use{
-	$if_followRodnin_eq_2{There were a series of different colored buttons.
-	$Choice{
-	Press the white one|
-		Lore pressed the white button. All the lights in the hangar went off. She pressed it again and they came back on.
-	|Press the blue one|
-		Lore pressed the blue button. A robotic voice spoke out of the speaker.
-		
-		Voice: Sending a signal to facility management. Press to cancel...
-		
-		Lore panicked and pressed the button again. The speaker clicked off. 
-	|Press the green one|
-		Lore pressed the green button. The whole floor began to shake. The central platform with the plane lifted up with a huge creaking sound. It raised up until it clicked into place. Lore noticed stairs leading to an @blue{upper level}.
-		$set_planeUL_1
-	|Press the red one|
-		Lore pressed the red button. 
-		$if_planeUL_eq_1{
-			The central platform began to shake again. The plane was lifted back down to the lower level.
-			$set_planeUL_0
-		}$else{
-			Nothing happened.}|
-		}
-	}
-	$if_allfriends_eq_2{
-	There were a series of different colored buttons.
-	$Choice{
-	Press the white one|
-		Lore pressed the white button. All the lights in the hangar went off. She pressed it again and they came back on.
-	|Press the blue one|
-		Lore pressed the blue button. A robotic voice spoke out of the speaker.
-		
-		Voice: Sending a signal to facility management. Press to cancel...
-		
-		Lore panicked and pressed the button again. The speaker clicked off. 
-	|Press the green one|
-		Lore pressed the green button. The whole floor began to shake. The central platform with the plane lifted up with a huge creaking sound. It raised up until it clicked into place. Lore noticed stairs leading to an @blue{upper level}.
-		$set_planeULfriends_1
-	|Press the red one|
-		Lore pressed the red button. 
-		$if_planeULfriends_eq_1{
-			The central platform began to shake again. The plane was lifted back down to the lower level.
-			$set_planeULfriends_0
-		}$else{
-			Nothing happened.}|
-	}
+	$if_followRodnin_eq_2{
+        There were a series of different colored buttons.
+        $choice{
+        Press the white one|
+            Lore pressed the white button. All the lights in the hangar went off. She pressed it again and they came back on.
+        |Press the blue one|
+            Lore pressed the blue button. A robotic voice spoke out of the speaker.
+            
+            Voice: Sending a signal to facility management. Press to cancel...
+            
+            Lore panicked and pressed the button again. The speaker clicked off. 
+        |Press the green one|
+            Lore pressed the green button. The whole floor began to shake. The central platform with the plane lifted up with a huge creaking sound. It raised up until it clicked into place. Lore noticed stairs leading to an @blue{upper level}.
+            $set_planeUL_1
+        |Press the red one|
+            Lore pressed the red button. 
+            $if_planeUL_eq_1{
+                The central platform began to shake again. The plane was lifted back down to the lower level.
+                $set_planeUL_0
+            }$else{
+                Nothing happened.
+            }
+        }
+	}$elif_allfriends_eq_2{
+        There were a series of different colored buttons.
+        $choice{
+        Press the white one|
+            Lore pressed the white button. All the lights in the hangar went off. She pressed it again and they came back on.
+        |Press the blue one|
+            Lore pressed the blue button. A robotic voice spoke out of the speaker.
+            
+            Voice: Sending a signal to facility management. Press to cancel...
+            
+            Lore panicked and pressed the button again. The speaker clicked off. 
+        |Press the green one|
+            Lore pressed the green button. The whole floor began to shake. The central platform with the plane lifted up with a huge creaking sound. It raised up until it clicked into place. Lore noticed stairs leading to an @blue{upper level}.
+            $set_planeULfriends_1
+        |Press the red one|
+            Lore pressed the red button. 
+            $if_planeULfriends_eq_1{
+                The central platform began to shake again. The plane was lifted back down to the lower level.
+                $set_planeULfriends_0
+            }$else{
+                Nothing happened.}
+        }
+    }
 }

@@ -2,17 +2,17 @@
 
 Use{
 	Lore thumbed through the table of contents. There was only one named she recognized - Hal.
-	$Choice{
-		Read his profile|
-			Hal
-			Years of Employment: 3
-			Position: Field Manager
-			Description: Worked in the Wilderness collecting data and managing the research outpost. Monitored media reception and PR of scientific data. Managed scientific publications. Skills in data analysis, management, writing, and human resources. Publications of significance include @italic{Role of Tectonic Plate Movements in Wilderness Topography and Geology}.
-		$set_Halnumber_1
-		$if_acceptedjob_eq_0{
-		Lore: Maybe I should pay Hal a visit. Since he's worked with Rodnin in the Wilderness before, maybe he can help me get there. He's probably in his house back in the Suburbs. Then again, should I bother him with this? Maybe I should find a way to go it alone.
-		}
-		|Don't read|
-			Lore placed the binder back on the shelf.|
+	$choice{
+	Read his profile|
+            Hal
+            Years of Employment: 3
+            Position: Field Manager
+            Description: Worked in the Wilderness collecting data and managing the research outpost. Monitored media reception and PR of scientific data. Managed scientific publications. Skills in data analysis, management, writing, and human resources. Publications of significance include @italic{Role of Tectonic Plate Movements in Wilderness Topography and Geology}.
+            $set_Halnumber_1
+            $if_acceptedjob_eq_0{
+                Lore: Maybe I should pay Hal a visit. Since he's worked with Rodnin in the Wilderness before, maybe he can help me get there. He's probably in his house back in the Suburbs. Then again, should I bother him with this? Maybe I should find a way to go it alone.
+            }
+	|Don't read|
+			Lore placed the binder back on the shelf.
 	}
 }

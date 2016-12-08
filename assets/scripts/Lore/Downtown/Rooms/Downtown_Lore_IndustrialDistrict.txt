@@ -13,13 +13,13 @@ go to{
 	Lore: I should get some sleep. In the morning, I can figure out what to do. All I have to do is get the plane out of the hangar and fly it. That shouldn't be so bad...right? Anyways, I should head home.
 	
 	Lore trudged to the subway and took the train home. She was so tired that she ignored Marthi's greeting at the door. She collapsed into her bed and fell asleep.
-	$set_followRodnin_eq_2
+	$set_followRodnin_2
 	
-	}$if_followRodnin_eq_2{
+	}$elif_followRodnin_eq_2{
 	Lore entered the Industrial District. The @blue{Hangar} was to her right.
 	@bold{Once you enter the hangar, you will not be able to leave. Make any necessary preparations before entering.}
 	
-	}$if_enteredHangar_eq_1{
+	$if_enteredHangar_eq_1{
 	Lore turned to leave. To her surprise, the door had closed behind her. She tried to open it, but it wouldn't budge. Fear settled to the bottom of her stomach. There was no turning back now.
 	}
 	

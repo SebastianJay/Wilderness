@@ -26,6 +26,7 @@ use zweihander on{
         }
     }$else{
         Lore did not want to waste the @yellow{zweihander's} durability on @green{Shin}.
+    }
 }
 use bandages on{
     $if_inventory_bandages_eq_1{

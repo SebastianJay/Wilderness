@@ -29,7 +29,7 @@ go to{
 		
 		Lore swallowed a lump in her throat.
 		
-		$Choice{
+		$choice{
 			Essa and I want to do research in the Wilderness|
 				Lore: Essa and I want to do research in the Wilderness. It's important, and it may save-
 				Father: Essa...That little punk. She wants to leave? After everything I've done for her? Turn her back on her family, just like that?
@@ -74,7 +74,7 @@ go to{
 				Father: Why you-
 				
 				Nillie's mother screamed. Without thinking, Lore hoisted Nillie into her arms and bolted down the road towards @blue{Hal's house}.
-				$set_analyzedata_7|
+				$set_analyzedata_7
 		}
 	}$else{
 		Lore knocked on the door. No one answered.
