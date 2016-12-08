@@ -29,6 +29,7 @@ abandonedTreehouse:
         - diary
         - familyPhoto
         - recipe
+        - automaticRifle
 
 lumberMill:
     name: Lumber Mill
@@ -54,4 +55,17 @@ huntingRange:
         forestCabin: E
         abandonedTreehouse: N
         lumberMill: S
+        cave: NE
+    objects: 
+        - tucker
+        
+cave:
+    name: Mysterious Cave
+    description: n/a
+    script: Kappallanoah Forest/cave/cave.txt
+    r: 0
+    c: 0
+    showIf: forTuckerTalk_eq_1
+    neighbors:
+        huntingRange: W
     objects: {}

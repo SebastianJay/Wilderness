@@ -1,0 +1,63 @@
+talk to{
+    $choice{
+    
+    Learn about creatures|
+        Kipp: Hey, Tucker. Do you know anything about the woodland creatures that live around here?
+        Tucker: Well there have been rumors of a @blue{cave} around here holding the secret to the world, but it's guarded by a strange beast. 
+        
+        Kipp turned to [companionName]: Well, now we have to @red{go to} this @blue{mysterious cave}
+        [companionName]: Kipp, you understand how dangerous that sounds.
+        Kipp: And once we get some @yellow{rifle lessons}, we should be prepared.
+        Tucker: Here, @yellow{I'll mark the location on your map so you can explore it once you're ready.}
+        Kipp: Thanks.
+        Tucker: @yellow{I'd suggest talking with someone about the traps in the cave so you know what you're walking into.}
+        $set_forTuckerTalk_1
+    |Ask for lessons|
+        Tucker: Yes, would you like to learn how to operate a rifle?
+        Kipp: Yes, sir.
+        
+        $if_inventory_automaticRifle_eq_1{
+            Kipp: And I even have my own gun this time!
+            Tucker: Perfect.
+
+            Tucker inspected the gun.
+            
+            Tucker: I'm sorry. Wasn't your name Kipp?
+            Kipp: Yes.
+            Tucker: May you read this?
+            
+            Kipp looked closely at the butt of the gun.
+            
+            Kipp: Oh right. This is my dad's gun.
+            Tucker: I'm sorry fella. @yellow{You must get permission from you father or someone close to him to be allowed to use this weapon.}
+            Kipp: Isn't family close enough?
+            Tucker: You are too young to carry a weapon without consent.
+            $if_forPermission_eq_1{
+                Kipp: One note from my father's past friend.
+                Tucker: Oh Ol' Willy. I remember when your father and Ol' Willy use to get in trouble. Alright, Kid, I'll teach ya the ropes.
+                Kipp: Thanks sir.
+                
+                Kipp and Tucker walked up to the target range and put on some safety wear.
+                
+                So what you should do is the the top of the barrel with the target down your line of sign. Don't worry about compensating for the recoil. By the time the rifle bucks up, the bullet would have already left the barrel. Just make sure you keep a tight grip so it doesn't go flying...
+                    
+                Kipp took a shot and the gun slipped out of hand. The barrel smacked Kipp straight on the forehead and he passed out.
+                
+                Tucker: Oh dear.
+                [companionName]: Don't worry. He'll be alright.
+                Tucker: Just make sure he doesn't get into anymore danger.
+                [compaionName]: What should we do next, player? I think we're ready to visit a @blue{mysterious cave}
+                
+                $set_forWeaponsTraining_1
+            }$else{
+                [commpanionName]: Now what?
+                Kipp: Man, is there anyone around here @yellow{who would know my father?}
+            }
+        
+        }$else{
+            Kipp: Where can I get a practice rifle?
+            Tucker: I'm sorry. We can't provide weapons on this hunting range. @yellow{You have to find your own.}
+        }
+        
+    }
+}

@@ -24,7 +24,7 @@ talk to{
                 $choice{
                     Great|
                     Kipp: Fantastic! I'm ready for adventure!
-                    Thomas: Ah, to be young and fearless. An adventurous lad like you should try the moonshine at the blue{general store}.
+                    Thomas: Ah, to be young and fearless. An adventurous lad like you should try the moonshine at the @blue{general store}.
                     |Bad|
                     Kipp: Horrible. I've had a long day.
                     Thomas: I'm sorry to hear that. Perhaps some moonshine at the @blue{general store} can cheer you up.

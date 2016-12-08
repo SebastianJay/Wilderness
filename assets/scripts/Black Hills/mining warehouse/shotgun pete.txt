@@ -38,7 +38,7 @@ talk to{
 			Shotgun Pete: Bring the gas to me and I'll help you.
 		}
 	}$elif_frmTalkedShotgunPete_eq_2{
-		Shotgun Pete: You're good to go. Find @green{Widowmaker} for the clues to the yellow{password lock}. It would take you to a train that is directly connected to the @blue{mines}.
+		Shotgun Pete: You're good to go. Find @green{Widowmaker} for the clues to the @yellow{password lock}. It would take you to a train that is directly connected to the @blue{mines}.
 	}
 }
 

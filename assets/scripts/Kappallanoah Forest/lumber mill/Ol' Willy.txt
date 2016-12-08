@@ -8,7 +8,7 @@ talk to{
 		Kipp: I don't think so. You might have met my dad though. He used to drink with the lumberjacks a lot.
 		Ol' Willy: Oh! You're Johnson's boy? By god you have grown so much! So how can I help you?
 		[companionName]: We're investigating something in the cave. We've heard that you know the @blue{cave} very well.
-		Ol' Willy: I know it better than the wrinkles on my face. Can I know why you're going there?
+		Ol' Willy: I know all of the myths about it better than the wrinkles on my face. Can I know why you're going there?
 		$choice{
 			tell Ol' Willy|
 			Kipp: My father told a lie to me about the forest. I want to find out why...
@@ -38,7 +38,8 @@ talk to{
 			Kipp: Yeah, Yeah. Whatever.
 		}
 		Ol' Willy: Just trust the coin.
-		Kipp: Thank you, Willy!
+		Kipp: Thank you, Willy! Wait one more thing. Do you know where the @blue{cave} is located.
+        Ol' Willy: Sorry, partner. I'm not the exploring type. Maybe @green{Tucker} down at the hunting range has something to say.
 		$set_frmTalkedOlWilly_1
 	}$elif_frmTalkedOlWilly_eq_1{
 		Ol' Willy: How can I help you now?
@@ -49,7 +50,23 @@ talk to{
 			|ask about Willy's favorite food|
 			Kipp: Just out of curiosity, what's your favorite food?
 			Ol' Willy: Roasted squirrels. I love them. Used to have them every night before the authorities told me the squirrels are @italic{endangered}.
-			|nothing|
+			|ask for permission|
+            $if_inventory_automaticRifle_eq_1{
+            Kipp: Hey, Ol' Willy. I found this automatic rifle in the abandoned treehouse. Do you mind if I use it?
+            Ol' Willy: You're a grown adult Kipp. I think you can handle...oh you probably need permission from the owner to handle it. Well sure let me write you a note.
+            
+            Ol' Willy dropped the log they were carrying and it fell onto Jack. Jack tried to scream from help, but his voice was muffled.
+            
+            Ol' Willy: Alright there good sir. One @yellow{signed note} from a good friend.
+            Kipp: Thanks! Uhhh...are you going to take care of...
+            Ol' Willy: Hmm... Oh no, Jack! I got you.
+            
+            Ol' Willy returned to his work.
+            $set_forPermission_1
+            }$else{
+            Ol' Willy: Oh you don't need my permission to be here. If it's okay with your dad then it's okay with me.
+            }
+            |nothing|
 			Kipp: Nah, I'm good.
 			}
 		}

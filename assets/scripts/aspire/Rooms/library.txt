@@ -35,7 +35,8 @@ go to{
 
 		Kipp: Now, where would I be able to find those cliques hideouts. Last time I remember, I saw a group of people crowed next door in the @blue{bank}. On the other side of town, I also saw two big businesses still open: the @blue{saloon} and the @blue{gunsmith shop}. I would have to @red{go to} @blue{town center} first before I can reach those places across town first, but if I keep calm then maybe Rowen and his group won't notice me.
 
-		@bold{This will be an appropriate time to save. If you encounter a game over, you will return to the main menu screen and must load a save to continue.}
+        @bold_blue{From the desk of level designer, Mark:}
+        @bold_orange{Please save now so that you, the player, won't be butthurt when you randomly encounter a game over. If you do, you will return to the main menu screen and must load a save to continue. And don't forget to be awesome :)}
 
 		#END OF DIALOGUE
 

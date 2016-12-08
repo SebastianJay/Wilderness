@@ -3,17 +3,22 @@ inspect{
 }
 
 talk to{
-	$if_companionD_eq_1{
-		$if_frmTalkedBethy_eq_0{
-			Bethy: Gentlemen, this is our family cabin. We would be grateful if you'll give us some privacy.
-			Alodar: Indeed, my kind lady. We do not wish to bring you trouble. We're just 2 weary travelers seeking help.
-			Bethy: Then how can we help you?
-			$choice{
-				Ask about places to explore|
-				Kipp: We're new to this place. Can you tell us what's around here?
-				Bethy: Of course!
+    Bethy: Hello there, this is our family cabin. We would be grateful if you'll give us some privacy.
+    [companionName]: Indeed, my kind lady. We do not wish to bring you trouble. We're just 2 weary travelers seeking help.
+    Bethy: Then how can we help you?
+    $choice{
+        Ask about places to explore|
+        Kipp: We're new to this place. Can you tell us what's around here?
+        Bethy: Of course!
+        So the @blue{forest cabin} is right next to this @blue{abandoned treehouse}. Be careful wandering near that place. The @blue{lumber mill} and the @blue{hunting range} are located south of here. Finally, the exit to this forest can be located at the @blue{hunting range}. People say there use to be a fourth location here: some sort of cave. The tourist attraction was torn down due it rumors about safety issues. Hope this helped.
+        Kipp: Thank you mam.
+        Bethy: Anytime dear.
+        
+        |Ask to explore family cabin|
+        Kipp: May we take a minute to search your cabin?
+        Bethy: I'm sorry dear. We would not prefer strangers to look around in or cabin.
+        Kipp: Okay mam. Thank you for your time.
+        Bethy: No problem deary.
 
-			}
-		}
-	}
+    }
 }

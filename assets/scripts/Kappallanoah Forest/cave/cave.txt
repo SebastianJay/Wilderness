@@ -1,0 +1,56 @@
+go to{
+    
+    $if_frmTalkedOlWilly_eq_1{
+        $if_forWeaponsTraining_eq_1{
+            $if_forFinale_eq_0{
+                $set_forFinale_eq_1
+                [companionName]: Alright, Kipp. Make sure you have that rifle ready for anything that comes running towards us. And when we reach a junction, use that magic coin flipping trick like they taught you.
+                Kipp: Gotcha.
+                
+                Kipp and [companionName] cautiously stepped forward. A large growl came from inside the cave.
+                
+                [companionName]: You first.
+                Kipp: Why not you.
+                [companionName]: @bold{Because you have the rifle!}
+                
+                Another roar interrupted their argument. The roars grew louder and louder. 
+                
+                Kipp: Let's just back out now.
+                [companionName]: I second that.
+                
+                The last roar then began stuttering on a broken loop.
+                
+                Kipp: Wait. I don't think any beast sounds like that.
+                
+                Kipp and [companionName] walked into the cave and investigated.
+                
+                [companionName]: It's just a record player on loop.
+                Kipp: So why would someone do this?
+                [companionName]: Kipp, over here. There are cave drawings.
+                
+                The wall was covered with paintings of a person going around the world and saving the world. In the center, there was a drawing of a guy with the word "Kipp" by him.
+                
+                Kipp: Is this some strange prophecy or something?
+                [companionName]: I don't think any of this is real.
+                
+                Creepy Man: But it is all true! HA HA HA HA HA!
+                
+                The man raised his hands and the cave starting crumbling around him.
+                
+                Kipp and [companionName]: RUN!
+                
+                @bold_orange{KAPPALLANOAH FOREST LEVEL COMPLETE!}
+            }
+
+        }$else{
+            [companionName]: Kipp we really can't be here. We're gonna have to come back when we have some way of defending ourselves.
+            
+            Kipp and [compainonName] walked back to the hunting range.
+            
+            Kipp: Well now what should we do?
+            $goto_huntingRange
+        }
+    }$else{
+        [companionName]: Kipp. I'm not going in there until we know what could lie in that cave.
+    }
+}

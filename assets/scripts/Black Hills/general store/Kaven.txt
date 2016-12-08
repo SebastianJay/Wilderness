@@ -35,7 +35,7 @@ talk to{
      }
     }$elif_frmTalkedKaven_eq_1{
         Kaven: Come again next week and I'll show you a new magic trick!
-    }$leif_frmTalkedKaven_eq_2{
+    }$elif_frmTalkedKaven_eq_2{
         Kaven: Go away!
     }$elif_frmTalkedKaven_eq_3{
 	Kaven: Show me a real trick next time!
