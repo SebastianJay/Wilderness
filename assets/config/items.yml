@@ -75,7 +75,7 @@ extinguisher:
     description: A fire extinguisher...to put out fires. Not much else to it.
 map:
     name: map
-    description: "Yup. It's right here: cave 6 is accessible through that tunnel marked on the map. And that's how I'm  gonna reference it."
+    description: "Yup. It's right here: cave 6 is accessible through that tunnel marked on the map. And that's how I'm gonna reference it."
 ## End badlands items
 
 ## Begin farm items

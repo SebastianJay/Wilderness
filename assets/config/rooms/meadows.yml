@@ -1,6 +1,6 @@
 shepherdHouse:
     name: Shepherd House
-    description: n/a
+    description: The only house around here. I wonder how the shepherd can take the silence so well.
     script: meadows/Rooms/Shepherd House.txt
     r: 0
     c: 0
@@ -11,7 +11,7 @@ shepherdHouse:
 
 hedgeMazeEntrance:
     name: Hedge Maze Entrance
-    description: n/a
+    description: Kipp has seen these types of mazes before in the corn patches, but none of them glowed like this before…
     script: meadows/Rooms/Hedge Maze Entrance.txt
     r: 0
     c: 0
@@ -25,7 +25,7 @@ hedgeMazeEntrance:
 
 checkpoint1:
     name: Checkpoint 1
-    description: n/a
+    description: The sound of tanks, guns, and horses fill the air. War has never been like this in Kipp’s world.
     script: meadows/Rooms/Checkpoint 1.txt
     r: 0
     c: 0
@@ -36,7 +36,7 @@ checkpoint1:
 
 checkpoint2:
     name: Checkpoint 2
-    description: n/a
+    description: The roar of music and celebration from a different era confuses the group, but sounds inviting.
     script: meadows/Rooms/Checkpoint 2.txt
     r: 0
     c: 0
@@ -47,7 +47,7 @@ checkpoint2:
 
 checkpoint3:
     name: Checkpoint 3
-    description: n/a
+    description: The sound of a broken pipe whistles. The boiler room sets the scene for a slasher film, and guess who’s the star.
     script: meadows/Rooms/Checkpoint 3.txt
     r: 0
     c: 0
@@ -58,7 +58,7 @@ checkpoint3:
 
 checkpoint4:
     name: Checkpoint 4
-    description: n/a
+    description: The heat is on. With magma flowing beneath the floor, no one is going to survive here for long.
     script: meadows/Rooms/Checkpoint 4.txt
     r: 0
     c: 0
@@ -69,7 +69,7 @@ checkpoint4:
 
 cliffside:
     name: Cliffside
-    description: n/a
+    description: The end is near, and it looks pretty cool. Over the horizon lies ahead… 
     script: meadows/Rooms/Cliffside.txt
     r: 0
     c: 0
