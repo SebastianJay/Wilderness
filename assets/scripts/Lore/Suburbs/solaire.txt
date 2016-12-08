@@ -1,6 +1,10 @@
 talk to{
     Lore was amazed by the man that she couldn't speak.
-    
+    $if_subSolaired_eq_0{
     Solaire: I am @green{Solaire} of Astora, an adherent of the Lord of Sunlight! This is the @blue{House of Samjam}. Please come inside and make yourself welcome.
     $set_subSolaired_1
+    }$else{
+        Oh, hello there. I will stay behind, to gaze at the sun. The sun is a wondrous body. Like a magnificent father!
+        If only I could be so grossly incandescent!
+    }
 }

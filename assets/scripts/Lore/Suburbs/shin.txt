@@ -24,7 +24,8 @@ use zweihander on{
             Lore swung the @yellow{zweihander} and successfully amputated @green{Shin's} shin. Blood profusely sprayed all over the house.
             $set_subAmputated_1
         }
-    }
+    }$else{
+        Lore did not want to waste the @yellow{zweihander's} durability on @green{Shin}.
 }
 use bandages on{
     $if_inventory_bandages_eq_1{
@@ -46,8 +47,8 @@ use bandages on{
                     @italic{Added red crystal to inventory.}
                     $set_inventory_redCrystal_1
             }
-        }
         $set_subFixedShin_1
+        }
         }$else{
             Lore was not going to waste any more bandages on @green{Shin}.
         }

@@ -1,6 +1,6 @@
 go to{
 	Lore approached the large, gaping hole that she never noticed before. She was excited because she was never allowed to go to the @blue{outskirts} of the suburbs before.
 }
-inspect{
+look around{
 	The ground was littered with bricks from the wall. There was a wooden crate in front of the hole. On top of the crate, a man in a pink morphsuit. Lore could tell his name was @pink{Pink Guy}.
 }

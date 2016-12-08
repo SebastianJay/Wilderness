@@ -10,7 +10,7 @@ inspect{
 
 use zweihander on{
 	$if_subCanCutTree_eq_0{
-		The tree fell down with a loud crash that echoed through the street. Lore could hear noises inside the house and she knew that @green{Glover} was coming out.@green{Glover} stormed out of his house and Lore ducked behind some bushes. A strong wind came down with such a fury that it blew off Glover's afro and conveniently landed in Lore's hands.
+		The tree fell down with a loud crash that echoed through the street. Lore could hear noises inside the house and she knew that @green{Glover} was coming out. Lore ducked behind some bushes and @green{Glover} stormed out of his house. A strong wind came down with such a fury that it blew off Glover's afro and conveniently landed in Lore's hands.
 		@italic{Added Glover's afro to inventory.}
 		$set_subCanCutTree_1
 		$set_subDidCutTree_1

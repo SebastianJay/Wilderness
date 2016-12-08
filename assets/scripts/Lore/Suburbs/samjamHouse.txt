@@ -1,5 +1,10 @@
 go to{
-    Lore approached this beautiful mansion adorned with the sun.
+    $if_subFixedShin_eq_1{
+    Lore approached this beautiful mansion adorned with the sun. She could not stand the beauty and wanted to come back another time. So she walked back to the @blue{Outskirts}.
+    $goto_outskirts
+    }$else{
+        Lore approached this beautiful mansion adorned with the sun.
+    }
 }
 look around{
     It was a marvelous mansion that shined upon the poor houses of the neighborhood. The sun truly blessed this house.

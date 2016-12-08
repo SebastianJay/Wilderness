@@ -4,13 +4,36 @@ talk to{
 	Lore approached the nasty man.
 	$choice{
 	Kill|
+    $if_inventory_afro_eq_0{
 		Lore's strength and dexterity did not have enough points. Lore could not kill @green{Glover}.
 		$if_subTalktoGlover_eq_0{
 			$inc_loreMorality_-1
 		}
+    }$else{
+        $choice{
+        horizontal sweep on|
+            Glover caught the blade.
+            
+        |uppercut on|
+            $random{
+                Lore did 0 damage|
+                    Lore did 0 damage
+                |Lore did 0 damage|
+                    Lore did 0 damage
+                |Lore did 1 damage|
+                    Lore did 1 damage
+                |Lore did 2 damage|
+                    Lore did 2 damage
+            }
+        |piercing thrust on|
+            Lel
+        |overhead chop on|
+            Lel
+        }
+    }
 	|Greet|
 		Lore: Howdy do!
-        $if_inventory_afro_eq_0{
+        $if_subGotAfro_eq_0{
 		Glover: Yo dawg, what you doin on muh property, m8.
 		$choice{
 			Need Afro|
@@ -25,11 +48,17 @@ talk to{
 				
 				@italic{Added afro to inventory.}
 				$set_inventory_afro_1
+                $set_subGotAfro_1
         }
         }
         $else{
-            Glover: Fak off m8.}
+            Glover: Fak off m8.
+        }
 	}
-	$set_subTalktoGlover_1
-	}
+	$set_subTalktoGlover_1  
+    }$else{
+        Glover: WHERE IS MY AFRO?!?!?!
+        
+        Lore walked away.
+    }
 }

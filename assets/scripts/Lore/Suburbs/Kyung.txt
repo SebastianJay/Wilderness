@@ -19,4 +19,6 @@ uppercut on{
     }
 }
 piercing thrust on{
+}
 overhead chop on{
+}

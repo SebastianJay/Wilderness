@@ -7,5 +7,9 @@ use{
 	$set_subCanRingDoorbell_1
     $set_subRangDoorbell_1
 	$set_subCanCutTree_1
-	}
+	}$elif_subRangDoorbell_eq_1{
+        Lore did not want to approach the @yellow{doorbell} again.
+    }$else{
+        Lore had no reason to approach the @yellow{doorbell}.
+    }
 }
