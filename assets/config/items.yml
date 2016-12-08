@@ -109,3 +109,9 @@ corrosiveShotgun:
     description: I might get convicted of war crimes if I fool around with this.
 ## End Black Hills items
 
+## Begin Kappallanoah Forest items
+automaticRifle:
+    name: rifle
+    description: It was Kipp's father's old automatic rifle. It still works and might come in use later.
+# End Kappallanoah Forest items
+

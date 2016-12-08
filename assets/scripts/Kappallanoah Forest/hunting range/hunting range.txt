@@ -1,5 +1,23 @@
 go to{
     Kipp and [companionName] walked to the hunting range.
+    
+    $if_forHuntIntro_eq_0{
+        $set_forHuntIntro_1
+        [companionName]: Kipp, why are we here?
+        Kipp: Because we need some hunting training just in case something happens in this forest. I've never been around these parts before. So we can't risk it.
+        Kipp walked up to the registration desk
+    
+        Tucker: Hello, my name is @green{Tucker}. We offer free lessons on gun training, but you must provide your own weapon here. @{Talk to} @green{me} again when you're ready to train.
+        Kipp: Alright, thank you sir.
+    }
+    
+    Tucker: Welcome back travelers.
+    Kipp: So what should we do?
+}
+
+
+look around{
+    Kipp: It looks like the only guy we can talk to at the moment is @green{Tucker}. I wonder if he has any @yellow{knowledge about the creatures that roam these parts of the woods.} It does look like we can @red{leave} the @red{area} from here.
 }
 
 leave area{

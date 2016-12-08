@@ -33,6 +33,10 @@ recipe:
     name: recipe
     script: Kappallanoah Forest/abandoned treehouse/recipe.txt
 rifle:
-    name: hunting rifle
+    name: automatic rifle
     script: Kappallanoah Forest/abandoned treehouse/rifle.txt
+    showIf: not_inventory_rifle
     ## Hunting Range
+tucker:
+    name: Tucker
+    script: Kappallanoah Forest/hunting range/tucker.txt
