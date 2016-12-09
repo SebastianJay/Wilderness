@@ -1,12 +1,36 @@
+# Business District
+businessDistrict:
+    name: Business District
+    script: Lore/Downtown/Rooms/Downtown_Lore_BusinessDistrict.txt
+    r: 0
+    c: 0
+    neighbors:
+        industrialDistrict: N
+        rodinOffice: NE
+    objects: {}
+
+officeDesk:
+    name: Desk
+    description: n/a
+    script: Lore/Beginning/Downtown/Rooms/Beginning_LoreDowntownOfficeDesk.txt
+    r: 0
+    c: 0
+    neighbors: 
+        rodinOffice: SE
+    objects:
+        - secretary
+        - elevator
+
 rodninOffice:
     name: Office
     description: n/a
     script: Lore/Beginning/Downtown/Rooms/Beginning_LoreDowntownRodninOffice.txt
     r: 0
     c: 0
-    neighbors: {}
-    objects:
-        - secretary
+    neighbors:
+        businessDistrict: NW
+        officeDesk: SE
+    objects: 
         - elevator
 
 insideElevator:
@@ -29,3 +53,39 @@ rodninOfficeSecondFloor:
     objects:
         - rodnin
         - elevator
+
+# Industrial District
+industrialDistrict:
+    name: Industrial District
+    description: n/a
+    script: Lore/Downtown/Rooms/Downtown_Lore_IndustrialDistrict.txt
+    r: 0
+    c: 0
+    neighbors: 
+        businessDistrict: NW
+        hangar: SW
+    objects: {}
+    
+hangar:
+    name: Hangar
+    description: n/a
+    script: Lore/Downtown/Rooms/Downtown_Lore_IndustrialDistrict_Hangar.txt
+    r: 0
+    c: 0
+    neighbors:
+        industrialDistrict: E
+        upperLevel: E
+    objects:
+        - controlPanel
+        
+        
+upperLevel:
+    name: Upper Level
+    description: n/a
+    script: Lore/Downtown/Rooms/Downtown_Lore_IndustrialDistrict_Hangar_UpperLevel.txt
+    r: 0
+    c: 0
+    neighbors:
+        hangar: SW
+    objects:
+        - plane
