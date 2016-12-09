@@ -10,3 +10,6 @@ rodnin:
 liftAttendant:
     name: lift attendant
     script: Lore/Beginning/Downtown/People/Beginning_LoreDowntownOfficeLiftAttendant.txt
+controlPanel:
+    name: control panel
+    script: Lore/Downtown/Items/Downtown_Lore_IndustrialDistrict_Hangar_ControlPanel.txt

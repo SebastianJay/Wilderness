@@ -7,5 +7,3 @@ go to{
 inspect{
 	The office was overwhelmingly normal. The environment was sterile, freshly vacuumed and dusted. A few plants were gathered in the corner. A radio was softly playing music a the desk.
 }
-
-# Update this text to merge the beginning of the story and anytime she returns after the intro

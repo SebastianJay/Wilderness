@@ -33,6 +33,7 @@ rodninOffice:
     objects: 
         - elevator
 
+#Figure out how the elevator and insideElevator text files should operate.
 insideElevator:
     name: Inside Elevator
     description: n/a
