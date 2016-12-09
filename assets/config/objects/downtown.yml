@@ -1,9 +1,6 @@
 secretary:
     name: secretary
     script: Lore/Beginning/Downtown/People/Beginning_LoreDowntownOfficeSecretary.txt
-elevator:
-    name: elevator
-    script: Lore/Beginning/Downtown/Items/Beginning_LoreDowntownOfficeElevator.txt
 rodnin:
     name: Rodnin
     script: Lore/Beginning/Downtown/People/Beginning_LoreDowntownRodnin.txt
@@ -13,3 +10,12 @@ liftAttendant:
 controlPanel:
     name: control panel
     script: Lore/Downtown/Items/Downtown_Lore_IndustrialDistrict_Hangar_ControlPanel.txt
+oMFRP:
+    name: On the Flight and Mechanics of Rocket Propulsion
+    script: Lore/Beginning/Downtown/Items/Beginning_LoreDowntownOfficeFloor3_OntheFlightandMechanicsofRocketPropulsion.txt
+ePF:
+    name: Employee Profile Folder
+    script: Lore/Beginning/Downtown/Items/Beginning_LoreDowntownOfficeFloor3_EmployeeProfileFolder.txt
+dataSamples:
+    name: data samples
+    script: Lore/Beginning/Downtown/Items/Beginning_LoreDowntownOfficeFloor3_DataSamples.txt

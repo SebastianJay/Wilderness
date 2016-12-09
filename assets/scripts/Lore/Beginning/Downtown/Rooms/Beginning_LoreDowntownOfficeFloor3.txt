@@ -2,6 +2,14 @@
 
 go to{
 	$if_acceptedjob_eq_1{
-		Lore stepped into the lab. There were @yellow{data samples} on the table next to the log book. The @blue{shelf} was in behind the work station.
-	}
+		Lore stepped into the lab. There were @yellow{data samples} on the table next to the log book. The @blue{shelf} was in behind the work station. She could always return to the @blue{elevator} when the time comes.
+	}$else{
+        Lore stepped of the elevator.
+    
+        Guard: I'm sorry miss but you need level 14 access to enter this lab. Please leave the premises.
+        
+        Lore walked back to the @blue{elevator}.
+        
+        $goto_elevator
+    }
 }

@@ -11,6 +11,8 @@ talk to{
 			Lift Attendant: Here you go. 
 			
 			Lore got off the elevator and walked up to the @blue{desk}.
+            
+            $goto_officeDesk
 		|2|
 			Lift Attendant: Straight away.
 			
@@ -18,7 +20,9 @@ talk to{
 			
 			Lift Attendant: Here you go. 
 			
-			Lore got off the elevator and entered @blue{Rodnin's office}.
+			Lore got off the elevator and entered the @blue{Second Floor}.
+            
+            $goto_rodninOfficeSecondFloor
 		|3|
 			Lift Attendant: Straight away.
 			
@@ -27,5 +31,7 @@ talk to{
 			Lift Attendant: Here you go. 
 			
 			Lore got off the elevator and headed to the @blue{lab}.
+            
+            $goto_rodninOfficeThirdFloor
 	}
 }

@@ -6,7 +6,7 @@ businessDistrict:
     c: 0
     neighbors:
         industrialDistrict: N
-        rodinOffice: NE
+        rodninOffice: NE
     objects: {}
 
 officeDesk:
@@ -16,10 +16,10 @@ officeDesk:
     r: 0
     c: 0
     neighbors: 
-        rodinOffice: SE
+        rodninOffice: SE
+        insideElevator: E
     objects:
         - secretary
-        - elevator
 
 rodninOffice:
     name: Office
@@ -30,17 +30,18 @@ rodninOffice:
     neighbors:
         businessDistrict: NW
         officeDesk: SE
-    objects: 
-        - elevator
+        insideElevator: E
+    objects: {}
 
-#Figure out how the elevator and insideElevator text files should operate.
 insideElevator:
-    name: Inside Elevator
+    name: elevator
     description: n/a
     script: Lore/Beginning/Downtown/Rooms/InsideElevator.txt
     r: 0
     c: 0
-    neighbors: {}
+    neighbors:
+        officeDesk: SE
+        rodninOffice: SE
     objects:
         - liftAttendant
 
@@ -50,10 +51,35 @@ rodninOfficeSecondFloor:
     script: Lore/Beginning/Downtown/Rooms/Beginning_LoreDowntownSecondFloorRodninOffice.txt
     r: 0
     c: 0
-    neighbors: {}
+    neighbors:
+        insideElevator: E
     objects:
         - rodnin
         - elevator
+        
+rodninOfficeThirdFloor:
+    name: Lab
+    description: n/a
+    script: Lore/Beginning/Downtown/Rooms/Beginning_LoreDowntownOfficeFloor3.txt
+    r: 0
+    c: 0
+    neighbors:
+        rodninOfficeThirdFloorShelf: E
+        insideElevator: E
+    objects:
+        - dataSamples
+    
+rodninOfficeThirdFloorShelf:
+    name: Third Floor
+    description: n/a
+    script: Lore/Beginning/Downtown/Rooms/Beginning_LoreDowntownOfficeFloor3_Shelf.txt
+    r: 0
+    c: 0
+    neighbors:
+        rodninOfficeThirdFloor: W
+    objects:
+        -oFMRP
+        -ePF
 
 # Industrial District
 industrialDistrict:
