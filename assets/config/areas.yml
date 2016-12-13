@@ -31,7 +31,7 @@ downtown:
     mapId: 0
     entrances:
         -
-            roomId: rodninOffice
+            roomId: businessDistrict
             r: 15
             c: 26
 

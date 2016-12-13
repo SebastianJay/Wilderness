@@ -1,4 +1,12 @@
+go to{
+    $if_elevatorpermission_1{
+        Lore rang the bell for the elevator. It creaked down slowly down and opened before her. The @green{Lift Attendant} greeted her with a pleasant smile as she stepped inside. The elevator was nice and clean. Some mirrors on the ceiling reflected back the image of them.
+    }$else{
+        Lore: Wait, what am I doing? I should probably talk to the @green{secretary} at the @blue{desk} before I start walking around a building getting lost.
+        
+        Lore walked back to the main lobby.
+        
+        $goto_rodninOffice
+    }
 
-look around{
-  The elevator was nice and clean. Some mirrors on the ceiling reflected back the image of Lore and the @green{lift attendant}.
 }

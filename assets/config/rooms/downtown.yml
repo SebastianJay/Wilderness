@@ -1,21 +1,47 @@
+# Business District
+businessDistrict:
+    name: Business District
+    script: Lore/Downtown/Rooms/Downtown_Lore_BusinessDistrict.txt
+    r: 0
+    c: 0
+    neighbors:
+        industrialDistrict: N
+        rodninOffice: NE
+    objects: {}
+
+officeDesk:
+    name: Desk
+    description: n/a
+    script: Lore/Beginning/Downtown/Rooms/Beginning_LoreDowntownOfficeDesk.txt
+    r: 0
+    c: 0
+    neighbors: 
+        rodninOffice: SE
+        insideElevator: E
+    objects:
+        - secretary
+
 rodninOffice:
     name: Office
     description: n/a
     script: Lore/Beginning/Downtown/Rooms/Beginning_LoreDowntownRodninOffice.txt
     r: 0
     c: 0
-    neighbors: {}
-    objects:
-        - secretary
-        - elevator
+    neighbors:
+        businessDistrict: NW
+        officeDesk: SE
+        insideElevator: E
+    objects: {}
 
 insideElevator:
-    name: Inside Elevator
+    name: elevator
     description: n/a
     script: Lore/Beginning/Downtown/Rooms/InsideElevator.txt
     r: 0
     c: 0
-    neighbors: {}
+    neighbors:
+        officeDesk: SE
+        rodninOffice: SE
     objects:
         - liftAttendant
 
@@ -25,7 +51,68 @@ rodninOfficeSecondFloor:
     script: Lore/Beginning/Downtown/Rooms/Beginning_LoreDowntownSecondFloorRodninOffice.txt
     r: 0
     c: 0
-    neighbors: {}
+    neighbors:
+        insideElevator: E
     objects:
         - rodnin
         - elevator
+        
+rodninOfficeThirdFloor:
+    name: Lab
+    description: n/a
+    script: Lore/Beginning/Downtown/Rooms/Beginning_LoreDowntownOfficeFloor3.txt
+    r: 0
+    c: 0
+    neighbors:
+        rodninOfficeThirdFloorShelf: E
+        insideElevator: E
+    objects:
+        - dataSamples
+    
+rodninOfficeThirdFloorShelf:
+    name: Third Floor
+    description: n/a
+    script: Lore/Beginning/Downtown/Rooms/Beginning_LoreDowntownOfficeFloor3_Shelf.txt
+    r: 0
+    c: 0
+    neighbors:
+        rodninOfficeThirdFloor: W
+    objects:
+        -oFMRP
+        -ePF
+
+# Industrial District
+industrialDistrict:
+    name: Industrial District
+    description: n/a
+    script: Lore/Downtown/Rooms/Downtown_Lore_IndustrialDistrict.txt
+    r: 0
+    c: 0
+    neighbors: 
+        businessDistrict: NW
+        hangar: SW
+    objects: {}
+    
+hangar:
+    name: Hangar
+    description: n/a
+    script: Lore/Downtown/Rooms/Downtown_Lore_IndustrialDistrict_Hangar.txt
+    r: 0
+    c: 0
+    neighbors:
+        industrialDistrict: E
+        upperLevel: E
+    objects:
+        - controlPanel
+        
+        
+upperLevel:
+    name: Upper Level
+    description: n/a
+    script: Lore/Downtown/Rooms/Downtown_Lore_IndustrialDistrict_Hangar_UpperLevel.txt
+    r: 0
+    c: 0
+    neighbors:
+        hangar: SW
+    objects:
+        - plane

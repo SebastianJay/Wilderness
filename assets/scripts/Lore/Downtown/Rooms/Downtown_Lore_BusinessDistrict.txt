@@ -1,0 +1,17 @@
+_enter{
+    Lore had found herself back in the hustle and bustle of downtown. The streets were filled with the noise pollution of traffic. Everyone walked at a brisk pace as if they had somewhere to be all the time. Lore started walking down the block to fit in with the crowd.
+    $if_dowIntro_eq_0{
+        Lore knew there were places to explore, but she had only one location in mind: Rodnin's @blue{office}. She had to get an interview with him if she had any chance of gaining access to the lab her mother worked in.
+    }$else{
+        Lore saw the @blue{industrial district} on her left, the @blue{historical district} on her right, and the @blue{park} down South street. She could also return to Rodnin's @blue{office}.
+    }
+}
+
+go to{
+    Lore made her way back to the busiest place on her side of the planet. Lore saw the @blue{industrial district} on her left, the @blue{historical district} on her right, and the @blue{park} down South street. She could also return to Rodnin's @blue{office}.
+}
+
+leave area{
+	Lore found the nearest bus to take her outside the city.
+	$worldmap_16_26
+}

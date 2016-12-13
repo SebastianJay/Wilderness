@@ -5,6 +5,6 @@ go to{
 }
 
 look around{
-#	The door to the office was slightly ajar. Through the crack Lore could see @green{Rodnin} slouched over his desk. 
-	The office seemed cluttered, but the stacks of paper and lab equipment made it seem less intimidating.
+	The door to the office was slightly ajar. Through the crack Lore could see @green{Rodnin} slouched over his desk. 
+	The office seemed cluttered, but the stacks of paper and lab equipment made it seem less intimidating. She could always return to the @blue{elevator} when the time comes.
 }

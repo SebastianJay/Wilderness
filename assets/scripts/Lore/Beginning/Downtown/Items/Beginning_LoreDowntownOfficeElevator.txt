@@ -1,5 +1,5 @@
 #Beginning_LoreDowntownOfficeElevator
-
+# Code was added to insideElevator so that this code doesn't have to be repeated from secretary dialog. (NOT IMPLEMENTED AS OBJECT)
 Use{
 	$if_uniTalkedToFriends_eq_1{
         $if_elevatorpermission_eq_0{
