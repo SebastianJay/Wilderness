@@ -2,9 +2,9 @@ inspect{
     Shin seemed to be hurting a lot. Perhaps the @yellow{zweihander} would prove useful in ending his suffering.
 }
 talk to{
-${if_subMorphined_eq_0{
+$if_subMorphined_eq_0{
     Lore went up to @green{Shin}.
-    
+
     Lore: Hi! Are you doing alright?
     Shin: AHOEUCOIUSRHSORU
     Lore: Sorry, I can't understand you.
@@ -16,10 +16,10 @@ ${if_subMorphined_eq_0{
         Lore: Oh yeah, did your son disappear? I'm looking for a missing child and apparently you have a kid.
         Shin: What? I don't have a kid...
         Lore: ...
-        
+
         @green{Shin} passed out. Lore probably should finish the operation on @green{Shin}.
     }
-    
+
 }
 use morphine on{
     $if_subMorphined_eq_0{

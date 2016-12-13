@@ -15,7 +15,7 @@ officeDesk:
     script: Lore/Beginning/Downtown/Rooms/Beginning_LoreDowntownOfficeDesk.txt
     r: 0
     c: 0
-    neighbors: 
+    neighbors:
         rodninOffice: SE
         insideElevator: E
     objects:
@@ -55,8 +55,7 @@ rodninOfficeSecondFloor:
         insideElevator: E
     objects:
         - rodnin
-        - elevator
-        
+
 rodninOfficeThirdFloor:
     name: Lab
     description: n/a
@@ -68,7 +67,7 @@ rodninOfficeThirdFloor:
         insideElevator: E
     objects:
         - dataSamples
-    
+
 rodninOfficeThirdFloorShelf:
     name: Third Floor
     description: n/a
@@ -88,11 +87,11 @@ industrialDistrict:
     script: Lore/Downtown/Rooms/Downtown_Lore_IndustrialDistrict.txt
     r: 0
     c: 0
-    neighbors: 
+    neighbors:
         businessDistrict: NW
         hangar: SW
     objects: {}
-    
+
 hangar:
     name: Hangar
     description: n/a
@@ -104,8 +103,8 @@ hangar:
         upperLevel: E
     objects:
         - controlPanel
-        
-        
+
+
 upperLevel:
     name: Upper Level
     description: n/a
@@ -114,5 +113,4 @@ upperLevel:
     c: 0
     neighbors:
         hangar: SW
-    objects:
-        - plane
+    objects: {}

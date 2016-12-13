@@ -65,7 +65,8 @@ talk to{
 							}
 				|Not so good.|
 					Rodnin: Oh, I'm sorry to hear that. Headaches?
-					Be honest.|
+					$choice{
+						Be honest.|
 							Lore: Yes, actually. I've been getting them more and more recently.
 							Rodnin: Ah, well. I've heard something's going around...Listen, I know it sounds a bit weird, but please let me know if anything out of the ordinary happens. Saftey and all that, yes?
 						|Lie.|
@@ -73,7 +74,8 @@ talk to{
 
 							Something in Rodnin's eyes made Lore think he seemed disappointed.
 
-							Rodnin: Is that so? I'm glad to hear it.|
+							Rodnin: Is that so? I'm glad to hear it.
+					}
 			}
 		|Tell me about the work you did with my mother.|
 			Rodnin: Oh, it was mostly genetic engineering. Being an environmental scientist, I was a bit lost the whole time.
