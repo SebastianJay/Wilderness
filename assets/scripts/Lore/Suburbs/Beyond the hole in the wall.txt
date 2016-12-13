@@ -1,7 +1,11 @@
 #This is the subplot area. She can go back to the main suburbs through the hole in the fence and vice versa.
 go to{
-	Lore passed beyond the @blue{Hole in the Fence}. It was desolate.
+	Lore passed beyond the @blue{Hole in the Fence}. It was desolate. Lore wanted to @red{look around}.
 }
 look around{
-	There were a couple of trashy houses and the streets were void of people. The air itself did not seem to welcome Lore. There were three houses labeled @blue{Nolan House}, @blue{Shin House}, and @blue{House of Samjam}. Lore felt compelled to visit them in order.
+    $if_subFO_eq_0{
+	There were a couple of trashy houses and the streets were void of people except a single man that Lore wanted to @red{talk to}. The air itself did not seem to welcome Lore. There were three houses labeled @blue{Nolan House}, @blue{Shin House}, and @blue{House of Samjam}. Lore felt compelled to visit them in order.
+    }$else{
+    There were a couple of trashy houses and the streets were void of people. The air itself did not seem to welcome Lore. There were three houses labeled @blue{Nolan House}, @blue{Shin House}, and @blue{House of Samjam}. Lore felt compelled to visit them in order.
+    }
 }

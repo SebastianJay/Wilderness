@@ -2,15 +2,28 @@ inspect{
     Shin seemed to be hurting a lot. Perhaps the @yellow{zweihander} would prove useful in ending his suffering.
 }
 talk to{
+${if_subMorphined_eq_0{
     Lore went up to @green{Shin}.
     
     Lore: Hi! Are you doing alright?
     Shin: AHOEUCOIUSRHSORU
     Lore: Sorry, I can't understand you.
+    }$elif_subMorphined_eq_1{
+        Lore: Hi! Are you alright now?
+        Shin: I'm... a little better now...
+        Lore: What happened to your leg?
+        Shin: I don't really know... something or someone just ran through my door and gave me a blow on my shin with something sharp. I think he was shouting something about his son...
+        Lore: Oh yeah, did your son disappear? I'm looking for a missing child and apparently you have a kid.
+        Shin: What? I don't have a kid...
+        Lore: ...
+        
+        @green{Shin} passed out. Lore probably should finish the operation on @green{Shin}.
+    }
+    
 }
 use morphine on{
     $if_subMorphined_eq_0{
-        Lore injected the morphine into Shin and he gave a sigh of relief.
+        Lore injected the morphine into @green{Shin} and he gave a sigh of relief. Maybe she could talk to him now.
     $set_subMorphined_1
     }$else{
         Lore was not going to waste any more morphine on @green{Shin}.
@@ -49,6 +62,8 @@ use bandages on{
                     $set_inventory_redCrystal_1
             }
         $set_subFixedShin_1
+        }$else{
+            Lore probably should use the @yellow{zweihander} on the shin first.
         }
         }$else{
             Lore was not going to waste any more bandages on @green{Shin}.

@@ -15,16 +15,8 @@ talk to{
             Glover caught the blade.
             
         |uppercut on|
-            $random{
-                Lore did 0 damage|
-                    Lore did 0 damage
-                |Lore did 0 damage|
-                    Lore did 0 damage
-                |Lore did 1 damage|
-                    Lore did 1 damage
-                |Lore did 2 damage|
-                    Lore did 2 damage
-            }
+            lel
+            
         |piercing thrust on|
             Lel
         |overhead chop on|

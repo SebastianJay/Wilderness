@@ -1,0 +1,27 @@
+talk to{
+    Lore approached the man.
+    
+    Lore: Hey!
+        $if_subAAF_eq_0{
+        $choice{
+            Ask him who he is|
+                Lore: Who are you?
+                Samjam: I am Samjam. I'm kinda glad to see you. There doesn't seem to be anyone else in the streets. I'm looking for an old friend and my wallet. If you see a guy named @green{Kyungpai} or a brown wallet, let me know!
+                $set_subAAF_1
+            |Ask about the missing child|
+                Lore: Do you know anything about a missing child?
+                Samjam: Hmm. I've heard about someone going missing. I didn't know it was a child. I know that @green{Shin} has a kid, so why not give him a visit?
+            }
+        }$else{
+        $choice{
+            Ask about the missing child|
+                Lore: Do you know anything about a missing child?
+                Samjam: Hmm. I've heard about someone going missing. I didn't know it was a child. I know that @green{Shin} has a kid, so why not give him a visit?
+            |Ask about Kyungpai|
+                Lore: Who is @green{Kyungpai}? Why are you looking for him?
+                Samjam: Well, he's my friend and we had a... little disagreement about something. He left my house and I have no way of contacting him!
+                $set_subTTSJ_1
+        }
+        
+        }
+}
