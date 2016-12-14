@@ -86,10 +86,12 @@ class InputWindow(Window):
                                 gs.gameMode = GameMode.inAreaMap
                             elif val == 'save game':
                                 gs.writeFile(Globals.SavePaths[gs.saveId])
+                                gs.pushMessage('Game saved to ' + Globals.SavePaths[gs.saveId] + '.')
                             elif val == 'exit game':
                                 gs.gameMode = GameMode.titleScreen
                         else:   # tuple or None - invalid command
-                            pass
+                            if len(gs.cmdBuffer.strip('. ')) > 0:
+                                gs.pushMessage('Command not recognized.')
                     gs.clearCmdBuffer()
 
     def draw(self):

@@ -104,8 +104,8 @@ class GameState:
         def popMessage(self):
             return self.gameMessages.popleft()
 
-        def messageExists(self):
-            return len(self.gameMessages) != 0
+        def hasMessage(self):
+            return len(self.gameMessages) > 0
 
         def switchCharacter(self):
             """ Switch the active protagonist after text finishes animation """
