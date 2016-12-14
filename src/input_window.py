@@ -83,7 +83,8 @@ class InputWindow(Window):
                             if val == 'view inventory':
                                 gs.gameMode = GameMode.inAreaInventory
                             elif val == 'view map':
-                                gs.gameMode = GameMode.inAreaMap
+                                gs.pushMessage('Command not implemented yet. =(')
+                                #gs.gameMode = GameMode.inAreaMap # TODO
                             elif val == 'save game':
                                 gs.writeFile(Globals.SavePaths[gs.saveId])
                                 gs.pushMessage('Game saved to ' + Globals.SavePaths[gs.saveId] + '.')
