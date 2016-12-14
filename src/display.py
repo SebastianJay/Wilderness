@@ -44,6 +44,7 @@ class Display:
         self.root.configure(background='black', cursor='none')
         # mutable settings
         self.fontSize = Globals.DefaultFontSize
+        self.fontSkipFrame = False
         self.useStyling = Globals.DefaultUseStyling
         # create Text widget
         self.text = tk.Text(self.root, width=self.numCols, height=self.numRows, background='black',
@@ -66,11 +67,21 @@ class Display:
                 self.root.wm_attributes('-fullscreen', args[1])
             elif args[0] == 'fontSize':
                 self.fontSize = fontMapping[args[1]]
+                self.fontSkipFrame = True
             elif args[0] == 'styledText':
                 self.useStyling = True if args[1] == 0 else False
         return _settingsChangeHandler
 
     def draw(self):
+        # if font size changed, apply change and clear window for frame
+        if self.fontSkipFrame:
+            self.text.config(font=(Globals.FontName, self.fontSize))
+            self.text.config(state=tk.NORMAL)
+            self.text.delete(1.0, tk.END)
+            self.text.config(state=tk.DISABLED)
+            self.fontSkipFrame = False
+            return  # screen blinks blank screen rather than badly formatted text
+
         # call draw() on all active windows and compare against old state
         oldhash = hash(self.windowManager)
         pixels = self.windowManager.draw()
@@ -94,7 +105,6 @@ class Display:
 
         self.text.config(state=tk.NORMAL)
         self.text.delete(1.0, tk.END)
-        self.text.config(font=(Globals.FontName, self.fontSize))    # apply window-wide font changes
         if self.useStyling:
             # apply colors and font styles when styling turned on
             start_index = 0
