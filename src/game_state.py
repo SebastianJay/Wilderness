@@ -142,7 +142,7 @@ class GameState:
              (dict, str[]) tuple -> partial walk along tree, contains (level in tree, path taken including remainder)
              None -> extraneous command, bad characters after valid or between tree levels
             """
-            cmdString = self.cmdBuffer.lstrip().rstrip('. ')
+            cmdString = self.cmdBuffer.lstrip().rstrip('. ').lower()
             prefixTree = self.cmdMap
             if cmdString in GameState.cmdListMetaCommands:
                 return cmdString    # complete metacommand
@@ -152,7 +152,7 @@ class GameState:
             while len(cmdString) > 0 and keepWalking:
                 keepWalking = False
                 for prefix in prefixTree:
-                    if cmdString.startswith(prefix):
+                    if cmdString.startswith(prefix.lower()):
                         pathFollowed.append(prefix)
                         val = prefixTree[prefix]
                         if isinstance(val, BodyNode):

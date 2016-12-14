@@ -95,7 +95,7 @@ class AssetLoader:
             # construct reverse item mapping
             itemsConfig = self.getConfig(Globals.ItemsConfigPath)
             for item in itemsConfig:
-                self.reverseItem[itemsConfig[item]['name']] = item
+                self.reverseItem[itemsConfig[item]['name'].lower()] = item
 
             # construct reverse room mapping
             areasConfig = self.getConfig(Globals.AreasConfigPath)
@@ -103,7 +103,7 @@ class AssetLoader:
                 self.reverseRoom[area] = {}
                 roomsConfig = self.getConfig(areasConfig[area]['roomsConfig'])
                 for room in roomsConfig:
-                    self.reverseRoom[area][roomsConfig[room]['name']] = room
+                    self.reverseRoom[area][roomsConfig[room]['name'].lower()] = room
 
             self.isLoaded = True
             return success_flag
@@ -152,11 +152,13 @@ class AssetLoader:
             return os.path.normcase(os.path.normpath(os.path.join(*args)))
 
         def reverseItemLookup(self, name):
+            name = name.lower()
             if name in self.reverseItem:
                 return self.reverseItem[name]
             return ''
 
         def reverseRoomLookup(self, name, area):
+            name = name.lower()
             # area is an ID, name is the readable room name
             if area in self.reverseRoom:
                 if name in self.reverseRoom[area]:

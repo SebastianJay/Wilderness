@@ -61,7 +61,7 @@ class PaletteWindow(Window):
                     cmdList += list(GameState.cmdListMetaCommands)
                 # filter possible commands based on what is in cmdBuffer
                 for completion in cmdList:
-                    if len(cmdString) <= len(completion) and completion.startswith(cmdString):
+                    if len(cmdString) <= len(completion) and completion.lower().startswith(cmdString.lower()):
                         displayList.append(completion)
             for key in keypresses:
                 if key == 'Tab' and isinstance(val, tuple) and len(displayList) == 1:
@@ -76,7 +76,7 @@ class PaletteWindow(Window):
                     nextval = gs.traverseCmdMap()
                     if isinstance(nextval, tuple):
                         gs.appendCmdBuffer(' ')
-                        displayList = list(tree.keys())
+                        displayList = list(nextval[0].keys())
                     elif isinstance(nextval, str) or isinstance(nextval, BodyNode):
                         displayList = ['.']
         self.displayList = displayList
