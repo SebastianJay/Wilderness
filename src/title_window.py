@@ -12,6 +12,8 @@ import sys
 class TitleWindow(Window):
     def __init__(self, width, height):
         super().__init__(width, height)
+
+    def reset(self):
         self.options = ['New game', 'Load game', 'Options', 'Credits', 'Exit']
         self.pointingTo = 0 # index of option player is looking at
         self.blockedOptions = []    # list of indices of inaccessible options
@@ -19,13 +21,9 @@ class TitleWindow(Window):
         self.startRow = 0   # set in load()
         self.startCol = 0   # set in load()
         self.freeFileInd = 0    # set in refreshOptions()
-
-    def reset(self):
         # options to be selected on screen
         self.isPromptingName = False    # on new game, whether window is asking for player name
         self.nameBuffer = ''            # holds name that player is typing
-        if AssetLoader().isLoaded:
-            self.refreshOptions()
 
     def resetCursor(self):
         self.pointingTo = 0
@@ -72,6 +70,14 @@ class TitleWindow(Window):
         self.startRow = row + (self.height - row - len(self.options)) // 2
         self.startCol = (self.width // 2 - len(self.options[self.pointingTo]) // 2)
         self.refreshOptions()
+        # Draw options - they are left-aligned based on center of first option
+        for row, option in enumerate(self.options):
+            if row in self.blockedOptions:
+                for c in range(self.width):
+                    self.pixels[row + self.startRow][c] = ' '   # clear row
+                continue
+            for col, char in enumerate(option):
+                self.pixels[row + self.startRow][col + self.startCol] = char
 
     def update(self, timestep, keypresses):
         def updateCursor(delta):
@@ -139,15 +145,6 @@ class TitleWindow(Window):
                 else:
                     self.pixels[self.startRow+1][c] = ' '
         else:
-            # Draw options - they are left-aligned based on center of first option
-            for row, option in enumerate(self.options):
-                if row in self.blockedOptions:
-                    for c in range(self.width):
-                        self.pixels[row + self.startRow][c] = ' '   # clear row
-                    continue
-                for col, char in enumerate(option):
-                    self.pixels[row + self.startRow][col + self.startCol] = char
-
             # Clear previous cursor
             for row, temp in enumerate(self.options):
                 self.pixels[self.startRow + row][self.startCol - 4] = " "

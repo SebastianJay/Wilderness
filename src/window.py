@@ -57,6 +57,14 @@ class Window:
             for j in range(self.width):
                 self.pixels[i][j] = ' '
 
+    def refresh(self):
+        """
+        A helper method for resetting and reloading the Window
+        """
+        self.clear()
+        self.reset()
+        self.load()
+
     def debugDraw(self):
         """
         Displays the pixels matrix to shell using print()

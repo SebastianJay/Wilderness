@@ -88,12 +88,12 @@ class WindowManager(Window):
             elif old in [GameMode.selectFile, GameMode.credits] and new == GameMode.titleScreen:
                 # reset and pop off overlay
                 for winind in self.windowGroups[self.activeWindowGroups[-1]]:
-                    self.windowList[winind].reset()
+                    self.windowList[winind].refresh()
                 self.activeWindowGroups.pop()
                 # if going from select file back to main, refresh main command list
                 if old == GameMode.selectFile:
                     for winind in self.windowGroups[self.activeWindowGroups[-1]]:
-                        self.windowList[winind].reset()
+                        self.windowList[winind].refresh()
             elif new in [GameMode.titleScreen]:
                 # use the "title" window group
                 _queueTransition(1, True)
@@ -274,9 +274,7 @@ class WindowManager(Window):
                 if self.resetOnTransitionComplete:
                     # reload save files
                     AssetLoader().loadSaves()
-                    # clear, reset, and reload all windows
-                    self.reset()
-                    self.load()
+                    self.refresh()
                     self.resetOnTransitionComplete = False
             return
 

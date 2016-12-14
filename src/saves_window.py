@@ -7,20 +7,19 @@ class SavesWindow(Window):
 
     def __init__(self, width, height):
         super().__init__(width, height)
+
+    def reset(self):
         self.fileinfo = []
+        self.pointingTo = 0
         self.otherOptions = ['Delete File', 'Go Back']
         self.marginRows = 3  # space for header text and footer options
         self.rowNum = lambda i: (self.height - self.marginRows * 2) // len(self.fileinfo) * i + self.marginRows
-
-    def reset(self):
-        self.resetCursor()
         self.inDeleteMode = False
 
     def resetCursor(self):
         self.pointingTo = 0
-        if hasattr(self, 'fileinfo'):
-            while self.pointingTo < len(self.fileinfo) and self.fileinfo[self.pointingTo] is None:
-                self.pointingTo += 1
+        while self.pointingTo < len(self.fileinfo) and self.fileinfo[self.pointingTo] is None:
+            self.pointingTo += 1
 
     def load(self):
         self.fileinfo = []
@@ -52,32 +51,38 @@ class SavesWindow(Window):
                 self.pixels[row][cOption + c] = ch
 
         # draw the loaded file info
-        startCol = self.width // 3
-        for i in range(len(self.fileinfo)):
-            if self.fileinfo[i] is None:
+        cFile = self.width // 4
+        for i, finfo in enumerate(self.fileinfo):
+            if finfo is None:
                 continue
-            name = self.fileinfo[i]['name']
-            playtime = int(self.fileinfo[i]['playtime'])
+            name = finfo['name']
+            playtime = int(finfo['playtime'])
+            ind = finfo['activeProtagonistInd']
+            substate = finfo['subStates'][ind]
+            areasConfig = AssetLoader().getConfig(Globals.AreasConfigPath)
+            roomsConfig = AssetLoader().getConfig(areasConfig[substate['areaId']]['roomsConfig'])
+            timeStr = '{:02}:{:02}:{:02}'.format(playtime // 3600, (playtime % 3600) // 60, (playtime % 60))
+            progressStr = '{}:{}:{}'.format('Lore' if ind == 0 else 'Kipp',
+                areasConfig[substate['areaId']]['name'],
+                roomsConfig[substate['roomId']]['name'])
             infoStr = name + (' ' * (16 - len(name))) \
-                + '{:02}:{:02}:{:02}'.format(playtime // 3600, (playtime % 3600) // 60, (playtime % 60))
+                + timeStr + (' ' * (16 - len(timeStr))) \
+                + progressStr
             for j, ch in enumerate(infoStr):
-                self.pixels[self.rowNum(i)][startCol + j] = ch
+                self.pixels[self.rowNum(i)][cFile + j] = ch
+            # add strikethrough for deletion
+            if self.inDeleteMode and i == self.pointingTo:
+                self.formatting = [('overstrike', (self.rowNum(i)*self.width + cFile,
+                    self.rowNum(i)*self.width + cFile + len(infoStr) - 1))]
 
         # draw the cursor
-        cursorCol = self.width // 3 - 2
-        for i in range(len(self.fileinfo)):
-            row = self.rowNum(i)
-            if i == self.pointingTo:
-                self.pixels[row][cursorCol] = ">"
-            else:
-                self.pixels[row][cursorCol] = " "
-        cursorCol = (self.width - len(self.otherOptions[0])) // 2 - 2
-        for i in range(len(self.otherOptions)):
-            row = self.height - self.marginRows + i
-            if i+len(self.fileinfo) == self.pointingTo:
-                self.pixels[row][cursorCol] = ">"
-            else:
-                self.pixels[row][cursorCol] = " "
+        if self.pointingTo < len(self.fileinfo):
+            cursorCol = cFile - 2
+            self.pixels[self.rowNum(self.pointingTo)][cursorCol] = ">"
+        else:
+            row = self.height - self.marginRows + self.pointingTo - len(self.fileinfo)
+            cursorCol = cOption - 2
+            self.pixels[row][cursorCol] = ">"
         return self.pixels
 
     def update(self, timestep, keypresses):

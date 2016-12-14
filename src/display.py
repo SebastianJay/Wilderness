@@ -82,12 +82,8 @@ class Display:
             color = "white"
             font_style = (Globals.FontName, Globals.FontSize)
             for format_tag in formats:
-                if format_tag == "bold":
-                    font_style = (Globals.FontName, Globals.FontSize, "bold")
-                elif format_tag == "italic":
-                    font_style = (Globals.FontName, Globals.FontSize, "italic")
-                elif format_tag == "underline":
-                    font_style = (Globals.FontName, Globals.FontSize, "underline")
+                if format_tag in ["bold", "italic", "underline", "overstrike"]:
+                    font_style = (Globals.FontName, Globals.FontSize, format_tag)
                 else:
                     color = format_tag
             # map readable string to hex color code
