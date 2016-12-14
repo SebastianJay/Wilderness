@@ -231,8 +231,8 @@ class GameState:
             if i < len(node.formatting):
                 # any remaining formatting after last interpolated variable
                 appendToHistoryFormatting(self, node.formatting[i])
-            fullText += node.text[seekInd:]
-            fullText += "\n" # add trailing newline to separate new text from old
+            fullText += node.text[seekInd:] # remaining text after last variable
+            fullText = "\n" + fullText + "\n" # surround with newlines as separators from old text
             self.historyBuffer += fullText
             self.onAddLangNode(fullText)
 

@@ -38,14 +38,13 @@ class HistoryWindow(Window):
     def langNodeAddedHandler(self):
         def _langNodeAddedHandler(*args, **kwargs):
             # do word wrapping logic whenever an update has been made to history buffer
-            input_list = args[0].split("\n")    # args[0] is additional text added to buffer
+            added_text = args[0][1:] if args[0][0] == '\n' else args[0]
+            input_list = added_text.split('\n')
 
             output_list = []    # list of additional row text - each row contains a string
             row_indices = []    # list of additional (start, end) indices of historyBuffer corresponding to row
-            if len(self.rowIndices) > 0:
-                total_count = self.rowIndices[-1][1] # NOTE math is strange here due to leading/trailing newlines
-            else:
-                total_count = 0     # number of characters from historyBuffer (including whitespace) written
+            # NOTE math for total_count is strange due to leading/trailing newlines
+            total_count = self.rowIndices[-1][1] + 1 if len(self.rowIndices) > 0 else 0
             start_row_count = total_count # number of characters written by start of current line
 
             i = 0
