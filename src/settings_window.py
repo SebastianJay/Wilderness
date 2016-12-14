@@ -46,7 +46,6 @@ class SettingsWindow(Window):
 
     def load(self):
         self.settings = AssetLoader().getConfig('settings.yml')
-        settingsPath = AssetLoader().joinAndNorm('config', 'settings.yml')
         # We can't work on the actual dictionary as deleting keys during iteration isn't allowed,
         # so act on the list of the keys instead
         for setting in list(self.settings.keys()):

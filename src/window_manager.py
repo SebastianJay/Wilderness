@@ -41,7 +41,7 @@ class WindowManager(Window):
         # vars for transition animations between window groups
         self.isTransitioning = False
         self.transitionTimer = 0.0
-        self.transitionThreshold = 3.0
+        self.transitionThreshold = 2.5
         self.resetOnTransitionComplete = False
 
         # register a handler for changing the active window groups based on game mode
@@ -53,6 +53,10 @@ class WindowManager(Window):
         inGameModes = [GameMode.inAreaCommand, GameMode.inAreaChoice,
             GameMode.inAreaInput, GameMode.inAreaAnimating]
         worldMapModes = [GameMode.worldMap, GameMode.worldMapOverArea]
+        def _queueTransition(windowGroup, reset=False):
+            self.isTransitioning = True
+            self.resetOnTransitionComplete = reset
+            self.activeWindowGroups = [windowGroup]
         def _gameModeChangeHandler(*args, **kwargs):
             old, new = args[0]  # first arg is (old state, new state)
             if new == GameMode.isLoading:
@@ -63,12 +67,10 @@ class WindowManager(Window):
                 self.activeWindowGroups.pop()
             elif (old in [GameMode.titleScreen, GameMode.selectFile] or old in worldMapModes) and new in inGameModes:
                 # use the "main game" window group
-                self.activeWindowGroups = [2]
-                self.isTransitioning = True
+                _queueTransition(2)
             elif old in inGameModes and new in worldMapModes:
                 # switch to map window group
-                self.activeWindowGroups = [3]
-                self.isTransitioning = True
+                _queueTransition(3, False)
             elif old in inGameModes and new == GameMode.inAreaInventory:
                 # add inventory window
                 self.activeWindowGroups.append(6)
@@ -87,9 +89,7 @@ class WindowManager(Window):
                 self.activeWindowGroups.pop()
             elif new in [GameMode.titleScreen]:
                 # use the "title" window group
-                self.activeWindowGroups = [1]
-                self.isTransitioning = True
-                self.resetOnTransitionComplete = True
+                _queueTransition(1, True)
         return _gameModeChangeHandler
 
     def characterSwitchHandler(self):
@@ -260,8 +260,8 @@ class WindowManager(Window):
             self.transitionTimer += timestep
             if self.transitionTimer >= self.transitionThreshold:
                 self.transitionTimer = 0.0
-                self.alphaLevel = 0
                 self.isTransitioning = False
+                self.alphaLevel = 0
                 self.clear()
                 if self.resetOnTransitionComplete:
                     # reload save files

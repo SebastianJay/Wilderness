@@ -11,7 +11,6 @@ class HistoryWindow(Window):
     class SubState:
         """ History Window vars specific to one protagonist's history buffer """
         def __init__(self):
-            self.timestep = 0.0     # Tracks the time since the last character was displayed
             self.charLimit = 0      # The current number of characters (exclude newlines) that can be displayed
             self.wrappedLines = []  # Strings corresponding to word wrapped lines in window
             self.rowIndices = []    # Mappings of char indices in history buffer for particular rows
@@ -25,9 +24,11 @@ class HistoryWindow(Window):
         GameState().onClearBuffer += self.clearBufferHandler()
 
     def reset(self):
+        self.timestep = 0.0     # Tracks the time since the last character was displayed
         self.threshold = 0.025  # Delay in seconds before each character appears on-screen
         self.speedButtonFactor = 5.0  # Speedup factor for the text animation when "speed" button pressed
         self.speedPeriodFactor = 0.15 # Factor for additional time special chars like period take
+        self.unlockOnNextUpdate = False # flag indicating animation completion on next draw
 
         # State is maintained in window for each protagonist
         self.subStates = [
@@ -83,6 +84,10 @@ class HistoryWindow(Window):
     def update(self, timestep, keypresses):
         # increment charLimit in certain time increments to advance scrolling animation
         if GameState().gameMode == GameMode.inAreaAnimating:
+            if self.unlockOnNextUpdate:
+                self.unlockOnNextUpdate = False
+                GameState().unlockGameMode()
+                return
             self.timestep += timestep
             unwrappedText = ''.join(self.wrappedLines)
             speedFlag = False
@@ -109,7 +114,7 @@ class HistoryWindow(Window):
             # check if animation is complete
             if self.charLimit >= len(unwrappedText)+1 or skipFlag:
                 self.charLimit = len(unwrappedText)+1
-                GameState().unlockGameMode()
+                self.unlockOnNextUpdate = True
             # update starting line based on where the animation index is at
             lineIndex = 0
             charCounter = 0
@@ -193,13 +198,6 @@ class HistoryWindow(Window):
 
         self.formatting = output_formatting
         return self.pixels
-
-    @property
-    def timestep(self):
-        return self.subStates[GameState().activeProtagonistInd].timestep
-    @timestep.setter
-    def timestep(self, val):
-        self.subStates[GameState().activeProtagonistInd].timestep = val
 
     @property
     def charLimit(self):
