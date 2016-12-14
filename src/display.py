@@ -6,6 +6,7 @@ results to screen. The view in our MVC framework.
 import tkinter as tk
 import os
 from global_vars import Globals
+from asset_loader import joinAndNorm
 
 class Display:
 
@@ -35,9 +36,9 @@ class Display:
         self.root.resizable(width=False, height=False)
         # set window icon
         if 'nt' in os.name:
-            self.root.iconbitmap(Globals.IconFilePathWin)
+            self.root.iconbitmap(joinAndNorm(Globals.AssetsRootPath, 'art', Globals.IconFilePathWin))
         else:
-            self.root.iconbitmap(Globals.IconFilePathUnix)
+            self.root.iconbitmap(joinAndNorm(Globals.AssetsRootPath, 'art', Globals.IconFilePathUnix))
         # set window attributes
         self.root.configure(background='black', cursor='none')
         # create Text widget

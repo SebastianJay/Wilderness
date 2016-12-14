@@ -10,6 +10,8 @@ import yaml
 import codecs
 import traceback
 
+def joinAndNorm(*args):
+    return os.path.normcase(os.path.normpath(os.path.join(*args)))
 
 class AssetLoader:
     # Python singleton implementation adapted from
@@ -29,13 +31,13 @@ class AssetLoader:
             # indicates if asset loading happened
             self.isLoaded = False
 
-        def loadAssets(self, path_to_folder=Globals.AssetsRootPath):
+        def loadAssets(self):
             # if assets already in memory do not reload
             if self.isLoaded:
                 return
 
             # set root to assets for later reference
-            self.root_path = path_to_folder
+            self.root_path = Globals.AssetsRootPath
 
             # This dictionary will hold the contents of asset files in the format:
             #   key = the files path, e.g. "assets/readme.txt"
@@ -48,11 +50,11 @@ class AssetLoader:
             # recognized filename extensions
             whitelist_ext = ['.txt', '.wtxt', '.yml']
             # Go through each file in the specified dir and add contents to the dictionary
-            for root, subdirs, files in os.walk(path_to_folder):
+            for root, subdirs, files in os.walk(self.root_path):
                 for file_name in files:
                     try:
                         # Normalize the given path
-                        norm_path = self.joinAndNorm(root, file_name)
+                        norm_path = joinAndNorm(root, file_name)
                         # Check that filename ends with recognized extension
                         ext_not_valid = True
                         for ext in whitelist_ext:
@@ -71,17 +73,17 @@ class AssetLoader:
             parser = Parser()  # instantiate parser on the fly
             for path in assets:
                 try:
-                    if self.joinAndNorm(self.root_path, 'scripts') in path:
+                    if joinAndNorm(self.root_path, 'scripts') in path:
                         if 'fragments' in path:
                             # replace string with parsed BodyNode
                             assets[path] = parser.parseScriptFragment(assets[path])
                         else:
                             # replace string with parsed (string, BodyNode)[]
                             assets[path] = parser.parseScript(assets[path])
-                    elif self.joinAndNorm(self.root_path, 'config') in path:
+                    elif joinAndNorm(self.root_path, 'config') in path:
                         # replace string with parsed Python dict
                         assets[path] = yaml.load(assets[path])
-                    elif self.joinAndNorm(self.root_path, 'maps') in path:
+                    elif joinAndNorm(self.root_path, 'maps') in path:
                         # replace string with split string
                         assets[path] = assets[path].split('\n')
                 except:
@@ -111,7 +113,7 @@ class AssetLoader:
         def loadSaves(self, paths_to_saves=Globals.SavePaths):
             self.savefiles = {}
             for path in paths_to_saves:
-                normPath = self.joinAndNorm(path)
+                normPath = joinAndNorm(path)
                 if os.path.exists(normPath):
                     with open(normPath, 'r') as f:
                         self.savefiles[normPath] = json.loads(f.read())
@@ -129,27 +131,24 @@ class AssetLoader:
             return len(self.savefiles)
 
         def getMap(self, name):
-            return self.assets[self.joinAndNorm(self.root_path, 'maps', name)]
+            return self.assets[joinAndNorm(self.root_path, 'maps', name)]
 
         def getArt(self, name):
-            return self.assets[self.joinAndNorm(self.root_path, 'art', name)]
+            return self.assets[joinAndNorm(self.root_path, 'art', name)]
 
         def getScript(self, name):
-            return self.assets[self.joinAndNorm(self.root_path, 'scripts', name)]
+            return self.assets[joinAndNorm(self.root_path, 'scripts', name)]
 
         def getScriptFragment(self, name):
-            return self.assets[self.joinAndNorm(self.root_path, 'scripts', 'fragments', name)]
+            return self.assets[joinAndNorm(self.root_path, 'scripts', 'fragments', name)]
 
         def getConfig(self, name):
-            return self.assets[self.joinAndNorm(self.root_path, 'config', name)]
+            return self.assets[joinAndNorm(self.root_path, 'config', name)]
 
         def getSave(self, name):
-            if self.joinAndNorm(name) in self.savefiles:
-                return self.savefiles[self.joinAndNorm(name)]
+            if joinAndNorm(name) in self.savefiles:
+                return self.savefiles[joinAndNorm(name)]
             return None
-
-        def joinAndNorm(self, *args):
-            return os.path.normcase(os.path.normpath(os.path.join(*args)))
 
         def reverseItemLookup(self, name):
             name = name.lower()

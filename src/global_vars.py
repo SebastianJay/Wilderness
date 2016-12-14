@@ -3,13 +3,11 @@ Contains variables that should be accessible from any scope
 """
 
 class Globals:
-    XRes = 1280
-    YRes = 720
     NumCols = 120
     NumRows = 35
-    Timestep = 0.033
     FontName = 'Consolas'
     FontSize = 14
+    Timestep = 0.033
     IsDev = True
     AssetsRootPath = 'assets'
     SavePaths = [
@@ -30,8 +28,8 @@ class Globals:
     ItemsConfigPath = 'items.yml'
     KeybindingsConfigPath = 'keybindings.yml'
     FragmentsConfigPath = 'fragments.yml'
-    IconFilePathWin = 'assets/art/icon.ico'
-    IconFilePathUnix = 'assets/art/icon.xbm'
+    IconFilePathWin = 'icon.ico'
+    IconFilePathUnix = 'icon.xbm'
     CmdMaxLength = 48
     NameMaxLength = 8
     AlphaMax = 8        # should be power of two
