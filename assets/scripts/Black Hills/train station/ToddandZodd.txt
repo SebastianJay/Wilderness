@@ -27,7 +27,7 @@ talk to{
 	          $inc_darkPts_1
         }
 	   $set_frmTalkedToddandZodd_1
-     }if $frmTalkedToddandZodd_eq_1{
+     }$elif_frmTalkedToddandZodd_eq_1{
         Todd and Zodd: We gotta get working or the boss's kick our butts.
      }
 }

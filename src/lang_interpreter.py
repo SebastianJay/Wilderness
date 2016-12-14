@@ -75,6 +75,7 @@ class Interpreter:
                         return Interpreter.ExitCode.halt
                 elif node.title == 'random':
                     self.callStack[-1][1] = nodeInd + 1
+                    pick = randint(0, len(node.inner)-1)
                     self.callStack.append([node.inner[pick], 0])
                     return Interpreter.ExitCode.push
                 elif node.title == 'init':
