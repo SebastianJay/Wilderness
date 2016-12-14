@@ -22,6 +22,8 @@ class HistoryWindow(Window):
         GameState().onAddLangNode += self.langNodeAddedHandler()
         # register handler for clearing out buffer vars when area resets
         GameState().onClearBuffer += self.clearBufferHandler()
+        # register handler for game settings change
+        GameState().onSettingChange += self.settingsChangeHandler()
 
     def reset(self):
         self.timestep = 0.0     # Tracks the time since the last character was displayed
@@ -80,6 +82,17 @@ class HistoryWindow(Window):
         def _clearBufferHandler(*args, **kwargs):
             self.subStates[GameState().activeProtagonistInd] = HistoryWindow.SubState()
         return _clearBufferHandler
+
+    def settingsChangeHandler(self):
+        speedMapping = {
+            0: Globals.DefaultScrollThreshold + 0.015,
+            1: Globals.DefaultScrollThreshold,
+            2: Globals.DefaultScrollThreshold - 0.015,
+        }
+        def _settingsChangeHandler(*args, **kwargs):
+            if args[0] == 'scrollSpeed':
+                self.threshold = speedMapping[args[1]]
+        return _settingsChangeHandler
 
     def update(self, timestep, keypresses):
         # increment charLimit in certain time increments to advance scrolling animation

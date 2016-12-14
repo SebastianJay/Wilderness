@@ -6,7 +6,9 @@ class Globals:
     NumCols = 120
     NumRows = 35
     FontName = 'Consolas'
-    FontSize = 14
+    DefaultFontSize = 12
+    DefaultUseStyling = True
+    DefaultScrollThreshold = 0.025
     Timestep = 0.033
     IsDev = True
     AssetsRootPath = 'assets'
@@ -16,6 +18,7 @@ class Globals:
         'savefiles/sav2.txt',
         'savefiles/sav3.txt',
     ]
+    SettingsPath = 'settings.txt'
     MapsPaths = [
         ('lore_map.txt', 'lore_map_color_mask.txt', 'lore_map_travel_mask.txt'),
         ('kipp_map.txt', 'kipp_map_color_mask.txt', 'kipp_map_travel_mask.txt'),

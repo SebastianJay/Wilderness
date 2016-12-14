@@ -15,15 +15,16 @@ class GameMode(Enum):
     isLoading           =0
     titleScreen         =1
     selectFile          =2
-    credits             =3
-    inAreaCommand       =4
-    inAreaChoice        =5
-    inAreaInput         =6
-    inAreaMap           =7
-    inAreaInventory     =8
-    inAreaAnimating     =9
-    worldMap            =10
-    worldMapOverArea    =11
+    settings            =3
+    credits             =4
+    inAreaCommand       =5
+    inAreaChoice        =6
+    inAreaInput         =7
+    inAreaMap           =8
+    inAreaInventory     =9
+    inAreaAnimating     =10
+    worldMap            =11
+    worldMapOverArea    =12
 
 class GameState:
     # Python singleton implementation adapted from

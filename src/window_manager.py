@@ -85,7 +85,9 @@ class WindowManager(Window):
                 self.activeWindowGroups.append(7)
             elif old == GameMode.titleScreen and new == GameMode.credits:
                 self.activeWindowGroups.append(8)
-            elif old in [GameMode.selectFile, GameMode.credits] and new == GameMode.titleScreen:
+            elif old == GameMode.titleScreen and new == GameMode.settings:
+                self.activeWindowGroups.append(5)
+            elif old in [GameMode.selectFile, GameMode.credits, GameMode.settings] and new == GameMode.titleScreen:
                 # reset and pop off overlay
                 for winind in self.windowGroups[self.activeWindowGroups[-1]]:
                     self.windowList[winind].refresh()
@@ -149,7 +151,7 @@ class WindowManager(Window):
 
         self.addWindow(MapWindow, Globals.NumRows//4, Globals.NumCols//4, (Globals.NumRows//2)-2, (Globals.NumCols//2))
         self.addWindow(InAreaWindow, Globals.NumRows//5, Globals.NumCols//6, (Globals.NumRows*3//5)-2, (Globals.NumCols*2//3))
-        self.addWindow(SettingsWindow, 0, 0, Globals.NumRows-2, Globals.NumCols)
+        self.addWindow(SettingsWindow, Globals.NumRows * 3 // 7, 0, Globals.NumRows * 4 // 7, Globals.NumCols)
         self.addWindow(InventoryWindow, Globals.NumRows//5, Globals.NumCols//6, (Globals.NumRows*3//5)-2, (Globals.NumCols*2//3))
         self.addWindow(HelpWindow, Globals.NumRows - 3, 0, 3, Globals.NumCols)
         self.addWindow(SavesWindow, Globals.NumRows * 3 // 7, 0, Globals.NumRows * 4 // 7, Globals.NumCols)
@@ -262,6 +264,7 @@ class WindowManager(Window):
         for key in keypresses:
             if key == 'F11':
                 self.fullScreen = 1 - self.fullScreen
+                GameState().onSettingChange('fullScreen', self.fullScreen)
 
         # if in transition mode, freeze update calls
         if self.isTransitioning:

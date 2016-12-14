@@ -4,11 +4,9 @@
 
 isLoading: {}
 titleScreen: {}
-selectFile:
-    - ArrowKeys: Browse options
-    - Return: Confirm option
-credits:
-    - Return: Exit
+selectFile: {}
+credits: {}
+settings: {}
 inAreaCommand:
     - TextKeys: Form command
     - Return: Execute command

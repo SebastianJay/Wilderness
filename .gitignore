@@ -1,6 +1,8 @@
 ## Wilderness gitignore
 # save directory
 savefiles/
+# settings file
+settings.txt
 
 # Pycharm
 .idea

@@ -26,6 +26,11 @@ class GameDriver:
     def initAssets(self):
         AssetLoader().loadAssets()
         AssetLoader().loadSaves()
+        AssetLoader().loadSettings()
+        # send events for loaded settings
+        if AssetLoader().getSettings() is not None:
+            for setting in AssetLoader().getSettings():
+                GameState().onSettingChange(setting[0], setting[1])
         self.windowManager.load()
         GameState().unlockGameMode()
 

@@ -29,6 +29,7 @@ class CreditsWindow(Window):
             ])
         )
         footer = 'Directed by Jay Sebastian'
+        exitfooter = '[Return] to exit'
 
         # do drawing once
         rStart = self.height // 6
@@ -45,7 +46,12 @@ class CreditsWindow(Window):
         cFooter = (self.width - len(footer)) // 2
         for c, ch in enumerate(footer):
             self.pixels[rFooter][cFooter + c] = ch
-            
+
+        rFooter = self.height * 5 // 6 + 1
+        cFooter = (self.width - len(exitfooter)) // 2
+        for c, ch in enumerate(exitfooter):
+            self.pixels[rFooter][cFooter + c] = ch
+
     def update(self, timestep, keypresses):
         for key in keypresses:
             if key in [' ', 'Return', 'BackSpace']:

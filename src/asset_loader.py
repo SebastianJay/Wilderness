@@ -22,6 +22,8 @@ class AssetLoader:
             self.assets = {}
             # maps path to save file (as dict, not game state)
             self.savefiles = {}
+            # persistent game settings objects
+            self.settings = None
             # string containing root of assets folder
             self.root_path = ''
             # maps readable item name to item ID
@@ -110,13 +112,25 @@ class AssetLoader:
             self.isLoaded = True
             return success_flag
 
-        def loadSaves(self, paths_to_saves=Globals.SavePaths):
+        def loadSaves(self):
             self.savefiles = {}
-            for path in paths_to_saves:
+            for path in Globals.SavePaths:
                 normPath = joinAndNorm(path)
                 if os.path.exists(normPath):
                     with open(normPath, 'r') as f:
                         self.savefiles[normPath] = json.loads(f.read())
+
+        def loadSettings(self):
+            normPath = joinAndNorm(Globals.SettingsPath)
+            if os.path.exists(normPath):
+                with open(normPath, 'r') as f:
+                    self.settings = json.loads(f.read())
+
+        def writeSettings(self, obj):
+            normPath = joinAndNorm(Globals.SettingsPath)
+            with open(normPath, 'w') as f:
+                f.write(json.dumps(obj))
+            self.settings = obj # store the settings just written
 
         def freeSaveFileInd(self):
             # collapse all save path names into a big string
@@ -159,6 +173,9 @@ class AssetLoader:
             if joinAndNorm(name) in self.savefiles:
                 return self.savefiles[joinAndNorm(name)]
             return None
+
+        def getSettings(self):
+            return self.settings
 
         def reverseItemLookup(self, name):
             name = name.lower()
