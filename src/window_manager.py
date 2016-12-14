@@ -14,6 +14,7 @@ from palette_window import PaletteWindow
 from inarea_window import InAreaWindow
 from inventory_window import InventoryWindow
 from saves_window import SavesWindow
+from credits_window import CreditsWindow
 from asset_loader import AssetLoader
 from game_state import GameState, GameMode
 from global_vars import Globals
@@ -83,7 +84,7 @@ class WindowManager(Window):
             elif old == GameMode.titleScreen and new == GameMode.selectFile:
                 self.activeWindowGroups.append(7)
             elif old == GameMode.titleScreen and new == GameMode.credits:
-                pass
+                self.activeWindowGroups.append(8)
             elif old in [GameMode.selectFile, GameMode.credits] and new == GameMode.titleScreen:
                 # pop off overlay
                 self.activeWindowGroups.pop()
@@ -133,7 +134,6 @@ class WindowManager(Window):
         self.addWindow(LoadingWindow, midRow - 2, midCol - 10, 5, 20)    # default to small size
 
         self.addWindow(TitleWindow, 0, 0, Globals.NumRows, Globals.NumCols)
-        # add credits window
 
         splitCol = Globals.NumCols * 19 // 24
         splitRow = Globals.NumRows * 5 // 7
@@ -147,6 +147,7 @@ class WindowManager(Window):
         self.addWindow(InventoryWindow, Globals.NumRows//5, Globals.NumCols//6, (Globals.NumRows*3//5)-2, (Globals.NumCols*2//3))
         self.addWindow(HelpWindow, Globals.NumRows - 3, 0, 3, Globals.NumCols)
         self.addWindow(SavesWindow, Globals.NumRows * 3 // 7, 0, Globals.NumRows * 4 // 7, Globals.NumCols)
+        self.addWindow(CreditsWindow, Globals.NumRows * 3 // 7, 0, Globals.NumRows * 4 // 7, Globals.NumCols)
 
         # NOTE to debug, add a tuple with the index (in self.windowList) of your window to self.windowGroups
         #  then change self.activeWindowGroups to be a list containing just the index (in self.windowGroups) of that tuple
@@ -155,11 +156,12 @@ class WindowManager(Window):
             (1,),       # Title window
             (3, 2, 4, 9),  # Input, History, Palette, and Help windows
                         #NOTE the ordering here is specific as Input gets updated before History
-            (5,9),      # Map Window
+            (5,9),      # Map window
             (6,9),      # InArea window
             (7,),       # Settings window
             (8,9),      # Inventory window
-            (10,)       # Save Window
+            (10,),      # Save window
+            (11,),      # Credits window
         ]
         # which window group is on screen initially
         self.activeWindowGroups = [1]

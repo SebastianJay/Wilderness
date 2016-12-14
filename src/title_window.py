@@ -109,6 +109,8 @@ class TitleWindow(Window):
                     elif cmd == 'Options':
                         # TODO: Figure out how to get this to launch the settings window
                         continue
+                    elif cmd == 'Credits':
+                        GameState().gameMode = GameMode.credits
                     elif cmd == 'Exit':
                         sys.exit()
 
