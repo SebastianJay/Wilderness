@@ -127,6 +127,16 @@ class AssetLoader:
                     return i
             return -1
 
+        def deleteSave(self, index):
+            # search for index in string name of save path
+            for i, path in enumerate(Globals.SavePaths):
+                if str(i) in path:
+                    normPath = joinAndNorm(path)
+                    if os.path.exists(normPath):
+                        os.remove(normPath)
+                        del self.savefiles[normPath]
+                    break
+
         def lenSaveFiles(self):
             return len(self.savefiles)
 
