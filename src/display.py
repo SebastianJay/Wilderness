@@ -71,8 +71,15 @@ class Display:
         return _settingsChangeHandler
 
     def draw(self):
-        # aggregate text from pixels
+        # call draw() on all active windows and compare against old state
+        oldhash = hash(self.windowManager)
         pixels = self.windowManager.draw()
+        newhash = hash(self.windowManager)
+
+        # if they are the same, no need to draw
+        if oldhash == newhash:
+            return
+
         bufferlst = []
         for sublst in pixels:
             substr = ''.join(sublst)

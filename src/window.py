@@ -23,6 +23,12 @@ class Window:
         # initialize other fields
         self.reset()
 
+    def __hash__(self):
+        """
+        Hash used for dirty checking a window on a draw call
+        """
+        return hash(('\n'.join([''.join(row) for row in self.pixels]), tuple(self.formatting), self.alphaLevel))
+
     def reset(self):
         """
         Initialize pointers and other window specific state data which gets reset on game restart
