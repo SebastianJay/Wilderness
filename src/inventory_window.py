@@ -11,7 +11,6 @@ class InventoryWindow(Window):
     def reset(self):
         self.inventoryList = []
         self.currentInventoryList = []
-        #self.formatting.append(("bold_yellow", ((self.selectedItemPos*2+2)*self.width+1, (self.selectedItemPos*2+2)*self.width+int(self.width/3)-1)))
         self.startIndex = 0
         self.index = lambda x: (x + self.startIndex) % len(self.currentInventoryList)
 
@@ -44,28 +43,32 @@ class InventoryWindow(Window):
 
     def draw(self):
         self.clear()
+        # empty message when nothing is in inventory
         if len(self.currentInventoryList) == 0:
             message = "No items in inventory"
             for j in range(len(message)):
                 self.pixels[self.height//2][self.width//2 - len(message)//2 + j] = message[j]
             return self.pixels
 
+        # draw subset of item names
         selectedItemPos = 0
         numRows = (self.height - 3) // 2
         for i in range(numRows):
             if i >= len(self.currentInventoryList):
                 break
+            itemName = self.currentInventoryList[self.index(i)][1]
+            for j, ch in enumerate(itemName):
+                self.pixels[i * 2 + 2][6 + j] = ch
             if i == selectedItemPos:
-                self.pixels[((i+2) % numRows) * 2 + 2][2] = ">"
-            for j in range(len(self.currentInventoryList[self.index(i)][1])):
-                self.pixels[((i+2) % numRows) * 2 + 2][6+j] = self.currentInventoryList[self.index(i)][1][j]
+                self.pixels[i * 2 + 2][2] = ">"
+                self.formatting = [('bold', ((i*2+2)*self.width + 6, (i*2+2)*self.width + 6 + len(itemName) - 1))]
 
+        # draw description of item being hovered over
         counter = 0
         descriptionHeight = 2
         description = self.currentInventoryList[self.index(selectedItemPos)][2]
-        descriptionList = description.split(" ")
 
-        for el in descriptionList:
+        for el in description.split(" "):
             if counter + len(el) >= int(2 * self.width / 3 - 3):
                 counter = 0
                 descriptionHeight += 1
