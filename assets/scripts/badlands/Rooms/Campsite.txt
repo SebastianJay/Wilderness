@@ -67,8 +67,8 @@ go to{
         Rice: Trust me brother. Anyone who doesn't belong here are either lost for good or being eaten by the buzzards in the valley.
     }
 
-    Kipp: Let's move on and @red{go to } on of the other caves...uh.
-    [companionName]: @blue{Tau, Upsilon, Mu, Sigma, and Kappa} or we can @{look around} just in case we missed something.
+    Kipp: Let's move on and @red{go to} on of the other caves...uh.
+    [companionName]: @blue{Tau, Upsilon, Mu, Sigma, and Kappa} or we can @red{look around} just in case we missed something.
     Kipp: There's also a @yellow{sleeping bag} to @red{use} in case we get tired.
 }
 
@@ -107,7 +107,7 @@ look around{
 		[companionName]: Looks like that cave is marked with a lambd...
 		Kipp: 6. @blue{Cave 6}.
 		[companionName]: But the sign on the map here...
-		Kipp: ..is a six. No more debate. We will @red{go to } there later.
+		Kipp: ..is a six. No more debate. We will @red{go to} there later.
 		@bold{*Map Added to Inventory*}
 		$set_inventory_map_1
 		$inc_badScavenge_1

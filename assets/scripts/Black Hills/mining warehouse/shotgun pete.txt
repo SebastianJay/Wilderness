@@ -21,7 +21,7 @@ talk to{
 		$set_frmTalkedShotgunPete_1
 	}$elif_frmTalkedShotgunPete_eq_1{
 		$if_inventory_corrosiveGas_eq_1{
-			$if_frm_weaponchoice_eq_1{
+			$if_frmWeaponChoice_eq_1{
 				Pete checked the gas.
 
 				Shotgun Pete: You're good to go.
@@ -31,7 +31,7 @@ talk to{
 
 				Shotgun Pete: There you go.
 				$set_inventory_corrosiveShotgun_1
-				$set_frmtalkedShotgunPete_2
+				$set_frmTalkedShotgunPete_2
 				$set_inventory_corrosiveGas_0
 			}
 		}$elif_inventory_corrosiveGas_eq_0{

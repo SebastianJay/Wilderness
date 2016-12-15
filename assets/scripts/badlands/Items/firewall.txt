@@ -1,5 +1,5 @@
 use extinguisher on{
-	$if_inventory_extingusiher_eq_1{
+	$if_inventory_extinguisher_eq_1{
 		$if_badSigmaPainting_eq_0{
 			$set_badSigmaPainting_1
 			Kipp pulled out the fire extinguisher. He aimed at the base of the wall and doused the flames. The wall vanished in a matter of seconds.
@@ -32,7 +32,7 @@ use extinguisher on{
 }
 
 play with{
-	$if_inventory_extingusher_eq_1{
+	$if_inventory_extinguisher_eq_1{
 		The player was actually that curious to see what happens when Kipp played with it. Kipp crouched near the base of the flames, grabbed a marshmallow from his backpack and a stick on the ground, and started roasting it. A fire spirit in the shape of a hand came from the wall, picked Kipp up, and slammed him on the ground. [companionName] got up and grabbed the fire extinguisher from Kipp's backpack. He pulled the pin and put out the small flames on Kipp's clothes.
 		
 		Kipp: Thanks.

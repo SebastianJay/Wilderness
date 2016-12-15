@@ -5,8 +5,7 @@ inspect{
 talk to{
 	$if_frmTalkedWidowmaker_eq_1{
 		Widowmaker: You can unlock the @yellow{password lock} now and head to the mines.	
-	}
-	$elif_frmTalkedShotgunPete_eq_2{
+	}$elif_frmTalkedShotgunPete_eq_2{
 		Widowmaker: You can use the train to go to the mines directly. The clue to the @yellow{password lock} is (1,3), (3,4), (3,2), (5,1), (6,9). Find me when you have solved it.
 		Kipp: What? This makes no sense.
 		Widowmaker: Not my problem
@@ -50,6 +49,8 @@ talk to{
 		}
 		Widowmaker: You can unlock the @yellow{password lock} now and head to the mines.
 		$set_frmTalkedWidowmaker_1
-	}
+	}$else{
+        Widowmaker: I don't want to waste my time talking to a kid. Why don't you have a conversation with @green{Shotgun Pete} first.
+    }
 
 }

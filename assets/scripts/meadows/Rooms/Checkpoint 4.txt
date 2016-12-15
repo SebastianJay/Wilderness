@@ -3,7 +3,7 @@ go to{
 		$if_medCheck4Intro_eq_0{
 			$set_medCheck4Intro_eq_1
 
-			Kipp: You better now...
+			Kipp: Are you...better now?
 			[companionName]: Yeah. We can just leave all of that behind us.
 			Kipp: Alright, we have to be nearing the end of this maze.
 
