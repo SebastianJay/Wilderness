@@ -289,7 +289,8 @@ class GameState:
             self.areaId = areaId
             oldRoom = self.roomId
             self.roomId = roomId
-            self.clearBuffer()
+            if fromWorldMap:
+                self.clearBuffer()
             self.onEnterArea((oldArea, areaId), (oldRoom, roomId), fromWorldMap)
 
         @property

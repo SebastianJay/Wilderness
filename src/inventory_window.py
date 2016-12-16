@@ -7,6 +7,7 @@ class InventoryWindow(Window):
     def __init__(self, w, h):
         super().__init__(w, h)
         GameState().onInventoryChange += self.inventoryChangeHandler()
+        GameState().onCharacterSwitch += self.inventoryChangeHandler()  # refresh inventory when character changes
 
     def reset(self):
         self.inventoryList = []

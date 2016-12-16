@@ -38,7 +38,9 @@ class InputWindow(Window):
             for verb, action, _ in roomScript:
                 if verb == startupverb:
                     self.interpreter.executeAction(action)
-                    break
+                    return
+            # if startup script not found, refresh command list manually
+            self.interpreter.refreshCommandList()
         return _enterAreaHandler
 
     def langNodeAddedHandler(self):
