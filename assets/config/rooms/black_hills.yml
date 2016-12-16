@@ -45,6 +45,7 @@ hospital:
         - rani
         - rosanto
         - table
+        - bed
 townTreasury:
     name: Town Treasury
     description: n/a

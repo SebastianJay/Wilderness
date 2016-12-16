@@ -1,0 +1,10 @@
+sleep on{
+  Kipp: I could use a break.
+  [companionName]: Alright, see you on the other side.
+  Kipp: Huh?
+  [companionName]: Nothing, just an expression. Rest up.
+}
+
+inspect{
+  A simple cot that could be used for a quick nap.
+}

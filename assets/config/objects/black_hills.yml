@@ -45,6 +45,9 @@ rosanto:
 table:
     name: table
     script: Black Hills/hospital/table.txt
+bed:
+    name: bed
+    script: Black Hills/hospital/bed.txt
 bronzeShovel:
     name: bronze shovel
     script: Black Hills/town treasury/bronze shovel.txt

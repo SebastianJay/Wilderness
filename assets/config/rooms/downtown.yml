@@ -55,6 +55,7 @@ rodninOfficeSecondFloor:
         insideElevator: E
     objects:
         - rodnin
+        - tempBed
 
 rodninOfficeThirdFloor:
     name: Lab

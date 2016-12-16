@@ -15,6 +15,7 @@ inAreaCommand:
 inAreaChoice:
     - ArrowKeys: Browse choices
     - Return: Confirm choice
+    - PageUp/Down: Scroll history
 inAreaInput:
     - TextKeys: Form input
     - Return: Confirm input

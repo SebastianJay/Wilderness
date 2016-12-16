@@ -36,6 +36,9 @@ automaticRifle:
     name: automatic rifle
     script: Kappallanoah Forest/abandoned treehouse/rifle.txt
     showIf: not_inventory_rifle
+cot:
+    name: cot
+    script: Kappallanoah Forest/abandoned treehouse/cot.txt
     ## Hunting Range
 tucker:
     name: Tucker

@@ -1,0 +1,8 @@
+sleep on{
+  It didn't make much sense for a bed to be here, but Lore went ahead and used it anyway.
+  $switchcharacter
+}
+
+inspect{
+  A temporary bed. You can use it, or not.
+}

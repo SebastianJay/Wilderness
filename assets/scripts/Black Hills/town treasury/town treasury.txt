@@ -1,22 +1,22 @@
 go to{
 	$if_frmQuestChoice_eq_2{
 		It seemed like Kipp was not welcome at the Town Treasury.
-        
+
         Marshall: Sir, I have word from my superior, Dru. If you step any closer to the premises, I am legally obligated to put you to jail...
-        
+
         The Marshall took out a letter he was given from Dru.
-        
+
         Marshall: ...for life, plus 50 years. Apparently for life expectancy around here is about 20 years on average. We really have to do something about those freak accidents.
-        
+
         Yup, really not welcomed around these parts. Kipp didn't take a second thought before he walked straight back to the @blue{hospital}.
-        
+
         Kipp: Well after siding with the bad guys, you'd expect to see this coming.
-        
+
         $goto_hospital
 	}
 	$if_frmQuestChoice_eq_1{
 		$if_minerClues_eq_2{
-			Kipp entered the Town Treasury. It was the place where the town folks meet and discuss issues.	
+			Kipp entered the Town Treasury. It was the place where the town folks meet and discuss issues.
 		}
 		$else{
 			Kipp should talk to the injured miners in the @blue{hospital} first for clues.
@@ -25,5 +25,5 @@ go to{
 }
 
 look around{
-	The town sheriff @green{Marshall} was talking with @green{Dru}. Many items lay on the ground, including a bucket of yellow{gold}, a @yellow{silver pitchfork} and a @yellow{bronze shovel}.
+	The town sheriff @green{Marshall} was talking with @green{Dru}. Many items lay on the ground, including a bucket of @yellow{gold}, a @yellow{silver pitchfork} and a @yellow{bronze shovel}.
 }

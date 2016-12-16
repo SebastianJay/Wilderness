@@ -129,5 +129,6 @@ talk to{
 		#Added variable and set to zero if the player visited this town so that we can bring back memories about it in future levels. Black Hills sets the variable to 1.
 		$set_townChoice_0
 		$set_aspireComplete_1
+		$set_prelimTownComplete_1
 	}
 }

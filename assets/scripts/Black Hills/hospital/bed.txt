@@ -1,0 +1,13 @@
+sleep on{
+  Kipp reclined on the bed to get some shut-eye.
+
+  Rani: Hey, if someone actually needs this bed, I'll have no qualms kicking you out.
+  Kipp: Got it.
+
+  Kipp drifted off to sleep.
+  $switchcharacter
+}
+
+inspect{
+  A nice comfy bed usually reserved for the wounded. @green{Rani} probably wouldn't mind if Kipp took a short nap on it.
+}

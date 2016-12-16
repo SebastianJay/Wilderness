@@ -17,8 +17,8 @@ talk to{
 			}
 			Rani: I need to get back to my work now. You should probably head to the @blue{Town Treasury} after checking out the @blue{hospital}.
 			$set_frmTalkedRani_1
-		}$elif_frm_TalkedRani_eq_1{
+		}$elif_frmTalkedRani_eq_1{
 			Rani: I need to get back to my work now. You should probably check out the injured miners then head to the @blue{Town Treasury}.
-		}		
+		}
 	}
 }

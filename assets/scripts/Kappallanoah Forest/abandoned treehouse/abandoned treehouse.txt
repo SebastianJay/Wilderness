@@ -1,9 +1,15 @@
+_awake{
+	Kipp woke up to chirping birds and the din of insects.
+
+	[companionName]: Hey there. I was taking a nap on the grass outside. Ready to go?
+	Kipp: Yeah, let's go on.
+}
+
 go to{
 	Kipp entered the @blue{abandoned treehouse}. Kipp's father built it over 10 years ago. No one had been living in the treehouse for a long time. Moss and vines surrounded the house, but it was still accessible. Kipp would have to be careful walking in the treehouse.
 }
 
 look around{
-	Kipp looked around in the treehouse. A @yellow{family photo} and a @yellow{rifle} were hung on the wall. Kipp's father's @yellow{diary} lay on the ground. Kipp found his mother's @yellow{recipe} on the kitchen table. 
+	Kipp looked around in the treehouse. A @yellow{family photo} and a @yellow{rifle} were hung on the wall. Kipp's father's @yellow{diary} lay on the ground. Kipp found his mother's @yellow{recipe} on the kitchen table.
 
 }
-

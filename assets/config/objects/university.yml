@@ -24,3 +24,6 @@ essaPrelim:
         and:
             - not_uniTalkedToFriends
             - uniAtTable
+tempBed:
+    name: temporary bed
+    script: Lore/tempbed.txt

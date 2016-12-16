@@ -1,3 +1,10 @@
+_awake{
+  Kipp woke up. The patients in the hospital were dozing off, while @green{Rani} was busy with some paperwork.
+
+  Rani: Enjoyed your beauty rest?
+  Kipp: 10/10. Would spend night in hospital again.
+}
+
 go to{
     $if_hospitalIntro_eq_0{
         $set_hospitalIntro_eq_1
@@ -54,11 +61,11 @@ go to{
         }
         @bold_blue{From the desk of level designer, James:}
         @bold_orange{Please save now so that you, the player, won't be tilted when you randomly encounter a game over. If you do, you will return to the main menu screen and must load a save to continue. And always remember to have an awesome day :P}
-        
+
     }$else{
         Kipp: I wonder if everything has finally settle down. Maybe I should @red{look around}.
     }
-    
+
 }
 
 look around{

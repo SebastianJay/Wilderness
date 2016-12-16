@@ -1,5 +1,16 @@
 _enter{
-	$if_forIntro_eq_0{
+	$if_prelimTownComplete_eq_0{
+		Kipp walked down a trail to a foreboding forest. He hesitated before going further.
+
+		Kipp: (This is it. The Wilderness is further west, but... it's going to be a long journey, and I doubt I'll find people living around these parts.)
+
+		Kipp took a look back up the trail.
+
+		Kipp: (Maybe it would be best if I explored a bit of civilization first before venturing into the unknown. I could also collect some rations for my journey. If I recall correctly, there are two towns near my hometown of @blue{Charli}. To the north is @blue{Aspire}, while to the south is @blue{Black Hills}.)
+
+		Determined to explore one of the two other destinations first, Kipp turned around and headed out of the forest.
+		$worldmap_19_90
+	}$elif_forIntro_eq_0{
 		$set_forIntro_1
 		$if_brotherPts_gt_derelictPts{
 			$if_brotherPts_gt_fugitivePts{
@@ -81,5 +92,5 @@ go to{
 }
 
 look around{
-	A family was residing within the cabin. They were very friendly and welcomed Kipp and his companion inside. The residents are a family of three: @green{Gerald} the father, @green{Bethy} the mother and @green{Draymond} the child. @green{Draymond} was playing with his, too. There was an @yellow{information booklet} on the table and a @yellow{poster} on the wall.
+	A family was residing within the cabin. They were very friendly and welcomed Kipp and his companion inside. The residents are a family of three: @green{Gerald} the father, @green{Bethy} the mother and @green{Draymond} the child. @green{Draymond} was playing with his toys. There was an @yellow{information booklet} on the table and a @yellow{poster} on the wall.
 }

@@ -19,3 +19,6 @@ ePF:
 dataSamples:
     name: data samples
     script: Lore/Beginning/Downtown/Items/Beginning_LoreDowntownOfficeFloor3_DataSamples.txt
+tempBed:
+    name: temporary bed
+    script: Lore/tempbed.txt

@@ -30,6 +30,7 @@ abandonedTreehouse:
         - familyPhoto
         - recipe
         - automaticRifle
+        - cot
 
 lumberMill:
     name: Lumber Mill
@@ -56,9 +57,9 @@ huntingRange:
         abandonedTreehouse: N
         lumberMill: S
         cave: NE
-    objects: 
+    objects:
         - tucker
-        
+
 cave:
     name: Mysterious Cave
     description: n/a
