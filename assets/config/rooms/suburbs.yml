@@ -5,8 +5,8 @@ bedroom:
     r: 0
     c: 0
     neighbors:
-        bathroom: N
-        hallway: N
+        - bathroom
+        - hallway
     objects:
         - dresser
         - radio
@@ -19,7 +19,7 @@ bathroom:
     r: 0
     c: 0
     neighbors:
-        bedroom: N
+        - bedroom
     objects:
         - mirror
         - toilet
@@ -31,8 +31,8 @@ hallway:
     r: 0
     c: 0
     neighbors:
-        bedroom: N
-        kitchen: N
+        - bedroom
+        - kitchen
     objects:
         - picture
         - closet
@@ -45,8 +45,8 @@ livingRoom:
     r: 0
     c: 0
     neighbors:
-        kitchen: N
-        mainStreet: N
+        - kitchen
+        - mainStreet
     objects:
         - wallet
         - loreDoor
@@ -59,8 +59,8 @@ kitchen:
     r: 0
     c: 0
     neighbors:
-        hallway: N
-        livingRoom: N
+        - hallway
+        - livingRoom
     objects:
         - catFood
         - pillBottles
@@ -75,10 +75,10 @@ mainStreet:
     r: 0
     c: 0
     neighbors:
-        livingRoom: N
-        gloverHouse: N
-        busStop: N
-        holeInWall: N
+        - livingRoom
+        - gloverHouse
+        - busStop
+        - holeInWall
     showIf: subFinishedLoreHouse
     objects:
         - halBeginning
@@ -90,7 +90,7 @@ gloverHouse:
     r: 0
     c: 0
     neighbors:
-        mainStreet: N
+        - mainStreet
     objects:
         - doorbell
         - tree
@@ -103,7 +103,7 @@ busStop:
     r: 0
     c: 0
     neighbors:
-        mainStreet: N
+        - mainStreet
     objects: {}
 
 holeInWall:
@@ -113,8 +113,8 @@ holeInWall:
     r: 0
     c: 0
     neighbors:
-        mainStreet: N
-        outskirts: N
+        - mainStreet
+        - outskirts
     objects:
         - pinkGuy
 
@@ -125,10 +125,10 @@ outskirts:
     r: 0
     c: 0
     neighbors:
-        nolanHouse: N
-        holeInWall: N
-        shinHouse: N
-        samjamHouse: N
+        - nolanHouse
+        - holeInWall
+        - shinHouse
+        - samjamHouse
     showIf: canVisitOutskirts
     objects: {}
 
@@ -139,8 +139,8 @@ nolanHouse:
     r: 0
     c: 0
     neighbors:
-        outskirts: N
-        shinHouse: N
+        - outskirts
+        - shinHouse
     objects:
         - peevedPeople
         - pileOfMoney
@@ -154,7 +154,7 @@ nolanBasement:
     r: 0
     c: 0
     neighbors:
-        nolanHouse: N
+        - nolanHouse
     objects:
         - nolan
 
@@ -165,10 +165,10 @@ shinHouse:
     r: 0
     c: 0
     neighbors:
-        outskirts: N
-        insideShinHouse: N
-        nolanHouse: N
-        samjamHouse: N
+        - outskirts
+        - insideShinHouse
+        - nolanHouse
+        - samjamHouse
     objects: {}
 
 insideShinHouse:
@@ -178,7 +178,7 @@ insideShinHouse:
     r: 0
     c: 0
     neighbors:
-        shinHouse: N
+        - shinHouse
     showIf: inventory_morphine_eq_1
     objects:
         - shin
@@ -191,11 +191,11 @@ samjamHouse:
     r: 0
     c: 0
     neighbors:
-        outskirts: N
-        shinHouse: N
-        frontGate: N
+        - outskirts
+        - shinHouse
+        - frontGate
     objects: {}
-    
+
 frontGate:
     name: front gate
     description: n/a
@@ -203,8 +203,8 @@ frontGate:
     r: 0
     c: 0
     neighbors:
-        samjamHouse: N
-        insideSamjam: N
+        - samjamHouse
+        - insideSamjam
     objects:
         - solaire
 
@@ -215,8 +215,7 @@ insideSamjam:
     r: 0
     c: 0
     neighbors:
-        frontGate: N
-        
+        - frontGate
     showIf: subSolaired_eq_1
     objects:
         - samjam
@@ -227,5 +226,5 @@ dungeon:
     r: 0
     c: 0
     neighbors:
-       holeInWall: N
+        - holeInWall
     objects: {}

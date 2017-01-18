@@ -7,7 +7,7 @@ railwayStation:
     r: 0
     c: 0
     neighbors:
-        generalStore: S
+        - generalStore
     objects:
         - conney
         - thomas
@@ -21,8 +21,8 @@ generalStore:
     r: 0
     c: 0
     neighbors:
-        railwayStation: N
-        hospital: S
+        - railwayStation
+        - hospital
     objects:
         - druGeneral
         - gritt
@@ -36,9 +36,9 @@ hospital:
     r: 0
     c: 0
     neighbors:
-        generalStore: N
-        townTreasury: W
-        miningCompany: E
+        - generalStore
+        - townTreasury
+        - miningCompany
     objects:
         - baha
         - flyer
@@ -53,7 +53,7 @@ townTreasury:
     r: 0
     c: 0
     neighbors:
-        hospital: E
+        - hospital
     objects:
         - bronzeShovel
         - silverPitchfork
@@ -67,7 +67,7 @@ miningCompany:
     r: 0
     c: 0
     neighbors:
-        hospital: W
+        - hospital
     objects:
         - book
         - corrosiveGas

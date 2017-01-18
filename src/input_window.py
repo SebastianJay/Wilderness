@@ -9,6 +9,7 @@ from asset_loader import AssetLoader
 from global_vars import Globals
 from lang_parser import BodyNode
 from lang_interpreter import Interpreter
+import threading
 
 class InputWindow(Window):
 
@@ -79,17 +80,23 @@ class InputWindow(Window):
                             # special logic for go to - change room ID TODO refactor
                             if gs.cmdBuffer.strip('. ')[0:5] == 'go to':
                                 roomId = AssetLoader().reverseRoomLookup(gs.cmdBuffer.strip('. ')[5:].strip(), gs.areaId)
-                                gs.roomId = roomId or gs.roomId
+                                gs.enterRoom(roomId or gs.roomId)
                             self.interpreter.executeAction(val)
                         elif isinstance(val, str):      # valid metacommand
                             if val == 'view inventory':
                                 gs.gameMode = GameMode.inAreaInventory
                             elif val == 'view map':
-                                gs.pushMessage('Command not implemented yet. =(')
-                                #gs.gameMode = GameMode.inAreaMap # TODO
+                                gs.gameMode = GameMode.inAreaMap
                             elif val == 'save game':
-                                gs.writeFile(Globals.SavePaths[gs.saveId])
-                                gs.pushMessage('Game saved to ' + Globals.SavePaths[gs.saveId] + '.')
+                                # write the save file in a separate thread and wait with loading screen
+                                def writeFileFunc():
+                                    gs.writeFile(Globals.SavePaths[gs.saveId])
+                                    gs.pushMessage('Game saved to ' + Globals.SavePaths[gs.saveId] + '.')
+                                    gs.unlockGameMode()
+                                gs.lockGameMode(GameMode.isLoading)
+                                t = threading.Thread(target=writeFileFunc)
+                                t.daemon = True
+                                t.start()
                             elif val == 'exit game':
                                 gs.gameMode = GameMode.titleScreen
                         else:   # tuple or None - invalid command

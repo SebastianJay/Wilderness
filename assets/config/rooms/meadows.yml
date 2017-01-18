@@ -5,7 +5,7 @@ shepherdHouse:
     r: 0
     c: 0
     neighbors:
-        hedgeMazeEntrance: W
+        - hedgeMazeEntrance
     objects:
         - queenBed
 
@@ -16,22 +16,22 @@ hedgeMazeEntrance:
     r: 0
     c: 0
     neighbors:
-        checkpoint1: NW
-        checkpoint2: NE
-        checkpoint3: SE
-        checkpoint4: SW
-        cliffside: W
+        - checkpoint1
+        - checkpoint2
+        - checkpoint3
+        - checkpoint4
+        - cliffside
     objects: {}
 
 checkpoint1:
     name: Checkpoint 1
-    description: The sound of tanks, guns, and horses fill the air. War has never been like this in Kipp’s world.
+    description: The sound of tanks, guns, and horses fill the air. War has never been like this in Kipp's world.
     script: meadows/Rooms/Checkpoint 1.txt
     r: 0
     c: 0
     neighbors:
-        hedgeMazeEntrance: SE
-        checkpoint2: NE
+        - hedgeMazeEntrance
+        - checkpoint2
     objects: {}
 
 checkpoint2:
@@ -41,19 +41,19 @@ checkpoint2:
     r: 0
     c: 0
     neighbors:
-        hedgeMazeEntrance: SW
-        checkpoint3: SE
+        - hedgeMazeEntrance
+        - checkpoint3
     objects: {}
 
 checkpoint3:
     name: Checkpoint 3
-    description: The sound of a broken pipe whistles. The boiler room sets the scene for a slasher film, and guess who’s the star.
+    description: The sound of a broken pipe whistles. The boiler room sets the scene for a slasher film, and guess who's the star.
     script: meadows/Rooms/Checkpoint 3.txt
     r: 0
     c: 0
     neighbors:
-        hedgeMazeEntrance: NW
-        checkpoint4: SW
+        - hedgeMazeEntrance
+        - checkpoint4
     objects: {}
 
 checkpoint4:
@@ -63,16 +63,16 @@ checkpoint4:
     r: 0
     c: 0
     neighbors:
-        hedgeMazeEntrance: NE
-        cliffside: W
+        - hedgeMazeEntrance
+        - cliffside
     objects: {}
 
 cliffside:
     name: Cliffside
-    description: The end is near, and it looks pretty cool. Over the horizon lies ahead… 
+    description: The end is near, and it looks pretty cool. Over the horizon lies ahead...
     script: meadows/Rooms/Cliffside.txt
     r: 0
     c: 0
     neighbors:
-        hedgeMazeEntrance: E
+        - hedgeMazeEntrance
     objects: {}

@@ -5,9 +5,9 @@ forestCabin:
     r: 0
     c: 0
     neighbors:
-        abandonedTreehouse: N
-        lumberMill: S
-        huntingRange: W
+        - abandonedTreehouse
+        - lumberMill
+        - huntingRange
     objects:
         - bethy
         - draymond
@@ -22,9 +22,9 @@ abandonedTreehouse:
     r: 0
     c: 0
     neighbors:
-        forestCabin: E
-        lumberMill: S
-        huntingRange: W
+        - forestCabin
+        - lumberMill
+        - huntingRange
     objects:
         - diary
         - familyPhoto
@@ -39,9 +39,9 @@ lumberMill:
     r: 0
     c: 0
     neighbors:
-        forestCabin: E
-        abandonedTreehouse: N
-        huntingRange: W
+        - forestCabin
+        - abandonedTreehouse
+        - huntingRange
     objects:
         - jack
         - olWilly
@@ -53,10 +53,10 @@ huntingRange:
     r: 0
     c: 0
     neighbors:
-        forestCabin: E
-        abandonedTreehouse: N
-        lumberMill: S
-        cave: NE
+        - forestCabin
+        - abandonedTreehouse
+        - lumberMill
+        - cave
     objects:
         - tucker
 
@@ -68,5 +68,5 @@ cave:
     c: 0
     showIf: forTuckerTalk_eq_1
     neighbors:
-        huntingRange: W
+        - huntingRange
     objects: {}

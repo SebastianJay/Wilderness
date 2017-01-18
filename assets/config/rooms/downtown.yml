@@ -1,12 +1,13 @@
 # Business District
 businessDistrict:
     name: Business District
+    description: n/a
     script: Lore/Downtown/Rooms/Downtown_Lore_BusinessDistrict.txt
     r: 0
     c: 0
     neighbors:
-        industrialDistrict: N
-        rodninOffice: NE
+        - industrialDistrict
+        - rodninOffice
     objects: {}
 
 officeDesk:
@@ -16,8 +17,8 @@ officeDesk:
     r: 0
     c: 0
     neighbors:
-        rodninOffice: SE
-        insideElevator: E
+        - rodninOffice
+        - insideElevator
     objects:
         - secretary
 
@@ -28,9 +29,9 @@ rodninOffice:
     r: 0
     c: 0
     neighbors:
-        businessDistrict: NW
-        officeDesk: SE
-        insideElevator: E
+        - businessDistrict
+        - officeDesk
+        - insideElevator
     objects: {}
 
 insideElevator:
@@ -40,8 +41,8 @@ insideElevator:
     r: 0
     c: 0
     neighbors:
-        officeDesk: SE
-        rodninOffice: SE
+        - officeDesk
+        - rodninOffice
     objects:
         - liftAttendant
 
@@ -52,7 +53,7 @@ rodninOfficeSecondFloor:
     r: 0
     c: 0
     neighbors:
-        insideElevator: E
+        - insideElevator
     objects:
         - rodnin
         - tempBed
@@ -64,8 +65,8 @@ rodninOfficeThirdFloor:
     r: 0
     c: 0
     neighbors:
-        rodninOfficeThirdFloorShelf: E
-        insideElevator: E
+        - rodninOfficeThirdFloorShelf
+        - insideElevator
     objects:
         - dataSamples
 
@@ -76,7 +77,7 @@ rodninOfficeThirdFloorShelf:
     r: 0
     c: 0
     neighbors:
-        rodninOfficeThirdFloor: W
+        - rodninOfficeThirdFloor
     objects:
         -oFMRP
         -ePF
@@ -89,8 +90,8 @@ industrialDistrict:
     r: 0
     c: 0
     neighbors:
-        businessDistrict: NW
-        hangar: SW
+        - businessDistrict
+        - hangar
     objects: {}
 
 hangar:
@@ -100,8 +101,8 @@ hangar:
     r: 0
     c: 0
     neighbors:
-        industrialDistrict: E
-        upperLevel: E
+        - industrialDistrict
+        - upperLevel
     objects:
         - controlPanel
 
@@ -113,5 +114,5 @@ upperLevel:
     r: 0
     c: 0
     neighbors:
-        hangar: SW
+        - hangar
     objects: {}

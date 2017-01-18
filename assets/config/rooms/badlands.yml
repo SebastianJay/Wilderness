@@ -5,15 +5,15 @@ campsite:
     r: 0
     c: 0
     neighbors:
-        tau: N
-        upsilon: N
-        sigma: N
-        mu: N
-        kappa: N
-        cave6: N # HAS TO BE HIDDEN UNTIL THE MAP IS ADDED TO INVENTORY
+        - tau
+        - upsilon
+        - sigma
+        - mu
+        - kappa
+        - cave6 # HAS TO BE HIDDEN UNTIL THE MAP IS ADDED TO INVENTORY
     objects:
         - sleepingBag
-        
+
 tau:
     name: Tau
     description: n/a
@@ -21,10 +21,10 @@ tau:
     r: 0
     c: 0
     neighbors:
-        campsite: N
+        - campsite
     objects:
         - torch
-        
+
 upsilon:
     name: Upsilon
     description: n/a
@@ -32,7 +32,7 @@ upsilon:
     r: 0
     c: 0
     neighbors:
-        campsite: N
+        - campsite
     objects: {}
 
 sigma:
@@ -42,8 +42,8 @@ sigma:
     r: 0
     c: 0
     neighbors:
-        campsite: N
-    objects: 
+        - campsite
+    objects:
         - firewall
 
 mu:
@@ -53,7 +53,7 @@ mu:
     r: 0
     c: 0
     neighbors:
-        campsite: N
+        - campsite
     objects: {}
 
 kappa:
@@ -63,7 +63,7 @@ kappa:
     r: 0
     c: 0
     neighbors:
-        campsite: N
+        - campsite
     objects: {}
 
 cave6:
@@ -74,6 +74,6 @@ cave6:
     r: 0
     c: 0
     neighbors:
-        campsite: N
+        - campsite
     objects:
         - wallPuzzle

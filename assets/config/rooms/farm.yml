@@ -5,7 +5,7 @@ bedroom:
     r: 0
     c: 0
     neighbors:
-        livingRoom: E
+        - livingRoom
     objects:
         - bed
         - map
@@ -17,10 +17,10 @@ livingRoom:
     r: 0
     c: 0
     neighbors:
-        kitchen: E
-        bedroom: W
-        shop: N
-        meadow: S
+        - kitchen
+        - bedroom
+        - shop
+        - meadow
     objects:
         - rice
 
@@ -31,7 +31,7 @@ kitchen:
     r: 0
     c: 0
     neighbors:
-        livingRoom: W
+        - livingRoom
     objects: {}
 
 shop:
@@ -41,7 +41,7 @@ shop:
     r: 0
     c: 0
     neighbors:
-        livingRoom: S
+        - livingRoom
     objects:
         - henry
 
@@ -52,7 +52,7 @@ meadow:
     r: 0
     c: 0
     neighbors:
-        livingRoom: N
+        - livingRoom
     objects:
         - duke
         - hereford

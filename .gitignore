@@ -3,6 +3,8 @@
 savefiles/
 # settings file
 settings.txt
+# distribution zip
+dist.zip
 
 # Pycharm
 .idea

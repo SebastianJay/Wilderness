@@ -67,6 +67,7 @@ class GameState:
             self.onAddLangNode = EventHook()    # called when addLangNode is called
             self.onCharacterSwitch = EventHook()    # called when activeProtagonistInd changes
             self.onEnterArea = EventHook()      # called when enterArea is called
+            self.onEnterRoom = EventHook()      # called when enterRoom is called
             self.onClearBuffer = EventHook()    # called when clearBuffer is called
             self.onSettingChange = EventHook()  # called when a setting changes
             self.onInventoryChange = EventHook()    # called when inventory changes
@@ -286,12 +287,18 @@ class GameState:
         def enterArea(self, areaId, roomId, fromWorldMap=False):
             """ changes active character's area and room and fires event """
             oldArea = self.areaId
-            self.areaId = areaId
             oldRoom = self.roomId
-            self.roomId = roomId
+            self.areaId = areaId
+            self.enterRoom(roomId)
             if fromWorldMap:
                 self.clearBuffer()
             self.onEnterArea((oldArea, areaId), (oldRoom, roomId), fromWorldMap)
+
+        def enterRoom(self, roomId):
+            """ changes just active character's room and fires event """
+            oldRoom = self.roomId
+            self.roomId = roomId
+            self.onEnterRoom(oldRoom, roomId)
 
         @property
         def mapLocation(self):
@@ -346,8 +353,8 @@ class GameState:
             # do not save non-persistent fields
             deleteFields = ['cmdMap', 'cmdBuffer', 'gameModeActive', 'choiceList',
                 'gameModeLockedRequests', 'onChoiceChange', 'onSettingChange', 'onClearBuffer',
-                'onGameModeChange', 'onAddLangNode', 'onEnterArea', 'onCharacterSwitch',
-                'onInventoryChange', 'gameMessages', 'saveId']
+                'onGameModeChange', 'onAddLangNode', 'onEnterArea', 'onEnterRoom',
+                'onCharacterSwitch', 'onInventoryChange', 'gameMessages', 'saveId']
             for field in deleteFields:
                 del obj[field]
             return json.dumps(obj)
@@ -360,6 +367,7 @@ class GameState:
             # start all fields from scratch
             self.init()
             # "join" dct manually so omitted members of dct do not carry over
+            activeInd = 0
             for key in dct:
                 if key == 'subStates':
                     self.subStates = []
@@ -367,11 +375,18 @@ class GameState:
                         substate = GameState.__GameState.GameSubState()
                         substate.load(dct[key][i])
                         self.subStates.append(substate)
+                elif key == 'activeProtagonistInd':
+                    activeInd = int(dct[key])
                 else:
                     setattr(self, key, dct[key])
-            # send signals so other windows load correctly
-            self.onAddLangNode(self.historyBuffer, True)
+            # send inventory change signal to load InventoryWindow
             self.onInventoryChange()
+            # send lang node add signal to load both buffers of HistoryWindow
+            # the active protagonist is done last so correct commands will be shown TODO refactor
+            self.activeProtagonistInd = 1 - activeInd
+            self.onAddLangNode(self.historyBuffer, True)
+            self.activeProtagonistInd = activeInd
+            self.onAddLangNode(self.historyBuffer, True)
 
         def loads(self, jsonstr):
             """ Initialize the GameState from a Json string """

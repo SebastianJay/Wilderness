@@ -2,11 +2,19 @@
 ## rooms, which in turn has multiple objects. The rooms and objects are
 ## associated through the roomsConfig and objectsConfig fields
 
+# area id
 suburbs:
+    # readable name
     name: Residential District
+    # room config path
     roomsConfig: rooms/suburbs.yml
+    # object config path
     objectsConfig: objects/suburbs.yml
+    # which world map (0=Lore, 1=Kipp)
     mapId: 0
+    # in area map art path
+    inAreaMap: aspire.txt
+    # list of entrances to area (room id and coordinates on world map)
     entrances:
         -
             roomId: busStop
@@ -18,6 +26,7 @@ university:
     roomsConfig: rooms/university.yml
     objectsConfig: objects/university.yml
     mapId: 0
+    inAreaMap: aspire.txt
     entrances:
         -
             roomId: diningHall
@@ -29,6 +38,7 @@ downtown:
     roomsConfig: rooms/downtown.yml
     objectsConfig: objects/downtown.yml
     mapId: 0
+    inAreaMap: aspire.txt
     entrances:
         -
             roomId: businessDistrict
@@ -39,22 +49,20 @@ aspire:
     name: Aspire
     roomsConfig: rooms/aspire.yml
     objectsConfig: objects/aspire.yml
-    # which world map (0=Lore, 1=Kipp)
     mapId: 1
-    # locations on map where you can enter area
+    inAreaMap: aspire.txt
     entrances:
         -
-            roomId: townCenter  # id of room that gets loaded
-            r: 9                # r, c indicating tile on world map
+            roomId: townCenter
+            r: 9
             c: 116
-    # only be able to enter if a condition is fulfilled
-    #showIf: didFarm #TODO
 
 farm:
     name: Charli
     roomsConfig: rooms/farm.yml
     objectsConfig: objects/farm.yml
     mapId: 1
+    inAreaMap: aspire.txt
     entrances:
         -
             roomId: meadow
@@ -66,18 +74,19 @@ blackHills:
     roomsConfig: rooms/black_hills.yml
     objectsConfig: objects/black_hills.yml
     mapId: 1
+    inAreaMap: aspire.txt
     entrances:
         -
             roomId: railwayStation
             r: 30
             c: 97
-    #showIf: didFarm
 
 meadows:
     name: Uncanny Prairie
     roomsConfig: rooms/meadows.yml
     objectsConfig: objects/meadows.yml
     mapId: 1
+    inAreaMap: aspire.txt
     entrances:
         -
             roomId: shepherdHouse
@@ -93,6 +102,7 @@ badlands:
     roomsConfig: rooms/badlands.yml
     objectsConfig: objects/badlands.yml
     mapId: 1
+    inAreaMap: aspire.txt
     entrances:
         -
             roomId: campsite
@@ -109,6 +119,7 @@ forest:
     roomsConfig: rooms/forest.yml
     objectsConfig: objects/forest.yml
     mapId: 1
+    inAreaMap: aspire.txt
     entrances:
         -
             roomId: forestCabin
