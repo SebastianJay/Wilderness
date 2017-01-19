@@ -62,9 +62,10 @@ class SavesWindow(Window):
             areasConfig = AssetLoader().getConfig(Globals.AreasConfigPath)
             roomsConfig = AssetLoader().getConfig(areasConfig[substate['areaId']]['roomsConfig'])
             timeStr = '{:02}:{:02}:{:02}'.format(playtime // 3600, (playtime % 3600) // 60, (playtime % 60))
-            progressStr = '{}:{}:{}'.format('Lore' if ind == 0 else 'Kipp',
+            progressStr = '{}.{}.{}'.format('Lore' if ind == 0 else 'Kipp',
                 areasConfig[substate['areaId']]['name'],
-                roomsConfig[substate['roomId']]['name'])
+                roomsConfig[substate['roomId']]['mapName'] \
+                    if 'mapName' in roomsConfig[substate['roomId']] else roomsConfig[substate['roomId']]['name'])
             infoStr = name + (' ' * (16 - len(name))) \
                 + timeStr + (' ' * (16 - len(timeStr))) \
                 + progressStr

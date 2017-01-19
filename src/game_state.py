@@ -405,14 +405,17 @@ class GameState:
                     activeInd = int(dct[key])
                 else:
                     setattr(self, key, dct[key])
-            # send inventory change signal to load InventoryWindow
-            self.onInventoryChange()
+            # TODO refactor event signalling
             # send lang node add signal to load both buffers of HistoryWindow
-            # the active protagonist is done last so correct commands will be shown TODO refactor
+            # the active protagonist is done last so correct commands will be shown
             self.activeProtagonistInd = 1 - activeInd
             self.onAddLangNode(self.historyBuffer, True)
             self.activeProtagonistInd = activeInd
             self.onAddLangNode(self.historyBuffer, True)
+            # send inventory change signal to load InventoryWindow
+            self.onInventoryChange()
+            # send room enter signal to load InAreaWindow
+            self.onEnterRoom(self.roomId, self.roomId)
 
         def loads(self, jsonstr):
             """ Initialize the GameState from a Json string """
