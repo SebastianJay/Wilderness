@@ -171,6 +171,14 @@ class Interpreter:
 
     def evaluateCondition(self, args):
         """ returns True if the condition specified by args is true """
+        # recursively handle AND and OR -- the AND takes precedence
+        if 'or' in args:
+            ind = args.index('or')
+            return self.evaluateCondition(args[:ind]) or self.evaluateCondition(args[ind+1:])
+        if 'and' in args:
+            ind = args.index('and')
+            return self.evaluateCondition(args[:ind]) and self.evaluateCondition(args[ind+1:])
+
         gs = GameState()
         # return inverse of following condition if prefixed with 'not'
         args, notFlag = self.extractNot(args)
@@ -195,6 +203,8 @@ class Interpreter:
             # do the comparison
             if comparator in ['eq', '=', '==']:
                 retval = varval == compare
+            elif comparator in ['neq', '!=']:
+                retval = varval != compare
             elif comparator in ['gt', '>']:
                 retval = int(varval) > int(compare)
             elif comparator in ['lt', '<']:

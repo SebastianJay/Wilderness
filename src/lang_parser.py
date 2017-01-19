@@ -62,7 +62,8 @@ class FuncNode:
         self.args = args
         # typecheck the number of arguments
         if (self.title in ['set', 'inc', 'add', 'dec', 'sub'] and (len(self.args) < 1 or len(self.args) > 3)) \
-            or (self.title in ['if', 'elif'] and (len(self.args) < 1 or len(self.args) > 4)) \
+            or (self.title in ['actionset', 'timeset'] and len(self.args) != 3) \
+            or (self.title in ['if', 'elif'] and len(self.args) < 1) \
             or (self.title in ['init', 'unset'] and (len(self.args) < 1 or len(self.args) > 2)) \
             or (self.title in ['input', 'goto'] and len(self.args) != 1) \
             or (self.title in ['gameover', 'switchcharacter', 'random', 'choice', 'else'] and len(self.args) > 0):
