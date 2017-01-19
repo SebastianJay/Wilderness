@@ -149,7 +149,7 @@ class WindowManager(Window):
         self.addWindow(InputWindow, splitRow - 1, 0, Globals.NumRows - (splitRow - 1) - 2, splitCol)
         self.addWindow(PaletteWindow, 0, splitCol - 1, Globals.NumRows - 2, Globals.NumCols - (splitCol - 1))
 
-        self.addWindow(MapWindow, Globals.NumRows//4, Globals.NumCols//4, (Globals.NumRows//2)-2, (Globals.NumCols//2))
+        self.addWindow(MapWindow, Globals.NumRows//4-1, Globals.NumCols//4, (Globals.NumRows//2)-2+2, (Globals.NumCols//2))
         self.addWindow(InAreaWindow, Globals.NumRows//5, Globals.NumCols//6, (Globals.NumRows*3//5)-2, (Globals.NumCols*2//3))
         self.addWindow(SettingsWindow, Globals.NumRows * 3 // 7, 0, Globals.NumRows * 4 // 7, Globals.NumCols)
         self.addWindow(InventoryWindow, Globals.NumRows//5, Globals.NumCols//6, (Globals.NumRows*3//5)-2, (Globals.NumCols*2//3))

@@ -47,6 +47,7 @@ downtown:
 
 aspire:
     name: Aspire
+    subtitle: Desert Outpost
     roomsConfig: rooms/aspire.yml
     objectsConfig: objects/aspire.yml
     mapId: 1
