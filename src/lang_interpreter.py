@@ -84,7 +84,7 @@ class Interpreter:
                 elif node.title == 'unset':
                     args, inventoryFlag = self.extractInventory(node.args)
                     gs.delVar(args[0], inventoryFlag)
-                elif node.title in ['set', 'inc', 'add', 'dec', 'sub']:
+                elif node.title in ['set', 'inc', 'add', 'dec', 'sub', 'actionset', 'timeset']:
                     args, inventoryFlag = self.extractInventory(node.args)
                     gs.touchVar(args[0], inventoryFlag)
                     # if command specifies amount to increment by use that, otherwise use 1
@@ -105,10 +105,13 @@ class Interpreter:
                     multiple = 1
                     if node.title in ['dec', 'sub']:
                         multiple = -1
-                    if strVal:
-                        gs.setVar(args[0], strVal, inventoryFlag)
+                    setVal = strVal or str(addVal + multiple * incVal)
+                    if node.title == 'actionset':
+                        gs.actionSet(args[0], setVal, args[2])
+                    elif node.title == 'timeset':
+                        gs.timeSet(args[0], setVal, args[2])
                     else:
-                        gs.setVar(args[0], str(addVal + multiple * incVal), inventoryFlag)
+                        gs.setVar(args[0], setVal, inventoryFlag)
                 elif node.title == 'input':
                     if val is not None:
                         gs.gameMode = GameMode.inAreaCommand
@@ -317,16 +320,16 @@ class Interpreter:
                     cmdMap[action[0]][objName] = action[1]
         gs.cmdMap = cmdMap
 
-    def resume(self, val):
+    def resume(self, val=None):
         """ completes a choice or input function with a value """
-        self.drainCallStack(val)
+        if self.drainCallStack(val):
+            GameState().incActionCount()
         self.refreshCommandList()
 
     def executeAction(self, body):
         """ wrapper around stack manipulation to execute a BodyNode """
         self.callStack.append([body, 0])
-        self.drainCallStack()
-        self.refreshCommandList()
+        self.resume()
 
 if __name__ == '__main__':
     i = Interpreter()

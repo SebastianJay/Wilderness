@@ -78,8 +78,13 @@ class GameState:
             # game specific savable info
             self.name = ""              # player name, entered at start of new game
             self.playtime = 0.0         # playtime, in seconds
+            self.actionCount = 0        # number of actions the player has taken
             self.variables = {}         # variables created through script files {string key: string/int value}
                                         # value is a string by default, but can be converted to int on the fly
+            self.timeSetVars = {}       # sets vars after certain time elapses
+                                        # {string key: (int timeLeft, string/int targetValue)}
+            self.actionSetVars = {}     # sets vars after certain number of actions taken
+                                        # {string key: (int actionsLeft, string/int targetValue)}
 
             # character specific savable info
             self.subStates = [
@@ -99,6 +104,19 @@ class GameState:
 
         def incPlaytime(self, dt):
             self.playtime += dt
+            for varname in list(self.timeSetVars.keys()):
+                self.timeSetVars[varname][0] -= dt
+                if self.timeSetVars[varname][0] <= 0.0:
+                    self.setVar(varname, self.timeSetVars[varname][1])
+                    del self.timeSetVars[varname]
+
+        def incActionCount(self, delta=1):
+            self.actionCount += delta
+            for varname in list(self.actionSetVars.keys()):
+                self.actionSetVars[varname][0] -= delta
+                if self.actionSetVars[varname][0] <= 0:
+                    self.setVar(varname, self.actionSetVars[varname][1])
+                    del self.actionSetVars[varname]
 
         def pushMessage(self, message):
             self.gameMessages.append(message)
@@ -206,6 +224,14 @@ class GameState:
             else:
                 if varname in self.variables:
                     del self.variables[varname]
+
+        def actionSet(self, varname, value, numActions):
+            if varname not in self.actionSetVars:
+                self.actionSetVars[varname] = [int(numActions), value]
+
+        def timeSet(self, varname, value, numTime):
+            if varname not in self.timeSetVars:
+                self.timeSetVars[varname] = [float(numTime), value]
 
         def addLangNode(self, node):
             # helper for adding correct indices to historyFormatting
