@@ -59,7 +59,7 @@ go to{
             $inc_darkPts_1
 
         }
-        @bold_blue{From the desk of level designer, James:}
+        @bold_blue{From the desk of some level designer:}
         @bold_orange{Please save now so that you, the player, won't be tilted when you randomly encounter a game over. If you do, you will return to the main menu screen and must load a save to continue. And always remember to have an awesome day :P}
 
     }$else{
