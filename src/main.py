@@ -18,7 +18,9 @@ import threading
 
 class GameDriver:
     def __init__(self):
-        GameState() # initialize the singleton before threading to avoid race conditions
+        GameState() # initialize singletons before threading to avoid race conditions
+        AssetLoader()
+        MusicPlayer()
         self.root = tk.Tk()
         self.windowManager = WindowManager()
         self.display = Display(self.root, self.windowManager)
@@ -32,8 +34,8 @@ class GameDriver:
         if AssetLoader().getSettings() is not None:
             for setting in AssetLoader().getSettings():
                 GameState().onSettingChange(setting[0], setting[1])
-        #else:
-        MusicPlayer().playNext(AssetLoader().getMusicPath('title'))
+        else:
+            MusicPlayer().playNext(AssetLoader().getMusicPath('title'))
         self.windowManager.load()
         GameState().unlockGameMode()
 

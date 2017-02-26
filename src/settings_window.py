@@ -18,8 +18,9 @@ class SettingsWindow(Window):
         # Format: (Option name, (option values))
         self.options = [('Font size', ('Tiny', 'Small', 'Medium', 'Large', 'Huge')),
                         ('Scroll speed', ('Slow', 'Normal', 'Fast')),
-                        ('Styled text', ('On', 'Off'))]
-        self.optionIndices = [1, 1, 0]      # default indices (columns) of each option
+                        ('Styled text', ('On', 'Off')),
+                        ('Background music', ('On', 'Off'))]
+        self.optionIndices = [1, 1, 0, 0]      # default indices (columns) of each option
         self.optionPositions = []           # column locations of options
         self.startCol = self.width // 3
         self.marginRows = 3
@@ -35,6 +36,8 @@ class SettingsWindow(Window):
                     self.optionIndices[1] = setting[1]
                 elif setting[0] == 'styledText':
                     self.optionIndices[2] = setting[1]
+                elif setting[0] == 'backgroundMusic':
+                    self.optionIndices[3] = setting[1]
 
         for row, (option, values) in enumerate(self.options):
             col = self.startCol
