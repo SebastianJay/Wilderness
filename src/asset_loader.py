@@ -169,6 +169,10 @@ class AssetLoader:
         def getConfig(self, name):
             return self.assets[joinAndNorm(self.root_path, 'config', name)]
 
+        def getMusicPath(self, name):
+            fname = self.getConfig(Globals.MusicConfigPath)[name]
+            return joinAndNorm(self.root_path, 'music', fname)
+
         def getSave(self, name):
             if joinAndNorm(name) in self.savefiles:
                 return self.savefiles[joinAndNorm(name)]

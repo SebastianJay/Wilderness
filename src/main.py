@@ -8,6 +8,7 @@ from window_manager import WindowManager
 from display import Display
 from input_handler import InputHandler
 from asset_loader import AssetLoader
+from music_player import MusicPlayer
 from game_state import GameState, GameMode
 import tkinter as tk
 import sys
@@ -31,6 +32,8 @@ class GameDriver:
         if AssetLoader().getSettings() is not None:
             for setting in AssetLoader().getSettings():
                 GameState().onSettingChange(setting[0], setting[1])
+        #else:
+        MusicPlayer().playNext(AssetLoader().getMusicPath('title'))
         self.windowManager.load()
         GameState().unlockGameMode()
 

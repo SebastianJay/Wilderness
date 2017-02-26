@@ -27,6 +27,7 @@ class Globals:
     ItemsConfigPath = 'items.yml'
     KeybindingsConfigPath = 'keybindings.yml'
     FragmentsConfigPath = 'fragments.yml'
+    MusicConfigPath = 'music.yml'
     IconFilePathWin = 'icon.ico'
     IconFilePathUnix = 'icon.xbm'
     CmdMaxLength = 48

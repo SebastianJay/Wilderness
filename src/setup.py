@@ -12,6 +12,7 @@ setup(
     install_requires=[
         'pyyaml',
         'nose',
+        'pygame',
     ],
     zip_safe=False
 )

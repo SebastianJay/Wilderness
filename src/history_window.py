@@ -41,7 +41,7 @@ class HistoryWindow(Window):
     def langNodeAddedHandler(self):
         def _langNodeAddedHandler(*args, **kwargs):
             # do word wrapping logic whenever an update has been made to history buffer
-            added_text = args[0][1:] if args[0][0] == '\n' else args[0]
+            added_text = (args[0][1:] if args[0][0] == '\n' else args[0]) if len(args[0]) > 0 else ''
             input_list = added_text.split('\n')
 
             output_list = []    # list of additional row text - each row contains a string
