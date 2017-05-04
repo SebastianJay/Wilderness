@@ -1,5 +1,6 @@
 campsite:
-    name: Campsite
+    name: campsite
+    mapName: Campsite
     description: n/a
     script: badlands/Rooms/Campsite.txt
     r: 0
@@ -67,7 +68,8 @@ kappa:
     objects: {}
 
 cave6:
-    name: Cave 6
+    name: cave 6
+    mapName: Cave 6
     description: n/a
     script: badlands/Rooms/Cave 6.txt
     showIf: inventory_map_eq_1
