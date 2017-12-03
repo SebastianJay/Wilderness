@@ -20,6 +20,8 @@ One main plot point is that the two protagonists are telepathically connected, a
 
 The [characters document](characters.md) contains more details about the branching storylines as it pertains to each character.
 
+The [background document](background.md) contains more details about each area, including plot.
+
 ### Lore Storyline
 
 Lore's first step is figuring out how to the Wilderness. A system of roads connects ~3 cities together but no roads exist straight there (offroad driving is not an option). Lore's friends direct her attention to a local entrepreneur (Rodnin) who heads an environmental research and compliance company is known to have a private jet. Planes in general are a rarity, and those owned by the governments are provisioned for evacuation purposes. But perhaps there is a way to convince this man to send a plane the opposite way?
@@ -28,7 +30,7 @@ _The gamer must have progressed with Kipp at this point to make progress in this
 
 Because of Rodnin's familiarity with Lore's mother, he gives Lore a position working in the lab. He also allows all parties interested in his plane to meet with him and make their pitch; in a week's time he will decide who can take the plane.
 
-_The gamer will be placed on one of three paths depending on actions with Kipp._
+_The gamer will be placed on one of three paths depending on actions with Lore._
 
 ---
 
@@ -59,7 +61,7 @@ It is Kipp's father's birthday. After a peaceful night with the family, Kipp dec
 As an outdoorsman, Kipp is able to travel the world by foot, and he passes through a number of small settlements. He reaches a nexus from where he must venture more or less straight into the wasteland. One person will accompany him on the journey.
 
 _The gamer must have progressed with Lore at this point to make progress in this storyline._
-_The gamer will be placed on one of three paths, which is determined by progress with Lore._
+_The gamer will be placed on one of three paths, based on actions with Kipp._
 
 ---
 
