@@ -12,19 +12,19 @@ import copy
 import os
 
 class GameMode(Enum):
-    isLoading           =0
-    titleScreen         =1
-    selectFile          =2
-    settings            =3
-    credits             =4
-    inAreaCommand       =5
-    inAreaChoice        =6
-    inAreaInput         =7
-    inAreaMap           =8
-    inAreaInventory     =9
-    inAreaAnimating     =10
-    worldMap            =11
-    worldMapOverArea    =12
+    IsLoading           =0
+    TitleScreen         =1
+    SelectFile          =2
+    Settings            =3
+    Credits             =4
+    InAreaCommand       =5
+    InAreaChoice        =6
+    InAreaInput         =7
+    InAreaMap           =8
+    InAreaInventory     =9
+    InAreaAnimating     =10
+    WorldMap            =11
+    WorldMapOverArea    =12
 
 class GameState:
     # Python singleton implementation adapted from
@@ -99,7 +99,7 @@ class GameState:
             self.cmdMap = {}            # "trie" of commands player can type
             self.choiceList = []        # list of strings of choices player can make
             self.gameModeLockedRequests = []    # set requests are queued if game state is locked
-            self.gameModeActive = GameMode.titleScreen    # the "mode" of game player is in
+            self.gameModeActive = GameMode.TitleScreen    # the "mode" of game player is in
             self.gameMessages = deque()
 
         def incPlaytime(self, dt):
@@ -131,7 +131,7 @@ class GameState:
             """ Switch the active protagonist after text finishes animation """
             def _doSwitch(*args, **kwargs):
                 old, new = args[0]
-                if old == GameMode.inAreaAnimating: # when done with text animation..
+                if old == GameMode.InAreaAnimating: # when done with text animation..
                     self.activeProtagonistInd = 1 - self.activeProtagonistInd # flip index
                     self.enterArea(self.areaId, self.roomId)    # send signal to run _awake startup script
                     self.onGameModeChange -= _doSwitch  # deregister this handler after complete
@@ -337,9 +337,9 @@ class GameState:
             """ transitions to world map and sets character position to (r, c) """
             def _gotoWorldMap(*args, **kwargs):
                 old, new = args[0]
-                if old == GameMode.inAreaAnimating:         # when done with text animation..
+                if old == GameMode.InAreaAnimating:         # when done with text animation..
                     self.mapLocation = [int(r), int(c)]     # change player coordinates
-                    self.gameMode = GameMode.worldMap       # window manager changes active windows
+                    self.gameMode = GameMode.WorldMap       # window manager changes active windows
                     self.onGameModeChange -= _gotoWorldMap  # deregister handler
             self.onGameModeChange += _gotoWorldMap
 
@@ -438,7 +438,7 @@ class GameState:
     # singleton instance - created once per program run
     instance = None
 
-    # When GameMode is inAreaCommand, some generally available game commands
+    # When GameMode is InAreaCommand, some generally available game commands
     cmdListMetaCommands = (
         'view inventory',
         'view map',

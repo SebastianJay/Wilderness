@@ -75,7 +75,7 @@ class InAreaWindow(Window):
                     newCursor[1] += 1
             elif key == "Return":
                 # exit back to main game
-                GameState().gameMode = GameMode.inAreaCommand
+                GameState().gameMode = GameMode.InAreaCommand
                 break
             if currentMap[newCursor[0]][newCursor[1]] != '@':   # tile with @ cannot be hovered over
                 self.mapCursor = newCursor

@@ -55,4 +55,4 @@ class CreditsWindow(Window):
     def update(self, timestep, keypresses):
         for key in keypresses:
             if key in [' ', 'Return', 'BackSpace']:
-                GameState().gameMode = GameMode.titleScreen
+                GameState().gameMode = GameMode.TitleScreen

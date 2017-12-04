@@ -41,7 +41,7 @@ class GameDriver:
 
     def mainloop(self):
         # start off separate thread to load assets
-        GameState().lockGameMode(GameMode.isLoading)
+        GameState().lockGameMode(GameMode.IsLoading)
         t = threading.Thread(target=self.initAssets)
         t.daemon = True
         t.start()

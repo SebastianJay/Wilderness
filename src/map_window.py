@@ -136,9 +136,9 @@ class MapWindow(Window):
 
         val = self.overEntrance(g.mapLocation[0], g.mapLocation[1])
         if val:
-            g.gameMode = GameMode.worldMapOverArea
+            g.gameMode = GameMode.WorldMapOverArea
         else:
-            g.gameMode = GameMode.worldMap
+            g.gameMode = GameMode.WorldMap
 
         # process keystrokes to move player position
         for key in keypresses:
@@ -159,7 +159,7 @@ class MapWindow(Window):
                     if currentTravel[g.mapLocation[0]][g.mapLocation[1] + 1] == '0':
                         g.mapLocation[1] += 1
             elif key == "Return" and val:
-                GameState().gameMode = GameMode.inAreaCommand
+                GameState().gameMode = GameMode.InAreaCommand
                 GameState().enterArea(val[0], val[1], True)
 
 if __name__ == '__main__':

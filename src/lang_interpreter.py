@@ -59,13 +59,13 @@ class Interpreter:
                     return Interpreter.ExitCode.push
                 elif node.title == 'choice':
                     if val is not None:
-                        gs.gameMode = GameMode.inAreaCommand
+                        gs.gameMode = GameMode.InAreaCommand
                         pick = int(val)
                         self.callStack[-1][1] = nodeInd + 1
                         self.callStack.append([node.inner[pick][1], 0])
                         return Interpreter.ExitCode.push
                     else:
-                        gs.gameMode = GameMode.inAreaChoice
+                        gs.gameMode = GameMode.InAreaChoice
                         # populate choice list in GameState
                         lstChoices = []
                         for choice in node.inner:
@@ -114,11 +114,11 @@ class Interpreter:
                         gs.setVar(args[0], setVal, inventoryFlag)
                 elif node.title == 'input':
                     if val is not None:
-                        gs.gameMode = GameMode.inAreaCommand
+                        gs.gameMode = GameMode.InAreaCommand
                         gs.touchVar(node.args[0])
                         gs.setVar(node.args[0], str(val))
                     else:
-                        gs.gameMode = GameMode.inAreaInput
+                        gs.gameMode = GameMode.InAreaInput
                         self.callStack[-1][1] = nodeInd
                         return Interpreter.ExitCode.halt
                 elif node.title == 'goto':
@@ -128,7 +128,7 @@ class Interpreter:
                 elif node.title == 'exit':
                     return Interpreter.ExitCode.empty
                 elif node.title == 'gameover':
-                    gs.gameMode = GameMode.titleScreen
+                    gs.gameMode = GameMode.TitleScreen
                     return Interpreter.ExitCode.empty
                 elif node.title == 'switchcharacter':
                     gs.switchCharacter()

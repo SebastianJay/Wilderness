@@ -51,52 +51,52 @@ class WindowManager(Window):
         GameState().onCharacterSwitch += self.characterSwitchHandler()
 
     def gameModeChangeHandler(self):
-        inGameModes = [GameMode.inAreaCommand, GameMode.inAreaChoice,
-            GameMode.inAreaInput, GameMode.inAreaAnimating]
-        worldMapModes = [GameMode.worldMap, GameMode.worldMapOverArea]
+        inGameModes = [GameMode.InAreaCommand, GameMode.InAreaChoice,
+            GameMode.InAreaInput, GameMode.InAreaAnimating]
+        worldMapModes = [GameMode.WorldMap, GameMode.WorldMapOverArea]
         def _queueTransition(windowGroup, reset=False):
             self.isTransitioning = True
             self.resetOnTransitionComplete = reset
             self.activeWindowGroups = [windowGroup]
         def _gameModeChangeHandler(*args, **kwargs):
             old, new = args[0]  # first arg is (old state, new state)
-            if new == GameMode.isLoading:
+            if new == GameMode.IsLoading:
                 # push the loading window onto the screen
                 self.activeWindowGroups.append(0)
-            elif old == GameMode.isLoading:
+            elif old == GameMode.IsLoading:
                 # pop the loading window off the screen
                 self.activeWindowGroups.pop()
-            elif (old in [GameMode.titleScreen, GameMode.selectFile] or old in worldMapModes) and new in inGameModes:
+            elif (old in [GameMode.TitleScreen, GameMode.SelectFile] or old in worldMapModes) and new in inGameModes:
                 # use the "main game" window group
                 _queueTransition(2)
             elif old in inGameModes and new in worldMapModes:
                 # switch to map window group
                 _queueTransition(3, False)
-            elif old in inGameModes and new == GameMode.inAreaInventory:
+            elif old in inGameModes and new == GameMode.InAreaInventory:
                 # add inventory window
                 self.activeWindowGroups.append(6)
-            elif old in inGameModes and new == GameMode.inAreaMap:
+            elif old in inGameModes and new == GameMode.InAreaMap:
                 # switch to in area map window group
                 self.activeWindowGroups.append(4)
-            elif old in [GameMode.inAreaInventory, GameMode.inAreaMap] and new in inGameModes:
+            elif old in [GameMode.InAreaInventory, GameMode.InAreaMap] and new in inGameModes:
                 # pop off overlay
                 self.activeWindowGroups.pop()
-            elif old == GameMode.titleScreen and new == GameMode.selectFile:
+            elif old == GameMode.TitleScreen and new == GameMode.SelectFile:
                 self.activeWindowGroups.append(7)
-            elif old == GameMode.titleScreen and new == GameMode.credits:
+            elif old == GameMode.TitleScreen and new == GameMode.Credits:
                 self.activeWindowGroups.append(8)
-            elif old == GameMode.titleScreen and new == GameMode.settings:
+            elif old == GameMode.TitleScreen and new == GameMode.Settings:
                 self.activeWindowGroups.append(5)
-            elif old in [GameMode.selectFile, GameMode.credits, GameMode.settings] and new == GameMode.titleScreen:
+            elif old in [GameMode.SelectFile, GameMode.Credits, GameMode.Settings] and new == GameMode.TitleScreen:
                 # reset and pop off overlay
                 for winind in self.windowGroups[self.activeWindowGroups[-1]]:
                     self.windowList[winind].refresh()
                 self.activeWindowGroups.pop()
                 # if going from select file back to main, refresh main command list
-                if old == GameMode.selectFile:
+                if old == GameMode.SelectFile:
                     for winind in self.windowGroups[self.activeWindowGroups[-1]]:
                         self.windowList[winind].refresh()
-            elif new in [GameMode.titleScreen]:
+            elif new in [GameMode.TitleScreen]:
                 # use the "title" window group
                 _queueTransition(1, True)
         return _gameModeChangeHandler

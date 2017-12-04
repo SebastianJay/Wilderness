@@ -71,7 +71,7 @@ class HistoryWindow(Window):
 
             if len(args) == 1 or not args[1]:   # second arg indicates whether to animate
                 # switch out game mode until animation finished
-                GameState().lockGameMode(GameMode.inAreaAnimating)
+                GameState().lockGameMode(GameMode.InAreaAnimating)
             else:
                 # advance pointers as if animation complete
                 self.charLimit = len(''.join(self.wrappedLines)) + 1
@@ -96,7 +96,7 @@ class HistoryWindow(Window):
 
     def update(self, timestep, keypresses):
         # increment charLimit in certain time increments to advance scrolling animation
-        if GameState().gameMode == GameMode.inAreaAnimating:
+        if GameState().gameMode == GameMode.InAreaAnimating:
             if self.unlockOnNextUpdate:
                 self.unlockOnNextUpdate = False
                 GameState().unlockGameMode()
@@ -181,7 +181,7 @@ class HistoryWindow(Window):
         for style in input_formatting:
             first_index = row_indices[0][0]
             last_index = row_indices[-1][1]
-            if GameState().gameMode == GameMode.inAreaAnimating and r < len(row_indices):
+            if GameState().gameMode == GameMode.InAreaAnimating and r < len(row_indices):
                 last_index = row_indices[r][0] + c # bound formatted text to what's displayed
             for indices in input_formatting[style]:
                 start_index = indices[0]

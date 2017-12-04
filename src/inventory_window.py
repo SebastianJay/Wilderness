@@ -40,7 +40,7 @@ class InventoryWindow(Window):
                 elif key == "Down":
                     self.startIndex = (self.startIndex + 1) % len(self.currentInventoryList)
             if key == "Return":
-                GameState().gameMode = GameMode.inAreaCommand
+                GameState().gameMode = GameMode.InAreaCommand
 
     def draw(self):
         self.clear()

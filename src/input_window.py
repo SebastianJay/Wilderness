@@ -52,7 +52,7 @@ class InputWindow(Window):
 
     def update(self, timestep, keypresses):
         gs = GameState()
-        if gs.gameMode == GameMode.inAreaChoice:
+        if gs.gameMode == GameMode.InAreaChoice:
             for key in keypresses:
                 if key == 'Up':
                     self.choiceInd = (self.choiceInd - 1) % len(gs.choices)
@@ -60,7 +60,7 @@ class InputWindow(Window):
                     self.choiceInd = (self.choiceInd + 1) % len(gs.choices)
                 elif key == 'Return':
                     self.interpreter.resume(self.choiceInd)
-        elif gs.gameMode == GameMode.inAreaCommand or gs.gameMode == GameMode.inAreaInput:
+        elif gs.gameMode == GameMode.InAreaCommand or gs.gameMode == GameMode.InAreaInput:
             for key in keypresses:
                 # key is printable -> add it to buffer
                 if len(key) == 1:
@@ -72,9 +72,9 @@ class InputWindow(Window):
                     gs.popCmdBuffer()
                 # key is return -> commit command
                 elif key == 'Return':
-                    if gs.gameMode == GameMode.inAreaInput:
+                    if gs.gameMode == GameMode.InAreaInput:
                         self.interpreter.resume(gs.cmdBuffer.strip())
-                    else:   # GameMode.inAreaCommand
+                    else:   # GameMode.InAreaCommand
                         val = gs.traverseCmdMap()
                         if isinstance(val, BodyNode):   # valid normal command
                             # special logic for go to - change room ID TODO refactor
@@ -84,21 +84,21 @@ class InputWindow(Window):
                             self.interpreter.executeAction(val)
                         elif isinstance(val, str):      # valid metacommand
                             if val == 'view inventory':
-                                gs.gameMode = GameMode.inAreaInventory
+                                gs.gameMode = GameMode.InAreaInventory
                             elif val == 'view map':
-                                gs.gameMode = GameMode.inAreaMap
+                                gs.gameMode = GameMode.InAreaMap
                             elif val == 'save game':
                                 # write the save file in a separate thread and wait with loading screen
                                 def writeFileFunc():
                                     gs.writeFile(Globals.SavePaths[gs.saveId])
                                     gs.pushMessage('Game saved to ' + Globals.SavePaths[gs.saveId] + '.')
                                     gs.unlockGameMode()
-                                gs.lockGameMode(GameMode.isLoading)
+                                gs.lockGameMode(GameMode.IsLoading)
                                 t = threading.Thread(target=writeFileFunc)
                                 t.daemon = True
                                 t.start()
                             elif val == 'exit game':
-                                gs.gameMode = GameMode.titleScreen
+                                gs.gameMode = GameMode.TitleScreen
                         else:   # tuple or None - invalid command
                             if len(gs.cmdBuffer.strip('. ')) > 0:
                                 gs.pushMessage('Command not recognized.')
@@ -109,7 +109,7 @@ class InputWindow(Window):
         self.clear()
 
         gs = GameState()
-        if gs.gameMode == GameMode.inAreaChoice:
+        if gs.gameMode == GameMode.InAreaChoice:
             # display choices
             rStart = (self.height // 2) - (len(gs.choices) // 2)
             cStart = 3
@@ -121,7 +121,7 @@ class InputWindow(Window):
                 r += 1
             self.pixels[rStart + self.choiceInd][cStart] = '>'
             self.pixels[rStart + self.choiceInd][cStart+1] = '>'
-        elif gs.gameMode == GameMode.inAreaCommand or gs.gameMode == GameMode.inAreaInput:
+        elif gs.gameMode == GameMode.InAreaCommand or gs.gameMode == GameMode.InAreaInput:
             midY = self.height // 2
             startCol = 3
             # add current command input

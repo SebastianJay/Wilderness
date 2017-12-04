@@ -98,7 +98,7 @@ class TitleWindow(Window):
                     gs.init()   # clear out any old data
                     gs.name = self.nameBuffer.strip()
                     gs.saveId = self.freeFileInd
-                    gs.gameMode = GameMode.inAreaCommand
+                    gs.gameMode = GameMode.InAreaCommand
                     gs.enterArea(gs.areaId, gs.roomId)  # send signal to run startup script
         else:
             for key in keypresses:
@@ -112,11 +112,11 @@ class TitleWindow(Window):
                         # switch to name prompt mode before starting game
                         self.isPromptingName = True
                     elif cmd == 'Load game':
-                        GameState().gameMode = GameMode.selectFile
+                        GameState().gameMode = GameMode.SelectFile
                     elif cmd == 'Options':
-                        GameState().gameMode = GameMode.settings
+                        GameState().gameMode = GameMode.Settings
                     elif cmd == 'Credits':
-                        GameState().gameMode = GameMode.credits
+                        GameState().gameMode = GameMode.Credits
                     elif cmd == 'Exit':
                         sys.exit()
 

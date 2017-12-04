@@ -83,7 +83,7 @@ class SettingsWindow(Window):
                 changeSetting(1)
             elif key in [" ", "Return", "BackSpace"]:
                 AssetLoader().writeSettings(packSettings()) # creates a file
-                GameState().gameMode = GameMode.titleScreen
+                GameState().gameMode = GameMode.TitleScreen
 
     def draw(self):
         # draw cursor with arrow and option selections with brackets

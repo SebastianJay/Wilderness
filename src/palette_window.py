@@ -46,7 +46,7 @@ class PaletteWindow(Window):
     def update(self, timestep, keypresses):
         gs = GameState()
         displayList = []
-        if gs.gameMode == GameMode.inAreaCommand:
+        if gs.gameMode == GameMode.InAreaCommand:
             val = gs.traverseCmdMap()
             if isinstance(val, BodyNode) or isinstance(val, str):
                 # reached valid command, nothing more to show

@@ -2,34 +2,34 @@
 ## These will be displayed in the Help window
 ## Note that these are not actually bound to InputHandler, and are only for display
 
-isLoading: {}
-titleScreen: {}
-selectFile: {}
-credits: {}
-settings: {}
-inAreaCommand:
+IsLoading: {}
+TitleScreen: {}
+SelectFile: {}
+Credits: {}
+Settings: {}
+InAreaCommand:
     - TextKeys: Form command
     - Return: Execute command
     - PageUp/Down: Scroll history
     - Tab: Autocomplete
-inAreaChoice:
+InAreaChoice:
     - ArrowKeys: Browse choices
     - Return: Confirm choice
     - PageUp/Down: Scroll history
-inAreaInput:
+InAreaInput:
     - TextKeys: Form input
     - Return: Confirm input
     - PageUp/Down: Scroll history
-inAreaMap:
+InAreaMap:
     - ArrowKeys: Browse rooms
     - Return: Exit
-inAreaInventory:
+InAreaInventory:
     - ArrowKeys: Browse items
     - Return: Exit
-inAreaAnimating:
+InAreaAnimating:
     - Space(Hold): Fast Scroll
-worldMap:
+WorldMap:
     - ArrowKeys: Move
-worldMapOverArea:
+WorldMapOverArea:
     - ArrowKeys: Move
     - Return: Enter Area

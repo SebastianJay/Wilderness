@@ -103,7 +103,7 @@ class SavesWindow(Window):
                     if not self.inDeleteMode:
                         GameState().load(self.fileinfo[self.pointingTo])
                         GameState().saveId = self.pointingTo
-                        GameState().gameMode = GameMode.inAreaCommand
+                        GameState().gameMode = GameMode.InAreaCommand
                     else:
                         AssetLoader().deleteSave(self.pointingTo)
                         self.fileinfo[self.pointingTo] = None
@@ -115,5 +115,5 @@ class SavesWindow(Window):
                         self.inDeleteMode = not self.inDeleteMode
                         self.resetCursor()
                     elif option == 'Go Back':
-                        GameState().gameMode = GameMode.titleScreen
+                        GameState().gameMode = GameMode.TitleScreen
                 break
