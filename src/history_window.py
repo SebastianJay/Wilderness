@@ -210,7 +210,6 @@ class HistoryWindow(Window):
                         break
 
         self.formatting = output_formatting
-        return self.pixels
 
     @property
     def charLimit(self):

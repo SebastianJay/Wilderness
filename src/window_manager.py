@@ -186,7 +186,8 @@ class WindowManager(Window):
         for groupind in self.activeWindowGroups:
             group_formatting = []
             for winind in self.windowGroups[groupind]:
-                pixels = self.windowList[winind].draw()
+                self.windowList[winind].draw()
+                pixels = self.windowList[winind].pixels
                 startr, startc = self.windowPos[winind]
                 height = len(pixels)
                 width = len(pixels[0])
@@ -256,7 +257,6 @@ class WindowManager(Window):
         for winformat in formatting:
             flattened_formatting.extend(winformat)
         self.formatting = sorted(flattened_formatting, key=lambda tup: tup[1][0])
-        return self.pixels
 
     def update(self, timestep, keypresses):
         """ sends update signal to Windows in the active group """

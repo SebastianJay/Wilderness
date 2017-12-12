@@ -35,23 +35,17 @@ class SavesWindow(Window):
         self.clear()
         # draw the header text
         header = 'Select which file?' if not self.inDeleteMode else 'Delete which file?'
-        rHeader = 1
-        cHeader = (self.width - len(header)) // 2
-        for c, ch in enumerate(header):
-            self.pixels[rHeader][cHeader + c] = ch
+        self.writeText(header, 1, (self.width - len(header)) // 2)
 
         # draw the option text
-        cOption = (self.width - len(self.otherOptions[0])) // 2
-        for i, optionText in enumerate(self.otherOptions):
-            row = self.height - self.marginRows + i
-            text = optionText
-            if optionText == 'Delete File': # the delete option changes text
-                text = 'Delete File' if not self.inDeleteMode else 'Cancel Delete'
-            for c, ch in enumerate(text):
-                self.pixels[row][cOption + c] = ch
+        optionText = self.otherOptions[:]
+        if self.inDeleteMode:
+            optionText[optionText.index('Delete File')] = 'Cancel Delete'
+        optionCol = (self.width - len(self.otherOptions[0])) // 2
+        self.writeTextLines(optionText, self.height - self.marginRows, optionCol)
 
         # draw the loaded file info
-        cFile = self.width // 4
+        fileCol = self.width // 4
         for i, finfo in enumerate(self.fileinfo):
             if finfo is None:
                 continue
@@ -69,22 +63,19 @@ class SavesWindow(Window):
             infoStr = name + (' ' * (16 - len(name))) \
                 + timeStr + (' ' * (16 - len(timeStr))) \
                 + progressStr
-            for j, ch in enumerate(infoStr):
-                self.pixels[self.rowNum(i)][cFile + j] = ch
+            self.writeText(infoStr, self.rowNum(i), fileCol)
             # add strikethrough for deletion
             if self.inDeleteMode and i == self.pointingTo:
-                self.formatting = [('overstrike', (self.rowNum(i)*self.width + cFile,
-                    self.rowNum(i)*self.width + cFile + len(infoStr) - 1))]
+                self.addFormatting('overstrike', self.rowNum(i), fileCol, len(infoStr))
 
         # draw the cursor
         if self.pointingTo < len(self.fileinfo):
-            cursorCol = cFile - 2
-            self.pixels[self.rowNum(self.pointingTo)][cursorCol] = ">"
+            cursorCol = fileCol - 2
+            self.setPixel('>', self.rowNum(self.pointingTo), cursorCol)
         else:
             row = self.height - self.marginRows + self.pointingTo - len(self.fileinfo)
-            cursorCol = cOption - 2
-            self.pixels[row][cursorCol] = ">"
-        return self.pixels
+            cursorCol = optionCol - 2
+            self.setPixel('>', row, cursorCol)
 
     def update(self, timestep, keypresses):
         def updateCursor(delta):

@@ -84,13 +84,14 @@ class Display:
 
         # call draw() on all active windows and compare against old state
         oldhash = hash(self.windowManager)
-        pixels = self.windowManager.draw()
+        self.windowManager.draw()   # modifies the pixels property in-place
         newhash = hash(self.windowManager)
 
         # if they are the same, no need to draw
         if oldhash == newhash:
             return
 
+        pixels = self.windowManager.pixels
         bufferlst = []
         for sublst in pixels:
             substr = ''.join(sublst)

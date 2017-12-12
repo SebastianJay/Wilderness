@@ -79,8 +79,6 @@ class InventoryWindow(Window):
             self.pixels[descriptionHeight][int(self.width / 3) + 3 + counter] = " "
             counter += 1
 
-        return self.pixels
-
 if __name__ == '__main__':
     a = InventoryWindow(100, 17)
     a.load()

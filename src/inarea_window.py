@@ -98,9 +98,9 @@ class InAreaWindow(Window):
         for row in range(len(currentMap)):
             for column in range(len(currentMap[row])):
                 if currentMap[row][column] == '@':  # the @ char is rendered as space
-                    self.pixels[startRow + row][startCol + column] = ' '
+                    self.setPixel(' ', startRow + row, startCol + column)
                 else:
-                    self.pixels[startRow + row][startCol + column] = currentMap[row][column]
+                    self.setPixel(currentMap[row][column], startRow + row, startCol + column)
 
         # overlay the title and description if we are hovering over a room that is visible
         for room in currentMapData:
@@ -110,9 +110,9 @@ class InAreaWindow(Window):
                     desc = currentMapData[room][1]
                     titleCol = (self.width - len(name)) // 2
                     for j, ch in enumerate(name):
-                        self.pixels[0][titleCol + j] = ch
+                        self.setPixel(ch, 0, titleCol + j)
                     # underline the title
-                    self.formatting.append(('underline', (titleCol, titleCol+len(name)-1)))
+                    self.addFormatting('underline', 0, titleCol, len(name))
                     lines = []
                     while True:
                         end_ind = len(desc) if len(desc) < self.width-2 else desc.rfind(' ', 0, self.width-2)
@@ -122,17 +122,15 @@ class InAreaWindow(Window):
                             break
                     for i, line in enumerate(lines):
                         for j, ch in enumerate(line):
-                            self.pixels[1+i][1+j] = ch
+                            self.setPixel(ch, 1+i, 1+j)
                     break
 
         # overlay the cursor position
-        self.pixels[startRow + self.mapCursor[0]][startCol + self.mapCursor[1]] = '@'
+        self.setPixel('@', startRow + self.mapCursor[0], startCol + self.mapCursor[1])
 
         # make character location a yellow tile on map
         if roomId in currentMapData:
-            formatTile = (startRow+currentMapData[roomId][2])*self.width + (startCol+currentMapData[roomId][3])
-            self.formatting.append(('yellow', (formatTile, formatTile)))
-        return self.pixels
+            self.addFormatting('yellow', startRow+currentMapData[roomId][2], startCol+currentMapData[roomId][3], 1)
 
 if __name__ == '__main__':
     AssetLoader().loadAssets()

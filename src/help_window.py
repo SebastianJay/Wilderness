@@ -33,15 +33,12 @@ class HelpWindow(Window):
     def draw(self):
         self.clear()
         if self.inMessageMode:
-            for c, ch in enumerate(self.messageText):
-                self.pixels[0][c] = ch
+            self.writeText(self.messageText, 0, 0)
         else:
             dictionaryList = self.config[GameState().gameMode.name]
             # print the keybindings in 4 column format
             for i, dictionary in enumerate(dictionaryList):
                 key, value = list(dictionary.items())[0]
-                cStart = i * self.width // 4
-                fullColumn = key + ': ' + value
-                for c, ch in enumerate(fullColumn):
-                    self.pixels[0][cStart + c] = ch
-        return self.pixels
+                startCol = i * self.width // 4
+                keybindingEntry = key + ': ' + value
+                self.writeText(keybindingEntry, 0, startCol)

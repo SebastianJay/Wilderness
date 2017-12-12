@@ -32,16 +32,7 @@ class PaletteWindow(Window):
         # join two lists
         normalDisplayList.extend(metaDisplayList)
 
-        rStart = 0
-        cStart = 1
-        r = 0
-        for completion in normalDisplayList:
-            for i, c in enumerate(completion):
-                if cStart + i >= self.width:
-                    break
-                self.pixels[rStart + r][cStart + i] = c
-            r += 1
-        return self.pixels
+        self.writeTextLines(normalDisplayList, 0, 1)
 
     def update(self, timestep, keypresses):
         gs = GameState()

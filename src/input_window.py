@@ -109,31 +109,17 @@ class InputWindow(Window):
         self.clear()
 
         gs = GameState()
+        cursor = '>> '
+        startCol = 3
+
         if gs.gameMode == GameMode.InAreaChoice:
             # display choices
-            rStart = (self.height // 2) - (len(gs.choices) // 2)
-            cStart = 3
-            cursorOffset = 3
-            r = 0
-            for choice in gs.choices:
-                for i, c in enumerate(choice):
-                    self.pixels[rStart + r][cStart + cursorOffset + i] = c
-                r += 1
-            self.pixels[rStart + self.choiceInd][cStart] = '>'
-            self.pixels[rStart + self.choiceInd][cStart+1] = '>'
+            startRow = (self.height // 2) - (len(gs.choices) // 2)
+            self.writeTextLines(gs.choices, startRow, startCol + len(cursor))
+            self.writeText('>>', startRow + self.choiceInd, startCol)
         elif gs.gameMode == GameMode.InAreaCommand or gs.gameMode == GameMode.InAreaInput:
-            midY = self.height // 2
-            startCol = 3
+            startRow = self.height // 2
             # add current command input
             cmdBuffer = gs.cmdBuffer
-            fullLine = '>> ' + cmdBuffer + ('_' if len(cmdBuffer) < Globals.CmdMaxLength else '')
-            col = 0
-            for i, char in enumerate(fullLine):
-                # Start a new line if necessary
-                if startCol + col >= self.width:
-                    midY += 1
-                    col = startCol
-                self.pixels[midY][startCol + col] = char
-                col += 1
-
-        return self.pixels
+            fullLine = cursor + cmdBuffer + ('_' if len(cmdBuffer) < Globals.CmdMaxLength else '')
+            self.writeText(fullLine, startRow, startCol, True)

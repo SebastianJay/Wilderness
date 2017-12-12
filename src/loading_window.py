@@ -45,9 +45,8 @@ class LoadingWindow(Window):
 		 ]
 
 	def draw(self):
-		for i in self.animStates[self.animIndex]:
-			self.pixels[int(i[1][1])][int(i[1][0])] = i[0]
-		return self.pixels
+		for state in self.animStates[self.animIndex]:
+			self.setPixel(state[0], int(state[1][1]), int(state[1][0]))
 
 	def update(self, timestep, keypresses):
 		self.animTimer += timestep

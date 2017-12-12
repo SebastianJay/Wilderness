@@ -40,22 +40,22 @@ class SettingsWindow(Window):
                     self.optionIndices[3] = setting[1]
 
         for row, (option, values) in enumerate(self.options):
-            col = self.startCol
             # Draw the option names (eg Font size)
-            for char in option + ':  ':
-                self.pixels[self.rowNum(row)][col] = char
-                col += 1
+            col = self.startCol
+            optionPadded = option + ':  '
+            self.writeText(optionPadded, self.rowNum(row), col)
+            col += len(optionPadded)
             self.optionPositions.append([])
 
             # Draw the individual option values
             for value in values:
                 self.optionPositions[row].append(col)
-                for char in value + '  ':
-                    self.pixels[self.rowNum(row)][col] = char
-                    col += 1
+                valuePadded = value + '  '
+                self.writeText(valuePadded, self.rowNum(row), col)
+                col += len(valuePadded)
+
         footer = '[Return] to exit'
-        for c, ch in enumerate(footer):
-            self.pixels[self.height - self.marginRows][(self.width - len(footer)) // 2 + c] = ch
+        self.writeText(footer, self.height - self.marginRows, (self.width - len(footer)) // 2)
 
     def update(self, timestep, keypresses):
         def camelCase(s):
@@ -89,17 +89,16 @@ class SettingsWindow(Window):
         # draw cursor with arrow and option selections with brackets
         for i in range(len(self.options)):
             if i == self.pointingTo:
-                self.pixels[self.rowNum(i)][self.startCol - 2] = ">"
+                self.setPixel('>', self.rowNum(i), self.startCol - 2)
             else:
-                self.pixels[self.rowNum(i)][self.startCol - 2] = " "
+                self.setPixel(' ', self.rowNum(i), self.startCol - 2)
             for j in range(len(self.options[i][1])):
                 if j == self.optionIndices[i]:
-                    self.pixels[self.rowNum(i)][self.optionPositions[i][j]-1] = "["
-                    self.pixels[self.rowNum(i)][self.optionPositions[i][j]+len(self.options[i][1][j])] = "]"
+                    self.setPixel('[', self.rowNum(i), self.optionPositions[i][j]-1)
+                    self.setPixel(']', self.rowNum(i), self.optionPositions[i][j]+len(self.options[i][1][j]))
                 else:
-                    self.pixels[self.rowNum(i)][self.optionPositions[i][j]-1] = " "
-                    self.pixels[self.rowNum(i)][self.optionPositions[i][j]+len(self.options[i][1][j])] = " "
-        return self.pixels
+                    self.setPixel(' ', self.rowNum(i), self.optionPositions[i][j]-1)
+                    self.setPixel(' ', self.rowNum(i), self.optionPositions[i][j]+len(self.options[i][1][j]))
 
 if __name__ == '__main__':
     window = SettingsWindow(120, 35)

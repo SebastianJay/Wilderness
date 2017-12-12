@@ -52,16 +52,92 @@ class Window:
         """
         Pull from GameState (if needed) to update 2D pixel array
         """
-        return self.pixels
+        pass
+
+    def writeTextLines(self, lines, startRow, startCol):
+        """
+        Writes multiple strings as consecutive lines to the pixels array
+        """
+        for i in range(len(lines)):
+            self.writeText(lines[i], startRow + i, startCol, False, None)
+
+    def writeText(self, text, startRow, startCol, useWrapping=False, tag=None):
+        """
+        Writes a string as one line to the pixels array
+        Optionally word wrap the text to fit in the window by breaking it
+         on spaces to proceeding lines
+        Optionally add a tag to format the text with
+        """
+
+        if useWrapping:
+            tokens = text.split(" ")
+        else:
+            tokens = [text]
+        rowOffset = 0
+        colOffset = 0
+        for i in range(len(tokens)):
+            token = tokens[i]
+            if useWrapping and startCol + colOffset + len(token) > self.width:
+                # move to next line
+                colOffset = 0
+                rowOffset += 1
+                if rowOffset >= self.height:
+                    # cannot write any more on the window
+                    return
+
+            for c, ch in enumerate(token):
+                # write token (note that token will be clipped if it cannot fit on window)
+                self.setPixel(ch, startRow + rowOffset, startCol + colOffset + c)
+            if i < len(tokens) - 1:
+                # write space between tokens
+                self.setPixel(" ", startRow + rowOffset, startCol + colOffset + len(token))
+            colOffset += len(token) + 1
+
+        if tag is not None:
+            self.addFormatting(tag, startRow, startCol, len(text))
+
+    def fillRect(self, ch, left, up, right, down):
+        """
+        Fills a rect within the window with a given character
+        """
+        for i in range(max(up, 0), min(down, self.height)):
+            for j in range(max(left, 0), min(right, self.width)):
+                self.setPixel(ch, i, j)
+
+    def setPixel(self, ch, row, col):
+        """
+        Set one pixel in the window
+        """
+        if row < 0 or row >= self.height or col < 0 or col >= self.width:
+            return # ignore setting out of bounds
+        self.pixels[row][col] = ch[0]
+
+    def addFormatting(self, tag, startRow, startCol, length):
+        """
+        Adds a formatter to the given region of the window
+        """
+        self.formatting.append((tag, (startRow * self.width + startCol, startRow * self.width + startCol + length - 1)))
 
     def clear(self):
         """
-        Utility method to clear pixels to blank (' ') strings and empty formatting
+        Clear formatting tags and reset all pixels to blank (' ')
+        """
+        self.clearPixels()
+        self.clearFormatting()
+
+    def clearPixels(self, left = 0, up = 0, right = None, down = None):
+        """
+        Clear pixels to blank (' ') characters and empty formatting
+        """
+        right = self.width if right is None else right
+        down = self.height if down is None else down
+        self.fillRect(' ', left, up, right, down)
+
+    def clearFormatting(self):
+        """
+        Remove all formatting tags on the pixels
         """
         self.formatting = []
-        for i in range(self.height):
-            for j in range(self.width):
-                self.pixels[i][j] = ' '
 
     def refresh(self):
         """

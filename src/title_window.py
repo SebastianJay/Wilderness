@@ -64,7 +64,7 @@ class TitleWindow(Window):
                 row += 1
                 col = 0
             else:
-                self.pixels[row][col + startCol] = char
+                self.setPixel(char, row, col + startCol)
                 col += 1
 
         self.startRow = row + (self.height - row - len(self.options)) // 2
@@ -73,11 +73,9 @@ class TitleWindow(Window):
         # Draw options - they are left-aligned based on center of first option
         for row, option in enumerate(self.options):
             if row in self.blockedOptions:
-                for c in range(self.width):
-                    self.pixels[row + self.startRow][c] = ' '   # clear row
+                self.clearPixels(0, row + self.startRow, self.width, row + self.startRow)
                 continue
-            for col, char in enumerate(option):
-                self.pixels[row + self.startRow][col + self.startCol] = char
+            self.writeText(option, row + self.startRow, col + self.startCol)
 
     def update(self, timestep, keypresses):
         def updateCursor(delta):
@@ -123,33 +121,29 @@ class TitleWindow(Window):
     def draw(self):
         # ensure we are loaded
         if not self.art:
-            return self.pixels
+            return
 
         if self.isPromptingName:
             # Clear previous screen
-            for i, r in enumerate(range(self.startRow, self.startRow+len(self.options))):
-                for c in range(self.startCol, self.startCol+len(self.options[i])):
-                    self.pixels[r][c] = ' '
+            self.clearPixels(self.startCol, self.startRow, self.width, self.startRow + len(self.options))
             # Fill where options used to be with prompt
             promptString = 'What is your name?'
-            col = self.width // 2 - len(promptString) // 2
-            for i, c in enumerate(range(col, col + len(promptString))):
-                self.pixels[self.startRow][c] = promptString[i]
+            self.writeText(promptString, self.startRow, self.width // 2 - len(promptString) // 2)
+
             col = self.width // 2 - Globals.NameMaxLength // 2
             for i, c in enumerate(range(col, col + Globals.NameMaxLength)):
                 if i < len(self.nameBuffer):
-                    self.pixels[self.startRow+1][c] = self.nameBuffer[i]
+                    self.setPixel(self.nameBuffer[i], self.startRow+1, c)
                 elif i == len(self.nameBuffer):
-                    self.pixels[self.startRow+1][c] = '_'
+                    self.setPixel('_', self.startRow+1, c)
                 else:
-                    self.pixels[self.startRow+1][c] = ' '
+                    self.setPixel(' ', self.startRow+1, c)
         else:
             # Clear previous cursor
             for row, temp in enumerate(self.options):
-                self.pixels[self.startRow + row][self.startCol - 4] = " "
+                self.setPixel(' ', self.startRow + row, self.startCol - 4)
             # Draw current cursor
-            self.pixels[self.startRow + self.pointingTo][self.startCol - 4] = ">"
-        return self.pixels
+            self.setPixel('>', self.startRow + self.pointingTo, self.startCol - 4)
 
 if __name__ == '__main__':
     AssetLoader().loadAssets()

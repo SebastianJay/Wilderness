@@ -101,7 +101,7 @@ class MapWindow(Window):
                 # add a new formatter to self.formatting only if this one is different than the previous one, or a new row
                 if (previousColorCode != colorCode or row != previousRow):
                     self.formatting.append((color,(mapRow*self.width+j,mapRow*self.width+j)))
-                self.pixels[mapRow][j] = pixel
+                self.setPixel(pixel, mapRow, j)
                 previousColorCode = colorCode
                 previousRow = row
 
@@ -112,11 +112,10 @@ class MapWindow(Window):
             titleCol = (self.width - len(title)) // 2
             subtitleCol = (self.width - len(subtitle)) // 2
             for j, ch in enumerate(title):
-                self.pixels[0][titleCol + j] = ch
+                self.setPixel(ch, 0, titleCol + j)
             self.formatting = [('bold', (titleCol, titleCol+len(title)-1))] + self.formatting
             for j, ch in enumerate(subtitle):
-                self.pixels[self.height-1][subtitleCol + j] = ch
-        return self.pixels
+                self.setPixel(ch, self.height-1, subtitleCol + j)
 
     def overEntrance(self, r, c):
         for er, ec, areaId, roomId in self.entrances[GameState().activeProtagonistInd]:
