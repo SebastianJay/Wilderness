@@ -24,8 +24,6 @@ class TitleWindow(Window):
         self.isPromptingName = False
         # on new game, holds name that player is typing
         self.nameBuffer = ''
-        # flag for draw() when it's called before load()
-        self.isLoaded = False
 
     def load(self):
         # grab the title art and do one-time draw
@@ -95,7 +93,7 @@ class TitleWindow(Window):
                         sys.exit()
 
     def draw(self):
-        if not self.isLoaded:
+        if not AssetLoader().isLoaded:
             return
 
         # clear bottom half of window

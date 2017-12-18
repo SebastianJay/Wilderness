@@ -18,9 +18,12 @@ import threading
 
 class GameDriver:
     def __init__(self):
-        GameState() # initialize singletons before threading to avoid race conditions
+         # initialize singletons before threading to avoid race conditions
+        GameState()
         AssetLoader()
         MusicPlayer()
+
+        # initialize instance members
         self.root = tk.Tk()
         self.windowManager = WindowManager()
         self.display = Display(self.root, self.windowManager)
@@ -59,11 +62,14 @@ class GameDriver:
                 self.root.update()
                 time2 = time.time()
                 dt = time2 - time1
-            except tk.TclError: # window was closed
+            except tk.TclError:
+                # window was closed
                 sys.exit()
             except SystemExit:
-                break    # thrown on main menu exit
-            except: # some other exception occurred
+                # thrown on main menu exit
+                break
+            except:
+                # some other exception occurred
                 if Globals.IsDev:
                     traceback.print_exc()
                 sys.exit()

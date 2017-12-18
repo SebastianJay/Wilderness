@@ -1,5 +1,5 @@
 """
-Window containing the world map.
+Window containing the in area map.
 """
 from window import Window
 from game_state import GameState, GameMode
@@ -12,6 +12,11 @@ class InAreaWindow(Window):
         super().__init__(width, height)
         GameState().onEnterRoom += self.enterRoomHandler()
 
+    def reset(self):
+        self.mapCursor = [0, 0]
+        self.maps = {}
+        self.mapsData = {}
+
     def enterRoomHandler(self):
         def _enterRoomHandler(*args, **kwargs):
             gs = GameState()
@@ -23,8 +28,6 @@ class InAreaWindow(Window):
         return _enterRoomHandler
 
     def load(self):
-        self.mapCursor = [0, 0]
-
         loader = AssetLoader()
         self.maps = {}
         self.mapsData = {}
@@ -50,8 +53,7 @@ class InAreaWindow(Window):
                 )
 
     def update(self, timestep, keypresses):
-        # make sure we have loaded
-        if len(self.mapsData) == 0:
+        if not AssetLoader().isLoaded:
             return
 
         # identify the current map we are looking at
@@ -81,9 +83,9 @@ class InAreaWindow(Window):
                 self.mapCursor = newCursor
 
     def draw(self):
-        # make sure we have loaded
-        if len(self.mapsData) == 0:
-            return self.pixels
+        if not AssetLoader().isLoaded:
+            return
+
         self.clear()
         areaId = GameState().areaId
         roomId = GameState().roomId
@@ -95,35 +97,21 @@ class InAreaWindow(Window):
         # draw out the map
         startRow = (self.height - len(currentMap)) // 2 + 3
         startCol = (self.width - len(currentMap[0])) // 2
-        for row in range(len(currentMap)):
-            for column in range(len(currentMap[row])):
-                if currentMap[row][column] == '@':  # the @ char is rendered as space
-                    self.setPixel(' ', startRow + row, startCol + column)
-                else:
-                    self.setPixel(currentMap[row][column], startRow + row, startCol + column)
+        mapString = '\n'.join(currentMap).replace('@', ' ')
+        self.writeText(mapString, startRow, startCol)
 
         # overlay the title and description if we are hovering over a room that is visible
         for room in currentMapData:
-            if self.mapCursor[0] == currentMapData[room][2] and self.mapCursor[1] == currentMapData[room][3]:
-                if currentMapData[room][4] is None or Interpreter().evaluateCondition(currentMapData[room][4].split('_')):
-                    name = currentMapData[room][0]
-                    desc = currentMapData[room][1]
-                    titleCol = (self.width - len(name)) // 2
-                    for j, ch in enumerate(name):
-                        self.setPixel(ch, 0, titleCol + j)
-                    # underline the title
-                    self.addFormatting('underline', 0, titleCol, len(name))
-                    lines = []
-                    while True:
-                        end_ind = len(desc) if len(desc) < self.width-2 else desc.rfind(' ', 0, self.width-2)
-                        lines.append(desc[:end_ind])
-                        desc = desc[end_ind+1:]
-                        if desc == '':
-                            break
-                    for i, line in enumerate(lines):
-                        for j, ch in enumerate(line):
-                            self.setPixel(ch, 1+i, 1+j)
-                    break
+            if self.mapCursor[0] != currentMapData[room][2] or self.mapCursor[1] != currentMapData[room][3]:
+                continue
+
+            if currentMapData[room][4] is None or Interpreter().evaluateCondition(currentMapData[room][4].split('_')):
+                name = currentMapData[room][0]
+                desc = currentMapData[room][1]
+                titleCol = (self.width - len(name)) // 2
+                self.writeText(name, 0, titleCol, False, 'underline')
+                self.writeText(desc, 1, 1, self.width-1)
+            break
 
         # overlay the cursor position
         self.setPixel('@', startRow + self.mapCursor[0], startCol + self.mapCursor[1])
@@ -131,8 +119,3 @@ class InAreaWindow(Window):
         # make character location a yellow tile on map
         if roomId in currentMapData:
             self.addFormatting('yellow', startRow+currentMapData[roomId][2], startCol+currentMapData[roomId][3], 1)
-
-if __name__ == '__main__':
-    AssetLoader().loadAssets()
-    inareawindow = InAreaWindow(120, 35)
-    inareawindow.draw()
