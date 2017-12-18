@@ -10,72 +10,48 @@ from window import Window
 import sys
 
 class TitleWindow(Window):
-    def __init__(self, width, height):
-        super().__init__(width, height)
 
     def reset(self):
+        # main menu options
         self.options = ['New game', 'Load game', 'Options', 'Credits', 'Exit']
-        self.pointingTo = 0 # index of option player is looking at
-        self.blockedOptions = []    # list of indices of inaccessible options
-        self.art = None     # set in load()
-        self.startRow = 0   # set in load()
-        self.startCol = 0   # set in load()
-        self.freeFileInd = 0    # set in refreshOptions()
-        # options to be selected on screen
-        self.isPromptingName = False    # on new game, whether window is asking for player name
-        self.nameBuffer = ''            # holds name that player is typing
-
-    def resetCursor(self):
-        self.pointingTo = 0
-        while self.pointingTo in self.blockedOptions:
-            self.pointingTo += 1    # assume at least one option not blocked
-
-    def refreshOptions(self):
-        # Check if New Game or Load Game options are visible
-        self.freeFileInd = AssetLoader().freeSaveFileInd()
+        # list of indices of inaccessible options
         self.blockedOptions = []
-        if self.freeFileInd < 0:
-            self.blockedOptions.append(0)   # remove 'new game'
-        if AssetLoader().lenSaveFiles() == 0:
-            self.blockedOptions.append(1)   # remove 'load game'
-        self.resetCursor()
+        # index of option player is looking at
+        self.pointingTo = 0
+        # which index the save file of the game to be played goes to
+        self.freeFileIndex = 0
+        # on new game, whether window is asking for player name
+        self.isPromptingName = False
+        # on new game, holds name that player is typing
+        self.nameBuffer = ''
+        # flag for draw() when it's called before load()
+        self.isLoaded = False
 
     def load(self):
-        # grab the title art
-        self.art = AssetLoader().getArt('title_window.txt')
+        # grab the title art and do one-time draw
+        art = AssetLoader().getArt('title_window.txt')
+        maxLength = max([len(line) for line in art.split('\n')])
+        self.writeText(art, self.height // 6, (self.width - maxLength) // 2)
 
-        # do one-time drawing of title and options onto pixels
-        maxLength = 0
-        row = self.height // 6 # Looks better than starting at 0
-        col = 0
-        # Find the longest line...
-        for char in self.art:
-            if char == "\n":
-                if col > maxLength:
-                    maxLength = col
-                col = 0
-            else:
-                col += 1
+        # refresh which options are enabled
+        self.freeFileIndex = AssetLoader().freeSaveFileInd()
+        self.blockedOptions = []
+        if self.freeFileIndex < 0:
+            # remove 'new game' option
+            self.blockedOptions.append(0)
+        if AssetLoader().lenSaveFiles() == 0:
+            # remove 'load game' option
+            self.blockedOptions.append(1)
 
-        # So that we know where to center the ASCII art
-        startCol = (self.width - maxLength) // 2
-        for char in self.art:
-            if char == "\n":
-                row += 1
-                col = 0
-            else:
-                self.setPixel(char, row, col + startCol)
-                col += 1
+        # reset cursor to first option
+        self.pointingTo = 0
+        if len(self.blockedOptions) >= len(self.options):
+            # this should not happen
+            return
+        while self.pointingTo in self.blockedOptions:
+            self.pointingTo += 1
 
-        self.startRow = row + (self.height - row - len(self.options)) // 2
-        self.startCol = (self.width // 2 - len(self.options[self.pointingTo]) // 2)
-        self.refreshOptions()
-        # Draw options - they are left-aligned based on center of first option
-        for row, option in enumerate(self.options):
-            if row in self.blockedOptions:
-                self.clearPixels(0, row + self.startRow, self.width, row + self.startRow)
-                continue
-            self.writeText(option, row + self.startRow, col + self.startCol)
+        self.isLoaded = True
 
     def update(self, timestep, keypresses):
         def updateCursor(delta):
@@ -91,13 +67,13 @@ class TitleWindow(Window):
                 elif key == "BackSpace" and len(self.nameBuffer) > 0:
                     self.nameBuffer = self.nameBuffer[:-1]
                 elif key == "Return" and len(self.nameBuffer.strip()) > 0:
-                    # set game startup info
+                    # clear out old data, fill name and save id, send signal to run startup script
                     gs = GameState()
-                    gs.init()   # clear out any old data
+                    gs.init()
                     gs.name = self.nameBuffer.strip()
-                    gs.saveId = self.freeFileInd
+                    gs.saveId = self.freeFileIndex
                     gs.gameMode = GameMode.InAreaCommand
-                    gs.enterArea(gs.areaId, gs.roomId)  # send signal to run startup script
+                    gs.enterArea(gs.areaId, gs.roomId)
         else:
             for key in keypresses:
                 if key == "Up":
@@ -119,33 +95,25 @@ class TitleWindow(Window):
                         sys.exit()
 
     def draw(self):
-        # ensure we are loaded
-        if not self.art:
+        if not self.isLoaded:
             return
 
+        # clear bottom half of window
+        startRow = self.height * 4 // 7
+        startCol = (self.width - len(self.options[0])) // 2
+        self.clearPixels(0, startRow, self.width, self.height)
+
         if self.isPromptingName:
-            # Clear previous screen
-            self.clearPixels(self.startCol, self.startRow, self.width, self.startRow + len(self.options))
-            # Fill where options used to be with prompt
+            # draw prompt for name
             promptString = 'What is your name?'
-            self.writeText(promptString, self.startRow, self.width // 2 - len(promptString) // 2)
-
-            col = self.width // 2 - Globals.NameMaxLength // 2
-            for i, c in enumerate(range(col, col + Globals.NameMaxLength)):
-                if i < len(self.nameBuffer):
-                    self.setPixel(self.nameBuffer[i], self.startRow+1, c)
-                elif i == len(self.nameBuffer):
-                    self.setPixel('_', self.startRow+1, c)
-                else:
-                    self.setPixel(' ', self.startRow+1, c)
+            self.writeText(promptString, startRow, (self.width - len(promptString)) // 2)
+            nameBufferFormatted = self.nameBuffer + ('_' if len(self.nameBuffer) < Globals.NameMaxLength else '')
+            self.writeText(nameBufferFormatted, startRow, (self.width - Globals.NameMaxLength) // 2)
         else:
-            # Clear previous cursor
-            for row, temp in enumerate(self.options):
-                self.setPixel(' ', self.startRow + row, self.startCol - 4)
-            # Draw current cursor
-            self.setPixel('>', self.startRow + self.pointingTo, self.startCol - 4)
-
-if __name__ == '__main__':
-    AssetLoader().loadAssets()
-    window = TitleWindow(120, 35)
-    window.debugDraw()
+            # draw options
+            for row, option in enumerate(self.options):
+                if row in self.blockedOptions:
+                    continue
+                self.writeText(option, startRow + row, startCol)
+            # draw current cursor
+            self.setPixel('>', startRow + self.pointingTo, startCol - 4)

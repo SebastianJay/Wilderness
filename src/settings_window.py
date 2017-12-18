@@ -10,66 +10,37 @@ import sys
 import yaml
 
 class SettingsWindow(Window):
-    def __init__(self, width, height):
-        super().__init__(width, height)
 
     def reset(self):
-        self.pointingTo = 0 # index of option (row) player is looking at
+        # index of option (row) player is looking at
+        self.pointingTo = 0
+        # options to render on screen
         # Format: (Option name, (option values))
         self.options = [('Font size', ('Tiny', 'Small', 'Medium', 'Large', 'Huge')),
                         ('Scroll speed', ('Slow', 'Normal', 'Fast')),
                         ('Styled text', ('On', 'Off')),
                         ('Background music', ('On', 'Off'))]
-        self.optionIndices = [1, 1, 0, 0]      # default indices (columns) of each option
-        self.optionPositions = []           # column locations of options
-        self.startCol = self.width // 3
+        # default indices (columns) of each option
+        self.optionIndices = [1, 1, 0, 0]
+        # number of rows to leave at margin on top and bottom
         self.marginRows = 3
-        self.rowNum = lambda i: (self.height - self.marginRows * 2) // len(self.options) * i + self.marginRows
 
     def load(self):
         settings = AssetLoader().getSettings()
-        if settings is not None:
-            for setting in settings:
-                if setting[0] == 'fontSize':
-                    self.optionIndices[0] = setting[1]
-                elif setting[0] == 'scrollSpeed':
-                    self.optionIndices[1] = setting[1]
-                elif setting[0] == 'styledText':
-                    self.optionIndices[2] = setting[1]
-                elif setting[0] == 'backgroundMusic':
-                    self.optionIndices[3] = setting[1]
+        if settings is None:
+            return
 
-        for row, (option, values) in enumerate(self.options):
-            # Draw the option names (eg Font size)
-            col = self.startCol
-            optionPadded = option + ':  '
-            self.writeText(optionPadded, self.rowNum(row), col)
-            col += len(optionPadded)
-            self.optionPositions.append([])
-
-            # Draw the individual option values
-            for value in values:
-                self.optionPositions[row].append(col)
-                valuePadded = value + '  '
-                self.writeText(valuePadded, self.rowNum(row), col)
-                col += len(valuePadded)
-
-        footer = '[Return] to exit'
-        self.writeText(footer, self.height - self.marginRows, (self.width - len(footer)) // 2)
+        optionNames = [SettingsWindow.CamelCase(option) for (option, _) in self.options]
+        for setting in settings:
+            if setting[0] not in optionNames:
+                continue
+            self.optionIndices[optionNames.index(setting[0])] = setting[1]
 
     def update(self, timestep, keypresses):
-        def camelCase(s):
-            x = ''.join([word.capitalize() for word in s.split()])
-            return x[0].lower() + x[1:]
-        def packSettings():
-            obj = []
-            for i in range(len(self.options)):
-                obj.append((camelCase(self.options[i][0]), self.optionIndices[i]))
-            return obj
         def changeSetting(delta):
             self.optionIndices[self.pointingTo] = (self.optionIndices[self.pointingTo] + delta) \
                 % len(self.options[self.pointingTo][1])
-            option = camelCase(self.options[self.pointingTo][0])
+            option = SettingsWindow.CamelCase(self.options[self.pointingTo][0])
             GameState().onSettingChange(option, self.optionIndices[self.pointingTo])
 
         for key in keypresses:
@@ -82,24 +53,33 @@ class SettingsWindow(Window):
             elif key == "Right":
                 changeSetting(1)
             elif key in [" ", "Return", "BackSpace"]:
-                AssetLoader().writeSettings(packSettings()) # creates a file
+                # create a file with the packed settings before leaving settings
+                settings = [(SettingsWindow.CamelCase(self.options[i][0]), self.optionIndices[i])
+                    for i in range(len(self.options))]
+                AssetLoader().writeSettings(settings)
                 GameState().gameMode = GameMode.TitleScreen
 
     def draw(self):
-        # draw cursor with arrow and option selections with brackets
-        for i in range(len(self.options)):
-            if i == self.pointingTo:
-                self.setPixel('>', self.rowNum(i), self.startCol - 2)
-            else:
-                self.setPixel(' ', self.rowNum(i), self.startCol - 2)
-            for j in range(len(self.options[i][1])):
-                if j == self.optionIndices[i]:
-                    self.setPixel('[', self.rowNum(i), self.optionPositions[i][j]-1)
-                    self.setPixel(']', self.rowNum(i), self.optionPositions[i][j]+len(self.options[i][1][j]))
-                else:
-                    self.setPixel(' ', self.rowNum(i), self.optionPositions[i][j]-1)
-                    self.setPixel(' ', self.rowNum(i), self.optionPositions[i][j]+len(self.options[i][1][j]))
+        self.clear()
 
-if __name__ == '__main__':
-    window = SettingsWindow(120, 35)
-    window.debugDraw()
+        startCol = self.width // 3
+        optionRowFunc = lambda i: (self.height - self.marginRows * 2) // len(self.options) * i + self.marginRows
+
+        # draw options with selections in brackets
+        for i, (option, values) in enumerate(self.options):
+            formattedValues = [' ' + value + ' ' for value in values]
+            formattedValues[self.optionIndices[i]] = '[' + formattedValues[self.optionIndices[i]].strip() + ']'
+            fullLine = option + ': ' + ''.join(formattedValues)
+            self.writeText(fullLine, optionRowFunc(i), startCol)
+
+        # draw cursor
+        self.setPixel('>', optionRowFunc(self.pointingTo), startCol - 2)
+
+        # draw footer
+        footer = '[Return] to exit'
+        self.writeText(footer, self.height - self.marginRows, (self.width - len(footer)) // 2)
+
+    # helper for settings serialization
+    def CamelCase(s):
+        x = ''.join([word.capitalize() for word in s.split()])
+        return x[0].lower() + x[1:]

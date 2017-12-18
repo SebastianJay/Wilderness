@@ -9,30 +9,8 @@ from window import Window
 
 class PaletteWindow(Window):
 
-    def __init__(self, width, height):
-        super().__init__(width, height)
+    def reset(self):
         self.displayList = []
-
-    def draw(self):
-        # clean pixels from last frame
-        self.clear()
-
-        # separate normal commands and metacommands
-        normalDisplayList = []
-        metaDisplayList = []
-        for completion in self.displayList:
-            if completion in GameState.cmdListMetaCommands:
-                metaDisplayList.append(completion)
-            else:
-                normalDisplayList.append(completion)
-        # sort normal list by alpha
-        normalDisplayList.sort()
-        if len(normalDisplayList) > 0:
-            normalDisplayList.append('')    # empty element lets window skip a line
-        # join two lists
-        normalDisplayList.extend(metaDisplayList)
-
-        self.writeTextLines(normalDisplayList, 0, 1)
 
     def update(self, timestep, keypresses):
         gs = GameState()
@@ -51,9 +29,10 @@ class PaletteWindow(Window):
                 if tree == gs.cmdMap:
                     cmdList += list(GameState.cmdListMetaCommands)
                 # filter possible commands based on what is in cmdBuffer
-                for completion in cmdList:
-                    if len(cmdString) <= len(completion) and completion.lower().startswith(cmdString.lower()):
-                        displayList.append(completion)
+                displayList = [
+                    completion for completion in cmdList
+                    if len(cmdString) <= len(completion) and completion.lower().startswith(cmdString.lower())
+                ]
             for key in keypresses:
                 if key == 'Tab' and isinstance(val, tuple) and len(displayList) == 1:
                     # do autocomplete
@@ -71,3 +50,20 @@ class PaletteWindow(Window):
                     elif isinstance(nextval, str) or isinstance(nextval, BodyNode):
                         displayList = ['.']
         self.displayList = displayList
+
+    def draw(self):
+        self.clear()
+
+        # separate normal commands and metacommands
+        normalDisplayList = [completion for completion in self.displayList
+            if completion not in GameState.cmdListMetaCommands]
+        metaDisplayList = [completion for completion in self.displayList
+            if completion in GameState.cmdListMetaCommands]
+
+        # sort normal list by alpha
+        normalDisplayList.sort()
+
+        # join two lists - empty element in middle lets window skip a line
+        joinedDisplayList = normalDisplayList + ([''] if len(normalDisplayList) > 0 else []) + metaDisplayList
+
+        self.writeTextLines(joinedDisplayList, 0, 1)

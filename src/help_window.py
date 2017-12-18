@@ -9,13 +9,11 @@ from global_vars import Globals
 
 class HelpWindow(Window):
 
-    def __init__(self, width, height):
-        super().__init__(width, height)
+    def reset(self):
         self.config = None  # set in load()
         self.inMessageMode = False
         self.messageText = ''
         self.messageTimer = 0.0
-        self.messageThreshold = 2.0
 
     def load(self):
         self.config = AssetLoader().getConfig(Globals.KeybindingsConfigPath)
@@ -23,7 +21,7 @@ class HelpWindow(Window):
     def update(self, timestep, keypresses):
         if self.inMessageMode:
             self.messageTimer += timestep
-            if self.messageTimer >= self.messageThreshold:
+            if self.messageTimer >= Globals.HelpMessageTimespan:
                 self.messageTimer = 0.0
                 self.inMessageMode = False
         if not self.inMessageMode and GameState().hasMessage():
@@ -38,7 +36,5 @@ class HelpWindow(Window):
             dictionaryList = self.config[GameState().gameMode.name]
             # print the keybindings in 4 column format
             for i, dictionary in enumerate(dictionaryList):
-                key, value = list(dictionary.items())[0]
-                startCol = i * self.width // 4
-                keybindingEntry = key + ': ' + value
-                self.writeText(keybindingEntry, 0, startCol)
+                keybindingEntry = ': '.join(list(dictionary.items())[0])
+                self.writeText(keybindingEntry, 0, i * self.width // 4)

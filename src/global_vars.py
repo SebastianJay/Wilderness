@@ -33,3 +33,4 @@ class Globals:
     CmdMaxLength = 48
     NameMaxLength = 8
     AlphaMax = 8        # should be power of two
+    HelpMessageTimespan = 2.0   # in seconds

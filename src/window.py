@@ -61,23 +61,34 @@ class Window:
         for i in range(len(lines)):
             self.writeText(lines[i], startRow + i, startCol, False, None)
 
-    def writeText(self, text, startRow, startCol, useWrapping=False, tag=None):
+    def writeText(self, text, startRow, startCol, wordWrap=None, tag=None):
         """
-        Writes a string as one line to the pixels array
+        Writes a string as one line to the pixels array.
         Optionally word wrap the text to fit in the window by breaking it
-         on spaces to proceeding lines
-        Optionally add a tag to format the text with
+         on spaces to proceeding lines (either set wordWrap to True to wrap
+         until the edge of the window, or set to an int value to define the right-side
+         boundary). Newline characters are taken as line breaks and will go to
+         the next row regardless of wordWrap param.
+        Optionally add a string tag to format the text.
         """
 
-        if useWrapping:
-            tokens = text.split(" ")
-        else:
-            tokens = [text]
+        # split on newlines, which cause line breaks in the formatting
+        lineGroups = text.split('\n')
+        # split on whitespace if word wrapping
+        lineTokenLists = [group.split(' ') for group in lineGroups] if wordWrap \
+            else [[group] for group in lineGroups]
+        # calculate indices where line breaks happen due to newlines (presums of length of token groups)
+        lineBreakIndices = [len(tokenList) for tokenList in lineTokenLists]
+        for i in range(1, len(lineBreakIndices)):
+            lineBreakIndices[i] += lineBreakIndices[i-1]
+        # flatten token list - credit https://stackoverflow.com/a/952952 for one-liner
+        tokens = [token for tokenList in lineTokenLists for token in tokenList]
+
+        wrapBorder = wordWrap if type(wordWrap) is int and wordWrap != 0 else self.width
         rowOffset = 0
         colOffset = 0
-        for i in range(len(tokens)):
-            token = tokens[i]
-            if useWrapping and startCol + colOffset + len(token) > self.width:
+        for i, token in enumerate(tokens):
+            if (wordWrap and startCol + colOffset + len(token) > wrapBorder) or (i in lineBreakIndices):
                 # move to next line
                 colOffset = 0
                 rowOffset += 1
@@ -88,13 +99,14 @@ class Window:
             for c, ch in enumerate(token):
                 # write token (note that token will be clipped if it cannot fit on window)
                 self.setPixel(ch, startRow + rowOffset, startCol + colOffset + c)
-            if i < len(tokens) - 1:
+            if i < len(tokens) - 1 and i not in lineBreakIndices:
                 # write space between tokens
                 self.setPixel(" ", startRow + rowOffset, startCol + colOffset + len(token))
             colOffset += len(token) + 1
 
         if tag is not None:
-            self.addFormatting(tag, startRow, startCol, len(text))
+            # add formatter to cover the length of the full text
+            self.addFormatting(str(tag), startRow, startCol, len(text) - text.count('\n'))
 
     def fillRect(self, ch, left, up, right, down):
         """

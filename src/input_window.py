@@ -21,11 +21,11 @@ class InputWindow(Window):
 
     def reset(self):
         self.interpreter = Interpreter()
-        self.choiceInd = 0
+        self.choiceIndex = 0
 
     def choiceChangeHandler(self):
         def _choiceChangeHandler(*args, **kwargs):
-            self.choiceInd = 0
+            self.choiceIndex = 0
         return _choiceChangeHandler
 
     def enterAreaHandler(self):
@@ -53,13 +53,14 @@ class InputWindow(Window):
     def update(self, timestep, keypresses):
         gs = GameState()
         if gs.gameMode == GameMode.InAreaChoice:
+            # move cursor between options
             for key in keypresses:
                 if key == 'Up':
-                    self.choiceInd = (self.choiceInd - 1) % len(gs.choices)
+                    self.choiceIndex = (self.choiceIndex - 1) % len(gs.choices)
                 elif key == 'Down':
-                    self.choiceInd = (self.choiceInd + 1) % len(gs.choices)
+                    self.choiceIndex = (self.choiceIndex + 1) % len(gs.choices)
                 elif key == 'Return':
-                    self.interpreter.resume(self.choiceInd)
+                    self.interpreter.resume(self.choiceIndex)
         elif gs.gameMode == GameMode.InAreaCommand or gs.gameMode == GameMode.InAreaInput:
             for key in keypresses:
                 # key is printable -> add it to buffer
@@ -105,21 +106,17 @@ class InputWindow(Window):
                     gs.clearCmdBuffer()
 
     def draw(self):
-        # clean pixels from last frame
         self.clear()
-
         gs = GameState()
         cursor = '>> '
         startCol = 3
-
         if gs.gameMode == GameMode.InAreaChoice:
-            # display choices
             startRow = (self.height // 2) - (len(gs.choices) // 2)
+            # display choices
             self.writeTextLines(gs.choices, startRow, startCol + len(cursor))
-            self.writeText('>>', startRow + self.choiceInd, startCol)
+            self.writeText(cursor, startRow + self.choiceIndex, startCol)
         elif gs.gameMode == GameMode.InAreaCommand or gs.gameMode == GameMode.InAreaInput:
             startRow = self.height // 2
             # add current command input
-            cmdBuffer = gs.cmdBuffer
-            fullLine = cursor + cmdBuffer + ('_' if len(cmdBuffer) < Globals.CmdMaxLength else '')
+            fullLine = cursor + gs.cmdBuffer + ('_' if len(gs.cmdBuffer) < Globals.CmdMaxLength else '')
             self.writeText(fullLine, startRow, startCol, True)
