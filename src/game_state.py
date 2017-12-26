@@ -39,7 +39,7 @@ class GameState:
                 self.mapLocation = [0,0]    # coordinates of player location on world map
                 self.inventory = {}         # inventory, represented as {string itemId: int numberOfItem}
                 self.historyBuffer = ''     # string containing contents for  history window
-                self.historyFormatting = {} # dict containing formatting info for historyBuffer
+                self.historyFormatting = [] # list containing formatting info for historyBuffer
             def initLore(self):
                 self.areaId = 'suburbs'
                 self.roomId = 'bedroom'
@@ -234,34 +234,35 @@ class GameState:
                 self.timeSetVars[varname] = [float(numTime), value]
 
         def addLangNode(self, node):
-            # helper for adding correct indices to historyFormatting
-            def appendToHistoryFormatting(self, formatting):
-                nonlocal fullText
-                for key in formatting:
-                    if key not in self.historyFormatting:
-                        self.historyFormatting[key] = []
-                    for start, end in formatting[key]:
-                        # offset formatting indices by constant previous history buffer length
-                        #  and variable current text + interpolated variables length
-                        self.historyFormatting[key].append((start+len(self.historyBuffer)+len(fullText),
-                            end+len(self.historyBuffer)+len(fullText)))
+            # running buffer of text and variables in node
+            fullText = ''
+            # running buffer of new formatters
+            outputFormatting = []
+            # number of chars to adjust formatting by
+            varCharCount = len(self.historyBuffer)
+            formattingIndex = 0
+            seekIndex = 0
 
-            fullText = ''   # running buffer of text and variables in node
-            seekInd = 0
-            i = 0
             # interpolate variables into text
-            for varname, varindex in node.variables:
-                appendToHistoryFormatting(self, node.formatting[i])
-                varval = self.getVar(varname) if self.getVar(varname) is not None else ''
-                fullText += node.text[seekInd:varindex] + varval
-                seekInd = varindex
-                i += 1
-            if i < len(node.formatting):
-                # any remaining formatting after last interpolated variable
-                appendToHistoryFormatting(self, node.formatting[i])
-            fullText += node.text[seekInd:] # remaining text after last variable
-            fullText = "\n" + fullText + "\n" # surround with newlines as separators from old text
+            for varName, varIndex in node.variables:
+                while formattingIndex < len(node.formatting):
+                    tag, (ind1, ind2) = node.formatting[formattingIndex]
+                    if ind1 >= varIndex:
+                        break
+                    outputFormatting.append((tag, (ind1 + varCharCount, ind2 + varCharCount)))
+                    formattingIndex += 1
+                varVal = self.getVar(varName) if self.getVar(varName) is not None else ''
+                fullText += node.text[seekIndex:varIndex] + varVal
+                varCharCount += len(varVal)
+                seekIndex = varIndex
+            # handle text after last variable
+            for (tag, (ind1, ind2)) in node.formatting[formattingIndex:]:
+                outputFormatting.append((tag, (ind1 + varCharCount, ind2 + varCharCount)))
+            fullText += node.text[seekIndex:]
+
+            fullText = fullText + "\n"
             self.historyBuffer += fullText
+            self.historyFormatting.extend(outputFormatting)
             self.onAddLangNode(fullText)
 
         @property
@@ -289,7 +290,7 @@ class GameState:
 
         def clearBuffer(self):
             self.historyBuffer = ''
-            self.historyFormatting = {}
+            self.historyFormatting = []
             self.onClearBuffer()
 
         @property

@@ -26,10 +26,8 @@ class LangNode:
         self.text = text
         """
         formatting for text to modify color or style;
-        list of dicts that map tag to inclusive start and end indices where tag applies;
-        each dict represents a portion of text without any interpolated variables, so its
-         length is in [len(self.variables), len(self.variables)+1]
-        [{formatter1: (index1, index2),},]
+        list of tuples with tag name and inclusive start and end indices where tag applies;
+        [(formatter, (index1, index2)),]
         """
         self.formatting = formatting
         """
@@ -41,12 +39,9 @@ class LangNode:
 
     def __str__(self):
         ret = "LangNode(text: " + self.text.replace("\n"," \\n ") + ", formatting: {"
-        for dct in self.formatting:
-            for c in dct:
-                ret += c + ": " + str(dct[c]) + ", "
-            if len(dct) > 0:
-                ret += "\n"
-        ret += '}, variables: {'
+        for tup in self.formatting:
+            ret += str(tup) + ", "
+        ret += '\n}, variables: {'
         for var, index in self.variables:
             ret += var + ": " + str(index) + ", "
         ret += "})\n"
@@ -106,11 +101,11 @@ class Parser:
         ind = string.find(target, startInd)
         while ind != -1:
             # check if character is "escaped" by being in art line
-            prev_nlind = string.rfind('\n', 0, ind)
-            if string[prev_nlind+1] == '\\':
-                next_nlind = string.find('\n', ind)
-                if next_nlind != -1:
-                    ind = string.find(target, next_nlind+1)
+            prevNlInd = string.rfind('\n', 0, ind)
+            if string[prevNlInd+1] == '\\':
+                nextNlInd = string.find('\n', ind)
+                if nextNlInd != -1:
+                    ind = string.find(target, nextNlInd+1)
                 else:
                     ind = -1
                     break
@@ -171,88 +166,94 @@ class Parser:
         return results
 
     def parseFormat(self, text):
-        """ (internal) Reads color/style formatted text and returns (text, {formatter1 : [(index1,index2),],})"""
+        """ (internal) Reads color/style formatted text and returns (text, [(formatter, (index1,index2)),])"""
         # empty text case
         if len(text) == 0:
-            return text, {}
+            return text, []
 
-        #index_of_at will track the last instance of the "@" character in the text
-        index_of_at = 0
-        index_close_bracket = -1
-        previous_close_bracket = -1
-        index_open_bracket = -1
-        formatting = {} # dictionary of formation {string : tuple} of formatters and where they apply
-        text_without_formatters = ""
-        escape_char_count = 0 if text[0] != '\\' else 1
+        searchIndex = 0
+        formatting = []
+        textWithoutFormatters = ""
+        escapeCharCount = 0 if text[0] != '\\' else 1
 
         #While there are remaining "@"s in the string, format into a LangNode
-        while self.strFind(text, "@", index_of_at) != -1:
+        while self.strFind(text, "@", searchIndex) != -1:
             # count escape chars ("\" at beginning of line) between last formatter and this one
-            next_index_of_at = self.strFind(text, "@", index_of_at)
-            escape_char_count += text.count('\n\\', index_of_at, next_index_of_at)
+            indexOfAt = self.strFind(text, "@", searchIndex)
+            escapeCharCount += text.count('\n\\', searchIndex, indexOfAt)
 
             # find indices
-            index_of_at = next_index_of_at
-            index_open_bracket = text.find("{", index_of_at)
-            index_close_bracket = text.find("}", index_open_bracket)
+            indexOpenBracket = text.find("{", indexOfAt)
+            indexCloseBracket = text.find("}", indexOpenBracket)
 
             #if no close or open bracket exists, exit the method and return error message
-            if index_open_bracket == -1:
+            if indexOpenBracket == -1:
                 raise Exception("The formatter is missing an opening bracket: \n" + text)
-            if index_close_bracket == -1:
+            if indexCloseBracket == -1:
                 raise Exception("The formatter is missing an closing bracket: \n" + text)
 
-            # the formatted text looks like @formatter{formatted_text}
-            formatter = text[index_of_at + 1 : index_open_bracket].strip()
-            formatted_text = text[index_open_bracket + 1 : index_close_bracket]
+            # the formatted text looks like @formatter{formattedText}
+            formatter = text[indexOfAt + 1 : indexOpenBracket].strip()
+            formattedText = text[indexOpenBracket + 1 : indexCloseBracket]
 
-            # text_without_formatters will hold the text with the @formatter{formattted_text} replaced with just formatted_text
-            text_without_formatters += text[previous_close_bracket + 1 : index_of_at]
-            text_without_formatters += formatted_text
+            # textWithoutFormatters will hold the text with the @formatter{formattted_text} replaced with just formattedText
+            textWithoutFormatters += text[searchIndex : indexOfAt]
+            textWithoutFormatters += formattedText
 
-            # Remember where in the text_without_formatters string each formatter applies
-            # Decrement the indices by escape_char_count since those will be removed afterward
-            if formatter not in formatting:
-                formatting[formatter] = []
-            formatting[formatter].append((len(text_without_formatters)-len(formatted_text)-escape_char_count,
-                len(text_without_formatters)-1-escape_char_count))
+            # Remember where in the textWithoutFormatters string each formatter applies
+            # Decrement the indices by escapeCharCount since those will be removed afterward
+            formatting.append((formatter,
+                (len(textWithoutFormatters)-len(formattedText)-escapeCharCount,
+                len(textWithoutFormatters)-1-escapeCharCount)))
 
-            previous_close_bracket = index_close_bracket # remember where the previous } was
-            index_of_at = index_close_bracket + 1   # start searching for the next @
+            searchIndex = indexCloseBracket + 1   # start searching for the next @
         # capture remaining unformatted text
-        text_without_formatters += text[previous_close_bracket+1:]
+        textWithoutFormatters += text[searchIndex:]
 
         # Remove escape chars
-        lines = text_without_formatters.split('\n')
+        lines = textWithoutFormatters.split('\n')
         lines = [(line[1:] if len(line) > 0 and line[0] == '\\' else line) for line in lines]
-        final_text = '\n'.join(lines)
+        finalText = '\n'.join(lines)
 
-        return final_text, formatting
+        return finalText, formatting
 
     def parseFormatAndVars(self, text):
         """ (internal) parses text into a LangNode with formatter and variable locations """
-        parsed_text = ''        # text without variables and formatters
-        formatting_list = []    # formatter indices between variables
-        variables_list = []     # list of (var_name, index into parsed_text)
-        index_seek = 0
-        # find location of start of variable
-        while self.strFind(text, "[", index_seek) != -1:
-            # isolate name of variable
-            index_start_bracket = self.strFind(text, "[", index_seek)
-            index_end_bracket = self.strFind(text, "]", index_start_bracket)
-            var_name = text[index_start_bracket+1 : index_end_bracket]
+        parsedText = ''         # text without variables and formatters
+        allFormatting = []      # list of all formatters
+        variablesList = []      # list of (varName, index into parsedText)
+        searchIndex = 0
+
+        def parseFormatSection(startIndex, endIndex):
+            nonlocal parsedText
+            nonlocal allFormatting
             # parse formatters of all text preceding variable
-            text_stub, formatting = self.parseFormat(text[index_seek:index_start_bracket])
-            parsed_text += text_stub
-            formatting_list.append(formatting)
-            variables_list.append((var_name, len(parsed_text)))
-            index_seek = index_end_bracket + 1
+            textStub, formatting = self.parseFormat(text[startIndex:endIndex])
+            formatting = [(tag, (ind1 + len(parsedText), ind2 + len(parsedText)))
+                for (tag, (ind1, ind2)) in formatting]
+
+            # add parsed values to return vars
+            parsedText += textStub
+            allFormatting.extend(formatting)
+
+        # find location of start of variable
+        while self.strFind(text, "[", searchIndex) != -1:
+            # isolate name of variable
+            indexStartBracket = self.strFind(text, "[", searchIndex)
+            indexEndBracket = self.strFind(text, "]", indexStartBracket)
+            varName = text[indexStartBracket+1 : indexEndBracket]
+
+            # add parsed text and formatters
+            parseFormatSection(searchIndex, indexStartBracket)
+            # add variable
+            variablesList.append((varName, len(parsedText)))
+
+            # advance search index
+            searchIndex = indexEndBracket + 1
         # parse formatters for text following last variable
-        text_stub, formatting = self.parseFormat(text[index_seek:])
-        if len(text_stub) > 0:
-            parsed_text += text_stub
-            formatting_list.append(formatting)
-        return LangNode(parsed_text, formatting_list, variables_list)
+        parseFormatSection(searchIndex, len(text))
+
+        return LangNode(parsedText, allFormatting, variablesList)
 
     def preformatScriptString(self, scriptStr):
         """ (internal) prepares text before it is parsed as a BodyNode or full script file """

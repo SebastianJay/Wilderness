@@ -106,7 +106,7 @@ class TitleWindow(Window):
             promptString = 'What is your name?'
             self.writeText(promptString, startRow, (self.width - len(promptString)) // 2)
             nameBufferFormatted = self.nameBuffer + ('_' if len(self.nameBuffer) < Globals.NameMaxLength else '')
-            self.writeText(nameBufferFormatted, startRow, (self.width - Globals.NameMaxLength) // 2)
+            self.writeText(nameBufferFormatted, startRow + 1, (self.width - Globals.NameMaxLength) // 2)
         else:
             # draw options
             for row, option in enumerate(self.options):

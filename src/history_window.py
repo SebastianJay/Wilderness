@@ -11,10 +11,12 @@ class HistoryWindow(Window):
     class SubState:
         """ History Window vars specific to one protagonist's history buffer """
         def __init__(self):
-            self.charLimit = 0      # The current number of characters (exclude newlines) that can be displayed
-            self.wrappedLines = []  # Strings corresponding to word wrapped lines in window
-            self.rowIndices = []    # Mappings of char indices in history buffer for particular rows
-            self.startingLine = 0   # Index of line to start displaying in window
+            # The current number of characters (exclude newlines) that can be displayed
+            self.charLimit = 0
+            # Index of line to start displaying in window
+            self.startingLine = 0
+            # Mappings of char indices in history buffer for particular rows
+            self.rowIndices = []
 
     def __init__(self, width, height):
         super().__init__(width, height)
@@ -26,11 +28,16 @@ class HistoryWindow(Window):
         GameState().onSettingChange += self.settingsChangeHandler()
 
     def reset(self):
-        self.timestep = 0.0     # Tracks the time since the last character was displayed
-        self.threshold = 0.025  # Delay in seconds before each character appears on-screen
-        self.speedButtonFactor = 5.0  # Speedup factor for the text animation when "speed" button pressed
-        self.speedPeriodFactor = 0.15 # Factor for additional time special chars like period take
-        self.unlockOnNextUpdate = False # flag indicating animation completion on next draw
+        # Tracks the time since the last character was displayed
+        self.timestep = 0.0
+        # Delay in seconds before each character appears on-screen
+        self.threshold = 0.025
+        # Speedup factor for the text animation when "speed" button pressed
+        self.speedButtonFactor = 5.0
+        # Factor for additional time special chars like period take
+        self.speedPeriodFactor = 0.15
+        # flag indicating animation completion on next draw
+        self.unlockOnNextUpdate = False
 
         # State is maintained in window for each protagonist
         self.subStates = [
@@ -41,41 +48,31 @@ class HistoryWindow(Window):
     def langNodeAddedHandler(self):
         def _langNodeAddedHandler(*args, **kwargs):
             # do word wrapping logic whenever an update has been made to history buffer
-            added_text = (args[0][1:] if args[0][0] == '\n' else args[0]) if len(args[0]) > 0 else ''
-            input_list = added_text.split('\n')
+            addedText = args[0]
+            outputIndices = []
+            seekIndex = 0
+            previousBufferLength = len(GameState().historyBuffer) - len(addedText)
 
-            output_list = []    # list of additional row text - each row contains a string
-            row_indices = []    # list of additional (start, end) indices of historyBuffer corresponding to row
-            # NOTE math for total_count is strange due to leading/trailing newlines
-            total_count = self.rowIndices[-1][1] + 1 if len(self.rowIndices) > 0 else 0
-            start_row_count = total_count # number of characters written by start of current line
+            # record the start of each new line in the window
+            while seekIndex < len(addedText):
+                outputIndices.append(seekIndex + previousBufferLength)
+                newlineIndex = addedText.find('\n', seekIndex)
+                wordBreakIndex = len(addedText) if len(addedText[seekIndex:]) < self.width \
+                    else max(addedText.rfind(' ', seekIndex, seekIndex + self.width + 1),
+                        addedText.rfind('\n', seekIndex, seekIndex + self.width + 1))
+                seekIndex = (newlineIndex if newlineIndex != -1 and newlineIndex < wordBreakIndex \
+                    else (wordBreakIndex if wordBreakIndex != -1 else (seekIndex + self.width - 1))) + 1
 
-            i = 0
-            line_remaining = input_list[i]
-            while i < len(input_list):
-                # cut off chunk of input line that will fit in row of window
-                end_ind = len(line_remaining) if len(line_remaining) < self.width \
-                    else line_remaining.rfind(' ', 0, self.width)
-                output_list.append(line_remaining[:end_ind])
-                total_count += len(line_remaining[:end_ind]) + 1
-                row_indices.append((start_row_count, total_count-1))
-                start_row_count = total_count
-                # repeat with the remainder of the input line; use new one if done with current
-                line_remaining = line_remaining[end_ind+1:]
-                if line_remaining == '':
-                    i += 1
-                    if i < len(input_list):
-                        line_remaining = input_list[i]
-            self.wrappedLines.extend(output_list)
-            self.rowIndices.extend(row_indices)
+            self.rowIndices.extend(outputIndices)
 
-            if len(args) == 1 or not args[1]:   # second arg indicates whether to animate
+            # second arg indicates whether to animate
+            if len(args) == 1 or not args[1]:
                 # switch out game mode until animation finished
                 GameState().lockGameMode(GameMode.InAreaAnimating)
             else:
                 # advance pointers as if animation complete
-                self.charLimit = len(''.join(self.wrappedLines)) + 1
-                self.startingLine = max(len(self.wrappedLines) - self.height, 0)
+                self.charLimit = len(GameState().historyBuffer)
+                self.startingLine = max(len(self.rowIndices) - self.height, 0)
         return _langNodeAddedHandler
 
     def clearBufferHandler(self):
@@ -101,10 +98,12 @@ class HistoryWindow(Window):
                 self.unlockOnNextUpdate = False
                 GameState().unlockGameMode()
                 return
+
             self.timestep += timestep
-            unwrappedText = ''.join(self.wrappedLines)
             speedFlag = False
             skipFlag = False
+            historyBuffer = GameState().historyBuffer
+
             # scan for keys that speed up animation
             for key in keypresses:
                 if key == ' ':
@@ -116,7 +115,7 @@ class HistoryWindow(Window):
                 # add as many characters as possibly allowed by new timestep
                 while True:
                     speedMultiple = 1.0 if not speedFlag else self.speedButtonFactor
-                    ch = unwrappedText[self.charLimit-1] if 0 < self.charLimit < len(unwrappedText) else ''
+                    ch = historyBuffer[self.charLimit-1] if 0 < self.charLimit < len(historyBuffer) else ''
                     if ch == '.':
                         speedMultiple *= self.speedPeriodFactor
                     if self.timestep > self.threshold / speedMultiple:
@@ -124,92 +123,68 @@ class HistoryWindow(Window):
                         self.charLimit += 1
                     else:
                         break
+
             # check if animation is complete
-            if self.charLimit >= len(unwrappedText)+1 or skipFlag:
-                self.charLimit = len(unwrappedText)+1
+            if self.charLimit >= len(historyBuffer) or skipFlag:
+                self.charLimit = len(historyBuffer)
                 self.unlockOnNextUpdate = True
+
             # update starting line based on where the animation index is at
             lineIndex = 0
-            charCounter = 0
-            while lineIndex < len(self.wrappedLines) and charCounter < self.charLimit:
-                charCounter += len(self.wrappedLines[lineIndex])
+            while lineIndex < len(self.rowIndices) and self.rowIndices[lineIndex] < self.charLimit:
                 lineIndex += 1
             self.startingLine = max(lineIndex - self.height, 0)
-        else: # Only allow scrolling if we're not writing text to the screen
+        else:
+            # Only allow scrolling if we're not writing text to the screen
             for key in keypresses:
                 if key == "Prior":
                     if self.startingLine > 0:
                         self.startingLine -= 1
                 elif key == "Next":
-                    if self.startingLine + self.height < len(self.wrappedLines):
+                    if self.startingLine + self.height < len(self.rowIndices):
                         self.startingLine += 1
 
     def draw(self):
-        output_list = self.wrappedLines[self.startingLine : self.startingLine + self.height]
-        row_indices = self.rowIndices[self.startingLine : self.startingLine + self.height]
-        charsWritten = len(''.join(self.wrappedLines[:self.startingLine]))
+        self.clear()
 
-        # map output_list to self.pixels
-        # NOTE r and c represent where the animation "leaves off" after this loop
-        r = 0
-        stopWriting = False     # flag that indicates if we hit charLimit
-        for line in output_list:
-            c = 0
-            # fill in pixels with word
-            for ch in line:
-                if charsWritten >= self.charLimit:
-                    stopWriting = True
-                    break
-                self.pixels[r][c] = ch
-                charsWritten += 1
-                c += 1
-            # fill in what remains with spaces
-            for cc in range(c, self.width):
-                self.pixels[r][cc] = " "
-            if stopWriting:
+        # wrap text based on the calculated indices and write lines to screen
+        windowRowIndices = self.rowIndices[self.startingLine : self.startingLine + self.height]
+        wrappedText = []
+        for i, rowStartIndex in enumerate(windowRowIndices):
+            rowEndIndex = self.rowIndices[self.startingLine + i + 1] \
+                if self.startingLine + i < len(self.rowIndices) - 1 \
+                else len(GameState().historyBuffer)
+            lineEndIndex = min(rowEndIndex, self.charLimit)
+            wrappedText.append(GameState().historyBuffer[rowStartIndex:lineEndIndex].rstrip())
+            if lineEndIndex == self.charLimit:
                 break
-            r += 1
-        # fill in blank lines
-        for rr in range(r+1, self.height):
-            for cc in range(self.width):
-                self.pixels[rr][cc] = " "
+        self.writeTextLines(wrappedText, 0, 0)
 
-        # map LangNode formatting to Window formatting
-        # TODO super inefficient - refactor later
-        input_formatting = GameState().historyFormatting
-        output_formatting = []
-        for style in input_formatting:
-            first_index = row_indices[0][0]
-            last_index = row_indices[-1][1]
-            if GameState().gameMode == GameMode.InAreaAnimating and r < len(row_indices):
-                last_index = row_indices[r][0] + c # bound formatted text to what's displayed
-            for indices in input_formatting[style]:
-                start_index = indices[0]
-                end_index = indices[1]
-                # see if (start_index, end_index) is contained within current view of history
-                # clip indices if needed
-                if start_index >= first_index and start_index <= last_index:
-                    if end_index > last_index:
-                        end_index = last_index
-                elif end_index >= first_index and end_index <= last_index:
-                    start_index = first_index
-                else:
-                    continue
-                # scan through row_indices to find the rows where the style applies
-                for ri1, row1 in enumerate(row_indices):
-                    if start_index >= row1[0] and start_index <= row1[1]:
-                        ci1 = start_index - row1[0]
-                        for ri2, row2 in enumerate(row_indices[ri1:]):
-                            if end_index >= row2[0] and end_index <= row2[1]:
-                                ci2 = end_index - row2[0]
-                                # the row and column values translate to window indices
-                                fi1 = ri1 * self.width + ci1
-                                fi2 = (ri1 + ri2) * self.width + ci2
-                                output_formatting.append((style, (fi1, fi2)))
-                                break
-                        break
-
-        self.formatting = output_formatting
+        # take a subset of the formatting which is shown on screen
+        row = 0
+        for (tag, (ind1, ind2)) in GameState().historyFormatting:
+            # ignore formatters outside of range of window
+            if ind1 >= self.charLimit:
+                break
+            if ind2 < self.rowIndices[self.startingLine]:
+                continue
+            # adjust running counter of line the formatter is on
+            while self.startingLine + row + 1 < len(self.rowIndices) \
+                and self.rowIndices[self.startingLine + row + 1] <= ind1:
+                row += 1
+            # stop when going outside the window
+            if row >= self.height:
+                break
+            # clip to range of window
+            clippedInd1 = max(ind1, windowRowIndices[0])
+            clippedInd2 = min(ind2, self.charLimit - 1)
+            startCol = clippedInd1 - windowRowIndices[row]
+            formatterLength = clippedInd2 - clippedInd1 + 1
+            # if formatter extends across two lines, adjust length for spaces in between
+            if row < len(windowRowIndices) - 1 and clippedInd2 >= windowRowIndices[row + 1]:
+                formatterLength = (clippedInd2 - windowRowIndices[row + 1] + 1) \
+                    + (self.width - (clippedInd1 - windowRowIndices[row]))
+            self.addFormatting(tag, row, startCol, formatterLength)
 
     @property
     def charLimit(self):
@@ -232,15 +207,3 @@ class HistoryWindow(Window):
     @startingLine.setter
     def startingLine(self, val):
         self.subStates[GameState().activeProtagonistInd].startingLine = val
-
-if __name__ == '__main__':
-    h = HistoryWindow(30, 10)
-    # NOTE do not set GameState values directly in non-test code
-    test_input = "Kipp stepped back to take a good look at the room. He eyed a fancy bookself with some books that may be worth inspecting. In the far left corner of the room, Kipp also saw a sleeping bag. It may not be the right time to take a nap, but maybe he could use it to de-stress for a while. He looked back at Arthur. It looked like he hasn't gotten any better since we last talked. Maybe Kipp should go talk to Arthur again. \n  \n Kipp: Hmm...what should I do?"
-    GameState().subStates[0].historyBuffer = test_input
-    formatting = {'yellow': [(67, 74), (174, 185)],
-        'green': [(302, 307), (404, 409)],
-        'red': [(110, 119), (251, 253), (396, 402)],
-    }
-    GameState().subStates[0].historyFormatting = formatting
-    h.debugDraw()
