@@ -80,7 +80,7 @@ class AssetLoader:
                             # replace string with parsed BodyNode
                             assets[path] = parser.parseScriptFragment(assets[path])
                         else:
-                            # replace string with parsed (string, BodyNode)[]
+                            # replace string with parsed BehaviorNode
                             assets[path] = parser.parseScript(assets[path])
                     elif joinAndNorm(self.root_path, 'config') in path:
                         # replace string with parsed Python dict

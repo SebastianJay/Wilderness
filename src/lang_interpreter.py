@@ -4,7 +4,7 @@ Contains routines for executing the game's custom language.
 
 from global_vars import Globals
 from game_state import GameState, GameMode
-from lang_parser import BodyNode, LangNode, FuncNode
+from lang_parser import BodyNode, LangNode, FuncNode, BehaviorNode
 from asset_loader import AssetLoader
 from random import randint
 from enum import Enum
@@ -241,6 +241,7 @@ class Interpreter:
             return self.evaluateCondition(obj)  # parse list of tokens normally
         raise Exception('malformed argument in evaluateConditionTree: ' + str(obj))
 
+    # TODO refactor
     def refreshCommandList(self):
         """ Updates GameState cmdMap to contain all commands player can type """
         # Helper method to see if rooms or objects are visible in game
@@ -250,14 +251,14 @@ class Interpreter:
                 if 'showIf' in obj:
                     conditionVal = obj['showIf']
                     return self.evaluateConditionTree(conditionVal)
-            # if parameter is tuple of (verb, reaction, condition)
-            if isinstance(obj, tuple):
-                if obj[0].startswith('_'):
+            # if parameter is BehaviorNode
+            if isinstance(obj, BehaviorNode):
+                if len(obj.actions) == 1 and obj.actions[0].startswith('_'):
                     # verbs starting with underscore are not publicly visible
                     return False
-                if obj[2] is not None:
+                if obj.condition is not None:
                     # evaluate the condition
-                    return self.evaluateCondition(obj[2].split('_'))
+                    return self.evaluateCondition(obj.condition.split('_'))
             return True # visible by default
 
         # locate the rooms and objects configs
@@ -285,49 +286,52 @@ class Interpreter:
             neighborName = rooms[neighbor]['name']
             neighborScript = loader.getScript(rooms[neighbor]['script'])
             neighborReaction = None
-            for action in neighborScript:
-                if not isVisible(self, action):
+            for node in neighborScript.nodes:
+                if not isVisible(self, node):
                     continue
-                if action[0] == 'go to':
-                    neighborReaction = action[1]
+                if 'go to' in node.actions:
+                    neighborReaction = node.reaction
             if neighborReaction:
                 cmdMap['go to'][neighborName] = neighborReaction
         # go through actions to take on room
-        for action in roomScript:
+        for node in roomScript.nodes:
             # ignore 'go to' current room (not possible)
-            if action[0] == 'go to' or not isVisible(self, action):
+            if 'go to' in node.actions or not isVisible(self, node):
                 continue
-            cmdMap[action[0]] = action[1]
+            for action in node.actions:
+                cmdMap[action] = node.reaction
         # prefill 'use <item>', 'give <item>', 'show <item>'
         itemActionPhrases = [('use', 'on'), ('give', 'to'), ('show', 'to')]
         # go through actions to take on objects
         for i in range(len(objectScripts)):
             objScript = objectScripts[i]
             objName = objectNames[i]
-            for action in objScript:
-                if not isVisible(self, action):
+            for node in objScript.nodes:
+                if not isVisible(self, node):
                     continue
-                verbWords = action[0].split()
-                # "use .. on", "give ... to", "show ... to" needs special treatment for inventory items
-                for prefix, suffix in itemActionPhrases:
-                    if verbWords[0] == prefix and verbWords[-1] == suffix:
-                        itemWord = ' '.join(verbWords[1:-1])
-                        itemKey = loader.reverseItemLookup(itemWord)
-                        targetPhrase = suffix + ' ' + objName
-                        if itemKey == '':
-                            raise Exception('script item name', itemWord ,'not found in items configuration file')
-                        if itemKey in gs.inventory and int(gs.inventory[itemKey]) > 0:
-                            if prefix not in cmdMap:
-                                cmdMap[prefix] = {}
-                            if itemWord not in cmdMap[prefix]:
-                                cmdMap[prefix][itemWord] = {}
-                            cmdMap[prefix][itemWord][targetPhrase] = action[1]
-                        break
-                # all other verbs are straightforward
-                else:
-                    if action[0] not in cmdMap:
-                        cmdMap[action[0]] = {}
-                    cmdMap[action[0]][objName] = action[1]
+                for action in node.actions:
+                    verbWords = action.split()
+                    # "use .. on", "give ... to", "show ... to" needs special treatment for inventory items
+                    for prefix, suffix in itemActionPhrases:
+                        if verbWords[0] == prefix and verbWords[-1] == suffix:
+                            itemWord = ' '.join(verbWords[1:-1])
+                            itemKey = loader.reverseItemLookup(itemWord)
+                            targetPhrase = suffix + ' ' + objName
+                            if itemKey == '':
+                                raise Exception('script item name' + itemWord + 'not found in items configuration file')
+                            if itemKey in gs.inventory and int(gs.inventory[itemKey]) > 0:
+                                if prefix not in cmdMap:
+                                    cmdMap[prefix] = {}
+                                if itemWord not in cmdMap[prefix]:
+                                    cmdMap[prefix][itemWord] = {}
+                                cmdMap[prefix][itemWord][targetPhrase] = node.reaction
+                            break
+                    # all other verbs are straightforward
+                    else:
+                        for action in node.actions:
+                            if action not in cmdMap:
+                                cmdMap[action] = {}
+                            cmdMap[action][objName] = node.reaction
         gs.cmdMap = cmdMap
 
     def resume(self, val=None):
@@ -340,6 +344,3 @@ class Interpreter:
         """ wrapper around stack manipulation to execute a BodyNode """
         self.callStack.append([body, 0])
         self.resume()
-
-if __name__ == '__main__':
-    i = Interpreter()

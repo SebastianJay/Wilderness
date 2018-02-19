@@ -37,7 +37,7 @@ class CreditsWindow(Window):
         for i, (role, members) in enumerate(credits):
             startCol = (self.width // 5) * (i * 2 + 1)
             self.writeText(role, startRow, startCol, False, 'underline')
-            self.writeTextLines(members, startRow, startCol)
+            self.writeTextLines(members, startRow+1, startCol)
 
         self.writeText(footer, self.height * 5 // 6, (self.width - len(footer)) // 2)
         self.writeText(exitfooter, self.height * 5 // 6 + 1, (self.width - len(exitfooter)) // 2)

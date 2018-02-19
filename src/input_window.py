@@ -36,9 +36,9 @@ class InputWindow(Window):
             areasConfig = AssetLoader().getConfig(Globals.AreasConfigPath)
             roomsConfig = AssetLoader().getConfig(areasConfig[areaId]['roomsConfig'])
             roomScript = AssetLoader().getScript(roomsConfig[roomId]['script'])
-            for verb, action, _ in roomScript:
-                if verb == startupverb:
-                    self.interpreter.executeAction(action)
+            for behavior in roomScript.nodes:
+                if startupverb in behavior.actions:
+                    self.interpreter.executeAction(behavior.reaction)
                     return
             # if startup script not found, refresh command list manually
             self.interpreter.refreshCommandList()

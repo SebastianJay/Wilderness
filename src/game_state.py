@@ -177,17 +177,21 @@ class GameState:
                         val = prefixTree[prefix]
                         if isinstance(val, BodyNode):
                             if len(cmdString) > len(prefix):
-                                return None # too many chars at end
-                            return val  # correct command
+                                # too many chars at end
+                                return None
+                            # correct command
+                            return val
                         elif isinstance(val, dict):
                             prefixTree = val
                             cmdString = cmdString[len(prefix):]
                             if len(cmdString) == 0 or cmdString[0] == ' ':
                                 cmdString = cmdString.lstrip()
                                 keepWalking = True
-                                break   # continue walking tree
+                                # continue walking tree
+                                break
                             else:
-                                return None # invalid chars in between
+                                # invalid chars in between
+                                return None
             pathFollowed.append(cmdString)
             # (dict of current layer in tree, string[] of tokenized pieces of walk)
             return (val, pathFollowed)
@@ -455,22 +459,3 @@ class GameState:
         return getattr(self.instance, name)
     def __setattr__(self, name):
         return setattr(self.instance, name)
-
-if __name__ == '__main__':
-    g = GameState()
-    g.name = 'testing'
-    print(g)
-    g.writeFile(Globals.SavePaths[0])
-    g.name = 'should not appear in print(g)!'
-    g.readFile(Globals.SavePaths[0])
-    print(g)
-
-    from asset_loader import AssetLoader
-    AssetLoader().loadAssets()
-    g.areaId = "aspire"
-    g.roomId = "library"
-    g.mapLocation = [1, 0]
-    g.refreshCommandList()
-    print(g.cmdMap)
-    print(g.cmdMap['look around'])
-    print(g)

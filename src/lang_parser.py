@@ -4,19 +4,46 @@ Contains routines for parsing the game's custom language. Contains the node defi
 
 from global_vars import Globals
 
-class BodyNode:
-    """ Node containing a mixture of natural language and functions as child nodes """
+class ContainerNodeBase:
+    """ Base class for parent/internal nodes """
 
     def __init__(self, nodes=[]):
-        """ contains a sequence of LangNodes and FuncNodes """
+        """ Contains a sequence of subnodes """
         self.nodes = nodes
 
     def __str__(self):
-        ret = "BodyNode[\n"
-        for a in self.nodes:
-            ret += str(a)
+        ret = "ContainerNode[\n"
+        for node in self.nodes:
+            ret += str(node)
         ret += "]\n"
         return ret
+
+    # TODO iterable
+
+class ScriptNode(ContainerNodeBase):
+    """
+    Node representing a sequence of behaviors which can be taken on a certain object
+    nodes member should be a sequence of BehaviorNodes
+    """
+    pass
+
+class BodyNode(ContainerNodeBase):
+    """
+    Node containing a mixture of natural language and functions as child nodes
+    nodes member should be a sequence of LangNodes and FuncNodes
+    """
+    pass
+
+class BehaviorNode:
+    """ Node representing a verb[], condition, reaction tuple of a certain action """
+
+    def __init__(self, actions, condition, reaction):
+        self.actions = actions
+        self.condition = condition
+        self.reaction = reaction
+
+    def __str__(self):
+        return ','.join(self.actions) + "; " + str(self.condition) + "; " + str(self.reaction)
 
 class LangNode:
     """ Node that contains natural language to be displayed in game """
@@ -93,74 +120,71 @@ class FuncNode:
         return ret
 
 class Parser:
-    def __init__(self):
-        pass
 
-    def strFind(self, string, target, startInd=0):
+    def strFind(self, string, target, startIndex=0):
         """ (internal) extension of str.find() that ignores escaped characters """
-        ind = string.find(target, startInd)
-        while ind != -1:
+        index = string.find(target, startIndex)
+        while index != -1:
             # check if character is "escaped" by being in art line
-            prevNlInd = string.rfind('\n', 0, ind)
-            if string[prevNlInd+1] == '\\':
-                nextNlInd = string.find('\n', ind)
-                if nextNlInd != -1:
-                    ind = string.find(target, nextNlInd+1)
+            previousNewlineIndex = string.rfind('\n', 0, index)
+            if string[previousNewlineIndex+1] == '\\':
+                nextNewlineIndex = string.find('\n', index)
+                if nextNewlineIndex != -1:
+                    index = string.find(target, nextNewlineIndex+1)
                 else:
-                    ind = -1
+                    index = -1
                     break
             else:
                 break
-        return ind
+        return index
 
-    def matchingBraceIndex(self, string, startInd=0):
+    def matchingBraceIndex(self, string, startIndex=0):
         """ (internal) identify index of matching close brace """
-        nextInd = startInd
+        seekIndex = startIndex
         openCount = 1
         while True:
-            openInd = self.strFind(string, '{', nextInd)
-            closeInd = self.strFind(string, '}', nextInd)
-            if closeInd == -1:
+            openIndex = self.strFind(string, '{', seekIndex)
+            closeIndex = self.strFind(string, '}', seekIndex)
+            if closeIndex == -1:
                 raise Exception('No matching brace in string:\n' + string)
-            elif openInd != -1 and openInd < closeInd:
+            elif openIndex != -1 and openIndex < closeIndex:
                 openCount += 1
-                nextInd = openInd + 1
+                seekIndex = openIndex + 1
             else:
                 openCount -= 1
                 if openCount == 0:
-                    return closeInd
-                nextInd = closeInd + 1
+                    return closeIndex
+                seekIndex = closeIndex + 1
 
-    def splitByPipe(self, string, startInd=0):
+    def splitByPipe(self, string, startIndex=0):
         """ (internal) performs a split by vertical pipe, accounting for functions """
-        # remainingInd represents where unprocessed string starts
-        remainingInd = startInd
-        # seekInd indicates where to start looking for a pipe
-        seekInd = startInd
+        # where unprocessed string starts
+        seekIndex = startIndex
+        # where to start looking for a pipe
+        pipeSeekIndex = startIndex
         # results contains the split substrings
         results = []
-        while remainingInd < len(string):
+        while seekIndex < len(string):
             # find the pipe
-            pipeInd = self.strFind(string, '|', seekInd)
+            pipeIndex = self.strFind(string, '|', pipeSeekIndex)
             # no more pipes -> done
-            if pipeInd == -1:
+            if pipeIndex == -1:
                 break
             # find the opening of a function
-            openInd = self.strFind(string, '{', seekInd)
+            openIndex = self.strFind(string, '{', pipeSeekIndex)
             # if function opens before pipe, the pipe might be part of subfunction inner
-            if openInd != -1 and openInd < pipeInd:
+            if openIndex != -1 and openIndex < pipeIndex:
                 # skip past the function and retry
-                closeInd = self.matchingBraceIndex(string, openInd+1)
-                seekInd = closeInd + 1
+                closeIndex = self.matchingBraceIndex(string, openIndex+1)
+                pipeSeekIndex = closeIndex + 1
             # otherwise the pipe is part of this function inner
             else:
                 # capture the substring and continue
-                results.append(string[remainingInd:pipeInd])
-                seekInd = pipeInd + 1
-                remainingInd = pipeInd + 1
+                results.append(string[seekIndex:pipeIndex])
+                seekIndex = pipeSeekIndex = pipeIndex + 1
         # append element between last pipe and end of string
-        if remainingInd < len(string):
-            results.append(string[remainingInd:])
+        if seekIndex < len(string):
+            results.append(string[seekIndex:])
         # remove any empty elements in results
         results = [result for result in results if len(result) > 0]
         return results
@@ -171,16 +195,16 @@ class Parser:
         if len(text) == 0:
             return text, []
 
-        searchIndex = 0
+        seekIndex = 0
         formatting = []
         textWithoutFormatters = ""
         escapeCharCount = 0 if text[0] != '\\' else 1
 
         #While there are remaining "@"s in the string, format into a LangNode
-        while self.strFind(text, "@", searchIndex) != -1:
+        while self.strFind(text, "@", seekIndex) != -1:
             # count escape chars ("\" at beginning of line) between last formatter and this one
-            indexOfAt = self.strFind(text, "@", searchIndex)
-            escapeCharCount += text.count('\n\\', searchIndex, indexOfAt)
+            indexOfAt = self.strFind(text, "@", seekIndex)
+            escapeCharCount += text.count('\n\\', seekIndex, indexOfAt)
 
             # find indices
             indexOpenBracket = text.find("{", indexOfAt)
@@ -197,7 +221,7 @@ class Parser:
             formattedText = text[indexOpenBracket + 1 : indexCloseBracket]
 
             # textWithoutFormatters will hold the text with the @formatter{formattted_text} replaced with just formattedText
-            textWithoutFormatters += text[searchIndex : indexOfAt]
+            textWithoutFormatters += text[seekIndex : indexOfAt]
             textWithoutFormatters += formattedText
 
             # Remember where in the textWithoutFormatters string each formatter applies
@@ -206,9 +230,9 @@ class Parser:
                 (len(textWithoutFormatters)-len(formattedText)-escapeCharCount,
                 len(textWithoutFormatters)-1-escapeCharCount)))
 
-            searchIndex = indexCloseBracket + 1   # start searching for the next @
+            seekIndex = indexCloseBracket + 1   # start searching for the next @
         # capture remaining unformatted text
-        textWithoutFormatters += text[searchIndex:]
+        textWithoutFormatters += text[seekIndex:]
 
         # Remove escape chars
         lines = textWithoutFormatters.split('\n')
@@ -222,7 +246,7 @@ class Parser:
         parsedText = ''         # text without variables and formatters
         allFormatting = []      # list of all formatters
         variablesList = []      # list of (varName, index into parsedText)
-        searchIndex = 0
+        seekIndex = 0
 
         def parseFormatSection(startIndex, endIndex):
             nonlocal parsedText
@@ -237,21 +261,21 @@ class Parser:
             allFormatting.extend(formatting)
 
         # find location of start of variable
-        while self.strFind(text, "[", searchIndex) != -1:
+        while self.strFind(text, "[", seekIndex) != -1:
             # isolate name of variable
-            indexStartBracket = self.strFind(text, "[", searchIndex)
+            indexStartBracket = self.strFind(text, "[", seekIndex)
             indexEndBracket = self.strFind(text, "]", indexStartBracket)
             varName = text[indexStartBracket+1 : indexEndBracket]
 
             # add parsed text and formatters
-            parseFormatSection(searchIndex, indexStartBracket)
+            parseFormatSection(seekIndex, indexStartBracket)
             # add variable
             variablesList.append((varName, len(parsedText)))
 
             # advance search index
-            searchIndex = indexEndBracket + 1
+            seekIndex = indexEndBracket + 1
         # parse formatters for text following last variable
-        parseFormatSection(searchIndex, len(text))
+        parseFormatSection(seekIndex, len(text))
 
         return LangNode(parsedText, allFormatting, variablesList)
 
@@ -273,18 +297,18 @@ class Parser:
 
     def parseBody(self, scriptStr):
         """ (internal) Converts a string into a BodyNode """
-        remainingInd = 0
+        seekIndex = 0
         nodes = []
-        while remainingInd < len(scriptStr):
+        while seekIndex < len(scriptStr):
             # locate a function by searching for $
-            funcInd = self.strFind(scriptStr, '$', remainingInd)
+            funcIndex = self.strFind(scriptStr, '$', seekIndex)
             # function not found -> all content can be captured in LangNode
-            functionExists = funcInd != -1
+            functionExists = funcIndex != -1
             # if content exists between current index and function, store in LangNode
             if not functionExists:
-                langStr = scriptStr[remainingInd:].strip()
+                langStr = scriptStr[seekIndex:].strip()
             else:
-                langStr = scriptStr[remainingInd:funcInd].strip()
+                langStr = scriptStr[seekIndex:funcIndex].strip()
             if langStr != "":
                 langNode = self.parseFormatAndVars(langStr)
                 nodes.append(langNode)
@@ -292,28 +316,28 @@ class Parser:
             if not functionExists:
                 break
             # determine if function has inner (part surrounded by {})
-            braceOpenInd = self.strFind(scriptStr, '{', funcInd)
-            innerExists = (braceOpenInd != -1 and len(scriptStr[funcInd:braceOpenInd].split()) == 1)
+            braceOpenIndex = self.strFind(scriptStr, '{', funcIndex)
+            innerExists = (braceOpenIndex != -1 and len(scriptStr[funcIndex:braceOpenIndex].split()) == 1)
             # index where function name ends
-            funcNameEndInd = 0
+            funcNameEndIndex = 0
             # string containing function inner, if it exists
             funcInnerStr = None
             # function has inner -> parse that portion
             if innerExists:
-                braceCloseInd = self.matchingBraceIndex(scriptStr, braceOpenInd + 1)
-                funcInnerStr = scriptStr[braceOpenInd+1:braceCloseInd]
-                funcNameEndInd = braceOpenInd
-                remainingInd = braceCloseInd + 1
+                braceCloseIndex = self.matchingBraceIndex(scriptStr, braceOpenIndex + 1)
+                funcInnerStr = scriptStr[braceOpenIndex+1:braceCloseIndex]
+                funcNameEndIndex = braceOpenIndex
+                seekIndex = braceCloseIndex + 1
             # function has no inner
             else:
                 # function description ends on newline
-                newlineInd = scriptStr.find('\n', funcInd)
-                if newlineInd == -1:
-                    newlineInd = len(scriptStr)
-                funcNameEndInd = newlineInd
-                remainingInd = newlineInd + 1
+                newlineIndex = scriptStr.find('\n', funcIndex)
+                if newlineIndex == -1:
+                    newlineIndex = len(scriptStr)
+                funcNameEndIndex = newlineIndex
+                seekIndex = newlineIndex + 1
             # parse function title and args
-            funcAllArgs = scriptStr[funcInd+1:funcNameEndInd].strip().split('_')
+            funcAllArgs = scriptStr[funcIndex+1:funcNameEndIndex].strip().split('_')
             funcTitle = funcAllArgs[0]
             funcArgs = funcAllArgs[1:]
             funcInner = None
@@ -346,25 +370,22 @@ class Parser:
         return self.parseBody(scriptStr)
 
     def parseScript(self, scriptStr):
-        """ Converts file contents string into a list of (string verb, BodyNode reaction) tuples """
+        """ Converts file contents string into a BehaviorNode """
         scriptStr = self.preformatScriptString(scriptStr)
-        remainingInd = 0
-        tuples = []
-        while remainingInd < len(scriptStr):
-            braceLoc = scriptStr.find("{", remainingInd)
-            if braceLoc == -1:
+        seekIndex = 0
+        nodes = []
+        while seekIndex < len(scriptStr):
+            openIndex = scriptStr.find("{", seekIndex)
+            if openIndex == -1:
                 break
-            verbCondLst = scriptStr[remainingInd:braceLoc].split('|')
-            verb = verbCondLst[0].strip().lower()
+            verbCondLst = scriptStr[seekIndex:openIndex].split('|')
+            verbLst = [verb.strip().lower() for verb in verbCondLst[0].split(',')]
             if len(verbCondLst) > 1:
                 condition = verbCondLst[1].strip()
             else:
                 condition = None
-            closeInd = self.matchingBraceIndex(scriptStr, braceLoc + 1)
-            reaction = self.parseBody(scriptStr[braceLoc+1:closeInd].strip())
-            tuples.append((verb, reaction, condition))
-            remainingInd = closeInd + 1
-        return tuples
-
-if __name__ == '__main__':
-    p = Parser()
+            closeIndex = self.matchingBraceIndex(scriptStr, openIndex + 1)
+            reaction = self.parseBody(scriptStr[openIndex+1:closeIndex].strip())
+            nodes.append(BehaviorNode(verbLst, condition, reaction))
+            seekIndex = closeIndex + 1
+        return ScriptNode(nodes)

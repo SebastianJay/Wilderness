@@ -66,7 +66,7 @@ class HistoryWindow(Window):
             self.rowIndices.extend(outputIndices)
 
             # second arg indicates whether to animate
-            if len(args) == 1 or not args[1]:
+            if len(args) < 2 or not args[1]:
                 # switch out game mode until animation finished
                 GameState().lockGameMode(GameMode.InAreaAnimating)
             else:
@@ -192,10 +192,6 @@ class HistoryWindow(Window):
     @charLimit.setter
     def charLimit(self, val):
         self.subStates[GameState().activeProtagonistInd].charLimit = val
-
-    @property
-    def wrappedLines(self):
-        return self.subStates[GameState().activeProtagonistInd].wrappedLines
 
     @property
     def rowIndices(self):
