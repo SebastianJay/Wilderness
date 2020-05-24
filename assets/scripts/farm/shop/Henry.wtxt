@@ -4,7 +4,7 @@ talk to {
 
 $if_inventory_milk_eq_1{
 	$choice{
-		Sell milk to Henry|
+		|Sell milk to Henry|
 			Kipp: What a coincidence Uncle Henry, I happen to have fresh milk. *shows milk container* Wanna buy some?
 			Henry: Sure, here is 50 cents for you, my little boy. By the way, here is a map one bugger gave to me in exchange for 2 loaves of bread yesterday. He was bragging about treasure marked on the map. Why doesn't he go find it himself? Anyway, thought you might be interested.
 			$set_inventory_dirtyMap_1

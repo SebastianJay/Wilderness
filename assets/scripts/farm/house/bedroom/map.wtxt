@@ -1,0 +1,11 @@
+inspect {
+  The map was a gift from the shop owner @person{Henry}. Henry was an adventurous type who travelled the world, trading goods and tales. Kipp envied his freedom.
+
+  $choice {
+    |Study map|
+    The hand-drawn image showed the farm and surrounding region of @place{Sharlee} at its center. To the north was @place{Aspire}, and to the south was @place{Black Hills}. The east, which Kipp knew to be a large expanse of desert, was left blank on canvas. Some carefully constructed trees far to the left of Sharlee represented @place{Kappallanoah Forest}. Further in that direction, Kipp reminded himself, was the Wilderness.
+
+    |Leave|
+    $noop
+  }
+}

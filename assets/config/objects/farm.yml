@@ -1,18 +1,21 @@
 bed:
     name: bed
-    script: farm/House/Bedroom/bed.txt
+    script: farm/house/bedroom/bed.wtxt
+desk:
+    name: desk
+    script: farm/house/bedroom/desk.wtxt
 map:
     name: map on wall
-    script: farm/House/Bedroom/map.txt
+    script: farm/house/bedroom/map.wtxt
 rice:
     name: Rice
-    script: farm/House/living room/Rice.txt
+    script: farm/house/living_room/Rice.wtxt
 henry:
     name: Henry
-    script: farm/Shop/Henry.txt
+    script: farm/shop/Henry.wtxt
 duke:
     name: Duke
-    script: farm/meadow/Duke.txt
+    script: farm/meadow/Duke.wtxt
 hereford:
     name: Hereford
-    script: farm/meadow/Hereford.txt
+    script: farm/meadow/Hereford.wtxt

@@ -11,6 +11,7 @@ from asset_loader import joinAndNorm
 
 class Display:
 
+    # maps color names as well as object classes (like CSS)
     colorStringToHex = {
         'white':    '#ffffff',
         'black':    '#000000',
@@ -23,6 +24,11 @@ class Display:
         'pink':     '#ff7feb',
         'purple':   '#ff00ff',
         'brown':    '#8B4513',
+
+        'thing':    '#ffff00',  # yellow
+        'person':   '#00ff00',  # green
+        'place':    '#3030ff',  # blue
+        'action':   '#ff3030',  # red
     }
 
     def __init__(self, root, windowManager):

@@ -1,8 +1,10 @@
-look around{
-The room was decorated with paintings and handcrafts made by Kipp when he was young. The room was warm and cozy. This was where Kipp and his brother @green{Rice} played @yellow{World of Farmcraft}. @green{Rice} was siting on the sofa.
+look around {
+	The large living space was decorated with paintings and handcrafts made by Kipp and Rice when they were young. The room was warm and cozy. @person{Rice} was reclined at a sofa, reading a book on physics.
 }
 
-go to|charliComplete_eq_0{
+go to|charliComplete_eq_0 {
+		Kipp walked into the living room.
+
 $if_farmap_eq_1{
 	When Kipp went downstairs, he glanced at the world outside. The night gently caressed the endless meadow and the house was shining in golden twilight. He was enchanted by this scene until his mother called his name. He found his whole family was waiting for him in the living room. It occurred to him that today was his 18th birthday. After enjoying a turkey with the whole family, he calmly stated his decision: he will go to Wilderness.
 

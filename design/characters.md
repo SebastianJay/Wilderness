@@ -19,18 +19,18 @@ When the two learn of the Terraforming process, Rice gives Kipp a letter from Ti
 ### Tiko
 ###### Kipp's brusque but well-meaning father
 
-Tiko (age 52, TIE-coh) is Kipp's and Rice's father. He conquered turmoil in his youth to carve out a peaceful existence on the farm. Though he doesn't talk about it, he suspects his parents were involved with a shady business that eventually did them in. All he remembers was getting pushed out the door of his home in a distant city (called Drymesa) one night with directions to a plot of land that would become the farm; he never returned to his old home, but heard reports of a fire that consumed several homes in the neighborhood. Life in the country was different, and he initially had no idea what he was doing. The neighbor's kid (Flora) taught him the ropes; their relationship grew, and they became man and wife.
+Tiko (age 52, TIE-coh) is Kipp's and Rice's father. He conquered turmoil in his youth to carve out a peaceful existence on the farm. Though he doesn't talk about it, he suspects his parents were involved with a shady business that eventually did them in. All he remembers was getting pushed out the door of his home in a distant city (called Drymesa) one night with directions to a plot of land that would become the farm; he never returned to his old home, but heard reports of a fire that consumed several homes in the neighborhood. Life in the country was different, and he initially had no idea what he was doing. The neighbor's kid (Doloreas) taught him the ropes; their relationship grew, and they became man and wife.
 
 _In Rice's storyline, it is revealed that_ Tiko's parents were government intelligence operatives who had infiltrated a secret society (called Maven), which had learned of the ancient crystal ball artifact and was intent on leveraging it to create a totalitarian state. They were caught, but managed to assure their son's safety.
 
 Tiko is terse and transparent in his view of how things should be; the rest of the family accepts his authority (after all, he is usually reasonable!). He tends to give Kipp more of a hard time than Rice but is never rude or overbearing.
 
-### Flora
+### Doloreas
 ###### Kipp's gentle mother
 
-Flora (age 46, FLORE-uh) is Kipp's and Rice's mother. She grew up as an only child on the plot next to Tiko's, and inherited her parents' farm which merged with Tiko's. She claims her family lived around the area since the beginning of time and has few stories to share of her youth.
+Doloreas (age 46, duh-LORE-ez) is Kipp's and Rice's mother. She grew up as an only child on the plot next to Tiko's, and inherited her parents' farm which merged with Tiko's. She claims her family lived around the area since the beginning of time and has few stories to share of her youth.
 
-Flora balances Tiko's brusque nature with warmth and compassion, though she does tend to worry about her two boys and overreact if they're remotely close to trouble. That being said, she respects Kipp's and Rice's freedom to plot their own futures, unlike Tiko.
+Doloreas balances Tiko's brusque nature with warmth and compassion, though she does tend to worry about her two boys and overreact if they're remotely close to trouble. That being said, she respects Kipp's and Rice's freedom to plot their own futures, unlike Tiko.
 
 ### Alodar
 ###### Wise, eccentric old man

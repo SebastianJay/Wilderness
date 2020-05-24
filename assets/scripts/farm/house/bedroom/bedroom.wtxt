@@ -1,0 +1,17 @@
+_awake {
+  $staticseq_farmIntro {
+    | Kipp lay supine on an old mattress, staring straight up at the ceiling. Another morning, another day on the farm. The past couple weeks he had carefully reviewed the right construction of words for his family. But nothing felt right. There was no way to explain why he would abandon everything they had provided him and set off on his own.
+
+    Kipp sat up and got out of bed. He could think it over as the day passed. But first, chores.
+
+    | Kipp stretched as he became conscious. He jumped out of bed, ready to start the day.
+  }
+}
+
+go to {
+  Kipp walked into his and Rice's shared bedroom.
+}
+
+look around {
+  Two identical twin-size @thing{beds} occupied the center of the room. On the east wall, there hung a small @thing{map}. Some knick-knacks were spread across the boys' small @thing{desks}.
+}

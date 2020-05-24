@@ -1,0 +1,47 @@
+inspect {
+  @person{Doloreas} was short and stout, hiding a surprising amount of muscle beneath her simple frock. Her dark brown hair was stacked in buns on top of her head. She noted Kipp's presence with a small upward curl of the lips, but her warm almond eyes were focused on the food cooking in multiple pans.
+}
+
+talk to {
+  $staticseq_doloreasTalk {
+    | Kipp: @italic{(smiling)} Hey ma! What's cooking?
+    Doloreas: Good morning, Kipp. Here, come and grab some while it's hot.
+    Kipp: Mm! bacon, hash browns, scrambled eggs -- can't go wrong! What's the occasion for such a feast?
+    Doloreas: @italic{(narrowing eyes)} Don't play dumb, sweetie.
+
+    Kipp grinned. He knew it was his father's birthday. And he was sure a hot breakfast was the first of several treats planned for him.
+
+    Kipp: Where is @person{Tiko}?
+    Doloreas: Working the field, I'd expect. He should be in shortly. You'd better finish your chores before then, lazybones.
+    Kipp: @italic{(frowning)} Oops, I didn't realize it was so late. I'll see you later!
+    Doloreas: Hold on. Have some breakfast first. I want to make sure this turned out OK.
+
+    $choice {
+      |Try bacon|
+      Kipp: Well, I can't just ignore @italic{that}.
+
+      Kipp lowered a strip of bacon into his mouth. Its subdued sweetness was complemented with a small kick.
+
+      Kipp: Fan-tastic! That recipe's a keeper.
+      Doloreas: @italic{(smiling)} I should've known better than to ask you -- you'll eat anything.
+      Kipp: It's my blessing and my curse. Well, I look forward to finishing this later.
+
+      |Try eggs|
+      Kipp: Let me get a piece of that.
+
+      Kipp spooned a morsel of eggs scrambled with mushroom, pepper, and onion into his mouth.
+
+      Kipp: Fan-tastic! Why can't we eat like this every day?
+      Doloreas: @italic{(smiling)} If you'd like to start cooking, we certainly can.
+      Kipp: Uh, actually, oatmeal's not that bad. OK, I'm off.
+
+      |No time!|
+      Kipp: I'm sure it's tasty. I love everything you make anyway.
+      Doloreas: @italic{(smiling)} Well at least have the coffee I've prepared for you.
+
+      Kipp guzzled down a short mug of coffee waiting on the countertop, and turned to leave.
+    }
+
+    | Doloreas: Shouldn't you be off?
+  }
+}

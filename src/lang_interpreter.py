@@ -50,33 +50,40 @@ class Interpreter:
                         bodyNode.nodes[nodeInd].title in ['elif', 'else']:
                             nodeInd += 1
                         # add to call stack and return to manager
-                        self.callStack[-1][1] = nodeInd
-                        self.callStack.append([node.inner, 0])
+                        self.setStackPointer(nodeInd)
+                        self.appendStackFrame(node.inner)
                         return Interpreter.ExitCode.push
                 elif node.title == 'else':
-                    self.callStack[-1][1] = nodeInd + 1
-                    self.callStack.append([node.inner, 0])
+                    self.setStackPointer(nodeInd + 1)
+                    self.appendStackFrame(node.inner)
                     return Interpreter.ExitCode.push
                 elif node.title == 'choice':
                     if val is not None:
                         gs.gameMode = GameMode.InAreaCommand
                         pick = int(val)
-                        self.callStack[-1][1] = nodeInd + 1
-                        self.callStack.append([node.inner[pick][1], 0])
+                        self.setStackPointer(nodeInd + 1)
+                        self.appendStackFrame(node.inner[pick][1])
                         return Interpreter.ExitCode.push
                     else:
                         gs.gameMode = GameMode.InAreaChoice
-                        # populate choice list in GameState
-                        lstChoices = []
-                        for choice in node.inner:
-                            lstChoices.append(choice[0].text)
-                        gs.choices = lstChoices
-                        self.callStack[-1][1] = nodeInd
+                        gs.choices = [choice[0].text for choice in node.inner]
+                        self.setStackPointer(nodeInd)
                         return Interpreter.ExitCode.halt
                 elif node.title == 'random':
-                    self.callStack[-1][1] = nodeInd + 1
                     pick = randint(0, len(node.inner)-1)
-                    self.callStack.append([node.inner[pick], 0])
+                    self.setStackPointer(nodeInd + 1)
+                    self.appendStackFrame(node.inner[pick])
+                    return Interpreter.ExitCode.push
+                elif node.title in ['cycleseq', 'staticseq']:
+                    gs.touchVar(node.args[0])
+                    varval = int(gs.getVar(node.args[0]))
+                    gs.setVar(node.args[0], str(varval + 1))
+                    if node.title == 'cycleseq':
+                        pick = varval % len(node.inner)
+                    else:
+                        pick = min(varval, len(node.inner) - 1)
+                    self.setStackPointer(nodeInd + 1)
+                    self.appendStackFrame(node.inner[pick])
                     return Interpreter.ExitCode.push
                 elif node.title == 'init':
                     args, inventoryFlag = self.extractInventory(node.args)
@@ -102,9 +109,7 @@ class Interpreter:
                     if node.title == 'set':
                         addVal = 0
                     # which direction to increment in
-                    multiple = 1
-                    if node.title in ['dec', 'sub']:
-                        multiple = -1
+                    multiple = -1 if node.title in ['dec', 'sub'] else 1
                     setVal = strVal or str(addVal + multiple * incVal)
                     if node.title == 'actionset':
                         gs.actionSet(args[0], setVal, args[2])
@@ -119,7 +124,7 @@ class Interpreter:
                         gs.setVar(node.args[0], str(val))
                     else:
                         gs.gameMode = GameMode.InAreaInput
-                        self.callStack[-1][1] = nodeInd
+                        self.setStackPointer(nodeInd)
                         return Interpreter.ExitCode.halt
                 elif node.title == 'goto':
                     gs.roomId = node.args[0]
@@ -127,6 +132,8 @@ class Interpreter:
                     gs.gotoWorldMap(node.args[0], node.args[1])
                 elif node.title == 'exit':
                     return Interpreter.ExitCode.empty
+                elif node.title == 'noop':
+                    pass
                 elif node.title == 'gameover':
                     gs.gameMode = GameMode.TitleScreen
                     return Interpreter.ExitCode.empty
@@ -134,10 +141,10 @@ class Interpreter:
                     gs.switchCharacter()
                     return Interpreter.ExitCode.empty
                 elif node.title == 'fragment':
-                    self.callStack[-1][1] = nodeInd + 1
                     path = AssetLoader().getConfig(Globals.FragmentsConfigPath)[node.args[0]]['path']
                     frag = AssetLoader().getScriptFragment(path)
-                    self.callStack.append([frag, 0])
+                    self.setStackPointer(nodeInd + 1)
+                    self.appendStackFrame(frag)
                     return Interpreter.ExitCode.push
             elif isinstance(node, LangNode):
                 gs.addLangNode(node)
@@ -146,6 +153,14 @@ class Interpreter:
             nodeInd += 1
             val = None  # invalidate passed in value as soon as it is used
         return Interpreter.ExitCode.pop
+
+    # helper method to set pointer of current stack frame
+    def setStackPointer(self, ind):
+        self.callStack[-1][1] = ind
+
+    # helper method to append to the call stack
+    def appendStackFrame(self, frame):
+        self.callStack.append([frame, 0])
 
     def drainCallStack(self, val=None):
         """ Simulates a stack machine executing a tree of function calls """
@@ -342,5 +357,5 @@ class Interpreter:
 
     def executeAction(self, body):
         """ wrapper around stack manipulation to execute a BodyNode """
-        self.callStack.append([body, 0])
+        self.appendStackFrame(body)
         self.resume()

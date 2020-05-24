@@ -1,7 +1,7 @@
 bedroom:
     name: bedroom
     description: n/a
-    script: farm/House/Bedroom/Bedroom.txt
+    script: farm/house/bedroom/bedroom.wtxt
     r: 0
     c: 0
     neighbors:
@@ -13,7 +13,7 @@ bedroom:
 livingRoom:
     name: living room
     description: n/a
-    script: farm/House/living room/living room.txt
+    script: farm/house/living_room/living_room.wtxt
     r: 0
     c: 0
     neighbors:
@@ -27,7 +27,7 @@ livingRoom:
 kitchen:
     name: kitchen
     description: n/a
-    script: farm/House/Kitchen.txt
+    script: farm/house/kitchen/kitchen.wtxt
     r: 0
     c: 0
     neighbors:
@@ -37,7 +37,7 @@ kitchen:
 shop:
     name: Shop
     description: n/a
-    script: farm/Shop/Shop.txt
+    script: farm/shop/shop.wtxt
     r: 0
     c: 0
     neighbors:
@@ -48,7 +48,7 @@ shop:
 meadow:
     name: Meadow
     description: n/a
-    script: farm/meadow/meadow.txt
+    script: farm/meadow/meadow.wtxt
     r: 0
     c: 0
     neighbors:

@@ -87,8 +87,8 @@ class FuncNode:
             or (self.title in ['actionset', 'timeset'] and len(self.args) != 3) \
             or (self.title in ['if', 'elif'] and len(self.args) < 1) \
             or (self.title in ['init', 'unset'] and (len(self.args) < 1 or len(self.args) > 2)) \
-            or (self.title in ['input', 'goto'] and len(self.args) != 1) \
-            or (self.title in ['gameover', 'switchcharacter', 'random', 'choice', 'else'] and len(self.args) > 0):
+            or (self.title in ['input', 'goto', 'cycleseq', 'staticseq'] and len(self.args) != 1) \
+            or (self.title in ['gameover', 'switchcharacter', 'random', 'choice', 'else', 'noop'] and len(self.args) > 0):
             raise Exception('type check fail (number args) for $'+self.title)
         """
         type of self.inner depends on self.title:
@@ -186,7 +186,7 @@ class Parser:
         if seekIndex < len(string):
             results.append(string[seekIndex:])
         # remove any empty elements in results
-        results = [result for result in results if len(result) > 0]
+        results = [result for result in results if len(result.strip()) > 0]
         return results
 
     def parseFormat(self, text):
@@ -342,24 +342,19 @@ class Parser:
             funcArgs = funcAllArgs[1:]
             funcInner = None
             # parse inner based on title
-            if funcTitle == 'if' or funcTitle == 'elif' or funcTitle == 'else':
+            if funcTitle in ['if', 'elif', 'else']:
                 funcInner = self.parseBody(funcInnerStr.strip())
             elif funcTitle == 'choice':
-                choices = self.splitByPipe(funcInnerStr.strip())
-                funcInner = []
-                option = None
-                result = None
-                for i in range(len(choices)):
-                    if i % 2 == 0:
-                        option = self.parseFormatAndVars(choices[i].strip())
-                    else:
-                        result = self.parseBody(choices[i].strip())
-                        funcInner.append((option, result))
-            elif funcTitle == 'random':
-                funcInner = []
-                choices = self.splitByPipe(funcInnerStr.strip())
-                for a in choices:
-                    funcInner.append(self.parseBody(a.strip()))
+                parts = self.splitByPipe(funcInnerStr.strip())
+                if len(parts) % 2 != 0:
+                    raise Exception('type check fail - incorrect number of parts in $choice body: ' + funcInnerStr)
+                funcInner = [
+                    (self.parseFormatAndVars(parts[i*2].strip()), self.parseBody(parts[i*2+1].strip())) \
+                    for i in range(len(parts) // 2)
+                ]
+            elif funcTitle in ['random', 'cycleseq', 'staticseq']:
+                parts = self.splitByPipe(funcInnerStr.strip())
+                funcInner = [self.parseBody(part.strip()) for part in parts]
             funcNode = FuncNode(funcTitle, funcArgs, funcInner)
             nodes.append(funcNode)
         return BodyNode(nodes)

@@ -1,26 +1,24 @@
 talk to{
     $if_frm_TalkedSquirrels_eq_0{
-	
+
 	Lore: How are you?
 	Squirrel: (stops jumping, streighten its body and stare at Lore vigilantly)
-	Lore: Don't worry, I won't hurt you. 
+	Lore: Don't worry, I won't hurt you.
 	$choice{
-		$if_acorns_not_eq_0{
-			Feed|
-			Lore: It seems that someone wants an acorn. Come here, little guy. 
+		|Feed|
+			Lore: It seems that someone wants an acorn. Come here, little guy.
 			Squirrel:(sniffs the acorn, grabs it, and climbs up to the tree swiftly.)
-			$inc_Heroism{1}
-			$set_frm_TalkedSquirrels{1}
-		}
+			$inc_Heroism_1
+			$set_frm_TalkedSquirrels_1
 		|Pet|
-		Lore reaches out to the squirrel, the squirrel seems terrified and ran over the lawn quickly. 
-		$set_frm_TalkedSquirrels{2}
+		Lore reaches out to the squirrel, the squirrel seems terrified and ran over the lawn quickly.
+		$set_frm_TalkedSquirrels_2
 	}
-	
+
 
     }$elif_frm_TalkedSquirrels_eq_1{
-		The squirrel sniffs at Lore, and recognizes that Lore was the one who gave it an acorn. It runs to Lore and jumps on her shoulder intimately. 
+		The squirrel sniffs at Lore, and recognizes that Lore was the one who gave it an acorn. It runs to Lore and jumps on her shoulder intimately.
     }$elif_frm_TalkedSquirrels_eq_2{
-		The squirrel runs away as it notice Lore's existence. 
+		The squirrel runs away as it notice Lore's existence.
     }
 }}
